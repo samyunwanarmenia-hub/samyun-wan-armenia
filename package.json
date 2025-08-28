@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "framer-motion": "^10.18.0",
     "lucide-react": "^0.263.1",
@@ -25,12 +26,5 @@
     "vite": "^4.4.5",
     "typescript": "^5.9.2",
     "@netlify/functions": "^2.6.0"
-  },
-  "scripts": {
-    "dev": "vite",
-    "build": "node scripts/optimize-images.js && cross-env NODE_ENV=production vite build",
-    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "optimize-images": "node scripts/optimize-images.js"
   }
 }
