@@ -117,7 +117,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
       exit="hidden"
     >
       <motion.div
-        className="bg-white rounded-xl p-6 shadow-2xl relative w-full max-w-sm border border-gray-200"
+        className="bg-white rounded-xl p-5 shadow-2xl relative w-full max-w-sm border border-gray-200" // Reduced p-6 to p-5
         variants={modalVariants}
         initial="hidden"
         animate="visible"
@@ -125,22 +125,22 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
       >
         <button 
           onClick={onClose} 
-          className="absolute top-4 right-4 p-3 rounded-full bg-gray-200 text-red-600 hover:bg-gray-300 hover:text-red-700 transition-colors"
+          className="absolute top-3 right-3 p-2 rounded-full bg-gray-200 text-red-600 hover:bg-gray-300 hover:text-red-700 transition-colors" // Reduced p-3 to p-2, top-4 right-4 to top-3 right-3
         >
-          <X className="w-6 h-6" />
+          <X className="w-5 h-5" /> {/* Reduced w/h-6 to w/h-5 */}
         </button>
-        <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center">
+        <h3 className="text-xl font-bold text-gray-900 mb-5 text-center"> {/* Reduced text-2xl to text-xl, mb-6 to mb-5 */}
           {t.orderModal.title}
         </h3>
 
-        <p className="text-gray-700 text-sm mb-4 text-center font-semibold">
+        <p className="text-gray-700 text-sm mb-3 text-center font-semibold"> {/* Reduced mb-4 to mb-3 */}
           {t.orderModal.selectProducts}
         </p>
-        <div className="flex justify-center space-x-4 mb-6">
+        <div className="flex justify-center space-x-3 mb-5"> {/* Reduced space-x-4 to space-x-3, mb-6 to mb-5 */}
           {productShowcaseData.map((product) => (
             <motion.div
               key={product.labelKey}
-              className={`relative p-2 rounded-xl cursor-pointer transition-all duration-200 ${
+              className={`relative p-1.5 rounded-xl cursor-pointer transition-all duration-200 ${ // Reduced p-2 to p-1.5
                 selectedProducts.includes(product.labelKey)
                   ? 'border-4 border-green-600 shadow-lg'
                   : 'border-2 border-gray-300'
@@ -152,10 +152,10 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
               <OptimizedImage
                 src={product.src}
                 alt={product.alt}
-                className="w-20 h-20 object-contain rounded-lg"
+                className="w-16 h-16 object-contain rounded-lg" // Reduced w/h-20 to w/h-16
                 loading="eager"
               />
-              <p className="text-xs text-gray-900 mt-2 text-center font-medium">
+              <p className="text-xs text-gray-900 mt-1.5 text-center font-medium"> {/* Reduced mt-2 to mt-1.5 */}
                 {t.productShowcase[product.labelKey]}
               </p>
             </motion.div>
@@ -164,30 +164,30 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
 
         {selectedProducts.length > 0 && (
           <motion.div 
-            className="text-center mb-6 p-4 bg-green-100 rounded-lg border border-green-200"
+            className="text-center mb-5 p-3 bg-green-100 rounded-lg border border-green-200" // Reduced mb-6 to mb-5, p-4 to p-3
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <p className="text-gray-900 text-lg font-bold mb-1">
+            <p className="text-gray-900 text-base font-bold mb-0.5"> {/* Reduced text-lg to text-base, mb-1 to mb-0.5 */}
               Total: {totalPrice.toLocaleString()} AMD
             </p>
-            <p className="text-green-600 text-sm font-semibold">
+            <p className="text-green-600 text-xs font-semibold"> {/* Reduced text-sm to text-xs */}
               {t.orderModal.freeDeliveryMessage}
             </p>
           </motion.div>
         )}
 
-        <p className="text-gray-700 text-sm mb-4 text-center">
+        <p className="text-gray-700 text-sm mb-3 text-center"> {/* Reduced mb-4 to mb-3 */}
           {t.orderModal.deliveryInfo1}
         </p>
-        <p className="text-gray-700 text-sm mb-6 text-center">
+        <p className="text-gray-700 text-sm mb-5 text-center"> {/* Reduced mb-6 to mb-5 */}
           {t.orderModal.deliveryInfo2}
         </p>
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-3"> {/* Reduced space-y-4 to space-y-3 */}
           <input
             type="text"
-            className="bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600"
+            className="bg-gray-100 border border-gray-200 rounded-lg px-3 py-2.5 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600" // Reduced px-4 py-3 to px-3 py-2.5
             placeholder={t.orderModal.addressPlaceholder}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -195,7 +195,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
           />
           <input
             type="tel"
-            className="bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600"
+            className="bg-gray-100 border border-gray-200 rounded-lg px-3 py-2.5 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600" // Reduced px-4 py-3 to px-3 py-2.5
             placeholder={t.orderModal.phonePlaceholder}
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -205,7 +205,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
             type="submit"
             icon={ShoppingCart}
             disabled={isSubmitting}
-            size="lg" // Adjusted size for better fit
+            size="md" // Adjusted size from lg to md
           >
             {isSubmitting ? 'Sending...' : t.orderModal.orderButton}
           </CallToActionButton>

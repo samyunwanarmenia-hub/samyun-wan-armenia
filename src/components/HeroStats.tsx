@@ -14,7 +14,7 @@ const statItemVariants = {
 
 const HeroStats: React.FC<HeroStatsProps> = ({ t, stats, isVisible }) => {
   return (
-    <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4"> {/* Reduced gap-6 to gap-4 */}
       {stats.map((stat: StatItem, index: number) => (
         <motion.div 
           key={index} 
@@ -24,8 +24,10 @@ const HeroStats: React.FC<HeroStatsProps> = ({ t, stats, isVisible }) => {
           animate={isVisible['home'] ? "visible" : "hidden"}
           transition={{ delay: index * 0.1 + 0.8 }} // Staggered animation for stats
         >
-          <div className="text-2xl lg:text-3xl font-bold text-gray-900 mb-1">{stat.number}</div> {/* Changed text color to gray-900 */}
-          <div className="text-sm text-gray-700">{t.stats[stat.key]}</div> {/* Changed text color to gray-700 */}
+          <div className="text-xl lg:text-2xl font-bold text-gray-900 mb-0.5"> {/* Reduced text-2xl/3xl to text-xl/2xl, mb-1 to mb-0.5 */}
+            {stat.number}
+          </div>
+          <div className="text-xs text-gray-700">{t.stats[stat.key]}</div> {/* Reduced text-sm to text-xs */}
         </motion.div>
       ))}
     </div>

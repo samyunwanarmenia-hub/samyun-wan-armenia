@@ -91,7 +91,7 @@ const App = () => {
         <Navbar currentLang={currentLang} setCurrentLang={setCurrentLang} t={t} isVisible={isVisible} />
         
         <motion.main 
-          className="flex-grow pt-16"
+          className="flex-grow pt-16" // Kept pt-16 for navbar offset
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.1 }} // Small delay after navbar

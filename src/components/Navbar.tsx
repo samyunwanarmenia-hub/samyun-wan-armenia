@@ -44,7 +44,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6"> {/* Reduced space-x-8 to space-x-6 */}
             <motion.a 
               href="#home" 
               className={getLinkClasses('home')} // Reverted to original getLinkClasses which uses text-gray-700
@@ -102,12 +102,12 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
           </div>
 
           {/* Language Selector for Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-3"> {/* Reduced space-x-4 to space-x-3 */}
             {/* Changed background, border, and text color */}
             <select 
               value={currentLang} 
               onChange={(e) => setCurrentLang(e.target.value)}
-              className="bg-gray-100 border border-gray-200 rounded px-3 py-1 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-600" // Changed focus ring to green
+              className="bg-gray-100 border border-gray-200 rounded px-2.5 py-1 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-600" // Reduced px-3 to px-2.5
             >
               <option value="hy">🇦🇲 ՀԱՅ</option>
               <option value="ru">🇷🇺 РУС</option>

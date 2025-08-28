@@ -50,13 +50,13 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-white z-50 flex flex-col p-6" // Changed background to white
+            className="fixed inset-0 bg-white z-50 flex flex-col p-5" // Reduced p-6 to p-5
             variants={menuVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-6"> {/* Reduced mb-8 to mb-6 */}
               <div className="flex items-center space-x-2">
                 <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg flex items-center justify-center"> {/* Changed to green gradient */}
                   <Leaf className="w-6 h-6 text-white" />
@@ -74,7 +74,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
               </button>
             </div>
 
-            <nav className="flex flex-col space-y-6 text-xl font-semibold flex-grow">
+            <nav className="flex flex-col space-y-4 text-xl font-semibold flex-grow"> {/* Reduced space-y-6 to space-y-4 */}
               <motion.a 
                 href="#home" 
                 onClick={(e) => handleLinkClick(e, 'home')} 
@@ -137,7 +137,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
               </motion.a>
             </nav>
 
-            <div className="mt-8">
+            <div className="mt-6"> {/* Reduced mt-8 to mt-6 */}
               {/* Changed background, border, and text color */}
               <select 
                 value={currentLang} 
@@ -145,7 +145,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
                   setCurrentLang(e.target.value);
                   setIsOpen(false);
                 }}
-                className="bg-gray-100 border border-gray-200 rounded px-4 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-600 w-full" // Changed focus ring to green
+                className="bg-gray-100 border border-gray-200 rounded px-3 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-600 w-full" // Reduced px-4 py-2 to px-3 py-2
               >
                 <option value="hy">🇦🇲 ՀԱՅ</option>
                 <option value="ru">🇷🇺 РУС</option>

@@ -37,7 +37,7 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
   return (
     <motion.section 
       id="testimonials" 
-      className="relative py-20 bg-gray-100 overflow-hidden" // Changed bg-gray-100
+      className="relative py-16 bg-gray-100 overflow-hidden" // Reduced py-20 to py-16
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['testimonials'] ? "visible" : "hidden"}
@@ -54,25 +54,25 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
 
       <div className="container mx-auto px-4 relative z-10"> {/* Content needs higher z-index */}
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-12" // Reduced mb-16 to mb-12
           variants={itemVariants}
           initial="hidden"
           animate={isVisible['testimonials'] ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6"> {/* Changed text color to gray-900 */}
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-5"> {/* Reduced text-3xl/4xl to text-2xl/3xl, mb-6 to mb-5 */}
             {t.testimonials.title}
           </h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto"> {/* Changed text color to gray-700 */}
+          <p className="text-base text-gray-700 max-w-3xl mx-auto"> {/* Reduced text-lg to text-base */}
             {t.testimonials.subtitle}
           </p>
         </motion.div>
 
         {/* More Reviews Grid - now the primary display */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8"> {/* Adjusted grid columns for 4 items */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"> {/* Reduced gap-8 to gap-6 */}
           {shuffledGridTestimonials.map((testimonial, index) => (
             <motion.div 
               key={index} 
-              className="bg-white rounded-2xl p-5 shadow-lg border border-gray-200 group" // Changed background to white and border to gray-200
+              className="bg-white rounded-2xl p-4 shadow-lg border border-gray-200 group" // Reduced p-5 to p-4
               variants={itemVariants}
               initial="hidden"
               animate={isVisible['testimonials'] ? "visible" : "hidden"}
@@ -80,9 +80,9 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
               whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(34, 197, 94, 0.3), 0 10px 10px -5px rgba(34, 197, 94, 0.2)" }} // Changed shadow to green glow
               whileTap={{ scale: 0.98 }} // Added whileTap animation
             >
-              <div className="flex items-center mb-4">
+              <div className="flex items-center mb-3"> {/* Reduced mb-4 to mb-3 */}
                 <div>
-                  <h5 className="font-bold text-gray-900 text-base"> {/* Changed text color to gray-900 */}
+                  <h5 className="font-bold text-gray-900 text-sm"> {/* Reduced text-base to text-sm */}
                     {currentLang === 'hy' ? testimonial.name : currentLang === 'ru' ? testimonial.nameRu : testimonial.nameEn}
                   </h5>
                   <div className="flex">
@@ -91,12 +91,12 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
                     ))}
                   </div>
                 </div>
-                <div className="ml-auto bg-primary-500 text-white px-2 py-1 rounded-full text-xs font-bold"> {/* Changed to green-500 */}
+                <div className="ml-auto bg-primary-500 text-white px-1.5 py-0.5 rounded-full text-xs font-bold"> {/* Reduced px/py, text-xs (already small) */}
                   {testimonial.result}
                 </div>
               </div>
-              <p className="text-gray-700 text-xs leading-relaxed"> {/* Changed text color to gray-700 */}
-                {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.textEn}
+              <p className="text-gray-700 text-xs leading-relaxed"> {/* Reduced text-xs (already small) */}
+                {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.nameEn}
               </p>
             </motion.div>
           ))}

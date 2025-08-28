@@ -33,7 +33,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
           onClick={onClose} // Close modal when clicking on backdrop
         >
           <motion.div
-            className="bg-white rounded-xl p-6 shadow-2xl relative w-full max-w-lg border border-gray-200" // Changed background to white and added border
+            className="bg-white rounded-xl p-5 shadow-2xl relative w-full max-w-md border border-gray-200" // Reduced p-6 to p-5, max-w-lg to max-w-md
             variants={modalVariants}
             initial="hidden"
             animate="visible"
@@ -43,11 +43,11 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
             <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 hover:text-gray-900 transition-colors"> {/* Changed close button color */}
               <X className="w-6 h-6" />
             </button>
-            <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center"> {/* Changed text color to gray-900 */}
+            <h3 className="text-xl font-bold text-gray-900 mb-5 text-center"> {/* Reduced text-2xl to text-xl, mb-6 to mb-5 */}
               {t.authenticity.title}
             </h3>
             
-            <div className="max-w-lg mx-auto mt-6">
+            <div className="max-w-sm mx-auto mt-5"> {/* Reduced max-w-lg to max-w-sm, mt-6 to mt-5 */}
               <OptimizedImage 
                 src="/images/samyun-arm-original-whey-certificate.jpg" 
                 alt="Samyun Wan Original Certificate" 
