@@ -1,4 +1,4 @@
-import { useState } => 'react';
+import { useState } from 'react';
 import { Menu, X, Leaf } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TranslationKeys, SectionId } from '../types/global';

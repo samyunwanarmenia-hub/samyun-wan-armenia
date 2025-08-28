@@ -35,7 +35,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className={`transform transition-all duration-1000 ${isVisible['home'] ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'} text-center lg:text-left`}> {/* Centered text on small screens */}
             <motion.div 
-              className="inline-flex items-center bg-red-100/50 text-red-600 px-4 py-2 rounded-full text-sm font-semibold mb-6" {/* Lighter background, darker text */}
+              className="inline-flex items-center bg-red-100/50 text-red-600 px-4 py-2 rounded-full text-sm font-semibold mb-6" 
+              /* Lighter background, darker text */
               variants={textVariants}
               initial="hidden"
               animate={isVisible['home'] ? "visible" : "hidden"}
@@ -45,7 +46,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
             </motion.div>
             
             <motion.h1 
-              className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight" {/* Changed text color to gray-900 */}
+              className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight" 
+              /* Changed text color to gray-900 */
               variants={textVariants}
               initial="hidden"
               animate={isVisible['home'] ? "visible" : "hidden"}
@@ -58,7 +60,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
             </motion.h1>
             
             <motion.p 
-              className="text-xl text-gray-700 mb-8 leading-relaxed relative overflow-hidden inline-block" {/* Changed text color to gray-700 */}
+              className="text-xl text-gray-700 mb-8 leading-relaxed relative overflow-hidden inline-block" 
+              /* Changed text color to gray-700 */
               variants={textVariants}
               initial="hidden"
               animate={isVisible['home'] ? "visible" : "hidden"}

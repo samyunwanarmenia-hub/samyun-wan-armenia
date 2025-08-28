@@ -11,7 +11,7 @@ interface TestimonialsSectionProps {
   userTestimonial: UserTestimonial | null;
 }
 
-const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTestimonial }: TestimonialSectionProps) => {
+const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTestimonial }: TestimonialsSectionProps) => {
   // Memoize allTestimonials to ensure its reference is stable
   const allTestimonials = useMemo(() => {
     return userTestimonial ? [userTestimonial, ...testimonials] : testimonials;

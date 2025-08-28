@@ -75,7 +75,8 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
               <code className="text-gray-800 text-sm mr-2">{clientId}</code> {/* Changed text color to gray-800 */}
               <motion.button
                 onClick={handleCopyClientId}
-                className="text-gray-600 hover:text-gray-900 transition-colors" {/* Changed text color */}
+                className="text-gray-600 hover:text-gray-900 transition-colors" 
+                /* Changed text color */
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
