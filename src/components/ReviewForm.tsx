@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Send } from 'lucide-react';
-import { motion } from 'framer-motion';
+// motion import removed
 import { TranslationKeys, UserReviewSubmission } from '../types/global';
+import CallToActionButton from './CallToActionButton'; // Import CallToActionButton
 
 interface ReviewFormProps {
   t: TranslationKeys;
@@ -30,50 +31,46 @@ const ReviewForm = ({ t, onSubmit }: ReviewFormProps) => {
   };
 
   return (
-    <section className="relative py-20 bg-gray-100 text-gray-900 overflow-hidden"> {/* Changed background to gray-100 and text to gray-900 */}
-      {/* Subtle radial gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div> {/* Lighter gradient */}
-      <div className="container mx-auto px-4 max-w-2xl relative z-10"> {/* Ensure content is above overlay */}
+    <section className="relative py-20 bg-gray-100 text-gray-900 overflow-hidden">
+      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div>
+      <div className="container mx-auto px-4 max-w-2xl relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl lg:text-5xl font-bold mb-4">
             {t.testimonials.formTitle}
           </h2>
-          <p className="text-xl text-gray-700"> {/* Changed text color to gray-700 */}
+          <p className="text-xl text-gray-700">
             {t.testimonials.formSubtitle}
           </p>
         </div>
 
         {submitted ? (
-          <div className="bg-green-600 text-white p-6 rounded-xl text-center text-lg font-semibold"> {/* Changed background to green-600 */}
+          <div className="bg-green-600 text-white p-6 rounded-xl text-center text-lg font-semibold">
             {t.testimonials.thankYou}
           </div>
         ) : (
           <>
             {!showForm && (
               <div className="flex justify-center">
-                <motion.button
+                <CallToActionButton
                   onClick={() => setShowForm(true)}
-                  className="bg-gradient-to-r from-red-600 to-orange-500 text-white font-bold py-3 px-8 rounded-full hover:shadow-lg transform hover:scale-105 transition-all flex items-center justify-center"
-                  whileHover={{ scale: 1.08 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  icon={Send}
+                  size="lg" // Adjusted size for better fit
                 >
-                  <Send className="w-5 h-5 mr-2" />
-                  {t.testimonials.formTitle} {/* Changed to formTitle for opening the form */}
-                </motion.button>
+                  {t.testimonials.formTitle}
+                </CallToActionButton>
               </div>
             )}
 
             {showForm && (
-              <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 animate-fade-in-up"> {/* Changed background to white and border to gray-200 */}
+              <form onSubmit={handleSubmit} className="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 animate-fade-in-up">
                 <div className="mb-6">
-                  <label htmlFor="name" className="block text-gray-900 text-sm font-bold mb-2"> {/* Changed text color to gray-900 */}
+                  <label htmlFor="name" className="block text-gray-900 text-sm font-bold mb-2">
                     {t.testimonials.namePlaceholder}
                   </label>
                   <input
                     type="text"
                     id="name"
-                    className="shadow appearance-none border border-gray-200 rounded-lg w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-600 bg-gray-100 placeholder-gray-500" // Changed background, border, and text color
+                    className="shadow appearance-none border border-gray-200 rounded-lg w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-600 bg-gray-100 placeholder-gray-500"
                     placeholder={t.testimonials.namePlaceholder}
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -81,13 +78,13 @@ const ReviewForm = ({ t, onSubmit }: ReviewFormProps) => {
                   />
                 </div>
                 <div className="mb-6">
-                  <label htmlFor="review" className="block text-gray-900 text-sm font-bold mb-2"> {/* Changed text color to gray-900 */}
+                  <label htmlFor="review" className="block text-gray-900 text-sm font-bold mb-2">
                     {t.testimonials.reviewPlaceholder}
                   </label>
                   <textarea
                     id="review"
                     rows={5}
-                    className="shadow appearance-none border border-gray-200 rounded-lg w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-600 bg-gray-100 placeholder-gray-500 resize-none" // Changed background, border, and text color
+                    className="shadow appearance-none border border-gray-200 rounded-lg w-full py-3 px-4 text-gray-900 leading-tight focus:outline-none focus:ring-2 focus:ring-red-600 bg-gray-100 placeholder-gray-500 resize-none"
                     placeholder={t.testimonials.reviewPlaceholder}
                     value={reviewText}
                     onChange={(e) => setReviewText(e.target.value)}
@@ -95,26 +92,21 @@ const ReviewForm = ({ t, onSubmit }: ReviewFormProps) => {
                   ></textarea>
                 </div>
                 <div className="flex items-center justify-center space-x-4">
-                  <motion.button
+                  <CallToActionButton
                     type="submit"
-                    className="bg-gradient-to-r from-red-600 to-orange-500 text-white font-bold py-3 px-8 rounded-full hover:shadow-lg transform hover:scale-105 transition-all flex items-center justify-center"
-                    whileHover={{ scale: 1.08 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    icon={Send}
+                    size="lg" // Adjusted size for better fit
                   >
-                    <Send className="w-5 h-5 mr-2" />
                     {t.testimonials.submitButton}
-                  </motion.button>
-                  <motion.button
+                  </CallToActionButton>
+                  <CallToActionButton
                     type="button"
                     onClick={() => setShowForm(false)}
-                    className="bg-gray-200 text-gray-800 font-bold py-3 px-8 rounded-full hover:bg-gray-300 transform hover:scale-105 transition-all" // Changed background, text, and hover background
-                    whileHover={{ scale: 1.08 }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    variant="subtle" // Using the new subtle variant
+                    size="lg" // Adjusted size for better fit
                   >
                     Cancel
-                  </motion.button>
+                  </CallToActionButton>
                 </div>
               </form>
             )}

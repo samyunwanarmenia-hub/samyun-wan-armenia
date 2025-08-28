@@ -1,7 +1,8 @@
 import { Phone, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { TranslationKeys, IntersectionObserverVisibility, ContactModalType } from '../types/global';
-import { contactInfoData } from '../data/contactInfo'; // Import data
+import { contactInfoData } from '../data/contactInfo';
+import CallToActionButton from './CallToActionButton'; // Import CallToActionButton
 
 interface ContactSectionProps {
   t: TranslationKeys;
@@ -28,15 +29,14 @@ const ContactSection = ({ t, isVisible, openContactModal }: ContactSectionProps)
   return (
     <motion.section 
       id="contact" 
-      className="relative py-20 bg-gray-100 text-gray-900 overflow-hidden" // Changed background to gray-100 and text to gray-900
+      className="relative py-20 bg-gray-100 text-gray-900 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['contact'] ? "visible" : "hidden"}
       viewport={{ once: true, amount: 0.3 }}
     >
-      {/* Subtle radial gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div> {/* Lighter gradient */}
-      <div className="container mx-auto px-4 relative z-10"> {/* Ensure content is above overlay */}
+      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div>
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           className="text-center mb-16"
           variants={itemVariants}
@@ -52,19 +52,19 @@ const ContactSection = ({ t, isVisible, openContactModal }: ContactSectionProps)
           {contactInfoData.map((item, index) => (
             <motion.div 
               key={item.key} 
-              className="text-center bg-white rounded-2xl p-6 shadow-lg border border-gray-200 group" // Changed background to white and border to gray-200
+              className="text-center bg-white rounded-2xl p-6 shadow-lg border border-gray-200 group"
               variants={itemVariants}
               initial="hidden"
               animate={isVisible['contact'] ? "visible" : "hidden"}
-              transition={{ delay: index * 0.1 + 0.2 }} // Staggered animation
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(248, 113, 113, 0.3), 0 10px 10px -5px rgba(248, 113, 113, 0.2)" }} // Enhanced shadow with red glow
-              whileTap={{ scale: 0.98 }} // Added whileTap animation
+              transition={{ delay: index * 0.1 + 0.2 }}
+              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(248, 113, 113, 0.3), 0 10px 10px -5px rgba(248, 113, 113, 0.2)" }}
+              whileTap={{ scale: 0.98 }}
             >
               <div className={`w-16 h-16 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
                 <item.icon className="w-8 h-8" />
               </div>
-              <h3 className="text-gray-900 text-xl font-bold mb-4">{t.contact[item.titleKey]}</h3> {/* Changed text color to gray-900 */}
-              <p className="text-gray-700" dangerouslySetInnerHTML={{ __html: item.key === 'phone' ? t.contact.phoneNumbers.description : item.details }}></p> {/* Changed text color to gray-700 */}
+              <h3 className="text-gray-900 text-xl font-bold mb-4">{t.contact[item.titleKey]}</h3>
+              <p className="text-gray-700" dangerouslySetInnerHTML={{ __html: item.key === 'phone' ? t.contact.phoneNumbers.description : item.details }}></p>
             </motion.div>
           ))}
         </div>
@@ -74,28 +74,25 @@ const ContactSection = ({ t, isVisible, openContactModal }: ContactSectionProps)
           variants={buttonVariants}
           initial="hidden"
           animate={isVisible['contact'] ? "visible" : "hidden"}
-          transition={{ delay: contactInfoData.length * 0.1 + 0.4 }} // Delay after cards
+          transition={{ delay: contactInfoData.length * 0.1 + 0.4 }}
         >
-          <motion.button 
+          <CallToActionButton 
             onClick={() => openContactModal('call')} 
-            className="bg-green-600 hover:bg-green-700 text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all flex items-center justify-center"
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            icon={Phone}
+            variant="success" // Using the new success variant
+            size="md"
           >
-            <Phone className="w-5 h-5 mr-2" />
             {t.contact.callNowButton}
-          </motion.button>
-          <motion.button 
+          </CallToActionButton>
+          <CallToActionButton 
             onClick={() => openContactModal('message')} 
-            className="bg-green-500 hover:bg-green-600 text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all flex items-center justify-center"
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            icon={MessageCircle}
+            variant="success" // Using the new success variant
+            size="md"
+            className="bg-green-500 hover:bg-green-600" // Slightly different green for WhatsApp
           >
-            <MessageCircle className="w-5 h-5 mr-2" />
             {t.contact.whatsappButton}
-          </motion.button>
+          </CallToActionButton>
         </motion.div>
       </div>
     </motion.section>

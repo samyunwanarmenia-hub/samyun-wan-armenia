@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { TranslationKeys, ProductShowcaseItem } from '../types/global';
 import { productShowcaseData } from '../data/productShowcaseData';
 import OptimizedImage from './OptimizedImage';
+import CallToActionButton from './CallToActionButton'; // Import CallToActionButton
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -124,7 +125,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
       >
         <button 
           onClick={onClose} 
-          className="absolute top-4 right-4 p-3 rounded-full bg-gray-200 text-red-600 hover:bg-gray-300 hover:text-red-700 transition-colors" // Changed to lighter gray background and darker text
+          className="absolute top-4 right-4 p-3 rounded-full bg-gray-200 text-red-600 hover:bg-gray-300 hover:text-red-700 transition-colors"
         >
           <X className="w-6 h-6" />
         </button>
@@ -141,8 +142,8 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
               key={product.labelKey}
               className={`relative p-2 rounded-xl cursor-pointer transition-all duration-200 ${
                 selectedProducts.includes(product.labelKey)
-                  ? 'border-4 border-green-600 shadow-lg' // Changed to green-600
-                  : 'border-2 border-gray-300' // Changed to gray-300
+                  ? 'border-4 border-green-600 shadow-lg'
+                  : 'border-2 border-gray-300'
               }`}
               onClick={() => handleProductSelect(product.labelKey)}
               whileHover={{ scale: 1.05 }}
@@ -154,7 +155,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
                 className="w-20 h-20 object-contain rounded-lg"
                 loading="eager"
               />
-              <p className="text-xs text-gray-900 mt-2 text-center font-medium"> {/* Changed text to gray-900 */}
+              <p className="text-xs text-gray-900 mt-2 text-center font-medium">
                 {t.productShowcase[product.labelKey]}
               </p>
             </motion.div>
@@ -163,30 +164,30 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
 
         {selectedProducts.length > 0 && (
           <motion.div 
-            className="text-center mb-6 p-4 bg-green-100 rounded-lg border border-green-200" // Changed to lighter green background and border
+            className="text-center mb-6 p-4 bg-green-100 rounded-lg border border-green-200"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <p className="text-gray-900 text-lg font-bold mb-1"> {/* Changed text to gray-990 */}
+            <p className="text-gray-900 text-lg font-bold mb-1">
               Total: {totalPrice.toLocaleString()} AMD
             </p>
-            <p className="text-green-600 text-sm font-semibold"> {/* Changed to green-600 */}
+            <p className="text-green-600 text-sm font-semibold">
               {t.orderModal.freeDeliveryMessage}
             </p>
           </motion.div>
         )}
 
-        <p className="text-gray-700 text-sm mb-4 text-center"> {/* Changed text to gray-700 */}
+        <p className="text-gray-700 text-sm mb-4 text-center">
           {t.orderModal.deliveryInfo1}
         </p>
-        <p className="text-gray-700 text-sm mb-6 text-center"> {/* Changed text to gray-700 */}
+        <p className="text-gray-700 text-sm mb-6 text-center">
           {t.orderModal.deliveryInfo2}
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-4">
           <input
             type="text"
-            className="bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600" // Changed to lighter gray background, darker text, and placeholder
+            className="bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600"
             placeholder={t.orderModal.addressPlaceholder}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -194,23 +195,20 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
           />
           <input
             type="tel"
-            className="bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600" // Changed to lighter gray background, darker text, and placeholder
+            className="bg-gray-100 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600"
             placeholder={t.orderModal.phonePlaceholder}
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             required
           />
-          <motion.button
+          <CallToActionButton
             type="submit"
-            className="bg-gradient-to-r from-red-600 to-orange-500 text-white px-5 py-3 rounded-full font-bold text-lg flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+            icon={ShoppingCart}
             disabled={isSubmitting}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            size="lg" // Adjusted size for better fit
           >
-            <ShoppingCart className="w-6 h-6 mr-3" />
             {isSubmitting ? 'Sending...' : t.orderModal.orderButton}
-          </motion.button>
+          </CallToActionButton>
         </form>
       </motion.div>
     </motion.div>
