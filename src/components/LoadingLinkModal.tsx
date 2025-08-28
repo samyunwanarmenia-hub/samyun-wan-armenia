@@ -39,43 +39,43 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
 
   return (
     <motion.div
-      className="fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center p-4"
+      className="fixed inset-0 bg-gray-900 bg-opacity-70 z-[100] flex items-center justify-center p-4"
       variants={backdropVariants}
       initial="hidden"
       animate="visible"
       exit="hidden"
     >
       <motion.div
-        className="bg-gray-800 rounded-xl p-6 shadow-2xl relative w-full max-w-sm flex flex-col items-center text-center border border-gray-700" // Changed background to gray-800 and added border
+        className="bg-white rounded-xl p-6 shadow-2xl relative w-full max-w-sm flex flex-col items-center text-center border border-gray-200" // Changed background to white and added border
         variants={modalVariants}
         initial="hidden"
         animate="visible"
         exit="exit"
       >
-        <button onClick={onClose} className="absolute top-3 right-3 text-gray-400 hover:text-white transition-colors"> 
+        <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 hover:text-gray-900 transition-colors"> {/* Changed text color */}
           <X className="w-6 h-6" />
         </button>
         <div className="w-24 h-24 mb-6 flex items-center justify-center">
           <LoadingSpinner />
         </div>
-        <h3 className="text-2xl font-bold text-white mb-4"> 
+        <h3 className="text-2xl font-bold text-gray-900 mb-4"> {/* Changed text color to gray-900 */}
           {t.loadingLinkModal.title}
         </h3>
-        <p className="text-gray-300 text-lg mb-2"> 
+        <p className="text-gray-700 text-lg mb-2"> {/* Changed text color to gray-700 */}
           {t.loadingLinkModal.message}
         </p>
-        <p className="text-gray-400 text-sm mb-4"> 
+        <p className="text-gray-500 text-sm mb-4"> {/* Changed text color to gray-500 */}
           {t.loadingLinkModal.waitingForAdmin}
         </p>
 
         {clientId && (
           <div className="flex flex-col items-center mb-6">
-            <p className="text-gray-400 text-xs mb-2">Your Client ID:</p> 
-            <div className="flex items-center bg-gray-700 rounded-lg px-3 py-2 border border-gray-600"> 
-              <code className="text-white text-sm mr-2">{clientId}</code> 
+            <p className="text-gray-500 text-xs mb-2">Your Client ID:</p> {/* Changed text color to gray-500 */}
+            <div className="flex items-center bg-gray-100 rounded-lg px-3 py-2 border border-gray-200"> {/* Changed background and border */}
+              <code className="text-gray-800 text-sm mr-2">{clientId}</code> {/* Changed text color to gray-800 */}
               <motion.button
                 onClick={handleCopyClientId}
-                className="text-gray-300 hover:text-white transition-colors" 
+                className="text-gray-600 hover:text-gray-900 transition-colors" {/* Changed text color */}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -88,7 +88,7 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
 
         <motion.button
           onClick={onClose}
-          className="bg-gray-700 text-white font-bold py-3 px-8 rounded-full hover:bg-gray-600 transform hover:scale-105 transition-all mt-4"
+          className="bg-gray-200 text-gray-800 font-bold py-3 px-8 rounded-full hover:bg-gray-300 transform hover:scale-105 transition-all mt-4" // Changed background and text color
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}

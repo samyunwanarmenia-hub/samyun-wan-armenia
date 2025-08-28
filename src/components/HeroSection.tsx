@@ -22,20 +22,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
   };
 
   return (
-    <section id="home" className="relative min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 flex items-center overflow-hidden py-20 lg:py-0"> {/* Added vertical padding for smaller screens */}
+    <section id="home" className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center overflow-hidden py-20 lg:py-0"> {/* Changed background to lighter gradient */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-red-900/20 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-orange-900/20 rounded-full opacity-20 animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-yellow-900/20 rounded-full opacity-10 animate-pulse" style={{animationDelay: '4s'}}></div>
+        <div className="absolute top-20 left-20 w-72 h-72 bg-red-100/50 rounded-full opacity-50 animate-pulse"></div> {/* Lighter, more visible */}
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-orange-100/50 rounded-full opacity-50 animate-pulse" style={{animationDelay: '2s'}}></div> {/* Lighter, more visible */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-yellow-100/50 rounded-full opacity-50 animate-pulse" style={{animationDelay: '4s'}}></div> {/* Lighter, more visible */}
         {/* Subtle radial gradient overlay */}
-        <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-800/20 via-transparent to-transparent opacity-50"></div>
+        <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div> {/* Lighter gradient */}
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className={`transform transition-all duration-1000 ${isVisible['home'] ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'} text-center lg:text-left`}> {/* Centered text on small screens */}
             <motion.div 
-              className="inline-flex items-center bg-red-900/20 text-red-400 px-4 py-2 rounded-full text-sm font-semibold mb-6"
+              className="inline-flex items-center bg-red-100/50 text-red-600 px-4 py-2 rounded-full text-sm font-semibold mb-6" {/* Lighter background, darker text */}
               variants={textVariants}
               initial="hidden"
               animate={isVisible['home'] ? "visible" : "hidden"}
@@ -45,20 +45,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
             </motion.div>
             
             <motion.h1 
-              className="text-5xl lg:text-7xl font-bold text-white mb-6 leading-tight"
+              className="text-5xl lg:text-7xl font-bold text-gray-900 mb-6 leading-tight" {/* Changed text color to gray-900 */}
               variants={textVariants}
               initial="hidden"
               animate={isVisible['home'] ? "visible" : "hidden"}
               transition={{ delay: 0.1 }}
             >
               {t.hero.title}
-              <span className="block text-3xl lg:text-4xl text-red-400 font-normal mt-2">
+              <span className="block text-3xl lg:text-4xl text-red-600 font-normal mt-2"> {/* Changed to red-600 */}
                 {t.hero.subtitle}
               </span>
             </motion.h1>
             
             <motion.p 
-              className="text-xl text-gray-300 mb-8 leading-relaxed relative overflow-hidden inline-block"
+              className="text-xl text-gray-700 mb-8 leading-relaxed relative overflow-hidden inline-block" {/* Changed text color to gray-700 */}
               variants={textVariants}
               initial="hidden"
               animate={isVisible['home'] ? "visible" : "hidden"}
@@ -90,7 +90,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
                 target="_blank" 
                 rel="noopener noreferrer" 
                 icon={MessageCircle} 
-                variant="ghost" // Changed to use the new 'ghost' variant with lightGreen
+                variant="ghost" // Changed to use the new 'ghost' variant with green
                 size="md"
               >
                 {t.hero.consultation}

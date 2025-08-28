@@ -39,9 +39,9 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
 
   const variantClasses = {
     primary: "bg-gradient-to-r from-red-600 to-orange-500 text-white hover:shadow-2xl hover:scale-105",
-    secondary: "bg-gray-700 text-red-400 hover:bg-gray-600 hover:scale-105 shadow-xl", // Changed to use dark gray background and red text
+    secondary: "bg-gray-200 text-red-600 hover:bg-gray-300 hover:scale-105 shadow-xl", // Changed to use light gray background and red text
     outline: "border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white hover:scale-105",
-    ghost: "border-2 border-lightGreen-500 text-lightGreen-500 hover:bg-lightGreen-900/20 hover:text-lightGreen-400 hover:scale-105", // Changed to use lightGreen-500 border/text and subtle dark green hover
+    ghost: "border-2 border-green-600 text-green-600 hover:bg-green-100 hover:text-green-700 hover:scale-105", // Changed to use green-600 border/text and subtle light green hover
   };
 
   const iconSizeClasses = {

@@ -28,14 +28,14 @@ const ContactSection = ({ t, isVisible, openContactModal }: ContactSectionProps)
   return (
     <motion.section 
       id="contact" 
-      className="relative py-20 bg-gray-900 text-white overflow-hidden" // Added relative and overflow-hidden
+      className="relative py-20 bg-gray-100 text-gray-900 overflow-hidden" // Changed background to gray-100 and text to gray-900
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['contact'] ? "visible" : "hidden"}
       viewport={{ once: true, amount: 0.3 }}
     >
       {/* Subtle radial gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-800/20 via-transparent to-transparent opacity-50"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div> {/* Lighter gradient */}
       <div className="container mx-auto px-4 relative z-10"> {/* Ensure content is above overlay */}
         <motion.div 
           className="text-center mb-16"
@@ -52,7 +52,7 @@ const ContactSection = ({ t, isVisible, openContactModal }: ContactSectionProps)
           {contactInfoData.map((item, index) => (
             <motion.div 
               key={item.key} 
-              className="text-center bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-700 group" // Changed background and border to darker shades
+              className="text-center bg-white rounded-2xl p-6 shadow-lg border border-gray-200 group" // Changed background to white and border to gray-200
               variants={itemVariants}
               initial="hidden"
               animate={isVisible['contact'] ? "visible" : "hidden"}
@@ -63,8 +63,8 @@ const ContactSection = ({ t, isVisible, openContactModal }: ContactSectionProps)
               <div className={`w-16 h-16 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center mx-auto mb-6`}>
                 <item.icon className="w-8 h-8" />
               </div>
-              <h3 className="text-white text-xl font-bold mb-4">{t.contact[item.titleKey]}</h3> {/* Changed text color to white */}
-              <p className="text-gray-300" dangerouslySetInnerHTML={{ __html: item.key === 'phone' ? t.contact.phoneNumbers.description : item.details }}></p> {/* Changed text color to gray-300 */}
+              <h3 className="text-gray-900 text-xl font-bold mb-4">{t.contact[item.titleKey]}</h3> {/* Changed text color to gray-900 */}
+              <p className="text-gray-700" dangerouslySetInnerHTML={{ __html: item.key === 'phone' ? t.contact.phoneNumbers.description : item.details }}></p> {/* Changed text color to gray-700 */}
             </motion.div>
           ))}
         </div>

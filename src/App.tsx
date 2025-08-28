@@ -86,7 +86,7 @@ const App = () => {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-gray-950"> {/* Changed background to gray-950 */}
+      <div className="min-h-screen flex flex-col bg-gray-50"> {/* Changed background to gray-50 */}
         <StructuredData t={t} currentLang={currentLang} />
         <Navbar currentLang={currentLang} setCurrentLang={setCurrentLang} t={t} isVisible={isVisible} />
         

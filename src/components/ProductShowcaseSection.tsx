@@ -24,14 +24,14 @@ const ProductShowcaseSection = ({ t, isVisible, openOrderModal }: ProductShowcas
   return (
     <motion.section
       id="products"
-      className="relative py-20 bg-gray-950 text-white overflow-hidden" // Added relative and overflow-hidden
+      className="relative py-20 bg-gray-50 text-gray-900 overflow-hidden" // Changed background to gray-50 and text to gray-900
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['products'] ? "visible" : "hidden"}
       viewport={{ once: true, amount: 0.3 }}
     >
       {/* Subtle radial gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-800/20 via-transparent to-transparent opacity-50"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div> {/* Lighter gradient */}
       <div className="container mx-auto px-4 relative z-10"> {/* Ensure content is above overlay */}
         <motion.div 
           className="text-center mb-16"
@@ -39,10 +39,10 @@ const ProductShowcaseSection = ({ t, isVisible, openOrderModal }: ProductShowcas
           initial="hidden"
           animate={isVisible['products'] ? "visible" : "hidden"}
         >
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             {t.gallery.title}
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             {t.gallery.subtitle}
           </p>
         </motion.div>
@@ -51,7 +51,7 @@ const ProductShowcaseSection = ({ t, isVisible, openOrderModal }: ProductShowcas
           {productShowcaseData.map((product, index) => (
             <motion.div
               key={product.src}
-              className="flex flex-col items-center text-center p-4 rounded-xl shadow-lg group cursor-pointer bg-gray-800 border border-gray-700 w-full sm:w-[calc(50%-1rem)] lg:w-64" // Adjusted width for responsiveness, removed animate-float
+              className="flex flex-col items-center text-center p-4 rounded-xl shadow-lg group cursor-pointer bg-white border border-gray-200 w-full sm:w-[calc(50%-1rem)] lg:w-64" // Adjusted width for responsiveness, removed animate-float, changed background to white and border to gray-200
               variants={itemVariants}
               initial="hidden"
               animate={isVisible['products'] ? "visible" : "hidden"}
@@ -59,7 +59,7 @@ const ProductShowcaseSection = ({ t, isVisible, openOrderModal }: ProductShowcas
               whileHover={{ scale: 1.08, boxShadow: "0 20px 25px -5px rgba(248, 113, 113, 0.3), 0 10px 10px -5px rgba(248, 113, 113, 0.2)" }} // Enhanced shadow with red glow
             >
               <motion.div 
-                className="w-32 h-32 flex items-center justify-center mb-4 overflow-hidden rounded-lg bg-gray-700" 
+                className="w-32 h-32 flex items-center justify-center mb-4 overflow-hidden rounded-lg bg-gray-100" // Changed background to gray-100
                 whileHover={{ scale: 1.1 }} // Apply scale animation to the image container
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               > 
@@ -70,9 +70,9 @@ const ProductShowcaseSection = ({ t, isVisible, openOrderModal }: ProductShowcas
                   loading="lazy"
                 />
               </motion.div>
-              <p className="text-white text-2xl font-bold mb-1">{t.productShowcase[product.labelKey]}</p> {/* Changed text color to white */}
-              <p className="text-gray-300 text-sm mb-2">{t.productShowcase[product.descKey]}</p> {/* Changed text color to gray-300 */}
-              <p className="text-green-400 text-xl font-bold mb-4">{product.price.toLocaleString()} AMD</p> {/* Displaying price */}
+              <p className="text-gray-900 text-2xl font-bold mb-1">{t.productShowcase[product.labelKey]}</p> {/* Changed text color to gray-900 */}
+              <p className="text-gray-700 text-sm mb-2">{t.productShowcase[product.descKey]}</p> {/* Changed text color to gray-700 */}
+              <p className="text-green-600 text-xl font-bold mb-4">{product.price.toLocaleString()} AMD</p> {/* Changed to green-600 */}
               <motion.button
                 onClick={() => openOrderModal(product.labelKey)} // Pass product.labelKey here
                 className="bg-gradient-to-r from-red-600 to-orange-500 text-white px-4 py-2 rounded-full font-semibold text-sm flex items-center justify-center w-full"

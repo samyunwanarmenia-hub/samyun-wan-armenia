@@ -29,23 +29,23 @@ const ContactModal = ({ isOpen, onClose, type, t }: ContactModalProps) => {
 
   return (
     <motion.div
-      className="fixed inset-0 bg-black bg-opacity-70 z-[100] flex items-center justify-center p-4"
+      className="fixed inset-0 bg-gray-900 bg-opacity-70 z-[100] flex items-center justify-center p-4"
       variants={backdropVariants}
       initial="hidden"
       animate="visible"
       exit="hidden" // Use exit for when the component unmounts
     >
       <motion.div
-        className="bg-gray-800 rounded-xl p-6 shadow-2xl relative w-full max-w-sm border border-gray-700" // Changed background to gray-800 and added border
+        className="bg-white rounded-xl p-6 shadow-2xl relative w-full max-w-sm border border-gray-200" // Changed background to white and added border
         variants={modalVariants}
         initial="hidden"
         animate="visible"
         exit="exit" // Use exit for when the component unmounts
       >
-        <button onClick={onClose} className="absolute top-3 right-3 text-gray-400 hover:text-white transition-colors"> {/* Changed close button color */}
+        <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 hover:text-gray-900 transition-colors"> {/* Changed close button color */}
           <X className="w-6 h-6" />
         </button>
-        <h3 className="text-2xl font-bold text-white mb-6 text-center"> {/* Changed text color to white */}
+        <h3 className="text-2xl font-bold text-gray-900 mb-6 text-center"> {/* Changed text color to gray-900 */}
           {isCallType ? t.contactModal.chooseCall : t.contactModal.chooseMessage}
         </h3>
         <div className="flex flex-col space-y-4">

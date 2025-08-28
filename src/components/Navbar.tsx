@@ -33,21 +33,21 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-black/95 shadow-lg' : 'bg-black/85'}`}> {/* Changed background to black */}
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 shadow-lg' : 'bg-white/85'}`}> {/* Changed background to white */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-orange-500 rounded-lg flex items-center justify-center">
               <Leaf className="w-6 h-6 text-white" />
             </div>
-            <span className="text-xl font-bold text-white">Samyun Wan Armenia</span> {/* Changed text color to white */}
+            <span className="text-xl font-bold text-gray-900">Samyun Wan Armenia</span> {/* Changed text color to gray-900 */}
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
             <motion.a 
               href="#home" 
-              className={getLinkClasses('home')} // Reverted to original getLinkClasses which uses text-gray-300
+              className={getLinkClasses('home')} // Reverted to original getLinkClasses which uses text-gray-700
               whileHover={{ scale: 1.1, color: '#ef4444' }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -107,7 +107,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
             <select 
               value={currentLang} 
               onChange={(e) => setCurrentLang(e.target.value)}
-              className="bg-gray-800 border border-gray-700 rounded px-3 py-1 text-sm text-white focus:outline-none focus:ring-2 focus:ring-red-600" 
+              className="bg-gray-100 border border-gray-200 rounded px-3 py-1 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-600" 
             >
               <option value="hy">🇦🇲 ՀԱՅ</option>
               <option value="ru">🇷🇺 РУС</option>

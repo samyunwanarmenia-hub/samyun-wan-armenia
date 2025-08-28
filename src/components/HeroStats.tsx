@@ -24,8 +24,8 @@ const HeroStats: React.FC<HeroStatsProps> = ({ t, stats, isVisible }) => {
           animate={isVisible['home'] ? "visible" : "hidden"}
           transition={{ delay: index * 0.1 + 0.8 }} // Staggered animation for stats
         >
-          <div className="text-2xl lg:text-3xl font-bold text-white mb-1">{stat.number}</div>
-          <div className="text-sm text-gray-300">{t.stats[stat.key]}</div>
+          <div className="text-2xl lg:text-3xl font-bold text-gray-900 mb-1">{stat.number}</div> {/* Changed text color to gray-900 */}
+          <div className="text-sm text-gray-700">{t.stats[stat.key]}</div> {/* Changed text color to gray-700 */}
         </motion.div>
       ))}
     </div>

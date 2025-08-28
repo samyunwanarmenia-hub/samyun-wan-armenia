@@ -16,7 +16,7 @@ const Footer = ({ t }: FooterProps) => {
   };
 
   return (
-    <footer className="bg-black text-white py-12">
+    <footer className="bg-gray-900 text-white py-12"> {/* Changed background to gray-900 */}
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
@@ -26,14 +26,14 @@ const Footer = ({ t }: FooterProps) => {
               </div>
               <span className="text-xl font-bold">Samyun Wan Armenia</span>
             </div>
-            <p className="text-gray-400 leading-relaxed">
+            <p className="text-gray-300 leading-relaxed"> {/* Changed text to gray-300 */}
               {t.footer.description}
             </p>
           </div>
 
           <div>
             <h4 className="font-bold text-lg mb-4">{t.footer.about}</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-gray-300"> {/* Changed text to gray-300 */}
               <li>
                 <motion.a 
                   href="#about" 
@@ -87,7 +87,7 @@ const Footer = ({ t }: FooterProps) => {
 
           <div>
             <h4 className="font-bold text-lg mb-4">{t.footer.products}</h4>
-            <ul className="space-y-2 text-gray-400">
+            <ul className="space-y-2 text-gray-300"> {/* Changed text to gray-300 */}
               <li>
                 <motion.a 
                   href="#products" 
@@ -186,12 +186,12 @@ const Footer = ({ t }: FooterProps) => {
                 <MessageCircle className="w-5 h-5" />
               </motion.a>
             </div>
-            <p className="text-gray-400 text-sm">@samyunwanarmenia</p>
+            <p className="text-gray-300 text-sm">@samyunwanarmenia</p> {/* Changed text to gray-300 */}
           </div>
         </div>
 
-        <div className="border-t border-gray-800 pt-8 text-center">
-          <p className="text-gray-400">
+        <div className="border-t border-gray-700 pt-8 text-center"> {/* Changed border to gray-700 */}
+          <p className="text-gray-300"> {/* Changed text to gray-300 */}
             © 2025 Samyun Wan Armenia. {t.footer.allRightsReserved} | {t.footer.officialRepresentative}
           </p>
         </div>

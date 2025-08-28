@@ -40,14 +40,14 @@ const FaqSection: React.FC<FaqSectionProps> = ({ t, isVisible }) => {
   return (
     <motion.section
       id="faq"
-      className="relative py-20 bg-gray-900 text-white overflow-hidden" // Added relative and overflow-hidden
+      className="relative py-20 bg-gray-100 text-gray-900 overflow-hidden" // Changed background to gray-100 and text to gray-900
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['faq'] ? "visible" : "hidden"}
       viewport={{ once: true, amount: 0.3 }}
     >
       {/* Subtle radial gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-800/20 via-transparent to-transparent opacity-50"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div> {/* Lighter gradient */}
       <div className="container mx-auto px-4 max-w-3xl relative z-10"> {/* Ensure content is above overlay */}
         <motion.div
           className="text-center mb-16"
@@ -58,7 +58,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ t, isVisible }) => {
           <h2 className="text-4xl lg:text-5xl font-bold mb-6">
             {t.nav.faq}
           </h2>
-          <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-2xl mx-auto">
             {t.faq.q1} {/* Using q1 as a general subtitle for FAQ section */}
           </p>
         </motion.div>
@@ -68,7 +68,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ t, isVisible }) => {
             <motion.div
               key={q.key}
               /* Changed background and border */
-              className="bg-gray-800 rounded-xl shadow-lg border border-gray-700 overflow-hidden" 
+              className="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden" 
               variants={itemVariants}
               initial="hidden"
               animate={isVisible['faq'] ? "visible" : "hidden"}
@@ -76,7 +76,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ t, isVisible }) => {
             >
               <motion.button
                 /* Changed text color and hover background */
-                className="flex justify-between items-center w-full p-6 text-left text-xl font-semibold text-white hover:bg-gray-700 transition-colors" 
+                className="flex justify-between items-center w-full p-6 text-left text-xl font-semibold text-gray-900 hover:bg-gray-100 transition-colors" 
                 onClick={() => toggleQuestion(q.key)}
                 whileHover={{ scale: 1.02 }} // Добавлена анимация при наведении
                 whileTap={{ scale: 0.98 }} // Добавлена анимация при нажатии
@@ -87,7 +87,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ t, isVisible }) => {
                   animate={{ rotate: openQuestion === q.key ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ChevronDown className="w-6 h-6 text-red-500" />
+                  <ChevronDown className="w-6 h-6 text-red-600" /> {/* Changed to red-600 */}
                 </motion.div>
               </motion.button>
               <AnimatePresence>
@@ -98,7 +98,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ t, isVisible }) => {
                     exit="exit"
                     variants={accordionContentVariants}
                     /* Changed text color */
-                    className="px-6 pb-6 text-gray-300 leading-relaxed" 
+                    className="px-6 pb-6 text-gray-700 leading-relaxed" 
                   >
                     <p>{t.faq[q.answerKey]}</p>
                   </motion.div>

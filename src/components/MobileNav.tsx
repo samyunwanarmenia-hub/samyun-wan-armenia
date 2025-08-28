@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } => 'react';
 import { Menu, X, Leaf } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TranslationKeys, SectionId } from '../types/global';
@@ -37,7 +37,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
 
   return (
     <div className="md:hidden">
-      <button onClick={toggleMenu} className="text-white focus:outline-none p-2 rounded-md hover:bg-gray-800 transition-colors">
+      <button onClick={toggleMenu} className="text-gray-900 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition-colors"> {/* Changed text and hover background color */}
         <motion.div
           variants={iconVariants}
           animate={isOpen ? "open" : "closed"}
@@ -50,7 +50,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-gray-950 z-50 flex flex-col p-6" // Changed background to gray-950
+            className="fixed inset-0 bg-white z-50 flex flex-col p-6" // Changed background to white
             variants={menuVariants}
             initial="hidden"
             animate="visible"
@@ -61,9 +61,9 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
                 <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-orange-500 rounded-lg flex items-center justify-center">
                   <Leaf className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-xl font-bold text-white">Samyun Wan Armenia</span> {/* Changed text color to white */}
+                <span className="text-xl font-bold text-gray-900">Samyun Wan Armenia</span> {/* Changed text color to gray-900 */}
               </div>
-              <button onClick={toggleMenu} className="text-white focus:outline-none p-2 rounded-md hover:bg-gray-800 transition-colors"> {/* Changed text and hover background color */}
+              <button onClick={toggleMenu} className="text-gray-900 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition-colors"> {/* Changed text and hover background color */}
                 <motion.div
                   variants={iconVariants}
                   animate={isOpen ? "open" : "closed"}
@@ -145,7 +145,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
                   setCurrentLang(e.target.value);
                   setIsOpen(false);
                 }}
-                className="bg-gray-800 border border-gray-700 rounded px-4 py-2 text-base text-white focus:outline-none focus:ring-2 focus:ring-red-600 w-full" 
+                className="bg-gray-100 border border-gray-200 rounded px-4 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-600 w-full" 
               >
                 <option value="hy">🇦🇲 ՀԱՅ</option>
                 <option value="ru">🇷🇺 РУС</option>

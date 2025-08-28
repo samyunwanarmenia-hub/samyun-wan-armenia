@@ -11,7 +11,7 @@ interface TestimonialsSectionProps {
   userTestimonial: UserTestimonial | null;
 }
 
-const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTestimonial }: TestimonialsSectionProps) => {
+const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTestimonial }: TestimonialSectionProps) => {
   // Memoize allTestimonials to ensure its reference is stable
   const allTestimonials = useMemo(() => {
     return userTestimonial ? [userTestimonial, ...testimonials] : testimonials;
@@ -37,20 +37,20 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
   return (
     <motion.section 
       id="testimonials" 
-      className="relative py-20 bg-gray-900 overflow-hidden" // Added bg-gray-900
+      className="relative py-20 bg-gray-100 overflow-hidden" // Changed bg-gray-100
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['testimonials'] ? "visible" : "hidden"}
       viewport={{ once: true, amount: 0.3 }}
     >
       {/* Subtle radial gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-800/20 via-transparent to-transparent opacity-50"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div> {/* Lighter gradient */}
       {/* Semi-transparent black overlay */}
-      <div className="absolute inset-0 bg-black/20 z-0"></div>
+      <div className="absolute inset-0 bg-gray-200/20 z-0"></div> {/* Lighter overlay */}
       
       {/* Dynamic background elements (circles) */}
-      <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-red-900/10 rounded-full opacity-20 animate-pulse-slow z-0"></div>
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-orange-900/10 rounded-full opacity-20 animate-pulse-slow z-0" style={{animationDelay: '1.5s'}}></div>
+      <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-red-100/50 rounded-full opacity-50 animate-pulse-slow z-0"></div> {/* Lighter, more visible */}
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-orange-100/50 rounded-full opacity-50 animate-pulse-slow z-0" style={{animationDelay: '1.5s'}}></div> {/* Lighter, more visible */}
 
       <div className="container mx-auto px-4 relative z-10"> {/* Content needs higher z-index */}
         <motion.div 
@@ -59,10 +59,10 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
           initial="hidden"
           animate={isVisible['testimonials'] ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-6"> {/* Changed text color to gray-900 */}
             {t.testimonials.title}
           </h2>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto"> {/* Changed text color to gray-700 */}
             {t.testimonials.subtitle}
           </p>
         </motion.div>
@@ -72,7 +72,7 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
           {shuffledGridTestimonials.map((testimonial, index) => (
             <motion.div 
               key={index} 
-              className="bg-gray-800 rounded-2xl p-5 shadow-lg border border-gray-700 group" // Changed background and border to darker shades
+              className="bg-white rounded-2xl p-5 shadow-lg border border-gray-200 group" // Changed background to white and border to gray-200
               variants={itemVariants}
               initial="hidden"
               animate={isVisible['testimonials'] ? "visible" : "hidden"}
@@ -82,7 +82,7 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
             >
               <div className="flex items-center mb-4">
                 <div>
-                  <h5 className="font-bold text-white text-base"> {/* Changed text color to white */}
+                  <h5 className="font-bold text-gray-900 text-base"> {/* Changed text color to gray-900 */}
                     {currentLang === 'hy' ? testimonial.name : currentLang === 'ru' ? testimonial.nameRu : testimonial.nameEn}
                   </h5>
                   <div className="flex">
@@ -95,7 +95,7 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
                   {testimonial.result}
                 </div>
               </div>
-              <p className="text-gray-300 text-xs leading-relaxed"> {/* Changed text color to gray-300 */}
+              <p className="text-gray-700 text-xs leading-relaxed"> {/* Changed text color to gray-700 */}
                 {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.textEn}
               </p>
             </motion.div>

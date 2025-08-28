@@ -13,8 +13,8 @@ const ToastProvider = () => {
         className: '',
         duration: 5000,
         style: {
-          background: '#363636',
-          color: '#fff',
+          background: '#ffffff', // Changed to white
+          color: '#363636', // Changed to dark gray
         },
         // Default options for specific types
         success: {
@@ -22,7 +22,7 @@ const ToastProvider = () => {
           // 'theme' is not a direct property here, use 'iconTheme' or 'style'
           iconTheme: {
             primary: 'green',
-            secondary: 'black',
+            secondary: 'white', // Changed secondary icon color for contrast
           },
         },
         error: {
@@ -30,7 +30,7 @@ const ToastProvider = () => {
           // 'theme' is not a direct property here, use 'iconTheme' or 'style'
           iconTheme: {
             primary: 'red',
-            secondary: 'black',
+            secondary: 'white', // Changed secondary icon color for contrast
           },
         },
       }}
