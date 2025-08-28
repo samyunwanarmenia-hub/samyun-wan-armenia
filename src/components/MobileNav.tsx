@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { Menu, X, Leaf } from 'lucide-react';
+import { Menu, X } from 'lucide-react'; // Removed Leaf import
 import { motion, AnimatePresence } from 'framer-motion';
 import { TranslationKeys, SectionId } from '../types/global';
+import OptimizedImage from './OptimizedImage'; // Import OptimizedImage
 
 interface MobileNavProps {
   currentLang: string;
   setCurrentLang: (lang: string) => void;
   t: TranslationKeys;
-  getLinkClasses: (sectionId: SectionId) => string; // New prop
+  getLinkClasses: (sectionId: SectionId) => string;
 }
 
 const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNavProps) => {
@@ -37,7 +38,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
 
   return (
     <div className="md:hidden">
-      <button onClick={toggleMenu} className="text-gray-900 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition-colors"> {/* Changed text and hover background color */}
+      <button onClick={toggleMenu} className="text-gray-900 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition-colors">
         <motion.div
           variants={iconVariants}
           animate={isOpen ? "open" : "closed"}
@@ -50,20 +51,24 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-white z-50 flex flex-col p-5" // Reduced p-6 to p-5
+            className="fixed inset-0 bg-white z-50 flex flex-col p-5"
             variants={menuVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
           >
-            <div className="flex items-center justify-between mb-6"> {/* Reduced mb-8 to mb-6 */}
+            <div className="flex items-center justify-between mb-6">
               <div className="flex items-center space-x-2">
-                <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg flex items-center justify-center"> {/* Changed to green gradient */}
-                  <Leaf className="w-6 h-6 text-white" />
-                </div>
-                <span className="text-xl font-bold text-gray-900">Samyun Wan Armenia</span> {/* Changed text color to gray-900 */}
+                <a href="#home" className="flex items-center">
+                  <OptimizedImage 
+                    src="/images/logo.png" 
+                    alt="Samyun Wan Armenia Logo" 
+                    className="h-10 w-auto" // Adjusted size for the logo
+                    loading="eager"
+                  />
+                </a>
               </div>
-              <button onClick={toggleMenu} className="text-gray-900 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition-colors"> {/* Changed text and hover background color */}
+              <button onClick={toggleMenu} className="text-gray-900 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition-colors">
                 <motion.div
                   variants={iconVariants}
                   animate={isOpen ? "open" : "closed"}
@@ -74,12 +79,12 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
               </button>
             </div>
 
-            <nav className="flex flex-col space-y-4 text-xl font-semibold flex-grow"> {/* Reduced space-y-6 to space-y-4 */}
+            <nav className="flex flex-col space-y-4 text-xl font-semibold flex-grow">
               <motion.a 
                 href="#home" 
                 onClick={(e) => handleLinkClick(e, 'home')} 
-                className={getLinkClasses('home')} // Reverted to original getLinkClasses
-                whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
+                className={getLinkClasses('home')}
+                whileHover={{ scale: 1.05, color: '#22c55e' }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -88,8 +93,8 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
               <motion.a 
                 href="#about" 
                 onClick={(e) => handleLinkClick(e, 'about')} 
-                className={getLinkClasses('about')} // Reverted to original getLinkClasses
-                whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
+                className={getLinkClasses('about')}
+                whileHover={{ scale: 1.05, color: '#22c55e' }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -98,8 +103,8 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
               <motion.a 
                 href="#benefits" 
                 onClick={(e) => handleLinkClick(e, 'benefits')} 
-                className={getLinkClasses('benefits')} // Reverted to original getLinkClasses
-                whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
+                className={getLinkClasses('benefits')}
+                whileHover={{ scale: 1.05, color: '#22c55e' }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -108,8 +113,8 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
               <motion.a 
                 href="#testimonials" 
                 onClick={(e) => handleLinkClick(e, 'testimonials')} 
-                className={getLinkClasses('testimonials')} // Reverted to original getLinkClasses
-                whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
+                className={getLinkClasses('testimonials')}
+                whileHover={{ scale: 1.05, color: '#22c55e' }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -118,8 +123,8 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
               <motion.a 
                 href="#faq" 
                 onClick={(e) => handleLinkClick(e, 'faq')} 
-                className={getLinkClasses('faq')} // Reverted to original getLinkClasses
-                whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
+                className={getLinkClasses('faq')}
+                whileHover={{ scale: 1.05, color: '#22c55e' }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -128,8 +133,8 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
               <motion.a 
                 href="#contact" 
                 onClick={(e) => handleLinkClick(e, 'contact')} 
-                className={getLinkClasses('contact')} // Reverted to original getLinkClasses
-                whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
+                className={getLinkClasses('contact')}
+                whileHover={{ scale: 1.05, color: '#22c55e' }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -137,15 +142,14 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
               </motion.a>
             </nav>
 
-            <div className="mt-6"> {/* Reduced mt-8 to mt-6 */}
-              {/* Changed background, border, and text color */}
+            <div className="mt-6">
               <select 
                 value={currentLang} 
                 onChange={(e) => {
                   setCurrentLang(e.target.value);
                   setIsOpen(false);
                 }}
-                className="bg-gray-100 border border-gray-200 rounded px-3 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-600 w-full" // Reduced px-4 py-2 to px-3 py-2
+                className="bg-gray-100 border border-gray-200 rounded px-3 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-600 w-full"
               >
                 <option value="hy">🇦🇲 ՀԱՅ</option>
                 <option value="ru">🇷🇺 РУС</option>
