@@ -37,7 +37,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-orange-500 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg flex items-center justify-center"> {/* Changed to green gradient */}
               <Leaf className="w-6 h-6 text-white" />
             </div>
             <span className="text-xl font-bold text-gray-900">Samyun Wan Armenia</span> {/* Changed text color to gray-900 */}
@@ -48,7 +48,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
             <motion.a 
               href="#home" 
               className={getLinkClasses('home')} // Reverted to original getLinkClasses which uses text-gray-700
-              whileHover={{ scale: 1.1, color: '#ef4444' }}
+              whileHover={{ scale: 1.1, color: '#22c55e' }} // Changed hover color to green
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
@@ -57,7 +57,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
             <motion.a 
               href="#about" 
               className={getLinkClasses('about')} // Reverted to original getLinkClasses
-              whileHover={{ scale: 1.1, color: '#ef4444' }}
+              whileHover={{ scale: 1.1, color: '#22c55e' }} // Changed hover color to green
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
@@ -66,7 +66,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
             <motion.a 
               href="#benefits" 
               className={getLinkClasses('benefits')} // Reverted to original getLinkClasses
-              whileHover={{ scale: 1.1, color: '#ef4444' }}
+              whileHover={{ scale: 1.1, color: '#22c55e' }} // Changed hover color to green
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
@@ -75,7 +75,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
             <motion.a 
               href="#testimonials" 
               className={getLinkClasses('testimonials')} // Reverted to original getLinkClasses
-              whileHover={{ scale: 1.1, color: '#ef4444' }}
+              whileHover={{ scale: 1.1, color: '#22c55e' }} // Changed hover color to green
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
@@ -84,7 +84,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
             <motion.a 
               href="#faq" 
               className={getLinkClasses('faq')} // Reverted to original getLinkClasses
-              whileHover={{ scale: 1.1, color: '#ef4444' }}
+              whileHover={{ scale: 1.1, color: '#22c55e' }} // Changed hover color to green
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
@@ -93,7 +93,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
             <motion.a 
               href="#contact" 
               className={getLinkClasses('contact')} // Reverted to original getLinkClasses
-              whileHover={{ scale: 1.1, color: '#ef4444' }}
+              whileHover={{ scale: 1.1, color: '#22c55e' }} // Changed hover color to green
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
@@ -107,7 +107,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
             <select 
               value={currentLang} 
               onChange={(e) => setCurrentLang(e.target.value)}
-              className="bg-gray-100 border border-gray-200 rounded px-3 py-1 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-600" 
+              className="bg-gray-100 border border-gray-200 rounded px-3 py-1 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-600" // Changed focus ring to green
             >
               <option value="hy">🇦🇲 ՀԱՅ</option>
               <option value="ru">🇷🇺 РУС</option>

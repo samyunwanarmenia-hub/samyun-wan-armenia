@@ -7,6 +7,8 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Existing primary (green) and secondary (teal) are good.
+        // Let's ensure they are used consistently.
         primary: {
           50: '#f0fdf4',
           100: '#dcfce7',
@@ -31,14 +33,14 @@ export default {
           800: '#115e59',
           900: '#134e4a',
         },
-        // New white palette
+        // New white palette for soft backgrounds
         white: {
           DEFAULT: '#FFFFFF',
           50: '#F9FAFB', // Very light gray for subtle backgrounds
           100: '#F3F4F6', // Light gray
           200: '#E5E7EB', // Slightly darker light gray
         },
-        // New light green palette
+        // New light green palette (already exists, ensuring it's consistent)
         lightGreen: {
           DEFAULT: '#A7F3D0', // A bright, light green
           50: '#ECFDF5',
@@ -47,6 +49,23 @@ export default {
           300: '#6EE7B7',
           400: '#34D399',
           500: '#10B981',
+        },
+        // Define a brand red/orange gradient for primary CTAs if needed,
+        // but for now, we'll use direct gradient classes.
+        // Let's add a specific green for accents
+        accentGreen: {
+          500: '#22c55e', // Primary green
+          600: '#16a34a', // Darker green
+        },
+        // Define a brand red for primary actions
+        brandRed: {
+          500: '#ef4444',
+          600: '#dc2626',
+        },
+        // Define a brand orange for secondary actions
+        brandOrange: {
+          500: '#f97316',
+          600: '#ea580c',
         },
       },
       fontFamily: {
@@ -88,6 +107,7 @@ export default {
       boxShadow: {
         'glow-red': '0 0 15px rgba(239, 68, 68, 0.5), 0 0 30px rgba(239, 68, 68, 0.3)', // Refined glow
         'card-hover': '0 10px 20px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.1)', // General card hover shadow
+        'glow-green': '0 0 15px rgba(34, 197, 94, 0.5), 0 0 30px rgba(34, 197, 94, 0.3)', // New green glow
       },
     },
   },
@@ -102,6 +122,11 @@ export default {
         },
         '.border-gradient-red-orange': {
           'border-image': 'linear-gradient(to right, #ef4444, #f97316) 1',
+          'border-width': '2px',
+          'border-style': 'solid',
+        },
+        '.border-gradient-green-emerald': { // New green gradient border
+          'border-image': 'linear-gradient(to right, #22c55e, #10b981) 1',
           'border-width': '2px',
           'border-style': 'solid',
         },

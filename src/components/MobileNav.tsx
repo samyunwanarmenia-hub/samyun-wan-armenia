@@ -58,7 +58,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
           >
             <div className="flex items-center justify-between mb-8">
               <div className="flex items-center space-x-2">
-                <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-orange-500 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg flex items-center justify-center"> {/* Changed to green gradient */}
                   <Leaf className="w-6 h-6 text-white" />
                 </div>
                 <span className="text-xl font-bold text-gray-900">Samyun Wan Armenia</span> {/* Changed text color to gray-900 */}
@@ -79,7 +79,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
                 href="#home" 
                 onClick={(e) => handleLinkClick(e, 'home')} 
                 className={getLinkClasses('home')} // Reverted to original getLinkClasses
-                whileHover={{ scale: 1.05, color: '#ef4444' }}
+                whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -89,7 +89,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
                 href="#about" 
                 onClick={(e) => handleLinkClick(e, 'about')} 
                 className={getLinkClasses('about')} // Reverted to original getLinkClasses
-                whileHover={{ scale: 1.05, color: '#ef4444' }}
+                whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -99,7 +99,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
                 href="#benefits" 
                 onClick={(e) => handleLinkClick(e, 'benefits')} 
                 className={getLinkClasses('benefits')} // Reverted to original getLinkClasses
-                whileHover={{ scale: 1.05, color: '#ef4444' }}
+                whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -109,7 +109,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
                 href="#testimonials" 
                 onClick={(e) => handleLinkClick(e, 'testimonials')} 
                 className={getLinkClasses('testimonials')} // Reverted to original getLinkClasses
-                whileHover={{ scale: 1.05, color: '#ef4444' }}
+                whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -119,7 +119,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
                 href="#faq" 
                 onClick={(e) => handleLinkClick(e, 'faq')} 
                 className={getLinkClasses('faq')} // Reverted to original getLinkClasses
-                whileHover={{ scale: 1.05, color: '#ef4444' }}
+                whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -129,7 +129,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
                 href="#contact" 
                 onClick={(e) => handleLinkClick(e, 'contact')} 
                 className={getLinkClasses('contact')} // Reverted to original getLinkClasses
-                whileHover={{ scale: 1.05, color: '#ef4444' }}
+                whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
@@ -145,7 +145,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
                   setCurrentLang(e.target.value);
                   setIsOpen(false);
                 }}
-                className="bg-gray-100 border border-gray-200 rounded px-4 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-600 w-full" 
+                className="bg-gray-100 border border-gray-200 rounded px-4 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-600 w-full" // Changed focus ring to green
               >
                 <option value="hy">🇦🇲 ՀԱՅ</option>
                 <option value="ru">🇷🇺 РУС</option>

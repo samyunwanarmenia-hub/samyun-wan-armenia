@@ -87,7 +87,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ t, isVisible }) => {
                   animate={{ rotate: openQuestion === q.key ? 180 : 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <ChevronDown className="w-6 h-6 text-red-600" /> {/* Changed to red-600 */}
+                  <ChevronDown className="w-6 h-6 text-primary-600" /> {/* Changed to green-600 */}
                 </motion.div>
               </motion.button>
               <AnimatePresence>

@@ -56,7 +56,7 @@ const BenefitsSection = ({ t, isVisible }: BenefitsSectionProps) => {
               initial="hidden"
               animate={isVisible['benefits'] ? "visible" : "hidden"}
               transition={{ delay: index * 0.1 + 0.2 }} // Staggered animation
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(248, 113, 113, 0.3), 0 10px 10px -5px rgba(248, 113, 113, 0.2)" }} // Enhanced shadow with red glow
+              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(34, 197, 94, 0.3), 0 10px 10px -5px rgba(34, 197, 94, 0.2)" }} // Changed shadow to green glow
               // Removed transition={{ type: "spring", stiffness: 300, damping: 20 }} from here
             >
               <div className="absolute top-0 right-0 w-32 h-32 opacity-10 transform rotate-12 group-hover:rotate-45 transition-transform duration-500">

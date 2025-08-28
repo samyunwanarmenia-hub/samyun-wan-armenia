@@ -24,9 +24,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
   return (
     <section id="home" className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center overflow-hidden py-20 lg:py-0"> {/* Changed background to lighter gradient */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-red-100/50 rounded-full opacity-50 animate-pulse"></div> {/* Lighter, more visible */}
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-orange-100/50 rounded-full opacity-50 animate-pulse" style={{animationDelay: '2s'}}></div> {/* Lighter, more visible */}
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-yellow-100/50 rounded-full opacity-50 animate-pulse" style={{animationDelay: '4s'}}></div> {/* Lighter, more visible */}
+        <div className="absolute top-20 left-20 w-72 h-72 bg-primary-100/50 rounded-full opacity-50 animate-pulse"></div> {/* Changed to green-100/50 */}
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-100/50 rounded-full opacity-50 animate-pulse" style={{animationDelay: '2s'}}></div> {/* Changed to blue-100/50 */}
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-yellow-100/50 rounded-full opacity-50 animate-pulse" style={{animationDelay: '4s'}}></div> {/* Changed to yellow-100/50 */}
         {/* Subtle radial gradient overlay */}
         <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div> {/* Lighter gradient */}
       </div>
@@ -35,7 +35,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div className={`transform transition-all duration-1000 ${isVisible['home'] ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'} text-center lg:text-left`}> {/* Centered text on small screens */}
             <motion.div 
-              className="inline-flex items-center bg-red-100/50 text-red-600 px-4 py-2 rounded-full text-sm font-semibold mb-6" 
+              className="inline-flex items-center bg-primary-100/50 text-primary-600 px-4 py-2 rounded-full text-sm font-semibold mb-6" 
               /* Lighter background, darker text */
               variants={textVariants}
               initial="hidden"
@@ -54,7 +54,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
               transition={{ delay: 0.1 }}
             >
               {t.hero.title}
-              <span className="block text-3xl lg:text-4xl text-red-600 font-normal mt-2"> {/* Changed to red-600 */}
+              <span className="block text-3xl lg:text-4xl text-primary-600 font-normal mt-2"> {/* Changed to green-600 */}
                 {t.hero.subtitle}
               </span>
             </motion.h1>

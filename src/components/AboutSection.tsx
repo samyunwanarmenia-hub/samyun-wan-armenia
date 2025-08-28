@@ -12,7 +12,7 @@ type AboutItemKey = 'natural' | 'proven' | 'safe' | 'fast';
 
 const AboutSection = ({ t, isVisible }: AboutSectionProps) => {
   const aboutItems: { key: AboutItemKey; icon: any; color: string; }[] = [
-    { key: 'natural', icon: Leaf, color: 'from-green-500 to-emerald-600' },
+    { key: 'natural', icon: Leaf, color: 'from-primary-500 to-primary-600' }, // Changed to green gradient
     { key: 'proven', icon: Award, color: 'from-blue-500 to-indigo-600' },
     { key: 'safe', icon: Shield, color: 'from-purple-500 to-violet-600' },
     { key: 'fast', icon: TrendingUp, color: 'from-orange-500 to-red-600' }
@@ -63,7 +63,7 @@ const AboutSection = ({ t, isVisible }: AboutSectionProps) => {
               initial="hidden"
               animate={isVisible['about'] ? "visible" : "hidden"}
               transition={{ delay: index * 0.1 + 0.2 }} // Staggered animation
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(248, 113, 113, 0.3), 0 10px 10px -5px rgba(248, 113, 113, 0.2)" }} // Enhanced shadow with red glow
+              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(34, 197, 94, 0.3), 0 10px 10px -5px rgba(34, 197, 94, 0.2)" }} // Changed shadow to green glow
               // Removed transition={{ type: "spring", stiffness: 300, damping: 20 }} from here as it's now in itemVariants
             >
               <motion.div 

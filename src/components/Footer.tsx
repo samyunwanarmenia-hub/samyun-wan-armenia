@@ -21,7 +21,7 @@ const Footer = ({ t }: FooterProps) => {
         <div className="grid md:grid-cols-4 gap-8 mb-8">
           <div>
             <div className="flex items-center space-x-2 mb-6">
-              <div className="w-10 h-10 bg-gradient-to-r from-red-600 to-orange-500 rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-primary-500 to-primary-600 rounded-lg flex items-center justify-center"> {/* Changed to green gradient */}
                 <Leaf className="w-6 h-6 text-white" />
               </div>
               <span className="text-xl font-bold">Samyun Wan Armenia</span>
@@ -38,8 +38,8 @@ const Footer = ({ t }: FooterProps) => {
                 <motion.a 
                   href="#about" 
                   onClick={(e) => handleLinkClick(e, 'about')}
-                  className="hover:text-white transition-colors"
-                  whileHover={{ scale: 1.05, color: '#ffffff' }}
+                  className="hover:text-primary-500 transition-colors" // Changed hover color to green
+                  whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
@@ -50,8 +50,8 @@ const Footer = ({ t }: FooterProps) => {
                 <motion.a 
                   href="#benefits" 
                   onClick={(e) => handleLinkClick(e, 'benefits')}
-                  className="hover:text-white transition-colors"
-                  whileHover={{ scale: 1.05, color: '#ffffff' }}
+                  className="hover:text-primary-500 transition-colors" // Changed hover color to green
+                  whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
@@ -62,8 +62,8 @@ const Footer = ({ t }: FooterProps) => {
                 <motion.a 
                   href="#testimonials" 
                   onClick={(e) => handleLinkClick(e, 'testimonials')}
-                  className="hover:text-white transition-colors"
-                  whileHover={{ scale: 1.05, color: '#ffffff' }}
+                  className="hover:text-primary-500 transition-colors" // Changed hover color to green
+                  whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
@@ -74,8 +74,8 @@ const Footer = ({ t }: FooterProps) => {
                 <motion.a 
                   href="#contact" 
                   onClick={(e) => handleLinkClick(e, 'contact')}
-                  className="hover:text-white transition-colors"
-                  whileHover={{ scale: 1.05, color: '#ffffff' }}
+                  className="hover:text-primary-500 transition-colors" // Changed hover color to green
+                  whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
@@ -92,8 +92,8 @@ const Footer = ({ t }: FooterProps) => {
                 <motion.a 
                   href="#products" 
                   onClick={(e) => handleLinkClick(e, 'products')}
-                  className="hover:text-white transition-colors"
-                  whileHover={{ scale: 1.05, color: '#ffffff' }}
+                  className="hover:text-primary-500 transition-colors" // Changed hover color to green
+                  whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
@@ -104,8 +104,8 @@ const Footer = ({ t }: FooterProps) => {
                 <motion.a 
                   href="#authenticity" 
                   onClick={(e) => handleLinkClick(e, 'authenticity')}
-                  className="hover:text-white transition-colors"
-                  whileHover={{ scale: 1.05, color: '#ffffff' }}
+                  className="hover:text-primary-500 transition-colors" // Changed hover color to green
+                  whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
@@ -115,8 +115,8 @@ const Footer = ({ t }: FooterProps) => {
               <li>
                 <motion.a 
                   href="#" // Placeholder for usage guide, if a dedicated section is added later
-                  className="hover:text-white transition-colors"
-                  whileHover={{ scale: 1.05, color: '#ffffff' }}
+                  className="hover:text-primary-500 transition-colors" // Changed hover color to green
+                  whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
@@ -127,8 +127,8 @@ const Footer = ({ t }: FooterProps) => {
                 <motion.a 
                   href="#faq" 
                   onClick={(e) => handleLinkClick(e, 'faq')}
-                  className="hover:text-white transition-colors"
-                  whileHover={{ scale: 1.05, color: '#ffffff' }}
+                  className="hover:text-primary-500 transition-colors" // Changed hover color to green
+                  whileHover={{ scale: 1.05, color: '#22c55e' }} // Changed hover color to green
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
@@ -178,7 +178,7 @@ const Footer = ({ t }: FooterProps) => {
                 href="https://wa.me/37496653666" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="w-10 h-10 bg-gradient-to-r from-green-600 to-emerald-600 rounded-full flex items-center justify-center"
+                className="w-10 h-10 bg-gradient-to-r from-primary-500 to-emerald-600 rounded-full flex items-center justify-center" // Changed to green gradient
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}

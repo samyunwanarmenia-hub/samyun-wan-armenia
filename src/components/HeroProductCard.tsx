@@ -21,7 +21,7 @@ const HeroProductCard: React.FC<HeroProductCardProps> = ({ t, openOrderModal }) 
     <div className="relative">
       <motion.div 
         className="bg-white rounded-3xl p-8 shadow-2xl max-w-md mx-auto border border-gray-200" // Changed background to white and border to gray-200
-        whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(248, 113, 113, 0.3), 0 10px 10px -5px rgba(248, 113, 113, 0.2)" }}
+        whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(34, 197, 94, 0.3), 0 10px 10px -5px rgba(34, 197, 94, 0.2)" }} // Changed shadow to green glow
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         <div className="relative">
@@ -53,7 +53,7 @@ const HeroProductCard: React.FC<HeroProductCardProps> = ({ t, openOrderModal }) 
         </div>
       </motion.div>
 
-      <div className="absolute -top-6 -left-6 w-12 h-12 bg-red-500 rounded-full flex items-center justify-center animate-bounce">
+      <div className="absolute -top-6 -left-6 w-12 h-12 bg-primary-500 rounded-full flex items-center justify-center animate-bounce"> {/* Changed to green-500 */}
         <Heart className="w-6 h-6 text-white" />
       </div>
       <div className="absolute -bottom-6 -right-6 w-12 h-12 bg-green-500 rounded-full flex items-center justify-center animate-bounce" style={{animationDelay: '1s'}}>

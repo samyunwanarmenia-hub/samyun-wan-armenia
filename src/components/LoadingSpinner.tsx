@@ -14,7 +14,7 @@ const spinnerVariants = {
 const LoadingSpinner = () => {
   return (
     <motion.div
-      className="w-16 h-16 border-4 border-t-4 border-red-500 border-t-transparent rounded-full"
+      className="w-16 h-16 border-4 border-t-4 border-primary-500 border-t-transparent rounded-full" // Changed to green border
       variants={spinnerVariants}
       animate="animate"
     />

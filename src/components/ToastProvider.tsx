@@ -21,7 +21,7 @@ const ToastProvider = () => {
           duration: 3000,
           // 'theme' is not a direct property here, use 'iconTheme' or 'style'
           iconTheme: {
-            primary: 'green',
+            primary: '#22c55e', // Changed to primary green
             secondary: 'white', // Changed secondary icon color for contrast
           },
         },

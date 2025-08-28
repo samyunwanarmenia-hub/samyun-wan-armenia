@@ -49,8 +49,8 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
       <div className="absolute inset-0 bg-gray-200/20 z-0"></div> {/* Lighter overlay */}
       
       {/* Dynamic background elements (circles) */}
-      <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-red-100/50 rounded-full opacity-50 animate-pulse-slow z-0"></div> {/* Lighter, more visible */}
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-orange-100/50 rounded-full opacity-50 animate-pulse-slow z-0" style={{animationDelay: '1.5s'}}></div> {/* Lighter, more visible */}
+      <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-primary-100/50 rounded-full opacity-50 animate-pulse-slow z-0"></div> {/* Changed to green-100/50 */}
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-100/50 rounded-full opacity-50 animate-pulse-slow z-0" style={{animationDelay: '1.5s'}}></div> {/* Changed to blue-100/50 */}
 
       <div className="container mx-auto px-4 relative z-10"> {/* Content needs higher z-index */}
         <motion.div 
@@ -77,7 +77,7 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
               initial="hidden"
               animate={isVisible['testimonials'] ? "visible" : "hidden"}
               transition={{ delay: index * 0.1 + 0.2 }} // Staggered animation
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(248, 113, 113, 0.3), 0 10px 10px -5px rgba(248, 113, 113, 0.2)" }} // Enhanced shadow with red glow
+              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(34, 197, 94, 0.3), 0 10px 10px -5px rgba(34, 197, 94, 0.2)" }} // Changed shadow to green glow
               whileTap={{ scale: 0.98 }} // Added whileTap animation
             >
               <div className="flex items-center mb-4">
@@ -91,7 +91,7 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
                     ))}
                   </div>
                 </div>
-                <div className="ml-auto bg-green-500 text-white px-2 py-1 rounded-full text-xs font-bold">
+                <div className="ml-auto bg-primary-500 text-white px-2 py-1 rounded-full text-xs font-bold"> {/* Changed to green-500 */}
                   {testimonial.result}
                 </div>
               </div>
