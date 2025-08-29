@@ -30,78 +30,80 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
         <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-10 max-w-7xl"> {/* Added max-w-7xl to container */}
         <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div className={`transform transition-all duration-1000 ${isVisible['home'] ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'} text-center lg:text-left`}>
-            <motion.div 
-              className="inline-flex items-center bg-primary-100/50 text-primary-600 px-3 py-1.5 rounded-full text-sm font-semibold mb-5"
-              variants={textVariants}
-              initial="hidden"
-              animate={isVisible['home'] ? "visible" : "hidden"}
-            >
-              <Award className="w-4 h-4 mr-2" />
-              {t.hero.guarantee}
-            </motion.div>
-            
-            <motion.h1 
-              className="text-4xl lg:text-6xl font-bold text-gray-900 mb-5 leading-tight"
-              variants={textVariants}
-              initial="hidden"
-              animate={isVisible['home'] ? "visible" : "hidden"}
-              transition={{ delay: 0.1 }}
-            >
-              {t.hero.title}
-              <span className="block text-2xl lg:text-3xl text-primary-600 font-normal mt-1.5">
-                {t.hero.subtitle}
-              </span>
-            </motion.h1>
-            
-            <motion.p 
-              className="text-lg text-gray-700 mb-6 leading-relaxed relative overflow-hidden inline-block"
-              variants={textVariants}
-              initial="hidden"
-              animate={isVisible['home'] ? "visible" : "hidden"}
-              transition={{ delay: 0.2 }}
-            >
-              {t.hero.tagline}
-              <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 hover:opacity-100 animate-shine pointer-events-none"></span>
-            </motion.p>
-
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-3 mb-10 justify-center lg:justify-start"
-              variants={textVariants}
-              initial="hidden"
-              animate={isVisible['home'] ? "visible" : "hidden"}
-              transition={{ delay: 0.3 }}
-            >
-              <CallToActionButton 
-                onClick={() => openOrderModal('weightGainLabel')} 
-                icon={ShoppingCart} 
-                variant="primary" 
-                size="sm"
-                iconClassName="group-hover:animate-bounce"
+            <div className="max-w-xl mx-auto lg:mx-0"> {/* New wrapper for text content */}
+              <motion.div 
+                className="inline-flex items-center bg-primary-100/50 text-primary-600 px-3 py-1.5 rounded-full text-sm font-semibold mb-5"
+                variants={textVariants}
+                initial="hidden"
+                animate={isVisible['home'] ? "visible" : "hidden"}
               >
-                {t.hero.cta}
-              </CallToActionButton>
-              <CallToActionButton 
-                href="https://m.me/samyunwanarmenia" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                icon={MessageCircle} 
-                variant="ghost"
-                size="sm"
+                <Award className="w-4 h-4 mr-2" />
+                {t.hero.guarantee}
+              </motion.div>
+              
+              <motion.h1 
+                className="text-4xl lg:text-6xl font-bold text-gray-900 mb-5 leading-tight"
+                variants={textVariants}
+                initial="hidden"
+                animate={isVisible['home'] ? "visible" : "hidden"}
+                transition={{ delay: 0.1 }}
               >
-                {t.hero.consultation}
-              </CallToActionButton>
-            </motion.div>
+                {t.hero.title}
+                <span className="block text-2xl lg:text-3xl text-primary-600 font-normal mt-1.5">
+                  {t.hero.subtitle}
+                </span>
+              </motion.h1>
+              
+              <motion.p 
+                className="text-lg text-gray-700 mb-6 leading-relaxed relative overflow-hidden inline-block"
+                variants={textVariants}
+                initial="hidden"
+                animate={isVisible['home'] ? "visible" : "hidden"}
+                transition={{ delay: 0.2 }}
+              >
+                {t.hero.tagline}
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 hover:opacity-100 animate-shine pointer-events-none"></span>
+              </motion.p>
 
-            <HeroStats t={t} stats={stats} isVisible={isVisible} />
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-3 mb-10 justify-center lg:justify-start"
+                variants={textVariants}
+                initial="hidden"
+                animate={isVisible['home'] ? "visible" : "hidden"}
+                transition={{ delay: 0.3 }}
+              >
+                <CallToActionButton 
+                  onClick={() => openOrderModal('weightGainLabel')} 
+                  icon={ShoppingCart} 
+                  variant="primary" 
+                  size="sm"
+                  iconClassName="group-hover:animate-bounce"
+                >
+                  {t.hero.cta}
+                </CallToActionButton>
+                <CallToActionButton 
+                  href="https://m.me/samyunwanarmenia" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  icon={MessageCircle} 
+                  variant="ghost"
+                  size="sm"
+                >
+                  {t.hero.consultation}
+                </CallToActionButton>
+              </motion.div>
 
-            <AuthenticityInfo 
-              t={t} 
-              openLoadingLinkModal={openLoadingLinkModal} 
-              openAuthenticityModal={openAuthenticityModal} 
-            />
+              <HeroStats t={t} stats={stats} isVisible={isVisible} />
+
+              <AuthenticityInfo 
+                t={t} 
+                openLoadingLinkModal={openLoadingLinkModal} 
+                openAuthenticityModal={openAuthenticityModal} 
+              />
+            </div> {/* End of new wrapper div */}
           </div>
 
           <div className={`transform transition-all duration-1000 delay-500 ${isVisible['home'] ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'} flex justify-center lg:justify-end mt-10 lg:mt-0`}>
