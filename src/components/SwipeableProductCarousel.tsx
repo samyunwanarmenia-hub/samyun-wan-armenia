@@ -24,7 +24,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
     );
   };
 
-  const currentProduct: ProductShowcaseItem = productShowcaseData[currentIndex]; // Explicitly typed here
+  const currentProduct: ProductShowcaseItem = productShowcaseData[currentIndex];
 
   const carouselVariants = {
     enter: (direction: number) => ({
@@ -64,16 +64,16 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
           <OptimizedImage
             src={currentProduct.src}
             alt={currentProduct.alt}
-            className="w-48 h-48 object-contain mb-6 drop-shadow-lg"
+            className="w-40 h-40 object-contain mb-4 drop-shadow-lg"
             loading="eager"
           />
-          <h3 className="text-2xl font-bold text-gray-900 mb-2 text-center">
+          <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">
             {t.productShowcase[currentProduct.labelKey]}
           </h3>
           <p className="text-gray-700 text-sm mb-4 text-center">
             {t.productShowcase[currentProduct.descKey]}
           </p>
-          <p className="text-3xl font-extrabold text-primary-600 mb-6">
+          <p className="text-2xl font-extrabold text-primary-600 mb-4">
             {currentProduct.price.toLocaleString()} AMD
           </p>
           <CallToActionButton
