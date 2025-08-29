@@ -37,7 +37,7 @@ export const genericNames = [
   { hy: 'Կարեն', ru: 'Карен', en: 'Karen' }, { hy: 'Նունե', ru: 'Նունե', en: 'Nune' },
   { hy: 'Արթուր', ru: 'Артур', en: 'Artur' }, { hy: 'Դիանա', ru: 'Диана', en: 'Diana' },
   { hy: 'Էդգար', ru: 'Эдгар', en: 'Edgar' }, { hy: 'Սոնա', ru: 'Սոնա', en: 'Sona' },
-  { hy: 'Ռուբեն', ru: 'Рубен', en: 'Ruben' }, { hy: 'Մելինե', ru: 'Мелинэ', en: 'Meline' },
+  { hy: 'Ռուբեն', ru: 'Ռուբեն', en: 'Ruben' }, { hy: 'Մելինե', ru: 'Мелинэ', en: 'Meline' },
 ];
 
 export const genericLastNames = {

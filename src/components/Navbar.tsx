@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { TranslationKeys, IntersectionObserverVisibility } from '../types/global';
+// import { motion } from 'framer-motion'; // Removed motion
+import { TranslationKeys } from '../types/global';
 import MobileNav from './MobileNav';
 import useActiveSection from '../hooks/useActiveSection';
-import OptimizedImage from './OptimizedImage'; // Import OptimizedImage
+import OptimizedImage from './OptimizedImage';
 
 interface NavbarProps {
   currentLang: string;
   setCurrentLang: (lang: string) => void;
   t: TranslationKeys;
-  isVisible: IntersectionObserverVisibility;
+  // isVisible: IntersectionObserverVisibility; // Removed isVisible
 }
 
-const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
+const Navbar = ({ currentLang, setCurrentLang, t }: NavbarProps) => { // Removed isVisible from props
   const [scrolled, setScrolled] = useState(false);
-  const { getLinkClasses } = useActiveSection(isVisible);
+  const { getLinkClasses } = useActiveSection(); // Removed isVisible from hook
 
   useEffect(() => {
     const handleScroll = () => {
@@ -33,7 +33,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 shadow-lg' : 'bg-white/85'}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-pure-white/95 shadow-lg' : 'bg-pure-white/85'}`}> {/* Updated colors */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
@@ -41,7 +41,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
               <OptimizedImage 
                 src="/images/logo.jpg" 
                 alt="Samyun Wan Armenia Logo" 
-                className="h-10 w-auto" // Adjusted size for the logo
+                className="h-10 w-auto"
                 loading="eager"
               />
             </a>
@@ -49,60 +49,42 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            <motion.a 
+            <a 
               href="#home" 
               className={getLinkClasses('home')}
-              whileHover={{ scale: 1.1, color: '#22c55e' }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               {t.nav.home}
-            </motion.a>
-            <motion.a 
+            </a>
+            <a 
               href="#about" 
               className={getLinkClasses('about')}
-              whileHover={{ scale: 1.1, color: '#22c55e' }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               {t.nav.about}
-            </motion.a>
-            <motion.a 
+            </a>
+            <a 
               href="#benefits" 
               className={getLinkClasses('benefits')}
-              whileHover={{ scale: 1.1, color: '#22c55e' }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               {t.nav.benefits}
-            </motion.a>
-            <motion.a 
+            </a>
+            <a 
               href="#testimonials" 
               className={getLinkClasses('testimonials')}
-              whileHover={{ scale: 1.1, color: '#22c55e' }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               {t.nav.testimonials}
-            </motion.a>
-            <motion.a 
+            </a>
+            <a 
               href="#faq" 
               className={getLinkClasses('faq')}
-              whileHover={{ scale: 1.1, color: '#22c55e' }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               {t.nav.faq}
-            </motion.a>
-            <motion.a 
+            </a>
+            <a 
               href="#contact" 
               className={getLinkClasses('contact')}
-              whileHover={{ scale: 1.1, color: '#22c55e' }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
             >
               {t.nav.contact}
-            </motion.a>
+            </a>
           </div>
 
           {/* Language Selector for Desktop */}
@@ -110,7 +92,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
             <select 
               value={currentLang} 
               onChange={(e) => setCurrentLang(e.target.value)}
-              className="bg-gray-100 border border-gray-200 rounded px-2.5 py-1 text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-600"
+              className="bg-neutral-light border border-gray-200 rounded px-2.5 py-1 text-sm text-neutral-dark focus:outline-none focus:ring-2 focus:ring-primary-green" // Updated colors
             >
               <option value="hy">🇦🇲 ՀԱՅ</option>
               <option value="ru">🇷🇺 РУС</option>

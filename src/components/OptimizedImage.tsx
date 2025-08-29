@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface OptimizedImageProps {
   src: string; // Expected format: /images/my-image.jpg
   alt: string;

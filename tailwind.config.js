@@ -7,70 +7,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Existing primary (green) and secondary (teal) are good.
-        // Let's ensure they are used consistently.
-        primary: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#22c55e',
-          600: '#16a34a',
-          700: '#15803d',
-          800: '#166534',
-          900: '#14532d',
-        },
-        secondary: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-          700: '#0f766e',
-          800: '#115e59',
-          900: '#134e4a',
-        },
-        // New white palette for soft backgrounds
-        white: {
-          DEFAULT: '#FFFFFF',
-          50: '#F9FAFB', // Very light gray for subtle backgrounds
-          100: '#F3F4F6', // Light gray
-          200: '#E5E7EB', // Slightly darker light gray
-        },
-        // New light green palette (already exists, ensuring it's consistent)
-        lightGreen: {
-          DEFAULT: '#A7F3D0', // A bright, light green
-          50: '#ECFDF5',
-          100: '#D1FAE5',
-          200: '#A7F3D0',
-          300: '#6EE7B7',
-          400: '#34D399',
-          500: '#10B981',
-        },
-        // Define a brand red/orange gradient for primary CTAs if needed,
-        // but for now, we'll use direct gradient classes.
-        // Let's add a specific green for accents
-        accentGreen: {
-          500: '#22c55e', // Primary green
-          600: '#16a34a', // Darker green
-        },
-        // Define a brand red for primary actions
-        brandRed: {
-          500: '#ef4444',
-          600: '#dc2626',
-        },
-        // Define a brand orange for secondary actions
-        brandOrange: {
-          500: '#f97316',
-          600: '#ea580c',
-        },
+        // New Color Palette
+        'primary-green': '#2E7D32', // Deep natural green for trust and nature
+        'secondary-green': '#4CAF50', // Vibrant accent green
+        'warm-accent': '#FF9800', // Orange for energy and action calls
+        'neutral-dark': '#212121', // For primary text
+        'neutral-medium': '#757575', // Secondary text
+        'neutral-light': '#F5F5F5', // Backgrounds
+        'pure-white': '#FFFFFF', // Containers, cards
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Cal Sans', 'Inter', 'system-ui', 'sans-serif'],
+        // New Typography
+        display: ['"Playfair Display"', 'serif'], // Headings
+        sans: ['Inter', 'sans-serif'], // Body Text
+        serif: ['Lora', 'serif'], // Special Elements (e.g., for quotes/testimonials)
       },
       animation: {
         'float': 'float 6s ease-in-out infinite',
@@ -102,12 +52,12 @@ export default {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'hero-pattern': 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%)',
-        'gradient-text': 'linear-gradient(to right, var(--tw-gradient-stops))', // New text gradient
+        'gradient-text': 'linear-gradient(to right, var(--tw-gradient-stops))',
       },
       boxShadow: {
-        'glow-red': '0 0 15px rgba(239, 68, 68, 0.5), 0 0 30px rgba(239, 68, 68, 0.3)', // Refined glow
-        'card-hover': '0 10px 20px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.1)', // General card hover shadow
-        'glow-green': '0 0 15px rgba(34, 197, 94, 0.5), 0 0 30px rgba(34, 197, 94, 0.3)', // New green glow
+        'glow-red': '0 0 15px rgba(239, 68, 68, 0.5), 0 0 30px rgba(239, 68, 68, 0.3)',
+        'card-hover': '0 10px 20px rgba(0, 0, 0, 0.2), 0 5px 10px rgba(0, 0, 0, 0.1)',
+        'glow-green': '0 0 15px rgba(34, 197, 94, 0.5), 0 0 30px rgba(34, 197, 94, 0.3)',
       },
     },
   },
@@ -125,7 +75,7 @@ export default {
           'border-width': '2px',
           'border-style': 'solid',
         },
-        '.border-gradient-green-emerald': { // New green gradient border
+        '.border-gradient-green-emerald': {
           'border-image': 'linear-gradient(to right, #22c55e, #10b981) 1',
           'border-width': '2px',
           'border-style': 'solid',

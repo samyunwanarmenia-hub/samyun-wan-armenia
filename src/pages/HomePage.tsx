@@ -4,18 +4,17 @@ import AboutSection from '../components/AboutSection';
 import BenefitsSection from '../components/BenefitsSection';
 import ProductShowcaseSection from '../components/ProductShowcaseSection';
 import SeoHead from '../components/SeoHead';
-// import CtaSection from '../components/CtaSection'; // Removed direct import
 
 const TestimonialsSection = lazy(() => import('../components/TestimonialsSection'));
 const ReviewForm = lazy(() => import('../components/ReviewForm'));
 const ContactSection = lazy(() => import('../components/ContactSection'));
-const FaqSection = lazy(() => import('../components/FaqSection')); // Lazy-load FaqSection
+const FaqSection = lazy(() => import('../components/FaqSection'));
 
 import { generateTestimonials } from '../utils/testimonialGenerator';
 import { statsData } from '../data/stats';
-import useIntersectionObserver from '../hooks/useIntersectionObserver';
+// import useIntersectionObserver from '../hooks/useIntersectionObserver'; // Removed useIntersectionObserver
 import { sendTelegramMessage } from '../utils/telegramApi';
-import { showSuccess, showError } from '../utils/toast'; // Ensure showError is imported here
+import { showSuccess, showError } from '../utils/toast';
 import { TranslationKeys, IntersectionObserverVisibility, UserTestimonial, UserReviewSubmission, ContactModalType } from '../types/global';
 
 interface HomePageProps {
@@ -25,16 +24,18 @@ interface HomePageProps {
   openOrderModal: (productKey?: 'weightGainLabel' | 'weightLossLabel') => void;
   openLoadingLinkModal: () => void;
   openAuthenticityModal: () => void;
+  // isVisible: IntersectionObserverVisibility; // Removed isVisible prop
 }
 
-const HomePage = ({ currentLang, t, openContactModal, openOrderModal, openLoadingLinkModal, openAuthenticityModal }: HomePageProps) => {
+const HomePage = ({ currentLang, t, openContactModal, openOrderModal, openLoadingLinkModal, openAuthenticityModal }: HomePageProps) => { // Removed isVisible from props
   const [userTestimonial, setUserTestimonial] = useState<UserTestimonial | null>(null);
 
   const testimonials = useMemo(() => generateTestimonials(10), []);
 
-  const isVisible: IntersectionObserverVisibility = useIntersectionObserver({
-    threshold: 0.1,
-  });
+  // Removed useIntersectionObserver as AOS will handle scroll animations
+  // const isVisible: IntersectionObserverVisibility = useIntersectionObserver({
+  //   threshold: 0.1,
+  // });
 
   const handleReviewSubmit = async (review: UserReviewSubmission) => {
     try {
@@ -55,9 +56,9 @@ const HomePage = ({ currentLang, t, openContactModal, openOrderModal, openLoadin
 
       showSuccess(t.testimonials.thankYou);
       console.log('Review submitted:', review);
-    } catch (error: any) { // Catch the error thrown by sendTelegramMessage
+    } catch (error: any) {
       console.error("Error submitting review:", error);
-      showError(error.message || "Failed to submit review. Please try again."); // Display the error message
+      showError(error.message || "Failed to submit review. Please try again.");
     }
   };
 
@@ -71,26 +72,26 @@ const HomePage = ({ currentLang, t, openContactModal, openOrderModal, openLoadin
         pageKeywords={t.hero.title + ', ' + t.hero.subtitle + ', ' + t.hero.tagline + ', samyun wan, armenia, քաշի ավելացում, բնական կապսուլներ, ինդոնեզական, samyun wan оригинал ереван, նաբոր վеса հայաստան'}
         ogImage="/optimized/og-image.jpg"
       />
-      <HeroSection t={t} isVisible={isVisible} stats={statsData} openOrderModal={openOrderModal} openLoadingLinkModal={openLoadingLinkModal} openAuthenticityModal={openAuthenticityModal} />
-      <AboutSection t={t} isVisible={isVisible} />
-      <BenefitsSection t={t} isVisible={isVisible} />
-      <ProductShowcaseSection t={t} isVisible={isVisible} openOrderModal={openOrderModal} />
-      {/* <CtaSection t={t} isVisible={isVisible} openOrderModal={openOrderModal} /> Removed CTA section */}
+      {/* isVisible prop is no longer needed for sections */}
+      <HeroSection t={t} stats={stats} openOrderModal={openOrderModal} openLoadingLinkModal={openLoadingLinkModal} openAuthenticityModal={openAuthenticityModal} />
+      <AboutSection t={t} />
+      <BenefitsSection t={t} />
+      <ProductShowcaseSection t={t} openOrderModal={openOrderModal} />
       
       <Suspense fallback={<div>Loading Testimonials...</div>}>
-        <TestimonialsSection t={t} isVisible={isVisible} testimonials={testimonials} currentLang={currentLang} userTestimonial={userTestimonial} />
+        <TestimonialsSection t={t} testimonials={testimonials} currentLang={currentLang} userTestimonial={userTestimonial} />
       </Suspense>
       
       <Suspense fallback={<div>Loading Review Form...</div>}>
         <ReviewForm t={t} onSubmit={handleReviewSubmit} />
       </Suspense>
 
-      <Suspense fallback={<div>Loading FAQ...</div>}> {/* Added Suspense for FaqSection */}
-        <FaqSection t={t} isVisible={isVisible} />
+      <Suspense fallback={<div>Loading FAQ...</div>}>
+        <FaqSection t={t} />
       </Suspense>
       
       <Suspense fallback={<div>Loading Contact Info...</div>}>
-        <ContactSection t={t} isVisible={isVisible} openContactModal={openContactModal} />
+        <ContactSection t={t} openContactModal={openContactModal} />
       </Suspense>
     </>
   );

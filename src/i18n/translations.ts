@@ -8,7 +8,7 @@ export const translations: Record<string, TranslationKeys> = {
       benefits: 'Առավելություններ',
       testimonials: 'Գնահատականներ',
       contact: 'Կապ',
-      faq: 'Հաճախ տրվող հարցեր' // New FAQ nav item
+      faq: 'Հաճախ տրվող հարցեր'
     },
     hero: {
       title: 'Samyun Wan Armenia',
@@ -17,8 +17,8 @@ export const translations: Record<string, TranslationKeys> = {
       cta: 'Պատվիրել հիմա',
       consultation: 'Անվճար խորհրդատվություն',
       guarantee: '100% բնօրինակ երաշխիք',
-      qrVerificationTitle: '', // Removed Armenian text as requested
-      qrVerificationSubtitle: '', // Removed Armenian text as requested
+      qrVerificationTitle: '',
+      qrVerificationSubtitle: '',
     },
     stats: {
       customers: 'Գոհ հաճախորդներ',
@@ -170,7 +170,7 @@ export const translations: Record<string, TranslationKeys> = {
       benefits: 'Преимущества',
       testimonials: 'Отзывы',
       contact: 'Контакты',
-      faq: 'Часто задаваемые вопросы' // New FAQ nav item
+      faq: 'Часто задаваемые вопросы'
     },
     hero: {
       title: 'Samyun Wan Armenia',
@@ -332,7 +332,7 @@ export const translations: Record<string, TranslationKeys> = {
       benefits: 'Benefits',
       testimonials: 'Testimonials',
       contact: 'Contact',
-      faq: 'FAQ' // New FAQ nav item
+      faq: 'FAQ'
     },
     hero: {
       title: 'Samyun Wan Armenia',

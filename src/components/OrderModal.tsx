@@ -1,12 +1,12 @@
 import { useState, useMemo, useEffect } from 'react';
-import { X, ShoppingCart } from 'lucide-react';
+import { FaTimes, FaShoppingCart } from 'react-icons/fa'; // Changed to Font Awesome icons
 import { sendTelegramMessage } from '../utils/telegramApi';
 import { showSuccess, showError } from '../utils/toast';
-import { motion } from 'framer-motion';
+// import { motion } from 'framer-motion'; // Removed motion
 import { TranslationKeys, ProductShowcaseItem } from '../types/global';
 import { productShowcaseData } from '../data/productShowcaseData';
 import OptimizedImage from './OptimizedImage';
-import CallToActionButton from './CallToActionButton'; // Import CallToActionButton
+import CallToActionButton from './CallToActionButton';
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -75,7 +75,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
     }
 
     const selectedProductNames = selectedProducts.map(key => t.productShowcase[key]).join(' & ');
-    const telegramMessage = `<b>New Order!</b>\n\n<b>Products:</b> ${selectedProductNames}\n<b>Total Price:</b> ${totalPrice} AMD\n<b>Address:</b> ${address}\n<b>Phone:</b> ${phone}\n\n<b>Language:</b> ${currentLang ? currentLang.toUpperCase() : 'N/A'}`;
+    const telegramMessage = `<b>New Order!</b>\n\n<b>Products:</b> ${selectedProductNames}\n<b>Total Price:</b> ${totalPrice.toLocaleString()} AMD\n<b>Address:</b> ${address}\n<b>Phone:</b> ${phone}\n\n<b>Language:</b> ${currentLang ? currentLang.toUpperCase() : 'N/A'}`;
     
     try {
       await sendTelegramMessage(telegramMessage);
@@ -97,97 +97,82 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
     }
   };
 
-  const backdropVariants = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1 }
-  };
-
-  const modalVariants = {
-    hidden: { y: "-100vh", opacity: 0, scale: 0.8 },
-    visible: { y: "0", opacity: 1, scale: 1, transition: { delay: 0.1, type: "spring", stiffness: 200, damping: 20 } },
-    exit: { y: "100vh", opacity: 0, scale: 0.8, transition: { duration: 0.3 } }
-  };
-
   return (
-    <motion.div
-      className="fixed inset-0 bg-gray-900 bg-opacity-70 z-[100] flex items-center justify-center p-4"
-      variants={backdropVariants}
-      initial="hidden"
-      animate="visible"
-      exit="hidden"
+    <div
+      className="fixed inset-0 bg-neutral-dark bg-opacity-70 z-[100] flex items-center justify-center p-4" // Updated background color
+      data-aos="fade" // AOS animation for backdrop
+      data-aos-duration="300"
     >
-      <motion.div
-        className="bg-white rounded-xl p-5 shadow-2xl relative w-full max-w-sm border border-gray-200" // Reduced p-6 to p-5
-        variants={modalVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
+      <div
+        className="bg-pure-white rounded-xl p-5 shadow-2xl relative w-full max-w-sm border border-gray-200" // Updated background color
+        data-aos="zoom-in" // AOS animation for modal content
+        data-aos-duration="400"
+        data-aos-delay="100"
       >
         <button 
           onClick={onClose} 
-          className="absolute top-3 right-3 p-2 rounded-full bg-gray-200 text-red-600 hover:bg-gray-300 hover:text-red-700 transition-colors" // Reduced p-3 to p-2, top-4 right-4 to top-3 right-3
+          className="absolute top-3 right-3 p-2 rounded-full bg-neutral-light text-warm-accent hover:bg-gray-200 hover:text-orange-600 transition-colors" // Updated colors
         >
-          <X className="w-5 h-5" /> {/* Reduced w/h-6 to w/h-5 */}
+          <FaTimes className="w-5 h-5" />
         </button>
-        <h3 className="text-xl font-bold text-gray-900 mb-5 text-center"> {/* Reduced text-2xl to text-xl, mb-6 to mb-5 */}
+        <h3 className="text-xl font-bold text-neutral-dark mb-5 text-center"> {/* Updated colors */}
           {t.orderModal.title}
         </h3>
 
-        <p className="text-gray-700 text-sm mb-3 text-center font-semibold"> {/* Reduced mb-4 to mb-3 */}
+        <p className="text-neutral-medium text-sm mb-3 text-center font-semibold"> {/* Updated colors */}
           {t.orderModal.selectProducts}
         </p>
-        <div className="flex justify-center space-x-3 mb-5"> {/* Reduced space-x-4 to space-x-3, mb-6 to mb-5 */}
+        <div className="flex justify-center space-x-3 mb-5">
           {productShowcaseData.map((product) => (
-            <motion.div
+            <div
               key={product.labelKey}
-              className={`relative p-1.5 rounded-xl cursor-pointer transition-all duration-200 ${ // Reduced p-2 to p-1.5
+              className={`relative p-1.5 rounded-xl cursor-pointer transition-all duration-200 ${
                 selectedProducts.includes(product.labelKey)
-                  ? 'border-4 border-green-600 shadow-lg'
+                  ? 'border-4 border-primary-green shadow-lg' // Updated border color
                   : 'border-2 border-gray-300'
               }`}
               onClick={() => handleProductSelect(product.labelKey)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              data-aos="zoom-in" // AOS animation
+              data-aos-delay="150"
             >
               <OptimizedImage
                 src={product.src}
                 alt={product.alt}
-                className="w-16 h-16 object-contain rounded-lg" // Reduced w/h-20 to w/h-16
+                className="w-16 h-16 object-contain rounded-lg"
                 loading="eager"
               />
-              <p className="text-xs text-gray-900 mt-1.5 text-center font-medium"> {/* Reduced mt-2 to mt-1.5 */}
+              <p className="text-neutral-dark text-xs mt-1.5 text-center font-medium"> {/* Updated colors */}
                 {t.productShowcase[product.labelKey]}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {selectedProducts.length > 0 && (
-          <motion.div 
-            className="text-center mb-5 p-3 bg-green-100 rounded-lg border border-green-200" // Reduced mb-6 to mb-5, p-4 to p-3
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3 }}
+          <div 
+            className="text-center mb-5 p-3 bg-secondary-green/10 rounded-lg border border-secondary-green/20" // Updated colors
+            data-aos="fade-in" // AOS animation
+            data-aos-delay="200"
           >
-            <p className="text-gray-900 text-base font-bold mb-0.5"> {/* Reduced text-lg to text-base, mb-1 to mb-0.5 */}
+            <p className="text-neutral-dark text-base font-bold mb-0.5"> {/* Updated colors */}
               Total: {totalPrice.toLocaleString()} AMD
             </p>
-            <p className="text-green-600 text-xs font-semibold"> {/* Reduced text-sm to text-xs */}
+            <p className="text-primary-green text-xs font-semibold"> {/* Updated colors */}
               {t.orderModal.freeDeliveryMessage}
             </p>
-          </motion.div>
+          </div>
         )}
 
-        <p className="text-gray-700 text-sm mb-3 text-center"> {/* Reduced mb-4 to mb-3 */}
+        <p className="text-neutral-medium text-sm mb-3 text-center"> {/* Updated colors */}
           {t.orderModal.deliveryInfo1}
         </p>
-        <p className="text-gray-700 text-sm mb-5 text-center"> {/* Reduced mb-6 to mb-5 */}
+        <p className="text-neutral-medium text-sm mb-5 text-center"> {/* Updated colors */}
           {t.orderModal.deliveryInfo2}
         </p>
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-3"> {/* Reduced space-y-4 to space-y-3 */}
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
           <input
             type="text"
-            className="bg-gray-100 border border-gray-200 rounded-lg px-3 py-2.5 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600" // Reduced px-4 py-3 to px-3 py-2.5
+            className="bg-neutral-light border border-gray-200 rounded-lg px-3 py-2.5 text-neutral-dark placeholder-neutral-medium focus:outline-none focus:ring-2 focus:ring-warm-accent" // Updated colors
             placeholder={t.orderModal.addressPlaceholder}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -195,7 +180,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
           />
           <input
             type="tel"
-            className="bg-gray-100 border border-gray-200 rounded-lg px-3 py-2.5 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600" // Reduced px-4 py-3 to px-3 py-2.5
+            className="bg-neutral-light border border-gray-200 rounded-lg px-3 py-2.5 text-neutral-dark placeholder-neutral-medium focus:outline-none focus:ring-2 focus:ring-warm-accent" // Updated colors
             placeholder={t.orderModal.phonePlaceholder}
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -203,15 +188,17 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
           />
           <CallToActionButton
             type="submit"
-            icon={ShoppingCart}
+            icon={FaShoppingCart} // Changed to Font Awesome icon
             disabled={isSubmitting}
-            size="md" // Adjusted size from lg to md
+            size="md"
+            aos="fade-up" // AOS animation
+            aosDelay="300"
           >
             {isSubmitting ? 'Sending...' : t.orderModal.orderButton}
           </CallToActionButton>
         </form>
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 };
 

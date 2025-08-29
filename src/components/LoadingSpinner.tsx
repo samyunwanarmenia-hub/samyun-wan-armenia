@@ -1,22 +1,9 @@
-import { motion } from 'framer-motion';
-
-const spinnerVariants = {
-  animate: {
-    rotate: 360,
-    transition: {
-      repeat: Infinity,
-      duration: 1,
-      ease: "linear",
-    },
-  },
-};
+import React from 'react';
 
 const LoadingSpinner = () => {
   return (
-    <motion.div
-      className="w-16 h-16 border-4 border-t-4 border-primary-500 border-t-transparent rounded-full" // Changed to green border
-      variants={spinnerVariants}
-      animate="animate"
+    <div
+      className="w-16 h-16 border-4 border-t-4 border-primary-green border-t-transparent rounded-full animate-spin" // Changed to primary-green border
     />
   );
 };
