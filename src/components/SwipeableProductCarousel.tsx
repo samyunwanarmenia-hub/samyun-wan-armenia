@@ -79,7 +79,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
               <div className="text-center mb-5">
                 <h3 className="text-gray-900 text-2xl font-bold mb-1.5">{t.productShowcase[product.labelKey]}</h3>
                 <p className="text-gray-700 text-base mb-2.5">{t.productShowcase[product.descKey]}</p>
-                <p className="text-green-600 text-2xl font-bold mb-5">{product.price.toLocaleString()} AMD}</p>
+                <p className="text-green-600 text-2xl font-bold mb-5">{product.price.toLocaleString()} AMD</p> {/* Исправлено: удалена лишняя '}' */}
                 <CallToActionButton
                   onClick={() => openOrderModal(product.labelKey)}
                   icon={ShoppingCart}
