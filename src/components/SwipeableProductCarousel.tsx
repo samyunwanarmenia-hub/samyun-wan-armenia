@@ -61,13 +61,18 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
           exit="exit"
           className="absolute inset-0 flex flex-col items-center justify-center p-6"
         >
-          <OptimizedImage
-            src={currentProduct.src}
-            alt={currentProduct.alt}
-            /* Changed w-40 h-40 to w-28 h-28 */
-            className="w-28 h-28 object-contain mb-4 drop-shadow-lg" 
-            loading="eager"
-          />
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            className="mb-4"
+          >
+            <OptimizedImage
+              src={currentProduct.src}
+              alt={currentProduct.alt}
+              className="w-28 h-28 object-contain drop-shadow-lg" 
+              loading="eager"
+            />
+          </motion.div>
           <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-2 text-center">
             {t.productShowcase[currentProduct.labelKey]}
           </h3>
