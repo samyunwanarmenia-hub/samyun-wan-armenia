@@ -84,8 +84,7 @@ export default {
         'float': 'float 6s ease-in-out infinite',
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'bounce-slow': 'bounce 2s infinite',
-        'shine': 'shine 2s infinite linear',
-        'shine-slow': 'shine 6s infinite linear', // New slow shine animation
+        'shine-tagline': 'shine 8s infinite linear', // Adjusted duration for tagline
         'fade-in-up': 'fadeInUp 0.8s ease-out',
       },
       keyframes: {
@@ -94,8 +93,8 @@ export default {
           '50%': { transform: 'translateY(-20px)' },
         },
         shine: {
-          '0%': { transform: 'translateX(-120%)' }, // Start further left to ensure full sweep
-          '100%': { transform: 'translateX(120%)' }, // End further right to ensure full sweep
+          '0%': { transform: 'translateX(-150%)' }, // Start further left
+          '100%': { transform: 'translateX(150%)' }, // End further right
         },
         fadeInUp: {
           from: {
@@ -112,8 +111,8 @@ export default {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'hero-pattern': 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%)',
         'gradient-text': 'linear-gradient(to right, var(--tw-gradient-stops))', // New text gradient
-        'gradient-shine-light': 'linear-gradient(to right, transparent 0%, rgba(255,255,255,0.7) 49%, rgba(255,255,255,0.7) 51%, transparent 100%)', // Narrower shine
-        'gradient-shine-dark': 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 49%, rgba(0,0,0,0.7) 51%, rgba(0,0,0,0) 100%)', // Narrower shine for dark mode, darker
+        'gradient-shine-light': 'linear-gradient(to right, transparent 0%, rgba(255,255,255,0.5) 45%, rgba(255,255,255,0.5) 55%, transparent 100%)', // Softer, slightly wider shine
+        'gradient-shine-dark': 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 45%, rgba(0,0,0,0.5) 55%, rgba(0,0,0,0) 100%)', // Softer, slightly wider shine for dark mode
       },
       boxShadow: {
         'glow-red': '0 0 15px rgba(239, 68, 68, 0.5), 0 0 30px rgba(239, 68, 68, 0.3)', // Refined glow

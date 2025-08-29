@@ -33,10 +33,11 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
     >
       {hasAttentionText && (
         <motion.span
-          className="inline-block bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 text-xl font-bold px-4 py-2 rounded-full mb-5 animate-pulse-slow"
+          className="inline-block bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 text-xl font-bold px-4 py-2 rounded-full mb-5" // Removed animate-pulse-slow
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.5 }}
+          transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.5 }} // Softer entrance
+          whileHover={{ scale: 1.02 }} // Subtle hover effect
         >
           {t.authenticity.attention}
         </motion.span>
@@ -46,11 +47,11 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
         <motion.div 
           className="cursor-pointer group mb-4 flex flex-col items-center p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
           onClick={openLoadingLinkModal}
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.05, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" }} // Stronger shadow on hover
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
-          <div className="w-20 h-20 bg-gray-100 dark:bg-gray-700 rounded-xl mx-auto mb-3 flex items-center justify-center transform hover:scale-110 transition-all border border-gray-200 dark:border-gray-600">
+          <div className="w-20 h-20 bg-gray-100 dark:bg-gray-700 rounded-xl mx-auto mb-3 flex items-center justify-center transform group-hover:scale-110 transition-all border border-gray-200 dark:border-gray-600">
             <QrCode className="w-10 h-10 text-gray-900 dark:text-gray-50" />
           </div>
           <p className="text-gray-700 dark:text-gray-300 font-semibold text-base">{t.hero.qrVerificationTitle}</p>
