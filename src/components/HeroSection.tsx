@@ -30,10 +30,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
         <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div>
       </div>
 
-      <div className="container mx-auto px-4 relative z-10 max-w-7xl"> {/* Added max-w-7xl to container */}
+      <div className="container mx-auto px-4 relative z-10 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
-          <div className={`transform transition-all duration-1000 ${isVisible['home'] ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'} text-center lg:text-left`}>
-            <div className="max-w-xl mx-auto lg:mx-0"> {/* New wrapper for text content */}
+          <div className={`transform transition-all duration-1000 ${isVisible['home'] ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'} text-center`}>
+            <div className="max-w-xl mx-auto">
               <motion.div 
                 className="inline-flex items-center bg-primary-100/50 text-primary-600 px-3 py-1.5 rounded-full text-sm font-semibold mb-5"
                 variants={textVariants}
@@ -69,7 +69,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
               </motion.p>
 
               <motion.div 
-                className="flex flex-col sm:flex-row gap-3 mb-10 justify-center lg:justify-start"
+                className="flex flex-col sm:flex-row gap-3 mb-10 justify-center"
                 variants={textVariants}
                 initial="hidden"
                 animate={isVisible['home'] ? "visible" : "hidden"}
@@ -103,11 +103,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
                 openLoadingLinkModal={openLoadingLinkModal} 
                 openAuthenticityModal={openAuthenticityModal} 
               />
-            </div> {/* End of new wrapper div */}
+            </div>
           </div>
 
           <div className={`transform transition-all duration-1000 delay-500 ${isVisible['home'] ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'} flex justify-center lg:justify-end mt-10 lg:mt-0`}>
-            <SwipeableProductCarousel t={t} openOrderModal={openOrderModal} /> {/* Use the new component here */}
+            <SwipeableProductCarousel t={t} openOrderModal={openOrderModal} />
           </div>
         </div>
       </div>
