@@ -9,24 +9,28 @@ const ToastProvider = () => {
       containerClassName=""
       containerStyle={{}}
       toastOptions={{
+        // Define default options
         className: '',
         duration: 5000,
         style: {
-          background: '#FFFFFF', // Pure White
-          color: '#212121', // Neutral Dark
+          background: '#ffffff', // Changed to white
+          color: '#363636', // Changed to dark gray
         },
+        // Default options for specific types
         success: {
           duration: 3000,
+          // 'theme' is not a direct property here, use 'iconTheme' or 'style'
           iconTheme: {
-            primary: '#2E7D32', // Primary Green
-            secondary: 'white',
+            primary: '#22c55e', // Changed to primary green
+            secondary: 'white', // Changed secondary icon color for contrast
           },
         },
         error: {
           duration: 4000,
+          // 'theme' is not a direct property here, use 'iconTheme' or 'style'
           iconTheme: {
             primary: 'red',
-            secondary: 'white',
+            secondary: 'white', // Changed secondary icon color for contrast
           },
         },
       }}

@@ -1,6 +1,6 @@
-import { useState, useMemo, useEffect } from 'react'; // Added useEffect
+import { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion'; // Removed motion import
+import { AnimatePresence, motion } from 'framer-motion'; // Import motion
 import Navbar from './components/Navbar';
 import ContactModal from './components/ContactModal';
 import OrderModal from './components/OrderModal';
@@ -10,17 +10,14 @@ import ScrollToTopButton from './components/ScrollToTopButton';
 import FloatingButtons from './components/FloatingButtons';
 import HomePage from './pages/HomePage';
 import StructuredData from './components/StructuredData';
-// import useIntersectionObserver from './hooks/useIntersectionObserver'; // Removed useIntersectionObserver
+import useIntersectionObserver from './hooks/useIntersectionObserver';
 
 import Footer from './components/Footer';
 
 import { translations } from './i18n/translations';
-import { TranslationKeys, ContactModalType, ProductShowcaseItem } from './types/global'; // Removed IntersectionObserverVisibility
+import { TranslationKeys, ContactModalType, IntersectionObserverVisibility, ProductShowcaseItem } from './types/global';
 import { sendTelegramMessage } from './utils/telegramApi';
-import { showError } from './utils/toast';
-
-import AOS from 'aos'; // Import AOS
-import 'aos/dist/aos.css'; // Import AOS styles
+import { showError } from './utils/toast'; // Ensure showError is imported here
 
 const App = () => {
   const [currentLang, setCurrentLang] = useState<string>('hy');
@@ -34,20 +31,9 @@ const App = () => {
 
   const t: TranslationKeys = useMemo(() => translations[currentLang], [currentLang]);
 
-  // Removed useIntersectionObserver as AOS will handle scroll animations
-  // const isVisible: IntersectionObserverVisibility = useIntersectionObserver({
-  //   threshold: 0.1,
-  // });
-
-  // Initialize AOS
-  useEffect(() => {
-    AOS.init({
-      duration: 800, // values from 0 to 3000, with step 50ms
-      once: true, // whether animation should happen only once - while scrolling down
-      mirror: false, // whether elements should animate out while scrolling past them
-    });
-    AOS.refresh(); // Recalculate positions on component mount/update
-  }, []);
+  const isVisible: IntersectionObserverVisibility = useIntersectionObserver({
+    threshold: 0.1,
+  });
 
   const openContactModal = (type: ContactModalType) => {
     setContactModalType(type);
@@ -100,14 +86,15 @@ const App = () => {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-neutral-light"> {/* Changed background to neutral-light */}
+      <div className="min-h-screen flex flex-col bg-gray-50"> {/* Changed background to gray-50 */}
         <StructuredData t={t} currentLang={currentLang} />
-        {/* isVisible prop is no longer needed for Navbar as AOS handles visibility */}
-        <Navbar currentLang={currentLang} setCurrentLang={setCurrentLang} t={t} /> 
+        <Navbar currentLang={currentLang} setCurrentLang={setCurrentLang} t={t} isVisible={isVisible} />
         
-        <main 
+        <motion.main 
           className="flex-grow pt-16" // Kept pt-16 for navbar offset
-          // Removed framer-motion animation props
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, delay: 0.1 }} // Small delay after navbar
         >
           <Routes>
             <Route 
@@ -120,12 +107,11 @@ const App = () => {
                   openOrderModal={openOrderModal} 
                   openLoadingLinkModal={openLoadingLinkModal}
                   openAuthenticityModal={openAuthenticityModal}
-                  // isVisible prop is no longer needed for HomePage
                 />
               } 
             />
           </Routes>
-        </main>
+        </motion.main>
 
         <Footer t={t} />
         <FloatingButtons openContactModal={openContactModal} />

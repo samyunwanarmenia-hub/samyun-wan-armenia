@@ -1,46 +1,35 @@
-import { TranslationKeys, StatItem } from '../types/global';
-import { FaUsers, FaChartLine } from 'react-icons/fa'; // Changed to Font Awesome icons
+import { motion } from 'framer-motion';
+import { TranslationKeys, StatItem, IntersectionObserverVisibility } from '../types/global';
 
 interface HeroStatsProps {
   t: TranslationKeys;
   stats: StatItem[];
+  isVisible: IntersectionObserverVisibility;
 }
 
-const HeroStats: React.FC<HeroStatsProps> = ({ t, stats }) => {
-  const getIcon = (key: StatItem['key']) => {
-    switch (key) {
-      case 'customers':
-        return FaUsers;
-      case 'experience':
-        return FaChartLine;
-      default:
-        return null;
-    }
-  };
+const statItemVariants = {
+  hidden: { opacity: 0, y: 20, scale: 0.9 },
+  visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } }
+};
 
+const HeroStats: React.FC<HeroStatsProps> = ({ t, stats, isVisible }) => {
   return (
-    <div 
-      className="flex flex-wrap justify-center lg:justify-start gap-6 mb-10"
-      data-aos="fade-up" // AOS animation
-      data-aos-delay="700"
-    >
-      {stats.map((stat, index) => {
-        const IconComponent = getIcon(stat.key);
-        return (
-          <div 
-            key={stat.key} 
-            className="flex items-center bg-pure-white rounded-xl p-4 shadow-md border border-gray-200" // Updated colors
-            data-aos="zoom-in" // AOS animation
-            data-aos-delay={`${index * 100 + 800}`}
-          >
-            {IconComponent && <IconComponent className="w-6 h-6 text-primary-green mr-3" />} {/* Updated colors */}
-            <div>
-              <p className="text-2xl font-bold text-neutral-dark">{stat.number}</p> {/* Updated colors */}
-              <p className="text-sm text-neutral-medium">{t.stats[stat.key]}</p> {/* Updated colors */}
-            </div>
+    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4"> {/* Reduced gap-6 to gap-4 */}
+      {stats.map((stat: StatItem, index: number) => (
+        <motion.div 
+          key={index} 
+          className="text-center"
+          variants={statItemVariants}
+          initial="hidden"
+          animate={isVisible['home'] ? "visible" : "hidden"}
+          transition={{ delay: index * 0.1 + 0.8 }} // Staggered animation for stats
+        >
+          <div className="text-xl lg:text-2xl font-bold text-gray-900 mb-0.5"> {/* Reduced text-2xl/3xl to text-xl/2xl, mb-1 to mb-0.5 */}
+            {stat.number}
           </div>
-        );
-      })}
+          <div className="text-xs text-gray-700">{t.stats[stat.key]}</div> {/* Reduced text-sm to text-xs */}
+        </motion.div>
+      ))}
     </div>
   );
 };

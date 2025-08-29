@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react';
-// import { motion, AnimatePresence } from 'framer-motion'; // Removed motion, AnimatePresence
-import { FaArrowUp } from 'react-icons/fa'; // Changed to Font Awesome icon
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUp } from 'lucide-react';
 
 const ScrollToTopButton: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
 
+  // Show button when page is scrolled down
   const toggleVisibility = () => {
-    if (window.pageYOffset > 300) {
+    if (window.pageYOffset > 300) { // Show after scrolling 300px
       setIsVisible(true);
     } else {
       setIsVisible(false);
     }
   };
 
+  // Scroll to top when button is clicked
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -27,22 +29,29 @@ const ScrollToTopButton: React.FC = () => {
     };
   }, []);
 
-  // Removed framer-motion variants, AOS will handle visibility if needed, or simple CSS transition
-  // For a simple show/hide, direct conditional rendering with CSS transitions is sufficient.
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 50, scale: 0.8 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 200, damping: 20 } },
+    exit: { opacity: 0, y: 50, scale: 0.8, transition: { duration: 0.2 } },
+  };
 
   return (
-    <>
+    <AnimatePresence>
       {isVisible && (
-        <button
+        <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-4 left-4 z-50 p-3 bg-gradient-to-r from-primary-green to-secondary-green text-pure-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-green focus:ring-opacity-75 transition-all duration-300 transform hover:scale-110 active:scale-95" // Updated colors and added manual transitions
-          data-aos="fade-up" // AOS animation
-          data-aos-anchor-placement="bottom-bottom"
+          className="fixed bottom-4 left-4 z-50 p-3 bg-gradient-to-r from-primary-500 to-accentGreen-600 text-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-75" // Changed to green gradient
+          variants={buttonVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
         >
-          <FaArrowUp className="w-6 h-6" />
-        </button>
+          <ArrowUp className="w-6 h-6" />
+        </motion.button>
       )}
-    </>
+    </AnimatePresence>
   );
 };
 

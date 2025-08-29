@@ -1,6 +1,7 @@
-import { FaQrcode, FaInfoCircle } from 'react-icons/fa'; // Changed to Font Awesome icons
+import { motion } from 'framer-motion';
+import { QrCode } from 'lucide-react';
 import { TranslationKeys } from '../types/global';
-import CallToActionButton from './CallToActionButton';
+import CallToActionButton from './CallToActionButton'; // Import CallToActionButton
 
 interface AuthenticityInfoProps {
   t: TranslationKeys;
@@ -9,42 +10,59 @@ interface AuthenticityInfoProps {
 }
 
 const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkModal, openAuthenticityModal }) => {
+  const shouldShowQrBlock = !!t.hero.qrVerificationTitle;
+  const hasAttentionText = !!t.authenticity.attention;
+  const hasHowToDistinguishText = !!t.authenticity.howToDistinguish;
+
+  if (!shouldShowQrBlock && !hasAttentionText && !hasHowToDistinguishText) {
+    return null;
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+  };
+
   return (
-    <div 
-      id="authenticity" 
-      className="mt-10 p-5 bg-pure-white rounded-2xl shadow-lg border border-gray-200 text-center" // Updated colors
-      data-aos="fade-up" // AOS animation
-      data-aos-delay="700"
+    <motion.div 
+      className="mt-8 text-center lg:text-left" // Reduced mt-12 to mt-8
+      variants={itemVariants}
+      initial="hidden"
+      animate="visible"
+      transition={{ delay: 0.4 }}
     >
-      <h3 className="text-xl font-display font-bold text-neutral-dark mb-3"> {/* Updated font size, family and color */}
-        {t.hero.qrVerificationTitle || t.authenticity.title}
-      </h3>
-      <p className="text-neutral-medium text-base mb-5"> {/* Updated font size and color */}
-        {t.hero.qrVerificationSubtitle || t.authenticity.howToDistinguish}
-      </p>
-      <div className="flex flex-col sm:flex-row justify-center gap-3">
-        <CallToActionButton
+      {hasAttentionText && (
+        <p className="text-2xl font-bold text-red-600 mb-3 animate-pulse-slow"> {/* Reduced text-3xl to text-2xl, mb-4 to mb-3 */}
+          {t.authenticity.attention}
+        </p>
+      )}
+      
+      {shouldShowQrBlock && (
+        <motion.div 
+          className="text-center lg:text-left cursor-pointer group mb-3" // Reduced mb-4 to mb-3
           onClick={openLoadingLinkModal}
-          icon={FaQrcode} // Changed to Font Awesome icon
-          variant="outline"
-          size="sm" // Adjusted size to sm (16px text)
-          aos="zoom-in" // AOS animation
-          aosDelay="800"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
-          {t.hero.qrVerificationTitle || 'Get QR Link'}
-        </CallToActionButton>
+          <div className="w-20 h-20 bg-white rounded-xl mx-auto lg:mx-0 mb-3 flex items-center justify-center transform hover:scale-110 transition-all border border-gray-200"> {/* Reduced w/h-24 to w/h-20, mb-4 to mb-3 */}
+            <QrCode className="w-10 h-10 text-gray-900" /> {/* Reduced w/h-12 to w/h-10 */}
+          </div>
+          <p className="text-gray-700 font-semibold text-sm">{t.hero.qrVerificationTitle}</p> {/* Reduced text size */}
+          {t.hero.qrVerificationSubtitle && <p className="text-xs text-gray-500">{t.hero.qrVerificationSubtitle}</p>} {/* Reduced text size */}
+        </motion.div>
+      )}
+
+      {hasHowToDistinguishText && (
         <CallToActionButton
           onClick={openAuthenticityModal}
-          icon={FaInfoCircle} // Changed to Font Awesome icon
-          variant="subtle"
-          size="sm" // Adjusted size to sm (16px text)
-          aos="zoom-in" // AOS animation
-          aosDelay="900"
+          variant="subtle" // Using the new subtle variant
+          size="xs" // Using the new xs size
         >
           {t.authenticity.howToDistinguish}
         </CallToActionButton>
-      </div>
-    </div>
+      )}
+    </motion.div>
   );
 };
 

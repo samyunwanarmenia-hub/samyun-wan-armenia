@@ -1,5 +1,5 @@
 import React from 'react';
-// import { motion } from 'framer-motion'; // Removed motion
+import { motion } from 'framer-motion';
 import { Icon } from '../types/global';
 
 interface CallToActionButtonProps {
@@ -14,9 +14,7 @@ interface CallToActionButtonProps {
   className?: string;
   disabled?: boolean;
   iconClassName?: string;
-  type?: 'button' | 'submit' | 'reset';
-  aos?: string; // Added AOS prop
-  aosDelay?: string; // Added AOS prop
+  type?: 'button' | 'submit' | 'reset'; // Added 'type' property
 }
 
 const CallToActionButton: React.FC<CallToActionButtonProps> = ({
@@ -31,68 +29,67 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
   className,
   disabled = false,
   iconClassName,
-  type = 'button',
-  aos, // Destructure AOS props
-  aosDelay, // Destructure AOS props
+  type = 'button', // Default to 'button' if not specified
 }) => {
   const baseClasses = "flex items-center justify-center font-semibold transition-all duration-300 rounded-full";
   
   const sizeClasses = {
-    xs: "px-3 py-1.5 text-sm", // Adjusted text size to 14px (sm)
-    sm: "px-4 py-2 text-base", // Adjusted text size to 16px (base)
-    md: "px-5 py-2.5 text-base", // Adjusted text size to 16px (base)
-    lg: "px-8 py-3 text-lg", // Adjusted text size to 18px (lg)
+    xs: "px-3 py-1.5 text-xs",
+    sm: "px-4 py-2 text-sm",
+    md: "px-5 py-2.5 text-sm",
+    lg: "px-8 py-3 text-lg",
   };
 
   const variantClasses = {
-    primary: "bg-warm-accent text-pure-white hover:shadow-lg hover:scale-105", // Updated colors
-    secondary: "bg-neutral-light text-neutral-dark hover:bg-gray-200 hover:scale-105 shadow-sm", // Updated colors
-    outline: "border-2 border-primary-green text-primary-green hover:bg-primary-green hover:text-pure-white hover:scale-105", // Updated colors
-    ghost: "border-2 border-transparent text-primary-green hover:bg-primary-green/10 hover:text-primary-green-dark hover:scale-105", // Updated colors
-    subtle: "bg-neutral-light text-neutral-medium hover:bg-gray-200 hover:scale-105 shadow-sm border border-gray-300", // Updated colors
-    success: "bg-secondary-green hover:bg-primary-green text-pure-white hover:shadow-lg hover:scale-105", // Updated colors
+    primary: "bg-gradient-to-r from-red-600 to-orange-500 text-white hover:shadow-2xl hover:scale-105",
+    secondary: "bg-gray-200 text-red-600 hover:bg-gray-300 hover:scale-105 shadow-xl",
+    outline: "border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white hover:scale-105",
+    ghost: "border-2 border-green-600 text-green-600 hover:bg-green-100 hover:text-green-700 hover:scale-105",
+    subtle: "bg-gray-200 text-gray-800 hover:bg-gray-300 hover:scale-105 shadow-sm border border-gray-300",
+    success: "bg-green-600 hover:bg-green-700 text-white hover:shadow-lg hover:scale-105",
   };
 
   const iconSizeClasses = {
-    xs: "w-4 h-4", // Adjusted icon size
-    sm: "w-4 h-4", // Adjusted icon size
-    md: "w-5 h-5", // Adjusted icon size
-    lg: "w-6 h-6", // Adjusted icon size
+    xs: "w-3 h-3",
+    sm: "w-4 h-4",
+    md: "w-5 h-5",
+    lg: "w-6 h-6",
   };
 
   const combinedClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className || ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`;
 
-  const commonProps = {
-    "data-aos": aos,
-    "data-aos-delay": aosDelay,
+  const motionProps = {
+    whileHover: { scale: 1.08 },
+    whileTap: { scale: 0.95 },
+    transition: { type: "spring", stiffness: 400, damping: 17 },
   };
 
   if (href) {
     return (
-      <a
+      <motion.a
         href={href}
         target={target}
         rel={rel}
         className={combinedClasses}
-        {...commonProps}
+        {...motionProps}
       >
         {IconComponent && <IconComponent className={`${iconSizeClasses[size]} mr-2 ${iconClassName || ''}`} />}
         {children}
-      </a>
+      </motion.a>
     );
   }
 
   return (
-    <button
+    <motion.button
       onClick={onClick}
       className={combinedClasses}
       disabled={disabled}
-      type={type}
-      {...commonProps}
+      type={type} // Added type to the button element
+      {...motionProps}
     >
       {IconComponent && <IconComponent className={`${iconSizeClasses[size]} mr-2 ${iconClassName || ''}`} />}
       {children}
-    </button>
+    </motion.button>
   );
 };
 

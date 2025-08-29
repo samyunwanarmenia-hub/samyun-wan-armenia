@@ -158,8 +158,7 @@ export interface StatItem {
 
 // Define the structure for the intersection observer visibility state
 export type SectionId = 'home' | 'about' | 'benefits' | 'authenticity' | 'products' | 'testimonials' | 'contact' | 'cta' | 'faq'; // Added 'faq'
-// Removed IntersectionObserverVisibility as AOS is now used
-// export type IntersectionObserverVisibility = Record<SectionId, boolean>;
+export type IntersectionObserverVisibility = Record<SectionId, boolean>;
 
 // Define types for modal interactions
 export type ContactModalType = 'call' | 'message';
