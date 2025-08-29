@@ -28,7 +28,8 @@ const formatNameInitialLastName = (fullName: string): string => {
 };
 
 export const generateTestimonials = (count: number): Testimonial[] => {
-  // Process base testimonials to format names
+  // Process base testimonials to format names (if not already formatted)
+  // and ensure they have IDs. Base testimonials already have IDs.
   const processedBaseTestimonials = baseTestimonials.map(t => ({
     ...t,
     name: formatNameInitialLastName(t.name),
@@ -43,6 +44,7 @@ export const generateTestimonials = (count: number): Testimonial[] => {
     const lastNameEn = getRandomElement(genericLastNames.en);
 
     return {
+      id: `generated-${Date.now()}-${i}-${Math.random().toString(36).substring(2, 9)}`, // Unique ID for generated testimonials
       name: formatNameInitialLastName(`${nameObj.hy} ${lastNameHy}`),
       nameRu: formatNameInitialLastName(`${nameObj.ru} ${lastNameRu}`),
       nameEn: formatNameInitialLastName(`${nameObj.en} ${lastNameEn}`),

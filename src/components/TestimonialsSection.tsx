@@ -106,15 +106,15 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
 
         <div className="grid md:grid-cols-2 gap-6 justify-center">
           <AnimatePresence mode="wait">
-            {displayedTestimonials.map((testimonial, index) => (
+            {displayedTestimonials.map((testimonial) => (
               <motion.div 
-                key={testimonial.name + index}
+                key={testimonial.id} // Using unique ID as key
                 className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-700 group hover:shadow-glow-green dark:hover:shadow-glow-green-dark"
                 variants={itemVariants}
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                transition={{ delay: index * 0.1 + 0.2 }} // Staggered delay
+                transition={{ delay: 0.2 }} // Removed index-based delay as it's now for individual items
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >

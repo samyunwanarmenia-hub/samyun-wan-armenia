@@ -139,6 +139,7 @@ export interface TranslationKeys {
 
 // Define the structure of a testimonial
 export interface Testimonial {
+  id: string; // Added unique ID
   name: string;
   nameRu: string;
   nameEn: string;
@@ -174,21 +175,6 @@ export interface UserTestimonial extends Testimonial {
   // Can add specific fields if needed, e.g., isNew: boolean
 }
 
-// New types for data separation
-export type AboutItemKey = 'natural' | 'proven' | 'safe' | 'fast';
-export interface AboutItem {
-  key: AboutItemKey;
-  icon: Icon; // Changed from 'any' to 'Icon'
-  color: string;
-}
-
-export type BenefitItemKey = 'appetite' | 'weight' | 'immunity' | 'energy' | 'metabolism' | 'mood';
-export interface BenefitItem {
-  key: BenefitItemKey;
-  icon: Icon; // Changed from 'any' to 'Icon'
-  gradient: string;
-}
-
 // Utility type to extract keys that map to string values
 type StringKeys<T> = {
   [K in keyof T]: T[K] extends string ? K : never;
@@ -209,6 +195,13 @@ export interface ProductShowcaseItem {
   descKey: 'weightLossDesc' | 'weightGainDesc';
   buttonTextKey: 'orderWeightGain' | 'orderWeightLoss'; // New property
   price: number; // New property for product price
+}
+
+// New interface for BenefitItem
+export interface BenefitItem {
+  key: 'appetite' | 'weight' | 'immunity' | 'energy' | 'metabolism' | 'mood';
+  icon: Icon;
+  gradient: string;
 }
 
 export interface SeoHeadProps {

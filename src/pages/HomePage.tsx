@@ -38,6 +38,7 @@ const HomePage = ({ currentLang, t, openContactModal, openOrderModal, openLoadin
   const handleReviewSubmit = async (review: UserReviewSubmission) => {
     try {
       setUserTestimonial({
+        id: `user-${Date.now()}-${Math.random().toString(36).substring(2, 9)}`, // Assign unique ID
         name: review.name,
         nameRu: review.name,
         nameEn: review.name,
