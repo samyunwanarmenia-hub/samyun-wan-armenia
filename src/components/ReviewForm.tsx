@@ -13,6 +13,7 @@ const ReviewForm = ({ t, onSubmit }: ReviewFormProps) => {
   const [reviewText, setReviewText] = useState<string>('');
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [showForm, setShowForm] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false); // Добавлено состояние для отслеживания отправки
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -20,12 +21,19 @@ const ReviewForm = ({ t, onSubmit }: ReviewFormProps) => {
       return;
     }
 
-    await onSubmit({ name, text: reviewText });
-
-    setSubmitted(true);
-    setName('');
-    setReviewText('');
-    setShowForm(false);
+    setIsSubmitting(true); // Устанавливаем состояние отправки в true
+    try {
+      await onSubmit({ name, text: reviewText });
+      setSubmitted(true);
+      setName('');
+      setReviewText('');
+      setShowForm(false);
+    } catch (error) {
+      console.error("Error submitting review in form:", error);
+      // Обработка ошибок (например, показ тоста) уже происходит в HomePage.tsx
+    } finally {
+      setIsSubmitting(false); // Сбрасываем состояние отправки
+    }
   };
 
   return (
@@ -94,14 +102,16 @@ const ReviewForm = ({ t, onSubmit }: ReviewFormProps) => {
                     type="submit"
                     icon={Send}
                     size="md"
+                    disabled={isSubmitting} // Отключаем кнопку во время отправки
                   >
-                    {t.testimonials.submitButton}
+                    {isSubmitting ? 'Sending...' : t.testimonials.submitButton} {/* Меняем текст кнопки */}
                   </CallToActionButton>
                   <CallToActionButton
                     type="button"
                     onClick={() => setShowForm(false)}
                     variant="subtle"
                     size="md"
+                    disabled={isSubmitting} // Отключаем кнопку отмены
                   >
                     Cancel
                   </CallToActionButton>
