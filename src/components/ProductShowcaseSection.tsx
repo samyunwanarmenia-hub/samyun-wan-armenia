@@ -39,6 +39,8 @@ const ProductShowcaseSection: React.FC<ProductShowcaseSectionProps> = ({
     >
       <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50 dark:from-gray-700/20"></div>
       <div className="container mx-auto px-4 relative z-10">
+        {/* Removed the title and subtitle as requested */}
+        {/*
         <motion.div
           className="text-center mb-12"
           variants={itemVariants}
@@ -52,6 +54,7 @@ const ProductShowcaseSection: React.FC<ProductShowcaseSectionProps> = ({
             {t.gallery.subtitle}
           </p>
         </motion.div>
+        */}
 
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8 max-w-5xl mx-auto">
           <motion.div
