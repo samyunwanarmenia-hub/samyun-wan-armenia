@@ -20,8 +20,8 @@ const HeroProductCard: React.FC<HeroProductCardProps> = ({ t, openOrderModal }) 
   return (
     <div className="relative">
       <motion.div 
-        className="bg-white rounded-3xl p-6 shadow-2xl max-w-sm mx-auto border border-gray-200" // Reduced p-8 to p-6, max-w-md to max-w-sm
-        whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(34, 197, 94, 0.3), 0 10px 10px -5px rgba(34, 197, 94, 0.2)" }} // Changed shadow to green glow
+        className="bg-white rounded-3xl p-6 shadow-2xl max-w-sm mx-auto border border-gray-200 hover:shadow-glow-green" // Using custom glow-green shadow
+        whileHover={{ scale: 1.05 }} // Removed boxShadow from here
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
       >
         <div className="relative">
@@ -41,7 +41,7 @@ const HeroProductCard: React.FC<HeroProductCardProps> = ({ t, openOrderModal }) 
             <p className="text-green-600 text-2xl font-bold mb-5">{featuredProduct.price.toLocaleString()} AMD</p> {/* Reduced text-3xl to text-2xl, mb-6 to mb-5 */}
             <motion.button
               onClick={() => openOrderModal(featuredProduct.labelKey)}
-              className="bg-gradient-to-r from-red-600 to-orange-500 text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-xl hover:bg-gray-100 transform hover:scale-105 transition-all flex items-center justify-center mx-auto" // Reduced px/py, text-lg to text-sm
+              className="bg-gradient-to-r from-red-600 to-orange-500 text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-xl hover:shadow-glow-red transform hover:scale-105 transition-all flex items-center justify-center mx-auto" // Using custom glow-red shadow
               whileHover={{ scale: 1.08 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}

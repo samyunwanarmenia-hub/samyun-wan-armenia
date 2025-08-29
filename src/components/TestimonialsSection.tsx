@@ -72,12 +72,12 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
           {shuffledGridTestimonials.map((testimonial, index) => (
             <motion.div 
               key={index} 
-              className="bg-white rounded-2xl p-4 shadow-lg border border-gray-200 group" // Reduced p-5 to p-4
+              className="bg-white rounded-2xl p-4 shadow-lg border border-gray-200 group hover:shadow-glow-green" // Using custom glow-green shadow
               variants={itemVariants}
               initial="hidden"
               animate={isVisible['testimonials'] ? "visible" : "hidden"}
               transition={{ delay: index * 0.1 + 0.2 }} // Staggered animation
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(34, 197, 94, 0.3), 0 10px 10px -5px rgba(34, 197, 94, 0.2)" }} // Changed shadow to green glow
+              whileHover={{ scale: 1.05 }} // Removed boxShadow from here
               whileTap={{ scale: 0.98 }} // Added whileTap animation
             >
               <div className="flex items-center mb-3"> {/* Reduced mb-4 to mb-3 */}

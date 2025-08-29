@@ -58,12 +58,12 @@ const AboutSection = ({ t, isVisible }: AboutSectionProps) => {
           {aboutItems.map((item, index) => (
             <motion.div 
               key={item.key}
-              className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 group" // Reduced p-8 to p-6
+              className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 group hover:shadow-glow-green" // Using custom glow-green shadow
               variants={itemVariants}
               initial="hidden"
               animate={isVisible['about'] ? "visible" : "hidden"}
               transition={{ delay: index * 0.1 + 0.2 }} // Staggered animation
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(34, 197, 94, 0.3), 0 10px 10px -5px rgba(34, 197, 94, 0.2)" }} // Changed shadow to green glow
+              whileHover={{ scale: 1.05 }} // Removed boxShadow from here
               // Removed transition={{ type: "spring", stiffness: 300, damping: 20 }} from here as it's now in itemVariants
             >
               <motion.div 
