@@ -75,7 +75,7 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
   return (
     <motion.section 
       id="testimonials" 
-      className="relative py-16 bg-gray-100 dark:bg-gray-900 overflow-hidden"
+      className="relative py-12 bg-gray-100 dark:bg-gray-900 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['testimonials'] ? "visible" : "hidden"}

@@ -31,7 +31,7 @@ const ProductShowcaseSection: React.FC<ProductShowcaseSectionProps> = ({
   return (
     <motion.section
       id="products"
-      className="relative py-16 bg-gradient-to-br from-gray-50 to-white dark:from-gray-950 dark:to-gray-800 overflow-hidden"
+      className="relative py-12 bg-gradient-to-br from-gray-50 to-white dark:from-gray-950 dark:to-gray-800 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['products'] ? "visible" : "hidden"}

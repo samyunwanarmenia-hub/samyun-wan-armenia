@@ -21,7 +21,7 @@ const BenefitsSection = ({ t, isVisible }: BenefitsSectionProps) => {
   return (
     <motion.section 
       id="benefits" 
-      className="relative py-16 bg-gradient-to-br from-gray-100 to-white dark:from-gray-900 dark:to-gray-800 overflow-hidden"
+      className="relative py-12 bg-gradient-to-br from-gray-100 to-white dark:from-gray-900 dark:to-gray-800 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['benefits'] ? "visible" : "hidden"}
@@ -60,7 +60,6 @@ const BenefitsSection = ({ t, isVisible }: BenefitsSectionProps) => {
               
               <div className="relative z-10">
                 <div className="flex items-center mb-3">
-                  {/* Reduced size and margin */}
                   <motion.div 
                     className={`w-10 h-10 bg-gradient-to-r ${benefit.gradient} rounded-2xl flex items-center justify-center mr-3`}
                     whileHover={{ scale: 1.1 }}

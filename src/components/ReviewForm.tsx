@@ -37,7 +37,7 @@ const ReviewForm = ({ t, onSubmit }: ReviewFormProps) => {
   };
 
   return (
-    <section className="relative py-16 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-50 overflow-hidden">
+    <section className="relative py-12 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-50 overflow-hidden">
       <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50 dark:from-gray-700/20"></div>
       <div className="container mx-auto px-4 max-w-2xl relative z-10">
         <div className="text-center mb-8">
@@ -102,16 +102,16 @@ const ReviewForm = ({ t, onSubmit }: ReviewFormProps) => {
                     type="submit"
                     icon={Send}
                     size="md"
-                    disabled={isSubmitting} // Отключаем кнопку во время отправки
+                    disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Sending...' : t.testimonials.submitButton} {/* Меняем текст кнопки */}
+                    {isSubmitting ? 'Sending...' : t.testimonials.submitButton}
                   </CallToActionButton>
                   <CallToActionButton
                     type="button"
                     onClick={() => setShowForm(false)}
                     variant="subtle"
                     size="md"
-                    disabled={isSubmitting} // Отключаем кнопку отмены
+                    disabled={isSubmitting}
                   >
                     Cancel
                   </CallToActionButton>

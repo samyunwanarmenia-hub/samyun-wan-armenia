@@ -30,7 +30,7 @@ const AboutSection = ({ t, isVisible }: AboutSectionProps) => {
   return (
     <motion.section 
       id="about" 
-      className="relative py-16 bg-gray-100 dark:bg-gray-900 overflow-hidden"
+      className="relative py-12 bg-gray-100 dark:bg-gray-900 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['about'] ? "visible" : "hidden"}
@@ -64,7 +64,6 @@ const AboutSection = ({ t, isVisible }: AboutSectionProps) => {
               whileHover={{ scale: 1.05, rotate: 1 }}
             >
               <div className="flex items-center mb-3">
-                {/* Reduced size and margin */}
                 <motion.div 
                   className={`w-10 h-10 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center mr-3`}
                   whileHover={{ scale: 1.1 }}

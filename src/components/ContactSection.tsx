@@ -29,7 +29,7 @@ const ContactSection = ({ t, isVisible, openContactModal }: ContactSectionProps)
   return (
     <motion.section 
       id="contact" 
-      className="relative py-16 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-50 overflow-hidden"
+      className="relative py-12 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-50 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['contact'] ? "visible" : "hidden"}
@@ -60,11 +60,11 @@ const ContactSection = ({ t, isVisible, openContactModal }: ContactSectionProps)
               whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(248, 113, 113, 0.3), 0 10px 10px -5px rgba(248, 113, 113, 0.2)" }}
               whileTap={{ scale: 0.98 }}
             >
-              <div className="flex items-center justify-center mb-3"> {/* Combined icon and title into a flex container */}
-                <div className={`w-10 h-10 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center mr-3`}> {/* Reduced size and margin */}
-                  <item.icon className="w-5 h-5" /> {/* Reduced icon size */}
+              <div className="flex items-center justify-center mb-3">
+                <div className={`w-10 h-10 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center mr-3`}>
+                  <item.icon className="w-5 h-5" />
                 </div>
-                <h3 className="text-gray-900 dark:text-gray-50 text-lg font-bold">{t.contact[item.titleKey]}</h3> {/* Removed mb-3 */}
+                <h3 className="text-gray-900 dark:text-gray-50 text-lg font-bold">{t.contact[item.titleKey]}</h3>
               </div>
               <p className="text-gray-700 dark:text-gray-300 text-base" dangerouslySetInnerHTML={{ __html: item.key === 'phone' ? t.contact.phoneNumbers.description : item.details }}></p>
             </motion.div>

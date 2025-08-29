@@ -41,7 +41,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ t, isVisible }) => {
   return (
     <motion.section
       id="faq"
-      className="relative py-16 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-50 overflow-hidden"
+      className="relative py-12 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-50 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['faq'] ? "visible" : "hidden"}
