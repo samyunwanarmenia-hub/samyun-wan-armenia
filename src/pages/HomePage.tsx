@@ -2,9 +2,8 @@ import { useState, useMemo, lazy, Suspense } from 'react';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import BenefitsSection from '../components/BenefitsSection';
-import ProductShowcaseSection from '../components/ProductShowcaseSection';
+// Removed import ProductShowcaseSection from '../components/ProductShowcaseSection';
 import SeoHead from '../components/SeoHead';
-// import CtaSection from '../components/CtaSection'; // Removed direct import
 
 const TestimonialsSection = lazy(() => import('../components/TestimonialsSection'));
 const ReviewForm = lazy(() => import('../components/ReviewForm'));
@@ -15,7 +14,7 @@ import { generateTestimonials } from '../utils/testimonialGenerator';
 import { statsData } from '../data/stats';
 import useIntersectionObserver from '../hooks/useIntersectionObserver';
 import { sendTelegramMessage } from '../utils/telegramApi';
-import { showSuccess, showError } from '../utils/toast'; // Ensure showError is imported here
+import { showSuccess, showError } from '../utils/toast';
 import { TranslationKeys, IntersectionObserverVisibility, UserTestimonial, UserReviewSubmission, ContactModalType } from '../types/global';
 
 interface HomePageProps {
@@ -55,9 +54,9 @@ const HomePage = ({ currentLang, t, openContactModal, openOrderModal, openLoadin
 
       showSuccess(t.testimonials.thankYou);
       console.log('Review submitted:', review);
-    } catch (error: any) { // Catch the error thrown by sendTelegramMessage
+    } catch (error: any) {
       console.error("Error submitting review:", error);
-      showError(error.message || "Failed to submit review. Please try again."); // Display the error message
+      showError(error.message || "Failed to submit review. Please try again.");
     }
   };
 
@@ -74,8 +73,7 @@ const HomePage = ({ currentLang, t, openContactModal, openOrderModal, openLoadin
       <HeroSection t={t} isVisible={isVisible} stats={statsData} openOrderModal={openOrderModal} openLoadingLinkModal={openLoadingLinkModal} openAuthenticityModal={openAuthenticityModal} />
       <AboutSection t={t} isVisible={isVisible} />
       <BenefitsSection t={t} isVisible={isVisible} />
-      <ProductShowcaseSection t={t} isVisible={isVisible} openOrderModal={openOrderModal} />
-      {/* <CtaSection t={t} isVisible={isVisible} openOrderModal={openOrderModal} /> Removed CTA section */}
+      {/* Removed ProductShowcaseSection */}
       
       <Suspense fallback={<div>Loading Testimonials...</div>}>
         <TestimonialsSection t={t} isVisible={isVisible} testimonials={testimonials} currentLang={currentLang} userTestimonial={userTestimonial} />
@@ -85,7 +83,7 @@ const HomePage = ({ currentLang, t, openContactModal, openOrderModal, openLoadin
         <ReviewForm t={t} onSubmit={handleReviewSubmit} />
       </Suspense>
 
-      <Suspense fallback={<div>Loading FAQ...</div>}> {/* Added Suspense for FaqSection */}
+      <Suspense fallback={<div>Loading FAQ...</div>}>
         <FaqSection t={t} isVisible={isVisible} />
       </Suspense>
       

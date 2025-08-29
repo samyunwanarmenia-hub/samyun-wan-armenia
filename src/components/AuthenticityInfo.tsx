@@ -25,39 +25,40 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
 
   return (
     <motion.div 
-      className="mt-8 text-center lg:text-left" // Reduced mt-12 to mt-8
+      className="mt-8 p-6 bg-white rounded-2xl shadow-xl border border-gray-200 max-w-md mx-auto text-center" // Added styling for distinct block and centering
       variants={itemVariants}
       initial="hidden"
       animate="visible"
       transition={{ delay: 0.4 }}
     >
       {hasAttentionText && (
-        <p className="text-2xl font-bold text-red-600 mb-3 animate-pulse-slow"> {/* Reduced text-3xl to text-2xl, mb-4 to mb-3 */}
+        <p className="text-2xl font-bold text-red-600 mb-3 animate-pulse-slow">
           {t.authenticity.attention}
         </p>
       )}
       
       {shouldShowQrBlock && (
         <motion.div 
-          className="text-center lg:text-left cursor-pointer group mb-3" // Reduced mb-4 to mb-3
+          className="cursor-pointer group mb-3 flex flex-col items-center" // Ensured content is centered
           onClick={openLoadingLinkModal}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
-          <div className="w-20 h-20 bg-white rounded-xl mx-auto lg:mx-0 mb-3 flex items-center justify-center transform hover:scale-110 transition-all border border-gray-200"> {/* Reduced w/h-24 to w/h-20, mb-4 to mb-3 */}
-            <QrCode className="w-10 h-10 text-gray-900" /> {/* Reduced w/h-12 to w/h-10 */}
+          <div className="w-20 h-20 bg-gray-100 rounded-xl mx-auto mb-3 flex items-center justify-center transform hover:scale-110 transition-all border border-gray-200">
+            <QrCode className="w-10 h-10 text-gray-900" />
           </div>
-          <p className="text-gray-700 font-semibold text-sm">{t.hero.qrVerificationTitle}</p> {/* Reduced text size */}
-          {t.hero.qrVerificationSubtitle && <p className="text-xs text-gray-500">{t.hero.qrVerificationSubtitle}</p>} {/* Reduced text size */}
+          <p className="text-gray-700 font-semibold text-sm">{t.hero.qrVerificationTitle}</p>
+          {t.hero.qrVerificationSubtitle && <p className="text-xs text-gray-500">{t.hero.qrVerificationSubtitle}</p>}
         </motion.div>
       )}
 
       {hasHowToDistinguishText && (
         <CallToActionButton
           onClick={openAuthenticityModal}
-          variant="subtle" // Using the new subtle variant
-          size="xs" // Using the new xs size
+          variant="subtle"
+          size="xs"
+          className="mt-4" // Added margin top for spacing
         >
           {t.authenticity.howToDistinguish}
         </CallToActionButton>
