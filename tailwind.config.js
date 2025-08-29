@@ -78,6 +78,7 @@ export default {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'bounce-slow': 'bounce 2s infinite',
         'shine': 'shine 2s infinite linear',
+        'shine-slow': 'shine 6s infinite linear', // New slow shine animation
         'fade-in-up': 'fadeInUp 0.8s ease-out',
       },
       keyframes: {

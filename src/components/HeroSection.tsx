@@ -51,8 +51,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
                 animate={isVisible['home'] ? "visible" : "hidden"}
                 transition={{ delay: 0.1 }}
               >
-                {t.hero.title}
-                <span className="block text-2xl lg:text-3xl text-primary-600 font-normal mt-1.5 dark:text-primary-400">
+                <span className="relative overflow-hidden inline-block">
+                  {t.hero.title}
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/70 to-transparent opacity-100 animate-shine-slow pointer-events-none dark:via-gray-800/70"></span>
+                </span>
+                <span className="block text-2xl lg:text-3xl font-bold mt-1.5 text-gradient bg-gradient-to-r from-blue-500 to-purple-600 dark:from-blue-400 dark:to-purple-500">
                   {t.hero.subtitle}
                 </span>
               </motion.h1>
