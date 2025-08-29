@@ -1,7 +1,8 @@
 import { Helmet } from 'react-helmet-async';
 import { TranslationKeys } from '../types/global';
-import { contactInfoData } from '../data/contactInfo'; // Import contactInfoData
-import { productShowcaseData } from '../data/productShowcaseData'; // Import productShowcaseData
+import { contactInfoData } from '../data/contactInfo';
+import { productShowcaseData } from '../data/productShowcaseData';
+import { getOptimizedImagePath } from '../utils/imageUtils'; // Import the new utility
 
 interface StructuredDataProps {
   t: TranslationKeys;
@@ -9,57 +10,31 @@ interface StructuredDataProps {
 }
 
 const StructuredData = ({ t, currentLang }: StructuredDataProps) => {
-  const baseUrl = "https://samyunwanarmenia.netlify.app"; // Your base URL
+  const baseUrl = "https://samyunwanarmenia.netlify.app";
 
-  // Extract phone number from translations
-  const phoneNumber = t.contact.phoneNumbers.number1.replace(/\s/g, ''); // Remove spaces for schema
+  const phoneNumber = t.contact.phoneNumbers.number1.replace(/\s/g, '');
 
-  // Extract address details from contactInfoData
   const addressItem = contactInfoData.find(item => item.key === 'address');
-  let streetAddress = "1 Teryan St";
-  let addressLocality = "Yerevan";
+  const streetAddress = addressItem?.details.split('<br />')[0]?.trim() || "1 Teryan St";
+  const addressLocality = addressItem?.details.split('<br />')[0]?.includes('Yerevan') ? "Yerevan" : "Yerevan"; // Default to Yerevan if not explicitly found
 
-  if (addressItem && addressItem.details) {
-    const cleanedDetails = addressItem.details.replace(/<br \/>\(Citadel Office\)/, '').trim();
-    const parts = cleanedDetails.split(',').map(part => part.trim());
-    if (parts.length >= 2) {
-      streetAddress = parts[0];
-      addressLocality = parts[1];
-    } else if (parts.length === 1) {
-      streetAddress = parts[0];
-    }
-  }
-
-  // Extract opening hours dynamically
   const hoursItem = contactInfoData.find(item => item.key === 'hours');
-  let openingHoursSchema = "Mo-Sa 09:00-18:00, Su 10:00-16:00"; // Default based on contactInfoData
+  let openingHoursSchema = "Mo-Sa 09:00-18:00, Su 10:00-16:00";
   if (hoursItem && hoursItem.details) {
     const parts = hoursItem.details.split('<br />');
     const weekdays = parts[0].replace('Mon - Sat:', 'Mo-Sa').trim();
     const sunday = parts[1].replace('Sunday:', 'Su').trim();
     openingHoursSchema = `${weekdays}, ${sunday}`;
-    // Ensure single digit hours are prefixed with 0 (e.g., 9:00 -> 09:00)
     openingHoursSchema = openingHoursSchema.replace(/(\s)(\d):(\d{2})/g, '$10$2:$3');
   }
 
-  // Product data for schema
   const weightGainProduct = productShowcaseData[0];
   const weightLossProduct = productShowcaseData[1];
 
-  // Helper to get optimized image path
-  const getOptimizedImagePath = (originalSrc: string) => {
-    const lastSlashIndex = originalSrc.lastIndexOf('/');
-    const lastDotIndex = originalSrc.lastIndexOf('.');
-    const baseName = originalSrc.substring(lastSlashIndex + 1, lastDotIndex);
-    return `/optimized/${baseName}.jpg`; // Use .jpg as the primary optimized fallback
-  };
-
   return (
     <Helmet>
-      {/* Set HTML lang attribute dynamically */}
       <html lang={currentLang} />
 
-      {/* JSON-LD Structured Data */}
       <script type="application/ld+json">
         {`
           {
@@ -84,7 +59,7 @@ const StructuredData = ({ t, currentLang }: StructuredDataProps) => {
             "name": "Samyun Wan Armenia",
             "description": "${t.hero.title} – ${t.hero.subtitle}. ${t.hero.tagline}",
             "url": "${baseUrl}/",
-            "logo": "${baseUrl}/optimized/logo.jpg",
+            "logo": "${baseUrl}${getOptimizedImagePath('/images/og-image.jpg')}",
             "address": {
               "@type": "PostalAddress",
               "streetAddress": "${streetAddress}",
