@@ -64,7 +64,8 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
           <OptimizedImage
             src={currentProduct.src}
             alt={currentProduct.alt}
-            className="w-40 h-40 object-contain mb-4 drop-shadow-lg"
+            /* Changed w-40 h-40 to w-28 h-28 */
+            className="w-28 h-28 object-contain mb-4 drop-shadow-lg" 
             loading="eager"
           />
           <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-2 text-center">
