@@ -2,7 +2,7 @@ import { ShoppingCart, MessageCircle, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { TranslationKeys, IntersectionObserverVisibility, StatItem } from '../types/global';
 import HeroStats from './HeroStats';
-import AuthenticityInfo from './AuthenticityInfo';
+// import AuthenticityInfo from './AuthenticityInfo'; // Removed unused import
 import CallToActionButton from './CallToActionButton';
 // import SwipeableProductCarousel from './SwipeableProductCarousel'; // Removed import
 
@@ -11,11 +11,11 @@ interface HeroSectionProps {
   isVisible: IntersectionObserverVisibility;
   stats: StatItem[];
   openOrderModal: (productKey?: 'weightGainLabel' | 'weightLossLabel') => void;
-  openLoadingLinkModal: () => void;
-  openAuthenticityModal: () => void;
+  // openLoadingLinkModal: () => void; // Removed unused prop
+  // openAuthenticityModal: () => void; // Removed unused prop
 }
 
-const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrderModal, openLoadingLinkModal, openAuthenticityModal }) => {
+const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrderModal }) => { // Removed unused props from destructuring
   const textVariants = {
     hidden: { opacity: 0, y: 20, scale: 0.98 },
     visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" } }
@@ -101,18 +101,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
 
               <HeroStats t={t} stats={stats} isVisible={isVisible} />
 
-              {/* AuthenticityInfo remains here */}
-              <AuthenticityInfo 
-                t={t} 
-                openLoadingLinkModal={openLoadingLinkModal} 
-                openAuthenticityModal={openAuthenticityModal} 
-              />
+              {/* AuthenticityInfo removed from here */}
             </div>
           </div>
 
-          {/* Removed SwipeableProductCarousel from this column */}
+          {/* This column is now empty or can be used for other content if needed */}
           <div className={`transform transition-all duration-1000 delay-500 ${isVisible['home'] ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'} flex justify-center lg:justify-start mt-10 lg:mt-0`}>
-            {/* This column is now empty or can be used for other content if needed */}
           </div>
         </div>
       </div>

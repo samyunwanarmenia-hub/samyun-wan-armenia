@@ -71,7 +71,14 @@ const HomePage = ({ currentLang, t, openContactModal, openOrderModal, openLoadin
         pageKeywords={t.hero.title + ', ' + t.hero.subtitle + ', ' + t.hero.tagline + ', samyun wan, armenia, քաշի ավելացում, բնական կապսուլներ, ինդոնեզական, samyun wan оригинал ереван, նաբոր վеса հայաստան'}
         ogImage="/optimized/og-image.jpg"
       />
-      <HeroSection t={t} isVisible={isVisible} stats={statsData} openOrderModal={openOrderModal} openLoadingLinkModal={openLoadingLinkModal} openAuthenticityModal={openAuthenticityModal} />
+      <HeroSection 
+        t={t} 
+        isVisible={isVisible} 
+        stats={statsData} 
+        openOrderModal={openOrderModal} 
+        // openLoadingLinkModal={openLoadingLinkModal} // Removed
+        // openAuthenticityModal={openAuthenticityModal} // Removed
+      />
       <AboutSection t={t} isVisible={isVisible} />
       <BenefitsSection t={t} isVisible={isVisible} />
       
