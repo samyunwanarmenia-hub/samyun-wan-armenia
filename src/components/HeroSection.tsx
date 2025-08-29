@@ -17,8 +17,8 @@ interface HeroSectionProps {
 
 const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrderModal, openLoadingLinkModal, openAuthenticityModal }) => {
   const textVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    hidden: { opacity: 0, y: 20, scale: 0.98 },
+    visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
   return (
@@ -49,7 +49,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
                 variants={textVariants}
                 initial="hidden"
                 animate={isVisible['home'] ? "visible" : "hidden"}
-                transition={{ delay: 0.1 }}
+                transition={{ delay: 0.1, type: "spring", stiffness: 100, damping: 10 }}
               >
                 <span className="relative overflow-hidden inline-block">
                   {t.hero.title}
@@ -65,8 +65,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
                 variants={textVariants}
                 initial="hidden"
                 animate={isVisible['home'] ? "visible" : "hidden"}
-                // Increased duration here
-                transition={{ delay: 0.2, duration: 1.5 }} 
+                transition={{ delay: 0.2, type: "spring", stiffness: 100, damping: 10 }} 
               >
                 {t.hero.tagline}
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-100 animate-shine pointer-events-none dark:via-gray-800/50"></span>

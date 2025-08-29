@@ -61,7 +61,7 @@ const AboutSection = ({ t, isVisible }: AboutSectionProps) => {
               initial="hidden"
               animate={isVisible['about'] ? "visible" : "hidden"}
               transition={{ delay: index * 0.1 + 0.2 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, rotate: 1 }}
             >
               <motion.div 
                 className={`w-14 h-14 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center mb-5`}
