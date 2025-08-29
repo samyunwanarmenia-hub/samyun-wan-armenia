@@ -24,7 +24,7 @@ const Footer = ({ t }: FooterProps) => {
             <div className="flex items-center space-x-2 mb-5">
               <a href="#home" className="flex items-center">
                 <OptimizedImage 
-                  src="/images/logo.png" 
+                  src="/images/logo.jpg" 
                   alt="Samyun Wan Armenia Logo" 
                   className="h-9 w-auto" // Adjusted size for the logo
                   loading="lazy"

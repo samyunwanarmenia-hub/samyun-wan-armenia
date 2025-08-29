@@ -61,7 +61,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
               <div className="flex items-center space-x-2">
                 <a href="#home" className="flex items-center">
                   <OptimizedImage 
-                    src="/images/logo.png" 
+                    src="/images/logo.jpg" 
                     alt="Samyun Wan Armenia Logo" 
                     className="h-10 w-auto" // Adjusted size for the logo
                     loading="eager"
