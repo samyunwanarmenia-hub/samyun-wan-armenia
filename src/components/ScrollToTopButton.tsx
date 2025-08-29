@@ -30,9 +30,19 @@ const ScrollToTopButton: React.FC = () => {
   }, []);
 
   const buttonVariants = {
-    hidden: { opacity: 0, y: 50, scale: 0.8 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { type: "spring", stiffness: 200, damping: 20 } },
-    exit: { opacity: 0, y: 50, scale: 0.8, transition: { duration: 0.2 } },
+    hidden: { opacity: 0, y: 100, scale: 0.7 }, // Start lower and smaller
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      transition: { 
+        type: "spring", 
+        stiffness: 200, 
+        damping: 20, 
+        mass: 0.8 // Added mass for a slightly heavier spring feel
+      } 
+    },
+    exit: { opacity: 0, y: 100, scale: 0.7, transition: { duration: 0.3, ease: "easeIn" } }, // Exit faster
   };
 
   return (
