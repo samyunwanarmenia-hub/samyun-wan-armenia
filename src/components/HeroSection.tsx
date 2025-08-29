@@ -4,7 +4,7 @@ import { TranslationKeys, IntersectionObserverVisibility, StatItem } from '../ty
 import HeroStats from './HeroStats';
 import AuthenticityInfo from './AuthenticityInfo';
 import CallToActionButton from './CallToActionButton';
-// Removed import SwipeableProductCarousel from './SwipeableProductCarousel';
+import SwipeableProductCarousel from './SwipeableProductCarousel'; // Re-import SwipeableProductCarousel
 
 interface HeroSectionProps {
   t: TranslationKeys;
@@ -31,7 +31,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
       </div>
 
       <div className="container mx-auto px-4 relative z-10 max-w-7xl">
-        <div className="grid lg:grid-cols-1 gap-8 items-center"> {/* Changed to 1 column */}
+        <div className="grid lg:grid-cols-2 gap-8 items-center"> {/* Changed back to lg:grid-cols-2 */}
           <div className={`transform transition-all duration-1000 ${isVisible['home'] ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'} text-center`}>
             <div className="max-w-xl mx-auto">
               <motion.div 
@@ -105,7 +105,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
               />
             </div>
           </div>
-          {/* Removed the SwipeableProductCarousel column */}
+
+          <div className={`transform transition-all duration-1000 delay-500 ${isVisible['home'] ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'} flex justify-center lg:justify-end mt-10 lg:mt-0`}>
+            <SwipeableProductCarousel t={t} openOrderModal={openOrderModal} />
+          </div>
         </div>
       </div>
     </section>
