@@ -25,7 +25,7 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
 
   return (
     <motion.div 
-      className="mt-8 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-md mx-auto text-center"
+      className="mt-8 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-md mx-auto text-center" // Reduced p-6 to p-4
       variants={itemVariants}
       initial="hidden"
       animate="visible"
@@ -33,11 +33,11 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
     >
       {hasAttentionText && (
         <motion.span
-          className="inline-block bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 text-xl font-bold px-4 py-2 rounded-full mb-5" // Removed animate-pulse-slow
+          className="inline-block bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 text-xl font-bold px-4 py-2 rounded-full mb-3" // Reduced mb-5 to mb-3
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.5 }} // Softer entrance
-          whileHover={{ scale: 1.02 }} // Subtle hover effect
+          transition={{ type: "spring", stiffness: 200, damping: 15, delay: 0.5 }}
+          whileHover={{ scale: 1.02 }}
         >
           {t.authenticity.attention}
         </motion.span>
@@ -45,9 +45,9 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
       
       {shouldShowQrBlock && (
         <motion.div 
-          className="cursor-pointer group mb-4 flex flex-col items-center p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+          className="cursor-pointer group mb-3 flex flex-col items-center p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200" // Reduced mb-4 to mb-3
           onClick={openLoadingLinkModal}
-          whileHover={{ scale: 1.05, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" }} // Stronger shadow on hover
+          whileHover={{ scale: 1.05, boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)" }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
@@ -64,7 +64,7 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
           onClick={openAuthenticityModal}
           variant="subtle"
           size="sm"
-          className="mt-4"
+          className="mt-3 mx-auto" // Reduced mt-4 to mt-3 and added mx-auto for centering
         >
           {t.authenticity.howToDistinguish}
         </CallToActionButton>
