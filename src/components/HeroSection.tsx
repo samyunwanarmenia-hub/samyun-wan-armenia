@@ -4,7 +4,7 @@ import { TranslationKeys, IntersectionObserverVisibility, StatItem } from '../ty
 import HeroStats from './HeroStats';
 import AuthenticityInfo from './AuthenticityInfo';
 import CallToActionButton from './CallToActionButton';
-import SwipeableProductCarousel from './SwipeableProductCarousel'; // Re-import SwipeableProductCarousel
+import SwipeableProductCarousel from './SwipeableProductCarousel';
 
 interface HeroSectionProps {
   t: TranslationKeys;
@@ -22,20 +22,20 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
   };
 
   return (
-    <section id="home" className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 flex items-center overflow-hidden py-16 lg:py-0">
+    <section id="home" className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-800 flex items-center overflow-hidden py-16 lg:py-0">
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-primary-100/50 rounded-full opacity-50 animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-100/50 rounded-full opacity-50 animate-pulse" style={{animationDelay: '2s'}}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-yellow-100/50 rounded-full opacity-50 animate-pulse" style={{animationDelay: '4s'}}></div>
-        <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div>
+        <div className="absolute top-20 left-20 w-72 h-72 bg-primary-100/50 rounded-full opacity-50 animate-pulse dark:bg-primary-900/30"></div>
+        <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-100/50 rounded-full opacity-50 animate-pulse dark:bg-blue-900/30" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-yellow-100/50 rounded-full opacity-50 animate-pulse dark:bg-yellow-900/30" style={{animationDelay: '4s'}}></div>
+        <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50 dark:from-gray-700/20"></div>
       </div>
 
       <div className="container mx-auto px-4 relative z-10 max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-8 items-center"> {/* Changed back to lg:grid-cols-2 */}
+        <div className="grid lg:grid-cols-2 gap-8 items-center">
           <div className={`transform transition-all duration-1000 ${isVisible['home'] ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'} text-center`}>
             <div className="max-w-xl mx-auto">
               <motion.div 
-                className="inline-flex items-center bg-primary-100/50 text-primary-600 px-3 py-1.5 rounded-full text-sm font-semibold mb-5"
+                className="inline-flex items-center bg-primary-100/50 text-primary-600 px-3 py-1.5 rounded-full text-sm font-semibold mb-5 dark:bg-primary-900/50 dark:text-primary-400"
                 variants={textVariants}
                 initial="hidden"
                 animate={isVisible['home'] ? "visible" : "hidden"}
@@ -45,27 +45,27 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
               </motion.div>
               
               <motion.h1 
-                className="text-4xl lg:text-6xl font-bold text-gray-900 mb-5 leading-tight"
+                className="text-4xl lg:text-6xl font-bold text-gray-900 dark:text-gray-50 mb-5 leading-tight"
                 variants={textVariants}
                 initial="hidden"
                 animate={isVisible['home'] ? "visible" : "hidden"}
                 transition={{ delay: 0.1 }}
               >
                 {t.hero.title}
-                <span className="block text-2xl lg:text-3xl text-primary-600 font-normal mt-1.5">
+                <span className="block text-2xl lg:text-3xl text-primary-600 font-normal mt-1.5 dark:text-primary-400">
                   {t.hero.subtitle}
                 </span>
               </motion.h1>
               
               <motion.p 
-                className="text-lg text-gray-700 mb-6 leading-relaxed relative overflow-hidden inline-block"
+                className="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed relative overflow-hidden inline-block"
                 variants={textVariants}
                 initial="hidden"
                 animate={isVisible['home'] ? "visible" : "hidden"}
                 transition={{ delay: 0.2 }}
               >
                 {t.hero.tagline}
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 hover:opacity-100 animate-shine pointer-events-none"></span>
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 hover:opacity-100 animate-shine pointer-events-none dark:via-gray-800/50"></span>
               </motion.p>
 
               <motion.div 

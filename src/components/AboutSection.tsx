@@ -7,12 +7,11 @@ interface AboutSectionProps {
   isVisible: IntersectionObserverVisibility;
 }
 
-// Define a type for the keys that are actually iterated over in t.about
 type AboutItemKey = 'natural' | 'proven' | 'safe' | 'fast';
 
 const AboutSection = ({ t, isVisible }: AboutSectionProps) => {
   const aboutItems: { key: AboutItemKey; icon: any; color: string; }[] = [
-    { key: 'natural', icon: Leaf, color: 'from-primary-500 to-primary-600' }, // Changed to green gradient
+    { key: 'natural', icon: Leaf, color: 'from-primary-500 to-primary-600' },
     { key: 'proven', icon: Award, color: 'from-blue-500 to-indigo-600' },
     { key: 'safe', icon: Shield, color: 'from-purple-500 to-violet-600' },
     { key: 'fast', icon: TrendingUp, color: 'from-orange-500 to-red-600' }
@@ -31,14 +30,13 @@ const AboutSection = ({ t, isVisible }: AboutSectionProps) => {
   return (
     <motion.section 
       id="about" 
-      className="relative py-16 bg-gray-100 overflow-hidden"
+      className="relative py-16 bg-gray-100 dark:bg-gray-900 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['about'] ? "visible" : "hidden"}
       viewport={{ once: true, amount: 0.3 }}
     >
-      {/* Subtle radial gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div>
+      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50 dark:from-gray-700/20"></div>
       <div className="container mx-auto px-4 relative z-10">
         <motion.div 
           className="text-center mb-12"
@@ -46,19 +44,19 @@ const AboutSection = ({ t, isVisible }: AboutSectionProps) => {
           initial="hidden"
           animate={isVisible['about'] ? "visible" : "hidden"}
         >
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-5">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-5">
             {t.about.title}
           </h2>
-          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+          <p className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
             {t.about.subtitle}
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto max-w-6xl"> {/* Added mx-auto and max-w-6xl to center the grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto max-w-6xl">
           {aboutItems.map((item, index) => (
             <motion.div 
               key={item.key}
-              className="bg-white rounded-2xl p-6 shadow-lg border border-gray-200 group hover:shadow-glow-green"
+              className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group hover:shadow-glow-green dark:hover:shadow-glow-green-dark"
               variants={itemVariants}
               initial="hidden"
               animate={isVisible['about'] ? "visible" : "hidden"}
@@ -72,8 +70,8 @@ const AboutSection = ({ t, isVisible }: AboutSectionProps) => {
               >
                 <item.icon className="w-7 h-7 text-white" />
               </motion.div>
-              <h3 className="text-gray-900 text-lg font-bold mb-3">{t.about[item.key].title}</h3>
-              <p className="text-gray-700 text-sm leading-relaxed">{t.about[item.key].desc}</p>
+              <h3 className="text-gray-900 dark:text-gray-50 text-lg font-bold mb-3">{t.about[item.key].title}</h3>
+              <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{t.about[item.key].desc}</p>
             </motion.div>
           ))}
         </div>

@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Menu, X } from 'lucide-react'; // Removed Leaf import
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TranslationKeys, SectionId } from '../types/global';
-// import OptimizedImage from './OptimizedImage'; // Removed OptimizedImage import
+import ThemeToggle from './ThemeToggle';
 
 interface MobileNavProps {
   currentLang: string;
@@ -37,8 +37,9 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
   };
 
   return (
-    <div className="md:hidden">
-      <button onClick={toggleMenu} className="text-gray-900 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition-colors">
+    <div className="md:hidden flex items-center space-x-2">
+      <ThemeToggle />
+      <button onClick={toggleMenu} className="text-gray-900 dark:text-gray-50 focus:outline-none p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
         <motion.div
           variants={iconVariants}
           animate={isOpen ? "open" : "closed"}
@@ -51,7 +52,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed inset-0 bg-white z-50 flex flex-col p-5"
+            className="fixed inset-0 bg-white dark:bg-gray-900 z-50 flex flex-col p-5"
             variants={menuVariants}
             initial="hidden"
             animate="visible"
@@ -60,12 +61,12 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center space-x-2">
                 <a href="#home" className="flex items-center">
-                  <span className="text-gray-900 text-xl font-bold">
+                  <span className="text-gray-900 dark:text-gray-50 text-xl font-bold">
                     {t.hero.title}
                   </span>
                 </a>
               </div>
-              <button onClick={toggleMenu} className="text-gray-900 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition-colors">
+              <button onClick={toggleMenu} className="text-gray-900 dark:text-gray-50 focus:outline-none p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors">
                 <motion.div
                   variants={iconVariants}
                   animate={isOpen ? "open" : "closed"}
@@ -146,7 +147,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
                   setCurrentLang(e.target.value);
                   setIsOpen(false);
                 }}
-                className="bg-gray-100 border border-gray-200 rounded px-3 py-2 text-base text-gray-900 focus:outline-none focus:ring-2 focus:ring-primary-600 w-full"
+                className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded px-3 py-2 text-base text-gray-900 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-600 w-full"
               >
                 <option value="hy">🇦🇲 ՀԱՅ</option>
                 <option value="ru">🇷🇺 РУС</option>

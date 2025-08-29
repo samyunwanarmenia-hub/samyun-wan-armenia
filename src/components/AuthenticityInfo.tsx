@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { QrCode } from 'lucide-react';
 import { TranslationKeys } from '../types/global';
-import CallToActionButton from './CallToActionButton'; // Import CallToActionButton
+import CallToActionButton from './CallToActionButton';
 
 interface AuthenticityInfoProps {
   t: TranslationKeys;
@@ -25,7 +25,7 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
 
   return (
     <motion.div 
-      className="mt-8 p-6 bg-white rounded-2xl shadow-xl border border-gray-200 max-w-md mx-auto text-center" // Added styling for distinct block and centering
+      className="mt-8 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-md mx-auto text-center"
       variants={itemVariants}
       initial="hidden"
       animate="visible"
@@ -33,7 +33,7 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
     >
       {hasAttentionText && (
         <motion.span
-          className="inline-block bg-red-100 text-red-700 text-xl font-bold px-4 py-2 rounded-full mb-5 animate-pulse-slow" // Changed to span, added bg, padding, rounded-full, mb-5
+          className="inline-block bg-red-100 dark:bg-red-900/50 text-red-700 dark:text-red-300 text-xl font-bold px-4 py-2 rounded-full mb-5 animate-pulse-slow"
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.5 }}
@@ -44,17 +44,17 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
       
       {shouldShowQrBlock && (
         <motion.div 
-          className="cursor-pointer group mb-4 flex flex-col items-center p-4 rounded-xl hover:bg-gray-50 transition-colors duration-200" // Added padding, rounded, hover effect, mb-4
+          className="cursor-pointer group mb-4 flex flex-col items-center p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
           onClick={openLoadingLinkModal}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
-          <div className="w-20 h-20 bg-gray-100 rounded-xl mx-auto mb-3 flex items-center justify-center transform hover:scale-110 transition-all border border-gray-200">
-            <QrCode className="w-10 h-10 text-gray-900" />
+          <div className="w-20 h-20 bg-gray-100 dark:bg-gray-700 rounded-xl mx-auto mb-3 flex items-center justify-center transform hover:scale-110 transition-all border border-gray-200 dark:border-gray-600">
+            <QrCode className="w-10 h-10 text-gray-900 dark:text-gray-50" />
           </div>
-          <p className="text-gray-700 font-semibold text-base">{t.hero.qrVerificationTitle}</p> {/* Changed text-sm to text-base */}
-          {t.hero.qrVerificationSubtitle && <p className="text-xs text-gray-500">{t.hero.qrVerificationSubtitle}</p>}
+          <p className="text-gray-700 dark:text-gray-300 font-semibold text-base">{t.hero.qrVerificationTitle}</p>
+          {t.hero.qrVerificationSubtitle && <p className="text-xs text-gray-500 dark:text-gray-400">{t.hero.qrVerificationSubtitle}</p>}
         </motion.div>
       )}
 
@@ -62,8 +62,8 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
         <CallToActionButton
           onClick={openAuthenticityModal}
           variant="subtle"
-          size="sm" // Changed size from xs to sm for better visibility
-          className="mt-4" // Added margin top for spacing
+          size="sm"
+          className="mt-4"
         >
           {t.authenticity.howToDistinguish}
         </CallToActionButton>

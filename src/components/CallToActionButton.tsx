@@ -14,7 +14,7 @@ interface CallToActionButtonProps {
   className?: string;
   disabled?: boolean;
   iconClassName?: string;
-  type?: 'button' | 'submit' | 'reset'; // Added 'type' property
+  type?: 'button' | 'submit' | 'reset';
 }
 
 const CallToActionButton: React.FC<CallToActionButtonProps> = ({
@@ -29,7 +29,7 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
   className,
   disabled = false,
   iconClassName,
-  type = 'button', // Default to 'button' if not specified
+  type = 'button',
 }) => {
   const baseClasses = "flex items-center justify-center font-semibold transition-all duration-300 rounded-full";
   
@@ -41,12 +41,12 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
   };
 
   const variantClasses = {
-    primary: "bg-gradient-to-r from-red-600 to-orange-500 text-white hover:shadow-glow-red", // Using custom glow-red shadow
-    secondary: "bg-gray-200 text-red-600 hover:bg-gray-300 shadow-xl",
-    outline: "border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white",
-    ghost: "border-2 border-green-600 text-green-600 hover:bg-green-100 hover:text-green-700",
-    subtle: "bg-gray-200 text-gray-800 hover:bg-gray-300 shadow-sm border border-gray-300",
-    success: "bg-green-600 hover:bg-green-700 text-white hover:shadow-glow-green", // Using custom glow-green shadow
+    primary: "bg-gradient-to-r from-red-600 to-orange-500 text-white hover:shadow-glow-red",
+    secondary: "bg-gray-200 dark:bg-gray-700 text-red-600 dark:text-red-400 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-xl",
+    outline: "border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white dark:border-red-400 dark:text-red-400 dark:hover:bg-red-600 dark:hover:text-white",
+    ghost: "border-2 border-green-600 dark:border-green-400 text-green-600 dark:text-green-400 hover:bg-green-100 dark:hover:bg-green-800 hover:text-green-700 dark:hover:text-green-200",
+    subtle: "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-50 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-sm border border-gray-300 dark:border-gray-600",
+    success: "bg-green-600 hover:bg-green-700 text-white hover:shadow-glow-green",
   };
 
   const iconSizeClasses = {
@@ -84,7 +84,7 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
       onClick={onClick}
       className={combinedClasses}
       disabled={disabled}
-      type={type} // Added type to the button element
+      type={type}
       {...motionProps}
     >
       {IconComponent && <IconComponent className={`${iconSizeClasses[size]} mr-2 ${iconClassName || ''}`} />}

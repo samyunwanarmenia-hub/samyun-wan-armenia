@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { TranslationKeys, ProductShowcaseItem } from '../types/global';
 import { productShowcaseData } from '../data/productShowcaseData';
 import OptimizedImage from './OptimizedImage';
-import CallToActionButton from './CallToActionButton'; // Import CallToActionButton
+import CallToActionButton from './CallToActionButton';
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -117,7 +117,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
       exit="hidden"
     >
       <motion.div
-        className="bg-white rounded-xl p-5 shadow-2xl relative w-full max-w-sm border border-gray-200" // Reduced p-6 to p-5
+        className="bg-white dark:bg-gray-800 rounded-xl p-5 shadow-2xl relative w-full max-w-sm border border-gray-200 dark:border-gray-700"
         variants={modalVariants}
         initial="hidden"
         animate="visible"
@@ -125,25 +125,25 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
       >
         <button 
           onClick={onClose} 
-          className="absolute top-3 right-3 p-2 rounded-full bg-gray-200 text-red-600 hover:bg-gray-300 hover:text-red-700 transition-colors" // Reduced p-3 to p-2, top-4 right-4 to top-3 right-3
+          className="absolute top-3 right-3 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-red-600 hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-red-700 transition-colors"
         >
-          <X className="w-5 h-5" /> {/* Reduced w/h-6 to w/h-5 */}
+          <X className="w-5 h-5" />
         </button>
-        <h3 className="text-xl font-bold text-gray-900 mb-5 text-center"> {/* Reduced text-2xl to text-xl, mb-6 to mb-5 */}
+        <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-5 text-center">
           {t.orderModal.title}
         </h3>
 
-        <p className="text-gray-700 text-sm mb-3 text-center font-semibold"> {/* Reduced mb-4 to mb-3 */}
+        <p className="text-gray-700 dark:text-gray-300 text-sm mb-3 text-center font-semibold">
           {t.orderModal.selectProducts}
         </p>
-        <div className="flex justify-center space-x-3 mb-5"> {/* Reduced space-x-4 to space-x-3, mb-6 to mb-5 */}
+        <div className="flex justify-center space-x-3 mb-5">
           {productShowcaseData.map((product) => (
             <motion.div
               key={product.labelKey}
-              className={`relative p-1.5 rounded-xl cursor-pointer transition-all duration-200 ${ // Reduced p-2 to p-1.5
+              className={`relative p-1.5 rounded-xl cursor-pointer transition-all duration-200 ${
                 selectedProducts.includes(product.labelKey)
                   ? 'border-4 border-green-600 shadow-lg'
-                  : 'border-2 border-gray-300'
+                  : 'border-2 border-gray-300 dark:border-gray-600'
               }`}
               onClick={() => handleProductSelect(product.labelKey)}
               whileHover={{ scale: 1.05 }}
@@ -152,10 +152,10 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
               <OptimizedImage
                 src={product.src}
                 alt={product.alt}
-                className="w-16 h-16 object-contain rounded-lg" // Reduced w/h-20 to w/h-16
+                className="w-16 h-16 object-contain rounded-lg"
                 loading="eager"
               />
-              <p className="text-xs text-gray-900 mt-1.5 text-center font-medium"> {/* Reduced mt-2 to mt-1.5 */}
+              <p className="text-xs text-gray-900 dark:text-gray-50 mt-1.5 text-center font-medium">
                 {t.productShowcase[product.labelKey]}
               </p>
             </motion.div>
@@ -164,30 +164,30 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
 
         {selectedProducts.length > 0 && (
           <motion.div 
-            className="text-center mb-5 p-3 bg-green-100 rounded-lg border border-green-200" // Reduced mb-6 to mb-5, p-4 to p-3
+            className="text-center mb-5 p-3 bg-green-100 dark:bg-green-900/50 rounded-lg border border-green-200 dark:border-green-700"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <p className="text-gray-900 text-base font-bold mb-0.5"> {/* Reduced text-lg to text-base, mb-1 to mb-0.5 */}
+            <p className="text-gray-900 dark:text-gray-50 text-base font-bold mb-0.5">
               Total: {totalPrice.toLocaleString()} AMD
             </p>
-            <p className="text-green-600 text-xs font-semibold"> {/* Reduced text-sm to text-xs */}
+            <p className="text-green-600 dark:text-green-400 text-xs font-semibold">
               {t.orderModal.freeDeliveryMessage}
             </p>
           </motion.div>
         )}
 
-        <p className="text-gray-700 text-sm mb-3 text-center"> {/* Reduced mb-4 to mb-3 */}
+        <p className="text-gray-700 dark:text-gray-300 text-sm mb-3 text-center">
           {t.orderModal.deliveryInfo1}
         </p>
-        <p className="text-gray-700 text-sm mb-5 text-center"> {/* Reduced mb-6 to mb-5 */}
+        <p className="text-gray-700 dark:text-gray-300 text-sm mb-5 text-center">
           {t.orderModal.deliveryInfo2}
         </p>
-        <form onSubmit={handleSubmit} className="flex flex-col space-y-3"> {/* Reduced space-y-4 to space-y-3 */}
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
           <input
             type="text"
-            className="bg-gray-100 border border-gray-200 rounded-lg px-3 py-2.5 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600" // Reduced px-4 py-3 to px-3 py-2.5
+            className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2.5 text-gray-900 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600"
             placeholder={t.orderModal.addressPlaceholder}
             value={address}
             onChange={(e) => setAddress(e.target.value)}
@@ -195,7 +195,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
           />
           <input
             type="tel"
-            className="bg-gray-100 border border-gray-200 rounded-lg px-3 py-2.5 text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-600" // Reduced px-4 py-3 to px-3 py-2.5
+            className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2.5 text-gray-900 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-600"
             placeholder={t.orderModal.phonePlaceholder}
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
@@ -205,7 +205,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
             type="submit"
             icon={ShoppingCart}
             disabled={isSubmitting}
-            size="md" // Adjusted size from lg to md
+            size="md"
           >
             {isSubmitting ? 'Sending...' : t.orderModal.orderButton}
           </CallToActionButton>

@@ -50,7 +50,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
   };
 
   return (
-    <div className="relative w-full max-w-sm mx-auto bg-white rounded-3xl shadow-2xl p-6 border border-gray-200 overflow-hidden min-h-[450px]"> {/* Added min-h-[450px] */}
+    <div className="relative w-full max-w-sm mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 border border-gray-200 dark:border-gray-700 overflow-hidden min-h-[450px]">
       <AnimatePresence initial={false} custom={currentIndex}>
         <motion.div
           key={currentIndex}
@@ -67,13 +67,13 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
             className="w-40 h-40 object-contain mb-4 drop-shadow-lg"
             loading="eager"
           />
-          <h3 className="text-xl font-bold text-gray-900 mb-2 text-center">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-2 text-center">
             {t.productShowcase[currentProduct.labelKey]}
           </h3>
-          <p className="text-gray-700 text-sm mb-4 text-center">
+          <p className="text-gray-700 dark:text-gray-300 text-sm mb-4 text-center">
             {t.productShowcase[currentProduct.descKey]}
           </p>
-          <p className="text-2xl font-extrabold text-primary-600 mb-4">
+          <p className="text-2xl font-extrabold text-primary-600 dark:text-primary-400 mb-4">
             {currentProduct.price.toLocaleString()} AMD
           </p>
           <CallToActionButton
@@ -89,13 +89,13 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
 
       <button
         onClick={handlePrev}
-        className="absolute top-1/2 left-3 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md text-gray-700 hover:bg-gray-100 transition-colors z-20"
+        className="absolute top-1/2 left-3 transform -translate-y-1/2 bg-white dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-700 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors z-20"
       >
         <ChevronLeft className="w-6 h-6" />
       </button>
       <button
         onClick={handleNext}
-        className="absolute top-1/2 right-3 transform -translate-y-1/2 bg-white p-2 rounded-full shadow-md text-gray-700 hover:bg-gray-100 transition-colors z-20"
+        className="absolute top-1/2 right-3 transform -translate-y-1/2 bg-white dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-700 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors z-20"
       >
         <ChevronRight className="w-6 h-6" />
       </button>

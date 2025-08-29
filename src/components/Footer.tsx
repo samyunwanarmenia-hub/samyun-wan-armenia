@@ -1,7 +1,6 @@
 import { Instagram, Facebook, MessageCircle, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { TranslationKeys, SectionId } from '../types/global';
-// import OptimizedImage from './OptimizedImage'; // Removed OptimizedImage import
 
 interface FooterProps {
   t: TranslationKeys;
@@ -17,7 +16,7 @@ const Footer = ({ t }: FooterProps) => {
   };
 
   return (
-    <footer className="bg-gray-900 text-white py-10">
+    <footer className="bg-gray-900 dark:bg-gray-950 text-white py-10"> {/* Added dark mode bg */}
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-6 mb-6">
           <div>
@@ -28,14 +27,14 @@ const Footer = ({ t }: FooterProps) => {
                 </span>
               </a>
             </div>
-            <p className="text-gray-300 text-sm leading-relaxed">
+            <p className="text-gray-300 dark:text-gray-400 text-sm leading-relaxed"> {/* Added dark mode text color */}
               {t.footer.description}
             </p>
           </div>
 
           <div>
             <h4 className="font-bold text-base mb-3">{t.footer.about}</h4>
-            <ul className="space-y-1.5 text-gray-300 text-sm">
+            <ul className="space-y-1.5 text-gray-300 dark:text-gray-400 text-sm"> {/* Added dark mode text color */}
               <li>
                 <motion.a 
                   href="#about" 
@@ -89,7 +88,7 @@ const Footer = ({ t }: FooterProps) => {
 
           <div>
             <h4 className="font-bold text-base mb-3">{t.footer.products}</h4>
-            <ul className="space-y-1.5 text-gray-300 text-sm">
+            <ul className="space-y-1.5 text-gray-300 dark:text-gray-400 text-sm"> {/* Added dark mode text color */}
               <li>
                 <motion.a 
                   href="#products" 
@@ -188,12 +187,12 @@ const Footer = ({ t }: FooterProps) => {
                 <MessageCircle className="w-5 h-5" />
               </motion.a>
             </div>
-            <p className="text-gray-300 text-xs">@samyunwanarmenia</p>
+            <p className="text-gray-300 dark:text-gray-400 text-xs">@samyunwanarmenia</p> {/* Added dark mode text color */}
           </div>
         </div>
 
-        <div className="border-t border-gray-700 pt-6 text-center">
-          <p className="text-gray-300 text-sm">
+        <div className="border-t border-gray-700 dark:border-gray-600 pt-6 text-center"> {/* Added dark mode border */}
+          <p className="text-gray-300 dark:text-gray-400 text-sm"> {/* Added dark mode text color */}
             © 2025 Samyun Wan Armenia. {t.footer.allRightsReserved} | {t.footer.officialRepresentative}
           </p>
         </div>

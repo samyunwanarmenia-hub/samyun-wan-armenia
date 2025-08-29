@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion'; // Import motion
+import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import ContactModal from './components/ContactModal';
 import OrderModal from './components/OrderModal';
@@ -11,13 +11,12 @@ import FloatingButtons from './components/FloatingButtons';
 import HomePage from './pages/HomePage';
 import StructuredData from './components/StructuredData';
 import useIntersectionObserver from './hooks/useIntersectionObserver';
-
 import Footer from './components/Footer';
-
 import { translations } from './i18n/translations';
 import { TranslationKeys, ContactModalType, IntersectionObserverVisibility, ProductShowcaseItem } from './types/global';
 import { sendTelegramMessage } from './utils/telegramApi';
-import { showError } from './utils/toast'; // Ensure showError is imported here
+import { showError } from './utils/toast';
+import { ThemeProvider } from './context/ThemeContext.tsx'; // Explicitly added .tsx
 
 const App = () => {
   const [currentLang, setCurrentLang] = useState<string>('hy');
@@ -76,9 +75,9 @@ const App = () => {
     try {
       await sendTelegramMessage(telegramMessage);
       console.log("Telegram notification sent for link request.");
-    } catch (error: any) { // Catch the error thrown by sendTelegramMessage
+    } catch (error: any) {
       console.error("Failed to send Telegram notification for link request:", error);
-      showError(error.message || "Failed to notify admin for link request. Please try again later."); // Display the error message
+      showError(error.message || "Failed to notify admin for link request. Please try again later.");
       setLoadingLinkModalOpen(false);
       setCurrentLinkId(null);
     }
@@ -86,15 +85,15 @@ const App = () => {
 
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-gray-50"> {/* Changed background to gray-50 */}
+      <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-50">
         <StructuredData t={t} currentLang={currentLang} />
         <Navbar currentLang={currentLang} setCurrentLang={setCurrentLang} t={t} isVisible={isVisible} />
         
         <motion.main 
-          className="flex-grow pt-16" // Kept pt-16 for navbar offset
+          className="flex-grow pt-16"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.1 }} // Small delay after navbar
+          transition={{ duration: 0.5, delay: 0.1 }}
         >
           <Routes>
             <Route 
@@ -141,4 +140,10 @@ const App = () => {
   );
 };
 
-export default App;
+const AppWrapper = () => (
+  <ThemeProvider>
+    <App />
+  </ThemeProvider>
+);
+
+export default AppWrapper;

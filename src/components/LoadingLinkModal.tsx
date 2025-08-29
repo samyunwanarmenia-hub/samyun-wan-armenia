@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion';
 import { TranslationKeys } from '../types/global';
-import LoadingSpinner from './LoadingSpinner'; // Import the new spinner
-import { X, Copy } from 'lucide-react'; // Import X and Copy icons
-import { showSuccess, showError } from '../utils/toast'; // For toast notifications
+import LoadingSpinner from './LoadingSpinner';
+import { X, Copy } from 'lucide-react';
+import { showSuccess, showError } from '../utils/toast';
 
 interface LoadingLinkModalProps {
   isOpen: boolean;
   t: TranslationKeys;
-  clientId: string | null; // New prop for client ID
-  onClose: () => void; // New prop for closing the modal
+  clientId: string | null;
+  onClose: () => void;
 }
 
 const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProps) => {
@@ -46,37 +46,36 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
       exit="hidden"
     >
       <motion.div
-        className="bg-white rounded-xl p-6 shadow-2xl relative w-full max-w-sm flex flex-col items-center text-center border border-gray-200" // Changed background to white and added border
+        className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-2xl relative w-full max-w-sm flex flex-col items-center text-center border border-gray-200 dark:border-gray-700"
         variants={modalVariants}
         initial="hidden"
         animate="visible"
         exit="exit"
       >
-        <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 hover:text-gray-900 transition-colors"> {/* Changed text color */}
+        <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 transition-colors">
           <X className="w-6 h-6" />
         </button>
         <div className="w-24 h-24 mb-6 flex items-center justify-center">
           <LoadingSpinner />
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-4"> {/* Changed text color to gray-900 */}
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4">
           {t.loadingLinkModal.title}
         </h3>
-        <p className="text-gray-700 text-lg mb-2"> {/* Changed text color to gray-700 */}
+        <p className="text-gray-700 dark:text-gray-300 text-lg mb-2">
           {t.loadingLinkModal.message}
         </p>
-        <p className="text-gray-500 text-sm mb-4"> {/* Changed text color to gray-500 */}
+        <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
           {t.loadingLinkModal.waitingForAdmin}
         </p>
 
         {clientId && (
           <div className="flex flex-col items-center mb-6">
-            <p className="text-gray-500 text-xs mb-2">Your Client ID:</p> {/* Changed text color to gray-500 */}
-            <div className="flex items-center bg-gray-100 rounded-lg px-3 py-2 border border-gray-200"> {/* Changed background and border */}
-              <code className="text-gray-800 text-sm mr-2">{clientId}</code> {/* Changed text color to gray-800 */}
+            <p className="text-gray-500 dark:text-gray-400 text-xs mb-2">Your Client ID:</p>
+            <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-2 border border-gray-200 dark:border-gray-600">
+              <code className="text-gray-800 dark:text-gray-200 text-sm mr-2">{clientId}</code>
               <motion.button
                 onClick={handleCopyClientId}
-                className="text-gray-600 hover:text-gray-900 transition-colors" 
-                /* Changed text color */
+                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-50 transition-colors" 
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -89,7 +88,7 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
 
         <motion.button
           onClick={onClose}
-          className="bg-gray-200 text-gray-800 font-bold py-3 px-8 rounded-full hover:bg-gray-300 transform hover:scale-105 transition-all mt-4" // Changed background and text color
+          className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-50 font-bold py-3 px-8 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transform hover:scale-105 transition-all mt-4"
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
