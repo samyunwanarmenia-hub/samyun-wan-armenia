@@ -68,6 +68,20 @@ export default {
           500: '#f97316',
           600: '#ea580c',
         },
+        // Custom gray palette for darker dark mode
+        gray: {
+          50: '#f9fafb',
+          100: '#f3f4f6',
+          200: '#e5e7eb',
+          300: '#d1d5db',
+          400: '#9ca3af',
+          500: '#6b7280',
+          600: '#4b5563',
+          700: '#374151',
+          800: '#18202b', // Slightly darker
+          900: '#0d1218', // Darker
+          950: '#080a0d', // Even darker, almost black
+        },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
@@ -106,7 +120,7 @@ export default {
         'hero-pattern': 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%)',
         'gradient-text': 'linear-gradient(to right, var(--tw-gradient-stops))', // New text gradient
         'gradient-shine-light': 'linear-gradient(to right, transparent 0%, rgba(255,255,255,0.7) 49%, rgba(255,255,255,0.7) 51%, transparent 100%)', // Narrower shine
-        'gradient-shine-dark': 'linear-gradient(to right, transparent 0%, rgba(55,65,81,0.7) 49%, rgba(55,65,81,0.7) 51%, transparent 100%)', // Narrower shine for dark mode
+        'gradient-shine-dark': 'linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 49%, rgba(0,0,0,0.7) 51%, rgba(0,0,0,0) 100%)', // Narrower shine for dark mode, darker
       },
       boxShadow: {
         'glow-red': '0 0 15px rgba(239, 68, 68, 0.5), 0 0 30px rgba(239, 68, 68, 0.3)', // Refined glow
