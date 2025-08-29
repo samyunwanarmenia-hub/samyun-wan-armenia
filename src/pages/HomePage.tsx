@@ -2,7 +2,7 @@ import { useState, useMemo, lazy, Suspense } from 'react';
 import HeroSection from '../components/HeroSection';
 import AboutSection from '../components/AboutSection';
 import BenefitsSection from '../components/BenefitsSection';
-// Removed import ProductShowcaseSection from '../components/ProductShowcaseSection';
+import ProductShowcaseSection from '../components/ProductShowcaseSection'; // Uncommented import
 import SeoHead from '../components/SeoHead';
 
 const TestimonialsSection = lazy(() => import('../components/TestimonialsSection'));
@@ -73,7 +73,14 @@ const HomePage = ({ currentLang, t, openContactModal, openOrderModal, openLoadin
       <HeroSection t={t} isVisible={isVisible} stats={statsData} openOrderModal={openOrderModal} openLoadingLinkModal={openLoadingLinkModal} openAuthenticityModal={openAuthenticityModal} />
       <AboutSection t={t} isVisible={isVisible} />
       <BenefitsSection t={t} isVisible={isVisible} />
-      {/* Removed ProductShowcaseSection */}
+      
+      <ProductShowcaseSection // Added ProductShowcaseSection
+        t={t}
+        isVisible={isVisible}
+        openOrderModal={openOrderModal}
+        openLoadingLinkModal={openLoadingLinkModal}
+        openAuthenticityModal={openAuthenticityModal}
+      />
       
       <Suspense fallback={<div>Loading Testimonials...</div>}>
         <TestimonialsSection t={t} isVisible={isVisible} testimonials={testimonials} currentLang={currentLang} userTestimonial={userTestimonial} />

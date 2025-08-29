@@ -157,7 +157,7 @@ export interface StatItem {
 }
 
 // Define the structure for the intersection observer visibility state
-export type SectionId = 'home' | 'about' | 'benefits' | 'authenticity' | 'products' | 'testimonials' | 'contact' | 'cta' | 'faq'; // Added 'faq'
+export type SectionId = 'home' | 'about' | 'benefits' | 'authenticity' | 'products' | 'testimonials' | 'contact' | 'cta' | 'faq'; // Added 'products' and 'faq'
 export type IntersectionObserverVisibility = Record<SectionId, boolean>;
 
 // Define types for modal interactions

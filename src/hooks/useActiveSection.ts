@@ -5,7 +5,7 @@ const useActiveSection = (isVisible: IntersectionObserverVisibility) => {
   const [activeSection, setActiveSection] = useState<SectionId>('home');
 
   useEffect(() => {
-    const sections: SectionId[] = ['home', 'about', 'benefits', 'authenticity', 'products', 'cta', 'testimonials', 'faq', 'contact'];
+    const sections: SectionId[] = ['home', 'about', 'benefits', 'products', 'authenticity', 'cta', 'testimonials', 'faq', 'contact']; // Added 'products'
     for (const section of sections) {
       if (isVisible[section]) {
         setActiveSection(section);
