@@ -65,7 +65,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
                 transition={{ delay: 0.2 }}
               >
                 {t.hero.tagline}
-                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-0 hover:opacity-100 animate-shine pointer-events-none dark:via-gray-800/50"></span>
+                <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-100 animate-shine pointer-events-none dark:via-gray-800/50"></span>
               </motion.p>
 
               <motion.div 
