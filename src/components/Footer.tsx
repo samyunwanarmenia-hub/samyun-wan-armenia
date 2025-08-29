@@ -1,7 +1,7 @@
 import { Instagram, Facebook, MessageCircle, Send } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { TranslationKeys, SectionId } from '../types/global';
-import OptimizedImage from './OptimizedImage'; // Import OptimizedImage
+// import OptimizedImage from './OptimizedImage'; // Removed OptimizedImage import
 
 interface FooterProps {
   t: TranslationKeys;
@@ -23,12 +23,9 @@ const Footer = ({ t }: FooterProps) => {
           <div>
             <div className="flex items-center space-x-2 mb-5">
               <a href="#home" className="flex items-center">
-                <OptimizedImage 
-                  src="/images/logo.jpg" 
-                  alt="Samyun Wan Armenia Logo" 
-                  className="h-9 w-auto" // Adjusted size for the logo
-                  loading="lazy"
-                />
+                <span className="text-white text-xl font-bold">
+                  {t.hero.title}
+                </span>
               </a>
             </div>
             <p className="text-gray-300 text-sm leading-relaxed">

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Menu, X } from 'lucide-react'; // Removed Leaf import
 import { motion, AnimatePresence } from 'framer-motion';
 import { TranslationKeys, SectionId } from '../types/global';
-import OptimizedImage from './OptimizedImage'; // Import OptimizedImage
+// import OptimizedImage from './OptimizedImage'; // Removed OptimizedImage import
 
 interface MobileNavProps {
   currentLang: string;
@@ -60,12 +60,9 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center space-x-2">
                 <a href="#home" className="flex items-center">
-                  <OptimizedImage 
-                    src="/images/logo.jpg" 
-                    alt="Samyun Wan Armenia Logo" 
-                    className="h-10 w-auto" // Adjusted size for the logo
-                    loading="eager"
-                  />
+                  <span className="text-gray-900 text-xl font-bold">
+                    {t.hero.title}
+                  </span>
                 </a>
               </div>
               <button onClick={toggleMenu} className="text-gray-900 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition-colors">
