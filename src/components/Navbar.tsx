@@ -33,7 +33,7 @@ const Navbar = ({ currentLang, setCurrentLang, t, isVisible }: NavbarProps) => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 shadow-lg dark:bg-gray-800/95 dark:shadow-xl' : 'bg-white/85 dark:bg-gray-900/85'}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 shadow-lg dark:bg-gray-800/95 dark:shadow-xl py-2' : 'bg-white/85 dark:bg-gray-900/85 py-4'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">

@@ -51,8 +51,20 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      transition: { 
+        type: "spring", 
+        stiffness: 100, 
+        damping: 15, 
+        duration: 0.6, 
+        ease: "easeOut" 
+      } 
+    },
+    exit: { opacity: 0, y: -20, transition: { duration: 0.3, ease: "easeIn" } }
   };
 
   const displayedTestimonials = [
@@ -101,8 +113,8 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
                 variants={itemVariants}
                 initial="hidden"
                 animate="visible"
-                exit="hidden"
-                transition={{ delay: 0.1 }}
+                exit="exit"
+                transition={{ delay: index * 0.1 + 0.2 }} // Staggered delay
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
               >
