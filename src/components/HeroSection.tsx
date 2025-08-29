@@ -65,7 +65,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
                 variants={textVariants}
                 initial="hidden"
                 animate={isVisible['home'] ? "visible" : "hidden"}
-                transition={{ delay: 0.2 }}
+                // Increased duration here
+                transition={{ delay: 0.2, duration: 1.5 }} 
               >
                 {t.hero.tagline}
                 <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent opacity-100 animate-shine pointer-events-none dark:via-gray-800/50"></span>
