@@ -53,7 +53,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
               >
                 <span className="relative overflow-hidden inline-block">
                   {t.hero.title}
-                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/90 to-transparent opacity-100 animate-shine-slow pointer-events-none dark:via-gray-700/90"></span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/70 to-transparent opacity-100 animate-shine-slow pointer-events-none dark:via-gray-800/70"></span>
                 </span>
                 <span className="block text-2xl lg:text-3xl font-bold mt-1.5 text-gradient bg-gradient-to-r from-primary-500 to-blue-500 dark:from-primary-400 dark:to-blue-400">
                   {t.hero.subtitle}
