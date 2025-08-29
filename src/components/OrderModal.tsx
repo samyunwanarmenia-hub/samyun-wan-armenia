@@ -142,7 +142,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
               key={product.labelKey}
               className={`relative p-1.5 rounded-xl cursor-pointer transition-all duration-200 ${
                 selectedProducts.includes(product.labelKey)
-                  ? 'border-4 border-green-600 shadow-lg'
+                  ? 'border-4 border-red-600 shadow-lg' // Changed to border-red-600
                   : 'border-2 border-gray-300 dark:border-gray-600'
               }`}
               onClick={() => handleProductSelect(product.labelKey)}

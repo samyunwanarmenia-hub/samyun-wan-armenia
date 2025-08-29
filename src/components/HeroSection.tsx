@@ -22,7 +22,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
   };
 
   return (
-    <section id="home" className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-800 flex items-center overflow-hidden py-16">
+    <section id="home" className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-800 flex items-center overflow-hidden py-12">
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-72 h-72 bg-primary-100/50 rounded-full opacity-50 animate-pulse dark:bg-primary-900/30"></div>
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-100/50 rounded-full opacity-50 animate-pulse dark:bg-blue-900/30" style={{animationDelay: '2s'}}></div>

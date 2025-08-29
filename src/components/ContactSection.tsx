@@ -81,7 +81,7 @@ const ContactSection = ({ t, isVisible, openContactModal }: ContactSectionProps)
           <CallToActionButton 
             onClick={() => openContactModal('call')} 
             icon={Phone}
-            variant="success"
+            variant="primary" // Changed to primary
             size="sm"
           >
             {t.contact.callNowButton}

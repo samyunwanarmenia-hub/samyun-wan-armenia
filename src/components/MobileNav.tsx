@@ -147,7 +147,7 @@ const MobileNav = ({ currentLang, setCurrentLang, t, getLinkClasses }: MobileNav
                   setCurrentLang(e.target.value);
                   setIsOpen(false);
                 }}
-                className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded px-3 py-2 text-base text-gray-900 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-primary-600 w-full"
+                className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded px-3 py-2 text-base text-gray-900 dark:text-gray-50 focus:outline-none focus:ring-2 focus:ring-red-600 w-full"
               >
                 <option value="hy">🇦🇲 ՀԱՅ</option>
                 <option value="ru">🇷🇺 РУС</option>

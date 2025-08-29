@@ -16,7 +16,7 @@ const Footer = ({ t }: FooterProps) => {
   };
 
   return (
-    <footer className="bg-gray-900 dark:bg-gray-950 text-white py-10"> {/* Added dark mode bg */}
+    <footer className="bg-gray-900 dark:bg-gray-950 text-white py-8"> {/* Changed py-10 to py-8 */}
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-4 gap-6 mb-6">
           <div>
