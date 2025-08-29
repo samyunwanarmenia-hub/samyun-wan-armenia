@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 // import { motion } from 'framer-motion'; // Removed motion
 import { FaStar } from 'react-icons/fa'; // Changed to Font Awesome icon
 import { TranslationKeys, Testimonial, UserTestimonial } from '../types/global';
-import { generateTestimonials } from '../utils/testimonialGenerator'; // Import generateTestimonials
+// import { generateTestimonials } from '../utils/testimonialGenerator'; // Removed unused import
 
 interface TestimonialsSectionProps {
   t: TranslationKeys;
@@ -66,7 +66,7 @@ const TestimonialsSection = ({ t, testimonials, currentLang, userTestimonial }: 
                   <h5 className="font-bold text-neutral-dark text-base font-sans">{currentLang === 'hy' ? testimonial.name : currentLang === 'ru' ? testimonial.nameRu : testimonial.nameEn}</h5> {/* Updated font size and color */}
                   <div className="flex">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <FaStar key={i} className="w-4 h-4 text-yellow-400 fill-current" /> {/* Changed to Font Awesome icon */}
+                      <FaStar key={i} className="w-4 h-4 text-yellow-400 fill-current" /> 
                     ))}
                   </div>
                 </div>

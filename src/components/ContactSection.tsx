@@ -1,4 +1,4 @@
-import { FaMapMarkerAlt, FaPhone, FaClock, FaCommentAlt } from 'react-icons/fa'; // Changed to Font Awesome icons
+import { FaPhone, FaCommentAlt } from 'react-icons/fa'; // Removed FaMapMarkerAlt and FaClock
 // import { motion } from 'framer-motion'; // Removed motion
 import { TranslationKeys, ContactModalType } from '../types/global';
 import { contactInfoData } from '../data/contactInfo';

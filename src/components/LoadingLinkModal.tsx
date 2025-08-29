@@ -13,6 +13,14 @@ interface LoadingLinkModalProps {
 const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProps) => {
   if (!isOpen) return null;
 
+  const handleCopyClientId = () => {
+    if (clientId) {
+      navigator.clipboard.writeText(clientId)
+        .then(() => showSuccess("Client ID copied to clipboard!"))
+        .catch(() => showError("Failed to copy Client ID."));
+    }
+  };
+
   return (
     <div
       className="fixed inset-0 bg-neutral-dark bg-opacity-70 z-[100] flex items-center justify-center p-4" // Updated background color

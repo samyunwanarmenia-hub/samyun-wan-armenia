@@ -135,7 +135,7 @@ export const translations: Record<string, TranslationKeys> = {
     authenticity: {
       title: 'Տարբերեք Օրիգինալը',
       howToDistinguish: 'ինչպե՞ս տարբերել օրիգինալը',
-      attention: 'ՈՒՇԱԴՐՈՒԹՅՈՒՆ',
+      attention: 'ՈՒՇԱԱԴՐՈՒԹՅՈՒՆ',
     },
     gallery: {
       title: 'Մեր արտադրանքի պատկերասրահը',

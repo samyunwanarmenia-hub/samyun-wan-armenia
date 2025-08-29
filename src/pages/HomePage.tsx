@@ -15,7 +15,7 @@ import { statsData } from '../data/stats';
 // import useIntersectionObserver from '../hooks/useIntersectionObserver'; // Removed useIntersectionObserver
 import { sendTelegramMessage } from '../utils/telegramApi';
 import { showSuccess, showError } from '../utils/toast';
-import { TranslationKeys, IntersectionObserverVisibility, UserTestimonial, UserReviewSubmission, ContactModalType } from '../types/global';
+import { TranslationKeys, UserTestimonial, UserReviewSubmission, ContactModalType } from '../types/global'; // Removed IntersectionObserverVisibility
 
 interface HomePageProps {
   currentLang: string;
@@ -73,7 +73,7 @@ const HomePage = ({ currentLang, t, openContactModal, openOrderModal, openLoadin
         ogImage="/optimized/og-image.jpg"
       />
       {/* isVisible prop is no longer needed for sections */}
-      <HeroSection t={t} stats={stats} openOrderModal={openOrderModal} openLoadingLinkModal={openLoadingLinkModal} openAuthenticityModal={openAuthenticityModal} />
+      <HeroSection t={t} stats={statsData} openOrderModal={openOrderModal} openLoadingLinkModal={openLoadingLinkModal} openAuthenticityModal={openAuthenticityModal} />
       <AboutSection t={t} />
       <BenefitsSection t={t} />
       <ProductShowcaseSection t={t} openOrderModal={openOrderModal} />

@@ -15,7 +15,7 @@ import StructuredData from './components/StructuredData';
 import Footer from './components/Footer';
 
 import { translations } from './i18n/translations';
-import { TranslationKeys, ContactModalType, IntersectionObserverVisibility, ProductShowcaseItem } from './types/global';
+import { TranslationKeys, ContactModalType, ProductShowcaseItem } from './types/global'; // Removed IntersectionObserverVisibility
 import { sendTelegramMessage } from './utils/telegramApi';
 import { showError } from './utils/toast';
 

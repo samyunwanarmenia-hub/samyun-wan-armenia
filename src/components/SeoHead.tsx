@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async';
-import { TranslationKeys } from '../types/global'; // Removed TranslationKeys
+import { SeoHeadProps } from '../types/global'; // Corrected import
 
 const SeoHead = ({ t, currentLang, pageTitle, pageDescription, pageKeywords, ogImage }: SeoHeadProps) => {
   const defaultTitle = t.hero.title + ' – ' + t.hero.subtitle;
