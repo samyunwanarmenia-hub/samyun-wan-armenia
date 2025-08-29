@@ -35,6 +35,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ t, isVisible }) => {
     { key: 'q1', answerKey: 'a1' },
     { key: 'q2', answerKey: 'a2' },
     { key: 'q3', answerKey: 'a3' },
+    { key: 'q4', answerKey: 'a4' }, // Added new FAQ question
   ];
 
   return (
@@ -100,7 +101,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ t, isVisible }) => {
                     /* Changed text color */
                     className="px-5 pb-5 text-gray-700 text-sm leading-relaxed" // Reduced px/pb-6 to px/pb-5, added text-sm
                   >
-                    <p>{t.faq[q.answerKey]}</p>
+                    <p dangerouslySetInnerHTML={{ __html: t.faq[q.answerKey] }}></p>
                   </motion.div>
                 )}
               </AnimatePresence>

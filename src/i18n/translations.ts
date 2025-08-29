@@ -156,11 +156,13 @@ export const translations: Record<string, TranslationKeys> = {
     },
     faq: {
       q1: 'Ինչպե՞ս տարբերել օրիգինալը Samyun Wan-ը կեղծից։',
-      a1: 'Ստուգեք QR կոդով փաթեթավորման վրա։',
+      a1: 'Օրիգինալ ապրանքատեսակը պիտանելիության ժամկետի վերևի ձախ հատվածում ունի նկարում պատկեված QR տարբերանշանը , որը սկանավորելով կարող եք համոզվել :',
       q2: 'Որքա՞ն ժամանակ է պահանջվում քաշ ավելացնելու համար։',
-      a2: '1-2 ամիս կանոնավոր օգտագործմամբ։',
+      a2: 'Յուրաքանչյուր օրգանիզմ ինդիվիդուալ է, սակայն մեկ տուփով առնվազն 6 կգ քաշի ավելացում լինում է բոլոր դեպքերում (6-8 kg 21 orum)',
       q3: 'Կա՞ն կողմնակի էֆեկտներ Samyun Wan-ի օգտագործումից։',
-      a3: 'Samyun Wan-ը պատրաստված է բնական բաղադրիչներից և չունի կողմնակի ազդեցություններ։'
+      a3: 'Samyun Wan-ը պատրաստված է բնական բաղադրիչներից և չունի կողմնակի ազդեցություններ։',
+      q4: 'Հակացուցումներ',
+      a4: 'ԽՈՐՀՈՒՐԴ ՉԻ ՏՐՎՈՒՄ՝<br />Հղի կանանց<br />Կերակրող մայրերին<br />Մինչև 14 տարեկան երեխաներին'
     },
   },
   ru: {
@@ -322,7 +324,9 @@ export const translations: Record<string, TranslationKeys> = {
       q2: 'Сколько времени требуется для набора веса?',
       a2: 'При регулярном использовании 1-2 месяца.',
       q3: 'Есть ли побочные эффекты от использования Samyun Wan?',
-      a3: 'Samyun Wan изготовлен из натуральных ингредиентов и не имеет побочных эффектов.'
+      a3: 'Samyun Wan изготовлен из натуральных ингредиентов и не имеет побочных эффектов.',
+      q4: 'Противопоказания',
+      a4: 'НЕ РЕКОМЕНДУЕТСЯ:<br />Беременным женщинам<br />Кормящим матерям<br />Детям до 14 лет'
     },
   },
   en: {
@@ -484,7 +488,9 @@ export const translations: Record<string, TranslationKeys> = {
       q2: 'How long does it take to gain weight?',
       a2: 'With 1-2 months of regular use.',
       q3: 'Are there side effects from using Samyun Wan?',
-      a3: 'Samyun Wan is made from natural ingredients and has no side effects.'
+      a3: 'Samyun Wan is made from natural ingredients and has no side effects.',
+      q4: 'Contraindications',
+      a4: 'NOT RECOMMENDED FOR:<br />Pregnant women<br />Nursing mothers<br />Children under 14 years old'
     },
   }
 };

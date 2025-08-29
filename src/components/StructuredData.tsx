@@ -19,7 +19,7 @@ const StructuredData = ({ t, currentLang }: StructuredDataProps) => {
   const addressLocality = addressItem?.details.split('<br />')[0]?.includes('Yerevan') ? "Yerevan" : "Yerevan"; // Default to Yerevan if not explicitly found
 
   const hoursItem = contactInfoData.find(item => item.key === 'hours');
-  let openingHoursSchema = "Mo-Sa 09:00-18:00, Su 10:00-16:00";
+  let openingHoursSchema = "Mo-Sa 09:00-23:00, Su 10:00-18:00"; // Updated hours
   if (hoursItem && hoursItem.details) {
     const parts = hoursItem.details.split('<br />');
     const weekdays = parts[0].replace('Mon - Sat:', 'Mo-Sa').trim();
@@ -238,6 +238,13 @@ const StructuredData = ({ t, currentLang }: StructuredDataProps) => {
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "${t.faq.a3}"
+              }
+            }, {
+              "@type": "Question",
+              "name": "${t.faq.q4}",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "${t.faq.a4.replace(/<br \/>/g, '\\n')}"
               }
             }]
           }

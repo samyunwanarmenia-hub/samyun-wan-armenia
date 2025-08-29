@@ -224,8 +224,8 @@ export interface SeoHeadProps {
 export type OpenOrderModalFunction = (productKey?: ProductShowcaseItem['labelKey']) => void;
 
 // New types for FAQ keys
-export type FaqQuestionKey = 'q1' | 'q2' | 'q3';
-export type FaqAnswerKey = 'a1' | 'a2' | 'a3';
+export type FaqQuestionKey = 'q1' | 'q2' | 'q3' | 'q4'; // Added q4
+export type FaqAnswerKey = 'a1' | 'a2' | 'a3' | 'a4'; // Added a4
 export type FaqTranslationKey = FaqQuestionKey | FaqAnswerKey;
 
 // Corrected Icon type definition
