@@ -10,5 +10,5 @@ export const contactInfoData: ContactInfoItem[] = [
     details: 'Կապվեք մեզ հետ հեռախոսով կամ WhatsApp-ով', // This will be replaced by t.contact.phoneNumbers.description in the component
     color: 'from-green-600 to-blue-500' 
   },
-  { key: 'hours', icon: Clock, titleKey: 'hours', details: 'Mon - Sat: 9:00 - 18:00<br />Sunday: 10:00 - 16:00', color: 'from-purple-600 to-pink-500' }
+  { key: 'hours', icon: Clock, titleKey: 'hours', details: 'Mon - Sat: 9:00 - 23:00<br />Sunday: 10:00 - 18:00', color: 'from-purple-600 to-pink-500' }
 ];
