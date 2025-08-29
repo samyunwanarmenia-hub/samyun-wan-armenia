@@ -59,14 +59,17 @@ const BenefitsSection = ({ t, isVisible }: BenefitsSectionProps) => {
               </div>
               
               <div className="relative z-10">
-                <motion.div 
-                  className={`w-14 h-14 bg-gradient-to-r ${benefit.gradient} rounded-2xl flex items-center justify-center mb-5`}
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                >
-                  <benefit.icon className="w-7 h-7 text-white" />
-                </motion.div>
-                <h3 className="text-gray-900 dark:text-gray-50 text-xl font-bold mb-3">{t.benefits[benefit.key].title}</h3>
+                <div className="flex items-center mb-3">
+                  {/* Reduced size and margin */}
+                  <motion.div 
+                    className={`w-10 h-10 bg-gradient-to-r ${benefit.gradient} rounded-2xl flex items-center justify-center mr-3`}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  >
+                    <benefit.icon className="w-5 h-5 text-white" />
+                  </motion.div>
+                  <h3 className="text-gray-900 dark:text-gray-50 text-xl font-bold">{t.benefits[benefit.key].title}</h3>
+                </div>
                 <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">{t.benefits[benefit.key].desc}</p>
               </div>
             </motion.div>
