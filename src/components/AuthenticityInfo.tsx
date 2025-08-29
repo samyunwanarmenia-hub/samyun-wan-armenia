@@ -32,14 +32,19 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
       transition={{ delay: 0.4 }}
     >
       {hasAttentionText && (
-        <p className="text-2xl font-bold text-red-600 mb-3 animate-pulse-slow">
+        <motion.span
+          className="inline-block bg-red-100 text-red-700 text-xl font-bold px-4 py-2 rounded-full mb-5 animate-pulse-slow" // Changed to span, added bg, padding, rounded-full, mb-5
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.5 }}
+        >
           {t.authenticity.attention}
-        </p>
+        </motion.span>
       )}
       
       {shouldShowQrBlock && (
         <motion.div 
-          className="cursor-pointer group mb-3 flex flex-col items-center" // Ensured content is centered
+          className="cursor-pointer group mb-4 flex flex-col items-center p-4 rounded-xl hover:bg-gray-50 transition-colors duration-200" // Added padding, rounded, hover effect, mb-4
           onClick={openLoadingLinkModal}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
@@ -48,7 +53,7 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
           <div className="w-20 h-20 bg-gray-100 rounded-xl mx-auto mb-3 flex items-center justify-center transform hover:scale-110 transition-all border border-gray-200">
             <QrCode className="w-10 h-10 text-gray-900" />
           </div>
-          <p className="text-gray-700 font-semibold text-sm">{t.hero.qrVerificationTitle}</p>
+          <p className="text-gray-700 font-semibold text-base">{t.hero.qrVerificationTitle}</p> {/* Changed text-sm to text-base */}
           {t.hero.qrVerificationSubtitle && <p className="text-xs text-gray-500">{t.hero.qrVerificationSubtitle}</p>}
         </motion.div>
       )}
@@ -57,7 +62,7 @@ const AuthenticityInfo: React.FC<AuthenticityInfoProps> = ({ t, openLoadingLinkM
         <CallToActionButton
           onClick={openAuthenticityModal}
           variant="subtle"
-          size="xs"
+          size="sm" // Changed size from xs to sm for better visibility
           className="mt-4" // Added margin top for spacing
         >
           {t.authenticity.howToDistinguish}
