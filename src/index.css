@@ -13,6 +13,7 @@
     font-family: 'Inter', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-weight: 500; /* Set default font weight to medium */
   }
 
   /* Modern selection style */
