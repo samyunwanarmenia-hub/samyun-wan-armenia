@@ -27,7 +27,7 @@ const Footer = ({ t }: FooterProps) => {
                 </span>
               </a>
             </div>
-            <p className="text-gray-300 dark:text-gray-400 text-sm leading-relaxed"> {/* Added dark mode text color */}
+            <p className="text-gray-300 dark:text-gray-400 text-base leading-relaxed"> {/* Changed text-sm to text-base */}
               {t.footer.description}
             </p>
           </div>

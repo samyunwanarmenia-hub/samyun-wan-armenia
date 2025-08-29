@@ -133,7 +133,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
           {t.orderModal.title}
         </h3>
 
-        <p className="text-gray-700 dark:text-gray-300 text-sm mb-3 text-center font-semibold">
+        <p className="text-gray-700 dark:text-gray-300 text-base mb-3 text-center font-semibold">
           {t.orderModal.selectProducts}
         </p>
         <div className="flex justify-center space-x-3 mb-5">
@@ -178,10 +178,10 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
           </motion.div>
         )}
 
-        <p className="text-gray-700 dark:text-gray-300 text-sm mb-3 text-center">
+        <p className="text-gray-700 dark:text-gray-300 text-base mb-3 text-center">
           {t.orderModal.deliveryInfo1}
         </p>
-        <p className="text-gray-700 dark:text-gray-300 text-sm mb-5 text-center">
+        <p className="text-gray-700 dark:text-gray-300 text-base mb-5 text-center">
           {t.orderModal.deliveryInfo2}
         </p>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3">

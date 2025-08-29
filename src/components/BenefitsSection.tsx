@@ -67,7 +67,7 @@ const BenefitsSection = ({ t, isVisible }: BenefitsSectionProps) => {
                   <benefit.icon className="w-7 h-7 text-white" />
                 </motion.div>
                 <h3 className="text-gray-900 dark:text-gray-50 text-xl font-bold mb-3">{t.benefits[benefit.key].title}</h3>
-                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{t.benefits[benefit.key].desc}</p>
+                <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">{t.benefits[benefit.key].desc}</p>
               </div>
             </motion.div>
           ))}

@@ -14,6 +14,8 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: 500; /* Set default font weight to medium */
+    font-size: 1.05rem; /* Slightly larger base font size for better readability */
+    line-height: 1.7; /* More generous line height */
   }
 
   /* Modern selection style */

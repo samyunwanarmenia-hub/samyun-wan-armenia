@@ -133,7 +133,7 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
                     {testimonial.result}
                   </div>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 text-xs leading-relaxed">
+                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
                   {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.textEn}
                 </p>
               </motion.div>

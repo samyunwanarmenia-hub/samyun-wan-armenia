@@ -92,7 +92,7 @@ const FaqSection: React.FC<FaqSectionProps> = ({ t, isVisible }) => {
                     animate="visible"
                     exit="exit"
                     variants={accordionContentVariants}
-                    className="px-5 pb-5 text-gray-700 dark:text-gray-300 text-sm leading-relaxed"
+                    className="px-5 pb-5 text-gray-700 dark:text-gray-300 text-base leading-relaxed"
                   >
                     <p dangerouslySetInnerHTML={{ __html: t.faq[q.answerKey] }}></p>
                   </motion.div>

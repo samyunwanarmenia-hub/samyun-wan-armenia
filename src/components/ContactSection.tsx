@@ -64,7 +64,7 @@ const ContactSection = ({ t, isVisible, openContactModal }: ContactSectionProps)
                 <item.icon className="w-7 h-7" />
               </div>
               <h3 className="text-gray-900 dark:text-gray-50 text-lg font-bold mb-3">{t.contact[item.titleKey]}</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-sm" dangerouslySetInnerHTML={{ __html: item.key === 'phone' ? t.contact.phoneNumbers.description : item.details }}></p>
+              <p className="text-gray-700 dark:text-gray-300 text-base" dangerouslySetInnerHTML={{ __html: item.key === 'phone' ? t.contact.phoneNumbers.description : item.details }}></p>
             </motion.div>
           ))}
         </div>
