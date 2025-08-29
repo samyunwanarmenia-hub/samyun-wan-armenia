@@ -1,13 +1,8 @@
 import { Helmet } from 'react-helmet-async';
-import { TranslationKeys } from '../types/global';
+import { StructuredDataProps } from '../types/global'; // Removed TranslationKeys
 import { contactInfoData } from '../data/contactInfo';
 import { productShowcaseData } from '../data/productShowcaseData';
 import { getOptimizedImagePath } from '../utils/imageUtils'; // Import the new utility
-
-interface StructuredDataProps {
-  t: TranslationKeys;
-  currentLang: string;
-}
 
 const StructuredData = ({ t, currentLang }: StructuredDataProps) => {
   const baseUrl = "https://samyunwanarmenia.netlify.app";

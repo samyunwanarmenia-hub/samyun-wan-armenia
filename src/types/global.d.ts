@@ -223,3 +223,8 @@ export type FaqTranslationKey = FaqQuestionKey | FaqAnswerKey;
 
 // Corrected Icon type definition
 export type Icon = React.ElementType;
+
+export interface StructuredDataProps { // Moved here and exported
+  t: TranslationKeys;
+  currentLang: string;
+}
