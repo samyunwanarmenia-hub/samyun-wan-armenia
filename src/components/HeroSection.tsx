@@ -22,7 +22,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
   };
 
   return (
-    <section id="home" className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-800 flex items-center overflow-hidden py-16 lg:py-0">
+    <section id="home" className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-100 dark:from-gray-950 dark:via-gray-900 dark:to-gray-800 flex items-center overflow-hidden py-16">
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-72 h-72 bg-primary-100/50 rounded-full opacity-50 animate-pulse dark:bg-primary-900/30"></div>
         <div className="absolute bottom-20 right-20 w-96 h-96 bg-blue-100/50 rounded-full opacity-50 animate-pulse dark:bg-blue-900/30" style={{animationDelay: '2s'}}></div>
@@ -32,8 +32,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
 
       <div className="container mx-auto px-4 relative z-10 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-8 items-center">
-          <div className={`transform transition-all duration-1000 ${isVisible['home'] ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'} text-center`}>
-            <div className="max-w-xl mx-auto">
+          <div className={`transform transition-all duration-1000 ${isVisible['home'] ? 'translate-x-0 opacity-100' : '-translate-x-20 opacity-0'} text-center lg:text-left`}>
+            <div className="max-w-xl mx-auto lg:mx-0">
               <motion.div 
                 className="inline-flex items-center bg-primary-100/50 text-primary-600 px-3 py-1.5 rounded-full text-sm font-semibold mb-5 dark:bg-primary-900/50 dark:text-primary-400"
                 variants={textVariants}
@@ -72,7 +72,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
               </motion.p>
 
               <motion.div 
-                className="flex flex-col sm:flex-row gap-3 mb-10 justify-center"
+                className="flex flex-col sm:flex-row gap-3 mb-10 justify-center lg:justify-start"
                 variants={textVariants}
                 initial="hidden"
                 animate={isVisible['home'] ? "visible" : "hidden"}
@@ -109,7 +109,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ t, isVisible, stats, openOrde
             </div>
           </div>
 
-          <div className={`transform transition-all duration-1000 delay-500 ${isVisible['home'] ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'} flex justify-center lg:justify-end mt-10 lg:mt-0`}>
+          <div className={`transform transition-all duration-1000 delay-500 ${isVisible['home'] ? 'translate-x-0 opacity-100' : 'translate-x-20 opacity-0'} flex justify-center lg:justify-start mt-10 lg:mt-0`}>
             <SwipeableProductCarousel t={t} openOrderModal={openOrderModal} />
           </div>
         </div>
