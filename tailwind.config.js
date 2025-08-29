@@ -87,8 +87,8 @@ export default {
           '50%': { transform: 'translateY(-20px)' },
         },
         shine: {
-          '0%': { transform: 'translateX(-100%)' },
-          '100%': { transform: 'translateX(100%)' },
+          '0%': { transform: 'translateX(-120%)' }, // Start further left to ensure full sweep
+          '100%': { transform: 'translateX(120%)' }, // End further right to ensure full sweep
         },
         fadeInUp: {
           from: {
@@ -105,6 +105,8 @@ export default {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'hero-pattern': 'linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(245, 158, 11, 0.1) 100%)',
         'gradient-text': 'linear-gradient(to right, var(--tw-gradient-stops))', // New text gradient
+        'gradient-shine-light': 'linear-gradient(to right, transparent 0%, rgba(255,255,255,0.7) 45%, rgba(255,255,255,0.7) 55%, transparent 100%)',
+        'gradient-shine-dark': 'linear-gradient(to right, transparent 0%, rgba(55,65,81,0.7) 45%, rgba(55,65,81,0.7) 55%, transparent 100%)', // gray-700/70
       },
       boxShadow: {
         'glow-red': '0 0 15px rgba(239, 68, 68, 0.5), 0 0 30px rgba(239, 68, 68, 0.3)', // Refined glow
