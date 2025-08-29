@@ -21,4 +21,16 @@
     background-color: #ef4444; /* Red-500 */
     color: #ffffff;
   }
+
+  /* CSS Variables for Toast in Light Mode */
+  :root {
+    --toast-bg: #ffffff;
+    --toast-text-color: #363636;
+  }
+
+  /* CSS Variables for Toast in Dark Mode */
+  .dark {
+    --toast-bg: #1f2937; /* Dark gray for toast background */
+    --toast-text-color: #f9fafb; /* Light text for toast */
+  }
 }
