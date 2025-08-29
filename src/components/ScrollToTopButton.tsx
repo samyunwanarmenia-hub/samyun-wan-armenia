@@ -50,7 +50,7 @@ const ScrollToTopButton: React.FC = () => {
       {isVisible && (
         <motion.button
           onClick={scrollToTop}
-          className="fixed bottom-4 left-4 z-50 p-3 bg-gradient-to-r from-primary-500 to-accentGreen-600 text-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-75" // Changed to green gradient
+          className="fixed bottom-4 left-4 z-50 p-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-75" // Changed to green gradient
           variants={buttonVariants}
           initial="hidden"
           animate="visible"

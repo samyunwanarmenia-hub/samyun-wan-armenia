@@ -51,13 +51,6 @@ export default {
           400: '#34D399',
           500: '#10B981',
         },
-        // Define a brand red/orange gradient for primary CTAs if needed,
-        // but for now, we'll use direct gradient classes.
-        // Let's add a specific green for accents
-        accentGreen: {
-          500: '#22c55e', // Primary green
-          600: '#16a34a', // Darker green
-        },
         // Define a brand red for primary actions
         brandRed: {
           500: '#ef4444',
