@@ -6,9 +6,9 @@ export const translations: Record<string, TranslationKeys> = {
       home: 'Գլխավոր',
       about: 'Մեր մասին',
       benefits: 'Առավելություններ',
-      testimonials: 'Գնահատականներ',
+      testimonials: 'Կարծիքներ', // Changed
       contact: 'Կապ',
-      faq: 'Հաճախ տրվող հարցեր' // New FAQ nav item
+      faq: 'Հաճախ տրվող հարցեր'
     },
     hero: {
       title: 'Samyun Wan Armenia',
@@ -16,9 +16,9 @@ export const translations: Record<string, TranslationKeys> = {
       tagline: 'Փոխելով կազմվածքդ կփոխվի քո կյանքը ',
       cta: 'Պատվիրել հիմա',
       consultation: 'Անվճար խորհրդատվություն',
-      guarantee: '100% բնօրինակ երաշխիք',
-      qrVerificationTitle: '', // Removed Armenian text as requested
-      qrVerificationSubtitle: '', // Removed Armenian text as requested
+      guarantee: '100% բնական', // Changed
+      qrVerificationTitle: '',
+      qrVerificationSubtitle: '',
     },
     stats: {
       customers: 'Գոհ հաճախորդներ',
@@ -73,8 +73,8 @@ export const translations: Record<string, TranslationKeys> = {
       },
     },
     testimonials: {
-      title: 'Իրական հաճախորդների կարծիքները',
-      subtitle: 'Ապացույց մեր արդյունավետության',
+      title: 'Կարծիքներ', // Changed
+      subtitle: '', // Removed
       formTitle: 'Թողեք Ձեր կարծիքը',
       formSubtitle: 'Մենք ուրախ կլինենք լսել Ձեր պատմությունը',
       namePlaceholder: 'Ձեր անունը',
@@ -158,7 +158,7 @@ export const translations: Record<string, TranslationKeys> = {
       q1: 'Ինչպե՞ս տարբերել օրիգինալը Samyun Wan-ը կեղծից։',
       a1: 'Օրիգինալ ապրանքատեսակը պիտանելիության ժամկետի վերևի ձախ հատվածում ունի նկարում պատկեված QR տարբերանշանը , որը սկանավորելով կարող եք համոզվել :',
       q2: 'Որքա՞ն ժամանակ է պահանջվում քաշ ավելացնելու համար։',
-      a2: 'Յուրաքանչյուր օրգանիզմ ինդիվիդուալ է, սակայն մեկ տուփով առնվազն 6 կգ քաշի ավելացում լինում է բոլոր դեպքերում (6-8 kg 21 orum)',
+      a2: 'Յուրաքանչյուր օրգանիզմ ինդիվիդուալ է, սակայն մեկ տուփով առնվազն 6 կգ քաշի ավելացում լինում է բոլոր դեպքերում (6-8 կգ 21 օրում)', // Changed
       q3: 'Կա՞ն կողմնակի էֆեկտներ Samyun Wan-ի օգտագործումից։',
       a3: 'Samyun Wan-ը պատրաստված է բնական բաղադրիչներից և չունի կողմնակի ազդեցություններ։',
       q4: 'Հակացուցումներ',
@@ -170,9 +170,9 @@ export const translations: Record<string, TranslationKeys> = {
       home: 'Главная',
       about: 'О нас',
       benefits: 'Преимущества',
-      testimonials: 'Отзывы',
+      testimonials: 'Отзывы', // Changed
       contact: 'Контакты',
-      faq: 'Часто задаваемые вопросы' // New FAQ nav item
+      faq: 'Часто задаваемые вопросы'
     },
     hero: {
       title: 'Samyun Wan Armenia',
@@ -237,8 +237,8 @@ export const translations: Record<string, TranslationKeys> = {
       },
     },
     testimonials: {
-      title: 'Отзывы реальных клиентов',
-      subtitle: 'Доказательство нашей эффективности',
+      title: 'Отзывы', // Changed
+      subtitle: '', // Removed
       formTitle: 'Оставьте свой отзыв',
       formSubtitle: 'Мы будем рады услышать вашу историю',
       namePlaceholder: 'Ваше имя',
@@ -334,9 +334,9 @@ export const translations: Record<string, TranslationKeys> = {
       home: 'Home',
       about: 'About Us',
       benefits: 'Benefits',
-      testimonials: 'Testimonials',
+      testimonials: 'Reviews', // Changed
       contact: 'Contact',
-      faq: 'FAQ' // New FAQ nav item
+      faq: 'FAQ'
     },
     hero: {
       title: 'Samyun Wan Armenia',
@@ -401,8 +401,8 @@ export const translations: Record<string, TranslationKeys> = {
       },
     },
     testimonials: {
-      title: 'Real Customer Reviews',
-      subtitle: 'Proof of Our Effectiveness',
+      title: 'Reviews', // Changed
+      subtitle: '', // Removed
       formTitle: 'Leave Your Review',
       formSubtitle: 'We would love to hear your story',
       namePlaceholder: 'Your Name',

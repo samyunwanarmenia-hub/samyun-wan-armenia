@@ -1,6 +1,6 @@
-import { useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Star } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { TranslationKeys, IntersectionObserverVisibility, Testimonial, UserTestimonial } from '../types/global';
 
 interface TestimonialsSectionProps {
@@ -12,17 +12,43 @@ interface TestimonialsSectionProps {
 }
 
 const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTestimonial }: TestimonialsSectionProps) => {
+  const [displayIndices, setDisplayIndices] = useState<[number, number]>([0, 1]); // State to hold indices of 2 testimonials
+  const [shuffledTestimonials, setShuffledTestimonials] = useState<Testimonial[]>([]);
+
   // Memoize allTestimonials to ensure its reference is stable
   const allTestimonials = useMemo(() => {
     return userTestimonial ? [userTestimonial, ...testimonials] : testimonials;
-  }, [userTestimonial, testimonials]); // Dependencies: userTestimonial and testimonials props
+  }, [userTestimonial, testimonials]);
 
-  // Shuffle testimonials for the grid display
-  const shuffledGridTestimonials = useMemo(() => {
-    return [...allTestimonials]
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 4); // Changed to show up to 4 random testimonials in the grid
-  }, [allTestimonials]); // Re-shuffle if allTestimonials changes
+  // Shuffle testimonials once when allTestimonials changes
+  useEffect(() => {
+    const newShuffled = [...allTestimonials].sort(() => 0.5 - Math.random());
+    setShuffledTestimonials(newShuffled);
+    // Reset display indices to the first two shuffled testimonials
+    setDisplayIndices([0, 1]);
+  }, [allTestimonials]);
+
+  // Effect for automatic rotation
+  useEffect(() => {
+    if (shuffledTestimonials.length < 2) return; // Need at least 2 testimonials to rotate
+
+    const interval = setInterval(() => {
+      setDisplayIndices(prevIndices => {
+        const [idx1, idx2] = prevIndices;
+        let newIdx1 = (idx1 + 2) % shuffledTestimonials.length;
+        let newIdx2 = (idx2 + 2) % shuffledTestimonials.length;
+
+        // Ensure new indices are distinct if possible and within bounds
+        if (newIdx1 === newIdx2 && shuffledTestimonials.length > 1) {
+          newIdx2 = (newIdx2 + 1) % shuffledTestimonials.length;
+        }
+        
+        return [newIdx1, newIdx2];
+      });
+    }, 10000); // Rotate every 10 seconds
+
+    return () => clearInterval(interval);
+  }, [shuffledTestimonials]);
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -34,72 +60,82 @@ const TestimonialsSection = ({ t, isVisible, testimonials, currentLang, userTest
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
+  const displayedTestimonials = [
+    shuffledTestimonials[displayIndices[0]],
+    shuffledTestimonials[displayIndices[1]]
+  ].filter(Boolean) as Testimonial[]; // Filter out any undefined if less than 2 testimonials
+
   return (
     <motion.section 
       id="testimonials" 
-      className="relative py-16 bg-gray-100 overflow-hidden" // Reduced py-20 to py-16
+      className="relative py-16 bg-gray-100 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
       animate={isVisible['testimonials'] ? "visible" : "hidden"}
       viewport={{ once: true, amount: 0.3 }}
     >
       {/* Subtle radial gradient overlay */}
-      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div> {/* Lighter gradient */}
+      <div className="absolute inset-0 z-0 bg-gradient-radial from-gray-200/20 via-transparent to-transparent opacity-50"></div>
       {/* Semi-transparent black overlay */}
-      <div className="absolute inset-0 bg-gray-200/20 z-0"></div> {/* Lighter overlay */}
+      <div className="absolute inset-0 bg-gray-200/20 z-0"></div>
       
       {/* Dynamic background elements (circles) */}
-      <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-primary-100/50 rounded-full opacity-50 animate-pulse-slow z-0"></div> {/* Changed to green-100/50 */}
-      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-100/50 rounded-full opacity-50 animate-pulse-slow z-0" style={{animationDelay: '1.5s'}}></div> {/* Changed to blue-100/50 */}
+      <div className="absolute top-1/4 left-1/4 w-48 h-48 bg-primary-100/50 rounded-full opacity-50 animate-pulse-slow z-0"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-100/50 rounded-full opacity-50 animate-pulse-slow z-0" style={{animationDelay: '1.5s'}}></div>
 
-      <div className="container mx-auto px-4 relative z-10"> {/* Content needs higher z-index */}
+      <div className="container mx-auto px-4 relative z-10">
         <motion.div 
-          className="text-center mb-12" // Reduced mb-16 to mb-12
+          className="text-center mb-12"
           variants={itemVariants}
           initial="hidden"
           animate={isVisible['testimonials'] ? "visible" : "hidden"}
         >
-          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-5"> {/* Reduced text-3xl/4xl to text-2xl/3xl, mb-6 to mb-5 */}
+          <h2 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-5">
             {t.testimonials.title}
           </h2>
-          <p className="text-base text-gray-700 max-w-3xl mx-auto"> {/* Reduced text-lg to text-base */}
-            {t.testimonials.subtitle}
-          </p>
+          {t.testimonials.subtitle && ( // Only render if subtitle is not empty
+            <p className="text-base text-gray-700 max-w-3xl mx-auto">
+              {t.testimonials.subtitle}
+            </p>
+          )}
         </motion.div>
 
-        {/* More Reviews Grid - now the primary display */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"> {/* Reduced gap-8 to gap-6 */}
-          {shuffledGridTestimonials.map((testimonial, index) => (
-            <motion.div 
-              key={index} 
-              className="bg-white rounded-2xl p-4 shadow-lg border border-gray-200 group hover:shadow-glow-green" // Using custom glow-green shadow
-              variants={itemVariants}
-              initial="hidden"
-              animate={isVisible['testimonials'] ? "visible" : "hidden"}
-              transition={{ delay: index * 0.1 + 0.2 }} // Staggered animation
-              whileHover={{ scale: 1.05 }} // Removed boxShadow from here
-              whileTap={{ scale: 0.98 }} // Added whileTap animation
-            >
-              <div className="flex items-center mb-3"> {/* Reduced mb-4 to mb-3 */}
-                <div>
-                  <h5 className="font-bold text-gray-900 text-sm"> {/* Reduced text-base to text-sm */}
-                    {currentLang === 'hy' ? testimonial.name : currentLang === 'ru' ? testimonial.nameRu : testimonial.nameEn}
-                  </h5>
-                  <div className="flex">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
-                    ))}
+        {/* Testimonials Grid - now showing 2 rotating items */}
+        <div className="grid md:grid-cols-2 gap-6 justify-center"> {/* Changed to md:grid-cols-2 */}
+          <AnimatePresence mode="wait"> {/* Use AnimatePresence for exit animations */}
+            {displayedTestimonials.map((testimonial, index) => (
+              <motion.div 
+                key={testimonial.name + index} // Use a unique key for each displayed testimonial
+                className="bg-white rounded-2xl p-4 shadow-lg border border-gray-200 group hover:shadow-glow-green"
+                variants={itemVariants}
+                initial="hidden"
+                animate="visible"
+                exit="hidden" // Animate out when removed from display
+                transition={{ delay: 0.1 }} // Small delay for entry animation
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="flex items-center mb-3">
+                  <div>
+                    <h5 className="font-bold text-gray-900 text-sm">
+                      {currentLang === 'hy' ? testimonial.name : currentLang === 'ru' ? testimonial.nameRu : testimonial.nameEn}
+                    </h5>
+                    <div className="flex">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
+                      ))}
+                    </div>
+                  </div>
+                  <div className="ml-auto bg-primary-500 text-white px-1.5 py-0.5 rounded-full text-xs font-bold">
+                    {testimonial.result}
                   </div>
                 </div>
-                <div className="ml-auto bg-primary-500 text-white px-1.5 py-0.5 rounded-full text-xs font-bold"> {/* Reduced px/py, text-xs (already small) */}
-                  {testimonial.result}
-                </div>
-              </div>
-              <p className="text-gray-700 text-xs leading-relaxed"> {/* Reduced text-xs (already small) */}
-                {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.nameEn}
-              </p>
-            </motion.div>
-          ))}
+                <p className="text-gray-700 text-xs leading-relaxed">
+                  {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.textEn}
+                </p>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </motion.section>
