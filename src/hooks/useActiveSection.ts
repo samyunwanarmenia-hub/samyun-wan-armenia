@@ -15,7 +15,7 @@ const useActiveSection = (isVisible: IntersectionObserverVisibility) => {
   }, [isVisible]);
 
   const getLinkClasses = useCallback((sectionId: SectionId) => 
-    `text-gray-700 hover:text-primary-600 transition-colors ${activeSection === sectionId ? 'text-primary-600 font-bold' : ''}`, // Changed base text to gray-700 and active to green-600
+    `text-gray-700 dark:text-gray-300 hover:text-primary-600 transition-colors ${activeSection === sectionId ? 'text-primary-600 font-bold' : ''}`, // Added dark:text-gray-300
     [activeSection]
   );
 
