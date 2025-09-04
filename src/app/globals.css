@@ -57,14 +57,14 @@
     overflow-x: hidden; /* Prevent horizontal scroll from pseudo-elements */
     
     /* Light mode background gradient and animation */
-    background: linear-gradient(132deg, #f7fcf7, #eef3f4, #f7fcf7); /* Very light, almost white, with hints of new primary/secondary */
+    background: linear-gradient(to bottom right, #f7fcf7, #eef3f4, #f7fcf7); /* Updated gradient syntax */
     background-size: 400% 400%;
     animation: BackgroundGradient 15s ease infinite;
   }
 
   /* Dark mode background gradient */
   .dark body {
-    background: linear-gradient(132deg, #0d1218, #18202b, #0d1218); /* Darker gradient for dark mode */
+    background: linear-gradient(to bottom right, #0d1218, #18202b, #0d1218); /* Updated gradient syntax */
     background-size: 400% 400%;
     animation: BackgroundGradient 15s ease infinite;
   }

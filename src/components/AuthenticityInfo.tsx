@@ -1,20 +1,18 @@
 "use client";
 
-import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Award } from 'lucide-react'; // Removed QrCode as it's not directly used
+import { Award } from 'lucide-react';
 import CallToActionButton from '@/components/CallToActionButton';
 import SectionHeader from './SectionHeader';
 import { QRCodeCanvas } from 'qrcode.react';
-import { useLayoutContext } from '@/context/LayoutContext'; // Исправленный путь импорта
+import { useLayoutContext } from '@/context/LayoutContext';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
 
 const AuthenticityInfo = () => {
   const { t, openAuthenticityModal, currentLang } = useLayoutContext();
 
-  // Removed useState, useEffect, useRef as they are not used
-  const { ref, inView: _inView } = useInView({ // Prefixed inView with _
+  const { ref, inView: _inView } = useInView({
     triggerOnce: true,
     threshold: 0.3,
   });
