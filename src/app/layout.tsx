@@ -1,13 +1,11 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import dynamic from 'next/dynamic';
 // Removed Image import as it's no longer needed for noscript
 
 import '../app/globals.css';
 import { translations } from '@/i18n/translations';
-
-const DynamicThemeProvider = dynamic(() => import('@/context/ThemeContext').then(mod => mod.ThemeProvider), { ssr: false });
-const DynamicToastProvider = dynamic(() => import('@/components/ToastProvider'), { ssr: false });
+import { ThemeProvider } from '@/context/ThemeContext'; // Импортируем напрямую
+import ToastProvider from '@/components/ToastProvider'; // Импортируем напрямую
 
 
 const inter = Inter({
@@ -87,10 +85,10 @@ const RootLayout = ({
   return (
     <html className={`${inter.variable}`}>
       <body>
-        <DynamicThemeProvider>
-          <DynamicToastProvider />
+        <ThemeProvider>
+          <ToastProvider />
           {children}
-        </DynamicThemeProvider>
+        </ThemeProvider>
         <noscript>
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}

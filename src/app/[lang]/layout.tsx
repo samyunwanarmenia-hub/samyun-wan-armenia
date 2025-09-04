@@ -5,7 +5,7 @@ import { generateOrganizationStructuredData, generateFaqStructuredData, generate
 import dynamic from 'next/dynamic';
 
 // Dynamically import LayoutClientProvider without ssr: false to allow server rendering
-const DynamicLayoutClientProvider = dynamic(() => import('@/components/LayoutClientProvider'));
+const LayoutClientProvider = dynamic(() => import('@/components/LayoutClientProvider')); // Удаляем ssr: false
 const DynamicYandexMetrikaTracker = dynamic(() => import('@/components/YandexMetrikaTracker'), { ssr: false });
 const DynamicVisitTrackerWrapper = dynamic(() => import('@/components/VisitTrackerWrapper'), { ssr: false });
 const DynamicGoogleAnalyticsTracker = dynamic(() => import('@/components/GoogleAnalyticsTracker'), { ssr: false });
@@ -101,13 +101,13 @@ const LangLayout = ({ children, params }: LangLayoutProps) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteStructuredData) }}
       />
-      <DynamicLayoutClientProvider initialLang={params.lang}>
+      <LayoutClientProvider initialLang={params.lang}> {/* Используем напрямую */}
         <DynamicYandexMetrikaTracker />
         <DynamicGoogleAnalyticsTracker />
         <DynamicVisitTrackerWrapper />
         <DynamicServiceWorkerRegister /> {/* New component for Service Worker registration */}
         {children}
-      </DynamicLayoutClientProvider>
+      </LayoutClientProvider>
     </>
   );
 };

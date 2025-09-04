@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 import dynamic from 'next/dynamic'; // Import dynamic
 
 // Re-introducing dynamic imports for client-side components
-const DynamicLayoutClientProvider = dynamic(() => import('@/components/LayoutClientProvider'));
+const LayoutClientProvider = dynamic(() => import('@/components/LayoutClientProvider')); // Удаляем ssr: false
 const DynamicYandexMetrikaTracker = dynamic(() => import('@/components/YandexMetrikaTracker'), { ssr: false });
 const DynamicVisitTrackerWrapper = dynamic(() => import('@/components/VisitTrackerWrapper'), { ssr: false });
 const DynamicGoogleAnalyticsTracker = dynamic(() => import('@/components/GoogleAnalyticsTracker'), { ssr: false });
@@ -51,13 +51,13 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 
 const QrVerifyLayout = ({ children, params }: QrVerifyLayoutProps) => {
   return (
-    <DynamicLayoutClientProvider initialLang={params.lang}>
+    <LayoutClientProvider initialLang={params.lang}> {/* Используем напрямую */}
       <DynamicYandexMetrikaTracker />
       <DynamicGoogleAnalyticsTracker />
       <DynamicVisitTrackerWrapper />
       <DynamicServiceWorkerRegister />
       {children}
-    </DynamicLayoutClientProvider>
+    </LayoutClientProvider>
   );
 };
 
