@@ -21,15 +21,15 @@ export async function generateMetadata({ params }: LangLayoutProps): Promise<Met
   const lang = params.lang as keyof typeof translations;
   const t = translations[lang] || translations.hy; // Fallback to Armenian
 
-  const pathSegments = params.lang ? [params.lang] : [];
-  const currentRoute = pathSegments.join('/'); // e.g., 'hy'
+  // const pathSegments = params.lang ? [params.lang] : []; // Removed unused variable
+  // const currentRoute = pathSegments.join('/'); // Removed unused variable
 
-  let pageTitle = t.hero.title + ' - ' + t.hero.subtitle + ' | ' + t.hero.seo_title_addon;
-  let pageDescription = t.hero.tagline + ' ' + t.about.description + ' ' + t.benefits.subtitle;
-  let pageKeywords = `${t.hero.title}, ${t.hero.subtitle}, ${t.hero.tagline}, samyun wan, armenia, քաշի ավելացում, բնական կապսուլներ, ինդոնեզական, samyun wan оригинал ереван, նաբոր վеса հայաստան, Samyun Wan Armenia, weight gain, natural capsules, Indonesian, original Samyun Wan Yerevan, weight loss Armenia, sports nutrition, health supplements, ${t.about.natural.title}, ${t.benefits.appetite.title}, ${t.productShowcase.weightGainLabel}, ${t.productShowcase.weightLossLabel}, ${t.authenticity.title}, ${t.testimonials.title}, ${t.faq.q1}, ${t.contact.title}`;
-  let pageUrl = `https://samyunwanarmenia.netlify.app/${lang}`;
-  let pageImage = 'https://samyunwanarmenia.netlify.app/optimized/og-image.jpg';
-  let pageImageAlt = t.hero.title + ' - ' + t.hero.subtitle;
+  const pageTitle = t.hero.title + ' - ' + t.hero.subtitle + ' | ' + t.hero.seo_title_addon;
+  const pageDescription = t.hero.tagline + ' ' + t.about.description + ' ' + t.benefits.subtitle;
+  const pageKeywords = `${t.hero.title}, ${t.hero.subtitle}, ${t.hero.tagline}, samyun wan, armenia, քաշի ավելացում, բնական կապսուլներ, ինդոնեզական, samyun wan оригинал ереван, նաբոր վеса հայաստան, Samyun Wan Armenia, weight gain, natural capsules, Indonesian, original Samyun Wan Yerevan, weight loss Armenia, sports nutrition, health supplements, ${t.about.natural.title}, ${t.benefits.appetite.title}, ${t.productShowcase.weightGainLabel}, ${t.productShowcase.weightLossLabel}, ${t.authenticity.title}, ${t.testimonials.title}, ${t.faq.q1}, ${t.contact.title}`;
+  const pageUrl = `https://samyunwanarmenia.netlify.app/${lang}`;
+  const pageImage = 'https://samyunwanarmenia.netlify.app/optimized/og-image.jpg';
+  const pageImageAlt = t.hero.title + ' - ' + t.hero.subtitle;
 
   return {
     title: {

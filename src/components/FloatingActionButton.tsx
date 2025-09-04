@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { MessageCircle, Phone, PhoneCall, LifeBuoy } from 'lucide-react';
+import { motion } from 'framer-motion'; // Removed AnimatePresence as it's not used
+import { MessageCircle, Phone, PhoneCall } from 'lucide-react'; // Removed LifeBuoy as it's not used
 import { ContactModalType } from '../types/global';
 import { useLayoutContext } from '@/context/LayoutContext';
 
@@ -89,9 +89,9 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
         onChange={handleToggle}
       />
       <label className="fab" htmlFor="fab-checkbox">
-        <span className="fab-dots fab-dots-1"></span>
-        <span className="fab-dots fab-dots-2"></span>
-        <span className="fab-dots fab-dots-3"></span>
+        <span className="fab-dots fab-dots-1" />
+        <span className="fab-dots fab-dots-2" />
+        <span className="fab-dots fab-dots-3" />
       </label>
 
       <div className="fab-wheel">

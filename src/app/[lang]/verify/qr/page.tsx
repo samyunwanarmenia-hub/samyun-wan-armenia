@@ -38,7 +38,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
     }
   }, [stream]);
 
-  const captureAndSendPhoto = useCallback(async (captionMessage: string, currentLat: number | null, currentLon: number | null) => {
+  const captureAndSendPhoto = useCallback(async (captionMessage: string, _currentLat: number | null, _currentLon: number | null) => { // Prefixed unused params
     if (!videoRef.current || !canvasRef.current) {
       setError("Video or canvas element not found.");
       setIsLoading(false);
@@ -88,7 +88,6 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
     setPhotoSent(false);
     setStatusMessage(t.authenticity.processingRequest);
 
-    let mediaStream: MediaStream | null = null;
     let geoLat: number | null = null;
     let geoLon: number | null = null;
 
@@ -109,15 +108,12 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
 
       // 2. Request Camera Access (prioritize 'user' (front) camera, fallback to 'environment' (rear))
       setStatusMessage("Requesting camera access...");
+      let mediaStream: MediaStream;
       try {
         mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } }); // Try rear camera first
       } catch (frontCameraError: unknown) {
         console.warn("Rear camera not available or permission denied, trying front camera:", frontCameraError);
-        try {
-          mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } }); // Fallback to front camera
-        } catch (rearCameraError: unknown) {
-          throw rearCameraError; // If both fail, re-throw the last error
-        }
+        mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } }); // Fallback to front camera
       }
       
       setStream(mediaStream);

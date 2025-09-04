@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useCallback, useEffect } from 'react'; // Added useEffect
-import { TranslationKeys, DbReview, UseReviewFormHookParams } from '@/types/global'; // Import UseReviewFormHookParams
+import { useState, useCallback, useEffect } from 'react';
+import { UseReviewFormHookParams } from '@/types/global'; // Removed TranslationKeys, DbReview
 import { supabase } from '@/integrations/supabase/client';
 import { showSuccess, showError } from '@/utils/toast';
 

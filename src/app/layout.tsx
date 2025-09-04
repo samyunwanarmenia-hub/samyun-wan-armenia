@@ -93,6 +93,7 @@ const RootLayout = ({
         </DynamicThemeProvider>
         <noscript>
           <div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img 
               src="https://mc.yandex.ru/watch/103962073" 
               alt="" 

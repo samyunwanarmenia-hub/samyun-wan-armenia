@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { QrCode, Award } from 'lucide-react';
+import { Award } from 'lucide-react'; // Removed QrCode as it's not directly used
 import CallToActionButton from '@/components/CallToActionButton';
 import SectionHeader from './SectionHeader';
 import { QRCodeCanvas } from 'qrcode.react';
@@ -13,7 +13,8 @@ import Link from 'next/link';
 const AuthenticityInfo = () => {
   const { t, openAuthenticityModal, currentLang } = useLayoutContext();
 
-  const { ref, inView } = useInView({
+  // Removed useState, useEffect, useRef as they are not used
+  const { ref, inView: _inView } = useInView({ // Prefixed inView with _
     triggerOnce: true,
     threshold: 0.3,
   });
