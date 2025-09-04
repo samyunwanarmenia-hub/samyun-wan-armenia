@@ -1,5 +1,5 @@
 [build]
-  command = "pnpm run build" # Временно отключена оптимизация изображений
+  command = "pnpm run optimize-images && pnpm run build" # Возвращена оптимизация изображений
   publish = ".next"
 
 [[redirects]]
