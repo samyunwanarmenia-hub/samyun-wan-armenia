@@ -17,7 +17,7 @@ export async function POST(request: Request) {
   try {
     const headersList = headers();
     const { searchParams } = new URL(request.url);
-    const body: NotifyVisitBody = await request.json(); // Read body with isQrScan and pagePath
+    const body: NotifyVisitBody = await request.json(); // Read body with all new fields
 
     // 1️⃣ Get IP
     const ipHeader = headersList.get('x-forwarded-for') || '';
@@ -62,20 +62,33 @@ export async function POST(request: Request) {
 
     // 5️⃣ Parse User-Agent
     const ua = new UAParser(headersList.get('user-agent') || '').getResult();
-    const deviceInfo = `<b>Device:</b> ${ua.device.type || 'unknown'}, OS: ${ua.os.name || 'unknown'} ${ua.os.version || ''}`;
-    const browserInfo = `<b>Browser:</b> ${ua.browser.name || 'unknown'} ${ua.browser.version || ''}`;
+    const deviceType = ua.device.type || 'unknown';
+    const osName = ua.os.name || 'unknown';
+    const osVersion = ua.os.version || '';
+    const browserName = ua.browser.name || 'unknown';
+    const browserVersion = ua.browser.version || '';
+
+    // New device details from body or UA
+    const deviceVendor = body.deviceVendor || ua.device.vendor || 'unknown';
+    const deviceModel = body.deviceModel || ua.device.model || 'unknown';
+    const cpuArchitecture = body.cpuArchitecture || ua.cpu.architecture || 'unknown';
+    const clientTimezone = body.clientTimezone || 'unknown';
 
     // 6️⃣ Format message
     const messageTitle = body.isQrScan ? '<b>🚨 New QR Scan Verification!</b>' : '<b>🚀 New Visit!</b>';
 
     const message = `${messageTitle}
 <b>Time:</b> ${new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Yerevan' })}
+<b>Client Timezone:</b> ${clientTimezone}
 <b>Path:</b> ${body.pagePath}
 <b>IP:</b> ${ip}
 <b>City:</b> ${geoData.city || 'unknown'}
 <b>Country:</b> ${geoData.country_name || 'unknown'}
-${preciseLocation ? `${preciseLocation}\n` : ''}${screenResolution ? `${screenResolution}\n` : ''}${deviceInfo}
-${browserInfo}
+${preciseLocation ? `${preciseLocation}\n` : ''}${screenResolution ? `${screenResolution}\n` : ''}
+<b>Device:</b> ${deviceType} (Vendor: ${deviceVendor}, Model: ${deviceModel})
+<b>OS:</b> ${osName} ${osVersion}
+<b>CPU Arch:</b> ${cpuArchitecture}
+<b>Browser:</b> ${browserName} ${browserVersion}
 <b>Browser Lang:</b> ${headersList.get('accept-language') || 'unknown'}
 <b>Referrer:</b> ${headersList.get('referer') || 'unknown'}
 ${utmParams ? `<b>${utmParams}</b>\n` : ''}

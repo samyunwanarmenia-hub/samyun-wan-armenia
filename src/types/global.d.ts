@@ -138,12 +138,6 @@ export interface TranslationKeys {
     qrScanSuccess: string; // New: Message after successful scan
     qrScanError: string; // New: Message if QR scan fails
     processingRequest: string; // New
-    // Removed startScanButton: string; // Removed
-    // Removed retakeScanButton: string; // Removed
-    // Removed startRecordingButton: string; // Removed
-    // Removed stopRecordingButton: string; // Removed
-    // Removed sendVideoButton: string; // Removed
-    // Removed retakeVideoButton: string; // Removed
     recordingInstructions: string; // New
     recordingSuccess: string; // New
     recordingError: string; // New
@@ -354,6 +348,10 @@ export interface NotifyVisitBody {
   screenHeight: number;
   isQrScan?: boolean; // Added for QR scan differentiation
   pagePath: string; // New: The actual page path
+  deviceVendor?: string | null; // New
+  deviceModel?: string | null; // New
+  cpuArchitecture?: string | null; // New
+  clientTimezone?: string; // New
 }
 
 // New interface for UTM query parameters

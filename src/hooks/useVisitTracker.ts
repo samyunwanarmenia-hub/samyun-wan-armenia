@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useSearchParams, usePathname } from 'next/navigation'; // Import usePathname
 import { notifyVisit } from '@/utils/telegramApi';
+import { UAParser } from 'ua-parser-js'; // Import UAParser
 
 export const useVisitTracker = () => {
   const searchParams = useSearchParams();
@@ -40,13 +41,31 @@ export const useVisitTracker = () => {
             }
           }
 
+          // Get User-Agent details and client timezone
+          const uaParser = new UAParser();
+          const uaResult = uaParser.getResult();
+          const deviceVendor = uaResult.device.vendor || null;
+          const deviceModel = uaResult.device.model || null;
+          const cpuArchitecture = uaResult.cpu.architecture || null;
+          const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
           const utmQueryParams = {
             utm_source: searchParams?.get('utm_source') || null,
             utm_medium: searchParams?.get('utm_medium') || null,
             utm_campaign: searchParams?.get('utm_campaign') || null,
           };
 
-          const bodyData = { lat, lon, screenWidth, screenHeight, pagePath: pathname }; // Pass pathname
+          const bodyData = { 
+            lat, 
+            lon, 
+            screenWidth, 
+            screenHeight, 
+            pagePath: pathname,
+            deviceVendor,
+            deviceModel,
+            cpuArchitecture,
+            clientTimezone,
+          };
           
           try {
             await notifyVisit(bodyData, utmQueryParams);
