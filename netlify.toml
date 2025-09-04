@@ -1,0 +1,22 @@
+[build]
+  command = "pnpm run optimize-images && pnpm run build"
+  publish = ".next"
+
+[dev]
+  command = "pnpm run dev"
+  port = 3000
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
+
+[[headers]]
+  for = "/optimized/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# This rule forces the root path to redirect to the default language
+[[redirects]]
+  from = "/"
+  to = "/hy"
+  status = 301
+  force = true

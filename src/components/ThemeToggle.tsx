@@ -1,0 +1,48 @@
+"use client";
+
+import { useState, useEffect } from 'react';
+import { useTheme } from '../context/ThemeContext';
+import { Sun, Moon } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+interface ThemeToggleProps {
+  onClose?: () => void; // New optional prop
+}
+
+const ThemeToggle: React.FC<ThemeToggleProps> = ({ onClose }) => {
+  const { theme, toggleTheme } = useTheme();
+  const [mounted, setMounted] = useState(false); // New state to track if component is mounted on client
+
+  useEffect(() => {
+    setMounted(true); // Set to true once component mounts on client
+  }, []);
+
+  const handleToggle = () => {
+    toggleTheme();
+    onClose?.(); // Call onClose if provided
+  };
+
+  if (!mounted) {
+    // Render a placeholder div on the server and until mounted on client.
+    // This ensures the server and initial client render match, preventing hydration errors.
+    return <div className="w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-700" />; 
+  }
+
+  return (
+    <motion.button
+      onClick={handleToggle} // Use the new handler
+      className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-600"
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+    >
+      {theme === 'light' ? (
+        <Sun className="w-5 h-5" />
+      ) : (
+        <Moon className="w-5 h-5" />
+      )}
+    </motion.button>
+  );
+};
+
+export default ThemeToggle;

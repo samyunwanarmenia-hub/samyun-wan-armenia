@@ -1,0 +1,105 @@
+"use client";
+
+import { motion } from 'framer-motion';
+import { TranslationKeys } from '../types/global';
+import LoadingSpinner from './LoadingSpinner';
+import { X, Copy } from 'lucide-react';
+import { showSuccess, showError } from '../utils/toast';
+
+interface LoadingLinkModalProps {
+  isOpen: boolean;
+  t: TranslationKeys;
+  clientId: string | null;
+  onClose: () => void;
+}
+
+const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProps) => {
+  if (!isOpen) return null;
+
+  const backdropVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 }
+  };
+
+  const modalVariants = {
+    hidden: { y: "-100vh", opacity: 0, scale: 0.8 },
+    visible: { y: "0", opacity: 1, scale: 1, transition: { delay: 0.1, type: "spring", stiffness: 200, damping: 20 } },
+    exit: { y: "100vh", opacity: 0, scale: 0.8, transition: { duration: 0.3 } }
+  };
+
+  const handleCopyClientId = async () => {
+    if (clientId) {
+      try {
+        await navigator.clipboard.writeText(clientId);
+        showSuccess("Client ID copied to clipboard!");
+      } catch (err) {
+        console.error("Failed to copy Client ID:", err);
+        showError("Failed to copy Client ID.");
+      }
+    }
+  };
+
+  return (
+    <motion.div
+      className="fixed inset-0 bg-gray-900 bg-opacity-70 z-[100] flex items-center justify-center p-4"
+      variants={backdropVariants}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
+    >
+      <motion.div
+        className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-2xl relative w-full max-w-sm flex flex-col items-center text-center border border-gray-200 dark:border-gray-700"
+        variants={modalVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
+        <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 transition-colors">
+          <X className="w-6 h-6" />
+        </button>
+        <div className="w-24 h-24 mb-6 flex items-center justify-center">
+          <LoadingSpinner />
+        </div>
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4">
+          {t.loadingLinkModal.title}
+        </h3>
+        <p className="text-gray-700 dark:text-gray-300 text-lg mb-2">
+          {t.loadingLinkModal.message}
+        </p>
+        <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
+          {t.loadingLinkModal.waitingForAdmin}
+        </p>
+
+        {clientId && (
+          <div className="flex flex-col items-center mb-6">
+            <p className="text-gray-500 dark:text-gray-400 text-xs mb-2">Your Client ID:</p>
+            <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-2 border border-gray-200 dark:border-gray-600">
+              <code className="text-gray-800 dark:text-gray-200 text-sm mr-2">{clientId}</code>
+              <motion.button
+                onClick={handleCopyClientId}
+                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-50 transition-colors" 
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <Copy className="w-4 h-4" />
+              </motion.button>
+            </div>
+          </div>
+        )}
+
+        <motion.button
+          onClick={onClose}
+          className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-50 font-bold py-3 px-8 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transform hover:scale-105 transition-all mt-4"
+          whileHover={{ scale: 1.08 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
+          Close
+        </motion.button>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+export default LoadingLinkModal;

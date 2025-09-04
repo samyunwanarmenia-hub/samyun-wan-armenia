@@ -1,0 +1,499 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /* Define Inter font faces */
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/Inter-Regular.woff2') format('woff2');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    src: url('/fonts/Inter-Medium.woff2') format('woff2');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    src: url('/fonts/Inter-SemiBold.woff2') format('woff2');
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/fonts/Inter-Bold.woff2') format('woff2');
+    font-display: swap;
+  }
+
+  /* Define Cal Sans font face */
+  @font-face {
+    font-family: 'Cal Sans';
+    font-style: normal;
+    font-weight: 600; /* Assuming Cal Sans is primarily semi-bold */
+    src: url('/fonts/CalSans-SemiBold.woff2') format('woff2');
+    font-display: swap;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: var(--font-inter), sans-serif; /* Use CSS variable from next/font */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 500; /* Set default font weight to medium */
+    font-size: 1.05rem; /* Slightly larger base font size for better readability */
+    line-height: 1.7; /* More generous line height */
+    position: relative; /* Ensure body is positioned for pseudo-elements */
+    overflow-x: hidden; /* Prevent horizontal scroll from pseudo-elements */
+    
+    /* Light mode background gradient and animation */
+    background: linear-gradient(132deg, #f7fcf7, #eef3f4, #f7fcf7); /* Very light, almost white, with hints of new primary/secondary */
+    background-size: 400% 400%;
+    animation: BackgroundGradient 15s ease infinite;
+  }
+
+  /* Dark mode background gradient */
+  .dark body {
+    background: linear-gradient(132deg, #0d1218, #18202b, #0d1218); /* Darker gradient for dark mode */
+    background-size: 400% 400%;
+    animation: BackgroundGradient 15s ease infinite;
+  }
+
+  /* Modern selection style */
+  ::selection {
+    background-color: #86b486; /* New primary-500 */
+    color: #ffffff;
+  }
+
+  /* CSS Variables for Toast in Light Mode */
+  :root {
+    --toast-bg: #ffffff;
+    --toast-text-color: #363636;
+    --tw-shadow-color-neon-green: #39ff14; /* Define shadow color for neon-green */
+    --tw-shadow-color-neon-blue: #25d4ff;   /* Define shadow color for neon-blue */
+    --tw-shadow-color-neon-pink: #ff2d74;   /* Define shadow color for neon-pink */
+    --tw-shadow-color-neon-purple: #bd00ff; /* Define shadow color for neon-purple */
+    /* New CSS variables for text shine animation */
+    --text-color-light: #4b5563; /* gray-700 */
+    --text-color-dark: #d1d5db; /* gray-300 */
+    --shine-color: #ffffff;
+
+    /* FAB Colors - Light Mode */
+    --fab-bg: #6c906c; /* primary-600 */
+    --fab-shadow: #b8d4b8; /* primary-300 */
+    --fab-border: #526c52; /* primary-700 */
+    --fab-hover-bg: #86b486; /* primary-500 */
+    --fab-hover-shadow: #9fc49f; /* primary-400 */
+    --fab-action-bg: #6c906c; /* primary-600 */
+    --fab-action-shadow-rgb: 108, 144, 108; /* RGB for primary-600 */
+    --fab-action-hover-bg: #86b486; /* primary-500 */
+
+    /* Shine Text Animation Colors - Light Mode */
+    --shine-text-base-color: rgba(0, 0, 0, 0.3); /* Dark text, transparent */
+    --shine-gradient-dark: #222; /* Dark background for gradient */
+    --shine-gradient-highlight: #fff; /* White highlight */
+
+    /* Supabase Auth UI HSL Colors - Light Mode */
+    --primary-600: 100 30% 49%; /* HSL for #6c906c */
+    --primary-500: 100 30% 62%; /* HSL for #86b486 */
+    --primary-400: 100 30% 70%; /* HSL for #9fc49f */
+    --primary-300: 100 30% 78%; /* HSL for #b8d4b8 */
+    --primary-100: 100 30% 92%; /* HSL for #eaf4ea */
+    --gray-100: 220 14% 96%; /* HSL for #f2f4f7 */
+    --gray-200: 220 13% 91%; /* HSL for #e5e8ed */
+    --gray-300: 220 12% 83%; /* HSL for #ced3da */
+    --gray-50: 220 14% 99%; /* HSL for #f9fafb */
+    --gray-700: 220 12% 43%; /* HSL for #697586 */
+    --gray-800: 220 12% 28%; /* HSL for #47505e */
+    --gray-900: 220 12% 18%; /* HSL for #2e343e */
+  }
+
+  /* CSS Variables for Toast in Dark Mode */
+  .dark {
+    --toast-bg: #1f2937; /* Dark gray for toast background */
+    --toast-text-color: #f9fafb; /* Light text for toast */
+    --tw-shadow-color-neon-green: #39ff14;
+    --tw-shadow-color-neon-blue: #25d4ff;
+    --tw-shadow-color-neon-pink: #ff2d74;
+    --tw-shadow-color-neon-purple: #bd00ff;
+
+    /* FAB Colors - Dark Mode */
+    --fab-bg: #384838; /* primary-800 */
+    --fab-shadow: #526c52; /* primary-700 */
+    --fab-border: #1e241e; /* primary-900 */
+    --fab-hover-bg: #526c52; /* primary-700 */
+    --fab-hover-shadow: #6c906c; /* primary-600 */
+    --fab-action-bg: #384838; /* primary-800 */
+    --fab-action-shadow-rgb: 56, 72, 56; /* RGB for primary-800 */
+    --fab-action-hover-bg: #526c52; /* primary-700 */
+
+    /* Shine Text Animation Colors - Dark Mode */
+    --shine-text-base-color: rgba(255, 255, 255, 0.3); /* Light text, transparent */
+    --shine-gradient-dark: #eee; /* Light background for gradient */
+    --shine-gradient-highlight: #000; /* Dark highlight */
+
+    /* Supabase Auth UI HSL Colors - Dark Mode */
+    --primary-600: 100 30% 49%; /* HSL for #6c906c */
+    --primary-500: 100 30% 62%; /* HSL for #86b486 */
+    --primary-400: 100 30% 70%; /* HSL for #9fc49f */
+    --primary-300: 100 30% 78%; /* HSL for #b8d4b8 */
+    --primary-100: 100 30% 92%; /* HSL for #eaf4ea */
+    --primary-900: 100 30% 13%; /* HSL for #1e241e */
+    --primary-800: 100 30% 25%; /* HSL for #384838 */
+    --primary-700: 100 30% 37%; /* HSL for #526c52 */
+    --gray-100: 220 14% 96%; /* HSL for #f2f4f7 */
+    --gray-200: 220 13% 91%; /* HSL for #e5e8ed */
+    --gray-300: 220 12% 83%; /* HSL for #ced3da */
+    --gray-50: 220 14% 99%; /* HSL for #f9fafb */
+    --gray-700: 220 12% 43%; /* HSL for #697586 */
+    --gray-800: 220 12% 28%; /* HSL for #47505e */
+    --gray-900: 220 12% 18%; /* HSL for #2e343e */
+  }
+}
+
+/* Keyframes for the new background gradient */
+@keyframes BackgroundGradient {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+/* Keyframes for the moving balls */
+@keyframes move {
+  100% {
+    transform: translate3d(0, 0, 1px) rotate(360deg);
+  }
+}
+
+/* Styles for the moving balls background */
+.background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: transparent; /* The body already has the gradient */
+  overflow: hidden;
+  z-index: -1; /* Ensure it's behind content */
+}
+
+.ball {
+  position: absolute;
+  width: 20vmin;
+  height: 20vmin;
+  border-radius: 50%;
+  backface-visibility: hidden;
+  animation: move linear infinite;
+}
+
+/* Light mode colors for balls */
+.ball:nth-child(odd) {
+    color: #6c906c; /* New primary-600 */
+}
+
+.ball:nth-child(even) {
+    color: #9aaeb8; /* New secondary-500 */
+}
+
+/* Dark mode colors for balls */
+.dark .ball:nth-child(odd) {
+    color: #384838; /* primary-800 (darker) */
+}
+
+.dark .ball:nth-child(even) {
+    color: #3d484c; /* secondary-800 (darker) */
+}
+
+/* Using a custom attribute for variability */
+/* These will be overridden by inline styles in the component for dynamic animation properties */
+.ball:nth-child(1) {
+  top: 77%;
+  left: 88%;
+  animation-duration: 40s;
+  animation-delay: -3s;
+}
+.ball:nth-child(2) {
+  top: 42%;
+  left: 2%;
+  animation-duration: 53s;
+  animation-delay: -29s;
+}
+.ball:nth-child(3) {
+  top: 28%;
+  left: 18%;
+  animation-duration: 49s;
+  animation-delay: -8s;
+}
+.ball:nth-child(4) {
+  top: 50%;
+  left: 79%;
+  animation-duration: 26s;
+  animation-delay: -21s;
+}
+.ball:nth-child(5) {
+  top: 46%;
+  left: 15%;
+  animation-duration: 36s;
+  animation-delay: -40s;
+}
+.ball:nth-child(6) {
+  top: 77%;
+  left: 16%;
+  animation-duration: 31s;
+  animation-delay: -10s;
+}
+.ball:nth-child(7) {
+  top: 22%;
+  left: 17%;
+  animation-duration: 55s;
+  animation-delay: -6s;
+}
+.ball:nth-child(8) {
+  top: 41%;
+  left: 47%;
+  animation-duration: 43s;
+  animation-delay: -28s;
+}
+
+/* New CSS for the loader animation */
+.loader {
+  height: 100px;
+  aspect-ratio: 1;
+  position: relative;
+  --g: /calc(30.259% + 5.027px) calc(30.259% + 5.027px) radial-gradient(#0000 calc(70% - 8px),#000 calc(71% - 8px) 70%,#0000 71%) no-repeat;
+  mask: radial-gradient(100% 100%,#0000 calc((30.259% + 5.027px)/0.964 - 8.306px),#000 calc((30.259% + 5.027px)/0.964 - 8.306px + 1px)) intersect,100% 50% var(--g),81.174% 89.092% var(--g),38.874% 98.746% var(--g),4.952% 71.694% var(--g),4.952% 28.306% var(--g),38.874% 1.254% var(--g),81.174% 10.908% var(--g);
+  filter: blur(12px);
+}
+.loader:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(#0000 35%,#FA6900,#0000 65%); /* Orange color */
+  animation: l9 2s linear infinite;
+}
+@keyframes l9 {
+  to {rotate: 1turn}
+}
+
+/* New FAB styles */
+.fab-wrapper {
+  position: fixed;
+  bottom: 3rem;
+  right: 2rem; /* Сдвинуто вправо */
+  z-index: 50; /* Ensure it's above other content */
+}
+.fab-checkbox {
+  display: none;
+}
+.fab {
+  position: absolute;
+  bottom: -1rem;
+  right: -1rem;
+  width: 4rem;
+  height: 4rem;
+  background: var(--fab-bg); /* Используем новую переменную */
+  box-shadow: 0px 5px 20px var(--fab-shadow); /* Используем новую переменную */
+  transition: all 0.3s ease;
+  z-index: 1;
+  border-bottom-right-radius: 6px;
+  border: 1px solid var(--fab-border); /* Используем новую переменную */
+  border-radius: 50%; /* Ensure it's round */
+  cursor: pointer; /* Indicate it's clickable */
+  opacity: 0.9; /* Добавлена прозрачность */
+}
+
+.fab:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease; /* Add transition for before pseudo-element */
+}
+.fab-checkbox:checked ~ .fab:before {
+  width: 90%;
+  height: 90%;
+  left: 5%;
+  top: 5%;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.fab:hover {
+  background: var(--fab-hover-bg); /* Используем новую переменную */
+  box-shadow: 0px 5px 20px 5px var(--fab-hover-shadow); /* Используем новую переменную */
+}
+
+.fab-dots {
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  background-color: white;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateX(0%) translateY(-50%) rotate(0deg);
+  opacity: 1;
+  animation: blink 3s ease infinite;
+  transition: all 0.3s ease;
+}
+
+.fab-dots-1 {
+  left: 15px;
+  animation-delay: 0s;
+}
+.fab-dots-2 {
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  animation-delay: 0.4s;
+}
+.fab-dots-3 {
+  right: 15px;
+  animation-delay: 0.8s;
+}
+
+.fab-checkbox:checked ~ .fab .fab-dots {
+  height: 6px;
+}
+
+.fab .fab-dots-2 {
+  transform: translateX(-50%) translateY(-50%) rotate(0deg);
+}
+
+.fab-checkbox:checked ~ .fab .fab-dots-1 {
+  width: 32px;
+  border-radius: 10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+}
+.fab-checkbox:checked ~ .fab .fab-dots-3 {
+  width: 32px;
+  border-radius: 10px;
+  right: 50%;
+  transform: translateX(50%) translateY(-50%) rotate(-45deg);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.fab-checkbox:checked ~ .fab .fab-dots {
+  animation: none;
+}
+
+.fab-wheel {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border: 1px solid var(--tw-colors-gray-300); /* Use Tailwind color */
+  width: 10rem;
+  height: 10rem;
+  transition: all 0.3s ease;
+  transform-origin: bottom right;
+  transform: scale(0);
+}
+
+.dark .fab-wheel {
+  border: 1px solid var(--tw-colors-gray-700);
+}
+
+.fab-checkbox:checked ~ .fab-wheel {
+  transform: scale(1);
+}
+.fab-action {
+  position: absolute;
+  background: var(--fab-action-bg); /* Используем новую переменную */
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: White;
+  box-shadow: 0 0.1rem 1rem rgba(var(--fab-action-shadow-rgb), 0.82); /* Используем новую переменную RGB */
+  transition: all 1s ease;
+  opacity: 0.9; /* Добавлена прозрачность */
+  cursor: pointer; /* Indicate it's clickable */
+}
+
+.fab-checkbox:checked ~ .fab-wheel .fab-action {
+  opacity: 1;
+}
+
+.fab-action:hover {
+  background-color: var(--fab-action-hover-bg); /* Используем новую переменную */
+}
+
+.fab-wheel .fab-action-1 {
+  right: -1rem;
+  top: 0;
+}
+
+.fab-wheel .fab-action-2 {
+  right: 3.4rem;
+  top: 0.5rem;
+}
+.fab-wheel .fab-action-3 {
+  left: 0.5rem;
+  bottom: 3.4rem;
+}
+.fab-wheel .fab-action-4 {
+  left: 0;
+  bottom: -1rem;
+}
+
+/* Text Shine Animation */
+.text-shine-animation {
+  background: var(--shine-gradient-dark) linear-gradient(to right, var(--shine-gradient-dark) 0%, var(--shine-gradient-dark) 40%, var(--shine-gradient-highlight) 50%, var(--shine-gradient-dark) 60%, var(--shine-gradient-dark) 100%) 0 0 no-repeat;
+  -webkit-background-size: 150px;
+  background-size: 150px;
+  color: var(--shine-text-base-color);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent; /* Ensure text color is transparent to show background */
+  animation-name: shine;
+  animation-duration: 2s; /* 2-секундный интервал */
+  animation-iteration-count: infinite;
+  text-shadow: 0 0px 0px rgba(255, 255, 255, 0.5); /* Keep original shadow */
+}
+
+.dark .text-shine-animation {
+  background: var(--shine-gradient-dark) linear-gradient(to right, var(--shine-gradient-dark) 0%, var(--shine-gradient-dark) 40%, var(--shine-gradient-highlight) 50%, var(--shine-gradient-dark) 60%, var(--shine-gradient-dark) 100%) 0 0 no-repeat;
+  -webkit-background-size: 150px;
+  background-size: 150px;
+  color: var(--shine-text-base-color);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation-name: shine;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  text-shadow: 0 0px 0px rgba(0, 0, 0, 0.5); /* Darker shadow for dark mode */
+}
+
+@keyframes shine {
+  0%, 10% {
+    background-position: -1000px;
+  }
+  20% {
+    background-position: top left;
+  }
+  90% {
+    background-position: top right;
+  }
+  100% {
+    background-position: 1000px;
+  }
+}
