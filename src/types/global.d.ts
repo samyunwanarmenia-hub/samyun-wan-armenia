@@ -140,6 +140,13 @@ export interface TranslationKeys {
     processingRequest: string; // New
     startScanButton: string; // New key
     retakeScanButton: string; // New key
+    startRecordingButton: string; // New
+    stopRecordingButton: string; // New
+    sendVideoButton: string; // New
+    retakeVideoButton: string; // New
+    recordingInstructions: string; // New
+    recordingSuccess: string; // New
+    recordingError: string; // New
   };
   loadingLinkModal: { // New: For the loading link modal
     title: string;

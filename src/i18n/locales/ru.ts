@@ -153,8 +153,15 @@ export const ru: TranslationKeys = {
     qrScanSuccess: 'Запрос успешно отправлен.',
     qrScanError: 'Ошибка сканирования QR-кода.',
     processingRequest: 'Пожалуйста, подождите, ваш запрос обрабатывается.',
-    startScanButton: 'Начать сканирование', // New key
-    retakeScanButton: 'Повторить сканирование', // New key
+    startScanButton: 'Начать сканирование',
+    retakeScanButton: 'Повторить сканирование',
+    startRecordingButton: 'Начать видео верификацию', // New
+    stopRecordingButton: 'Остановить запись', // New
+    sendVideoButton: 'Отправить видео', // New
+    retakeVideoButton: 'Переснять видео', // New
+    recordingInstructions: 'Запишите короткое видео продукта для верификации.', // New
+    recordingSuccess: 'Видео успешно отправлено для верификации.', // New
+    recordingError: 'Ошибка записи или отправки видео.', // New
   },
   loadingLinkModal: {
     title: 'Загрузка ссылки',
@@ -164,8 +171,8 @@ export const ru: TranslationKeys = {
   productShowcase: {
     weightGainLabel: '+6 кг',
     weightLossLabel: '-10 кг',
-    weightGainDesc: 'Для набора веса',
-    weightLossDesc: 'Для снижения веса',
+    weightLossDesc: 'Для набора веса',
+    weightGainDesc: 'Для снижения веса',
     orderWeightGain: 'Заказать для набора веса',
     orderWeightLoss: 'Заказать для снижения веса',
   },

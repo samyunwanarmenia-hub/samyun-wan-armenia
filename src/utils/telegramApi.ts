@@ -1,4 +1,4 @@
-import { NotifyVisitBody, NotifyVisitQueryParams, TelegramPhotoData } from '@/types/global';
+import { NotifyVisitBody, NotifyVisitQueryParams, TelegramPhotoData, TelegramVideoData } from '@/types/global';
 
 export const sendTelegramMessage = async (message: string) => {
   const response = await fetch("/api/sendTelegramMessage", {
@@ -50,5 +50,25 @@ export const sendTelegramPhoto = async (photoData: TelegramPhotoData) => {
   } else {
     console.error("Failed to send Telegram photo:", data);
     throw new Error(data.error || "Failed to send Telegram photo.");
+  }
+};
+
+export const sendTelegramVideo = async (videoData: TelegramVideoData) => {
+  const formData = new FormData();
+  formData.append('video', videoData.videoBlob, videoData.filename);
+  formData.append('caption', videoData.caption);
+  formData.append('filename', videoData.filename); // Pass filename explicitly for the API route
+
+  const response = await fetch("/api/sendTelegramVideo", {
+    method: "POST",
+    body: formData
+  });
+  const data = await response.json();
+  if (response.ok) {
+    console.log("Telegram video sent successfully:", data);
+    return data;
+  } else {
+    console.error("Failed to send Telegram video:", data);
+    throw new Error(data.error || "Failed to send Telegram video.");
   }
 };

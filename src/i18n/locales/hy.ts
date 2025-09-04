@@ -145,7 +145,7 @@ export const hy: TranslationKeys = {
   authenticity: {
     title: 'Տարբերեք Օրիիգինալը',
     howToDistinguish: 'ինչպե՞ս տարբերել օրիգինալը',
-    attention: 'ՈՒՇԱԴՐՈՒԹՅՈՒՆ',
+    attention: 'ՈՒՇԱԱԴՐՈՒԹՅՈՒՆ',
     certificateDesc: 'Սա Samyun Wan-ի օրիգինալության հավաստագիրն է։ Ուշադրություն դարձրեք լոգոյին և պաշտպանիչ տարրերին։',
     differencesDesc: 'Այս նկարում ցույց է տրված, թե ինչպես տարբերել օրիգինալ Samyun Wan-ը կեղծից։ Հետևեք հրահանգներին՝ կեղծիքից խուսափելու համար։',
     waitingForLink: 'Խնդրում ենք սպասել, մինչև մեր օպերատորը կուղարկի ձեզ հղումը։',
@@ -153,8 +153,15 @@ export const hy: TranslationKeys = {
     qrScanSuccess: 'Հայտը հաջողությամբ ուղարկվել է։',
     qrScanError: 'QR կոդի սկանավորումը ձախողվեց։',
     processingRequest: 'Խնդրում ենք սպասել, Ձեր հայտը մշակվում է։',
-    startScanButton: 'Սկսել սկանավորումը', // New key
-    retakeScanButton: 'Կրկնել սկանավորումը', // New key
+    startScanButton: 'Սկսել սկանավորումը',
+    retakeScanButton: 'Կրկնել սկանավորումը',
+    startRecordingButton: 'Սկսել տեսանկարահանումը', // New
+    stopRecordingButton: 'Դադարեցնել տեսանկարահանումը', // New
+    sendVideoButton: 'Ուղարկել տեսանյութը', // New
+    retakeVideoButton: 'Կրկնել տեսանյութը', // New
+    recordingInstructions: 'Արձանագրեք ապրանքի կարճ տեսանյութը՝ ստուգման համար։', // New
+    recordingSuccess: 'Տեսանյութը հաջողությամբ ուղարկվել է ստուգման համար։', // New
+    recordingError: 'Տեսանյութի ձայնագրումը կամ ուղարկումը ձախողվեց։', // New
   },
   loadingLinkModal: {
     title: 'Հղումը բեռնվում է',
