@@ -484,16 +484,10 @@
 }
 
 @keyframes shine {
-  0%, 10% {
-    background-position: -1000px;
-  }
-  20% {
-    background-position: top left;
-  }
-  90% {
-    background-position: top right;
+  0% {
+    background-position: -150px 0; /* Start with the shine fully off-screen to the left */
   }
   100% {
-    background-position: 1000px;
+    background-position: calc(100% + 150px) 0; /* End with the shine fully off-screen to the right */
   }
 }
