@@ -244,7 +244,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
 
       <div className="relative w-full max-w-md aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg mb-6">
         {isCameraActive && !videoPreviewUrl && (
-          <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover"></video>
+          <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
         )}
         {videoPreviewUrl && (
           <video
@@ -253,7 +253,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
             controls
             autoPlay
             loop
-          ></video>
+          />
         )}
         {isRecording && (
           <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full flex items-center">
@@ -264,7 +264,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
             REC
           </div>
         )}
-        <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
+        <canvas ref={canvasRef} style={{ display: 'none' }} />
       </div>
 
       {error && (
@@ -272,7 +272,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
           onClick={() => window.location.reload()}
           className="mt-4 px-6 py-3 bg-primary-600 text-white rounded-full shadow-lg hover:bg-primary-700 transition-colors"
         >
-          <RefreshCcw className="inline-block mr-2"></RefreshCcw> Try Again
+          <RefreshCcw className="inline-block mr-2" /> Try Again
         </button>
       )}
     </div>
