@@ -1,7 +1,15 @@
 import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
-// Removed dynamic imports for ThemeProvider, ToastProvider, and MovingBallsBackground
+import dynamic from 'next/dynamic'; // Import dynamic
+
+// Re-introducing dynamic imports for client-side components
+const DynamicLayoutClientProvider = dynamic(() => import('@/components/LayoutClientProvider'));
+const DynamicYandexMetrikaTracker = dynamic(() => import('@/components/YandexMetrikaTracker'), { ssr: false });
+const DynamicVisitTrackerWrapper = dynamic(() => import('@/components/VisitTrackerWrapper'), { ssr: false });
+const DynamicGoogleAnalyticsTracker = dynamic(() => import('@/components/GoogleAnalyticsTracker'), { ssr: false });
+const DynamicServiceWorkerRegister = dynamic(() => import('@/components/ServiceWorkerRegister'), { ssr: false });
+
 
 interface QrVerifyLayoutProps {
   children: ReactNode;
@@ -41,12 +49,15 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   };
 }
 
-const QrVerifyLayout = ({ children }: QrVerifyLayoutProps) => {
+const QrVerifyLayout = ({ children, params }: QrVerifyLayoutProps) => {
   return (
-    <>
-      {/* All dynamic components removed, leaving only global CSS background */}
+    <DynamicLayoutClientProvider initialLang={params.lang}>
+      <DynamicYandexMetrikaTracker />
+      <DynamicGoogleAnalyticsTracker />
+      <DynamicVisitTrackerWrapper />
+      <DynamicServiceWorkerRegister />
       {children}
-    </>
+    </DynamicLayoutClientProvider>
   );
 };
 
