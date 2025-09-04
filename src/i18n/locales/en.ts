@@ -153,8 +153,8 @@ export const en: TranslationKeys = {
     qrScanSuccess: 'Request sent successfully.',
     qrScanError: 'QR code scan failed.',
     processingRequest: 'Please wait, your request is being processed.',
-    startScanButton: 'Start Scan',
-    retakeScanButton: 'Retake Scan',
+    // Removed startScanButton: 'Start Scan',
+    // Removed retakeScanButton: 'Retake Scan',
     startRecordingButton: 'Start Video Verification', // New
     stopRecordingButton: 'Stop Recording', // New
     sendVideoButton: 'Send Video', // New

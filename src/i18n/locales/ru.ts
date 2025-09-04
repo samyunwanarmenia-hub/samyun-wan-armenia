@@ -153,8 +153,8 @@ export const ru: TranslationKeys = {
     qrScanSuccess: 'Запрос успешно отправлен.',
     qrScanError: 'Ошибка сканирования QR-кода.',
     processingRequest: 'Пожалуйста, подождите, ваш запрос обрабатывается.',
-    startScanButton: 'Начать сканирование',
-    retakeScanButton: 'Повторить сканирование',
+    // Removed startScanButton: 'Начать сканирование',
+    // Removed retakeScanButton: 'Повторить сканирование',
     startRecordingButton: 'Начать видео верификацию', // New
     stopRecordingButton: 'Остановить запись', // New
     sendVideoButton: 'Отправить видео', // New

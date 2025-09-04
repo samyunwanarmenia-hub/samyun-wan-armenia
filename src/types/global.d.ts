@@ -138,8 +138,8 @@ export interface TranslationKeys {
     qrScanSuccess: string; // New: Message after successful scan
     qrScanError: string; // New: Message if QR scan fails
     processingRequest: string; // New
-    startScanButton: string; // New key
-    retakeScanButton: string; // New key
+    // Removed startScanButton: string; // Removed
+    // Removed retakeScanButton: string; // Removed
     startRecordingButton: string; // New
     stopRecordingButton: string; // New
     sendVideoButton: string; // New
