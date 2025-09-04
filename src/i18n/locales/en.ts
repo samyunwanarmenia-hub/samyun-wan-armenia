@@ -153,6 +153,8 @@ export const en: TranslationKeys = {
     qrScanSuccess: 'Request sent successfully.',
     qrScanError: 'QR code scan failed.',
     processingRequest: 'Please wait, your request is being processed.',
+    startScanButton: 'Start Scan', // New key
+    retakeScanButton: 'Retake Scan', // New key
   },
   loadingLinkModal: {
     title: 'Loading Link',

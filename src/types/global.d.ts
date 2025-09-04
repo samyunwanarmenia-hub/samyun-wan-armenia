@@ -138,6 +138,8 @@ export interface TranslationKeys {
     qrScanSuccess: string; // New: Message after successful scan
     qrScanError: string; // New: Message if QR scan fails
     processingRequest: string; // New
+    startScanButton: string; // New key
+    retakeScanButton: string; // New key
   };
   loadingLinkModal: { // New: For the loading link modal
     title: string;

@@ -153,6 +153,8 @@ export const hy: TranslationKeys = {
     qrScanSuccess: 'Հայտը հաջողությամբ ուղարկվել է։',
     qrScanError: 'QR կոդի սկանավորումը ձախողվեց։',
     processingRequest: 'Խնդրում ենք սպասել, Ձեր հայտը մշակվում է։',
+    startScanButton: 'Սկսել սկանավորումը', // New key
+    retakeScanButton: 'Կրկնել սկանավորումը', // New key
   },
   loadingLinkModal: {
     title: 'Հղումը բեռնվում է',
