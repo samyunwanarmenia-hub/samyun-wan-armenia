@@ -6,10 +6,11 @@ import { motion } from 'framer-motion';
 interface SplitTextAnimationProps {
   text: string;
   delay?: number;
+  duration?: number; // New prop for animation duration
   className?: string;
 }
 
-const SplitTextAnimation: React.FC<SplitTextAnimationProps> = ({ text, delay = 0, className }) => {
+const SplitTextAnimation: React.FC<SplitTextAnimationProps> = ({ text, delay = 0, duration = 0.8, className }) => {
   // Split the text into two parts: "Samyun Wan" and "Armenia"
   // Find the index of the second space
   const firstSpaceIndex = text.indexOf(' ');
@@ -46,7 +47,7 @@ const SplitTextAnimation: React.FC<SplitTextAnimationProps> = ({ text, delay = 0
       x: '0%',
       opacity: 1,
       transition: {
-        duration: 0.8,
+        duration: duration, // Use the new duration prop
         ease: "easeOut",
       },
     },

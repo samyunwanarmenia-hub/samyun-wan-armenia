@@ -65,6 +65,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               <SplitTextAnimation 
                 text="Samyun Wan Armenia" 
                 delay={0.3} // Задержка для начала анимации
+                duration={1.2} // Set duration to 1.2 seconds (50% slower than default 0.8s)
                 className="mb-1.5" // Добавляем небольшой отступ, если нужно
               />
               {/* Subtitle */}
