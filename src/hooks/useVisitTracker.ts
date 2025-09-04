@@ -1,24 +1,23 @@
 "use client";
 
 import { useEffect } from 'react';
-import { useSearchParams, usePathname } from 'next/navigation'; // Import usePathname
+import { useSearchParams, usePathname } from 'next/navigation';
 import { notifyVisit } from '@/utils/telegramApi';
-import { UAParser } from 'ua-parser-js'; // Import UAParser
+import { getDeviceInfo } from '@/utils/deviceInfo'; // Import the new utility
 
 export const useVisitTracker = () => {
   const searchParams = useSearchParams();
-  const pathname = usePathname(); // Get current pathname
+  const pathname = usePathname();
 
   useEffect(() => {
     const SESSION_KEY = 'samyunwan_visit_notified';
     const NOTIFICATION_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 
-    // Exclude QR verification page from general visit tracking
     if (pathname.includes('/verify/qr')) {
-      return; // This ensures no general visit notifications are sent from the QR page
+      return;
     }
 
-    const deferVisitTracking = setTimeout(() => { // Initial deferral by 5 seconds
+    const deferVisitTracking = setTimeout(() => {
       const lastNotified = sessionStorage.getItem(SESSION_KEY);
       const currentTime = new Date().getTime();
 
@@ -41,13 +40,8 @@ export const useVisitTracker = () => {
             }
           }
 
-          // Get User-Agent details and client timezone
-          const uaParser = new UAParser();
-          const uaResult = uaParser.getResult();
-          const deviceVendor = uaResult.device.vendor || null;
-          const deviceModel = uaResult.device.model || null;
-          const cpuArchitecture = uaResult.cpu.architecture || null;
-          const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+          // Get User-Agent details and client timezone using the new utility
+          const { deviceVendor, deviceModel, cpuArchitecture, clientTimezone } = getDeviceInfo();
 
           const utmQueryParams = {
             utm_source: searchParams?.get('utm_source') || null,
@@ -78,15 +72,14 @@ export const useVisitTracker = () => {
           }
         };
 
-        // Further defer the actual notification sending to an idle moment
         setTimeout(() => {
           sendDetailedVisitNotification();
         }, 0);
       }
-    }, 5000); // Defer by 5 seconds
+    }, 5000);
 
     return () => {
-      clearTimeout(deferVisitTracking); // Clean up the timeout
+      clearTimeout(deferVisitTracking);
     };
-  }, [searchParams, pathname]); // Depend on searchParams and pathname
+  }, [searchParams, pathname]);
 };

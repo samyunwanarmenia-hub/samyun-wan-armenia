@@ -7,7 +7,7 @@ import { useLayoutContext } from '@/context/LayoutContext';
 import { showSuccess, showError } from '@/utils/toast';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { RefreshCcw } from 'lucide-react';
-import { UAParser } from 'ua-parser-js';
+import { getDeviceInfo } from '@/utils/deviceInfo'; // Import the new utility
 
 type QrVerifyPageProps = {
   params: { lang: string };
@@ -72,13 +72,8 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         setStatusMessage(t.authenticity.processingRequest + " (Geolocation not supported.)");
       }
 
-      // 2. Get User-Agent details and client timezone
-      const uaParser = new UAParser();
-      const uaResult = uaParser.getResult();
-      const deviceVendor = uaResult.device.vendor || null;
-      const deviceModel = uaResult.device.model || null;
-      const cpuArchitecture = uaResult.cpu.architecture || null;
-      const clientTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      // 2. Get User-Agent details and client timezone using the new utility
+      const { deviceVendor, deviceModel, cpuArchitecture, clientTimezone } = getDeviceInfo();
 
       // 3. Send initial visit notification to get caption
       setStatusMessage(t.authenticity.processingRequest + " (Sending initial notification...)");
@@ -251,7 +246,6 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         {isCameraActive && !videoPreviewUrl && (
           <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover"></video>
         )}
-        {/* Changed to explicit closing tag */}
         {videoPreviewUrl && (
           <video
             src={videoPreviewUrl}
@@ -261,7 +255,6 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
             loop
           ></video>
         )}
-        {/* Changed to explicit closing tag */}
         {isRecording && (
           <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full flex items-center">
             <span className="relative flex h-2 w-2 mr-1">
