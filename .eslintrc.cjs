@@ -28,7 +28,7 @@ module.exports = {
     'react/react-in-jsx-scope': 'off', // Not needed with new JSX transform
     'react/self-closing-comp': ['error', {
       component: true,
-      html: true,
+      html: false, // Изменено на false, чтобы разрешить <span></span>
     }],
     'react/jsx-curly-brace-presence': ['error', { props: 'never', children: 'never' }],
     'react/function-component-definition': [

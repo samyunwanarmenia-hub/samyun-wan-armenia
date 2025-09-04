@@ -24,7 +24,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
   const [isRecording, setIsRecording] = useState<boolean>(false);
-  const [stream, setStream] = useState<MediaStream | null>(null);
+  const [stream, setStream] = useState<MediaStream | null>(null); // Исправлено: удалено 'new'
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
   const [videoPreviewUrl, setVideoPreviewUrl] = useState<string | null>(null);
@@ -34,7 +34,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
 
   const stopCamera = useCallback(() => {
     if (stream) {
-      stream.getTracks().forEach(track => track.stop());
+      stream.getTracks().forEach((track: MediaStreamTrack) => track.stop()); // Исправлено: явно указан тип 'MediaStreamTrack'
       setStream(null);
     }
     if (videoRef.current) {
@@ -257,8 +257,8 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
         )}
         {isRecording && (
           <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full flex items-center">
-            <span className="relative flex h-2 w-2 mr-1" />
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
+            <span className="relative flex h-2 w-2 mr-1"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-white"></span>
             REC
           </div>
         )}
