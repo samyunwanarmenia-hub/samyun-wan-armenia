@@ -289,7 +289,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
       }
       isProcessingRef.current = false; // Reset local processing flag on cleanup
     };
-  }, [startVerificationProcess, videoPreviewUrl, stopCamera]); // mediaRecorderRef не нужен здесь, так как stopCamera его сбрасывает
+  }, []); // Empty dependency array to run only once on mount
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-50">
