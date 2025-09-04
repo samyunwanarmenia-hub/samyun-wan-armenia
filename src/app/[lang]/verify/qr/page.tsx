@@ -13,7 +13,7 @@ type QrVerifyPageProps = {
   params: { lang: string };
 };
 
-const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
+const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed params to _params
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { t } = useLayoutContext();
@@ -244,7 +244,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
 
       <div className="relative w-full max-w-md aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg mb-6">
         {isCameraActive && !videoPreviewUrl && (
-          <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
+          <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover"></video>
         )}
         {videoPreviewUrl && (
           <video
@@ -253,7 +253,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
             controls
             autoPlay
             loop
-          />
+          ></video>
         )}
         {isRecording && (
           <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full flex items-center">
@@ -264,7 +264,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
             REC
           </div>
         )}
-        <canvas ref={canvasRef} style={{ display: 'none' }} />
+        <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
       </div>
 
       {error && (
