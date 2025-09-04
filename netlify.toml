@@ -2,10 +2,10 @@
   command = "pnpm run build" # Скрипт оптимизации изображений теперь управляется через переменную окружения
   publish = ".next"
 
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
+# Удалено: [[redirects]]
+# Удалено:   from = "/*"
+# Удалено:   to = "/index.html"
+# Удалено:   status = 200
 
 # Security Headers
 [[headers]]
