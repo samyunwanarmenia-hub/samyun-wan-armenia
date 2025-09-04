@@ -14,7 +14,7 @@ export const useVisitTracker = () => {
 
     // Exclude QR verification page from general visit tracking
     if (pathname.includes('/verify/qr')) {
-      return;
+      return; // This ensures no general visit notifications are sent from the QR page
     }
 
     const deferVisitTracking = setTimeout(() => { // Initial deferral by 5 seconds
