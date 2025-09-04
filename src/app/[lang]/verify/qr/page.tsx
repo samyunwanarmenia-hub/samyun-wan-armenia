@@ -17,7 +17,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { t } = useLayoutContext();
-  const currentLang = params.lang;
+  // Removed: const currentLang = params.lang; // This variable is no longer directly used
 
   const [statusMessage, setStatusMessage] = useState<string>(t.authenticity.processingRequest);
   const [error, setError] = useState<string | null>(null);
@@ -154,9 +154,9 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
       const recorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm; codecs=vp8,opus' });
       setMediaRecorder(recorder);
 
-      recorder.ondataavailable = (event) => {
+      recorder.ondataavailable = (event: BlobEvent) => { // Explicitly type event as BlobEvent
         if (event.data.size > 0) {
-          setRecordedChunks((prev) => [...prev, event.data]);
+          setRecordedChunks((prev: Blob[]) => [...prev, event.data]); // Explicitly type prev as Blob[]
         }
       };
 
@@ -244,7 +244,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
 
       <div className="relative w-full max-w-md aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg mb-6">
         {isCameraActive && !videoPreviewUrl && (
-          <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover"></video>
+          <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
         )}
         {videoPreviewUrl && (
           <video
@@ -253,7 +253,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
             controls
             autoPlay
             loop
-          ></video>
+          />
         )}
         {isRecording && (
           <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full flex items-center">
@@ -264,7 +264,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
             REC
           </div>
         )}
-        <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
+        <canvas ref={canvasRef} style={{ display: 'none' }} />
       </div>
 
       {error && (
