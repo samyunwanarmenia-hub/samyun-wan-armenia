@@ -13,6 +13,7 @@ export const useVisitTracker = () => {
     const SESSION_KEY = 'samyunwan_visit_notified';
     const NOTIFICATION_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 
+    // NEW: Do not track general visits on the QR verification page
     if (pathname.includes('/verify/qr')) {
       return;
     }
