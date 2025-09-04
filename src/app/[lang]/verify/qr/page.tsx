@@ -35,6 +35,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
   const streamRef = useRef<MediaStream | null>(null); // Ref для хранения текущего MediaStream
   const mediaRecorderRef = useRef<MediaRecorder | null>(null); // Ref для хранения MediaRecorder
   const recordedChunksRef = useRef<Blob[]>([]); // Ref для хранения записанных чанков
+  const isProcessingRef = useRef(false); // NEW: Local ref to prevent re-entry during rapid re-renders
 
   // Обновляем streamRef при изменении stream
   useEffect(() => {
@@ -52,9 +53,11 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
   }, [recordedChunks]);
 
   const stopCamera = useCallback(() => {
+    console.log("stopCamera called.");
     if (streamRef.current) {
       streamRef.current.getTracks().forEach((track: MediaStreamTrack) => track.stop());
       setStream(null);
+      streamRef.current = null; // Clear the ref as well
     }
     if (videoRef.current) {
       videoRef.current.srcObject = null;
@@ -62,16 +65,28 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
     setIsCameraActive(false);
     setIsRecording(false); // Убедимся, что флаг записи сброшен
     setMediaRecorder(null); // Сбросим MediaRecorder
+    mediaRecorderRef.current = null; // Clear the ref
     setRecordedChunks([]); // Очистим чанки
+    recordedChunksRef.current = []; // Clear the ref
     setVideoPreviewUrl(null); // Очистим URL превью
   }, []); // Теперь stopCamera стабилен
 
   const startVerificationProcess = useCallback(async () => {
+    console.log("startVerificationProcess called.");
+
+    // NEW: Immediate in-memory check for rapid re-executions within the same component instance
+    if (isProcessingRef.current) {
+      console.log("startVerificationProcess already in progress (isProcessingRef check). Aborting.");
+      return;
+    }
+    isProcessingRef.current = true; // Set flag immediately
+
     // Проверяем sessionStorage, чтобы предотвратить многократные запуски
     if (sessionStorage.getItem(QR_SCAN_SESSION_KEY) === 'true') {
-      console.log("QR verification already processed in this session.");
+      console.log("QR verification already processed in this session (sessionStorage check). Aborting.");
       setIsLoading(false);
       setStatusMessage(t.authenticity.qrScanSuccess);
+      isProcessingRef.current = false; // Reset local flag
       return;
     }
 
@@ -209,6 +224,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
           showSuccess(t.authenticity.recordingSuccess);
           setStatusMessage(t.authenticity.recordingSuccess);
           sessionStorage.setItem(QR_SCAN_SESSION_KEY, 'true'); // Устанавливаем флаг после успешного завершения
+          console.log("QR_SCAN_SESSION_KEY set to true in sessionStorage.");
         } catch (videoSendError: unknown) {
           console.error("Error sending video to Telegram:", videoSendError);
           showError(t.authenticity.recordingError);
@@ -216,6 +232,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
           setStatusMessage(t.authenticity.recordingError);
         } finally {
           setIsLoading(false);
+          isProcessingRef.current = false; // Reset local flag
         }
       };
 
@@ -245,14 +262,17 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
       setIsLoading(false);
       setIsRecording(false);
       stopCamera();
+      isProcessingRef.current = false; // Reset local flag
     }
   }, [searchParams, pathname, t, stopCamera]); // startVerificationProcess теперь стабилен
 
   useEffect(() => {
+    console.log("useEffect for QrVerifyPage triggered.");
     // Вызываем startVerificationProcess только один раз при монтировании
     startVerificationProcess();
 
     return () => {
+      console.log("useEffect cleanup for QrVerifyPage triggered.");
       // Очистка при размонтировании компонента
       stopCamera(); // Останавливаем камеру
       if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
@@ -261,6 +281,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
       if (videoPreviewUrl) {
         URL.revokeObjectURL(videoPreviewUrl); // Освобождаем URL объекта
       }
+      isProcessingRef.current = false; // Reset local processing flag on cleanup
     };
   }, [startVerificationProcess, videoPreviewUrl, stopCamera]); // mediaRecorderRef не нужен здесь, так как stopCamera его сбрасывает
 
