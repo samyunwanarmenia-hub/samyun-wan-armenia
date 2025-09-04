@@ -6,7 +6,6 @@ import { DbReview } from '../types/global';
 import CallToActionButton from './CallToActionButton';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { useReviewForm } from '@/hooks/useReviewForm';
-import { useAuth } from '@/components/AuthSessionProvider'; // Import useAuth
 
 interface ReviewFormProps {
   onReviewSubmitted: (review: DbReview) => void;
@@ -14,11 +13,8 @@ interface ReviewFormProps {
 
 const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
   const { t } = useLayoutContext();
-  const { user } = useAuth(); // Get user from AuthContext
   const [showForm, setShowForm] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
-
-  const initialName = user?.user_metadata?.first_name || user?.email?.split('@')[0] || '';
 
   const {
     name,
@@ -34,8 +30,7 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
       setShowForm(false);
       setSubmitted(true);
     },
-    initialName: initialName, // Pass initial name to hook
-    userId: user?.id, // Pass user ID to hook
+    initialName: '', // No initial name from user auth
   });
 
   return (
@@ -85,7 +80,6 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                     value={name}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                     required
-                    disabled={!!user} // Disable if user is logged in
                   />
                 </div>
                 <div className="mb-5">

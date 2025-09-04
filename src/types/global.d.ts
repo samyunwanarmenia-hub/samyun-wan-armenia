@@ -29,7 +29,6 @@ export interface TranslationKeys {
     english: string;  // Added
     open: string;     // Added
     close: string;    // Added
-    profile?: string; // New: Profile link in navigation
   };
   hero: {
     title: string;
@@ -171,55 +170,6 @@ export interface TranslationKeys {
     selectProductType: string;
     selectPurpose: string;
   };
-  auth?: { // New optional section for authentication translations
-    emailLabel?: string;
-    passwordLabel?: string;
-    emailPlaceholder?: string;
-    passwordPlaceholder?: string;
-    signInButton?: string;
-    socialSignIn?: string;
-    signInLink?: string;
-    signUpButton?: string;
-    socialSignUp?: string;
-    signUpLink?: string;
-    sendInstructions?: string;
-    forgotPasswordLink?: string;
-    newPasswordLabel?: string;
-    newPasswordPlaceholder?: string;
-    updatePasswordButton?: string;
-    sendMagicLink?: string;
-    magicLinkText?: string;
-    phonePlaceholder?: string;
-    tokenPlaceholder?: string;
-    phoneLabel?: string;
-    tokenLabel?: string;
-    verifyOtpButton?: string;
-    verifyOtpLink?: string;
-  };
-  profile?: { // New section for profile page translations
-    description?: string;
-    fetchError?: string;
-    updateSuccess?: string;
-    updateError?: string;
-    notLoggedIn?: string;
-    firstNameLabel?: string;
-    firstNamePlaceholder?: string;
-    lastNameLabel?: string;
-    lastNamePlaceholder?: string;
-    avatarLabel?: string;
-    avatarPlaceholder?: string;
-    avatarHint?: string;
-    saving?: string;
-    updateButton?: string;
-  };
-}
-
-export interface Profile {
-  id: string;
-  first_name: string | null;
-  last_name: string | null;
-  avatar_url: string | null;
-  updated_at: string | null;
 }
 
 export interface Testimonial {
@@ -250,7 +200,7 @@ export interface StatItem {
   key: 'customers' | 'experience';
 }
 
-export type SectionId = 'home' | 'about' | 'benefits' | 'products' | 'authenticity' | 'cta' | 'testimonials' | 'contact' | 'faq' | 'profile'; // Added 'profile'
+export type SectionId = 'home' | 'about' | 'benefits' | 'products' | 'authenticity' | 'cta' | 'testimonials' | 'contact' | 'faq'; // Removed 'profile'
 
 export type ContactModalType = 'call' | 'message';
 
@@ -327,7 +277,6 @@ export interface UseReviewFormHookParams { // Renamed to clarify it's for hook p
   onReviewSubmitted: (review: DbReview) => void;
   t: TranslationKeys;
   initialName?: string;
-  userId?: string;
 }
 
 export interface NavSection {

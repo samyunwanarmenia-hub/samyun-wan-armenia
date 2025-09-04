@@ -7,7 +7,6 @@ import Link from 'next/link'; // Import Next.js Link component
 import { useLayoutContext } from '@/context/LayoutContext'; // Import useLayoutContext
 import useNavigationUtils from '@/hooks/useNavigationUtils'; // Import useNavigationUtils
 import { navigationSections } from '@/data/navigationSections'; // Import centralized data
-import { useAuth } from '@/components/AuthSessionProvider'; // Import useAuth
 
 // Removed FooterProps interface as 't' will be accessed via context
 // interface FooterProps {
@@ -17,7 +16,6 @@ import { useAuth } from '@/components/AuthSessionProvider'; // Import useAuth
 const Footer = () => { // Removed t from props
   const { t, currentLang, openAuthenticityModal } = useLayoutContext(); // Get t, currentLang and openAuthenticityModal from context
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang); // Get navigation utilities, передаем currentLang
-  const { user } = useAuth(); // Get user from AuthContext
 
   const aboutLinks = navigationSections.filter(s => ['about', 'benefits', 'testimonials', 'contact'].includes(s.id));
   // Products link in footer should now use nav.products for the general link
@@ -56,19 +54,6 @@ const Footer = () => { // Removed t from props
                   </motion.div>
                 </li>
               ))}
-              {user && ( // Conditionally render profile link if user is logged in
-                <li>
-                  <motion.div
-                    whileHover={{ scale: 1.05, color: '#22c55e' }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  >
-                    <Link href={getSectionPath('profile')} className="hover:text-primary-500 transition-colors">
-                      {t.nav.profile}
-                    </Link>
-                  </motion.div>
-                </li>
-              )}
             </ul>
           </div>
 

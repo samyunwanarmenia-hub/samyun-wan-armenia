@@ -5,7 +5,7 @@ import { TranslationKeys, DbReview, UseReviewFormHookParams } from '@/types/glob
 import { supabase } from '@/integrations/supabase/client';
 import { showSuccess, showError } from '@/utils/toast';
 
-export const useReviewForm = ({ t, onReviewSubmitted, initialName = '', userId }: UseReviewFormHookParams) => { // Use UseReviewFormHookParams
+export const useReviewForm = ({ t, onReviewSubmitted, initialName = '' }: UseReviewFormHookParams) => { // Removed userId
   const [name, setName] = useState<string>(initialName);
   const [reviewText, setReviewText] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -27,7 +27,7 @@ export const useReviewForm = ({ t, onReviewSubmitted, initialName = '', userId }
         .from('reviews')
         .insert([
           {
-            user_id: userId,
+            // user_id: userId, // Removed user_id
             name: name.trim(),
             text: reviewText.trim(),
             rating: 5,
@@ -55,7 +55,7 @@ export const useReviewForm = ({ t, onReviewSubmitted, initialName = '', userId }
     } finally {
       setIsSubmitting(false);
     }
-  }, [name, reviewText, t, onReviewSubmitted, userId, initialName]);
+  }, [name, reviewText, t, onReviewSubmitted, initialName]);
 
   return {
     name,

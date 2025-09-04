@@ -46,7 +46,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     });
 
-    // Other static pages for each language (e.g., /hy/about, /ru/benefits, /hy/profile)
+    // Other static pages for each language (e.g., /hy/about, /ru/benefits)
     staticPages.forEach(page => {
       const alternates: Record<string, string> = {};
       languages.forEach(altLang => {

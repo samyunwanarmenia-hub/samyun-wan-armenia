@@ -10,16 +10,11 @@ import useNavigationUtils from '@/hooks/useNavigationUtils';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { navigationSections } from '@/data/navigationSections'; // Import centralized data
-import { useAuth } from '@/components/AuthSessionProvider'; // Import useAuth
-import { supabase } from '@/integrations/supabase/client'; // Import supabase client
-import { useRouter } from 'next/navigation'; // Import useRouter
 
 const Navbar: React.FC<NavbarProps> = () => {
   const [scrolled, setScrolled] = useState(false);
   const { t, currentLang, getLinkClasses } = useLayoutContext();
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);
-  const { user, isLoading } = useAuth(); // Get user and isLoading from AuthContext
-  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,19 +32,6 @@ const Navbar: React.FC<NavbarProps> = () => {
     };
   }, []);
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    router.push(`/${currentLang}/auth/login`); // Redirect to login page after logout
-  };
-
-  // Filter navigation sections based on authentication status
-  const filteredNavigationSections = navigationSections.filter(section => {
-    if (section.id === 'profile') {
-      return user; // Only show profile link if user is logged in
-    }
-    return true; // Show other links always
-  });
-
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 shadow-lg dark:bg-gray-800/95 dark:shadow-xl py-2' : 'bg-white/85 dark:bg-gray-900/85 py-4'}`}>
       <div className="container mx-auto px-4">
@@ -64,7 +46,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
-            {filteredNavigationSections.map((section) => (
+            {navigationSections.map((section) => (
               <motion.div
                 key={section.id}
                 whileHover={{ scale: 1.1, color: '#22c55e' }}
@@ -81,36 +63,8 @@ const Navbar: React.FC<NavbarProps> = () => {
             ))}
           </div>
 
-          {/* Auth/User Info and Language Selector and Theme Toggle for Desktop */}
+          {/* Language Selector and Theme Toggle for Desktop */}
           <div className="hidden md:flex items-center space-x-3">
-            {!isLoading && (
-              <>
-                {user ? (
-                  <div className="flex items-center space-x-2">
-                    <Link href={getSectionPath('profile')} className="text-gray-700 dark:text-gray-300 text-sm hover:text-primary-600 transition-colors">
-                      Hello, {user.user_metadata?.first_name || user.email?.split('@')[0] || 'User'}!
-                    </Link>
-                    <motion.button
-                      onClick={handleLogout}
-                      className="px-3 py-1.5 rounded-full bg-red-600 text-white text-sm font-semibold hover:bg-red-700 transition-colors"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      Logout
-                    </motion.button>
-                  </div>
-                ) : (
-                  <motion.button
-                    onClick={() => router.push(`/${currentLang}/auth/login`)}
-                    className="px-3 py-1.5 rounded-full bg-primary-600 text-white text-sm font-semibold hover:bg-primary-700 transition-colors"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    Login
-                  </motion.button>
-                )}
-              </>
-            )}
             <LanguageSwitcher />
             <ThemeToggle />
           </div>

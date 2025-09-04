@@ -22,7 +22,7 @@ export async function generateMetadata({ params }: LangLayoutProps): Promise<Met
   const t = translations[lang] || translations.hy; // Fallback to Armenian
 
   const pathSegments = params.lang ? [params.lang] : [];
-  const currentRoute = pathSegments.join('/'); // e.g., 'hy', 'hy/profile'
+  const currentRoute = pathSegments.join('/'); // e.g., 'hy'
 
   let pageTitle = t.hero.title + ' - ' + t.hero.subtitle + ' | ' + t.hero.seo_title_addon;
   let pageDescription = t.hero.tagline + ' ' + t.about.description + ' ' + t.benefits.subtitle;
@@ -30,14 +30,6 @@ export async function generateMetadata({ params }: LangLayoutProps): Promise<Met
   let pageUrl = `https://samyunwanarmenia.netlify.app/${lang}`;
   let pageImage = 'https://samyunwanarmenia.netlify.app/optimized/og-image.jpg';
   let pageImageAlt = t.hero.title + ' - ' + t.hero.subtitle;
-
-  if (currentRoute.endsWith('/profile')) {
-    pageTitle = `${t.nav?.profile || 'My Profile'} | ${t.hero.title}`;
-    pageDescription = t.profile?.description || 'Manage your profile details.';
-    pageKeywords = `${pageKeywords}, ${t.nav?.profile || 'profile'}, user settings, account management`;
-    pageUrl = `https://samyunwanarmenia.netlify.app/${lang}/profile`;
-    // You might want a specific image for the profile page, or keep the default
-  }
 
   return {
     title: {
@@ -72,10 +64,10 @@ export async function generateMetadata({ params }: LangLayoutProps): Promise<Met
     alternates: {
       canonical: pageUrl,
       languages: {
-        'hy-AM': `https://samyunwanarmenia.netlify.app/hy${currentRoute.endsWith('/profile') ? '/profile' : ''}`,
-        'ru-RU': `https://samyunwanarmenia.netlify.app/ru${currentRoute.endsWith('/profile') ? '/profile' : ''}`,
-        'en-US': `https://samyunwanarmenia.netlify.app/en${currentRoute.endsWith('/profile') ? '/profile' : ''}`,
-        'x-default': `https://samyunwanarmenia.netlify.app${currentRoute.endsWith('/profile') ? '/profile' : ''}`,
+        'hy-AM': `https://samyunwanarmenia.netlify.app/hy`,
+        'ru-RU': `https://samyunwanarmenia.netlify.app/ru`,
+        'en-US': `https://samyunwanarmenia.netlify.app/en`,
+        'x-default': `https://samyunwanarmenia.netlify.app`,
       },
     },
   };
@@ -84,8 +76,6 @@ export async function generateMetadata({ params }: LangLayoutProps): Promise<Met
 // This function tells Next.js which 'lang' parameters to pre-render or expect
 export async function generateStaticParams() {
   const locales = Object.keys(translations);
-  // For the [lang] segment, we just need to return the language itself.
-  // The /profile segment is a fixed part of the route, not a dynamic parameter here.
   return locales.map((lang) => ({ lang: lang }));
 }
 

@@ -10,13 +10,12 @@ import useNavigationUtils from '@/hooks/useNavigationUtils';
 import LanguageSwitcher from './LanguageSwitcher';
 import { MobileNavProps, TranslationKeys } from '@/types/global';
 import { navigationSections } from '@/data/navigationSections';
-import { useAuth } from '@/components/AuthSessionProvider'; // Import useAuth
 
 const MobileNav: React.FC<MobileNavProps> = () => {
   const { t, currentLang, getLinkClasses } = useLayoutContext();
   const [isOpen, setIsOpen] = useState(false);
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);
-  const { user } = useAuth(); // Get user from AuthContext
+  // Removed: const { user } = useAuth(); // Get user from AuthContext
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -80,14 +79,6 @@ const MobileNav: React.FC<MobileNavProps> = () => {
     }
   };
 
-  // Filter navigation sections based on authentication status for mobile
-  const filteredMobileNavigationSections = navigationSections.filter(section => {
-    if (section.id === 'profile') {
-      return user; // Only show profile link if user is logged in
-    }
-    return true; // Show other links always
-  });
-
   return (
     <>
       <button
@@ -133,7 +124,7 @@ const MobileNav: React.FC<MobileNavProps> = () => {
               </button>
             </div>
             <nav className="flex flex-col items-start space-y-6 pt-10 pb-6 pl-12">
-              {filteredMobileNavigationSections.map((section) => (
+              {navigationSections.map((section) => (
                 <motion.div key={section.id} variants={menuItemVariants}>
                   <Link
                     href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}

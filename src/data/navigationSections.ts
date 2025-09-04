@@ -13,5 +13,4 @@ export const navigationSections: NavSection[] = [
   { id: 'testimonials', labelKey: 'testimonials' },
   { id: 'faq', labelKey: 'faq' },
   { id: 'contact', labelKey: 'contact' },
-  { id: 'profile', labelKey: 'profile' }, // New: Profile link
 ];

@@ -10,7 +10,6 @@ import { useModals } from '@/hooks/useModals';
 import useActiveLink from '@/hooks/useActiveLink';
 import useNavigationUtils from '@/hooks/useNavigationUtils';
 import MainLayout from '@/layouts/MainLayout'; // Import MainLayout
-import { AuthSessionProvider } from './AuthSessionProvider'; // Import AuthSessionProvider
 
 interface LayoutClientProviderProps {
   children: React.ReactNode;
@@ -31,12 +30,6 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
     return pathSegments.length >= 2 && pathSegments[1] === 'verify' && pathSegments[2] === 'qr';
   }, [pathname]);
 
-  // Determine if it's an authentication page
-  const isAuthPage = useMemo(() => {
-    const pathSegments = pathname.split('/').filter(Boolean);
-    return pathSegments.length >= 2 && pathSegments[1] === 'auth' && pathSegments[2] === 'login';
-  }, [pathname]);
-
   useEffect(() => {
     // Ensure the client-side state matches the initial server-rendered language
     if (initialLang && initialLang !== currentLangState) {
@@ -48,7 +41,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
   useEffect(() => {
     document.documentElement.lang = currentLangState;
 
-    if (isQrVerifyPage || isAuthPage) { // Apply body-blank for auth pages too
+    if (isQrVerifyPage) {
       document.body.classList.add('body-blank');
       document.documentElement.classList.remove('dark'); // Ensure light mode for blank page
     } else {
@@ -60,7 +53,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
       // Clean up when component unmounts or isQrVerifyPage changes
       document.body.classList.remove('body-blank');
     };
-  }, [currentLangState, isQrVerifyPage, isAuthPage]);
+  }, [currentLangState, isQrVerifyPage]);
 
   const t: TranslationKeys = useMemo(() => translations[currentLangState], [currentLangState]);
 
@@ -119,35 +112,32 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
     getSectionPath,
   };
 
-  // Wrap the entire application with AuthSessionProvider
   return (
-    <AuthSessionProvider>
-      <LayoutContext.Provider value={contextValue}>
-        {/* If it's the QR verification or Auth page, only render children (the page content itself) */}
-        {(isQrVerifyPage || isAuthPage) ? (
-          children
-        ) : (
-          // For all other pages, render the full MainLayout
-          <MainLayout
-            contactModalOpen={contactModalOpen}
-            contactModalType={contactModalType}
-            orderModalOpen={orderModalOpen}
-            initialSelectedProduct={initialSelectedProduct}
-            authenticityModalOpen={authenticityModalOpen}
-            callbackRequestModalOpen={callbackRequestModalOpen}
-            closeContactModal={closeContactModal}
-            closeOrderModal={closeOrderModal}
-            closeAuthenticityModal={closeAuthenticityModal}
-            closeCallbackRequestModal={closeCallbackRequestModal}
-            loadingLinkModalOpen={loadingLinkModalOpen}
-            closeLoadingLinkModal={closeLoadingLinkModal}
-            loadingLinkClientId={loadingLinkClientId}
-          >
-            {children}
-          </MainLayout>
-        )}
-      </LayoutContext.Provider>
-    </AuthSessionProvider>
+    <LayoutContext.Provider value={contextValue}>
+      {/* If it's the QR verification page, only render children (the page content itself) */}
+      {isQrVerifyPage ? (
+        children
+      ) : (
+        // For all other pages, render the full MainLayout
+        <MainLayout
+          contactModalOpen={contactModalOpen}
+          contactModalType={contactModalType}
+          orderModalOpen={orderModalOpen}
+          initialSelectedProduct={initialSelectedProduct}
+          authenticityModalOpen={authenticityModalOpen}
+          callbackRequestModalOpen={callbackRequestModalOpen}
+          closeContactModal={closeContactModal}
+          closeOrderModal={closeOrderModal}
+          closeAuthenticityModal={closeAuthenticityModal}
+          closeCallbackRequestModal={closeCallbackRequestModal}
+          loadingLinkModalOpen={loadingLinkModalOpen}
+          closeLoadingLinkModal={closeLoadingLinkModal}
+          loadingLinkClientId={loadingLinkClientId}
+        >
+          {children}
+        </MainLayout>
+      )}
+    </LayoutContext.Provider>
   );
 };
 
