@@ -272,7 +272,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => { // Renamed pa
           onClick={() => window.location.reload()}
           className="mt-4 px-6 py-3 bg-primary-600 text-white rounded-full shadow-lg hover:bg-primary-700 transition-colors"
         >
-          <RefreshCcw className="inline-block mr-2" /> Try Again
+          <RefreshCcw className="inline-block mr-2"></RefreshCcw> Try Again
         </button>
       )}
     </div>
