@@ -2,8 +2,8 @@ import { ProductShowcaseItem } from '../types/global';
 
 export const productShowcaseData: ProductShowcaseItem[] = [
   {
-    src: '/images/samyun-wan-armenia-weight-gain-vitamin-original-whay-arm.jpg',
-    alt: 'Samyun Wan Weight Gain Capsules',
+    src: '/images/samyun-wan-weight-gain-qr.jpg', // Updated to new image with QR code
+    alt: 'Samyun Wan Weight Gain Capsules with QR Code for Authenticity', // Updated alt text
     labelKey: 'weightGainLabel',
     descKey: 'weightGainDesc', // Corrected from 'weightLossDesc'
     buttonTextKey: 'orderWeightGain', // Added button text key
