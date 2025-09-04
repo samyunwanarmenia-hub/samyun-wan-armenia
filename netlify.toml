@@ -1,5 +1,5 @@
 [build]
-  command = "pnpm run optimize-images && pnpm run build" # Возвращена оптимизация изображений
+  command = "pnpm run build" # Скрипт оптимизации изображений теперь управляется через переменную окружения
   publish = ".next"
 
 [[redirects]]
