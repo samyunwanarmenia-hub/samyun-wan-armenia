@@ -20,7 +20,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
   // Variants for general fade-in-up animation
   const fadeInUpVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.78, ease: "easeOut" } } // Changed duration to 0.78 (30% slower)
+    visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: "easeOut" } } // Changed duration to 0.9 (50% slower than original 0.6)
   };
 
   // Variants for the image
