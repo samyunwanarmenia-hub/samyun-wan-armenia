@@ -140,10 +140,10 @@ export interface TranslationKeys {
     processingRequest: string; // New
     // Removed startScanButton: string; // Removed
     // Removed retakeScanButton: string; // Removed
-    startRecordingButton: string; // New
-    stopRecordingButton: string; // New
-    sendVideoButton: string; // New
-    retakeVideoButton: string; // New
+    // Removed startRecordingButton: string; // Removed
+    // Removed stopRecordingButton: string; // Removed
+    // Removed sendVideoButton: string; // Removed
+    // Removed retakeVideoButton: string; // Removed
     recordingInstructions: string; // New
     recordingSuccess: string; // New
     recordingError: string; // New
@@ -353,6 +353,7 @@ export interface NotifyVisitBody {
   screenWidth: number;
   screenHeight: number;
   isQrScan?: boolean; // Added for QR scan differentiation
+  pagePath: string; // New: The actual page path
 }
 
 // New interface for UTM query parameters

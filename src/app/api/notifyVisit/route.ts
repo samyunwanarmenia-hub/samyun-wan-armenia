@@ -17,7 +17,7 @@ export async function POST(request: Request) {
   try {
     const headersList = headers();
     const { searchParams } = new URL(request.url);
-    const body: NotifyVisitBody = await request.json(); // Read body without isQrScan here
+    const body: NotifyVisitBody = await request.json(); // Read body with isQrScan and pagePath
 
     // 1️⃣ Get IP
     const ipHeader = headersList.get('x-forwarded-for') || '';
@@ -70,7 +70,7 @@ export async function POST(request: Request) {
 
     const message = `${messageTitle}
 <b>Time:</b> ${new Date().toLocaleString('ru-RU', { timeZone: 'Asia/Yerevan' })}
-<b>Path:</b> ${new URL(request.url).pathname}
+<b>Path:</b> ${body.pagePath}
 <b>IP:</b> ${ip}
 <b>City:</b> ${geoData.city || 'unknown'}
 <b>Country:</b> ${geoData.country_name || 'unknown'}
@@ -96,6 +96,7 @@ ${utmParams ? `<b>${utmParams}</b>\n` : ''}
         chat_id: TELEGRAM_CHAT_ID,
         text: message,
         parse_mode: 'HTML',
+        disable_web_page_preview: true, // Disable link previews
       }),
     });
 

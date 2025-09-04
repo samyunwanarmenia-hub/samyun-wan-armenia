@@ -16,7 +16,7 @@ export const sendTelegramMessage = async (message: string) => {
   }
 };
 
-export const notifyVisit = async (bodyData: NotifyVisitBody, queryParams: NotifyVisitQueryParams, isQrScan: boolean = false) => {
+export const notifyVisit = async (bodyData: NotifyVisitBody, queryParams: NotifyVisitQueryParams) => { // Removed isQrScan from signature
   const url = new URL("/api/notifyVisit", window.location.origin);
   if (queryParams.utm_source) url.searchParams.set('utm_source', queryParams.utm_source);
   if (queryParams.utm_medium) url.searchParams.set('utm_medium', queryParams.utm_medium);
@@ -25,7 +25,7 @@ export const notifyVisit = async (bodyData: NotifyVisitBody, queryParams: Notify
   const response = await fetch(url.toString(), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...bodyData, isQrScan }) // Теперь isQrScan передается в теле
+    body: JSON.stringify(bodyData) // bodyData now includes isQrScan and pagePath
   });
   const data = await response.json();
   if (response.ok) {

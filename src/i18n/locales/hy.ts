@@ -153,12 +153,6 @@ export const hy: TranslationKeys = {
     qrScanSuccess: 'Հայտը հաջողությամբ ուղարկվել է։',
     qrScanError: 'QR կոդի սկանավորումը ձախողվեց։',
     processingRequest: 'Խնդրում ենք սպասել, Ձեր հայտը մշակվում է։',
-    // Removed startScanButton: 'Սկսել սկանավորումը',
-    // Removed retakeScanButton: 'Կրկնել սկանավորումը',
-    startRecordingButton: 'Սկսել տեսանկարահանումը', // New
-    stopRecordingButton: 'Դադարեցնել տեսանկարահանումը', // New
-    sendVideoButton: 'Ուղարկել տեսանյութը', // New
-    retakeVideoButton: 'Կրկնել տեսանյութը', // New
     recordingInstructions: 'Արձանագրեք ապրանքի կարճ տեսանյութը՝ ստուգման համար։', // New
     recordingSuccess: 'Տեսանյութը հաջողությամբ ուղարկվել է ստուգման համար։', // New
     recordingError: 'Տեսանյութի ձայնագրումը կամ ուղարկումը ձախողվեց։', // New

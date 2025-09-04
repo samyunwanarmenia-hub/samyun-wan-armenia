@@ -1,15 +1,21 @@
 "use client";
 
 import { useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, usePathname } from 'next/navigation'; // Import usePathname
 import { notifyVisit } from '@/utils/telegramApi';
 
 export const useVisitTracker = () => {
   const searchParams = useSearchParams();
+  const pathname = usePathname(); // Get current pathname
 
   useEffect(() => {
     const SESSION_KEY = 'samyunwan_visit_notified';
     const NOTIFICATION_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
+
+    // Exclude QR verification page from general visit tracking
+    if (pathname.includes('/verify/qr')) {
+      return;
+    }
 
     const deferVisitTracking = setTimeout(() => { // Initial deferral by 5 seconds
       const lastNotified = sessionStorage.getItem(SESSION_KEY);
@@ -40,8 +46,8 @@ export const useVisitTracker = () => {
             utm_campaign: searchParams?.get('utm_campaign') || null,
           };
 
-          const bodyData = { lat, lon, screenWidth, screenHeight };
-
+          const bodyData = { lat, lon, screenWidth, screenHeight, pagePath: pathname }; // Pass pathname
+          
           try {
             await notifyVisit(bodyData, utmQueryParams);
             sessionStorage.setItem(SESSION_KEY, currentTime.toString());
@@ -63,5 +69,5 @@ export const useVisitTracker = () => {
     return () => {
       clearTimeout(deferVisitTracking); // Clean up the timeout
     };
-  }, [searchParams]); // Depend on searchParams to re-run if UTMs change
+  }, [searchParams, pathname]); // Depend on searchParams and pathname
 };

