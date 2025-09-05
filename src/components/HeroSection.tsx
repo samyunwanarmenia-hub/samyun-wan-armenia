@@ -68,7 +68,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             {/* Tagline with subtle animation */}
             <motion.p 
               className="text-xs sm:text-sm lg:text-lg font-bold uppercase tracking-[2px] sm:tracking-[3px] lg:tracking-[5px] text-slogan-shine mb-8 leading-relaxed relative overflow-hidden inline-block whitespace-nowrap"
-              // Removed variants, initial, animate, and transition props to keep text always visible
+              variants={fadeInUpVariants}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 2.0 }}
             >
               {t.hero.tagline}
             </motion.p>
