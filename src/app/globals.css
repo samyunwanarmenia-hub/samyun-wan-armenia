@@ -177,8 +177,6 @@
 }
 
 @layer components {
-  /* Removed .text-gradient as its properties are now integrated into .text-slogan-shine */
-
   /* New utility class for a subtle glow shadow */
   .shadow-glow-green {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 15px rgba(134, 180, 134, 0.5); /* primary-500 with 50% opacity */
@@ -190,13 +188,13 @@
 
   /* New CSS for the text shine animation */
   .text-slogan-shine {
-    background: linear-gradient(90deg, var(--slogan-base-color) 0%, var(--slogan-base-color) 20%, var(--slogan-shine-color) 50%, var(--slogan-base-color) 80%, var(--slogan-base-color) 100%);
+    background: linear-gradient(90deg, var(--slogan-base-color) 0%, var(--slogan-base-color) 45%, var(--slogan-shine-color) 50%, var(--slogan-base-color) 55%, var(--slogan-base-color) 100%);
     -webkit-background-clip: text; /* Apply clipping directly */
     background-clip: text;         /* Apply clipping directly */
     -webkit-text-fill-color: transparent; /* Make text transparent to show background */
     background-repeat: no-repeat;
     background-size: 400% auto; /* Increased size to ensure full sweep */
-    animation: shine 5s linear infinite;
+    animation: shine 8s linear infinite; /* Increased duration to 8s */
     position: relative; /* Needed for background-position-x to work correctly */
   }
 }
@@ -218,10 +216,10 @@
 /* Keyframes for the text shine effect */
 @keyframes shine {
   0% {
-    background-position-x: -200%; /* Start far left */
+    background-position-x: -300%; /* Start far left, ensuring text is covered */
   }
   100% {
-    background-position-x: 200%; /* End far right */
+    background-position-x: 100%; /* End far right, ensuring text is covered */
   }
 }
 
