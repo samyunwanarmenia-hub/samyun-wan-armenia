@@ -99,9 +99,8 @@
     --fab-action-hover-bg: theme('colors.primary.500'); /* Using Tailwind variable */
 
     /* Shine Text Animation Colors - Light Mode */
-    --shine-text-base-color: rgba(0, 0, 0, 0.3); /* Dark text, transparent */
-    --shine-gradient-dark: #222; /* Dark background for gradient */
-    --shine-gradient-highlight: #fff; /* White highlight */
+    --slogan-shine-dark: #000; /* Original dark from user's example */
+    --slogan-shine-light: #fff; /* Original light from user's example */
 
     /* Supabase Auth UI HSL Colors - Light Mode */
     --primary-600: 100 30% 49%; /* HSL for #6c906c */
@@ -123,10 +122,6 @@
     --secondary-400: 210 30% 76%; /* HSL for #a5c0d2 */
     --secondary-300: 210 30% 84%; /* HSL for #bdd1de */
     --secondary-100: 210 30% 95%; /* HSL for #edf3f7 */
-
-    /* Slogan Shine Effect Colors */
-    --slogan-shine-dark: #000; /* Original dark from user's example */
-    --slogan-shine-light: #fff; /* Original light from user's example */
   }
 
   /* CSS Variables for Toast in Dark Mode */
@@ -149,9 +144,8 @@
     --fab-action-hover-bg: theme('colors.primary.700'); /* Using Tailwind variable */
 
     /* Shine Text Animation Colors - Dark Mode */
-    --shine-text-base-color: rgba(255, 255, 255, 0.3); /* Light text, transparent */
-    --shine-gradient-dark: #eee; /* Light background for gradient */
-    --shine-gradient-highlight: #000; /* Dark highlight */
+    --slogan-shine-dark: #1f2937; /* Dark mode background color for the gradient */
+    --slogan-shine-light: #f9fafb; /* Dark mode highlight color for the gradient */
 
     /* Supabase Auth UI HSL Colors - Dark Mode */
     --primary-600: 100 30% 49%; /* HSL for #6c906c */
@@ -179,10 +173,6 @@
     --secondary-900: 210 30% 13%; /* HSL for #293241 */
     --secondary-800: 210 30% 25%; /* HSL for #42556e */
     --secondary-700: 210 30% 37%; /* HSL for #5b789b */
-
-    /* Slogan Shine Effect Colors - Dark Mode */
-    --slogan-shine-dark: #1f2937; /* Dark mode background color for the gradient */
-    --slogan-shine-light: #f9fafb; /* Dark mode highlight color for the gradient */
   }
 }
 
@@ -206,7 +196,7 @@
   .text-slogan-shine {
     background: linear-gradient(90deg, var(--slogan-shine-dark), var(--slogan-shine-light), var(--slogan-shine-dark));
     background-repeat: no-repeat;
-    background-size: 80%; /* Adjust as needed */
+    background-size: 200%; /* Increased size to ensure full sweep */
     animation: shine 5s linear infinite;
   }
 }
@@ -228,10 +218,10 @@
 /* Keyframes for the text shine effect */
 @keyframes shine {
   0% {
-    background-position-x: -500%;
+    background-position-x: -200%; /* Adjusted to sweep across the larger background */
   }
   100% {
-    background-position-x: 500%;
+    background-position-x: 200%; /* Adjusted to sweep across the larger background */
   }
 }
 
