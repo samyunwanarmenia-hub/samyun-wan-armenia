@@ -326,12 +326,13 @@ export interface LayoutContextType {
 //   telegram_chat_id?: string;
 // }
 
-export interface VerifyPageProps {
-  params: { lang: string };
-  searchParams: { clientId?: string };
-  t: TranslationKeys; // Added t
-  currentLang: string; // Added currentLang
-}
+// Removed VerifyPageProps as the page is now external
+// export interface VerifyPageProps {
+//   params: { lang: string };
+//   searchParams: { clientId?: string };
+//   t: TranslationKeys; // Added t
+//   currentLang: string; // Added currentLang
+// }
 
 // New type for analytics events
 export interface AnalyticsEvent {

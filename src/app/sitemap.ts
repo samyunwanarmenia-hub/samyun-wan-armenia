@@ -65,23 +65,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
       });
     });
-
-    // Add the new /verify/qr page for each language
-    const qrVerifyAlternates: Record<string, string> = {};
-    languages.forEach(altLang => {
-      qrVerifyAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${baseUrl}/${altLang}/verify/qr`;
-    });
-    qrVerifyAlternates['x-default'] = `${baseUrl}/hy/verify/qr`; // x-default for verify/qr page points to default language verify/qr page
-
-    sitemapEntries.push({
-      url: `${baseUrl}/${lang}/verify/qr`,
-      lastModified: lastModifiedDate,
-      changeFrequency: 'monthly',
-      priority: 0.7, // Lower priority as it's a utility page
-      alternates: {
-        languages: qrVerifyAlternates,
-      },
-    });
   });
 
   return sitemapEntries;

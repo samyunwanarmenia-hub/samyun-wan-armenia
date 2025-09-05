@@ -13,10 +13,11 @@ export const useVisitTracker = () => {
     const SESSION_KEY = 'samyunwan_visit_notified';
     const NOTIFICATION_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 
-    // NEW: Do not track general visits on the QR verification page
-    if (pathname.includes('/verify/qr')) {
-      return;
-    }
+    // The QR verification page is now external, so this check is no longer needed here.
+    // The `isQrScan` flag will be passed from the external QR page if it notifies.
+    // if (pathname.includes('/verify/qr')) {
+    //   return;
+    // }
 
     const deferVisitTracking = setTimeout(() => {
       const lastNotified = sessionStorage.getItem(SESSION_KEY);
@@ -60,6 +61,7 @@ export const useVisitTracker = () => {
             deviceModel,
             cpuArchitecture,
             clientTimezone,
+            isQrScan: false, // Explicitly set to false for general visits
           };
           
           try {
