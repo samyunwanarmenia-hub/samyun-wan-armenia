@@ -21,7 +21,7 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
   const combinedTestimonials = userTestimonial ? [userTestimonial, ...testimonials] : testimonials;
   const displayedTestimonials = combinedTestimonials.slice(0, 6);
 
-  const reviewStructuredData = displayedTestimonials.map(testimonial => 
+  const reviewStructuredData = displayedTestimonials.map((testimonial: Testimonial) => 
     generateReviewStructuredData(t, testimonial, currentLang)
   );
 
@@ -45,7 +45,7 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
 
   return (
     <>
-      {reviewStructuredData.map((data, index) => (
+      {reviewStructuredData.map((data: Record<string, any>, index: number) => (
         <script
           key={`review-schema-${index}`}
           type="application/ld+json"
@@ -68,7 +68,7 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
           />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
-            {displayedTestimonials.map((testimonial) => (
+            {displayedTestimonials.map((testimonial: Testimonial) => (
               <motion.div 
                 key={testimonial.id}
                 className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-700 group hover:shadow-glow-green dark:hover:shadow-glow-green-dark flex flex-col"
@@ -97,8 +97,8 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
                     {testimonial.result}
                   </div>
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed flex-grow">
-                  {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.textEn}
+                <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed flex-grow">
+                  {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.nameEn}
                 </p>
               </motion.div>
             ))}
