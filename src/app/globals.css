@@ -193,8 +193,8 @@
     background-clip: text;         /* Apply clipping directly */
     -webkit-text-fill-color: transparent; /* Make text transparent to show background */
     background-repeat: no-repeat;
-    background-size: 400% auto; /* Increased size to ensure full sweep */
-    animation: shine 8s linear infinite; /* Increased duration to 8s */
+    background-size: 200% auto; /* Adjusted size to ensure full sweep */
+    animation: shine 10s linear infinite; /* Increased duration to 10s */
     position: relative; /* Needed for background-position-x to work correctly */
   }
 }
@@ -216,10 +216,10 @@
 /* Keyframes for the text shine effect */
 @keyframes shine {
   0% {
-    background-position-x: -300%; /* Start far left, ensuring text is covered */
+    background-position-x: 0%; /* Start from left edge */
   }
   100% {
-    background-position-x: 100%; /* End far right, ensuring text is covered */
+    background-position-x: 100%; /* End at right edge */
   }
 }
 
