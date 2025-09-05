@@ -3,12 +3,19 @@
 import { motion } from 'framer-motion';
 
 const spinnerVariants = {
+  initial: { opacity: 0, scale: 0.8, rotate: 0 }, // Initial state for pop-in
   animate: {
+    opacity: 1,
+    scale: 1, // Scale to normal size
     rotate: 360,
     transition: {
-      repeat: Infinity,
-      duration: 1,
-      ease: "linear",
+      opacity: { duration: 0.3, ease: "easeOut" },
+      scale: { duration: 0.5, ease: "easeOut" },
+      rotate: {
+        repeat: Infinity,
+        duration: 1,
+        ease: "linear",
+      },
     },
   },
 };
@@ -33,7 +40,8 @@ const LoadingSpinner = () => {
     <motion.div
       className="w-16 h-16 border-4 border-gray-300 dark:border-gray-600 border-t-primary-500 rounded-full shadow-md" // Added shadow-md
       variants={spinnerVariants}
-      animate="animate"
+      initial="initial" // Use initial state
+      animate="animate" // Animate to visible and then loop rotation
     >
       <motion.div
         className="w-full h-full rounded-full" // Inner div for shadow animation

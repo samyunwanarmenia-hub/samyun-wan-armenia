@@ -41,10 +41,12 @@ const SplitTextAnimation: React.FC<SplitTextAnimationProps> = ({ text, delay = 0
   const textPartVariants = {
     hidden: (direction: 'left' | 'right') => ({
       x: direction === 'left' ? '-100%' : '100%', // Use 100% for full off-screen translation
+      y: 20, // Add a slight vertical offset
       opacity: 0,
     }),
     visible: {
       x: '0%',
+      y: 0, // Animate to 0 for vertical position
       opacity: 1,
       transition: {
         duration: duration, // Use the new duration prop
