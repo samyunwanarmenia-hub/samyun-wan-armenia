@@ -194,7 +194,7 @@
     -webkit-text-fill-color: transparent; /* Make text transparent to show background */
     background-repeat: no-repeat;
     background-size: 200% auto; /* Adjusted size to ensure full sweep */
-    animation: shine 10s linear infinite; /* Increased duration to 10s */
+    animation: shine 8s linear infinite; /* Increased duration to 8s (20% faster than 10s) */
     position: relative; /* Needed for background-position-x to work correctly */
   }
 }
