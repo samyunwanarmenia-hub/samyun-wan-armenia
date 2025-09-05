@@ -123,6 +123,10 @@
     --secondary-400: 210 30% 76%; /* HSL for #a5c0d2 */
     --secondary-300: 210 30% 84%; /* HSL for #bdd1de */
     --secondary-100: 210 30% 95%; /* HSL for #edf3f7 */
+
+    /* Slogan Shine Effect Colors */
+    --slogan-shine-dark: #000; /* Original dark from user's example */
+    --slogan-shine-light: #fff; /* Original light from user's example */
   }
 
   /* CSS Variables for Toast in Dark Mode */
@@ -175,6 +179,10 @@
     --secondary-900: 210 30% 13%; /* HSL for #293241 */
     --secondary-800: 210 30% 25%; /* HSL for #42556e */
     --secondary-700: 210 30% 37%; /* HSL for #5b789b */
+
+    /* Slogan Shine Effect Colors - Dark Mode */
+    --slogan-shine-dark: #1f2937; /* Dark mode background color for the gradient */
+    --slogan-shine-light: #f9fafb; /* Dark mode highlight color for the gradient */
   }
 }
 
@@ -193,6 +201,14 @@
   .dark .shadow-glow-green {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15), 0 0 15px rgba(134, 180, 134, 0.3); /* primary-500 with 30% opacity for dark mode */
   }
+
+  /* New CSS for the text shine animation */
+  .text-slogan-shine {
+    background: linear-gradient(90deg, var(--slogan-shine-dark), var(--slogan-shine-light), var(--slogan-shine-dark));
+    background-repeat: no-repeat;
+    background-size: 80%; /* Adjust as needed */
+    animation: shine 5s linear infinite;
+  }
 }
 
 /* Keyframes for the new background gradient */
@@ -206,6 +222,16 @@
 @keyframes move {
   100% {
     transform: translate3d(0, 0, 1px) rotate(360deg);
+  }
+}
+
+/* Keyframes for the text shine effect */
+@keyframes shine {
+  0% {
+    background-position-x: -500%;
+  }
+  100% {
+    background-position-x: 500%;
   }
 }
 
