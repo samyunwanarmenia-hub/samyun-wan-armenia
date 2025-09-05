@@ -269,7 +269,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
             gaEvent={{ category: 'Callback_Request', action: 'Click_SubmitCallbackRequest' }}
             ymEvent={{ category: 'Callback_Request', action: 'Click_SubmitCallbackRequest' }}
           >
-            {isSubmitting ? 'Sending...' : t.callbackRequest.submitButton}
+            {t.callbackRequest.submitButton}
           </CallToActionButton>
         </motion.div>
       </motion.form>

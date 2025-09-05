@@ -157,7 +157,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
               ymEvent={{ category: 'Order', action: 'Click_OrderModal_Submit', label: selectedProducts.join('&') }}
               className="mt-4"
             >
-              {isSubmitting ? 'Sending...' : t.orderModal.orderButton}
+              {t.orderModal.orderButton}
             </CallToActionButton>
           </motion.div>
         </form>

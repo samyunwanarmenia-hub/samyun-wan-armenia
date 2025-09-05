@@ -146,7 +146,7 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                     gaEvent={{ category: 'Review', action: 'Click_SubmitReview' }}
                     ymEvent={{ category: 'Review', action: 'Click_SubmitReview' }}
                   >
-                    {isSubmitting ? 'Sending...' : t.testimonials.submitButton}
+                    {t.testimonials.submitButton}
                   </CallToActionButton>
                   <CallToActionButton
                     type="button"

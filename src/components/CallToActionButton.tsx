@@ -100,15 +100,21 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
   const combinedClasses = `${baseClasses} ${sizeClasses[size]} ${variantClasses[variant]} ${className || ''} ${disabled ? 'opacity-50 cursor-not-allowed' : ''}`;
 
   const motionProps = {
-    whileHover: { scale: 1.08 },
-    whileTap: { scale: 0.95 },
+    whileHover: disabled ? {} : { scale: 1.08 },
+    whileTap: disabled ? {} : { scale: 0.95 },
     transition: { type: "spring", stiffness: 400, damping: 17 },
   };
 
   const content = (
     <>
-      {IconComponent && <IconComponent className={`${iconSizeClasses[size]} mr-2 ${iconClassName || ''} relative z-10`} />}
-      <span className="relative z-10">{children}</span>
+      {disabled ? (
+        <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+      ) : (
+        <>
+          {IconComponent && <IconComponent className={`${iconSizeClasses[size]} mr-2 ${iconClassName || ''} relative z-10`} />}
+          <span className="relative z-10">{children}</span>
+        </>
+      )}
       <AnimatePresence>
         {activeEffect === 'burst' && <ExplosionEffect x={effectCoords.x} y={effectCoords.y} onComplete={handleEffectComplete} />}
         {activeEffect === 'pixels' && <PixelExplosion x={effectCoords.x} y={effectCoords.y} onComplete={handleEffectComplete} />}
