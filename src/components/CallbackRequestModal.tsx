@@ -7,6 +7,7 @@ import CallToActionButton from './CallToActionButton';
 import { ProductType, CallbackPurpose, CallbackRequestModalProps } from '@/types/global';
 import { sendTelegramMessage } from '@/utils/telegramApi';
 import { showSuccess, showError } from '@/utils/toast';
+import { motion } from 'framer-motion'; // Import motion
 
 const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onClose, t, currentLang }) => {
   const [name, setName] = useState<string>('');
@@ -101,7 +102,11 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
       maxWidth="max-w-md"
     >
       <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
-        <div className="relative">
+        <motion.div 
+          className="relative"
+          whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
           <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
           <input
             type="text"
@@ -111,8 +116,12 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
             required
           />
-        </div>
-        <div className="relative">
+        </motion.div>
+        <motion.div 
+          className="relative"
+          whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
           <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
           <input
             type="tel"
@@ -122,7 +131,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
             required
           />
-        </div>
+        </motion.div>
 
         <div>
           <label className="block text-gray-700 dark:text-gray-300 text-sm font-semibold mb-2">

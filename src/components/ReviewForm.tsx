@@ -6,6 +6,7 @@ import { DbReview } from '../types/global';
 import CallToActionButton from './CallToActionButton';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { useReviewForm } from '@/hooks/useReviewForm';
+import { motion } from 'framer-motion'; // Import motion
 
 interface ReviewFormProps {
   onReviewSubmitted: (review: DbReview) => void;
@@ -72,7 +73,7 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                   <label htmlFor="name" className="block text-gray-900 dark:text-gray-50 text-sm font-bold mb-2">
                     {t.testimonials.namePlaceholder}
                   </label>
-                  <input
+                  <motion.input
                     type="text"
                     id="name"
                     className="shadow appearance-none border border-gray-200 dark:border-gray-600 rounded-lg w-full py-2.5 px-3 text-gray-900 dark:text-gray-50 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-600 bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400"
@@ -80,13 +81,15 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                     value={name}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                     required
+                    whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   />
                 </div>
                 <div className="mb-5">
                   <label htmlFor="review" className="block text-gray-900 dark:text-gray-50 text-sm font-bold mb-2">
                     {t.testimonials.reviewPlaceholder}
                   </label>
-                  <textarea
+                  <motion.textarea
                     id="review"
                     rows={4}
                     className="shadow appearance-none border border-gray-200 dark:border-gray-600 rounded-lg w-full py-2.5 px-3 text-gray-900 dark:text-gray-50 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-600 bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 resize-none"
@@ -94,6 +97,8 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                     value={reviewText}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setReviewText(e.target.value)}
                     required
+                    whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   />
                 </div>
                 <div className="flex items-center justify-center space-x-3">

@@ -87,21 +87,25 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
         {t.orderModal.deliveryInfo2}
       </p>
       <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
-        <input
+        <motion.input
           type="text"
           className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2.5 text-gray-900 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600"
           placeholder={t.orderModal.addressPlaceholder}
           value={address}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
           required
+          whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         />
-        <input
+        <motion.input
           type="tel"
           className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2.5 text-gray-900 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600"
           placeholder={t.orderModal.phonePlaceholder}
           value={phone}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
           required
+          whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
         />
         <CallToActionButton
           type="submit"

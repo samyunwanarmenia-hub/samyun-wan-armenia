@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { ImageOff } from 'lucide-react'; // Import ImageOff icon
 import { IMAGE_OPTIMIZED_WIDTHS } from '@/config/imageConfig'; // Import centralized widths
+import { motion } from 'framer-motion'; // Import motion
 
 interface OptimizedImageProps {
   src: string; // Expected format: /images/my-image.jpg
@@ -14,6 +15,7 @@ interface OptimizedImageProps {
 
 const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, loading = 'lazy', sizes }) => {
   const [imageError, setImageError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false); // New state for image load status
 
   // Extract base name from the src prop
   const lastSlashIndex = src.lastIndexOf('/');
@@ -23,6 +25,10 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, lo
   const handleImageError = () => {
     setImageError(true);
     console.error(`Failed to load image: ${src}`);
+  };
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
   };
 
   if (imageError) {
@@ -43,7 +49,11 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, lo
   const defaultJpgSrc = `/optimized/${baseName}-150w.jpg`;
 
   return (
-    <picture>
+    <motion.picture
+      initial={{ opacity: 0 }}
+      animate={{ opacity: imageLoaded ? 1 : 0 }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
       {/* Try AVIF first */}
       <source type="image/avif" srcSet={generateSrcset('avif')} sizes={sizes} />
       {/* Then WebP */}
@@ -57,8 +67,9 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, lo
         className={className}
         loading={loading}
         onError={handleImageError}
+        onLoad={handleImageLoad} // Call handleImageLoad on successful load
       />
-    </picture>
+    </motion.picture>
   );
 };
 
