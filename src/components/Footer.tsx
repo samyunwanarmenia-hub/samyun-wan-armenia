@@ -24,7 +24,7 @@ const Footer = () => { // Removed t from props
   return (
     <footer className="bg-gray-900 dark:bg-gray-950 text-white py-8">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-4 gap-6 mb-6">
+        <div className="grid md:grid-cols-4 gap-6 mb-6 mx-auto max-w-7xl"> {/* Added mx-auto max-w-7xl for centering */}
           <div>
             <div className="flex items-center space-x-2 mb-5">
               <Link href={getHomePath()} className="flex items-center">
