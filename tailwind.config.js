@@ -27,7 +27,23 @@ export default {
           800: '#384838',
           900: '#1e241e',
         },
-        // ... rest of the file
+        // New secondary (Soft Blue/Gray)
+        secondary: {
+          50: '#f8fbfd',
+          100: '#edf3f7',
+          200: '#d5e2eb',
+          300: '#bdd1de',
+          400: '#a5c0d2',
+          500: '#8dafd5', // Adjusted to be a bit more blue
+          600: '#749bc8', // Adjusted
+          700: '#5b789b',
+          800: '#42556e',
+          900: '#293241',
+        },
+        brandRed: { // Ensure brandRed is defined if used elsewhere
+          400: '#ef4444',
+          600: '#dc2626',
+        }
       },
       // ... rest of the theme object
     },

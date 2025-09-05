@@ -116,6 +116,13 @@
     --gray-700: 220 12% 43%; /* HSL for #697586 */
     --gray-800: 220 12% 28%; /* HSL for #47505e */
     --gray-900: 220 12% 18%; /* HSL for #2e343e */
+    
+    /* Secondary HSL for Supabase Auth UI - Light Mode */
+    --secondary-600: 210 30% 60%; /* HSL for #749bc8 */
+    --secondary-500: 210 30% 69%; /* HSL for #8dafd5 */
+    --secondary-400: 210 30% 76%; /* HSL for #a5c0d2 */
+    --secondary-300: 210 30% 84%; /* HSL for #bdd1de */
+    --secondary-100: 210 30% 95%; /* HSL for #edf3f7 */
   }
 
   /* CSS Variables for Toast in Dark Mode */
@@ -158,6 +165,24 @@
     --gray-700: 220 12% 43%; /* HSL for #697586 */
     --gray-800: 220 12% 28%; /* HSL for #47505e */
     --gray-900: 220 12% 18%; /* HSL for #2e343e */
+
+    /* Secondary HSL for Supabase Auth UI - Dark Mode */
+    --secondary-600: 210 30% 60%; /* HSL for #749bc8 */
+    --secondary-500: 210 30% 69%; /* HSL for #8dafd5 */
+    --secondary-400: 210 30% 76%; /* HSL for #a5c0d2 */
+    --secondary-300: 210 30% 84%; /* HSL for #bdd1de */
+    --secondary-100: 210 30% 95%; /* HSL for #edf3f7 */
+    --secondary-900: 210 30% 13%; /* HSL for #293241 */
+    --secondary-800: 210 30% 25%; /* HSL for #42556e */
+    --secondary-700: 210 30% 37%; /* HSL for #5b789b */
+  }
+}
+
+@layer components {
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
   }
 }
 
