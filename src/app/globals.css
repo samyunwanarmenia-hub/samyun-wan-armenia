@@ -89,14 +89,14 @@
     --shine-color: #ffffff;
 
     /* FAB Colors - Light Mode */
-    --fab-bg: #6c906c; /* primary-600 */
-    --fab-shadow: #b8d4b8; /* primary-300 */
-    --fab-border: #526c52; /* primary-700 */
-    --fab-hover-bg: #86b486; /* primary-500 */
-    --fab-hover-shadow: #9fc49f; /* primary-400 */
-    --fab-action-bg: #6c906c; /* primary-600 */
+    --fab-bg: theme('colors.primary.600'); /* Using Tailwind variable */
+    --fab-shadow: theme('colors.primary.300'); /* Using Tailwind variable */
+    --fab-border: theme('colors.primary.700'); /* Using Tailwind variable */
+    --fab-hover-bg: theme('colors.primary.500'); /* Using Tailwind variable */
+    --fab-hover-shadow: theme('colors.primary.400'); /* Using Tailwind variable */
+    --fab-action-bg: theme('colors.primary.600'); /* Using Tailwind variable */
     --fab-action-shadow-rgb: 108, 144, 108; /* RGB for primary-600 */
-    --fab-action-hover-bg: #86b486; /* primary-500 */
+    --fab-action-hover-bg: theme('colors.primary.500'); /* Using Tailwind variable */
 
     /* Shine Text Animation Colors - Light Mode */
     --shine-text-base-color: rgba(0, 0, 0, 0.3); /* Dark text, transparent */
@@ -135,14 +135,14 @@
     --tw-shadow-color-neon-purple: #bd00ff;
 
     /* FAB Colors - Dark Mode */
-    --fab-bg: #384838; /* primary-800 */
-    --fab-shadow: #526c52; /* primary-700 */
-    --fab-border: #1e241e; /* primary-900 */
-    --fab-hover-bg: #526c52; /* primary-700 */
-    --fab-hover-shadow: #6c906c; /* primary-600 */
-    --fab-action-bg: #384838; /* primary-800 */
+    --fab-bg: theme('colors.primary.800'); /* Using Tailwind variable */
+    --fab-shadow: theme('colors.primary.700'); /* Using Tailwind variable */
+    --fab-border: theme('colors.primary.900'); /* Using Tailwind variable */
+    --fab-hover-bg: theme('colors.primary.700'); /* Using Tailwind variable */
+    --fab-hover-shadow: theme('colors.primary.600'); /* Using Tailwind variable */
+    --fab-action-bg: theme('colors.primary.800'); /* Using Tailwind variable */
     --fab-action-shadow-rgb: 56, 72, 56; /* RGB for primary-800 */
-    --fab-action-hover-bg: #526c52; /* primary-700 */
+    --fab-action-hover-bg: theme('colors.primary.700'); /* Using Tailwind variable */
 
     /* Shine Text Animation Colors - Dark Mode */
     --shine-text-base-color: rgba(255, 255, 255, 0.3); /* Light text, transparent */
@@ -422,7 +422,7 @@
   position: absolute;
   bottom: 0;
   right: 0;
-  border: 1px solid var(--tw-colors-gray-300); /* Use Tailwind color */
+  border: 1px solid theme('colors.gray.300'); /* Using Tailwind variable */
   width: 10rem;
   height: 10rem;
   transition: all 0.2s ease-out; /* Ускоренное открытие */
@@ -431,7 +431,7 @@
 }
 
 .dark .fab-wheel {
-  border: 1px solid var(--tw-colors-gray-700);
+  border: 1px solid theme('colors.gray.700'); /* Using Tailwind variable */
 }
 
 .fab-checkbox:checked ~ .fab-wheel {

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from 'react';
-import { motion } from 'framer-motion'; // Removed AnimatePresence as it's not used
-import { MessageCircle, Phone, PhoneCall } from 'lucide-react'; // Removed LifeBuoy as it's not used
+import { motion } from 'framer-motion';
+import { MessageCircle, Phone, PhoneCall } from 'lucide-react';
 import { ContactModalType } from '../types/global';
 import { useLayoutContext } from '@/context/LayoutContext';
 
@@ -102,10 +102,10 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
             initial={{ opacity: 0, scale: 0 }}
             animate={isOpen ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
             transition={{
-              delay: isOpen ? index * 0.05 : (menuItemsData.length - 1 - index) * 0.02, // Ускоренная задержка
+              delay: isOpen ? index * 0.05 : (menuItemsData.length - 1 - index) * 0.02,
               type: "spring",
-              stiffness: 550, // Увеличена жесткость
-              damping: 18 // Слегка уменьшено демпфирование
+              stiffness: 600, // Increased stiffness for snappier feel
+              damping: 20 // Adjusted damping
             }}
             onClick={() => handleMenuItemClick(item.action, item.gaLabel, item.ymLabel)}
             whileHover={{ scale: 1.1 }}

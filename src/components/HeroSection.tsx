@@ -59,7 +59,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
                 variants={fadeInUpVariants}
                 initial="hidden"
                 animate="visible"
-                transition={{ delay: 1.8 }}
+                transition={{ delay: 1.6 }} 
               >
                 {t.hero.subtitle}
               </motion.span>
@@ -67,11 +67,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             
             {/* Tagline */}
             <motion.p 
-              className="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed relative overflow-hidden inline-block" /* Changed mb-6 to mb-8 */
+              className="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed relative overflow-hidden inline-block"
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 2.2 }}
+              transition={{ delay: 2.0 }} 
             >
               {t.hero.tagline}
             </motion.p>
@@ -82,7 +82,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 2.5 }}
+              transition={{ delay: 2.3 }} 
             >
               <CallToActionButton 
                 onClick={() => openOrderModal(mainProduct.labelKey)}
@@ -111,12 +111,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             </motion.div>
 
             {/* HeroStats */}
-            <HeroStats t={t} stats={stats} startDelay={3.0} />
+            <HeroStats t={t} stats={stats} startDelay={2.8} /> {/* Adjusted startDelay */}
           </div>
 
           {/* Right Column: QR Code Block */}
           <div className="flex justify-center lg:justify-end items-center mt-10 lg:mt-0"> {/* Align right on large screens */}
-            <HeroQrCodeBlock delay={3.5} />
+            <HeroQrCodeBlock delay={3.2} /> {/* Adjusted delay */}
           </div>
         </div>
       </div>

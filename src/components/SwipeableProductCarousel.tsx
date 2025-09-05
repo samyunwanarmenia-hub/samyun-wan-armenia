@@ -59,26 +59,24 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
           initial="enter"
           animate="center"
           exit="exit"
-          className="absolute inset-0 flex flex-col items-center justify-center p-6 group" // Added group class for hover effects
+          className="absolute inset-0 flex flex-col items-center justify-center p-6 group"
         >
-          {/* This motion.div acts as the 'block' from your CSS */}
           <motion.div
             className="relative w-full h-full max-w-[300px] max-h-[450px] p-6 rounded-2xl overflow-hidden
                        bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700
                        flex flex-col items-center justify-center text-center"
-            initial={{ boxShadow: "none" }} // No initial shadow
+            initial={{ boxShadow: "none" }}
             whileHover={{ 
-              scale: 1.03, // Slight scale on hover
-              boxShadow: "0px 0px 70px rgba(17, 17, 17, 0.7)" // Stronger shadow on hover
+              scale: 1.03,
+              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.1), var(--tw-shadow-glow-green)" // More pronounced shadow with glow
             }}
             whileTap={{ scale: 0.98 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           >
-            {/* The circleLight effect */}
             <span
               className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-500
                          bg-[radial-gradient(circle_at_80px_40px,_rgba(255,255,255,0.8),_transparent)]
-                         opacity-0 group-hover:opacity-40" // Appears on group hover
+                         opacity-0 group-hover:opacity-40"
             />
 
             <motion.div

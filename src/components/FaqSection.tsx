@@ -44,13 +44,12 @@ const FaqSection = () => {
       className="relative py-12 text-gray-900 dark:text-gray-50 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
-      whileInView="visible" // Changed to whileInView
+      whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
       <div className="container mx-auto px-4 max-w-3xl relative z-10">
         <SectionHeader
           title={t.nav.faq}
-          // Removed t={t}
         />
 
         <div className="space-y-3">
@@ -60,16 +59,20 @@ const FaqSection = () => {
               className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
               variants={itemVariants}
               initial="hidden"
-              whileInView="visible" // Changed to whileInView
+              whileInView="visible"
               transition={{ delay: index * 0.1 + 0.2, type: "spring", stiffness: 400, damping: 17 }}
-              whileHover={{ scale: 1.02 }}
+              whileHover={{ 
+                scale: 1.02, 
+                y: -2, // Subtle lift
+                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.04)" // Enhanced shadow
+              }}
               whileTap={{ scale: 0.98 }}
             >
               <motion.button
                 className="flex justify-between items-center w-full p-5 text-left text-lg font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                 onClick={() => toggleQuestion(q.key)}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.01 }} // Slightly less scale for the button itself
+                whileTap={{ scale: 0.99 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 {t.faq[q.key]}

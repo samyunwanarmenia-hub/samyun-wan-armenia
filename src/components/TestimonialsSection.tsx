@@ -64,16 +64,19 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
           <SectionHeader
             title={t.testimonials.title}
             subtitle={t.testimonials.subtitle}
-            // Removed t={t}
           />
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
             {displayedTestimonials.map((testimonial: Testimonial) => (
               <motion.div 
                 key={testimonial.id}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-700 group hover:shadow-glow-green dark:hover:shadow-glow-green-dark flex flex-col"
+                className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-700 group flex flex-col"
                 variants={itemVariants}
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ 
+                  scale: 1.05, 
+                  y: -5, // Subtle lift
+                  boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
+                }}
                 whileTap={{ scale: 0.98 }}
               >
                 <div className="flex items-center mb-3">

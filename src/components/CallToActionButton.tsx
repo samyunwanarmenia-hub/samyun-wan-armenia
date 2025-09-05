@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ExplosionEffect from './ExplosionEffect';
-import PixelExplosion from './PixelExplosion'; // Import PixelExplosion
+import PixelExplosion from './PixelExplosion';
 import { Icon, AnalyticsEvent } from '../types/global';
 
 interface CallToActionButtonProps {
@@ -19,7 +19,7 @@ interface CallToActionButtonProps {
   disabled?: boolean;
   iconClassName?: string;
   type?: 'button' | 'submit' | 'reset';
-  interactionEffect?: 'burst' | 'pixels'; // Changed from enableExplosion
+  interactionEffect?: 'burst' | 'pixels';
   gaEvent?: AnalyticsEvent;
   ymEvent?: AnalyticsEvent;
 }
@@ -37,7 +37,7 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
   disabled = false,
   iconClassName,
   type = 'button',
-  interactionEffect, // Changed from enableExplosion
+  interactionEffect,
   gaEvent,
   ymEvent,
 }) => {
@@ -83,7 +83,7 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
   };
 
   const variantClasses: Record<NonNullable<CallToActionButtonProps['variant']>, string> = {
-    primary: "bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:shadow-glow-green",
+    primary: "bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:shadow-glow-green", // Ensure this uses glow-green
     secondary: "bg-gray-200 dark:bg-gray-700 text-brandRed-600 dark:text-brandRed-400 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-xl",
     outline: "border-2 border-brandRed-600 text-brandRed-600 hover:bg-brandRed-600 hover:text-white dark:border-brandRed-400 dark:text-brandRed-400 dark:hover:bg-brandRed-600 dark:hover:text-white",
     ghost: "border-2 border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 hover:bg-primary-100 dark:hover:bg-primary-800 hover:text-primary-700 dark:hover:text-primary-200",

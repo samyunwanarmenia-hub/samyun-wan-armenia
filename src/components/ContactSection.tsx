@@ -31,25 +31,28 @@ const ContactSection = () => {
       className="relative py-12 text-gray-900 dark:text-gray-50 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
-      whileInView="visible" // Changed to whileInView
+      whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           title={t.contact.title}
-          // Removed t={t}
         />
 
-        <div className="grid md:grid-cols-3 gap-6 mb-12 mx-auto max-w-6xl"> {/* Added mx-auto max-w-6xl for centering */}
+        <div className="grid md:grid-cols-3 gap-6 mb-12 mx-auto max-w-6xl">
           {contactInfoData.map((item, index) => (
             <motion.div 
               key={item.key} 
               className="text-center bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-lg border border-gray-200 dark:border-gray-700 group"
               variants={itemVariants}
               initial="hidden"
-              whileInView="visible" // Changed to whileInView
+              whileInView="visible"
               transition={{ delay: index * 0.1 + 0.2 }}
-              whileHover={{ scale: 1.05, boxShadow: "0 20px 25px -5px rgba(248, 113, 113, 0.3), 0 10px 10px -5px rgba(248, 113, 113, 0.2)" }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -5, // Subtle lift
+                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
+              }}
               whileTap={{ scale: 0.98 }}
             >
               <motion.div
@@ -69,7 +72,7 @@ const ContactSection = () => {
           className="flex flex-col sm:flex-row justify-center space-x-0 sm:space-x-4 space-y-3 sm:space-y-0"
           variants={buttonVariants}
           initial="hidden"
-          whileInView="visible" // Changed to whileInView
+          whileInView="visible"
           transition={{ delay: contactInfoData.length * 0.1 + 0.4 }}
         >
           <CallToActionButton 

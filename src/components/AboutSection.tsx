@@ -34,26 +34,30 @@ const AboutSection = () => {
       className="relative py-12 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
-      whileInView="visible" // Changed to whileInView
+      whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           title={t.about.title}
           subtitle={t.about.subtitle}
-          // Removed t={t}
         />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto max-w-6xl">
           {aboutItems.map((item, index) => (
             <motion.div 
               key={item.key}
-              className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group hover:shadow-glow-green dark:hover:shadow-glow-green-dark"
+              className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group"
               variants={itemVariants}
               initial="hidden"
-              whileInView="visible" // Changed to whileInView
+              whileInView="visible"
               transition={{ delay: index * 0.1 + 0.2 }}
-              whileHover={{ scale: 1.05, rotate: 1 }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -5, // Subtle lift
+                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
+              }}
+              whileTap={{ scale: 0.98 }}
             >
               <div className="flex items-center mb-3">
                 <motion.div 

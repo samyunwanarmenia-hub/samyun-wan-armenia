@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from 'framer-motion';
-// Removed TranslationKeys import as 't' prop is no longer needed
 
 interface SectionHeaderProps {
   title: string;
@@ -9,8 +8,18 @@ interface SectionHeaderProps {
   className?: string;
   titleClassName?: string;
   subtitleClassName?: string;
-  // Removed 't: TranslationKeys;'
 }
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
 
 const itemVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -23,22 +32,28 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
   className,
   titleClassName,
   subtitleClassName,
-  // Removed 't: _t,' from destructuring
 }) => {
   return (
     <motion.div 
       className={`text-center mb-12 ${className || ''}`}
-      variants={itemVariants}
+      variants={containerVariants}
       initial="hidden"
-      animate="visible"
+      whileInView="visible" // Use whileInView for section headers
+      viewport={{ once: true, amount: 0.3 }}
     >
-      <h2 className={`text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-5 ${titleClassName || ''}`}>
+      <motion.h2 
+        className={`text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-5 ${titleClassName || ''}`}
+        variants={itemVariants}
+      >
         {title}
-      </h2>
+      </motion.h2>
       {subtitle && (
-        <p className={`text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto ${subtitleClassName || ''}`}>
+        <motion.p 
+          className={`text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto ${subtitleClassName || ''}`}
+          variants={itemVariants}
+        >
           {subtitle}
-        </p>
+        </motion.p>
       )}
     </motion.div>
   );

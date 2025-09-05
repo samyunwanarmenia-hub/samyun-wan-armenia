@@ -24,26 +24,30 @@ const BenefitsSection = () => {
       className="relative py-12 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
-      whileInView="visible" // Changed to whileInView
+      whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
     >
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           title={t.benefits.title}
           subtitle={t.benefits.subtitle}
-          // Removed t={t}
         />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-6xl">
           {benefitsItemsData.map((benefit, index) => (
             <motion.div 
               key={benefit.key}
-              className="relative overflow-hidden bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group hover:shadow-glow-green dark:hover:shadow-glow-green-dark"
+              className="relative overflow-hidden bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group"
               variants={itemVariants}
               initial="hidden"
-              whileInView="visible" // Changed to whileInView
+              whileInView="visible"
               transition={{ delay: index * 0.1 + 0.2 }}
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ 
+                scale: 1.05, 
+                y: -5, // Subtle lift
+                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
+              }}
+              whileTap={{ scale: 0.98 }}
             >
               <div className="absolute top-0 right-0 w-32 h-32 opacity-10 transform rotate-12 group-hover:rotate-45 transition-transform duration-500">
                 <div className={`w-full h-full bg-gradient-to-br ${benefit.gradient} rounded-full`} />
