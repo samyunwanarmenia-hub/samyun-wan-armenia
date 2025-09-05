@@ -51,7 +51,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
                 text="Samyun Wan Armenia" 
                 delay={0.3}
                 duration={1.2}
-                /* Align left on large screens */
                 className="mb-1.5 lg:justify-start" 
               />
               {/* Subtitle */}
@@ -68,7 +67,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             
             {/* Tagline - NOW WITH SHINE ANIMATION */}
             <motion.p 
-              className="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed relative overflow-hidden inline-block text-shine-animation"
+              className="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed relative overflow-hidden inline-block"
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
@@ -79,7 +78,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
 
             {/* Buttons */}
             <motion.div 
-              /* Align left on large screens */
               className="flex flex-col sm:flex-row gap-3 mb-10 justify-center lg:justify-start" 
               variants={fadeInUpVariants}
               initial="hidden"

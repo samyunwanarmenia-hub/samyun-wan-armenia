@@ -455,39 +455,4 @@
 }
 
 /* Text Shine Animation */
-.text-shine-animation {
-  background: var(--shine-gradient-dark) linear-gradient(to right, var(--shine-gradient-dark) 0%, var(--shine-gradient-dark) 40%, var(--shine-gradient-highlight) 50%, var(--shine-gradient-dark) 60%, var(--shine-gradient-dark) 100%) 0 0 no-repeat;
-  -webkit-background-size: 150px;
-  background-size: 150px;
-  color: var(--shine-text-base-color);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent; /* Ensure text color is transparent to show background */
-  animation-name: shine;
-  animation-duration: 2s; /* 2-секундный интервал */
-  animation-iteration-count: infinite;
-  text-shadow: 0 0px 0px rgba(255, 255, 255, 0.5); /* Keep original shadow */
-}
-
-.dark .text-shine-animation {
-  background: var(--shine-gradient-dark) linear-gradient(to right, var(--shine-gradient-dark) 0%, var(--shine-gradient-dark) 40%, var(--shine-gradient-highlight) 50%, var(--shine-gradient-dark) 60%, var(--shine-gradient-dark) 100%) 0 0 no-repeat;
-  -webkit-background-size: 150px;
-  background-size: 150px;
-  color: var(--shine-text-base-color);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation-name: shine;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-  text-shadow: 0 0px 0px rgba(0, 0, 0, 0.5); /* Darker shadow for dark mode */
-}
-
-@keyframes shine {
-  0% {
-    background-position: -150px 0; /* Start with the shine fully off-screen to the left */
-  }
-  100% {
-    background-position: calc(100% + 150px) 0; /* End with the shine fully off-screen to the right */
-  }
-}
+/* Removed .text-shine-animation and @keyframes shine */
