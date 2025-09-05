@@ -25,6 +25,8 @@ export const en: TranslationKeys = {
     qrVerificationTitle: 'Scan QR Code',
     qrVerificationSubtitle: 'Scan to verify',
     seo_title_addon: 'What is Samyun Wan and its real effect | Sports Nutrition',
+    qrBlockTitle: 'Verify Authenticity', // New translation
+    qrBlockDescription: 'Scan the QR code to ensure you have an original Samyun Wan product.', // New translation
   },
   stats: {
     customers: 'Happy Customers',

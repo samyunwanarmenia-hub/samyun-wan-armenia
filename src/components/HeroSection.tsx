@@ -9,6 +9,7 @@ import OptimizedImage from './OptimizedImage';
 import { productShowcaseData } from '../data/productShowcaseData';
 import { useLayoutContext } from '@/context/LayoutContext';
 import SplitTextAnimation from './SplitTextAnimation'; // Импортируем новый компонент
+import HeroQrCodeBlock from './HeroQrCodeBlock'; // Import the new QR code block
 
 interface HeroSectionProps {
   stats: StatItem[];
@@ -127,6 +128,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
 
             {/* HeroStats */}
             <HeroStats t={t} stats={stats} startDelay={3.0} />
+
+            {/* New QR Code Block */}
+            <HeroQrCodeBlock delay={3.5} /> {/* Added with a delay after stats */}
           </div>
 
           {/* Image */}
