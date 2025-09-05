@@ -30,6 +30,7 @@ export function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Match all paths except for static files and API routes
+    // Ensure all new page routes are covered by this matcher
     '/((?!_next|api|favicon.ico|site.webmanifest|robots.txt|images|fonts|optimized|loading.gif|testimonial-video.mp4).*)',
   ],
 };

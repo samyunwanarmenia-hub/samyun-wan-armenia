@@ -1,22 +1,21 @@
 "use client";
 
 import { useCallback } from 'react';
-// Removed: import { useLayoutContext } from '@/context/LayoutContext'; // Больше не нужен
 import { SectionId } from '@/types/global';
 
-const useNavigationUtils = (currentLang: string) => { // Принимаем currentLang как параметр
-  // Removed: const { currentLang } = useLayoutContext(); // Больше не нужен
-
+const useNavigationUtils = (currentLang: string) => {
   const getHomePath = useCallback(() => {
     return `/${currentLang}`;
   }, [currentLang]);
 
   const getSectionPath = useCallback((sectionId: SectionId) => {
-    const pageRoutes: SectionId[] = ['products'];
+    // These sections are now dedicated pages
+    const pageRoutes: SectionId[] = ['products', 'about', 'benefits', 'testimonials', 'faq', 'contact'];
     
     if (pageRoutes.includes(sectionId)) {
       return `/${currentLang}/${sectionId}`;
     }
+    // For sections that are still anchors on the home page (if any remain, though none do after this change)
     return `/${currentLang}#${sectionId}`;
   }, [currentLang]);
 

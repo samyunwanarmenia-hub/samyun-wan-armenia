@@ -7,6 +7,7 @@ const baseUrl = 'https://samyunwanarmenia.netlify.app'; // Replace with your act
 export default function sitemap(): MetadataRoute.Sitemap {
   const languages = Object.keys(translations);
   // Filter out 'home' as it's handled by the root and language-specific roots
+  // Now all navigationSections are treated as potential pages
   const staticPages = navigationSections.map(section => section.id).filter(id => id !== 'home');
 
   const sitemapEntries: MetadataRoute.Sitemap = [];

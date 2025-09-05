@@ -17,8 +17,8 @@ const Footer = () => { // Removed t from props
   const { t, currentLang, openAuthenticityModal } = useLayoutContext(); // Get t, currentLang and openAuthenticityModal from context
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang); // Get navigation utilities, передаем currentLang
 
+  // Filter navigation sections for footer links
   const aboutLinks = navigationSections.filter(s => ['about', 'benefits', 'testimonials', 'contact'].includes(s.id));
-  // Products link in footer should now use nav.products for the general link
   const productLinks = navigationSections.filter(s => ['products', 'faq'].includes(s.id)); 
 
   return (

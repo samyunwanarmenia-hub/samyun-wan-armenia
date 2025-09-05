@@ -10,7 +10,7 @@ export const navigationSections: NavSection[] = [
   { id: 'about', labelKey: 'about' },
   { id: 'benefits', labelKey: 'benefits' },
   { id: 'products', labelKey: 'products' },
-  { id: 'testimonials', labelKey: 'testimonials' },
-  { id: 'faq', labelKey: 'faq' },
-  { id: 'contact', labelKey: 'contact' },
+  { id: 'testimonials', labelKey: 'testimonials' }, // Now a dedicated page
+  { id: 'faq', labelKey: 'faq' },                   // Now a dedicated page
+  { id: 'contact', labelKey: 'contact' },           // Now a dedicated page
 ];

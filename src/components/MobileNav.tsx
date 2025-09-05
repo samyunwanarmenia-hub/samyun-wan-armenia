@@ -83,7 +83,7 @@ const MobileNav: React.FC<MobileNavProps> = () => {
     <>
       <button
         onClick={toggleMenu}
-        className="lg:hidden p-2 relative w-9 h-9 flex flex-col justify-around items-center text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md z-50"
+        className="md:hidden p-2 relative w-9 h-9 flex flex-col justify-around items-center text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md z-50"
         aria-label={isOpen ? t.nav.close : t.nav.open}
       >
         <motion.span

@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
             <Link href={getHomePath()} className="flex items-center">
-              <span className="text-gray-900 dark:text-gray-50 text-xl font-bold">
+              <span className="text-lg sm:text-xl font-bold text-gray-900 dark:text-gray-50 whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Adjusted text size and added ellipsis for small screens */}
                 {t.hero.title}
               </span>
             </Link>
