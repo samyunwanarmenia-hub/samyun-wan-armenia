@@ -69,6 +69,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, lo
         onError={handleImageError}
         onLoad={handleImageLoad} // Call handleImageLoad on successful load
         whileHover={{ scale: 1.02 }} // Subtle scale on hover
+        whileTap={{ scale: 0.98 }} // Subtle scale on tap
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
       />
     </motion.picture>
