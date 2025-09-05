@@ -400,7 +400,7 @@
   border: 1px solid var(--tw-colors-gray-300); /* Use Tailwind color */
   width: 10rem;
   height: 10rem;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease-out; /* Ускоренное открытие */
   transform-origin: bottom right;
   transform: scale(0);
 }

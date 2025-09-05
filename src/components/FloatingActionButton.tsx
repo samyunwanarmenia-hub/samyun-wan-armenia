@@ -102,7 +102,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
             initial={{ opacity: 0, scale: 0 }}
             animate={isOpen ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
             transition={{
-              delay: isOpen ? index * 0.07 : (menuItemsData.length - 1 - index) * 0.03, // Ускоренная задержка
+              delay: isOpen ? index * 0.05 : (menuItemsData.length - 1 - index) * 0.02, // Ускоренная задержка
               type: "spring",
               stiffness: 550, // Увеличена жесткость
               damping: 18 // Слегка уменьшено демпфирование
