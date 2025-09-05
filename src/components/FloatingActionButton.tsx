@@ -52,32 +52,35 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
     }
   };
 
+  // Define menu items with angles for radial positioning
   const menuItemsData = [
     {
       label: t.contactModal.callUsButton,
       icon: Phone,
       action: () => openContactModal('call'),
-      positionClass: 'fab-action-1',
       gaLabel: 'Call_FAB_Menu',
       ymLabel: 'Call_FAB_Menu',
+      angle: 90, // Angle in degrees (straight up)
     },
     {
       label: t.contactModal.whatsapp,
       icon: MessageCircle,
       action: () => openContactModal('message'),
-      positionClass: 'fab-action-2',
       gaLabel: 'WhatsApp_FAB_Menu',
       ymLabel: 'WhatsApp_FAB_Menu',
+      angle: 135, // Angle in degrees (up-left)
     },
     {
       label: t.contactModal.callbackButton,
       icon: PhoneCall,
       action: openCallbackRequestModal,
-      positionClass: 'fab-action-3',
       gaLabel: 'Callback_FAB_Menu',
       ymLabel: 'Callback_FAB_Menu',
+      angle: 180, // Angle in degrees (straight left)
     },
   ];
+
+  const radius = 80; // Distance from the center of the main FAB to the center of action buttons
 
   return (
     <div className="fab-wrapper">
@@ -94,28 +97,39 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
         <span className="fab-dots fab-dots-3" />
       </label>
 
-      <div className="fab-wheel">
-        {menuItemsData.map((item, index) => (
-          <motion.div
-            key={index}
-            className={`fab-action ${item.positionClass}`}
-            initial={{ opacity: 0, scale: 0 }}
-            animate={isOpen ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
-            transition={{
-              delay: isOpen ? index * 0.05 : (menuItemsData.length - 1 - index) * 0.02,
-              type: "spring",
-              stiffness: 600, // Increased stiffness for snappier feel
-              damping: 20 // Adjusted damping
-            }}
-            onClick={() => handleMenuItemClick(item.action, item.gaLabel, item.ymLabel)}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            aria-label={item.label}
-          >
-            <item.icon className="w-6 h-6" />
-          </motion.div>
-        ))}
-      </div>
+      <motion.div
+        className="fab-wheel"
+        initial={{ scale: 0 }}
+        animate={isOpen ? { scale: 1 } : { scale: 0 }}
+        transition={{ type: "spring", stiffness: 600, damping: 20 }}
+      >
+        {menuItemsData.map((item, index) => {
+          const angleRad = (item.angle * Math.PI) / 180;
+          const xPos = radius * Math.cos(angleRad);
+          const yPos = radius * Math.sin(angleRad);
+
+          return (
+            <motion.div
+              key={index}
+              className="fab-action"
+              initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
+              animate={isOpen ? { opacity: 1, scale: 1, x: -xPos, y: -yPos } : { opacity: 0, scale: 0, x: 0, y: 0 }}
+              transition={{
+                delay: isOpen ? index * 0.05 : (menuItemsData.length - 1 - index) * 0.02,
+                type: "spring",
+                stiffness: 600,
+                damping: 20
+              }}
+              onClick={() => handleMenuItemClick(item.action, item.gaLabel, item.ymLabel)}
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label={item.label}
+            >
+              <item.icon className="w-6 h-6" />
+            </motion.div>
+          );
+        })}
+      </motion.div>
     </div>
   );
 };

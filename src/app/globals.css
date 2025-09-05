@@ -431,12 +431,13 @@
   position: absolute;
   bottom: 0;
   right: 0;
+  /* Removed width, height, transform, transition, transform-origin */
+  /* These are now controlled by Framer Motion in FloatingActionButton.tsx */
   border: 1px solid theme('colors.gray.300'); /* Using Tailwind variable */
-  width: 10rem;
-  height: 10rem;
-  transition: all 0.2s ease-out; /* Ускоренное открытие */
-  transform-origin: bottom right;
-  transform: scale(0);
+  border-radius: 50%; /* Ensure it's round */
+  width: 10rem; /* Keep a base size for layout */
+  height: 10rem; /* Keep a base size for layout */
+  pointer-events: none; /* Initially prevent interaction */
 }
 
 .dark .fab-wheel {
@@ -444,10 +445,13 @@
 }
 
 .fab-checkbox:checked ~ .fab-wheel {
-  transform: scale(1);
+  pointer-events: auto; /* Enable interaction when open */
 }
+
 .fab-action {
   position: absolute;
+  /* Removed top, right, left, bottom, transition */
+  /* These are now controlled by Framer Motion in FloatingActionButton.tsx */
   background: var(--fab-action-bg); /* Используем новую переменную */
   width: 3rem;
   height: 3rem;
@@ -457,36 +461,20 @@
   justify-content: center;
   color: White;
   box-shadow: 0 0.1rem 1rem rgba(var(--fab-action-shadow-rgb), 0.82); /* Используем новую переменную RGB */
-  transition: all 1s ease;
   opacity: 0.9; /* Добавлена прозрачность */
   cursor: pointer; /* Indicate it's clickable */
-}
-
-.fab-checkbox:checked ~ .fab-wheel .fab-action {
-  opacity: 1;
+  /* Center the action button within its initial 0,0 position */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .fab-action:hover {
   background-color: var(--fab-action-hover-bg); /* Используем новую переменную */
 }
 
-.fab-wheel .fab-action-1 {
-  right: -1rem;
-  top: 0;
-}
-
-.fab-wheel .fab-action-2 {
-  right: 3.4rem;
-  top: 0.5rem;
-}
-.fab-wheel .fab-action-3 {
-  left: 0.5rem;
-  bottom: 3.4rem;
-}
-.fab-wheel .fab-action-4 {
-  left: 0;
-  bottom: -1rem;
-}
+/* Removed specific fab-action-1, fab-action-2, etc. positioning */
+/* These are now handled by Framer Motion's x and y properties */
 
 /* Text Shine Animation */
 /* Removed .text-shine-animation and @keyframes shine */
