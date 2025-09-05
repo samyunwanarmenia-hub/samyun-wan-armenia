@@ -5,11 +5,11 @@ import { motion } from 'framer-motion';
 import { StatItem } from '../types/global';
 import HeroStats from './HeroStats';
 import CallToActionButton from './CallToActionButton';
-import OptimizedImage from './OptimizedImage';
+// Removed OptimizedImage import as it's no longer used in this component
 import { productShowcaseData } from '../data/productShowcaseData';
 import { useLayoutContext } from '@/context/LayoutContext';
-import SplitTextAnimation from './SplitTextAnimation'; // Импортируем новый компонент
-import HeroQrCodeBlock from './HeroQrCodeBlock'; // Import the new QR code block
+import SplitTextAnimation from './SplitTextAnimation';
+import HeroQrCodeBlock from './HeroQrCodeBlock';
 
 interface HeroSectionProps {
   stats: StatItem[];
@@ -21,26 +21,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
   // Variants for general fade-in-up animation
   const fadeInUpVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: "easeOut" } } // Changed duration to 0.9 (50% slower than original 0.6)
+    visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: "easeOut" } }
   };
 
-  // Variants for the image
-  const imageVariants = {
-    hidden: { opacity: 0, scale: 0.8, y: 50 },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
-      y: 0, 
-      transition: { 
-        delay: 2.0, // Start image animation after title slide-in is well underway
-        type: "spring", 
-        stiffness: 100, 
-        damping: 10 
-      } 
-    }
-  };
+  // Removed imageVariants as the image block is being removed
 
-  const mainProduct = productShowcaseData[0]; // Get the first product (weight gain)
+  const mainProduct = productShowcaseData[0]; // Still need this for the order button
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden py-12">
@@ -65,9 +51,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             >
               <SplitTextAnimation 
                 text="Samyun Wan Armenia" 
-                delay={0.3} // Задержка для начала анимации
-                duration={1.2} // Set duration to 1.2 seconds (50% slower than default 0.8s)
-                className="mb-1.5" // Добавляем небольшой отступ, если нужно
+                delay={0.3}
+                duration={1.2}
+                className="mb-1.5"
               />
               {/* Subtitle */}
               <motion.span 
@@ -75,7 +61,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
                 variants={fadeInUpVariants}
                 initial="hidden"
                 animate="visible"
-                transition={{ delay: 1.8 }} // Delay after title slide-in finishes (0.3 + 1.5 = 1.8)
+                transition={{ delay: 1.8 }}
               >
                 {t.hero.subtitle}
               </motion.span>
@@ -83,11 +69,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             
             {/* Tagline - NOW WITH SHINE ANIMATION */}
             <motion.p 
-              className="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed relative overflow-hidden inline-block text-shine-animation" /* Added text-shine-animation */
+              className="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed relative overflow-hidden inline-block text-shine-animation"
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 2.2 }} // Delay after tagline
+              transition={{ delay: 2.2 }}
             >
               {t.hero.tagline}
             </motion.p>
@@ -98,7 +84,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 2.5 }} // Delay after tagline
+              transition={{ delay: 2.5 }}
             >
               <CallToActionButton 
                 onClick={() => openOrderModal(mainProduct.labelKey)}
@@ -130,26 +116,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             <HeroStats t={t} stats={stats} startDelay={3.0} />
 
             {/* New QR Code Block */}
-            <HeroQrCodeBlock delay={3.5} /> {/* Added with a delay after stats */}
+            <HeroQrCodeBlock delay={3.5} />
           </div>
 
-          {/* Image */}
-          <motion.div 
-            className="transform flex justify-center lg:justify-start mt-10 lg:mt-0"
-            variants={imageVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            {mainProduct && (
-              <OptimizedImage
-                src={mainProduct.src}
-                alt={mainProduct.alt}
-                className="w-64 h-64 md:w-80 md:h-80 lg:w-96 lg:h-96 object-contain drop-shadow-2xl"
-                loading="eager"
-                sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
-              />
-            )}
-          </motion.div>
+          {/* The image block is removed from here */}
         </div>
       </div>
     </section>
