@@ -65,9 +65,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               </motion.span>
             </h1>
             
-            {/* Tagline - NOW WITH SHINE ANIMATION */}
+            {/* Tagline */}
             <motion.p 
-              className="text-lg text-gray-700 dark:text-gray-300 mb-6 leading-relaxed relative overflow-hidden inline-block"
+              className="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed relative overflow-hidden inline-block" /* Changed mb-6 to mb-8 */
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
