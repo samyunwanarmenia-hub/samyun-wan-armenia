@@ -65,13 +65,25 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               </motion.span>
             </h1>
             
-            {/* Tagline */}
+            {/* Tagline with subtle animation */}
             <motion.p 
               className="text-lg text-gray-700 dark:text-gray-300 mb-8 leading-relaxed relative overflow-hidden inline-block"
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
               transition={{ delay: 2.0 }} 
+              whileInView={{
+                scale: [1, 1.005, 1], // Subtle pulse
+                y: [0, -2, 0], // Subtle vertical bounce
+                transition: {
+                  duration: 3,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                  repeatType: "mirror",
+                  delay: 3 // Start after the initial fade-in
+                }
+              }}
+              viewport={{ once: false, amount: 0.8 }} // Keep animating as long as it's in view
             >
               {t.hero.tagline}
             </motion.p>
