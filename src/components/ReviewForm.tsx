@@ -24,7 +24,7 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
     setReviewText,
     isSubmitting,
     handleSubmit,
-   = useReviewForm({
+  } = useReviewForm({
     t,
     onReviewSubmitted: (review) => {
       onReviewSubmitted(review);

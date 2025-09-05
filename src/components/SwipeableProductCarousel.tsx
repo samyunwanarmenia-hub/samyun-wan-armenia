@@ -67,7 +67,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
                        flex flex-col items-center justify-center text-center"
             initial={{ boxShadow: "none" }}
             whileHover={{ 
-              scale: 1.05, // Slightly more pronounced scale on hover
+              scale: 1.03,
               boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.1), var(--tw-shadow-glow-green)" // More pronounced shadow with glow
             }}
             whileTap={{ scale: 0.98 }}
