@@ -177,11 +177,7 @@
 }
 
 @layer components {
-  .text-gradient {
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-  }
+  /* Removed .text-gradient as its properties are now integrated into .text-slogan-shine */
 
   /* New utility class for a subtle glow shadow */
   .shadow-glow-green {
@@ -195,9 +191,13 @@
   /* New CSS for the text shine animation */
   .text-slogan-shine {
     background: linear-gradient(90deg, var(--slogan-shine-dark), var(--slogan-shine-light), var(--slogan-shine-dark));
+    -webkit-background-clip: text; /* Apply clipping directly */
+    background-clip: text;         /* Apply clipping directly */
+    -webkit-text-fill-color: transparent; /* Make text transparent to show background */
     background-repeat: no-repeat;
-    background-size: 200%; /* Increased size to ensure full sweep */
+    background-size: 80%; /* Smaller background for spotlight effect */
     animation: shine 5s linear infinite;
+    position: relative; /* Needed for background-position-x to work correctly */
   }
 }
 
@@ -218,10 +218,10 @@
 /* Keyframes for the text shine effect */
 @keyframes shine {
   0% {
-    background-position-x: -200%; /* Adjusted to sweep across the larger background */
+    background-position-x: -500%; /* Start far left */
   }
   100% {
-    background-position-x: 200%; /* Adjusted to sweep across the larger background */
+    background-position-x: 500%; /* End far right */
   }
 }
 

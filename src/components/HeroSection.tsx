@@ -67,7 +67,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             
             {/* Tagline with subtle animation */}
             <motion.p 
-              className="text-4xl font-bold uppercase tracking-[5px] text-gradient text-slogan-shine mb-8 leading-relaxed relative overflow-hidden inline-block"
+              className="text-4xl font-bold uppercase tracking-[5px] text-slogan-shine mb-8 leading-relaxed relative overflow-hidden inline-block"
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
