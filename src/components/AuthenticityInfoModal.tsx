@@ -19,7 +19,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
             loading="eager"
             sizes="(max-width: 768px) 90vw, 400px"
           />
-          <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+          <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
             {t.authenticity.certificateDesc}
           </p>
         </div>
@@ -32,7 +32,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
             loading="eager"
             sizes="(max-width: 768px) 90vw, 400px"
           />
-          <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+          <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
             {t.authenticity.differencesDesc}
           </p>
         </div>
