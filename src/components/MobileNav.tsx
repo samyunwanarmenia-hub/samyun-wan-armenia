@@ -125,7 +125,13 @@ const MobileNav: React.FC<MobileNavProps> = () => {
             </div>
             <nav className="flex flex-col items-start space-y-6 pt-10 pb-6 pl-12">
               {navigationSections.map((section) => (
-                <motion.div key={section.id} variants={menuItemVariants}>
+                <motion.div 
+                  key={section.id} 
+                  variants={menuItemVariants}
+                  whileHover={{ scale: 1.05, x: 5 }} // Added whileHover
+                  whileTap={{ scale: 0.95 }} // Added whileTap
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }} // Added transition
+                >
                   <Link
                     href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
                     onClick={() => setIsOpen(false)}
