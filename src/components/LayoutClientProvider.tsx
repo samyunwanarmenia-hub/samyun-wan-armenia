@@ -21,12 +21,14 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
   const router = useRouter();
 
   const [currentLangState, setCurrentLangState] = useState<string>(initialLang);
-  // Removed loadingLinkModalOpen and loadingLinkClientId as they are no longer needed
-  // const [loadingLinkModalOpen, setLoadingLinkModalOpen] = useState(false);
-  // const [loadingLinkClientId, setLoadingLinkClientId] = useState<string | null>(null);
+  const [loadingLinkModalOpen, setLoadingLinkModalOpen] = useState(false);
+  const [loadingLinkClientId, setLoadingLinkClientId] = useState<string | null>(null);
 
-  // Determine if it's the QR verification page (now always false in this app)
-  const isQrVerifyPage = false; // This page is now external, so this will always be false
+  // Determine if it's the QR verification page
+  const isQrVerifyPage = useMemo(() => {
+    const pathSegments = pathname.split('/').filter(Boolean);
+    return pathSegments.length >= 2 && pathSegments[1] === 'verify' && pathSegments[2] === 'qr';
+  }, [pathname]);
 
   useEffect(() => {
     // Ensure the client-side state matches the initial server-rendered language
@@ -39,15 +41,19 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
   useEffect(() => {
     document.documentElement.lang = currentLangState;
 
-    // The body-blank class and dark mode removal logic for QR page is no longer needed here
-    // as the QR page is external.
-    document.body.classList.remove('body-blank');
-    // ThemeContext will handle 'dark' class for other pages
+    if (isQrVerifyPage) {
+      document.body.classList.add('body-blank');
+      document.documentElement.classList.remove('dark'); // Ensure light mode for blank page
+    } else {
+      document.body.classList.remove('body-blank');
+      // ThemeContext will handle 'dark' class for other pages
+    }
 
     return () => {
+      // Clean up when component unmounts or isQrVerifyPage changes
       document.body.classList.remove('body-blank');
     };
-  }, [currentLangState, isQrVerifyPage]); // isQrVerifyPage is now a constant false
+  }, [currentLangState, isQrVerifyPage]);
 
   const t: TranslationKeys = useMemo(() => translations[currentLangState], [currentLangState]);
 
@@ -68,16 +74,15 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
     closeCallbackRequestModal,
   } = useModals({ currentLang: currentLangState, t });
 
-  // Removed openLoadingLinkModal and closeLoadingLinkModal as they are no longer needed
-  // const openLoadingLinkModal = () => {
-  //   setLoadingLinkModalOpen(true);
-  //   setLoadingLinkClientId(crypto.randomUUID());
-  // };
+  const openLoadingLinkModal = () => {
+    setLoadingLinkModalOpen(true);
+    setLoadingLinkClientId(crypto.randomUUID());
+  };
 
-  // const closeLoadingLinkModal = () => {
-  //   setLoadingLinkModalOpen(false);
-  //   setLoadingLinkClientId(null);
-  // };
+  const closeLoadingLinkModal = () => {
+    setLoadingLinkModalOpen(false);
+    setLoadingLinkClientId(null);
+  };
 
   const { getLinkClasses } = useActiveLink();
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLangState); // Передаем currentLangState сюда
@@ -101,7 +106,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
     openOrderModal,
     openAuthenticityModal,
     openCallbackRequestModal,
-    openLoadingLinkModal: () => {}, // Placeholder, as it's no longer used
+    openLoadingLinkModal,
     getLinkClasses,
     getHomePath,
     getSectionPath,
@@ -109,24 +114,29 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
 
   return (
     <LayoutContext.Provider value={contextValue}>
-      {/* The QR verification page is now external, so we always render the full MainLayout */}
-      <MainLayout
-        contactModalOpen={contactModalOpen}
-        contactModalType={contactModalType}
-        orderModalOpen={orderModalOpen}
-        initialSelectedProduct={initialSelectedProduct}
-        authenticityModalOpen={authenticityModalOpen}
-        callbackRequestModalOpen={callbackRequestModalOpen}
-        closeContactModal={closeContactModal}
-        closeOrderModal={closeOrderModal}
-        closeAuthenticityModal={closeAuthenticityModal}
-        closeCallbackRequestModal={closeCallbackRequestModal}
-        loadingLinkModalOpen={false} // Always false now
-        closeLoadingLinkModal={() => {}} // Placeholder
-        loadingLinkClientId={null} // Always null now
-      >
-        {children}
-      </MainLayout>
+      {/* If it's the QR verification page, only render children (the page content itself) */}
+      {isQrVerifyPage ? (
+        children
+      ) : (
+        // For all other pages, render the full MainLayout
+        <MainLayout
+          contactModalOpen={contactModalOpen}
+          contactModalType={contactModalType}
+          orderModalOpen={orderModalOpen}
+          initialSelectedProduct={initialSelectedProduct}
+          authenticityModalOpen={authenticityModalOpen}
+          callbackRequestModalOpen={callbackRequestModalOpen}
+          closeContactModal={closeContactModal}
+          closeOrderModal={closeOrderModal}
+          closeAuthenticityModal={closeAuthenticityModal}
+          closeCallbackRequestModal={closeCallbackRequestModal}
+          loadingLinkModalOpen={loadingLinkModalOpen}
+          closeLoadingLinkModal={closeLoadingLinkModal}
+          loadingLinkClientId={loadingLinkClientId}
+        >
+          {children}
+        </MainLayout>
+      )}
     </LayoutContext.Provider>
   );
 };

@@ -20,9 +20,9 @@ interface MainLayoutProps {
   closeOrderModal: () => void;
   closeAuthenticityModal: () => void;
   closeCallbackRequestModal: () => void;
-  loadingLinkModalOpen: boolean; // Still needed for prop type, but will always be false
-  closeLoadingLinkModal: () => void; // Still needed for prop type, but will be a no-op
-  loadingLinkClientId: string | null; // Still needed for prop type, but will always be null
+  loadingLinkModalOpen: boolean;
+  closeLoadingLinkModal: () => void;
+  loadingLinkClientId: string | null;
 }
 
 // Dynamically import client-only components with ssr: false
@@ -36,8 +36,7 @@ const DynamicContactModal = dynamic(() => import('@/components/ContactModal'), {
 const DynamicOrderModal = dynamic(() => import('@/components/OrderModal'), { ssr: false });
 const DynamicAuthenticityInfoModal = dynamic(() => import('@/components/AuthenticityInfoModal'), { ssr: false });
 const DynamicCallbackRequestModal = dynamic(() => import('@/components/CallbackRequestModal'), { ssr: false });
-// Removed DynamicLoadingLinkModal as it's no longer used
-// const DynamicLoadingLinkModal = dynamic(() => import('@/components/LoadingLinkModal'), { ssr: false });
+const DynamicLoadingLinkModal = dynamic(() => import('@/components/LoadingLinkModal'), { ssr: false });
 
 
 const MainLayout = ({
@@ -52,9 +51,9 @@ const MainLayout = ({
   closeOrderModal,
   closeAuthenticityModal,
   closeCallbackRequestModal,
-  loadingLinkModalOpen, // Keep for prop type, but logic will be removed
-  closeLoadingLinkModal, // Keep for prop type, but logic will be removed
-  loadingLinkClientId, // Keep for prop type, but logic will be removed
+  loadingLinkModalOpen,
+  closeLoadingLinkModal,
+  loadingLinkClientId,
 }: MainLayoutProps) => {
   const {
     t,
@@ -111,7 +110,14 @@ const MainLayout = ({
             currentLang={currentLang}
           />
         )}
-        {/* Removed DynamicLoadingLinkModal usage */}
+        {loadingLinkModalOpen && (
+          <DynamicLoadingLinkModal
+            isOpen={loadingLinkModalOpen}
+            onClose={closeLoadingLinkModal}
+            t={t}
+            clientId={loadingLinkClientId}
+          />
+        )}
       </AnimatePresence>
     </div>
   );

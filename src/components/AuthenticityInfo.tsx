@@ -10,16 +10,15 @@ import { useInView } from 'react-intersection-observer';
 import Link from 'next/link';
 
 const AuthenticityInfo = () => {
-  const { t, openAuthenticityModal } = useLayoutContext();
+  const { t, openAuthenticityModal, currentLang } = useLayoutContext();
 
   const { ref, inView: _inView } = useInView({
     triggerOnce: true,
     threshold: 0.3,
   });
 
-  // Updated to point to the external QR verification site
-  const qrCodeValue = `https://qr-wan.netlify.app`;
-  const qrLinkPath = `https://qr-wan.netlify.app`;
+  const qrCodeValue = `https://samyunwanarmenia.netlify.app/${currentLang}/verify/qr`;
+  const qrLinkPath = `/${currentLang}/verify/qr`;
 
   const hasAttentionText = !!t.authenticity.attention;
   const hasHowToDistinguishText = !!t.authenticity.howToDistinguish;
@@ -70,8 +69,6 @@ const AuthenticityInfo = () => {
           {/* Make the QR code area clickable */}
           <Link 
             href={qrLinkPath}
-            target="_blank" // Open in new tab since it's an external link
-            rel="noopener noreferrer" // Security best practice for target="_blank"
             className="group mb-3 flex flex-col items-center p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 w-full cursor-pointer"
             aria-label={t.hero.qrVerificationTitle}
           >

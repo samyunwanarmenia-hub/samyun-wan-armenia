@@ -15,14 +15,10 @@ interface OptimizedImageProps {
 const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, loading = 'lazy', sizes }) => {
   const [imageError, setImageError] = useState(false);
 
-  // Check if image optimization should be disabled via environment variable
-  const disableOptimization = process.env.NEXT_PUBLIC_DISABLE_IMAGE_OPTIMIZATION === 'true';
-
   // Extract base name from the src prop
   const lastSlashIndex = src.lastIndexOf('/');
   const lastDotIndex = src.lastIndexOf('.');
   const baseName = src.substring(lastSlashIndex + 1, lastDotIndex);
-  // const originalExtension = src.substring(lastDotIndex + 1); // Not strictly needed if using original src directly
 
   const handleImageError = () => {
     setImageError(true);
@@ -37,20 +33,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, lo
     );
   }
 
-  if (disableOptimization) {
-    // If optimization is disabled, use the original src directly
-    return (
-      <img
-        src={src} // Use the original src (e.g., /images/my-image.jpg)
-        alt={alt}
-        className={className}
-        loading={loading}
-        onError={handleImageError}
-      />
-    );
-  }
-
-  // If optimization is NOT disabled, proceed with generating srcset for optimized images
+  // Generate srcset for different formats and sizes
   const generateSrcset = (format: 'jpg' | 'webp' | 'avif') => {
     const widths = IMAGE_OPTIMIZED_WIDTHS; // Use centralized widths
     return widths.map((width: number) => `/optimized/${baseName}-${width}w.${format} ${width}w`).join(', ');
