@@ -216,10 +216,10 @@
 /* Keyframes for the text shine effect */
 @keyframes shine {
   0% {
-    background-position-x: 0%; /* Start from left edge */
+    background-position-x: 100%; /* Start from right edge */
   }
   100% {
-    background-position-x: 100%; /* End at right edge */
+    background-position-x: 0%; /* End at left edge */
   }
 }
 
