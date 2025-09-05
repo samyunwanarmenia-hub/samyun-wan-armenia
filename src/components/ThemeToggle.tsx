@@ -28,6 +28,20 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ onClose }) => {
     return <div className="w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-700" />; 
   }
 
+  const toggleVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        delay: 0.3, // Slight delay for entrance, after LanguageSwitcher
+        type: "spring", 
+        stiffness: 400, 
+        damping: 17 
+      } 
+    }
+  };
+
   return (
     <motion.button
       onClick={handleToggle} // Use the new handler
@@ -35,6 +49,9 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ onClose }) => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}
+      variants={toggleVariants}
+      initial="hidden"
+      animate="visible"
     >
       {theme === 'light' ? (
         <Sun className="w-5 h-5" />

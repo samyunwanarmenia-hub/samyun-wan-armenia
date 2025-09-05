@@ -49,7 +49,7 @@ const Navbar: React.FC<NavbarProps> = () => {
             {navigationSections.map((section) => (
               <motion.div
                 key={section.id}
-                whileHover={{ scale: 1.1, color: '#22c55e' }}
+                whileHover={{ scale: 1.1 }} // Removed hardcoded color, now relies on getLinkClasses
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
