@@ -44,7 +44,7 @@ const Footer = () => { // Removed t from props
               {aboutLinks.map((section) => (
                 <li key={section.id}>
                   <motion.div
-                    whileHover={{ scale: 1.05, color: '#22c55e' }}
+                    whileHover={{ scale: 1.05, color: '#86b486' }} // Primary-500 green
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
@@ -63,7 +63,7 @@ const Footer = () => { // Removed t from props
               {productLinks.map((section) => (
                 <li key={section.id}>
                   <motion.div
-                    whileHover={{ scale: 1.05, color: '#22c55e' }}
+                    whileHover={{ scale: 1.05, color: '#86b486' }} // Primary-500 green
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
@@ -77,7 +77,7 @@ const Footer = () => { // Removed t from props
                 <motion.button
                   onClick={openAuthenticityModal}
                   className="hover:text-primary-500 transition-colors text-sm"
-                  whileHover={{ scale: 1.05, color: '#22c55e' }}
+                  whileHover={{ scale: 1.05, color: '#86b486' }} // Primary-500 green
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
@@ -86,7 +86,7 @@ const Footer = () => { // Removed t from props
               </li>
               <li>
                 <motion.div
-                  whileHover={{ scale: 1.05, color: '#22c55e' }}
+                  whileHover={{ scale: 1.05, color: '#86b486' }} // Primary-500 green
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
