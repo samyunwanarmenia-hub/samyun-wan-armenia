@@ -34,6 +34,22 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
     initialName: '', // No initial name from user auth
   });
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  };
+
   const buttonVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", delay: 0.2 } },
@@ -78,8 +94,14 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
             )}
 
             {showForm && (
-              <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 animate-fade-in-up">
-                <div className="mb-5">
+              <motion.form 
+                onSubmit={handleSubmit} 
+                className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+              >
+                <motion.div className="mb-5" variants={itemVariants}>
                   <label htmlFor="name" className="block text-gray-900 dark:text-gray-50 text-sm font-bold mb-2">
                     {t.testimonials.namePlaceholder}
                   </label>
@@ -94,8 +116,8 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                     whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   />
-                </div>
-                <div className="mb-5">
+                </motion.div>
+                <motion.div className="mb-5" variants={itemVariants}>
                   <label htmlFor="review" className="block text-gray-900 dark:text-gray-50 text-sm font-bold mb-2">
                     {t.testimonials.reviewPlaceholder}
                   </label>
@@ -110,8 +132,11 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                     whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   />
-                </div>
-                <div className="flex items-center justify-center space-x-3">
+                </motion.div>
+                <motion.div 
+                  className="flex items-center justify-center space-x-3"
+                  variants={itemVariants}
+                >
                   <CallToActionButton
                     type="submit"
                     icon={Send}
@@ -132,8 +157,8 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                   >
                     Cancel
                   </CallToActionButton>
-                </div>
-              </form>
+                </motion.div>
+              </motion.form>
             )}
           </>
         )}

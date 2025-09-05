@@ -59,7 +59,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, lo
       {/* Then WebP */}
       <source type="image/webp" srcSet={generateSrcset('webp')} sizes={sizes} />
       {/* Fallback to smallest optimized JPG if AVIF/WebP fail or are not supported */}
-      <img
+      <motion.img
         src={defaultJpgSrc} // Default fallback to the smallest optimized JPG
         srcSet={generateSrcset('jpg')}
         sizes={sizes}
@@ -68,6 +68,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, lo
         loading={loading}
         onError={handleImageError}
         onLoad={handleImageLoad} // Call handleImageLoad on successful load
+        whileHover={{ scale: 1.02 }} // Subtle scale on hover
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       />
     </motion.picture>
   );

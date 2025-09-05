@@ -1,8 +1,25 @@
 import OptimizedImage from '@/components/OptimizedImage';
 import { AuthenticityInfoModalProps } from '@/types/global';
 import ModalWrapper from './ModalWrapper'; // Import ModalWrapper
+import { motion } from 'framer-motion'; // Import motion
 
 const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, onClose, t }) => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  };
+
   return (
     <ModalWrapper
       isOpen={isOpen}
@@ -10,8 +27,16 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
       title={t.authenticity.title}
       maxWidth="max-w-2xl" // Increased max-w
     >
-      <div className="grid md:grid-cols-2 gap-6 mt-5">
-        <div className="flex flex-col items-center text-center">
+      <motion.div 
+        className="grid md:grid-cols-2 gap-6 mt-5"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
+        <motion.div 
+          className="flex flex-col items-center text-center"
+          variants={itemVariants}
+        >
           <OptimizedImage 
             src="/images/samyun-arm-original-whey-certificate.jpg" 
             alt="Samyun Wan Original Certificate" 
@@ -22,9 +47,12 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
             {t.authenticity.certificateDesc}
           </p>
-        </div>
+        </motion.div>
 
-        <div className="flex flex-col items-center text-center">
+        <motion.div 
+          className="flex flex-col items-center text-center"
+          variants={itemVariants}
+        >
           <OptimizedImage 
             src="/images/samyun-arm-original-whey-certificate-deferences.jpg"
             alt="Samyun Wan Original vs Fake Differences" 
@@ -35,8 +63,8 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
             {t.authenticity.differencesDesc}
           </p>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </ModalWrapper>
   );
 };
