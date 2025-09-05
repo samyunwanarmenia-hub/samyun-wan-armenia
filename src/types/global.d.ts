@@ -40,6 +40,8 @@ export interface TranslationKeys {
     qrVerificationTitle: string;
     qrVerificationSubtitle: string;
     seo_title_addon: string;
+    qrBlockTitle: string; // New: Title for the QR code block in Hero
+    qrBlockDescription: string; // New: Description for the QR code block in Hero
   };
   stats: {
     customers: string;
