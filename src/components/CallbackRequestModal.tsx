@@ -94,6 +94,22 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  };
+
   return (
     <ModalWrapper
       isOpen={isOpen}
@@ -101,11 +117,16 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
       title={t.callbackRequest.title}
       maxWidth="max-w-md"
     >
-      <form onSubmit={handleSubmit} className="flex flex-col space-y-5">
+      <motion.form 
+        onSubmit={handleSubmit} 
+        className="flex flex-col space-y-5"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         <motion.div 
           className="relative"
-          whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          variants={itemVariants}
         >
           <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
           <input
@@ -119,8 +140,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
         </motion.div>
         <motion.div 
           className="relative"
-          whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          variants={itemVariants}
         >
           <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
           <input
@@ -133,7 +153,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
           />
         </motion.div>
 
-        <div>
+        <motion.div variants={itemVariants}>
           <label className="block text-gray-700 dark:text-gray-300 text-sm font-semibold mb-2">
             {t.callbackRequest.productTypeLabel}
           </label>
@@ -163,9 +183,9 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
               <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.weightLossOption}</span>
             </label>
           </div>
-        </div>
+        </motion.div>
 
-        <div>
+        <motion.div variants={itemVariants}>
           <label className="block text-gray-700 dark:text-gray-300 text-sm font-semibold mb-2">
             {t.callbackRequest.purposeLabel}
           </label>
@@ -207,7 +227,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
               <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.purposeOther}</span>
             </label>
           </div>
-        </div>
+        </motion.div>
 
         <CallToActionButton
           type="submit"
@@ -221,7 +241,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
         >
           {isSubmitting ? 'Sending...' : t.callbackRequest.submitButton}
         </CallToActionButton>
-      </form>
+      </motion.form>
     </ModalWrapper>
   );
 };

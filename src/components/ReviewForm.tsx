@@ -34,6 +34,11 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
     initialName: '', // No initial name from user auth
   });
 
+  const buttonVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", delay: 0.2 } },
+  };
+
   return (
     <section className="relative py-12 overflow-hidden">
       <div className="container mx-auto px-4 max-w-2xl relative z-10">
@@ -53,7 +58,12 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
         ) : (
           <>
             {!showForm && (
-              <div className="flex justify-center">
+              <motion.div 
+                className="flex justify-center"
+                variants={buttonVariants}
+                initial="hidden"
+                animate="visible"
+              >
                 <CallToActionButton
                   onClick={() => setShowForm(true)}
                   icon={Send}
@@ -64,7 +74,7 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                 >
                   {t.testimonials.formTitle}
                 </CallToActionButton>
-              </div>
+              </motion.div>
             )}
 
             {showForm && (
