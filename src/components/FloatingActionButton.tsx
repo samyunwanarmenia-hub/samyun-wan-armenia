@@ -53,6 +53,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
   };
 
   // Define menu items with angles for radial positioning
+  // Angles are now defined relative to the "up" direction (0 degrees is up), rotating clockwise.
   const menuItemsData = [
     {
       label: t.contactModal.callUsButton,
@@ -60,7 +61,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       action: () => openContactModal('call'),
       gaLabel: 'Call_FAB_Menu',
       ymLabel: 'Call_FAB_Menu',
-      angle: 90, // Angle in degrees (straight up)
+      angle: 0, // Straight up
     },
     {
       label: t.contactModal.whatsapp,
@@ -68,7 +69,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       action: () => openContactModal('message'),
       gaLabel: 'WhatsApp_FAB_Menu',
       ymLabel: 'WhatsApp_FAB_Menu',
-      angle: 135, // Angle in degrees (up-left)
+      angle: 45, // Up-left (45 degrees clockwise from straight up)
     },
     {
       label: t.contactModal.callbackButton,
@@ -76,7 +77,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       action: openCallbackRequestModal,
       gaLabel: 'Callback_FAB_Menu',
       ymLabel: 'Callback_FAB_Menu',
-      angle: 180, // Angle in degrees (straight left)
+      angle: 90, // Straight left (90 degrees clockwise from straight up)
     },
   ];
 
@@ -105,15 +106,18 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       >
         {menuItemsData.map((item, index) => {
           const angleRad = (item.angle * Math.PI) / 180;
-          const xPos = radius * Math.cos(angleRad);
-          const yPos = radius * Math.sin(angleRad);
+          // Calculate x and y offsets:
+          // xOffset: negative sine for leftward movement (clockwise from up)
+          // yOffset: negative cosine for upward movement (from up)
+          const xOffset = -radius * Math.sin(angleRad);
+          const yOffset = -radius * Math.cos(angleRad);
 
           return (
             <motion.div
               key={index}
               className="fab-action"
               initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
-              animate={isOpen ? { opacity: 1, scale: 1, x: -xPos, y: -yPos } : { opacity: 0, scale: 0, x: 0, y: 0 }}
+              animate={isOpen ? { opacity: 1, scale: 1, x: xOffset, y: yOffset } : { opacity: 0, scale: 0, x: 0, y: 0 }}
               transition={{
                 delay: isOpen ? index * 0.05 : (menuItemsData.length - 1 - index) * 0.02,
                 type: "spring",
