@@ -129,13 +129,15 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
           variants={itemVariants}
         >
           <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
-          <input
+          <motion.input
             type="text"
             className="pl-10 pr-3 py-2.5 w-full bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600"
             placeholder={t.callbackRequest.namePlaceholder}
             value={name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
             required
+            whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           />
         </motion.div>
         <motion.div 
@@ -143,13 +145,15 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
           variants={itemVariants}
         >
           <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
-          <input
+          <motion.input
             type="tel"
             className="pl-10 pr-3 py-2.5 w-full bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600"
             placeholder={t.callbackRequest.phonePlaceholder}
             value={phone}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
             required
+            whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           />
         </motion.div>
 
@@ -158,7 +162,12 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
             {t.callbackRequest.productTypeLabel}
           </label>
           <div className="flex flex-col space-y-2">
-            <label className="inline-flex items-center">
+            <motion.label 
+              className="inline-flex items-center"
+              whileHover={{ scale: 1.02, x: 5 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
               <input
                 type="radio"
                 className="form-radio text-primary-600 h-4 w-4"
@@ -169,8 +178,13 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 required
               />
               <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.weightGainOption}</span>
-            </label>
-            <label className="inline-flex items-center">
+            </motion.label>
+            <motion.label 
+              className="inline-flex items-center"
+              whileHover={{ scale: 1.02, x: 5 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
               <input
                 type="radio"
                 className="form-radio text-primary-600 h-4 w-4"
@@ -181,7 +195,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 required
               />
               <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.weightLossOption}</span>
-            </label>
+            </motion.label>
           </div>
         </motion.div>
 
@@ -190,7 +204,12 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
             {t.callbackRequest.purposeLabel}
           </label>
           <div className="flex flex-col space-y-2">
-            <label className="inline-flex items-center">
+            <motion.label 
+              className="inline-flex items-center"
+              whileHover={{ scale: 1.02, x: 5 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
               <input
                 type="radio"
                 className="form-radio text-primary-600 h-4 w-4"
@@ -201,8 +220,13 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 required
               />
               <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.purposeDetails}</span>
-            </label>
-            <label className="inline-flex items-center">
+            </motion.label>
+            <motion.label 
+              className="inline-flex items-center"
+              whileHover={{ scale: 1.02, x: 5 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
               <input
                 type="radio"
                 className="form-radio text-primary-600 h-4 w-4"
@@ -213,8 +237,13 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 required
               />
               <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.purposeOrders}</span>
-            </label>
-            <label className="inline-flex items-center">
+            </motion.label>
+            <motion.label 
+              className="inline-flex items-center"
+              whileHover={{ scale: 1.02, x: 5 }}
+              whileTap={{ scale: 0.98 }}
+              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            >
               <input
                 type="radio"
                 className="form-radio text-primary-600 h-4 w-4"
@@ -225,22 +254,24 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 required
               />
               <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.purposeOther}</span>
-            </label>
+            </motion.label>
           </div>
         </motion.div>
 
-        <CallToActionButton
-          type="submit"
-          icon={Send}
-          disabled={isSubmitting}
-          size="md"
-          className="mt-6"
-          interactionEffect="pixels"
-          gaEvent={{ category: 'Callback_Request', action: 'Click_SubmitCallbackRequest' }}
-          ymEvent={{ category: 'Callback_Request', action: 'Click_SubmitCallbackRequest' }}
-        >
-          {isSubmitting ? 'Sending...' : t.callbackRequest.submitButton}
-        </CallToActionButton>
+        <motion.div variants={itemVariants}> {/* Wrapped CallToActionButton */}
+          <CallToActionButton
+            type="submit"
+            icon={Send}
+            disabled={isSubmitting}
+            size="md"
+            className="mt-6"
+            interactionEffect="pixels"
+            gaEvent={{ category: 'Callback_Request', action: 'Click_SubmitCallbackRequest' }}
+            ymEvent={{ category: 'Callback_Request', action: 'Click_SubmitCallbackRequest' }}
+          >
+            {isSubmitting ? 'Sending...' : t.callbackRequest.submitButton}
+          </CallToActionButton>
+        </motion.div>
       </motion.form>
     </ModalWrapper>
   );

@@ -117,7 +117,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
         >
           {t.orderModal.deliveryInfo2}
         </motion.p>
-        <motion.form onSubmit={handleSubmit} className="flex flex-col space-y-3">
+        <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
           <motion.input
             type="text"
             className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2.5 text-gray-900 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600"
@@ -140,19 +140,21 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             variants={itemVariants}
           />
-          <CallToActionButton
-            type="submit"
-            icon={ShoppingCart}
-            disabled={isSubmitting}
-            size="md"
-            interactionEffect="pixels"
-            gaEvent={{ category: 'Order', action: 'Click_OrderModal_Submit', label: selectedProducts.join('&') }}
-            ymEvent={{ category: 'Order', action: 'Click_OrderModal_Submit', label: selectedProducts.join('&') }}
-            className="mt-4"
-          >
-            {isSubmitting ? 'Sending...' : t.orderModal.orderButton}
-          </CallToActionButton>
-        </motion.form>
+          <motion.div variants={itemVariants}> {/* Wrapped CallToActionButton */}
+            <CallToActionButton
+              type="submit"
+              icon={ShoppingCart}
+              disabled={isSubmitting}
+              size="md"
+              interactionEffect="pixels"
+              gaEvent={{ category: 'Order', action: 'Click_OrderModal_Submit', label: selectedProducts.join('&') }}
+              ymEvent={{ category: 'Order', action: 'Click_OrderModal_Submit', label: selectedProducts.join('&') }}
+              className="mt-4"
+            >
+              {isSubmitting ? 'Sending...' : t.orderModal.orderButton}
+            </CallToActionButton>
+          </motion.div>
+        </form>
       </motion.div>
     </ModalWrapper>
   );
