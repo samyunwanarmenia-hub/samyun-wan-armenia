@@ -55,7 +55,7 @@ const SplitTextAnimation: React.FC<SplitTextAnimationProps> = ({ text, delay = 0
 
   return (
     <motion.div
-      className={`flex justify-center lg:justify-start overflow-hidden ${className || ''}`}
+      className={`flex justify-center overflow-hidden ${className || ''}`}
       variants={containerVariants}
       initial="hidden"
       animate="visible"
