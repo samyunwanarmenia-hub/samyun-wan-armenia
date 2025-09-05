@@ -53,7 +53,7 @@ const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
         target="_blank"
         rel="noopener noreferrer"
         className="group block p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
-        aria-label={t.hero.qrBlockTitle}
+        aria-label={t.hero.qrBlockTitle} // Added aria-label
       >
         <motion.div
           className="w-32 h-32 bg-white dark:bg-gray-700 rounded-xl mx-auto mb-3 flex items-center justify-center transform group-hover:scale-105 transition-all border border-gray-200 dark:border-gray-600 p-2"

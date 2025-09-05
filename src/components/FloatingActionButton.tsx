@@ -62,6 +62,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       gaLabel: 'Call_FAB_Menu',
       ymLabel: 'Call_FAB_Menu',
       angle: 0, // Straight up
+      ariaLabel: t.contactModal.callUsButton,
     },
     {
       label: t.contactModal.whatsapp,
@@ -70,6 +71,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       gaLabel: 'WhatsApp_FAB_Menu',
       ymLabel: 'WhatsApp_FAB_Menu',
       angle: 45, // Up-left (45 degrees clockwise from straight up)
+      ariaLabel: t.contactModal.whatsapp,
     },
     {
       label: t.contactModal.callbackButton,
@@ -78,6 +80,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       gaLabel: 'Callback_FAB_Menu',
       ymLabel: 'Callback_FAB_Menu',
       angle: 90, // Straight left (90 degrees clockwise from straight up)
+      ariaLabel: t.contactModal.callbackButton,
     },
   ];
 
@@ -91,8 +94,9 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
         className="fab-checkbox"
         checked={isOpen}
         onChange={handleToggle}
+        aria-label={isOpen ? t.nav.close : t.nav.open} // Added aria-label
       />
-      <label className="fab" htmlFor="fab-checkbox">
+      <label className="fab" htmlFor="fab-checkbox" aria-label={isOpen ? t.nav.close : t.nav.open}> {/* Added aria-label */}
         <span className="fab-dots fab-dots-1" />
         <span className="fab-dots fab-dots-2" />
         <span className="fab-dots fab-dots-3" />
@@ -127,7 +131,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
               onClick={() => handleMenuItemClick(item.action, item.gaLabel, item.ymLabel)}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              aria-label={item.label}
+              aria-label={item.ariaLabel} // Added aria-label
             >
               <item.icon className="w-6 h-6" />
             </motion.div>

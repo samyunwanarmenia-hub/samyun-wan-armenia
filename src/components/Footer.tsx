@@ -27,8 +27,8 @@ const Footer = () => { // Removed t from props
         <div className="grid md:grid-cols-4 gap-6 mb-6 mx-auto max-w-7xl"> {/* Added mx-auto max-w-7xl for centering */}
           <div>
             <div className="flex items-center space-x-2 mb-5">
-              <Link href={getHomePath()} className="flex items-center">
-                <span className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-50">
+              <Link href={getHomePath()} className="flex items-center" aria-label={t.hero.title}> {/* Added aria-label */}
+                <span className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-50 whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Adjusted text size and added ellipsis for small screens */}
                   {t.hero.title}
                 </span>
               </Link>
@@ -48,7 +48,7 @@ const Footer = () => { // Removed t from props
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
-                    <Link href={getSectionPath(section.id)} className="hover:text-primary-500 transition-colors">
+                    <Link href={getSectionPath(section.id)} className="hover:text-primary-500 transition-colors" aria-label={t.nav[section.labelKey as keyof TranslationKeys['nav']]}> {/* Added aria-label */}
                       {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                     </Link>
                   </motion.div>
@@ -67,7 +67,7 @@ const Footer = () => { // Removed t from props
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
-                    <Link href={getSectionPath(section.id)} className="hover:text-primary-500 transition-colors">
+                    <Link href={getSectionPath(section.id)} className="hover:text-primary-500 transition-colors" aria-label={t.nav[section.labelKey as keyof TranslationKeys['nav']]}> {/* Added aria-label */}
                       {t.nav[section.labelKey as keyof TranslationKeys['nav']]} {/* Use nav translation for products and faq */}
                     </Link>
                   </motion.div>
@@ -80,6 +80,7 @@ const Footer = () => { // Removed t from props
                   whileHover={{ scale: 1.05, color: '#86b486' }} // Primary-500 green
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  aria-label={t.footer.productAuthenticity} // Added aria-label
                 >
                   {t.footer.productAuthenticity}
                 </motion.button>
@@ -91,7 +92,7 @@ const Footer = () => { // Removed t from props
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
                   {/* This link currently points to #, assuming it's a placeholder or will be a modal/page */}
-                  <Link href="#" className="hover:text-primary-500 transition-colors">
+                  <Link href="#" className="hover:text-primary-500 transition-colors" aria-label={t.footer.productUsage}> {/* Added aria-label */}
                     {t.footer.productUsage}
                   </Link>
                 </motion.div>
@@ -110,6 +111,7 @@ const Footer = () => { // Removed t from props
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                aria-label="Follow us on Instagram" // Added aria-label
               >
                 <Instagram className="w-5 h-5" />
               </motion.a>
@@ -121,6 +123,7 @@ const Footer = () => { // Removed t from props
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                aria-label="Follow us on Facebook" // Added aria-label
               >
                 <Facebook className="w-5 h-5" />
               </motion.a>
@@ -132,6 +135,7 @@ const Footer = () => { // Removed t from props
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                aria-label="Join us on Telegram" // Added aria-label
               >
                 <Send className="w-5 h-5" />
               </motion.a>
@@ -143,6 +147,7 @@ const Footer = () => { // Removed t from props
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                aria-label="Chat with us on WhatsApp" // Added aria-label
               >
                 <MessageCircle className="w-5 h-5" />
               </motion.a>
