@@ -28,7 +28,7 @@ const Footer = () => { // Removed t from props
           <div>
             <div className="flex items-center space-x-2 mb-5">
               <Link href={getHomePath()} className="flex items-center">
-                <span className="text-gray-900 dark:text-gray-50 text-xl font-bold">
+                <span className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-50">
                   {t.hero.title}
                 </span>
               </Link>
