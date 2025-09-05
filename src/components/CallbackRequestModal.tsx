@@ -139,7 +139,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 onChange={() => setProductType('weightGain')}
                 required
               />
-              <span className="ml-2 text-gray-800 dark:text-gray-200">{t.callbackRequest.weightGainOption}</span>
+              <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.weightGainOption}</span>
             </label>
             <label className="inline-flex items-center">
               <input
@@ -151,7 +151,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 onChange={() => setProductType('weightLoss')}
                 required
               />
-              <span className="ml-2 text-gray-800 dark:text-gray-200">{t.callbackRequest.weightLossOption}</span>
+              <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.weightLossOption}</span>
             </label>
           </div>
         </div>
@@ -171,7 +171,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 onChange={() => setPurpose('details')}
                 required
               />
-              <span className="ml-2 text-gray-800 dark:text-gray-200">{t.callbackRequest.purposeDetails}</span>
+              <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.purposeDetails}</span>
             </label>
             <label className="inline-flex items-center">
               <input
@@ -183,7 +183,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 onChange={() => setPurpose('orders')}
                 required
               />
-              <span className="ml-2 text-gray-800 dark:text-gray-200">{t.callbackRequest.purposeOrders}</span>
+              <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.purposeOrders}</span>
             </label>
             <label className="inline-flex items-center">
               <input
@@ -195,7 +195,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 onChange={() => setPurpose('other')}
                 required
               />
-              <span className="ml-2 text-gray-800 dark:text-gray-200">{t.callbackRequest.purposeOther}</span>
+              <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.purposeOther}</span>
             </label>
           </div>
         </div>

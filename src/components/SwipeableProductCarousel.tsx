@@ -50,7 +50,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
   };
 
   return (
-    <div className="relative w-full max-w-sm mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 border border-gray-200 dark:border-gray-700 overflow-hidden min-h-[450px]">
+    <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 border border-gray-200 dark:border-gray-700 overflow-hidden min-h-[450px]">
       <AnimatePresence initial={false} custom={currentIndex}>
         <motion.div
           key={currentIndex}

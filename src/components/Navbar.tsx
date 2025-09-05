@@ -55,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = () => {
               >
                 <Link
                   href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
-                  className={getLinkClasses(section.id)}
+                  className={`${getLinkClasses(section.id)} text-base`}
                 >
                   {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                 </Link>
