@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <url>
+        <loc>https://samyunwanarmenia.netlify.app/</loc>
+        <lastmod>2024-05-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="hy" href="https://samyunwanarmenia.netlify.app/hy/"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://samyunwanarmenia.netlify.app/ru/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://samyunwanarmenia.netlify.app/en/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://samyunwanarmenia.netlify.app/"/>
+    </url>
+    <url>
+        <loc>https://samyunwanarmenia.netlify.app/hy/</loc>
+        <lastmod>2024-05-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="hy" href="https://samyunwanarmenia.netlify.app/hy/"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://samyunwanarmenia.netlify.app/ru/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://samyunwanarmenia.netlify.app/en/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://samyunwanarmenia.netlify.app/"/>
+    </url>
+    <url>
+        <loc>https://samyunwanarmenia.netlify.app/ru/</loc>
+        <lastmod>2024-05-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="hy" href="https://samyunwanarmenia.netlify.app/hy/"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://samyunwanarmenia.netlify.app/ru/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://samyunwanarmenia.netlify.app/en/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://samyunwanarmenia.netlify.app/"/>
+    </url>
+    <url>
+        <loc>https://samyunwanarmenia.netlify.app/en/</loc>
+        <lastmod>2024-05-16</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+        <xhtml:link rel="alternate" hreflang="hy" href="https://samyunwanarmenia.netlify.app/hy/"/>
+        <xhtml:link rel="alternate" hreflang="ru" href="https://samyunwanarmenia.netlify.app/ru/"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://samyunwanarmenia.netlify.app/en/"/>
+        <xhtml:link rel="alternate" hreflang="x-default" href="https://samyunwanarmenia.netlify.app/"/>
+    </url>
+</urlset>
