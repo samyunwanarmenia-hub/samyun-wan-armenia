@@ -66,29 +66,35 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
           className="flex justify-center space-x-3 mb-5"
           variants={itemVariants}
         >
-          {productShowcaseData.map((product) => (
-            <motion.div
-              key={product.labelKey}
-              className={`relative p-1.5 rounded-xl cursor-pointer transition-all duration-200 ${
-                selectedProducts.includes(product.labelKey)
-                  ? 'border-4 border-primary-600 shadow-lg' // Changed to primary-600 for selected
-                  : 'border-2 border-gray-300 dark:border-gray-600'
-              }`}
-              onClick={() => handleProductSelect(product.labelKey)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <OptimizedImage
-                src={product.src}
-                alt={product.alt}
-                className="w-16 h-16 object-contain rounded-lg"
-                loading="eager"
-              />
-              <p className="text-xs text-gray-900 dark:text-gray-50 mt-1.5 text-center font-medium">
-                {t.productShowcase[product.labelKey]}
-              </p>
-            </motion.div>
-          ))}
+          {productShowcaseData.map((product) => {
+            const isSelected = selectedProducts.includes(product.labelKey);
+            return (
+              <motion.div
+                key={product.labelKey}
+                className={`relative p-1.5 rounded-xl cursor-pointer transition-all duration-200 ${
+                  isSelected
+                    ? 'border-4 border-primary-600 shadow-lg' // Changed to primary-600 for selected
+                    : 'border-2 border-gray-300 dark:border-gray-600'
+                }`}
+                onClick={() => handleProductSelect(product.labelKey)}
+                initial={false} // Disable initial animation for consistent hover/tap
+                animate={{ scale: isSelected ? 1.05 : 1 }} // Scale up when selected
+                whileHover={{ scale: isSelected ? 1.08 : 1.05 }} // Further scale on hover if selected, or normal hover if not
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              >
+                <OptimizedImage
+                  src={product.src}
+                  alt={product.alt}
+                  className="w-16 h-16 object-contain rounded-lg"
+                  loading="eager"
+                />
+                <p className="text-xs text-gray-900 dark:text-gray-50 mt-1.5 text-center font-medium">
+                  {t.productShowcase[product.labelKey]}
+                </p>
+              </motion.div>
+            );
+          })}
         </motion.div>
 
         {selectedProducts.length > 0 && (
