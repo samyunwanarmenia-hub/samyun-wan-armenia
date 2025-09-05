@@ -81,10 +81,13 @@ const MobileNav: React.FC<MobileNavProps> = () => {
 
   return (
     <>
-      <button
+      <motion.button
         onClick={toggleMenu}
         className="md:hidden p-2 relative w-9 h-9 flex flex-col justify-around items-center text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md z-50"
         aria-label={isOpen ? t.nav.close : t.nav.open}
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <motion.span
           className="block h-0.5 w-full bg-gray-700 dark:bg-gray-300 rounded-full"
@@ -104,7 +107,7 @@ const MobileNav: React.FC<MobileNavProps> = () => {
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.3 }}
         />
-      </button>
+      </motion.button>
       <AnimatePresence>
         {isOpen && (
           <motion.div

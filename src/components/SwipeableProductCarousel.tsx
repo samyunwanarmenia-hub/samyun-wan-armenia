@@ -115,20 +115,26 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
         </motion.div>
       </AnimatePresence>
 
-      <button
+      <motion.button
         onClick={handlePrev}
         className="absolute top-1/2 left-3 transform -translate-y-1/2 bg-white dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-700 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors z-20"
         aria-label="Previous product"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <ChevronLeft className="w-6 h-6" />
-      </button>
-      <button
+      </motion.button>
+      <motion.button
         onClick={handleNext}
         className="absolute top-1/2 right-3 transform -translate-y-1/2 bg-white dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-700 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors z-20"
         aria-label="Next product"
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.9 }}
+        transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <ChevronRight className="w-6 h-6" />
-      </button>
+      </motion.button>
     </div>
   );
 };
