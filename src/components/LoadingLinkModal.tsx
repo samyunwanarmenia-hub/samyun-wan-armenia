@@ -27,6 +27,22 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
     exit: { y: "100vh", opacity: 0, scale: 0.8, transition: { duration: 0.3 } }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
+  };
+
   const handleCopyClientId = async () => {
     if (clientId) {
       try {
@@ -57,46 +73,54 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
         <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 transition-colors">
           <X className="w-6 h-6" />
         </button>
-        <div className="w-24 h-24 mb-6 flex items-center justify-center">
-          <LoadingSpinner />
-        </div>
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4">
-          {t.loadingLinkModal.title}
-        </h3>
-        <p className="text-gray-700 dark:text-gray-300 text-lg mb-2">
-          {t.loadingLinkModal.message}
-        </p>
-        <p className="text-gray-500 dark:text-gray-400 text-sm mb-4">
-          {t.loadingLinkModal.waitingForAdmin}
-        </p>
-
-        {clientId && (
-          <div className="flex flex-col items-center mb-6">
-            <p className="text-gray-500 dark:text-gray-400 text-xs mb-2">Your Client ID:</p>
-            <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-2 border border-gray-200 dark:border-gray-600">
-              <code className="text-gray-800 dark:text-gray-200 text-sm mr-2">{clientId}</code>
-              <motion.button
-                onClick={handleCopyClientId}
-                className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-50 transition-colors" 
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
-              >
-                <Copy className="w-4 h-4" />
-              </motion.button>
-            </div>
-          </div>
-        )}
-
-        <motion.button
-          onClick={onClose}
-          className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-50 font-bold py-3 px-8 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transform hover:scale-105 transition-all mt-4"
-          whileHover={{ scale: 1.08 }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        <motion.div 
+          className="flex flex-col items-center text-center"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          Close
-        </motion.button>
+          <motion.div className="w-24 h-24 mb-6 flex items-center justify-center" variants={itemVariants}>
+            <LoadingSpinner />
+          </motion.div>
+          <motion.h3 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4" variants={itemVariants}>
+            {t.loadingLinkModal.title}
+          </motion.h3>
+          <motion.p className="text-gray-700 dark:text-gray-300 text-lg mb-2" variants={itemVariants}>
+            {t.loadingLinkModal.message}
+          </motion.p>
+          <motion.p className="text-gray-500 dark:text-gray-400 text-sm mb-4" variants={itemVariants}>
+            {t.loadingLinkModal.waitingForAdmin}
+          </motion.p>
+
+          {clientId && (
+            <motion.div className="flex flex-col items-center mb-6" variants={itemVariants}>
+              <p className="text-gray-500 dark:text-gray-400 text-xs mb-2">Your Client ID:</p>
+              <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-2 border border-gray-200 dark:border-gray-600">
+                <code className="text-gray-800 dark:text-gray-200 text-sm mr-2">{clientId}</code>
+                <motion.button
+                  onClick={handleCopyClientId}
+                  className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-50 transition-colors" 
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                >
+                  <Copy className="w-4 h-4" />
+                </motion.button>
+              </div>
+            </motion.div>
+          )}
+
+          <motion.button
+            onClick={onClose}
+            className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-50 font-bold py-3 px-8 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transform hover:scale-105 transition-all mt-4"
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            variants={itemVariants}
+          >
+            Close
+          </motion.button>
+        </motion.div>
       </motion.div>
     </motion.div>
   );

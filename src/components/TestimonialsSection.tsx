@@ -101,7 +101,7 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
                   </div>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed flex-grow">
-                  {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.nameEn}
+                  {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.textEn}
                 </p>
               </motion.div>
             ))}
