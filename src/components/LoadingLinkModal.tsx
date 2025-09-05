@@ -70,9 +70,16 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
         animate="visible"
         exit="exit"
       >
-        <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-50 transition-colors">
-          <X className="w-6 h-6" />
-        </button>
+        <motion.button 
+          onClick={onClose} 
+          className="absolute top-3 right-3 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-red-600 hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-red-700 transition-colors"
+          aria-label="Close modal"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
+          <X className="w-5 h-5" />
+        </motion.button>
         <motion.div 
           className="flex flex-col items-center text-center"
           variants={containerVariants}

@@ -37,13 +37,20 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
           className="flex flex-col items-center text-center"
           variants={itemVariants}
         >
-          <OptimizedImage 
-            src="/images/samyun-arm-original-whey-certificate.jpg" 
-            alt="Samyun Wan Original Certificate" 
-            className="w-full h-auto rounded-xl shadow-lg border border-gray-300 dark:border-gray-600 mb-3"
-            loading="eager"
-            sizes="(max-width: 768px) 90vw, 400px"
-          />
+          <motion.div
+            whileHover={{ scale: 1.03 }} // Subtle scale on hover for the image container
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            className="w-full h-auto rounded-xl shadow-lg border border-gray-300 dark:border-gray-600 mb-3 overflow-hidden" // Added overflow-hidden
+          >
+            <OptimizedImage 
+              src="/images/samyun-arm-original-whey-certificate.jpg" 
+              alt="Samyun Wan Original Certificate" 
+              className="w-full h-auto object-cover" // Ensure image fills container
+              loading="eager"
+              sizes="(max-width: 768px) 90vw, 400px"
+            />
+          </motion.div>
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
             {t.authenticity.certificateDesc}
           </p>
@@ -53,13 +60,20 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
           className="flex flex-col items-center text-center"
           variants={itemVariants}
         >
-          <OptimizedImage 
-            src="/images/samyun-arm-original-whey-certificate-deferences.jpg"
-            alt="Samyun Wan Original vs Fake Differences" 
-            className="w-full h-auto rounded-xl shadow-lg border border-gray-300 dark:border-gray-600 mb-3"
-            loading="eager"
-            sizes="(max-width: 768px) 90vw, 400px"
-          />
+          <motion.div
+            whileHover={{ scale: 1.03 }} // Subtle scale on hover for the image container
+            whileTap={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            className="w-full h-auto rounded-xl shadow-lg border border-gray-300 dark:border-gray-600 mb-3 overflow-hidden" // Added overflow-hidden
+          >
+            <OptimizedImage 
+              src="/images/samyun-arm-original-whey-certificate-deferences.jpg"
+              alt="Samyun Wan Original vs Fake Differences" 
+              className="w-full h-auto object-cover" // Ensure image fills container
+              loading="eager"
+              sizes="(max-width: 768px) 90vw, 400px"
+            />
+          </motion.div>
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">
             {t.authenticity.differencesDesc}
           </p>
