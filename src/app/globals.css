@@ -98,9 +98,9 @@
     --fab-action-shadow-rgb: 108, 144, 108; /* RGB for primary-600 */
     --fab-action-hover-bg: theme('colors.primary.500'); /* Using Tailwind variable */
 
-    /* Shine Text Animation Colors - Light Mode */
-    --slogan-shine-dark: #000; /* Original dark from user's example */
-    --slogan-shine-light: #fff; /* Original light from user's example */
+    /* Slogan Shine Effect Colors - Light Mode */
+    --slogan-base-color: theme('colors.gray.700'); /* Base text color for light mode */
+    --slogan-shine-color: theme('colors.gray.50'); /* Shine highlight color for light mode */
 
     /* Supabase Auth UI HSL Colors - Light Mode */
     --primary-600: 100 30% 49%; /* HSL for #6c906c */
@@ -143,9 +143,9 @@
     --fab-action-shadow-rgb: 56, 72, 56; /* RGB for primary-800 */
     --fab-action-hover-bg: theme('colors.primary.700'); /* Using Tailwind variable */
 
-    /* Shine Text Animation Colors - Dark Mode */
-    --slogan-shine-dark: #1f2937; /* Dark mode background color for the gradient */
-    --slogan-shine-light: #f9fafb; /* Dark mode highlight color for the gradient */
+    /* Slogan Shine Effect Colors - Dark Mode */
+    --slogan-base-color: theme('colors.gray.300'); /* Base text color for dark mode */
+    --slogan-shine-color: theme('colors.gray.50'); /* Shine highlight color for dark mode */
 
     /* Supabase Auth UI HSL Colors - Dark Mode */
     --primary-600: 100 30% 49%; /* HSL for #6c906c */
@@ -190,12 +190,12 @@
 
   /* New CSS for the text shine animation */
   .text-slogan-shine {
-    background: linear-gradient(90deg, var(--slogan-shine-dark), var(--slogan-shine-light), var(--slogan-shine-dark));
+    background: linear-gradient(90deg, var(--slogan-base-color) 0%, var(--slogan-base-color) 20%, var(--slogan-shine-color) 50%, var(--slogan-base-color) 80%, var(--slogan-base-color) 100%);
     -webkit-background-clip: text; /* Apply clipping directly */
     background-clip: text;         /* Apply clipping directly */
     -webkit-text-fill-color: transparent; /* Make text transparent to show background */
     background-repeat: no-repeat;
-    background-size: 80%; /* Smaller background for spotlight effect */
+    background-size: 400% auto; /* Increased size to ensure full sweep */
     animation: shine 5s linear infinite;
     position: relative; /* Needed for background-position-x to work correctly */
   }
@@ -218,10 +218,10 @@
 /* Keyframes for the text shine effect */
 @keyframes shine {
   0% {
-    background-position-x: -500%; /* Start far left */
+    background-position-x: -200%; /* Start far left */
   }
   100% {
-    background-position-x: 500%; /* End far right */
+    background-position-x: 200%; /* End far right */
   }
 }
 
