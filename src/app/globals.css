@@ -60,7 +60,6 @@
     background: linear-gradient(135deg, #f7fcf7, #eef3f4, #f7fcf7); /* Updated gradient syntax */
     background-size: 400% 400%;
     animation: BackgroundGradient 15s ease infinite;
-    will-change: background-position; /* Performance optimization */
   }
 
   /* Dark mode background gradient */
@@ -243,7 +242,6 @@
   border-radius: 50%;
   backface-visibility: hidden;
   animation: move linear infinite;
-  will-change: transform; /* Performance optimization */
 }
 
 /* Light mode colors for balls */
@@ -315,6 +313,26 @@
   animation-delay: -28s;
 }
 
+/* New CSS for the loader animation */
+.loader {
+  height: 100px;
+  aspect-ratio: 1;
+  position: relative;
+  --g: /calc(30.259% + 5.027px) calc(30.259% + 5.027px) radial-gradient(#0000 calc(70% - 8px),#000 calc(71% - 8px) 70%,#0000 71%) no-repeat;
+  mask: radial-gradient(100% 100%,#0000 calc((30.259% + 5.027px)/0.964 - 8.306px),#000 calc((30.259% + 5.027px)/0.964 - 8.306px + 1px)) intersect,100% 50% var(--g),81.174% 89.092% var(--g),38.874% 98.746% var(--g),4.952% 71.694% var(--g),4.952% 28.306% var(--g),38.874% 1.254% var(--g),81.174% 10.908% var(--g);
+  filter: blur(12px);
+}
+.loader:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(#0000 35%,#FA6900,#0000 65%); /* Orange color */
+  animation: l9 2s linear infinite;
+}
+@keyframes l9 {
+  to {rotate: 1turn}
+}
+
 /* New FAB styles */
 .fab-wrapper {
   position: fixed;
@@ -322,7 +340,9 @@
   right: 2rem; /* Сдвинуто вправо */
   z-index: 50; /* Ensure it's above other content */
 }
-
+.fab-checkbox {
+  display: none;
+}
 .fab {
   position: absolute;
   bottom: -1rem;
@@ -338,21 +358,95 @@
   border-radius: 50%; /* Ensure it's round */
   cursor: pointer; /* Indicate it's clickable */
   opacity: 0.9; /* Добавлена прозрачность */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
 }
 
+.fab:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease; /* Add transition for before pseudo-element */
+}
+.fab-checkbox:checked ~ .fab:before {
+  width: 90%;
+  height: 90%;
+  left: 5%;
+  top: 5%;
+  background-color: rgba(255, 255, 255, 0.2);
+}
 .fab:hover {
   background: var(--fab-hover-bg); /* Используем новую переменную */
   box-shadow: 0px 5px 20px 5px var(--fab-hover-shadow); /* Используем новую переменную */
+}
+
+.fab-dots {
+  position: absolute;
+  height: 8px;
+  width: 8px;
+  background-color: white;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateX(0%) translateY(-50%) rotate(0deg);
+  opacity: 1;
+  animation: blink 3s ease infinite;
+  transition: all 0.3s ease;
+}
+
+.fab-dots-1 {
+  left: 15px;
+  animation-delay: 0s;
+}
+.fab-dots-2 {
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  animation-delay: 0.4s;
+}
+.fab-dots-3 {
+  right: 15px;
+  animation-delay: 0.8s;
+}
+
+.fab-checkbox:checked ~ .fab .fab-dots {
+  height: 6px;
+}
+
+.fab .fab-dots-2 {
+  transform: translateX(-50%) translateY(-50%) rotate(0deg);
+}
+
+.fab-checkbox:checked ~ .fab .fab-dots-1 {
+  width: 32px;
+  border-radius: 10px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%) rotate(45deg);
+}
+.fab-checkbox:checked ~ .fab .fab-dots-3 {
+  width: 32px;
+  border-radius: 10px;
+  right: 50%;
+  transform: translateX(50%) translateY(-50%) rotate(-45deg);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.fab-checkbox:checked ~ .fab .fab-dots {
+  animation: none;
 }
 
 .fab-wheel {
   position: absolute;
   bottom: 0;
   right: 0;
+  /* Removed width, height, transform, transition, transform-origin */
+  /* These are now controlled by Framer Motion in FloatingActionButton.tsx */
   border: 1px solid theme('colors.gray.300'); /* Using Tailwind variable */
   border-radius: 50%; /* Ensure it's round */
   width: 10rem; /* Keep a base size for layout */
@@ -364,8 +458,14 @@
   border: 1px solid theme('colors.gray.700'); /* Using Tailwind variable */
 }
 
+.fab-checkbox:checked ~ .fab-wheel {
+  pointer-events: auto; /* Enable interaction when open */
+}
+
 .fab-action {
   position: absolute;
+  /* Removed top, right, left, bottom, transition */
+  /* These are now controlled by Framer Motion in FloatingActionButton.tsx */
   background: var(--fab-action-bg); /* Используем новую переменную */
   width: 3rem;
   height: 3rem;
@@ -377,6 +477,7 @@
   box-shadow: 0 0.1rem 1rem rgba(var(--fab-action-shadow-rgb), 0.82); /* Используем новую переменную RGB */
   opacity: 0.9; /* Добавлена прозрачность */
   cursor: pointer; /* Indicate it's clickable */
+  /* Center the action button within its initial 0,0 position */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -386,36 +487,8 @@
   background-color: var(--fab-action-hover-bg); /* Используем новую переменную */
 }
 
-/* Accessibility: Focus styles */
-.fab:focus-visible, .fab-action:focus-visible {
-  outline: 2px solid var(--fab-bg);
-  outline-offset: 2px;
-}
+/* Removed specific fab-action-1, fab-action-2, etc. positioning */
+/* These are now handled by Framer Motion's x and y properties */
 
-/* Accessibility: Reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  body, .ball, .text-slogan-shine, * {
-    animation: none !important;
-    transition: none !important;
-  }
-}
-
-/* Responsiveness: Mobile adjustments */
-@media (max-width: 640px) {
-  .fab {
-    width: 3.5rem;
-    height: 3.5rem;
-  }
-  .fab-wheel {
-    width: 9rem;
-    height: 9rem;
-  }
-  .fab-action {
-    width: 2.75rem;
-    height: 2.75rem;
-  }
-  .text-slogan-shine {
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-}
+/* Text Shine Animation */
+/* Removed .text-shine-animation and @keyframes shine */
