@@ -11,7 +11,7 @@ import useActiveLink from '@/hooks/useActiveLink';
 import useNavigationUtils from '@/hooks/useNavigationUtils';
 import MainLayout from '@/layouts/MainLayout'; // Import MainLayout
 import IntroAnimation from './IntroAnimation'; // Import the new IntroAnimation component
-import { AnimatePresence } from 'framer-motion'; // Import AnimatePresence
+import { AnimatePresence, motion } from 'framer-motion'; // Import AnimatePresence and motion
 
 interface LayoutClientProviderProps {
   children: React.ReactNode;
@@ -139,35 +139,41 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
 
   return (
     <LayoutContext.Provider value={contextValue}>
-      <AnimatePresence>
-        {showIntroAnimation && <IntroAnimation key="intro-animation" />}
-      </AnimatePresence>
-
-      {/* If it's the QR verification page, only render children (the page content itself) */}
-      {!showIntroAnimation && isQrVerifyPage ? (
-        children
-      ) : (
-        // For all other pages, render the full MainLayout
-        !showIntroAnimation && (
-          <MainLayout
-            contactModalOpen={contactModalOpen}
-            contactModalType={contactModalType}
-            orderModalOpen={orderModalOpen}
-            initialSelectedProduct={initialSelectedProduct}
-            authenticityModalOpen={authenticityModalOpen}
-            callbackRequestModalOpen={callbackRequestModalOpen}
-            closeContactModal={closeContactModal}
-            closeOrderModal={closeOrderModal}
-            closeAuthenticityModal={closeAuthenticityModal}
-            closeCallbackRequestModal={closeCallbackRequestModal}
-            loadingLinkModalOpen={loadingLinkModalOpen}
-            closeLoadingLinkModal={closeLoadingLinkModal}
-            loadingLinkClientId={loadingLinkClientId}
+      <AnimatePresence mode="wait"> {/* Use mode="wait" to ensure one animation finishes before the next starts */}
+        {showIntroAnimation ? (
+          <IntroAnimation key="intro-animation" />
+        ) : (
+          <motion.div
+            key="main-app-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }} // Match IntroAnimation's exit duration
+            className="min-h-screen flex flex-col text-gray-900 dark:text-gray-50 relative overflow-hidden" // Apply layout classes here
           >
-            {children}
-          </MainLayout>
-        )
-      )}
+            {isQrVerifyPage ? (
+              children
+            ) : (
+              <MainLayout
+                contactModalOpen={contactModalOpen}
+                contactModalType={contactModalType}
+                orderModalOpen={orderModalOpen}
+                initialSelectedProduct={initialSelectedProduct}
+                authenticityModalOpen={authenticityModalOpen}
+                callbackRequestModalOpen={callbackRequestModalOpen}
+                closeContactModal={closeContactModal}
+                closeOrderModal={closeOrderModal}
+                closeAuthenticityModal={closeAuthenticityModal}
+                closeCallbackRequestModal={closeCallbackRequestModal}
+                loadingLinkModalOpen={loadingLinkModalOpen}
+                closeLoadingLinkModal={closeLoadingLinkModal}
+                loadingLinkClientId={loadingLinkClientId}
+              >
+                {children}
+              </MainLayout>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </LayoutContext.Provider>
   );
 };

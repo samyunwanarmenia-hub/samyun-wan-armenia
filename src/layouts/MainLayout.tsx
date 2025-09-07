@@ -66,7 +66,7 @@ const MainLayout = ({
   } = useLayoutContext(); // Consume context here
 
   return (
-    <div className="min-h-screen flex flex-col text-gray-900 dark:text-gray-50 relative overflow-hidden">
+    <> {/* Use React.Fragment instead of a div */}
       <DynamicMovingBallsBackground /> {/* Use lazy-loaded component */}
       
       <DynamicNavbar />
@@ -119,7 +119,7 @@ const MainLayout = ({
           />
         )}
       </AnimatePresence>
-    </div>
+    </>
   );
 };
 
