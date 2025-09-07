@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
 import { generateOrganizationStructuredData, generateFaqStructuredData, generateWebSiteStructuredData } from '@/utils/structuredDataUtils';
-// Removed dynamic imports for trackers and LayoutClientProvider
+import LayoutClientProvider from '@/components/LayoutClientProvider'; // Import LayoutClientProvider
 
 interface LangLayoutProps {
   children: ReactNode;
@@ -13,9 +13,6 @@ interface LangLayoutProps {
 export async function generateMetadata({ params }: LangLayoutProps): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;
   const t = translations[lang] || translations.hy; // Fallback to Armenian
-
-  // const pathSegments = params.lang ? [params.lang] : []; // Removed unused variable
-  // const currentRoute = pathSegments.join('/'); // Removed unused variable
 
   const pageTitle = t.hero.title + ' - ' + t.hero.subtitle + ' | ' + t.hero.seo_title_addon;
   const pageDescription = t.hero.tagline + ' ' + t.about.description + ' ' + t.benefits.subtitle;
@@ -94,8 +91,9 @@ const LangLayout = ({ children, params }: LangLayoutProps) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteStructuredData) }}
       />
-      {/* LayoutClientProvider now wraps children in RootLayout */}
-      {children}
+      <LayoutClientProvider initialLang={params.lang}>
+        {children}
+      </LayoutClientProvider>
     </>
   );
 };
