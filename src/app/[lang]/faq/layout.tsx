@@ -2,11 +2,10 @@ import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { generateFaqStructuredData } from '@/utils/structuredDataUtils';
+import { FaqLayoutProps } from '@/types/global';
 
-interface FaqLayoutProps {
-  children: ReactNode;
-  // params: { lang: string }; // Removed as it's only used in generateMetadata
-}
+// The interface FaqLayoutProps is now imported from '@/types/global'
+// and should not be redefined here.
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;

@@ -3,11 +3,10 @@ import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { generateProductStructuredData } from '@/utils/structuredDataUtils'; // Import the new utility
 import { productShowcaseData } from '@/data/productShowcaseData'; // Import product data
+import { ProductsLayoutProps } from '@/types/global';
 
-interface ProductsLayoutProps {
-  children: ReactNode;
-  // params: { lang: string }; // Removed as it's only used in generateMetadata
-}
+// The interface ProductsLayoutProps is now imported from '@/types/global'
+// and should not be redefined here.
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;
@@ -16,7 +15,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   return {
     title: t.hero.title + ' - ' + t.productShowcase.weightGainLabel + ' & ' + t.productShowcase.weightLossLabel + ' | ' + t.nav.products,
     description: t.productShowcase.weightGainDesc + ' | ' + t.productShowcase.weightLossDesc + ' | ' + t.hero.tagline + ' ' + t.authenticity.howToDistinguish,
-    keywords: `${t.hero.title}, ${t.productShowcase.weightGainLabel}, ${t.productShowcase.weightLossLabel}, samyun wan, armenia, քաշի ավելացում, քաշի նվազեցում, բնական կապսուլներ, ինդոնեզական, samyun wan оригинал ереван, նաբոր վеса հայաստան, похудение армения, Samyun Wan products, weight gain capsules, weight loss capsules, original product, authenticity check`,
+    keywords: `${t.hero.title}, ${t.productShowcase.weightGainLabel}, ${t.productShowcase.weightLossLabel}, samyun wan, armenia, քաշի ավելացում, քաշի նվազեցում, բնական կապսուլներ, ինդոնեզական, samyun wan оригинал ереվան, նաբոր վеса հայաստան, похудение армения, Samyun Wan products, weight gain capsules, weight loss capsules, original product, authenticity check`,
     openGraph: {
       title: t.hero.title + ' - ' + t.productShowcase.weightGainLabel + ' & ' + t.productShowcase.weightLossLabel,
       description: t.productShowcase.weightGainDesc + ' | ' + t.productShowcase.weightLossDesc + ' | ' + t.authenticity.howToDistinguish,

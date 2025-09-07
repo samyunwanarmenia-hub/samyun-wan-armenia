@@ -278,7 +278,9 @@ export interface TestimonialsSectionProps {
   userTestimonial: Testimonial | null;
 }
 export interface ContactSectionProps {}
-export interface FaqSectionProps {}
+export interface FaqSectionProps {
+  params: { lang: string }; // Added params
+}
 export interface HeroSectionProps {
   stats: StatItem[];
 }
@@ -384,4 +386,14 @@ export interface TelegramVideoData {
   videoBlob: Blob; // Use Blob for video data
   caption: string;
   filename: string; // e.g., 'qr_scan_video.webm'
+}
+
+export interface ProductsLayoutProps {
+  children: React.ReactNode;
+  params: { lang: string }; // Added params
+}
+
+export interface TestimonialsLayoutProps {
+  children: React.ReactNode;
+  params: { lang: string }; // Added params
 }
