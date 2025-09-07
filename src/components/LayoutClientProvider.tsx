@@ -42,7 +42,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
 
   // Effect to manage intro animation and body overflow
   useEffect(() => {
-    const animationDuration = 1500; // Adjusted duration for the new animation
+    const animationDuration = 1300; // Adjusted duration for a smoother transition
 
     const timer = setTimeout(() => {
       setShowIntroAnimation(false);

@@ -25,8 +25,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
 
   const mainProduct = productShowcaseData[0]; // Still need this for the order button
 
-  // Base delay for elements in HeroSection, relative to the end of the intro animation (1.8s)
-  const introEndDelay = 1.8;
+  // Base delay for elements in HeroSection, relative to the end of the intro animation (1.3s + 0.3s fade-out = 1.6s)
+  const introEndDelay = 1.6;
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden py-12">
