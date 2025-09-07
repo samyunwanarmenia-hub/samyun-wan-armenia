@@ -1,0 +1,326 @@
+/*=================== animation05 ====================*/
+
+.animation05 { 
+  position: absolute; 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 100%; 
+  height: 100%; 
+}
+
+.double_wrapper02 { 
+  position: relative; 
+  width: 100%; 
+  height: 100%; 
+  animation: animation05_double 0.046s forwards;
+  opacity: 0; 
+}
+
+.double_wrapper01 { 
+  display: block; 
+  position: absolute; 
+  border-radius: 50%; 
+  overflow: hidden; 
+}
+
+.double_wrapper01::before { 
+  content: ""; 
+  display: block; 
+  position: absolute; 
+  background: #f2f3df;
+  z-index: 2; 
+}
+
+.dark .double_wrapper01::before {
+  background: #1a1a1a;
+}
+
+.double_wrapper01::after { 
+  content: ""; 
+  display: block; 
+  position: absolute; 
+  background: #f2f3df;
+  z-index: 3; 
+}
+
+.dark .double_wrapper01::after {
+  background: #1a1a1a;
+}
+
+.double_block { 
+  position: absolute; 
+  background: #f2f3df;
+  border-radius: 50%; 
+}
+
+.dark .double_block {
+  background: #1a1a1a;
+}
+
+/*============== green circle ==============*/
+
+.green02 { 
+  top: 0; 
+  animation-delay: 0.604s;
+}
+
+.green01 { 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 34vw; 
+  height: 34vw; 
+  background: #75cfb9; 
+  z-index: 1; 
+}
+
+.green01::before { 
+  top: 0; 
+  left: 17vw; 
+  width: 34vw; 
+  height: 34vw; 
+  transform-origin: left 17vw; 
+  animation: rotate-circle-right 0.232s linear 0.720s forwards;
+}
+
+.green01::after { 
+  top: 0; 
+  left: -17vw; 
+  width: 34vw; 
+  height: 34vw; 
+  transform-origin: right 17vw; 
+  animation: rotate-circle-left 0.232s linear 0.604s forwards;
+}
+
+.green00 { 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 9vw; 
+  height: 9vw; 
+  z-index: 4; 
+}
+
+/*============== navy circle ==============*/
+
+.navy02 { 
+  top: -100%; 
+  animation-delay: 0.651s;
+}
+
+.navy01 { 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%) rotate(-20deg); 
+  width: 25vw; 
+  height: 25vw; 
+  background: #485973; 
+  z-index: 1; 
+}
+
+.navy01::before { 
+  top: 0; 
+  left: 12.5vw; 
+  width: 25vw; 
+  height: 25vw; 
+  transform-origin: left 12.5vw; 
+  animation: rotate-circle-right 0.232s linear 0.767s forwards;
+}
+
+.navy01::after { 
+  top: 0; 
+  left: -12.5vw; 
+  width: 25vw; 
+  height: 25vw; 
+  transform-origin: right 12.5vw; 
+  animation: rotate-circle-left 0.232s linear 0.651s forwards;
+}
+
+.navy00 { 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 9vw; 
+  height: 9vw; 
+  z-index: 4; 
+}
+
+/*============== yellow circle ==============*/
+
+.yellow02 { 
+  top: -200%; 
+  animation-delay: 0.674s;
+}
+
+.yellow01 { 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%) rotate(20deg); 
+  width: 23vw; 
+  height: 23vw; 
+  background: #ffe08b; 
+  z-index: 1; 
+}
+
+.yellow01::before { 
+  top: 0; 
+  left: 11.5vw; 
+  width: 23vw; 
+  height: 23vw; 
+  transform-origin: left 11.5vw; 
+  animation: rotate-circle-right 0.232s linear 0.790s forwards;
+}
+
+.yellow01::after { 
+  top: 0; 
+  left: -11.5vw; 
+  width: 23vw; 
+  height: 23vw; 
+  transform-origin: right 11.5vw; 
+  animation: rotate-circle-left 0.232s linear 0.674s forwards;
+}
+
+.yellow00 { 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 9vw; 
+  height: 9vw; 
+  z-index: 4; 
+}
+
+/*============== blue circle ==============*/
+
+.blue02 { 
+  top: -300%; 
+  animation-delay: 0.558s;
+}
+
+.blue01 { 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%) rotate(20deg); 
+  width: 16vw; 
+  height: 16vw; 
+  background: #457ed4; 
+  z-index: 1; 
+}
+
+.blue01::before { 
+  top: 0; 
+  left: 8vw; 
+  width: 16vw; 
+  height: 16vw; 
+  transform-origin: left 8vw; 
+  animation: rotate-circle-right 0.232s linear 0.674s forwards;
+}
+
+.blue01::after { 
+  top: 0; 
+  left: -8vw; 
+  width: 16vw; 
+  height: 16vw; 
+  transform-origin: right 8vw; 
+  animation: rotate-circle-left 0.232s linear 0.558s forwards;
+}
+
+.blue00 { 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 7vw; 
+  height: 7vw; 
+  z-index: 4; 
+}
+
+/*============== red circle ==============*/
+
+.red02 { 
+  top: -400%; 
+  animation-delay: 0.604s;
+}
+
+.red01 { 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%) rotate(45deg); 
+  width: 12vw; 
+  height: 12vw; 
+  background: #e8595f; 
+  z-index: 1; 
+}
+
+.red01::before { 
+  top: 0; 
+  left: 6vw; 
+  width: 12vw; 
+  height: 12vw; 
+  transform-origin: left 6vw; 
+  animation: rotate-circle-right 0.232s linear 0.720s forwards;
+}
+
+.red01::after { 
+  top: 0; 
+  left: -6vw; 
+  width: 12vw; 
+  height: 12vw; 
+  transform-origin: right 6vw; 
+  animation: rotate-circle-left 0.232s linear 0.604s forwards;
+}
+
+.red00 { 
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+  width: 9vw; 
+  height: 9vw; 
+  z-index: 4; 
+}
+
+@keyframes animation05_double { 
+  0% { opacity: 0; } 
+  100% { opacity: 1; } 
+}
+
+@keyframes rotate-circle-left { 
+  0% { background: #f2f3df; transform: rotate(0deg); } 
+  50% { background: #f2f3df; transform: rotate(-180deg); } 
+  50.01% { background: #f2f3df; transform: rotate(-180deg); } 
+  100% { background: #f2f3df; transform: rotate(-360deg); } 
+}
+
+.dark @keyframes rotate-circle-left {
+  0% { background: #1a1a1a; transform: rotate(0deg); } 
+  50% { background: #1a1a1a; transform: rotate(-180deg); } 
+  50.01% { background: #1a1a1a; transform: rotate(-180deg); } 
+  100% { background: #1a1a1a; transform: rotate(-360deg); } 
+}
+
+@keyframes rotate-circle-right { 
+  0% { transform: rotate(0deg); } 
+  50% { transform: rotate(-180deg); } 
+  100% { transform: rotate(-360deg); } 
+}
+
+@media screen and (max-width: 750px) { 
+  /*============== green circle ==============*/ 
+  .green01 { width: 70vw; height: 70vw; } 
+  .green01::before { left: 35vw; width: 70vw; height: 70vw; transform-origin: left 35vw; } 
+  .green01::after { left: -35vw; width: 70vw; height: 70vw; transform-origin: right 35vw; } 
+  /*============== navy circle ==============*/ 
+  .navy01 { width: 50vw; height: 50vw; } 
+  .navy01::before { left: 25vw; width: 50vw; height: 50vw; transform-origin: left 25vw; } 
+  .navy01::after { left: -25vw; width: 50vw; height: 50vw; transform-origin: right 25vw; } 
+  /*============== yellow circle ==============*/ 
+  .yellow01 { width: 35vw; height: 35vw; } 
+  .yellow01::before { left: 17.5vw; width: 35vw; height: 35vw; transform-origin: left 17.5vw; } 
+  .yellow01::after { left: -17.5vw; width: 35vw; height: 35vw; transform-origin: right 17.5vw; } 
+  /*============== blue circle ==============*/ 
+  .blue01 { width: 20vw; height: 20vw; } 
+  .blue01::before { left: 10vw; width: 20vw; height: 20vw; transform-origin: left 10vw; } 
+  .blue01::after { left: -10vw; width: 20vw; height: 20vw; transform-origin: right 10vw; } 
+  .blue00 { width: 7vw; height: 7vw; } 
+  /*============== red circle ==============*/ 
+  .red00 { width: 6vw; height: 6vw; } 
+}

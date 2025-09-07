@@ -1,0 +1,46 @@
+/*=================== animation08 ====================*/
+
+.animation08 { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+  animation: animation08 0.697s ease-out 1.302s forwards;
+  opacity: 0; 
+}
+
+.animation08 div:nth-of-type(1) { 
+  width: 100%; 
+  height: 100%; 
+  background: #242324; 
+}
+
+.animation08 div:nth-of-type(2) { 
+  width: 100%; 
+  height: 25%; 
+  background: #75cfb9; 
+}
+
+.animation08 div:nth-of-type(3) { 
+  width: 100%; 
+  height: 25%; 
+  background: #457ed4; 
+}
+
+.animation08 div:nth-of-type(4) { 
+  width: 100%; 
+  height: 25%; 
+  background: #e8595f; 
+}
+
+.animation08 div:nth-of-type(5) { 
+  width: 100%; 
+  height: 25%; 
+  background: #ffe08b; 
+}
+
+@keyframes animation08 { 
+  0% { transform: translateY(-200vh); opacity: 1; } 
+  100% { transform: translateY(0); opacity: 1; } 
+}

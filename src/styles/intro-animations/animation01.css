@@ -1,0 +1,47 @@
+/*=================== animation01 ====================*/
+
+.animation01 { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  position: absolute; 
+  width: 100%; 
+  height: 100%; 
+}
+
+.animation01 div { 
+  width: 20%; 
+  height: 100%; 
+  animation: animation01 0.128s ease-in forwards;
+  transform-origin: bottom; 
+  opacity: 0; 
+}
+
+.animation01 div:nth-child(1) { 
+  background-color: #d55959; 
+  animation-delay: 0.186s;
+}
+
+.animation01 div:nth-child(2) { 
+  background-color: #ffe08b; 
+  animation-delay: 0.139s;
+}
+
+.animation01 div:nth-child(3) { 
+  background-color: #75cfb9; 
+  animation-delay: 0.093s;
+}
+
+.animation01 div:nth-child(4) { 
+  background-color: #f1a05b; 
+  animation-delay: 0.046s;
+}
+
+.animation01 div:nth-child(5) { 
+  background-color: #78bee4; 
+}
+
+@keyframes animation01 { 
+  0% { transform: scale3d(1, 0, 1); opacity: 1; } 
+  100% { transform: scale3d(1, 1, 1); opacity: 1; } 
+}
