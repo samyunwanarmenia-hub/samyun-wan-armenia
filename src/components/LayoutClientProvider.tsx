@@ -182,6 +182,8 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
                   loadingLinkModalOpen={loadingLinkModalOpen}
                   closeLoadingLinkModal={closeLoadingLinkModal}
                   loadingLinkClientId={loadingLinkClientId}
+                  t={t} {/* Pass t prop */}
+                  currentLang={currentLangState} {/* Pass currentLang prop */}
                 >
                   {children}
                 </MainLayout>

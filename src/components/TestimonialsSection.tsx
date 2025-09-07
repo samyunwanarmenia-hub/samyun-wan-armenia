@@ -6,7 +6,7 @@ import { Testimonial } from '../types/global';
 import SectionHeader from './SectionHeader';
 import { useLayoutContext } from '@/context/LayoutContext';
 import OptimizedImage from './OptimizedImage';
-import { generateReviewStructuredData } from '@/utils/structuredDataUtils';
+// Removed generateReviewStructuredData import as it's no longer needed here
 
 interface TestimonialsSectionProps {
   testimonials: Testimonial[];
@@ -21,9 +21,10 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
   const combinedTestimonials = userTestimonial ? [userTestimonial, ...testimonials] : testimonials;
   const displayedTestimonials = combinedTestimonials.slice(0, 6);
 
-  const reviewStructuredData = displayedTestimonials.map((testimonial: Testimonial) => 
-    generateReviewStructuredData(t, testimonial, currentLang)
-  );
+  // Removed reviewStructuredData generation as it's handled by the layout
+  // const reviewStructuredData = displayedTestimonials.map((testimonial: Testimonial) => 
+  //   generateReviewStructuredData(t, testimonial, currentLang)
+  // );
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -45,13 +46,7 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
 
   return (
     <>
-      {reviewStructuredData.map((data: Record<string, any>, index: number) => (
-        <script
-          key={`review-schema-${index}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-        />
-      ))}
+      {/* Removed script tag for structured data as it's handled by the layout */}
       <motion.section 
         id="testimonials" 
         className="relative py-12 overflow-hidden"
@@ -101,7 +96,7 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
                   </div>
                 </div>
                 <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed flex-grow">
-                  {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.nameEn}
+                  {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.textEn}
                 </p>
               </motion.div>
             ))}

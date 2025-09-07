@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useCallback, useEffect } from 'react';
-import { UseReviewFormHookParams } from '@/types/global'; // Removed TranslationKeys, DbReview
+import { UseReviewFormHookParams } from '@/types/global';
 import { supabase } from '@/integrations/supabase/client';
 import { showSuccess, showError } from '@/utils/toast';
 
-export const useReviewForm = ({ t, onReviewSubmitted, initialName = '' }: UseReviewFormHookParams) => { // Removed userId
+export const useReviewForm = ({ t, onReviewSubmitted, initialName = '' }: UseReviewFormHookParams) => {
   const [name, setName] = useState<string>(initialName);
   const [reviewText, setReviewText] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -27,7 +27,6 @@ export const useReviewForm = ({ t, onReviewSubmitted, initialName = '' }: UseRev
         .from('reviews')
         .insert([
           {
-            // user_id: userId, // Removed user_id
             name: name.trim(),
             text: reviewText.trim(),
             rating: 5,

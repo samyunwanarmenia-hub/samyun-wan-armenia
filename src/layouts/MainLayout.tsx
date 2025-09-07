@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 
 import { useLayoutContext } from '@/context/LayoutContext'; // Import useLayoutContext
-import { ContactModalType, ProductShowcaseItem } from '@/types/global'; // Import necessary types
+import { ContactModalType, ProductShowcaseItem, TranslationKeys } from '@/types/global'; // Import necessary types, including TranslationKeys
 import FloatingActionButton from '@/components/FloatingActionButton'; // Import the new FAB component
 
 interface MainLayoutProps {
@@ -23,6 +23,8 @@ interface MainLayoutProps {
   loadingLinkModalOpen: boolean;
   closeLoadingLinkModal: () => void;
   loadingLinkClientId: string | null;
+  t: TranslationKeys; // Added t prop
+  currentLang: string; // Added currentLang prop
 }
 
 // Dynamically import client-only components with ssr: false
@@ -54,10 +56,10 @@ const MainLayout = ({
   loadingLinkModalOpen,
   closeLoadingLinkModal,
   loadingLinkClientId,
+  t, // Destructure t from props
+  currentLang, // Destructure currentLang from props
 }: MainLayoutProps) => {
   const {
-    t,
-    currentLang, // Get currentLang from context
     openContactModal, // This is used in FloatingActionButton
     openCallbackRequestModal, // This is used in FloatingActionButton
     // openOrderModal, // Not used directly in MainLayout, handled by child components via their own context or props
