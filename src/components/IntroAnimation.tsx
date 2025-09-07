@@ -66,33 +66,6 @@ const IntroAnimation: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="animation05">
-          <div className="double_wrapper02 green02">
-            <div className="double_wrapper01 green01">
-              <div className="double_block green00"></div>
-            </div>
-          </div>
-          <div className="double_wrapper02 navy02">
-            <div className="double_wrapper01 navy01">
-              <div className="double_block navy00"></div>
-            </div>
-          </div>
-          <div className="double_wrapper02 yellow02">
-            <div className="double_wrapper01 yellow01">
-              <div className="double_block yellow00"></div>
-            </div>
-          </div>
-          <div className="double_wrapper02 blue02">
-            <div className="double_wrapper01 blue01">
-              <div className="double_block blue00"></div>
-            </div>
-          </div>
-          <div className="double_wrapper02 red02">
-            <div className="double_wrapper01 red01">
-              <div className="double_block red00"></div>
-            </div>
-          </div>
-        </div>
       </div>
     </motion.div>
   );
