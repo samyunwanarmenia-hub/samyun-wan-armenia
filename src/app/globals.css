@@ -7,7 +7,7 @@
 @import '../styles/variables.css';
 @import '../styles/background-animations.css';
 @import '../styles/fab.css';
-@import '../styles/intro-animation.css';
+/* @import '../styles/intro-animation.css'; */ /* Removed this import */
 @import '../styles/loader.css';
 
 @layer components {
