@@ -56,6 +56,11 @@
   --intro-circle-border-brownish-green: theme('colors.primary.600'); /* #a18a66 */
   --intro-circle-bg: #fff; /* White circle background */
   --intro-strip-dark-gray: theme('colors.gray.900'); /* #242324 */
+
+  --intro-rhombus-red: theme('colors.brandRed.400');
+  --intro-rhombus-green: theme('colors.primary.400');
+  --intro-rhombus-yellow: theme('colors.yellow.300');
+  --intro-rhombus-bg: var(--intro-bg-main);
 }
 
 .dark {
@@ -120,4 +125,9 @@
   --intro-circle-border-brownish-green: theme('colors.primary.700');
   --intro-circle-bg: #1a1a1a;
   --intro-strip-dark-gray: theme('colors.gray.100');
+
+  --intro-rhombus-red: theme('colors.brandRed.500');
+  --intro-rhombus-green: theme('colors.primary.600');
+  --intro-rhombus-yellow: theme('colors.yellow.500');
+  --intro-rhombus-bg: var(--intro-bg-main);
 }
