@@ -4,8 +4,8 @@ import { Inter } from 'next/font/google';
 
 import '../app/globals.css';
 import { translations } from '@/i18n/translations';
-import { ThemeProvider } from '@/context/ThemeContext'; // Импортируем напрямую
-import ToastProvider from '@/components/ToastProvider'; // Импортируем напрямую
+// Removed: import { ThemeProvider } from '@/context/ThemeContext';
+// Removed: import ToastProvider from '@/components/ToastProvider';
 
 
 const inter = Inter({
@@ -85,10 +85,7 @@ const RootLayout = ({
   return (
     <html className={`${inter.variable}`}>
       <body>
-        <ThemeProvider>
-          <ToastProvider />
-          {children}
-        </ThemeProvider>
+        {children}
         <noscript>
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}

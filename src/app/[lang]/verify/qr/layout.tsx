@@ -1,15 +1,7 @@
 import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
-import dynamic from 'next/dynamic'; // Import dynamic
-
-// Re-introducing dynamic imports for client-side components
-const LayoutClientProvider = dynamic(() => import('@/components/LayoutClientProvider')); // Удаляем ssr: false
-const DynamicYandexMetrikaTracker = dynamic(() => import('@/components/YandexMetrikaTracker'), { ssr: false });
-const DynamicVisitTrackerWrapper = dynamic(() => import('@/components/VisitTrackerWrapper'), { ssr: false });
-const DynamicGoogleAnalyticsTracker = dynamic(() => import('@/components/GoogleAnalyticsTracker'), { ssr: false });
-const DynamicServiceWorkerRegister = dynamic(() => import('@/components/ServiceWorkerRegister'), { ssr: false });
-
+// Removed dynamic imports for client-side components
 
 interface QrVerifyLayoutProps {
   children: ReactNode;
@@ -51,13 +43,11 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 
 const QrVerifyLayout = ({ children, params }: QrVerifyLayoutProps) => {
   return (
-    <LayoutClientProvider initialLang={params.lang}> {/* Используем напрямую */}
-      <DynamicYandexMetrikaTracker />
-      <DynamicGoogleAnalyticsTracker />
-      <DynamicVisitTrackerWrapper />
-      <DynamicServiceWorkerRegister />
+    // LayoutClientProvider now wraps children in RootLayout
+    // The initialLang prop is no longer needed here as it's passed to the root LayoutClientProvider
+    <>
       {children}
-    </LayoutClientProvider>
+    </>
   );
 };
 

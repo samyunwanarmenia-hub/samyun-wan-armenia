@@ -2,14 +2,7 @@ import { ReactNode } from 'react';
 import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
 import { generateOrganizationStructuredData, generateFaqStructuredData, generateWebSiteStructuredData } from '@/utils/structuredDataUtils';
-import dynamic from 'next/dynamic';
-
-// Dynamically import LayoutClientProvider without ssr: false to allow server rendering
-const LayoutClientProvider = dynamic(() => import('@/components/LayoutClientProvider')); // Удаляем ssr: false
-const DynamicYandexMetrikaTracker = dynamic(() => import('@/components/YandexMetrikaTracker'), { ssr: false });
-const DynamicVisitTrackerWrapper = dynamic(() => import('@/components/VisitTrackerWrapper'), { ssr: false });
-const DynamicGoogleAnalyticsTracker = dynamic(() => import('@/components/GoogleAnalyticsTracker'), { ssr: false });
-const DynamicServiceWorkerRegister = dynamic(() => import('@/components/ServiceWorkerRegister'), { ssr: false }); // New import
+// Removed dynamic imports for trackers and LayoutClientProvider
 
 interface LangLayoutProps {
   children: ReactNode;
@@ -101,13 +94,8 @@ const LangLayout = ({ children, params }: LangLayoutProps) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteStructuredData) }}
       />
-      <LayoutClientProvider initialLang={params.lang}> {/* Используем напрямую */}
-        <DynamicYandexMetrikaTracker />
-        <DynamicGoogleAnalyticsTracker />
-        <DynamicVisitTrackerWrapper />
-        <DynamicServiceWorkerRegister /> {/* New component for Service Worker registration */}
-        {children}
-      </LayoutClientProvider>
+      {/* LayoutClientProvider now wraps children in RootLayout */}
+      {children}
     </>
   );
 };

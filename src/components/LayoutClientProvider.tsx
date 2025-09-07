@@ -12,6 +12,15 @@ import useNavigationUtils from '@/hooks/useNavigationUtils';
 import MainLayout from '@/layouts/MainLayout'; // Import MainLayout
 import IntroAnimation from './IntroAnimation'; // Import the new IntroAnimation component
 import { AnimatePresence, motion } from 'framer-motion'; // Import AnimatePresence and motion
+import { ThemeProvider } from '@/context/ThemeContext'; // Import ThemeProvider
+import ToastProvider from '@/components/ToastProvider'; // Import ToastProvider
+import dynamic from 'next/dynamic'; // Import dynamic for client-side components
+
+// Dynamically import client-only components with ssr: false
+const DynamicYandexMetrikaTracker = dynamic(() => import('@/components/YandexMetrikaTracker'), { ssr: false });
+const DynamicVisitTrackerWrapper = dynamic(() => import('@/components/VisitTrackerWrapper'), { ssr: false });
+const DynamicGoogleAnalyticsTracker = dynamic(() => import('@/components/GoogleAnalyticsTracker'), { ssr: false });
+const DynamicServiceWorkerRegister = dynamic(() => import('@/components/ServiceWorkerRegister'), { ssr: false });
 
 interface LayoutClientProviderProps {
   children: React.ReactNode;
@@ -139,41 +148,48 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
 
   return (
     <LayoutContext.Provider value={contextValue}>
-      <AnimatePresence mode="wait"> {/* Use mode="wait" to ensure one animation finishes before the next starts */}
-        {showIntroAnimation ? (
-          <IntroAnimation key="intro-animation" />
-        ) : (
-          <motion.div
-            key="main-app-content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }} // Match IntroAnimation's exit duration
-            className="min-h-screen flex flex-col text-gray-900 dark:text-gray-50 relative overflow-hidden" // Apply layout classes here
-          >
-            {isQrVerifyPage ? (
-              children
-            ) : (
-              <MainLayout
-                contactModalOpen={contactModalOpen}
-                contactModalType={contactModalType}
-                orderModalOpen={orderModalOpen}
-                initialSelectedProduct={initialSelectedProduct}
-                authenticityModalOpen={authenticityModalOpen}
-                callbackRequestModalOpen={callbackRequestModalOpen}
-                closeContactModal={closeContactModal}
-                closeOrderModal={closeOrderModal}
-                closeAuthenticityModal={closeAuthenticityModal}
-                closeCallbackRequestModal={closeCallbackRequestModal}
-                loadingLinkModalOpen={loadingLinkModalOpen}
-                closeLoadingLinkModal={closeLoadingLinkModal}
-                loadingLinkClientId={loadingLinkClientId}
-              >
-                {children}
-              </MainLayout>
-            )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <ThemeProvider>
+        <ToastProvider />
+        <DynamicYandexMetrikaTracker />
+        <DynamicGoogleAnalyticsTracker />
+        <DynamicVisitTrackerWrapper />
+        <DynamicServiceWorkerRegister />
+        <AnimatePresence mode="wait"> {/* Use mode="wait" to ensure one animation finishes before the next starts */}
+          {showIntroAnimation ? (
+            <IntroAnimation key="intro-animation" />
+          ) : (
+            <motion.div
+              key="main-app-content"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.3 }} // Match IntroAnimation's exit duration
+              className="min-h-screen flex flex-col text-gray-900 dark:text-gray-50 relative overflow-hidden" // Apply layout classes here
+            >
+              {isQrVerifyPage ? (
+                children
+              ) : (
+                <MainLayout
+                  contactModalOpen={contactModalOpen}
+                  contactModalType={contactModalType}
+                  orderModalOpen={orderModalOpen}
+                  initialSelectedProduct={initialSelectedProduct}
+                  authenticityModalOpen={authenticityModalOpen}
+                  callbackRequestModalOpen={callbackRequestModalOpen}
+                  closeContactModal={closeContactModal}
+                  closeOrderModal={closeOrderModal}
+                  closeAuthenticityModal={closeAuthenticityModal}
+                  closeCallbackRequestModal={closeCallbackRequestModal}
+                  loadingLinkModalOpen={loadingLinkModalOpen}
+                  closeLoadingLinkModal={closeLoadingLinkModal}
+                  loadingLinkClientId={loadingLinkClientId}
+                >
+                  {children}
+                </MainLayout>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </ThemeProvider>
     </LayoutContext.Provider>
   );
 };
