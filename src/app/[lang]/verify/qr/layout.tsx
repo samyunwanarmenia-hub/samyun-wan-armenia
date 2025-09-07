@@ -1,11 +1,10 @@
 import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
-// Removed dynamic imports for client-side components
 
 interface QrVerifyLayoutProps {
   children: ReactNode;
-  params: { lang: string };
+  // params: { lang: string }; // Removed as it's only used in generateMetadata
 }
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
@@ -41,7 +40,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   };
 }
 
-const QrVerifyLayout = ({ children, params }: QrVerifyLayoutProps) => {
+const QrVerifyLayout = ({ children }: QrVerifyLayoutProps) => {
   return (
     // LayoutClientProvider now wraps children in RootLayout
     // The initialLang prop is no longer needed here as it's passed to the root LayoutClientProvider

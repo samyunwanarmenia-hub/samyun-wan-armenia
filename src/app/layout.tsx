@@ -1,11 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-// Removed Image import as it's no longer needed for noscript
 
 import '../app/globals.css';
 import { translations } from '@/i18n/translations';
-// Removed: import { ThemeProvider } from '@/context/ThemeContext';
-// Removed: import ToastProvider from '@/components/ToastProvider';
 
 
 const inter = Inter({
@@ -22,7 +19,7 @@ export const metadata: Metadata = {
     template: `%s | ${tHy.hero.title}`,
   },
   description: tHy.hero.tagline + ' ' + tHy.about.description + ' ' + tHy.benefits.subtitle,
-  keywords: `${tHy.hero.title}, ${tHy.hero.subtitle}, ${tHy.hero.tagline}, samyun wan, armenia, քաշի ավելացում, բնական կապսուլներ, ինդոնեզական, samyun wan оригинал ереван, նաբոր վеса հայաստան, Samyun Wan Armenia, weight gain, natural capsules, Indonesian, original Samyun Wan Yerevan, weight loss Armenia, sports nutrition, health supplements, ${tHy.about.natural.title}, ${tHy.benefits.appetite.title}, ${tHy.productShowcase.weightGainLabel}, ${tHy.productShowcase.weightLossLabel}, ${tHy.authenticity.title}, ${tHy.testimonials.title}`,
+  keywords: `${tHy.hero.title}, ${tHy.hero.subtitle}, ${tHy.hero.tagline}, samyun wan, armenia, քաշի ավելացում, բնական կապսուլներ, ինդոնեզական, samyun wan оригинал ереван, նաբոր վеса հայաստան, Samyun Wan Armenia, weight gain, natural capsules, Indonesian, original Samyun Wan Yerevan, weight loss Armenia, sports nutrition, health supplements, ${tHy.about.natural.title}, ${tHy.benefits.appetite.title}, ${tHy.productShowcase.weightGainLabel}, ${tHy.productShowcase.weightLossLabel}, ${tHy.authenticity.title}, ${tHy.testimonials.title}, ${tHy.faq.q1}, ${tHy.contact.title}`,
   authors: [{ name: 'Samyun Wan Armenia' }, { name: 'Aleksandr Gevorgyan' }],
   openGraph: {
     title: tHy.hero.title + ' - ' + tHy.hero.subtitle,
@@ -83,7 +80,7 @@ const RootLayout = ({
   children: React.ReactNode;
 }) => {
   return (
-    <html className={`${inter.variable}`}>
+    <html lang="hy" className={`${inter.variable}`}>
       <body>
         {children}
         <noscript>

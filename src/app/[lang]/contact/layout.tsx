@@ -5,10 +5,10 @@ import { contactInfoData } from '@/data/contactInfo';
 
 interface ContactLayoutProps {
   children: ReactNode;
-  params: { lang: string };
+  // params: { lang: string }; // Removed as it's only used in generateMetadata
 }
 
-export async function generateMetadata({ params }: ContactLayoutProps): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;
   const t = translations[lang] || translations.hy; // Fallback to Armenian
 

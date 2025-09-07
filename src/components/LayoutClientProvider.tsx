@@ -4,8 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { LayoutContext } from '@/context/LayoutContext';
 import { translations } from '@/i18n/translations';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { TranslationKeys, ContactModalType, ProductShowcaseItem, SectionId } from '@/types/global';
+import { TranslationKeys, ContactModalType, ProductShowcaseItem, SectionId } from '@/types/global'; // Removed eslint-disable for TranslationKeys
 import { useModals } from '@/hooks/useModals';
 import useActiveLink from '@/hooks/useActiveLink';
 import useNavigationUtils from '@/hooks/useNavigationUtils';
@@ -182,8 +181,8 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
                   loadingLinkModalOpen={loadingLinkModalOpen}
                   closeLoadingLinkModal={closeLoadingLinkModal}
                   loadingLinkClientId={loadingLinkClientId}
-                  t={t}
-                  currentLang={currentLangState}
+                  t={t} {/* Pass t prop */}
+                  currentLang={currentLangState} {/* Pass currentLang prop */}
                 >
                   {children}
                 </MainLayout>

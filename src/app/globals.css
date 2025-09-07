@@ -7,8 +7,11 @@
 @import '../styles/variables.css';
 @import '../styles/background-animations.css';
 @import '../styles/fab.css';
-@import '../styles/intro-animation.css'; /* Re-added this import */
-/* Removed @import '../styles/loader.css'; */
+@import '../styles/intro-animation.css';
+
+html {
+  font-family: var(--font-inter), sans-serif; /* Apply Inter font globally */
+}
 
 @layer components {
   @import '../styles/components.css';

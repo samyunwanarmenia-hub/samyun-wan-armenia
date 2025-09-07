@@ -157,7 +157,16 @@ export interface TranslationKeys {
     orderWeightGain: string;
     orderWeightLoss: string;
   };
-  faq: Record<FaqQuestionKey | FaqAnswerKey, string>;
+  faq: { // Refined FAQ type
+    q1: string;
+    a1: string;
+    q2: string;
+    a2: string;
+    q3: string;
+    a3: string;
+    q4: string;
+    a4: string;
+  };
   callbackRequest: { // New section for callback request
     title: string;
     namePlaceholder: string;

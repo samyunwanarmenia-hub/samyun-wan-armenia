@@ -11,11 +11,7 @@ import { baseTestimonials } from '@/data/testimonials'; // Import base testimoni
 import { formatNameInitialLastName } from '@/utils/testimonialGenerator'; // Import formatter
 import { supabase } from '@/integrations/supabase/client'; // Import Supabase client
 
-interface TestimonialsPageProps {
-  params: { lang: string };
-}
-
-const TestimonialsPage = ({ params }: TestimonialsPageProps) => {
+const TestimonialsPage = () => {
   const { t, currentLang } = useLayoutContext();
   const [dbTestimonials, setDbTestimonials] = useState<Testimonial[]>([]);
   const [userTestimonial, setUserTestimonial] = useState<Testimonial | null>(null);
