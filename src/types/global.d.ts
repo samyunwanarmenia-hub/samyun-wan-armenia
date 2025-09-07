@@ -209,10 +209,11 @@ export type SectionId = 'home' | 'about' | 'benefits' | 'products' | 'authentici
 
 export type ContactModalType = 'call' | 'message';
 
-export interface UserReviewSubmission {
-  name: string;
-  text: string;
-}
+// Removed UserReviewSubmission as DbReview is used directly now
+// export interface UserReviewSubmission {
+//   name: string;
+//   text: string;
+// }
 
 export interface UserTestimonial extends Testimonial {}
 
