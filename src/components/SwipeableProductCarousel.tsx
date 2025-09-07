@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ShoppingCart } from 'lucide-react';
 import { TranslationKeys, ProductShowcaseItem, OpenOrderModalFunction } from '../types/global';
@@ -13,12 +13,16 @@ interface SwipeableProductCarouselProps {
 
 const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, openOrderModal }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0); // 0: no change, 1: next, -1: prev
+  const touchStartX = useRef(0);
 
   const handleNext = () => {
+    setDirection(1);
     setCurrentIndex((prevIndex: number) => (prevIndex + 1) % productShowcaseData.length);
   };
 
   const handlePrev = () => {
+    setDirection(-1);
     setCurrentIndex((prevIndex: number) =>
       (prevIndex - 1 + productShowcaseData.length) % productShowcaseData.length
     );
@@ -49,12 +53,32 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
     })
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const touchEndX = e.changedTouches[0].clientX;
+    const swipeDistance = touchEndX - touchStartX.current;
+    const minSwipeDistance = 50; // Minimum pixels to register a swipe
+
+    if (swipeDistance > minSwipeDistance) {
+      handlePrev();
+    } else if (swipeDistance < -minSwipeDistance) {
+      handleNext();
+    }
+  };
+
   return (
-    <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 border border-gray-200 dark:border-gray-700 overflow-hidden min-h-[450px]">
-      <AnimatePresence initial={false} custom={currentIndex}>
+    <div
+      className="relative w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 border border-gray-200 dark:border-gray-700 overflow-hidden min-h-[450px]"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={currentIndex}
-          custom={currentIndex}
+          custom={direction}
           variants={carouselVariants}
           initial="enter"
           animate="center"
