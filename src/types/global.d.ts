@@ -397,3 +397,8 @@ export interface TestimonialsLayoutProps {
   children: React.ReactNode;
   params: { lang: string }; // Added params
 }
+
+export interface FaqLayoutProps { // Added export
+  children: React.ReactNode;
+  params: { lang: string };
+}
