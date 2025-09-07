@@ -9,7 +9,7 @@ const IntroAnimation: React.FC = () => {
       className="intro-animation-container"
       initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0, transition: { duration: 0.5, delay: 3.5 } }} // Fade out after animation
+      exit={{ opacity: 0, transition: { duration: 0.5, delay: 2.0 } }} // Fade out after animation
     >
       <div className="animation01">
         <div></div>
