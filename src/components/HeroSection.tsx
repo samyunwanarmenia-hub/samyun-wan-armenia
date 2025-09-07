@@ -25,6 +25,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
 
   const mainProduct = productShowcaseData[0]; // Still need this for the order button
 
+  // Base delay for elements in HeroSection, relative to the end of the intro animation (2.5s)
+  const introEndDelay = 2.5;
+
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden py-12">
       <div className="container mx-auto px-4 relative z-10 max-w-7xl">
@@ -37,7 +40,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 0.1 }}
+              transition={{ delay: introEndDelay + 0.1 }} // Adjusted delay
             >
               <Award className="w-4 h-4 mr-2" />
               {t.hero.guarantee}
@@ -49,7 +52,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             >
               <SplitTextAnimation 
                 text="Samyun Wan Armenia" 
-                delay={0} // Changed delay to 0
+                delay={introEndDelay + 0} // Adjusted delay to start right after intro
                 duration={1.2}
                 className="mb-1.5 lg:justify-start" 
               />
@@ -59,7 +62,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
                 variants={fadeInUpVariants}
                 initial="hidden"
                 animate="visible"
-                transition={{ delay: 1.6 }} 
+                transition={{ delay: introEndDelay + 1.6 }} // Adjusted delay
               >
                 {t.hero.subtitle}
               </motion.span>
@@ -71,7 +74,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 2.0 }}
+              transition={{ delay: introEndDelay + 2.0 }} // Adjusted delay
             >
               {t.hero.tagline}
             </motion.p>
@@ -82,7 +85,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
-              transition={{ delay: 2.3 }} 
+              transition={{ delay: introEndDelay + 2.3 }} // Adjusted delay
             >
               <CallToActionButton 
                 onClick={() => openOrderModal(mainProduct.labelKey)}
@@ -111,12 +114,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             </motion.div>
 
             {/* HeroStats */}
-            <HeroStats t={t} stats={stats} startDelay={2.8} /> {/* Adjusted startDelay */}
+            <HeroStats t={t} stats={stats} startDelay={introEndDelay + 2.8} /> {/* Adjusted startDelay */}
           </div>
 
           {/* Right Column: QR Code Block */}
           <div className="flex justify-center lg:justify-end items-center mt-10 lg:mt-0"> {/* Align right on large screens */}
-            <HeroQrCodeBlock delay={3.2} /> {/* Adjusted delay */}
+            <HeroQrCodeBlock delay={introEndDelay + 3.2} /> {/* Adjusted delay */}
           </div>
         </div>
       </div>
