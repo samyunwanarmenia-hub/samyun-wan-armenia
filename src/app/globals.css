@@ -5,8 +5,11 @@
 /* Import modular CSS files */
 @import '../styles/base.css';
 @import '../styles/variables.css';
-@import '../styles/components.css';
 @import '../styles/background-animations.css';
 @import '../styles/fab.css';
 @import '../styles/intro-animation.css';
 @import '../styles/loader.css';
+
+@layer components {
+  @import '../styles/components.css';
+}
