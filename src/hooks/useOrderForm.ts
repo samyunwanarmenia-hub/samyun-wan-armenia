@@ -45,11 +45,15 @@ export const useOrderForm = ({ t, currentLang, initialSelectedProductKey, onClos
   }, []);
 
   const handleProductSelect = useCallback((productKey: ProductShowcaseItem['labelKey']) => {
-    setSelectedProducts((prev: ProductShowcaseItem['labelKey'][]) =>
-      prev.includes(productKey)
-        ? prev.filter((key: ProductShowcaseItem['labelKey']) => key !== productKey)
-        : [...prev, productKey]
-    );
+    setSelectedProducts((prev: ProductShowcaseItem['labelKey'][]) => {
+      if (prev.includes(productKey)) {
+        // If already selected, deselect it
+        return [];
+      } else {
+        // If not selected, make it the only selected product
+        return [productKey];
+      }
+    });
   }, []);
 
   const totalPrice = useMemo(() => {
