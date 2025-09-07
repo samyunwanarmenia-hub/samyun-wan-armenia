@@ -2,11 +2,7 @@ import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { benefitsItemsData } from '@/data/benefitsItems';
-
-interface BenefitsLayoutProps {
-  children: ReactNode;
-  params: { lang: string };
-}
+import { BenefitsLayoutProps } from '@/types/global'; // Import the new interface
 
 export async function generateMetadata({ params }: BenefitsLayoutProps): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;

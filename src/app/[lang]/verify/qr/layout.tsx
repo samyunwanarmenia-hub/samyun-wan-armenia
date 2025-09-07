@@ -1,11 +1,7 @@
 import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
-
-interface QrVerifyLayoutProps {
-  children: ReactNode;
-  // params: { lang: string }; // Removed as it's only used in generateMetadata
-}
+import { QrVerifyLayoutProps } from '@/types/global'; // Import the new interface
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;

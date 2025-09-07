@@ -402,3 +402,24 @@ export interface FaqLayoutProps { // Added export
   children: React.ReactNode;
   params: { lang: string };
 }
+
+// New layout prop interfaces for consistency
+export interface AboutLayoutProps {
+  children: React.ReactNode;
+  params: { lang: string };
+}
+
+export interface BenefitsLayoutProps {
+  children: React.ReactNode;
+  params: { lang: string };
+}
+
+export interface ContactLayoutProps {
+  children: React.ReactNode;
+  params: { lang: string };
+}
+
+export interface QrVerifyLayoutProps {
+  children: React.ReactNode;
+  params: { lang: string };
+}

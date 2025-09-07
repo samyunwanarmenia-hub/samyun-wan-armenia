@@ -2,11 +2,7 @@ import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { contactInfoData } from '@/data/contactInfo';
-
-interface ContactLayoutProps {
-  children: ReactNode;
-  // params: { lang: string }; // Removed as it's only used in generateMetadata
-}
+import { ContactLayoutProps } from '@/types/global'; // Import the new interface
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;
