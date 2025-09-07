@@ -10,6 +10,8 @@ import { useModals } from '@/hooks/useModals';
 import useActiveLink from '@/hooks/useActiveLink';
 import useNavigationUtils from '@/hooks/useNavigationUtils';
 import MainLayout from '@/layouts/MainLayout'; // Import MainLayout
+import IntroAnimation from './IntroAnimation'; // Import the new IntroAnimation component
+import { AnimatePresence } from 'framer-motion'; // Import AnimatePresence
 
 interface LayoutClientProviderProps {
   children: React.ReactNode;
@@ -23,6 +25,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
   const [currentLangState, setCurrentLangState] = useState<string>(initialLang);
   const [loadingLinkModalOpen, setLoadingLinkModalOpen] = useState(false);
   const [loadingLinkClientId, setLoadingLinkClientId] = useState<string | null>(null);
+  const [showIntroAnimation, setShowIntroAnimation] = useState(true); // New state for intro animation
 
   // Determine if it's the QR verification page
   const isQrVerifyPage = useMemo(() => {
@@ -37,6 +40,24 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
     }
   }, [initialLang, currentLangState]);
 
+  // Effect to manage intro animation and body overflow
+  useEffect(() => {
+    const animationDuration = 4000; // 4 seconds, slightly longer than the longest CSS animation delay
+
+    const timer = setTimeout(() => {
+      setShowIntroAnimation(false);
+    }, animationDuration);
+
+    // Set initial overflow hidden for the animation
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      clearTimeout(timer);
+      // Restore overflow when component unmounts or animation finishes
+      document.body.style.overflow = '';
+    };
+  }, []); // Run only once on mount
+
   // Effect to update the HTML lang attribute and body classes
   useEffect(() => {
     document.documentElement.lang = currentLangState;
@@ -44,16 +65,20 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
     if (isQrVerifyPage) {
       document.body.classList.add('body-blank');
       document.documentElement.classList.remove('dark'); // Ensure light mode for blank page
+      document.body.style.overflow = ''; // Ensure scrolling is enabled for QR page
     } else {
       document.body.classList.remove('body-blank');
       // ThemeContext will handle 'dark' class for other pages
+      // Only set overflow to hidden if intro animation is active
+      document.body.style.overflow = showIntroAnimation ? 'hidden' : '';
     }
 
     return () => {
       // Clean up when component unmounts or isQrVerifyPage changes
       document.body.classList.remove('body-blank');
+      document.body.style.overflow = ''; // Always reset overflow on cleanup
     };
-  }, [currentLangState, isQrVerifyPage]);
+  }, [currentLangState, isQrVerifyPage, showIntroAnimation]);
 
   const t: TranslationKeys = useMemo(() => translations[currentLangState], [currentLangState]);
 
@@ -114,28 +139,34 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
 
   return (
     <LayoutContext.Provider value={contextValue}>
+      <AnimatePresence>
+        {showIntroAnimation && <IntroAnimation key="intro-animation" />}
+      </AnimatePresence>
+
       {/* If it's the QR verification page, only render children (the page content itself) */}
-      {isQrVerifyPage ? (
+      {!showIntroAnimation && isQrVerifyPage ? (
         children
       ) : (
         // For all other pages, render the full MainLayout
-        <MainLayout
-          contactModalOpen={contactModalOpen}
-          contactModalType={contactModalType}
-          orderModalOpen={orderModalOpen}
-          initialSelectedProduct={initialSelectedProduct}
-          authenticityModalOpen={authenticityModalOpen}
-          callbackRequestModalOpen={callbackRequestModalOpen}
-          closeContactModal={closeContactModal}
-          closeOrderModal={closeOrderModal}
-          closeAuthenticityModal={closeAuthenticityModal}
-          closeCallbackRequestModal={closeCallbackRequestModal}
-          loadingLinkModalOpen={loadingLinkModalOpen}
-          closeLoadingLinkModal={closeLoadingLinkModal}
-          loadingLinkClientId={loadingLinkClientId}
-        >
-          {children}
-        </MainLayout>
+        !showIntroAnimation && (
+          <MainLayout
+            contactModalOpen={contactModalOpen}
+            contactModalType={contactModalType}
+            orderModalOpen={orderModalOpen}
+            initialSelectedProduct={initialSelectedProduct}
+            authenticityModalOpen={authenticityModalOpen}
+            callbackRequestModalOpen={callbackRequestModalOpen}
+            closeContactModal={closeContactModal}
+            closeOrderModal={closeOrderModal}
+            closeAuthenticityModal={closeAuthenticityModal}
+            closeCallbackRequestModal={closeCallbackRequestModal}
+            loadingLinkModalOpen={loadingLinkModalOpen}
+            closeLoadingLinkModal={closeLoadingLinkModal}
+            loadingLinkClientId={loadingLinkClientId}
+          >
+            {children}
+          </MainLayout>
+        )
       )}
     </LayoutContext.Provider>
   );
