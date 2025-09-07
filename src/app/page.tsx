@@ -1,21 +1,7 @@
-"use client";
-
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import LoadingSpinner from '@/components/LoadingSpinner';
+import { redirect } from 'next/navigation';
 
 const RootPage = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace('/hy');
-  }, [router]);
-
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <LoadingSpinner />
-    </div>
-  );
+  redirect('/hy');
 };
 
 export default RootPage;
