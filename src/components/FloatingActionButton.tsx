@@ -59,7 +59,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       action: () => openContactModal('call'),
       gaLabel: 'Call_FAB_Menu',
       ymLabel: 'Call_FAB_Menu',
-      angle: 0,
+      angle: 0, // Angle for positioning
       ariaLabel: t.contactModal.callUsButton,
     },
     {
@@ -68,7 +68,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       action: () => openContactModal('message'),
       gaLabel: 'WhatsApp_FAB_Menu',
       ymLabel: 'WhatsApp_FAB_Menu',
-      angle: 45,
+      angle: 45, // Angle for positioning
       ariaLabel: t.contactModal.whatsapp,
     },
     {
@@ -77,17 +77,17 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       action: openCallbackRequestModal,
       gaLabel: 'Callback_FAB_Menu',
       ymLabel: 'Callback_FAB_Menu',
-      angle: 90,
+      angle: 90, // Angle for positioning
       ariaLabel: t.contactModal.callbackButton,
     },
   ];
 
-  const radius = 80;
+  const radius = 80; // Distance from center for action buttons
 
   return (
     <div className="fab-wrapper">
       <motion.button
-        className="fab"
+        className={`fab ${isOpen ? 'open' : ''}`} // Add 'open' class when FAB is open
         onClick={handleToggle}
         aria-expanded={isOpen}
         aria-controls="fab-wheel"
@@ -111,7 +111,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
 
       <motion.div
         id="fab-wheel"
-        className="fab-wheel"
+        className={`fab-wheel ${isOpen ? 'open' : ''}`} // Add 'open' class when FAB is open
         initial={{ scale: 0 }}
         animate={isOpen ? { scale: 1 } : { scale: 0 }}
         transition={{ type: "spring", stiffness: 600, damping: 20 }}
@@ -125,8 +125,8 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
             <motion.div
               key={index}
               className="fab-action"
-              initial={{ opacity: 0, scale: 0, x: 0, y: 0 }}
-              animate={isOpen ? { opacity: 1, scale: 1, x: xOffset, y: yOffset } : { opacity: 0, scale: 0, x: 0, y: 0 }}
+              initial={{ opacity: 0, scale: 0, x: 0, y: 0, pointerEvents: 'none' }} // Default pointerEvents to none
+              animate={isOpen ? { opacity: 1, scale: 1, x: xOffset, y: yOffset, pointerEvents: 'auto' } : { opacity: 0, scale: 0, x: 0, y: 0, pointerEvents: 'none' }} // Toggle pointerEvents
               transition={{
                 delay: isOpen ? index * 0.05 : (menuItemsData.length - 1 - index) * 0.02,
                 type: "spring",
