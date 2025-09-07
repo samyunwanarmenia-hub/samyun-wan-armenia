@@ -9,6 +9,7 @@
 @import '../styles/fab.css';
 @import '../styles/intro-animation.css'; /* Re-added this import */
 @import '../styles/loader.css';
+@import '../styles/new-footer.css'; /* New: Import the footer specific CSS */
 
 @layer components {
   @import '../styles/components.css';

@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css?family=IBM%20Plex%20Sans:500|IBM%20Plex%20Sans:300");
+
+/* New Footer Styles */
+
+/* Define --m variable for consistent sizing */
+:root {
+  --m: 4rem; /* Default for larger screens */
+}
+
+@media screen and (max-width: 1000px) {
+  :root {
+    --m: 3rem;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  :root {
+    --m: 2.5rem; /* Slightly smaller for mobile */
+  }
+}
+
+.new-footer-style {
+  font-family: "IBM Plex Sans", sans-serif; /* Apply new font here */
+  font-weight: 300; /* Apply default font weight */
+  color: #d5d5d5; /* Apply default text color */
+  background-color: black; /* Explicitly set background for the footer area */
+
+  display: flex;
+  flex-direction: row; /* Default to row for desktop */
+  justify-content: space-evenly;
+  align-items: flex-end; /* Align content to the bottom */
+  padding: calc(1.25 * var(--m)) calc(0.5 * var(--m)); /* Adjusted padding */
+  position: relative;
+  z-index: 50; /* Ensure it's above other content, but not too high */
+  min-height: 100vh; /* Ensure it takes full viewport height */
+  width: 100%; /* Full width */
+  margin-top: 0; /* Let Next.js layout handle vertical spacing */
+}
+
+.new-footer-style::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0, 0, 0, 0) 5%,
+    rgba(0, 0, 0, 0.3) 20%,
+    rgba(0, 0, 0, 0.6) 30%,
+    rgba(0, 0, 0, 0.8) 40%,
+    rgba(0, 0, 0, 1) 50%,
+    rgb(0, 0, 0)
+  );
+  z-index: -7;
+}
+
+.new-footer-style .backdrop {
+  z-index: -5;
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
+  mask-image: linear-gradient(
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.5) 10%,
+    rgba(0, 0, 0, 0.8) 20%,
+    rgba(0, 0, 0, 1) 30%,
+    rgb(0, 0, 0)
+  );
+  -webkit-mask-image: linear-gradient(
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 0.5) 10%,
+    rgba(0, 0, 0, 0.8) 20%,
+    rgba(0, 0, 0, 1) 30%,
+    rgb(0, 0, 0)
+  );
+}
+
+.new-footer-style h2 { /* Scoped h2 */
+  font-weight: 500;
+  text-align: center;
+  font-size: var(--m);
+  margin: 0;
+  color: white; /* Ensure h2 is white */
+}
+
+.new-footer-style h3 { /* Scoped h3 */
+  font-weight: 500;
+  font-size: calc(0.6 * var(--m));
+  margin: 0;
+  color: white; /* Ensure h3 is white */
+}
+
+.new-footer-style .footer-col { /* Renamed from .col to avoid conflict */
+  display: flex; /* Added display flex */
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: calc(0.3 * var(--m)) calc(0.8 * var(--m));
+  width: 28%; /* Keep original width for desktop */
+  gap: calc(0.2 * var(--m)); /* Add gap for list items */
+}
+
+.new-footer-style .footer-col-bg { /* For col2, col3 */
+  background-color: #121212;
+  border-radius: calc(0.5 * var(--m));
+}
+
+.new-footer-style .social-link-icon { /* For img */
+  height: calc(0.3 * var(--m));
+  object-fit: cover;
+}
+
+.new-footer-style .social-links-container { /* For .social */
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+.new-footer-style .social-link-wrapper { /* For .link */
+  width: calc(0.8 * var(--m));
+  height: calc(0.8 * var(--m));
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: calc(0.1 * var(--m));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.new-footer-style a { /* Scoped a */
+  text-decoration: none;
+  color: inherit;
+}
+
+.new-footer-style p { /* Scoped p */
+  font-size: calc(0.3 * var(--m)); /* Match body font size */
+  line-height: 1.5; /* Adjust line height */
+}
+
+/* Media queries for the new footer */
+@media screen and (max-width: 700px) {
+  .new-footer-style {
+    flex-direction: column; /* Stack columns on mobile */
+    padding: calc(1.25 * var(--m)) calc(5vw); /* Adjusted padding for mobile */
+    align-items: center; /* Center columns on mobile */
+  }
+  .new-footer-style .footer-col {
+    width: 100%; /* Full width for columns on mobile */
+    margin-bottom: calc(0.5 * var(--m)); /* Add some space between stacked columns */
+    align-items: center; /* Center content in columns on mobile */
+  }
+  .new-footer-style .footer-col:last-child {
+    margin-bottom: 0;
+  }
+  .new-footer-style h2, .new-footer-style h3, .new-footer-style p {
+    text-align: center; /* Center text on mobile */
+  }
+  .new-footer-style .social-links-container {
+    justify-content: center; /* Center social links on mobile */
+  }
+}
