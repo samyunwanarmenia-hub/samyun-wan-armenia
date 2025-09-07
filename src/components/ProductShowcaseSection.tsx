@@ -30,7 +30,7 @@ const ProductShowcaseSection = () => {
       <div className="container mx-auto px-4 relative z-10">
         <SectionHeader
           title={t.nav.products}
-          subtitle={t.hero.tagline}
+          // Removed subtitle={t.hero.tagline}
           // Removed t={t}
         />
         <motion.div
