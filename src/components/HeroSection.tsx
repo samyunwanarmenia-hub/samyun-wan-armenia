@@ -49,7 +49,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             >
               <SplitTextAnimation 
                 text="Samyun Wan Armenia" 
-                delay={0.3}
+                delay={0} // Changed delay to 0
                 duration={1.2}
                 className="mb-1.5 lg:justify-start" 
               />
