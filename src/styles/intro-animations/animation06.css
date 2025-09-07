@@ -26,7 +26,7 @@
   transform: translate(-50%, -50%) rotate(45deg); 
   width: 50vw; 
   height: 50vw; 
-  background-color: #ef5958; 
+  background-color: var(--intro-rhombus-red); 
 }
 
 .rhombus03 { 
@@ -36,7 +36,7 @@
   transform: translate(-50%, -50%); 
   width: 37.5vw; 
   height: 37.5vw; 
-  background-color: #77ceb9; 
+  background-color: var(--intro-rhombus-green); 
 }
 
 .rhombus02 { 
@@ -46,7 +46,7 @@
   transform: translate(-50%, -50%); 
   width: 25vw; 
   height: 25vw; 
-  background-color: #ffe08b; 
+  background-color: var(--intro-rhombus-yellow); 
 }
 
 .rhombus01 { 
@@ -56,11 +56,11 @@
   transform: translate(-50%, -50%); 
   width: 12.25vw; 
   height: 12.25vw; 
-  background-color: #f2f3df;
+  background-color: var(--intro-rhombus-bg);
 }
 
 .dark .rhombus01 {
-  background-color: #1a1a1a;
+  background-color: var(--intro-bg-dark-main);
 }
 
 @keyframes rhombus { 

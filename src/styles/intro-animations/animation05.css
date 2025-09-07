@@ -28,34 +28,34 @@
   content: ""; 
   display: block; 
   position: absolute; 
-  background: #f2f3df;
+  background: var(--intro-bg-main);
   z-index: 2; 
 }
 
 .dark .double_wrapper01::before {
-  background: #1a1a1a;
+  background: var(--intro-bg-dark-main);
 }
 
 .double_wrapper01::after { 
   content: ""; 
   display: block; 
   position: absolute; 
-  background: #f2f3df;
+  background: var(--intro-bg-main);
   z-index: 3; 
 }
 
 .dark .double_wrapper01::after {
-  background: #1a1a1a;
+  background: var(--intro-bg-dark-main);
 }
 
 .double_block { 
   position: absolute; 
-  background: #f2f3df;
+  background: var(--intro-bg-main);
   border-radius: 50%; 
 }
 
 .dark .double_block {
-  background: #1a1a1a;
+  background: var(--intro-bg-dark-main);
 }
 
 /*============== green circle ==============*/
@@ -71,7 +71,7 @@
   transform: translate(-50%, -50%); 
   width: 34vw; 
   height: 34vw; 
-  background: #75cfb9; 
+  background: var(--intro-color-green); 
   z-index: 1; 
 }
 
@@ -115,7 +115,7 @@
   transform: translate(-50%, -50%) rotate(-20deg); 
   width: 25vw; 
   height: 25vw; 
-  background: #485973; 
+  background: var(--intro-border-green-dark); /* Using a darker green for navy */
   z-index: 1; 
 }
 
@@ -159,7 +159,7 @@
   transform: translate(-50%, -50%) rotate(20deg); 
   width: 23vw; 
   height: 23vw; 
-  background: #ffe08b; 
+  background: var(--intro-color-yellow); 
   z-index: 1; 
 }
 
@@ -203,7 +203,7 @@
   transform: translate(-50%, -50%) rotate(20deg); 
   width: 16vw; 
   height: 16vw; 
-  background: #457ed4; 
+  background: var(--intro-color-blue); 
   z-index: 1; 
 }
 
@@ -247,7 +247,7 @@
   transform: translate(-50%, -50%) rotate(45deg); 
   width: 12vw; 
   height: 12vw; 
-  background: #e8595f; 
+  background: var(--intro-color-red); 
   z-index: 1; 
 }
 
@@ -284,17 +284,17 @@
 }
 
 @keyframes rotate-circle-left { 
-  0% { background: #f2f3df; transform: rotate(0deg); } 
-  50% { background: #f2f3df; transform: rotate(-180deg); } 
-  50.01% { background: #f2f3df; transform: rotate(-180deg); } 
-  100% { background: #f2f3df; transform: rotate(-360deg); } 
+  0% { background: var(--intro-bg-main); transform: rotate(0deg); } 
+  50% { background: var(--intro-bg-main); transform: rotate(-180deg); } 
+  50.01% { background: var(--intro-bg-main); transform: rotate(-180deg); } 
+  100% { background: var(--intro-bg-main); transform: rotate(-360deg); } 
 }
 
 .dark @keyframes rotate-circle-left {
-  0% { background: #1a1a1a; transform: rotate(0deg); } 
-  50% { background: #1a1a1a; transform: rotate(-180deg); } 
-  50.01% { background: #1a1a1a; transform: rotate(-180deg); } 
-  100% { background: #1a1a1a; transform: rotate(-360deg); } 
+  0% { background: var(--intro-bg-dark-main); transform: rotate(0deg); } 
+  50% { background: var(--intro-bg-dark-main); transform: rotate(-180deg); } 
+  50.01% { background: var(--intro-bg-dark-main); transform: rotate(-180deg); } 
+  100% { background: var(--intro-bg-dark-main); transform: rotate(-360deg); } 
 }
 
 @keyframes rotate-circle-right { 

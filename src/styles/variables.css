@@ -38,6 +38,24 @@
   --secondary-400: 210 30% 76%;
   --secondary-300: 210 30% 84%;
   --secondary-100: 210 30% 95%;
+
+  /* Intro Animation Colors - Light Mode */
+  --intro-color-red: theme('colors.brandRed.400');
+  --intro-color-yellow: theme('colors.yellow.300');
+  --intro-color-green: theme('colors.primary.500');
+  --intro-color-orange: theme('colors.brandOrange.500');
+  --intro-color-blue: theme('colors.secondary.500');
+
+  --intro-bg-main: #f2f3df; /* General light background for animations */
+
+  --intro-border-green-medium: theme('colors.primary.500'); /* #54988b */
+  --intro-border-green-dark: theme('colors.primary.700'); /* #4b5e58 */
+  --intro-border-gray-dark: theme('colors.gray.800'); /* #404a52 */
+
+  --intro-line-color: #fff; /* White lines */
+  --intro-circle-border-brownish-green: theme('colors.primary.600'); /* #a18a66 */
+  --intro-circle-bg: #fff; /* White circle background */
+  --intro-strip-dark-gray: theme('colors.gray.900'); /* #242324 */
 }
 
 .dark {
@@ -84,4 +102,22 @@
   --secondary-900: 210 30% 13%;
   --secondary-800: 210 30% 25%;
   --secondary-700: 210 30% 37%;
+
+  /* Intro Animation Colors - Dark Mode */
+  --intro-color-red: theme('colors.brandRed.500');
+  --intro-color-yellow: theme('colors.yellow.500');
+  --intro-color-green: theme('colors.primary.600');
+  --intro-color-orange: theme('colors.brandOrange.600');
+  --intro-color-blue: theme('colors.secondary.600');
+
+  --intro-bg-main: #1a1a1a; /* General dark background for animations */
+
+  --intro-border-green-medium: theme('colors.primary.600');
+  --intro-border-green-dark: theme('colors.primary.800');
+  --intro-border-gray-dark: theme('colors.gray.300');
+
+  --intro-line-color: #eee;
+  --intro-circle-border-brownish-green: theme('colors.primary.700');
+  --intro-circle-bg: #1a1a1a;
+  --intro-strip-dark-gray: theme('colors.gray.100');
 }

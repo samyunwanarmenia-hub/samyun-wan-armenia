@@ -12,7 +12,11 @@ export default {
       colors: {
         brandBlue: '#007BFF', // Added brandBlue
         brandBlueDark: '#126ee2', // New: Darker blue for FAB main button
-        brandOrange: '#f16100', // New: Orange for FAB hover state
+        brandOrange: { // Extended brandOrange
+          400: '#f6873b',
+          500: '#f16100',
+          600: '#d95700',
+        },
         // ... keep existing colors
         // New primary (Soft Sage Green)
         primary: {
@@ -40,9 +44,14 @@ export default {
           800: '#42556e',
           900: '#293241',
         },
-        brandRed: { // Ensure brandRed is defined if used elsewhere
+        brandRed: { // Extended brandRed
           400: '#ef4444',
-          600: '#dc2626',
+          500: '#dc2626',
+          600: '#b91c1c',
+        },
+        yellow: { // Added yellow palette
+          300: '#ffe08b', // Custom yellow for intro animation light mode
+          500: '#facc15', // Tailwind default yellow-500 for intro animation dark mode
         }
       },
       // ... rest of the theme object

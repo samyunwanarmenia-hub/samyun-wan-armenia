@@ -18,27 +18,27 @@
 }
 
 .animation01 div:nth-child(1) { 
-  background-color: #d55959; 
+  background-color: var(--intro-color-red); 
   animation-delay: 0.186s;
 }
 
 .animation01 div:nth-child(2) { 
-  background-color: #ffe08b; 
+  background-color: var(--intro-color-yellow); 
   animation-delay: 0.139s;
 }
 
 .animation01 div:nth-child(3) { 
-  background-color: #75cfb9; 
+  background-color: var(--intro-color-green); 
   animation-delay: 0.093s;
 }
 
 .animation01 div:nth-child(4) { 
-  background-color: #f1a05b; 
+  background-color: var(--intro-color-orange); 
   animation-delay: 0.046s;
 }
 
 .animation01 div:nth-child(5) { 
-  background-color: #78bee4; 
+  background-color: var(--intro-color-blue); 
 }
 
 @keyframes animation01 { 

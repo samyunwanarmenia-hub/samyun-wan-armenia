@@ -18,24 +18,24 @@
   top: 0; 
   left: 0; 
   border-top: 100vh solid transparent; 
-  border-right: 100vw solid #f2f3df; 
+  border-right: 100vw solid var(--intro-bg-main); 
   transform-origin: bottom right; 
 }
 
 .dark .animation02 div:nth-child(1) {
-  border-right: 100vw solid #1a1a1a;
+  border-right: 100vw solid var(--intro-bg-dark-main);
 }
 
 .animation02 div:nth-child(2) { 
   right: 0; 
   bottom: 0; 
   border-bottom: 100vh solid transparent; 
-  border-left: 100vw solid #f2f3df; 
+  border-left: 100vw solid var(--intro-bg-main); 
   transform-origin: top left; 
 }
 
 .dark .animation02 div:nth-child(2) {
-  border-left: 100vw solid #1a1a1a;
+  border-left: 100vw solid var(--intro-bg-dark-main);
 }
 
 @keyframes animation02 { 

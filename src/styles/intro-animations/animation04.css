@@ -20,12 +20,12 @@
   position: absolute; 
   width: 100%; 
   height: 100%; 
-  background-color: #fff; 
+  background-color: var(--intro-line-color); 
   opacity: 0; 
 }
 
 .dark .animation04 .line {
-  background-color: #eee;
+  background-color: var(--intro-line-color);
 }
 
 /*=========== line01 ===========*/

@@ -13,31 +13,31 @@
 .animation08 div:nth-of-type(1) { 
   width: 100%; 
   height: 100%; 
-  background: #242324; 
+  background: var(--intro-strip-dark-gray); 
 }
 
 .animation08 div:nth-of-type(2) { 
   width: 100%; 
   height: 25%; 
-  background: #75cfb9; 
+  background: var(--intro-color-green); 
 }
 
 .animation08 div:nth-of-type(3) { 
   width: 100%; 
   height: 25%; 
-  background: #457ed4; 
+  background: var(--intro-color-blue); 
 }
 
 .animation08 div:nth-of-type(4) { 
   width: 100%; 
   height: 25%; 
-  background: #e8595f; 
+  background: var(--intro-color-red); 
 }
 
 .animation08 div:nth-of-type(5) { 
   width: 100%; 
   height: 25%; 
-  background: #ffe08b; 
+  background: var(--intro-color-yellow); 
 }
 
 @keyframes animation08 { 
