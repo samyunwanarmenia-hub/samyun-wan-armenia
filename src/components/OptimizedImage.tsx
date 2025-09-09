@@ -49,11 +49,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, lo
   const defaultJpgSrc = `/optimized/${baseName}-150w.jpg`;
 
   return (
-    <motion.picture
-      initial={{ opacity: 0 }}
-      animate={{ opacity: imageLoaded ? 1 : 0 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-    >
+    <picture>
       {/* Try AVIF first */}
       <source type="image/avif" srcSet={generateSrcset('avif')} sizes={sizes} />
       {/* Then WebP */}
@@ -68,8 +64,11 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, lo
         loading={loading}
         onError={handleImageError}
         onLoad={handleImageLoad} // Call handleImageLoad on successful load
+        initial={{ opacity: 0 }}
+        animate={{ opacity: imageLoaded ? 1 : 0 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
       />
-    </motion.picture>
+    </picture>
   );
 };
 
