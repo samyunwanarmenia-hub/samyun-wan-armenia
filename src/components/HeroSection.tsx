@@ -46,9 +46,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               {t.hero.guarantee}
             </motion.div>
             
-            {/* Main Title (Samyun Wan Armenia) with split animation */}
+            {/* Main Title (Samyun Wan Armenia) and Tagline */}
             <h1 
-              className="text-4xl lg:text-6xl font-bold mb-5 leading-tight text-gray-900 dark:text-gray-50"
+              className="text-4xl lg:text-6xl font-bold mb-3 leading-tight text-gray-900 dark:text-gray-50"
             >
               <SplitTextAnimation 
                 text="Samyun Wan Armenia" 
@@ -56,27 +56,27 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
                 duration={1.2}
                 className="mb-1.5 lg:justify-start" 
               />
-              {/* Subtitle */}
-              <motion.span 
-                className="block text-2xl lg:text-3xl font-bold mt-1.5 text-gray-900 dark:text-gradient dark:bg-gradient-to-r dark:from-primary-400 dark:to-secondary-400"
+              {/* Tagline moved here */}
+              <motion.p 
+                className="text-xs sm:text-sm lg:text-lg font-bold uppercase tracking-[2px] sm:tracking-[3px] lg:tracking-[5px] text-slogan-shine mt-1.5 mb-4 leading-relaxed relative overflow-hidden inline-block whitespace-nowrap"
                 variants={fadeInUpVariants}
                 initial="hidden"
                 animate="visible"
                 transition={{ delay: introEndDelay + 1.5 }} // Adjusted delay
               >
-                {t.hero.subtitle}
-              </motion.span>
+                {t.hero.tagline}
+              </motion.p>
             </h1>
             
-            {/* Tagline with subtle animation */}
+            {/* Subtitle moved here */}
             <motion.p 
-              className="text-xs sm:text-sm lg:text-lg font-bold uppercase tracking-[2px] sm:tracking-[3px] lg:tracking-[5px] text-slogan-shine mb-8 leading-relaxed relative overflow-hidden inline-block whitespace-nowrap"
+              className="block text-2xl lg:text-3xl font-bold mb-5 text-gray-900 dark:text-gradient dark:bg-gradient-to-r dark:from-primary-400 dark:to-secondary-400"
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
               transition={{ delay: introEndDelay + 1.9 }} // Adjusted delay
             >
-              {t.hero.tagline}
+              {t.hero.subtitle}
             </motion.p>
 
             {/* Buttons */}
