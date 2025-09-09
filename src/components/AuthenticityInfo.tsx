@@ -7,7 +7,7 @@ import SectionHeader from './SectionHeader';
 import { QRCodeCanvas } from 'qrcode.react';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { useInView } from 'react-intersection-observer';
-// Removed Link import as it's no longer needed for external link
+import Link from 'next/link'; // Import Link for internal navigation
 
 const AuthenticityInfo = () => {
   const { t, openAuthenticityModal, currentLang } = useLayoutContext();
@@ -17,9 +17,9 @@ const AuthenticityInfo = () => {
     threshold: 0.3,
   });
 
-  // Updated QR code value and link path to the external verification site
-  const qrCodeValue = `https://qr-wan.netlify.app/`;
-  const qrLinkPath = `https://qr-wan.netlify.app/`;
+  // Updated QR code value and link path to point to the internal /verify/qr page
+  const qrCodeValue = `https://samyunwanarmenia.netlify.app/${currentLang}/verify/qr`;
+  const qrLinkPath = `/${currentLang}/verify/qr`;
 
   const hasAttentionText = !!t.authenticity.attention;
   const hasHowToDistinguishText = !!t.authenticity.howToDistinguish;
@@ -69,11 +69,9 @@ const AuthenticityInfo = () => {
             </motion.span>
           )}
 
-          {/* Changed to a standard <a> tag for external linking */}
-          <a 
+          {/* Changed to a Link component for internal navigation */}
+          <Link 
             href={qrLinkPath}
-            target="_blank" // Open in new tab
-            rel="noopener noreferrer" // Security best practice
             className="group mb-3 flex flex-col items-center p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 w-full cursor-pointer"
             aria-label={t.hero.qrVerificationTitle}
           >
@@ -87,7 +85,7 @@ const AuthenticityInfo = () => {
             </motion.div>
             <p className="text-gray-700 dark:text-gray-300 font-semibold text-base">{t.hero.qrVerificationTitle}</p>
             {t.hero.qrVerificationSubtitle && <p className="text-xs text-gray-500 dark:text-gray-400">{t.hero.qrVerificationSubtitle}</p>}
-          </a>
+          </Link>
 
           {hasHowToDistinguishText && (
             <CallToActionButton
