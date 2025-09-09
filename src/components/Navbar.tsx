@@ -12,33 +12,19 @@ import { useLayoutContext } from '@/context/LayoutContext';
 import { navigationSections } from '@/data/navigationSections'; // Import centralized data
 
 const Navbar: React.FC<NavbarProps> = () => {
-  const [scrolled, setScrolled] = useState(false);
+  // Removed scrolled state as the navbar will now be statically transparent at the top
   const { t, currentLang, getLinkClasses } = useLayoutContext();
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const offset = window.scrollY;
-      if (offset > 200) { // Changed scroll threshold from 50 to 200
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+  // Removed useEffect for scroll handling
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 shadow-lg dark:bg-gray-800/95 dark:shadow-xl py-2' : 'bg-transparent py-4'}`}>
+    <nav className="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent py-4"> {/* Always transparent */}
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
             <Link href={getHomePath()} className="flex items-center">
-              <span className="text-base sm:text-lg font-bold text-white dark:text-gray-50 whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Changed text-gray-900 to text-white, removed glossy text shadow */}
+              <span className="text-base sm:text-lg font-bold text-white dark:text-gray-50 whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none">
                 {t.hero.title}
               </span>
             </Link>
@@ -55,7 +41,7 @@ const Navbar: React.FC<NavbarProps> = () => {
               >
                 <Link
                   href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
-                  className={`${getLinkClasses(section.id)} text-base ${scrolled ? 'text-gray-700 dark:text-gray-300' : 'text-white dark:text-gray-300'}`}
+                  className={`${getLinkClasses(section.id)} text-base text-white dark:text-gray-300`} {/* Always light text */}
                 >
                   {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                 </Link>
