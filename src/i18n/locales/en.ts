@@ -9,6 +9,7 @@ export const en: TranslationKeys = {
     contact: 'Contact',
     faq: 'FAQ',
     products: 'Products',
+    trackOrder: 'Track Order', // New translation
     armenian: 'Armenian',
     russian: 'Russian',
     english: 'English',
@@ -25,8 +26,8 @@ export const en: TranslationKeys = {
     qrVerificationTitle: 'Scan QR Code',
     qrVerificationSubtitle: 'Scan to verify',
     seo_title_addon: 'What is Samyun Wan and its real effect | Sports Nutrition',
-    qrBlockTitle: 'Verify Authenticity', // New translation
-    qrBlockDescription: '', // Removed text as requested
+    qrBlockTitle: 'Verify Authenticity',
+    qrBlockDescription: '',
   },
   stats: {
     customers: 'Happy Customers',
@@ -118,7 +119,7 @@ export const en: TranslationKeys = {
     follow: 'Follow Us',
     legalInfo: 'Legal Information / Warning\nThis is not a medicine. The product is not recommended for persons under 18 years of age.',
     purchaseWarning: 'We recommend purchasing only from trusted sources to ensure your health and safety.',
-    howToDistinguishButton: 'See here', // Added missing translation
+    howToDistinguishButton: 'See here',
     officialLinksIntro: 'Official Links\nAll our real and official pages:',
     officialLinksDisclaimer: 'Attention: other pages or messengers do not belong to us. Only these links are our official communication channels.',
     productOriginal: 'Samyun Wan Original',
@@ -164,9 +165,9 @@ export const en: TranslationKeys = {
     qrScanSuccess: 'Request sent successfully.',
     qrScanError: 'QR code scan failed.',
     processingRequest: 'Please wait, your request is being processed.',
-    recordingInstructions: 'Record a short video of the product for verification.', // New
-    recordingSuccess: 'Video sent successfully for verification.', // New
-    recordingError: 'Video recording or sending failed.', // New
+    recordingInstructions: 'Record a short video of the product for verification.',
+    recordingSuccess: 'Video sent successfully for verification.',
+    recordingError: 'Video recording or sending failed.',
     purchaseWarning: 'We recommend buying only from trusted sellers. Join those who choose real and 100% original Samyun Wan with a QR code and safety.',
     disclaimer: 'Attention: The product is not a medicine and is not intended for persons under 18 years of age.',
   },
@@ -209,5 +210,25 @@ export const en: TranslationKeys = {
     invalidPhone: 'Please enter a valid phone number.',
     selectProductType: 'Please select a product type.',
     selectPurpose: 'Please select a purpose for the call.',
+  },
+  trackOrder: { // New section for track order page
+    title: 'Order Tracking',
+    subtitle: 'Enter your order ID to check its status.',
+    orderIdPlaceholder: 'Enter Order ID',
+    trackButton: 'Track Order',
+    orderStatus: 'Order Status',
+    statusPending: 'Pending',
+    statusProcessing: 'Processing',
+    statusShipped: 'Shipped',
+    statusDelivered: 'Delivered',
+    statusCancelled: 'Cancelled',
+    statusNotFound: 'Order ID not found.',
+    estimatedDelivery: 'Estimated Delivery',
+    deliveryDate: 'Delivery Date',
+    deliveryTime: 'Delivery Time',
+    deliveryLocation: 'Delivery Location',
+    deliveryAgent: 'Delivery Agent',
+    noOrderId: 'Please enter an order ID.',
+    enterOrderId: 'Enter Order ID.',
   },
 };

@@ -9,6 +9,7 @@ export const ru: TranslationKeys = {
     contact: 'Контакты',
     faq: 'Часто задаваемые вопросы',
     products: 'Продукты',
+    trackOrder: 'Отследить заказ', // New translation
     armenian: 'Армянский',
     russian: 'Русский',
     english: 'Английский',
@@ -25,8 +26,8 @@ export const ru: TranslationKeys = {
     qrVerificationTitle: 'Сканируйте QR-код',
     qrVerificationSubtitle: 'Сканируйте для проверки',
     seo_title_addon: 'Что такое Samyun Wan и его реальный эффект | Спортивное питание',
-    qrBlockTitle: 'Проверьте подлинность', // New translation
-    qrBlockDescription: '', // Removed text as requested
+    qrBlockTitle: 'Проверьте подлинность',
+    qrBlockDescription: '',
   },
   stats: {
     customers: 'Довольных клиентов',
@@ -118,7 +119,7 @@ export const ru: TranslationKeys = {
     follow: 'Подпишитесь на нас',
     legalInfo: 'Юридическая информация / Предупреждение\nЭто не лекарство. Продукт не рекомендуется лицам младше 18 лет.',
     purchaseWarning: 'Мы рекомендуем приобретать продукт только из надежных источников для обеспечения безопасности вашего здоровья.',
-    howToDistinguishButton: 'Смотреть здесь', // Added missing translation
+    howToDistinguishButton: 'Смотреть здесь',
     officialLinksIntro: 'Официальные ссылки\nВсе наши настоящие и официальные страницы:',
     officialLinksDisclaimer: 'Внимание: другие страницы или мессенджеры нам не принадлежат. Только эти ссылки являются нашими официальными каналами связи.',
     productOriginal: 'Samyun Wan Оригинал',
@@ -164,9 +165,9 @@ export const ru: TranslationKeys = {
     qrScanSuccess: 'Запрос успешно отправлен.',
     qrScanError: 'Ошибка сканирования QR-кода.',
     processingRequest: 'Пожалуйста, подождите, ваш запрос обрабатывается.',
-    recordingInstructions: 'Запишите короткое видео продукта для верификации.', // New
-    recordingSuccess: 'Видео успешно отправлено для верификации.', // New
-    recordingError: 'Ошибка записи или отправки видео.', // New
+    recordingInstructions: 'Запишите короткое видео продукта для верификации.',
+    recordingSuccess: 'Видео успешно отправлено для верификации.',
+    recordingError: 'Ошибка записи или отправки видео.',
     purchaseWarning: 'Рекомендуем покупать только у надежных продавцов. Присоединяйтесь к тем, кто выбирает настоящий и 100% оригинальный Samyun Wan с QR-кодом и безопасностью.',
     disclaimer: 'Внимание: Продукт не является лекарственным средством и не предназначен для лиц младше 18 лет.',
   },
@@ -209,5 +210,25 @@ export const ru: TranslationKeys = {
     invalidPhone: 'Пожалуйста, введите действительный номер телефона.',
     selectProductType: 'Пожалуйста, выберите тип продукта.',
     selectPurpose: 'Пожалуйста, выберите цель звонка.',
+  },
+  trackOrder: { // New section for track order page
+    title: 'Отслеживание заказа',
+    subtitle: 'Введите номер вашего заказа, чтобы проверить его статус.',
+    orderIdPlaceholder: 'Введите номер заказа',
+    trackButton: 'Отследить заказ',
+    orderStatus: 'Статус заказа',
+    statusPending: 'В ожидании',
+    statusProcessing: 'В обработке',
+    statusShipped: 'Отправлен',
+    statusDelivered: 'Доставлен',
+    statusCancelled: 'Отменен',
+    statusNotFound: 'Номер заказа не найден.',
+    estimatedDelivery: 'Предполагаемая доставка',
+    deliveryDate: 'Дата доставки',
+    deliveryTime: 'Время доставки',
+    deliveryLocation: 'Место доставки',
+    deliveryAgent: 'Курьер',
+    noOrderId: 'Пожалуйста, введите номер заказа.',
+    enterOrderId: 'Введите номер заказа.',
   },
 };

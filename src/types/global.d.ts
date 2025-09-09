@@ -23,12 +23,13 @@ export interface TranslationKeys {
     testimonials: string;
     contact: string;
     faq: string;
-    products: string; // Added
-    armenian: string; // Added
-    russian: string;  // Added
-    english: string;  // Added
-    open: string;     // Added
-    close: string;    // Added
+    products: string;
+    trackOrder: string; // Added
+    armenian: string;
+    russian: string;
+    english: string;
+    open: string;
+    close: string;
   };
   hero: {
     title: string;
@@ -40,8 +41,8 @@ export interface TranslationKeys {
     qrVerificationTitle: string;
     qrVerificationSubtitle: string;
     seo_title_addon: string;
-    qrBlockTitle: string; // New: Title for the QR code block in Hero
-    qrBlockDescription: string; // New: Description for the QR code block in Hero
+    qrBlockTitle: string;
+    qrBlockDescription: string;
   };
   stats: {
     customers: string;
@@ -50,17 +51,17 @@ export interface TranslationKeys {
   about: {
     title: string;
     subtitle: string;
-    description: string; // Added
-    content: string;     // Added
+    description: string;
+    content: string;
     natural: { title: string; desc: string; };
     proven: { title: string; desc: string; };
     safe: { title: string; desc: string; };
     fast: { title: string; desc: string; };
-    whyChooseUsTitle: string; // New: Title for "Why Choose Us" section
-    whyChooseUsOriginal: string; // New: Point 1 for "Why Choose Us"
-    whyChooseUsSafety: string; // New: Point 2 for "Why Choose Us"
-    whyChooseUsNoAdditives: string; // New: Point 3 for "Why Choose Us"
-    whyChooseUsTrust: string; // New: Point 4 for "Why Choose Us"
+    whyChooseUsTitle: string;
+    whyChooseUsOriginal: string;
+    whyChooseUsSafety: string;
+    whyChooseUsNoAdditives: string;
+    whyChooseUsTrust: string;
   };
   benefits: {
     title: string;
@@ -91,7 +92,7 @@ export interface TranslationKeys {
     phoneNumbers: {
       number1: string;
       number2: string;
-      description: string; // Added description property
+      description: string;
     };
     callNowButton: string;
     whatsappButton: string;
@@ -101,11 +102,11 @@ export interface TranslationKeys {
     products: string;
     support: string;
     follow: string;
-    legalInfo: string; // New
-    purchaseWarning: string; // New
-    howToDistinguishButton: string; // New: Button text for distinguishing original
-    officialLinksIntro: string; // New
-    officialLinksDisclaimer: string; // New
+    legalInfo: string;
+    purchaseWarning: string;
+    howToDistinguishButton: string;
+    officialLinksIntro: string;
+    officialLinksDisclaimer: string;
     productOriginal: string;
     productAuthenticity: string;
     productUsage: string;
@@ -122,8 +123,8 @@ export interface TranslationKeys {
       number1: string;
       number2: string;
     };
-    callUsButton: string; // New
-    callbackButton: string; // New
+    callUsButton: string;
+    callbackButton: string;
   };
   orderModal: {
     title: string;
@@ -142,20 +143,20 @@ export interface TranslationKeys {
     title: string;
     howToDistinguish: string;
     attention: string;
-    certificateDesc: string; // New
-    differencesDesc: string; // New
-    waitingForLink: string; // New: Message when waiting for admin to send link
-    qrScanInstructions: string; // New: Instructions for scanning QR
-    qrScanSuccess: string; // New: Message after successful scan
-    qrScanError: string; // New: Message if QR scan fails
-    processingRequest: string; // New
-    recordingInstructions: string; // New
-    recordingSuccess: string; // New
-    recordingError: string; // New
-    purchaseWarning: string; // New: Warning about purchasing from trusted sellers
-    disclaimer: string; // New: Disclaimer about product not being medicine
+    certificateDesc: string;
+    differencesDesc: string;
+    waitingForLink: string;
+    qrScanInstructions: string;
+    qrScanSuccess: string;
+    qrScanError: string;
+    processingRequest: string;
+    recordingInstructions: string;
+    recordingSuccess: string;
+    recordingError: string;
+    purchaseWarning: string;
+    disclaimer: string;
   };
-  loadingLinkModal: { // New: For the loading link modal
+  loadingLinkModal: {
     title: string;
     message: string;
     waitingForAdmin: string;
@@ -168,7 +169,7 @@ export interface TranslationKeys {
     orderWeightGain: string;
     orderWeightLoss: string;
   };
-  faq: { // Refined FAQ type
+  faq: {
     q1: string;
     a1: string;
     q2: string;
@@ -178,7 +179,7 @@ export interface TranslationKeys {
     q4: string;
     a4: string;
   };
-  callbackRequest: { // New section for callback request
+  callbackRequest: {
     title: string;
     namePlaceholder: string;
     phonePlaceholder: string;
@@ -194,6 +195,26 @@ export interface TranslationKeys {
     invalidPhone: string;
     selectProductType: string;
     selectPurpose: string;
+  };
+  trackOrder: { // New section for track order page
+    title: string;
+    subtitle: string;
+    orderIdPlaceholder: string;
+    trackButton: string;
+    orderStatus: string;
+    statusPending: string;
+    statusProcessing: string;
+    statusShipped: string;
+    statusDelivered: string;
+    statusCancelled: string;
+    statusNotFound: string;
+    estimatedDelivery: string;
+    deliveryDate: string;
+    deliveryTime: string;
+    deliveryLocation: string;
+    deliveryAgent: string;
+    noOrderId: string;
+    enterOrderId: string;
   };
 }
 
@@ -225,17 +246,9 @@ export interface StatItem {
   key: 'customers' | 'experience';
 }
 
-export type SectionId = 'home' | 'about' | 'benefits' | 'products' | 'authenticity' | 'cta' | 'testimonials' | 'contact' | 'faq'; // Removed 'profile'
+export type SectionId = 'home' | 'about' | 'benefits' | 'products' | 'authenticity' | 'cta' | 'testimonials' | 'contact' | 'faq' | 'track-order'; // Added 'track-order'
 
 export type ContactModalType = 'call' | 'message';
-
-// Removed UserReviewSubmission as DbReview is used directly now
-// export interface UserReviewSubmission {
-//   name: string;
-//   text: string;
-// }
-
-export interface UserTestimonial extends Testimonial {}
 
 type StringKeys<T> = {
   [K in keyof T]: T[K] extends string ? K : never;
@@ -272,13 +285,12 @@ export type FaqTranslationKey = FaqQuestionKey | FaqAnswerKey;
 
 export type Icon = React.ElementType;
 
-// Removed unused props interfaces, components will get data from context
 export interface NavbarProps {}
 export interface AuthenticityInfoModalProps {
   isOpen: boolean;
   onClose: () => void;
   t: TranslationKeys;
-  currentLang: string; // Added currentLang
+  currentLang: string;
 }
 export interface AuthenticityInfoProps {}
 export interface AboutSectionProps {}
@@ -291,7 +303,7 @@ export interface TestimonialsSectionProps {
 }
 export interface ContactSectionProps {}
 export interface FaqSectionProps {
-  params: { lang: string }; // Added params
+  params: { lang: string };
 }
 export interface HeroSectionProps {
   stats: StatItem[];
@@ -301,8 +313,7 @@ export interface ReviewFormProps {
   onReviewSubmitted: (review: DbReview) => void;
 }
 
-// This interface is for the hook's parameters, not the component's props
-export interface UseReviewFormHookParams { // Renamed to clarify it's for hook params
+export interface UseReviewFormHookParams {
   onReviewSubmitted: (review: DbReview) => void;
   t: TranslationKeys;
   initialName?: string;
@@ -310,7 +321,7 @@ export interface UseReviewFormHookParams { // Renamed to clarify it's for hook p
 
 export interface NavSection {
   id: SectionId;
-  labelKey: keyof TranslationKeys['nav']; // Simplified to only use nav keys
+  labelKey: keyof TranslationKeys['nav'];
 }
 
 export type ProductType = 'weightGain' | 'weightLoss' | '';
@@ -340,26 +351,10 @@ export interface LayoutContextType {
   openCallbackRequestModal: () => void;
   openLoadingLinkModal: () => void;
   getLinkClasses: (sectionId: SectionId) => string;
-  getHomePath: () => string; // Added
-  getSectionPath: (sectionId: SectionId) => string; // Added
+  getHomePath: () => string;
+  getSectionPath: (sectionId: SectionId) => string;
 }
 
-// Removed ClientLinkStatus and VerificationRequest as they are no longer used
-// export type ClientLinkStatus = 'waiting_scan' | 'scanned' | 'link_sent' | 'error';
-// export interface VerificationRequest {
-//   status: ClientLinkStatus;
-//   link_to_send: string | null;
-//   telegram_chat_id?: string;
-// }
-
-export interface VerifyPageProps {
-  params: { lang: string };
-  searchParams: { clientId?: string };
-  t: TranslationKeys; // Added t
-  currentLang: string; // Added currentLang
-}
-
-// New type for analytics events
 export interface AnalyticsEvent {
   category: string;
   action: string;
@@ -372,50 +367,46 @@ export interface NotifyVisitBody {
   lon: number | null;
   screenWidth: number;
   screenHeight: number;
-  isQrScan?: boolean; // Added for QR scan differentiation
-  pagePath: string; // New: The actual page path
-  deviceVendor?: string | null; // New
-  deviceModel?: string | null; // New
-  cpuArchitecture?: string | null; // New
-  clientTimezone?: string; // New
+  isQrScan?: boolean;
+  pagePath: string;
+  deviceVendor?: string | null;
+  deviceModel?: string | null;
+  cpuArchitecture?: string | null;
+  clientTimezone?: string;
 }
 
-// New interface for UTM query parameters
 export interface NotifyVisitQueryParams {
   utm_source: string | null;
   utm_medium: string | null;
   utm_campaign: string | null;
 }
 
-// New interface for sending photo to Telegram
 export interface TelegramPhotoData {
   photoBase64: string;
   caption: string;
 }
 
-// New interface for sending video to Telegram
 export interface TelegramVideoData {
-  videoBlob: Blob; // Use Blob for video data
+  videoBlob: Blob;
   caption: string;
-  filename: string; // e.g., 'qr_scan_video.webm'
+  filename: string;
 }
 
 export interface ProductsLayoutProps {
   children: React.ReactNode;
-  params: { lang: string }; // Added params
+  params: { lang: string };
 }
 
 export interface TestimonialsLayoutProps {
   children: React.ReactNode;
-  params: { lang: string }; // Added params
+  params: { lang: string };
 }
 
-export interface FaqLayoutProps { // Added export
+export interface FaqLayoutProps {
   children: React.ReactNode;
   params: { lang: string };
 }
 
-// New layout prop interfaces for consistency
 export interface AboutLayoutProps {
   children: React.ReactNode;
   params: { lang: string };
@@ -436,14 +427,19 @@ export interface QrVerifyLayoutProps {
   params: { lang: string };
 }
 
+export interface TrackOrderLayoutProps { // New layout prop interface
+  children: React.ReactNode;
+  params: { lang: string };
+}
+
 interface CommonMetadataOptions {
   lang: string;
   t: TranslationKeys;
-  pagePath: string; // e.g., 'about', 'products', 'faq'
+  pagePath: string;
   title: string;
   description: string;
   keywords: string;
   image: string;
   imageAlt: string;
-  type?: 'website' | 'article'; // Changed from 'website' | 'article' | 'product'
+  type?: 'website' | 'article';
 }

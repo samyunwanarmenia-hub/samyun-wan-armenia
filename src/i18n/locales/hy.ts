@@ -9,6 +9,7 @@ export const hy: TranslationKeys = {
     contact: 'Կապ',
     faq: 'Հաճախ տրվող հարցեր',
     products: 'Ապրանքներ',
+    trackOrder: 'Հետեւել պատվերին', // New translation
     armenian: 'Հայերեն',
     russian: 'Ռուսերեն',
     english: 'Անգլերեն',
@@ -25,8 +26,8 @@ export const hy: TranslationKeys = {
     qrVerificationTitle: 'Սկանավորեք QR կոդը',
     qrVerificationSubtitle: 'Սկանավորեք՝ ստուգելու համար',
     seo_title_addon: 'Samyun Wan ինչ է սա և նրա իրական ազդեցությունը | Սպորտային Սնունդ',
-    qrBlockTitle: 'Ստուգեք իսկությունը', // New translation
-    qrBlockDescription: '', // Removed text as requested
+    qrBlockTitle: 'Ստուգեք իսկությունը',
+    qrBlockDescription: '',
   },
   stats: {
     customers: 'Գոհ հաճախորդներ',
@@ -117,8 +118,8 @@ export const hy: TranslationKeys = {
     support: 'Օգնություն',
     follow: 'Հետևեք մեզ',
     legalInfo: 'Իրավական ինֆորմացիա / Զգուշացում\nՍա դեղորայք չէ։ Ապրանքը չի խորհուրդատրվում 18 տարեկանից ցածր անձանց համար։',
-    purchaseWarning: 'Խորհուրդ չի տրվում 14 տարեկանից ցածր անձանց :\nՁեր իսկ առողջության և անվտանգության նկատառումներից ելնելով , ՀՈՐԴՈՐՈՒՄ ԵՆՔ ԶԵՐԾ ՄՆԱԼ անհայտ ծագման ԻԲՐև ՎԿԱՅԳՐՎԱԾ ապրանքատեսակ գնելուց կամ օգտագործելուց:\nԱհա մի քանի նշան թե ինչպե՞ս տարբերել կեղծ ապրանքատեսակը։',
-    howToDistinguishButton: 'Տեսնել այստեղ', // New translation key for the button text
+    purchaseWarning: 'Խորհուրդ չի տրվում 14 տարեկանից ցածր անձանց :\nՁեր իսկ առողջության և անվտանգության նկատառումներից ելնելով , ՀՈՐԴՈՐՈՒՄ ԵՆՔ ԶԵՐԾ ՄՆԱԼ անհայտ ծագման ԻԲՐև ՎԿԱՅԳՐՎԱԾ ապրանքատեսակ գնելուց կամ օգտագրծելուց:\nԱհա մի քանի նշան թե ինչպե՞ս տարբերել կեղծ ապրանքատեսակը։',
+    howToDistinguishButton: 'Տեսնել այստեղ',
     officialLinksIntro: 'Պաշտոնական հղումներ\nԲոլոր մեր իրական և պաշտոնական էջերը՝',
     officialLinksDisclaimer: 'Ուշադրություն․ այլ էջեր կամ մեսենջերներ մեզ չեն պատկանում։ Միայն այս հղումներն են մեր պաշտոնական կապի ուղիները։',
     productOriginal: 'Samyun Wan Օրիգինալ',
@@ -157,16 +158,16 @@ export const hy: TranslationKeys = {
     title: 'Տարբերեք Օրիիգինալը',
     howToDistinguish: 'ինչպե՞ս տարբերել օրիգինալը',
     attention: 'ՈՒՇԱԱԴՐՈՒԹՅՈՒՆ',
-    certificateDesc: 'Ուշադրություն դարձրեք լոգոյին և պաշտպանիչ տարրերին։', // Updated text
+    certificateDesc: 'Ուշադրություն դարձրեք լոգոյին և պաշտպանիչ տարրերին։',
     differencesDesc: 'Այս նկարում ցույց է տրված, թե ինչպես տարբերել օրիգինալ Samyun Wan-ը կեղծից։ Հետևեք հրահանգներին՝ կեղծիքից խուսափելու համար։',
     waitingForLink: 'Խնդրում ենք սպասել, մինչև մեր օպերատորը կուղարկի ձեզ հղումը։',
     qrScanInstructions: 'Սկանավորեք QR կոդը՝ ապրանքի իսկությունը ստուգելու համար։',
     qrScanSuccess: 'Հայտը հաջողությամբ ուղարկվել է։',
     qrScanError: 'QR կոդի սկանավորումը ձախողվեց։',
     processingRequest: 'Խնդրում ենք սպասել, Ձեր հայտը մշակվում է։',
-    recordingInstructions: 'Արձանագրեք ապրանքի կարճ տեսանյութը՝ ստուգման համար։', // New
-    recordingSuccess: 'Տեսանյութը հաջողությամբ ուղարկվել է ստուգման համար։', // New
-    recordingError: 'Տեսանյութի ձայնագրումը կամ ուղարկումը ձախողվեց։', // New
+    recordingInstructions: 'Արձանագրեք ապրանքի կարճ տեսանյութը՝ ստուգման համար։',
+    recordingSuccess: 'Տեսանյութը հաջողությամբ ուղարկվել է ստուգման համար։',
+    recordingError: 'Տեսանյութի ձայնագրումը կամ ուղարկումը ձախողվեց։',
     purchaseWarning: 'Խորհուրդ ենք տալիս գնել միայն վստահելի վաճառողներից։ Միացեք նրանց, ովքեր ընտրում են իրական և 100% օրիգինալ Samyun Wan՝ QR կոդով և ապահով։',
     disclaimer: 'Ուշադրություն: Ապրանքը չի համարվում դեղորայք և նախատեսված չէ 18 տարեկանից փոքրերի համար։',
   },
@@ -209,5 +210,25 @@ export const hy: TranslationKeys = {
     invalidPhone: 'Խնդրում ենք մուտքագրել վավեր հեռախոսահամար։',
     selectProductType: 'Խնդրում ենք ընտրել ապրանքի տեսակը։',
     selectPurpose: 'Խնդրում ենք ընտրել զանգի նպատակը։',
+  },
+  trackOrder: { // New section for track order page
+    title: 'Պատվերի հետևում',
+    subtitle: 'Մուտքագրեք Ձեր պատվերի համարը՝ դրա կարգավիճակը ստուգելու համար։',
+    orderIdPlaceholder: 'Մուտքագրեք պատվերի համարը',
+    trackButton: 'Հետևել պատվերին',
+    orderStatus: 'Պատվերի կարգավիճակը',
+    statusPending: 'Սպասման մեջ',
+    statusProcessing: 'Մշակման մեջ',
+    statusShipped: 'Առաքված է',
+    statusDelivered: 'Հանձնված է',
+    statusCancelled: 'Չեղարկված է',
+    statusNotFound: 'Պատվերի համարը չգտնվեց։',
+    estimatedDelivery: 'Մոտավոր առաքում',
+    deliveryDate: 'Առաքման ամսաթիվ',
+    deliveryTime: 'Առաքման ժամանակ',
+    deliveryLocation: 'Առաքման վայր',
+    deliveryAgent: 'Առաքիչ',
+    noOrderId: 'Խնդրում ենք մուտքագրել պատվերի համարը։',
+    enterOrderId: 'Մուտքագրեք պատվերի համարը։',
   },
 };

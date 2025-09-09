@@ -83,6 +83,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
         languages: qrVerifyAlternates,
       },
     });
+
+    // Add the new /track-order page for each language
+    const trackOrderAlternates: Record<string, string> = {};
+    languages.forEach(altLang => {
+      trackOrderAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${baseUrl}/${altLang}/track-order`;
+    });
+    trackOrderAlternates['x-default'] = `${baseUrl}/hy/track-order`; // x-default for track-order page points to default language track-order page
+
+    sitemapEntries.push({
+      url: `${baseUrl}/${lang}/track-order`,
+      lastModified: lastModifiedDate,
+      changeFrequency: 'weekly',
+      priority: 0.8, // Same priority as other main pages
+      alternates: {
+        languages: trackOrderAlternates,
+      },
+    });
   });
 
   return sitemapEntries;
