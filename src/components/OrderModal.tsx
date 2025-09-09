@@ -57,7 +57,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
         animate="visible"
       >
         <motion.p 
-          className="text-gray-300 dark:text-gray-300 text-base mb-3 text-center font-semibold" /* Changed text-gray-700 to text-gray-300 */
+          className="text-gray-700 dark:text-gray-300 text-base mb-3 text-center font-semibold" /* Changed text-gray-300 to text-gray-700 for light mode */
           variants={itemVariants}
         >
           {t.orderModal.selectProducts}
@@ -89,7 +89,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
                   className="w-16 h-16 object-contain rounded-lg"
                   loading="eager"
                 />
-                <p className="text-xs text-gray-50 dark:text-gray-50 mt-1.5 text-center font-medium"> {/* Changed text-gray-900 to text-gray-50 */}
+                <p className="text-xs text-gray-900 dark:text-gray-50 mt-1.5 text-center font-medium"> {/* Changed text-gray-50 to text-gray-900 for light mode */}
                   {t.productShowcase[product.labelKey]}
                 </p>
               </motion.div>
@@ -102,7 +102,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
             className="text-center mb-5 p-3 bg-primary-100 dark:bg-primary-900/50 rounded-lg border border-primary-200 dark:border-primary-700"
             variants={itemVariants}
           >
-            <p className="text-gray-50 dark:text-gray-50 text-base font-bold mb-0.5"> {/* Changed text-gray-900 to text-gray-50 */}
+            <p className="text-gray-900 dark:text-gray-50 text-base font-bold mb-0.5"> {/* Changed text-gray-50 to text-gray-900 for light mode */}
               Total: {totalPrice.toLocaleString()} AMD
             </p>
             <p className="text-primary-600 dark:text-primary-400 text-xs font-semibold">
@@ -112,13 +112,13 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
         )}
 
         <motion.p 
-          className="text-gray-300 dark:text-gray-300 text-base mb-3 text-center" /* Changed text-gray-700 to text-gray-300 */
+          className="text-gray-700 dark:text-gray-300 text-base mb-3 text-center" /* Changed text-gray-300 to text-gray-700 for light mode */
           variants={itemVariants}
         >
           {t.orderModal.deliveryInfo1}
         </motion.p>
         <motion.p 
-          className="text-gray-300 dark:text-gray-300 text-base mb-5 text-center" /* Changed text-gray-700 to text-gray-300 */
+          className="text-gray-700 dark:text-gray-300 text-base mb-5 text-center" /* Changed text-gray-300 to text-gray-700 for light mode */
           variants={itemVariants}
         >
           {t.orderModal.deliveryInfo2}
@@ -126,7 +126,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
           <motion.input
             type="text"
-            className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2.5 text-gray-50 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600" /* Changed text-gray-900 to text-gray-50 */
+            className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2.5 text-gray-900 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600" /* Changed text-gray-50 to text-gray-900 for light mode */
             placeholder={t.orderModal.addressPlaceholder}
             value={address}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
@@ -137,7 +137,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
           />
           <motion.input
             type="tel"
-            className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2.5 text-gray-50 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600" /* Changed text-gray-900 to text-gray-50 */
+            className="bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg px-3 py-2.5 text-gray-900 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600" /* Changed text-gray-50 to text-gray-900 for light mode */
             placeholder={t.orderModal.phonePlaceholder}
             value={phone}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}

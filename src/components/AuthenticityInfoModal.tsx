@@ -58,7 +58,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
               sizes="(max-width: 768px) 90vw, 400px"
             />
           </motion.div>
-          <p className="text-gray-300 dark:text-gray-300 text-base leading-relaxed mb-4"> {/* Changed text-gray-700 to text-gray-300 */}
+          <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4"> {/* Changed text-gray-300 to text-gray-700 for light mode */}
             {t.authenticity.certificateDesc}
           </p>
         </motion.div>
@@ -76,7 +76,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
         >
           <div className="flex items-center justify-center mb-3">
             <ShieldCheck className="w-6 h-6 text-primary-600 dark:text-primary-400 mr-2" />
-            <h3 className="text-lg font-bold text-gray-50 dark:text-gray-50"> {/* Changed text-gray-900 to text-gray-50 */}
+            <h3 className="text-lg font-bold text-gray-900 dark:text-gray-50"> {/* Changed text-gray-50 to text-gray-900 for light mode */}
               {t.hero.qrBlockTitle}
             </h3>
           </div>
@@ -93,7 +93,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
             >
               <QRCodeCanvas value={qrCodeValue} size={128} level="H" />
             </motion.div>
-            <p className="text-gray-300 dark:text-gray-300 text-sm leading-relaxed"> {/* Changed text-gray-700 to text-gray-300 */}
+            <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed"> {/* Changed text-gray-300 to text-gray-700 for light mode */}
               {t.hero.qrBlockDescription}
             </p>
           </Link>

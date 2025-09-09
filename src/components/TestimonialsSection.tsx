@@ -82,7 +82,7 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
                     sizes="40px"
                   />
                   <div>
-                    <h5 className="font-bold text-gray-50 dark:text-gray-50 text-sm"> {/* Changed text-gray-900 to text-gray-50 */}
+                    <h5 className="font-bold text-gray-900 dark:text-gray-50 text-sm"> {/* Changed text-gray-50 to text-gray-900 for light mode */}
                       {currentLang === 'hy' ? testimonial.name : currentLang === 'ru' ? testimonial.nameRu : testimonial.nameEn}
                     </h5>
                     <div className="flex">
@@ -95,7 +95,7 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
                     {testimonial.result}
                   </div>
                 </div>
-                <p className="text-gray-300 dark:text-gray-300 text-base leading-relaxed flex-grow"> {/* Changed text-gray-700 to text-gray-300 */}
+                <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed flex-grow"> {/* Changed text-gray-300 to text-gray-700 for light mode */}
                   {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.textEn}
                 </p>
               </motion.div>

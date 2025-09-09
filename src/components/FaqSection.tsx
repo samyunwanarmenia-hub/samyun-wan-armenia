@@ -90,7 +90,7 @@ const FaqSection = () => {
                     animate="visible"
                     exit="exit"
                     variants={accordionContentVariants}
-                    className="px-5 pb-5 text-gray-700 dark:text-gray-300 text-base leading-relaxed"
+                    className="px-5 pb-5 text-gray-700 dark:text-gray-300 text-base leading-relaxed" /* Changed text-gray-300 to text-gray-700 for light mode */
                   >
                     <p dangerouslySetInnerHTML={{ __html: t.faq[q.answerKey] }} />
                   </motion.div>

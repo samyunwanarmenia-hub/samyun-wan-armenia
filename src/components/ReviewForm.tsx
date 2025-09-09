@@ -59,10 +59,10 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
     <section className="relative py-12 overflow-hidden">
       <div className="container mx-auto px-4 max-w-2xl relative z-10">
         <div className="text-center mb-8">
-          <h2 className="text-3xl lg:text-4xl font-bold mb-3 text-gray-50 dark:text-gray-50"> {/* Changed text-gray-900 to text-gray-50 */}
+          <h2 className="text-3xl lg:text-4xl font-bold mb-3 text-gray-900 dark:text-gray-50"> {/* Changed text-gray-50 to text-gray-900 for light mode */}
             {t.testimonials.formTitle}
           </h2>
-          <p className="text-lg text-gray-300 dark:text-gray-300"> {/* Changed text-gray-700 to text-gray-300 */}
+          <p className="text-lg text-gray-700 dark:text-gray-300"> {/* Changed text-gray-300 to text-gray-700 for light mode */}
             {t.testimonials.formSubtitle}
           </p>
         </div>
@@ -102,13 +102,13 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                 animate="visible"
               >
                 <motion.div className="mb-5" variants={itemVariants}>
-                  <label htmlFor="name" className="block text-gray-50 dark:text-gray-50 text-sm font-bold mb-2"> {/* Changed text-gray-900 to text-gray-50 */}
+                  <label htmlFor="name" className="block text-gray-900 dark:text-gray-50 text-sm font-bold mb-2"> {/* Changed text-gray-50 to text-gray-900 for light mode */}
                     {t.testimonials.namePlaceholder}
                   </label>
                   <motion.input
                     type="text"
                     id="name"
-                    className="shadow appearance-none border border-gray-200 dark:border-gray-600 rounded-lg w-full py-2.5 px-3 text-gray-50 dark:text-gray-50 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-600 bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400" /* Changed text-gray-900 to text-gray-50 */
+                    className="shadow appearance-none border border-gray-200 dark:border-gray-600 rounded-lg w-full py-2.5 px-3 text-gray-900 dark:text-gray-50 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-600 bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400" /* Changed text-gray-50 to text-gray-900 for light mode */
                     placeholder={t.testimonials.namePlaceholder}
                     value={name}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
@@ -118,13 +118,13 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                   />
                 </motion.div>
                 <motion.div className="mb-5" variants={itemVariants}>
-                  <label htmlFor="review" className="block text-gray-50 dark:text-gray-50 text-sm font-bold mb-2"> {/* Changed text-gray-900 to text-gray-50 */}
+                  <label htmlFor="review" className="block text-gray-900 dark:text-gray-50 text-sm font-bold mb-2"> {/* Changed text-gray-50 to text-gray-900 for light mode */}
                     {t.testimonials.reviewPlaceholder}
                   </label>
                   <motion.textarea
                     id="review"
                     rows={4}
-                    className="shadow appearance-none border border-gray-200 dark:border-gray-600 rounded-lg w-full py-2.5 px-3 text-gray-50 dark:text-gray-50 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-600 bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 resize-none" /* Changed text-gray-900 to text-gray-50 */
+                    className="shadow appearance-none border border-gray-200 dark:border-gray-600 rounded-lg w-full py-2.5 px-3 text-gray-900 dark:text-gray-50 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-600 bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 resize-none" /* Changed text-gray-50 to text-gray-900 for light mode */
                     placeholder={t.testimonials.reviewPlaceholder}
                     value={reviewText}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setReviewText(e.target.value)}

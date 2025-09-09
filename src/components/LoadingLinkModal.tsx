@@ -89,10 +89,10 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
           <motion.div className="w-24 h-24 mb-6 flex items-center justify-center" variants={itemVariants}>
             <LoadingSpinner />
           </motion.div>
-          <motion.h3 className="text-2xl font-bold text-gray-50 dark:text-gray-50 mb-4" variants={itemVariants}> {/* Changed text-gray-900 to text-gray-50 */}
+          <motion.h3 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4" variants={itemVariants}> {/* Changed text-gray-50 to text-gray-900 for light mode */}
             {t.loadingLinkModal.title}
           </motion.h3>
-          <motion.p className="text-gray-300 dark:text-gray-300 text-lg mb-2" variants={itemVariants}> {/* Changed text-gray-700 to text-gray-300 */}
+          <motion.p className="text-gray-700 dark:text-gray-300 text-lg mb-2" variants={itemVariants}> {/* Changed text-gray-300 to text-gray-700 for light mode */}
             {t.loadingLinkModal.message}
           </motion.p>
           <motion.p className="text-gray-500 dark:text-gray-400 text-sm mb-4" variants={itemVariants}>
@@ -101,9 +101,9 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
 
           {clientId && (
             <motion.div className="flex flex-col items-center mb-6" variants={itemVariants}>
-              <p className="text-gray-500 dark:text-gray-400 text-xs mb-2">Your Client ID:</p>
+              <p className="text-gray-700 dark:text-gray-400 text-xs mb-2">Your Client ID:</p> {/* Changed text-gray-500 to text-gray-700 for light mode */}
               <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-2 border border-gray-200 dark:border-gray-600">
-                <code className="text-gray-200 dark:text-gray-200 text-sm mr-2">{clientId}</code> {/* Changed text-gray-800 to text-gray-200 */}
+                <code className="text-gray-800 dark:text-gray-200 text-sm mr-2">{clientId}</code> {/* Changed text-gray-200 to text-gray-800 for light mode */}
                 <motion.button
                   onClick={handleCopyClientId}
                   className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-50 transition-colors" 
@@ -119,7 +119,7 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
 
           <motion.button
             onClick={onClose}
-            className="bg-gray-200 dark:bg-gray-700 text-gray-50 dark:text-gray-50 font-bold py-3 px-8 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transform hover:scale-105 transition-all mt-4" /* Changed text-gray-800 to text-gray-50 */
+            className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-50 font-bold py-3 px-8 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transform hover:scale-105 transition-all mt-4" /* Changed text-gray-50 to text-gray-800 for light mode */
             whileHover={{ scale: 1.08 }}
             whileTap={{ scale: 0.95 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}

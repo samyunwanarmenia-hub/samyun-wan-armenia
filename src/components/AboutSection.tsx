@@ -50,7 +50,7 @@ const AboutSection = () => {
 
         {/* New: Company Description */}
         <motion.p
-          className="text-lg text-gray-300 dark:text-gray-300 max-w-3xl mx-auto mb-8 text-center leading-relaxed" /* Changed text-gray-700 to text-gray-300 */
+          className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-8 text-center leading-relaxed" /* Changed text-gray-300 to text-gray-700 for light mode */
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
@@ -61,7 +61,7 @@ const AboutSection = () => {
 
         {/* New: Additional Content */}
         <motion.p
-          className="text-lg text-gray-300 dark:text-gray-300 max-w-3xl mx-auto mb-12 text-center leading-relaxed" /* Changed text-gray-700 to text-gray-300 */
+          className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-12 text-center leading-relaxed" /* Changed text-gray-300 to text-gray-700 for light mode */
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
@@ -78,10 +78,10 @@ const AboutSection = () => {
           whileInView="visible"
           transition={{ delay: 0.4 }}
         >
-          <h3 className="text-2xl font-bold text-gray-50 dark:text-gray-50 mb-4"> {/* Changed text-gray-900 to text-gray-50 */}
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4"> {/* Changed text-gray-50 to text-gray-900 for light mode */}
             {t.about.whyChooseUsTitle}
           </h3>
-          <ul className="list-disc list-inside text-left text-gray-300 dark:text-gray-300 space-y-2 text-base"> {/* Changed text-gray-700 to text-gray-300 */}
+          <ul className="list-disc list-inside text-left text-gray-700 dark:text-gray-300 space-y-2 text-base"> {/* Changed text-gray-300 to text-gray-700 for light mode */}
             <motion.li variants={itemVariants} transition={{ delay: 0.5 }}>
               {t.about.whyChooseUsOriginal}
             </motion.li>
@@ -121,9 +121,9 @@ const AboutSection = () => {
                 >
                   <item.icon className="w-5 h-5 text-white" />
                 </motion.div>
-                <h3 className="text-gray-50 dark:text-gray-50 text-lg font-bold">{t.about[item.key].title}</h3> {/* Changed text-gray-900 to text-gray-50 */}
+                <h3 className="text-gray-900 dark:text-gray-50 text-lg font-bold">{t.about[item.key].title}</h3> {/* Changed text-gray-50 to text-gray-900 for light mode */}
               </div>
-              <p className="text-gray-300 dark:text-gray-300 text-base leading-relaxed">{t.about[item.key].desc}</p> {/* Changed text-gray-700 to text-gray-300 */}
+              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">{t.about[item.key].desc}</p> {/* Changed text-gray-300 to text-gray-700 for light mode */}
             </motion.div>
           ))}
         </div>

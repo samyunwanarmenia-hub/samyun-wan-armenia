@@ -74,7 +74,7 @@ const TrackOrderSection = () => {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
             <motion.input
               type="text"
-              className="pl-10 pr-3 py-2.5 w-full bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-gray-50 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600" /* Changed text-gray-900 to text-gray-50 */
+              className="pl-10 pr-3 py-2.5 w-full bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-gray-900 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600" /* Changed text-gray-50 to text-gray-900 for light mode */
               placeholder={t.trackOrder.orderIdPlaceholder}
               value={orderId}
               onChange={(e) => setOrderId(e.target.value)}
@@ -105,7 +105,7 @@ const TrackOrderSection = () => {
             transition={{ duration: 0.3 }}
           >
             <LoadingSpinner />
-            <p className="ml-4 text-lg text-gray-300 dark:text-gray-300">{t.trackOrder.processingRequest}</p> {/* Changed text-gray-700 to text-gray-300 */}
+            <p className="ml-4 text-lg text-gray-700 dark:text-gray-300">{t.trackOrder.processingRequest}</p> {/* Changed text-gray-300 to text-gray-700 for light mode */}
           </motion.div>
         )}
 

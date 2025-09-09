@@ -90,19 +90,19 @@ const MobileNav: React.FC<MobileNavProps> = () => {
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <motion.span
-          className="block h-0.5 w-full bg-gray-300 dark:bg-gray-300 rounded-full" /* Changed bg-gray-700 to bg-gray-300 */
+          className="block h-0.5 w-full bg-gray-700 dark:bg-gray-300 rounded-full" /* Changed bg-gray-300 to bg-gray-700 for light mode */
           variants={line1Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.3 }}
         />
         <motion.span
-          className="block h-0.5 w-full bg-gray-300 dark:bg-gray-300 rounded-full" /* Changed bg-gray-700 to bg-gray-300 */
+          className="block h-0.5 w-full bg-gray-700 dark:bg-gray-300 rounded-full" /* Changed bg-gray-300 to bg-gray-700 for light mode */
           variants={line2Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.2 }}
         />
         <motion.span
-          className="block h-0.5 w-full bg-gray-300 dark:bg-gray-300 rounded-full" /* Changed bg-gray-700 to bg-gray-300 */
+          className="block h-0.5 w-full bg-gray-700 dark:bg-gray-300 rounded-full" /* Changed bg-gray-300 to bg-gray-700 for light mode */
           variants={line3Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.3 }}
@@ -138,7 +138,7 @@ const MobileNav: React.FC<MobileNavProps> = () => {
                   <Link
                     href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
                     onClick={() => setIsOpen(false)}
-                    className={`${getLinkClasses(section.id)} text-gray-300 dark:text-gray-300`} /* Added text-gray-300 */
+                    className={`${getLinkClasses(section.id)} text-gray-700 dark:text-gray-300`} /* Changed text-gray-300 to text-gray-700 for light mode */
                   >
                     {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                   </Link>

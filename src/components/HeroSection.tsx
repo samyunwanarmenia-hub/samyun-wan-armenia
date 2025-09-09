@@ -48,7 +48,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             
             {/* Main Title (Samyun Wan Armenia) and Tagline */}
             <h1 
-              className="text-4xl lg:text-6xl font-bold mb-3 leading-tight text-gray-50 dark:text-gray-50" /* Changed text-gray-900 to text-gray-50 */
+              className="text-4xl lg:text-6xl font-bold mb-3 leading-tight text-gray-900 dark:text-gray-50" /* Changed text-gray-50 to text-gray-900 for light mode */
             >
               <SplitTextAnimation 
                 text="Samyun Wan Armenia" 
@@ -70,7 +70,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             
             {/* Subtitle moved here */}
             <motion.p 
-              className="block text-2xl lg:text-3xl font-bold mb-5 text-gray-50 dark:text-gradient dark:bg-gradient-to-r dark:from-primary-400 dark:to-secondary-400" /* Changed text-gray-900 to text-gray-50 */
+              className="block text-2xl lg:text-3xl font-bold mb-5 text-gray-700 dark:text-gradient dark:bg-gradient-to-r dark:from-primary-400 dark:to-secondary-400" /* Changed text-gray-50 to text-gray-700 for light mode */
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
