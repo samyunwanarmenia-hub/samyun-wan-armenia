@@ -13,7 +13,7 @@ interface CommonMetadataOptions {
   keywords: string;
   image: string;
   imageAlt: string;
-  type?: 'website' | 'article' | 'product';
+  type?: 'website' | 'article'; // Corrected: Removed 'product' from allowed types
 }
 
 export const generateCommonMetadata = ({
