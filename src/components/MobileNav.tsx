@@ -110,7 +110,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ mobileIconColorClass = 'bg-white 
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed top-0 left-0 w-screen h-screen bg-white dark:bg-gray-900 z-40 overflow-y-auto shadow-lg max-w-[300px]"
+            className="fixed top-0 left-0 w-screen h-screen bg-gray-50 dark:bg-gray-900 z-40 overflow-y-auto shadow-lg max-w-[300px]" // Changed bg-white to bg-gray-50
             variants={menuVariants}
             initial="closed"
             animate="open"
