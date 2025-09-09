@@ -2,7 +2,8 @@ import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
 import { contactInfoData } from '@/data/contactInfo';
-import { ContactLayoutProps } from '@/types/global'; // Import the new interface
+import { ContactLayoutProps } from '@/types/global';
+import { generateCommonMetadata } from '@/utils/metadataUtils'; // Import the new utility
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;
@@ -13,33 +14,22 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     return item.details;
   }).join('; ');
 
-  return {
-    title: t.hero.title + ' - ' + t.nav.contact,
-    description: t.contact.title + ' ' + contactDetails,
-    keywords: `${t.hero.title}, ${t.nav.contact}, samyun wan, armenia, contact us, address, phone, working hours, связаться, адрес, телефон, часы работы`,
-    openGraph: {
-      title: t.hero.title + ' - ' + t.nav.contact,
-      description: t.contact.title + ' ' + contactDetails,
-      url: `https://samyunwanarmenia.netlify.app/${lang}/contact`,
-      images: [
-        {
-          url: 'https://samyunwanarmenia.netlify.app/optimized/samyun-wan-armenia-600w.jpg', // Generic image for contact
-          width: 600,
-          height: 600,
-          alt: t.nav.contact,
-        },
-      ],
-    },
-    alternates: {
-      canonical: `https://samyunwanarmenia.netlify.app/${lang}/contact`,
-      languages: {
-        'hy-AM': 'https://samyunwanarmenia.netlify.app/hy/contact',
-        'ru-RU': 'https://samyunwanarmenia.netlify.app/ru/contact',
-        'en-US': 'https://samyunwanarmenia.netlify.app/en/contact',
-        'x-default': 'https://samyunwanarmenia.netlify.app/contact',
-      },
-    },
-  };
+  const pageTitle = t.hero.title + ' - ' + t.nav.contact;
+  const pageDescription = t.contact.title + ' ' + contactDetails;
+  const pageKeywords = `${t.hero.title}, ${t.nav.contact}, samyun wan, armenia, contact us, address, phone, working hours, связаться, адрес, телефон, часы работы`;
+  const pageImage = 'https://samyunwanarmenia.netlify.app/optimized/samyun-wan-armenia-600w.jpg'; // Generic image for contact
+  const pageImageAlt = t.nav.contact;
+
+  return generateCommonMetadata({
+    lang,
+    t,
+    pagePath: 'contact',
+    title: pageTitle,
+    description: pageDescription,
+    keywords: pageKeywords,
+    image: pageImage,
+    imageAlt: pageImageAlt,
+  });
 }
 
 const ContactLayout = ({ children }: ContactLayoutProps) => {

@@ -1,45 +1,33 @@
 import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
 import { ReactNode } from 'react';
-import { QrVerifyLayoutProps } from '@/types/global'; // Import the new interface
+import { QrVerifyLayoutProps } from '@/types/global';
+import { generateCommonMetadata } from '@/utils/metadataUtils'; // Import the new utility
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;
   const t = translations[lang] || translations.hy; // Fallback to Armenian
 
-  return {
-    title: t.hero.title + ' - ' + t.authenticity.title,
-    description: t.authenticity.qrScanInstructions,
-    keywords: `${t.hero.title}, ${t.authenticity.title}, samyun wan, armenia, QR verification, authenticity check, original product, подлинность, проверка QR, Samyun Wan оригинал`,
-    openGraph: {
-      title: t.hero.title + ' - ' + t.authenticity.title,
-      description: t.authenticity.qrScanInstructions,
-      url: `https://samyunwanarmenia.netlify.app/${lang}/verify/qr`,
-      images: [
-        {
-          url: 'https://samyunwanarmenia.netlify.app/optimized/samyun-wan-product-600w.jpg', // Generic product image
-          width: 600,
-          height: 600,
-          alt: t.authenticity.title,
-        },
-      ],
-    },
-    alternates: {
-      canonical: `https://samyunwanarmenia.netlify.app/${lang}/verify/qr`,
-      languages: {
-        'hy-AM': 'https://samyunwanarmenia.netlify.app/hy/verify/qr',
-        'ru-RU': 'https://samyunwanarmenia.netlify.app/ru/verify/qr',
-        'en-US': 'https://samyunwanarmenia.netlify.app/en/verify/qr',
-        'x-default': 'https://samyunwanarmenia.netlify.app/verify/qr',
-      },
-    },
-  };
+  const pageTitle = t.hero.title + ' - ' + t.authenticity.title;
+  const pageDescription = t.authenticity.qrScanInstructions;
+  const pageKeywords = `${t.hero.title}, ${t.authenticity.title}, samyun wan, armenia, QR verification, authenticity check, original product, подлинность, проверка QR, Samyun Wan оригинал`;
+  const pageImage = 'https://samyunwanarmenia.netlify.app/optimized/samyun-wan-product-600w.jpg'; // Generic product image
+  const pageImageAlt = t.authenticity.title;
+
+  return generateCommonMetadata({
+    lang,
+    t,
+    pagePath: 'verify/qr',
+    title: pageTitle,
+    description: pageDescription,
+    keywords: pageKeywords,
+    image: pageImage,
+    imageAlt: pageImageAlt,
+  });
 }
 
 const QrVerifyLayout = ({ children }: QrVerifyLayoutProps) => {
   return (
-    // LayoutClientProvider now wraps children in RootLayout
-    // The initialLang prop is no longer needed here as it's passed to the root LayoutClientProvider
     <>
       {children}
     </>

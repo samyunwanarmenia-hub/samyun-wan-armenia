@@ -4,9 +4,7 @@ import { ReactNode } from 'react';
 import { baseTestimonials } from '@/data/testimonials';
 import { generateReviewStructuredData } from '@/utils/structuredDataUtils';
 import { TestimonialsLayoutProps } from '@/types/global';
-
-// The interface TestimonialsLayoutProps is now imported from '@/types/global'
-// and should not be redefined here.
+import { generateCommonMetadata } from '@/utils/metadataUtils'; // Import the new utility
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;
@@ -18,33 +16,22 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     return item.nameEn;
   }).join(', ');
 
-  return {
-    title: t.hero.title + ' - ' + t.testimonials.title,
-    description: t.testimonials.formSubtitle,
-    keywords: `${t.hero.title}, ${t.testimonials.title}, samyun wan, armenia, ${reviewKeywords}, отзывы, Samyun Wan отзывы, customer reviews, weight gain reviews`,
-    openGraph: {
-      title: t.hero.title + ' - ' + t.testimonials.title,
-      description: t.testimonials.formSubtitle,
-      url: `https://samyunwanarmenia.netlify.app/${lang}/testimonials`,
-      images: [
-        {
-          url: 'https://samyunwanarmenia.netlify.app/optimized/samyun-wan-armenia-original-600w.jpg', // Generic image for testimonials
-          width: 600,
-          height: 600,
-          alt: t.testimonials.title,
-        },
-      ],
-    },
-    alternates: {
-      canonical: `https://samyunwanarmenia.netlify.app/${lang}/testimonials`,
-      languages: {
-        'hy-AM': 'https://samyunwanarmenia.netlify.app/hy/testimonials',
-        'ru-RU': 'https://samyunwanarmenia.netlify.app/ru/testimonials',
-        'en-US': 'https://samyunwanarmenia.netlify.app/en/testimonials',
-        'x-default': 'https://samyunwanarmenia.netlify.app/testimonials',
-      },
-    },
-  };
+  const pageTitle = t.hero.title + ' - ' + t.testimonials.title;
+  const pageDescription = t.testimonials.formSubtitle;
+  const pageKeywords = `${t.hero.title}, ${t.testimonials.title}, samyun wan, armenia, ${reviewKeywords}, отзывы, Samyun Wan отзывы, customer reviews, weight gain reviews`;
+  const pageImage = 'https://samyunwanarmenia.netlify.app/optimized/samyun-wan-armenia-original-600w.jpg'; // Generic image for testimonials
+  const pageImageAlt = t.testimonials.title;
+
+  return generateCommonMetadata({
+    lang,
+    t,
+    pagePath: 'testimonials',
+    title: pageTitle,
+    description: pageDescription,
+    keywords: pageKeywords,
+    image: pageImage,
+    imageAlt: pageImageAlt,
+  });
 }
 
 const TestimonialsLayout = ({ children, params }: TestimonialsLayoutProps) => {

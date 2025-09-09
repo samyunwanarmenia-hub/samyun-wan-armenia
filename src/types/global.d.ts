@@ -433,3 +433,15 @@ export interface QrVerifyLayoutProps {
   children: React.ReactNode;
   params: { lang: string };
 }
+
+interface CommonMetadataOptions {
+  lang: string;
+  t: TranslationKeys;
+  pagePath: string; // e.g., 'about', 'products', 'faq'
+  title: string;
+  description: string;
+  keywords: string;
+  image: string;
+  imageAlt: string;
+  type?: 'website' | 'article'; // Changed from 'website' | 'article' | 'product'
+}
