@@ -18,7 +18,7 @@
   --fab-action-shadow-rgb: 108, 144, 108;
   --fab-action-hover-bg: theme('colors.primary.500');
 
-  --slogan-base-color: theme('colors.gray.700'); /* Changed to darker gray for light mode */
+  --slogan-base-color: theme('colors.gray.600'); /* Changed to softer gray for light mode */
   --slogan-shine-color: theme('colors.gray.50');
 
   /* Intro Animation Colors - Light Mode */
@@ -32,12 +32,12 @@
 
   --intro-border-green-medium: theme('colors.primary.600');
   --intro-border-green-dark: theme('colors.primary.700');
-  --intro-border-gray-dark: theme('colors.gray.700');
+  --intro-border-gray-dark: theme('colors.gray.600'); /* Changed to softer gray */
 
-  --intro-line-color: theme('colors.gray.900'); /* Dark lines on light background */
+  --intro-line-color: theme('colors.gray.800'); /* Darker lines on light background, but not black */
   --intro-circle-border-brownish-green: theme('colors.primary.700');
   --intro-circle-bg: theme('colors.white'); /* White circle background */
-  --intro-strip-dark-gray: theme('colors.gray.800');
+  --intro-strip-dark-gray: theme('colors.gray.700'); /* Changed to softer gray */
 }
 
 .dark {

@@ -119,7 +119,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ mobileIconColorClass = 'bg-white 
             <div className="flex justify-end p-4">
               <button
                 onClick={toggleMenu}
-                className="text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md"
+                className="text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md" /* Changed text-gray-700 to text-gray-600 for light mode */
                 aria-label={t.nav.close}
               >
                 <X size={24} />
@@ -137,7 +137,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ mobileIconColorClass = 'bg-white 
                   <Link
                     href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
                     onClick={() => setIsOpen(false)}
-                    className={`${getLinkClasses(section.id)} text-gray-700 dark:text-gray-300`}
+                    className={`${getLinkClasses(section.id)} text-gray-600 dark:text-gray-300`} /* Changed text-gray-700 to text-gray-600 for light mode */
                   >
                     {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                   </Link>

@@ -28,7 +28,7 @@ const ContactSection = () => {
   return (
     <motion.section 
       id="contact" 
-      className="relative py-12 text-gray-900 dark:text-gray-50 overflow-hidden"
+      className="relative py-12 text-gray-800 dark:text-gray-50 overflow-hidden" /* Changed text-gray-900 to text-gray-800 for light mode */
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
@@ -62,8 +62,8 @@ const ContactSection = () => {
               >
                 <item.icon className="w-5 h-5 text-white" />
               </motion.div>
-              <h3 className="text-gray-900 dark:text-gray-50 text-lg font-bold">{t.contact[item.titleKey]}</h3> {/* Changed text-gray-50 to text-gray-900 for light mode */}
-              <p className="text-gray-700 dark:text-gray-300 text-base" dangerouslySetInnerHTML={{ __html: item.key === 'phone' ? t.contact.phoneNumbers.description : item.details }} /> {/* Changed text-gray-300 to text-gray-700 for light mode */}
+              <h3 className="text-gray-800 dark:text-gray-50 text-lg font-bold">{t.contact[item.titleKey]}</h3> {/* Changed text-gray-900 to text-gray-800 for light mode */}
+              <p className="text-gray-600 dark:text-gray-300 text-base" dangerouslySetInnerHTML={{ __html: item.key === 'phone' ? t.contact.phoneNumbers.description : item.details }} /> {/* Changed text-gray-700 to text-gray-600 for light mode */}
             </motion.div>
           ))}
         </div>

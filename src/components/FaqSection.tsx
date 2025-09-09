@@ -41,7 +41,7 @@ const FaqSection = () => {
   return (
     <motion.section
       id="faq"
-      className="relative py-12 text-gray-900 dark:text-gray-50 overflow-hidden"
+      className="relative py-12 text-gray-800 dark:text-gray-50 overflow-hidden" /* Changed text-gray-900 to text-gray-800 for light mode */
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
@@ -69,7 +69,7 @@ const FaqSection = () => {
               whileTap={{ scale: 0.98 }}
             >
               <motion.button
-                className="flex justify-between items-center w-full p-5 text-left text-lg font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                className="flex justify-between items-center w-full p-5 text-left text-lg font-semibold text-gray-800 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" /* Changed text-gray-900 to text-gray-800 for light mode */
                 onClick={() => toggleQuestion(q.key)}
                 whileHover={{ scale: 1.01 }} // Slightly less scale for the button itself
                 whileTap={{ scale: 0.99 }}
@@ -90,7 +90,7 @@ const FaqSection = () => {
                     animate="visible"
                     exit="exit"
                     variants={accordionContentVariants}
-                    className="px-5 pb-5 text-gray-700 dark:text-gray-300 text-base leading-relaxed" /* Changed text-gray-300 to text-gray-700 for light mode */
+                    className="px-5 pb-5 text-gray-600 dark:text-gray-300 text-base leading-relaxed" /* Changed text-gray-700 to text-gray-600 for light mode */
                   >
                     <p dangerouslySetInnerHTML={{ __html: t.faq[q.answerKey] }} />
                   </motion.div>

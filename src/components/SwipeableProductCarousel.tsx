@@ -116,10 +116,10 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
                 sizes="112px" 
               />
             </motion.div>
-            <h3 className="text-xl font-bold text-gray-900 dark:text-gray-50 mb-2 text-center"> {/* Changed text-gray-50 to text-gray-900 for light mode */}
+            <h3 className="text-xl font-bold text-gray-800 dark:text-gray-50 mb-2 text-center"> {/* Changed text-gray-900 to text-gray-800 for light mode */}
               {t.productShowcase[currentProduct.labelKey]}
             </h3>
-            <p className="text-gray-700 dark:text-gray-300 text-sm mb-4 text-center"> {/* Changed text-gray-300 to text-gray-700 for light mode */}
+            <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 text-center"> {/* Changed text-gray-700 to text-gray-600 for light mode */}
               {t.productShowcase[currentProduct.descKey]}
             </p>
             <p className="text-2xl font-extrabold text-primary-600 dark:text-primary-400 mb-4">
@@ -141,7 +141,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
 
       <motion.button
         onClick={handlePrev}
-        className="absolute top-1/2 left-3 transform -translate-y-1/2 bg-gray-100 dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-700 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-20" /* Changed text-gray-50 to text-gray-700 for light mode */
+        className="absolute top-1/2 left-3 transform -translate-y-1/2 bg-gray-100 dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-600 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-20" /* Changed text-gray-700 to text-gray-600 for light mode */
         aria-label="Previous product"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
@@ -151,7 +151,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
       </motion.button>
       <motion.button
         onClick={handleNext}
-        className="absolute top-1/2 right-3 transform -translate-y-1/2 bg-gray-100 dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-700 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-20" /* Changed text-gray-50 to text-gray-700 for light mode */
+        className="absolute top-1/2 right-3 transform -translate-y-1/2 bg-gray-100 dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-600 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-20" /* Changed text-gray-700 to text-gray-600 for light mode */
         aria-label="Next product"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}

@@ -29,14 +29,14 @@ const Footer = () => {
           {/* Column 1: Legal Info, Warning, and Social Media */}
           <div className="flex flex-col items-start justify-start p-4 md:p-6 rounded-xl bg-gray-100 dark:bg-gray-950 shadow-lg"> {/* Changed bg-gray-900 to bg-gray-100 for light mode */}
             <Link href={getHomePath()} className="flex items-center mb-4" aria-label={t.hero.title}>
-              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Reverted text-white to text-gray-900 for light mode, removed glossy text shadow */}
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Changed text-gray-900 to text-gray-800 for light mode */}
                 {t.hero.title}
               </h2>
             </Link>
             
             {/* Legal Info / Warning Section */}
             <p 
-              className="text-sm leading-relaxed mb-4 whitespace-pre-line text-gray-700 dark:text-gray-300" // Adjusted text color for light mode
+              className="text-sm leading-relaxed mb-4 whitespace-pre-line text-gray-600 dark:text-gray-300" // Changed text-gray-700 to text-gray-600 for light mode
               dangerouslySetInnerHTML={{ __html: t.footer.legalAndWarning }}
             />
             
@@ -58,8 +58,8 @@ const Footer = () => {
             <div className="w-full h-px bg-gray-300 dark:bg-gray-600 my-4" /> {/* Adjusted divider color for light mode */}
 
             {/* Official Links Section */}
-            <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">{t.footer.officialLinksIntro.split('\n')[0]}</h3> {/* Adjusted text color for light mode */}
-            <p className="text-sm leading-relaxed mb-4 whitespace-pre-line text-gray-700 dark:text-gray-300"> {/* Adjusted text color for light mode */}
+            <h3 className="font-bold text-lg mb-2 text-gray-800 dark:text-white">{t.footer.officialLinksIntro.split('\n')[0]}</h3> {/* Changed text-gray-900 to text-gray-800 for light mode */}
+            <p className="text-sm leading-relaxed mb-4 whitespace-pre-line text-gray-600 dark:text-gray-300"> {/* Changed text-gray-700 to text-gray-600 for light mode */}
               {t.footer.officialLinksIntro.split('\n')[1]}
             </p>
 
@@ -68,7 +68,7 @@ const Footer = () => {
                 href="https://www.instagram.com/samyunwanarmenia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-gray-300 border border-gray-400 rounded-md flex items-center justify-center text-gray-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white" // Adjusted colors for light mode
+                className="w-9 h-9 bg-gray-300 border border-gray-400 rounded-md flex items-center justify-center text-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /* Changed text-gray-700 to text-gray-600 for light mode */
                 whileHover={{ scale: 1.2, backgroundColor: '#E1306C' }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -80,7 +80,7 @@ const Footer = () => {
                 href="https://www.facebook.com/samyunwanarmenia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-gray-300 border border-gray-400 rounded-md flex items-center justify-center text-gray-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white" // Adjusted colors for light mode
+                className="w-9 h-9 bg-gray-300 border border-gray-400 rounded-md flex items-center justify-center text-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /* Changed text-gray-700 to text-gray-600 for light mode */
                 whileHover={{ scale: 1.2, backgroundColor: '#1877F2' }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -92,7 +92,7 @@ const Footer = () => {
                 href="https://t.me/samyunwanarmenia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-gray-300 border border-gray-400 rounded-md flex items-center justify-center text-gray-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white" // Adjusted colors for light mode
+                className="w-9 h-9 bg-gray-300 border border-gray-400 rounded-md flex items-center justify-center text-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /* Changed text-gray-700 to text-gray-600 for light mode */
                 whileHover={{ scale: 1.2, backgroundColor: '#0088CC' }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -104,7 +104,7 @@ const Footer = () => {
                 href="https://wa.me/37496653666"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-gray-300 border border-gray-400 rounded-md flex items-center justify-center text-gray-700 dark:bg-gray-700 dark:border-gray-600 dark:text-white" // Adjusted colors for light mode
+                className="w-9 h-9 bg-gray-300 border border-gray-400 rounded-md flex items-center justify-center text-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /* Changed text-gray-700 to text-gray-600 for light mode */
                 whileHover={{ scale: 1.2, backgroundColor: '#25D366' }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -120,7 +120,7 @@ const Footer = () => {
 
           {/* Column 2: About Links */}
           <div className="flex flex-col items-start justify-start p-4 md:p-6 rounded-xl bg-gray-100 dark:bg-gray-950 shadow-lg"> {/* Changed bg-gray-900 to bg-gray-100 for light mode */}
-            <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">{t.footer.about}</h3> {/* Adjusted text color for light mode */}
+            <h3 className="font-bold text-lg mb-4 text-gray-800 dark:text-white">{t.footer.about}</h3> {/* Changed text-gray-900 to text-gray-800 for light mode */}
             <ul className="space-y-2 text-sm">
               {aboutLinks.map((section) => (
                 <li key={section.id}>
@@ -129,7 +129,7 @@ const Footer = () => {
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
-                    <Link href={getSectionPath(section.id)} className="text-gray-700 dark:text-gray-300 hover:text-primary-500 transition-colors" aria-label={t.nav[section.labelKey as keyof TranslationKeys['nav']]}> {/* Adjusted text color for light mode */}
+                    <Link href={getSectionPath(section.id)} className="text-gray-600 dark:text-gray-300 hover:text-primary-500 transition-colors" aria-label={t.nav[section.labelKey as keyof TranslationKeys['nav']]}> {/* Changed text-gray-700 to text-gray-600 for light mode */}
                       {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                     </Link>
                   </motion.div>
@@ -140,7 +140,7 @@ const Footer = () => {
 
           {/* Column 3: Product Links */}
           <div className="flex flex-col items-start justify-start p-4 md:p-6 rounded-xl bg-gray-100 dark:bg-gray-950 shadow-lg"> {/* Changed bg-gray-900 to bg-gray-100 for light mode */}
-            <h3 className="font-bold text-lg mb-4 text-gray-900 dark:text-white">{t.footer.products}</h3> {/* Adjusted text color for light mode */}
+            <h3 className="font-bold text-lg mb-4 text-gray-800 dark:text-white">{t.footer.products}</h3> {/* Changed text-gray-900 to text-gray-800 for light mode */}
             <ul className="space-y-2 text-sm">
               {productLinks.map((section) => (
                 <li key={section.id}>
@@ -149,7 +149,7 @@ const Footer = () => {
                     whileTap={{ scale: 0.95 }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   >
-                    <Link href={getSectionPath(section.id)} className="text-gray-700 dark:text-gray-300 hover:text-primary-500 transition-colors" aria-label={t.nav[section.labelKey as keyof TranslationKeys['nav']]}> {/* Adjusted text color for light mode */}
+                    <Link href={getSectionPath(section.id)} className="text-gray-600 dark:text-gray-300 hover:text-primary-500 transition-colors" aria-label={t.nav[section.labelKey as keyof TranslationKeys['nav']]}> {/* Changed text-gray-700 to text-gray-600 for light mode */}
                       {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                     </Link>
                   </motion.div>
@@ -158,7 +158,7 @@ const Footer = () => {
               <li>
                 <motion.button
                   onClick={openAuthenticityModal}
-                  className="text-gray-700 dark:text-gray-300 hover:text-primary-500 transition-colors text-sm text-left" // Adjusted text color for light mode
+                  className="text-gray-600 dark:text-gray-300 hover:text-primary-500 transition-colors text-sm text-left" /* Changed text-gray-700 to text-gray-600 for light mode */
                   whileHover={{ scale: 1.05, color: '#86b486' }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
@@ -173,7 +173,7 @@ const Footer = () => {
                   whileTap={{ scale: 0.95 }}
                   transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
-                  <Link href="#" className="text-gray-700 dark:text-gray-300 hover:text-primary-500 transition-colors" aria-label={t.footer.productUsage}> {/* Adjusted text color for light mode */}
+                  <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-primary-500 transition-colors" aria-label={t.footer.productUsage}> {/* Changed text-gray-700 to text-gray-600 for light mode */}
                     {t.footer.productUsage}
                   </Link>
                 </motion.div>
@@ -183,7 +183,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-gray-300 dark:border-gray-600 pt-6 text-center"> {/* Adjusted border color for light mode */}
-          <p className="text-sm text-gray-700 dark:text-gray-300"> {/* Adjusted text color for light mode */}
+          <p className="text-sm text-gray-600 dark:text-gray-300"> {/* Changed text-gray-700 to text-gray-600 for light mode */}
             © 2025 Samyun Wan Armenia. {t.footer.allRightsReserved} | {t.footer.officialRepresentative}
           </p>
         </div>
