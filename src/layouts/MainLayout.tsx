@@ -72,6 +72,14 @@ const MainLayout = ({
     <> {/* Use React.Fragment instead of a div */}
       <AnimatedGradientBackground /> {/* Use the new animated background component */}
       
+      {/* New: Semi-transparent overlay for text readability */}
+      <motion.div
+        className="fixed inset-0 z-[5] bg-black/30 dark:bg-black/50" // Adjust opacity as needed
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1, delay: 0.5 }}
+      />
+      
       <DynamicNavbar />
       
       <motion.main 
