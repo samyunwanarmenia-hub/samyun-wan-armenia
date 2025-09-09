@@ -39,14 +39,12 @@ body:active:after {
   box-sizing: border-box;
   z-index: 2;
 }
-.rain .left {
-  &:hover ~ .drop {
-    --angle: 105deg;
-  }
-  &:hover ~ .rain .right:after {
-    transform: rotate(22deg);
-    transition: all 0.5s ease 0s;
-  }
+.rain .left:hover ~ .drop {
+  --angle: 105deg;
+}
+.rain .left:hover ~ .rain .right:after {
+  transform: rotate(22deg);
+  transition: all 0.5s ease 0s;
 }
 .rain .right {
   left: initial;
@@ -71,14 +69,12 @@ body:active:after {
   transition: all 0.5s ease 0s;
   white-space: pre-wrap;
 }
-.rain .right:hover {
-  &:after {
-    transform: rotate(-22deg);
-    transition: all 0.5s ease 0s;
-  }
-  & ~ .drop {
-    --angle: 75deg;
-  }
+.rain .right:hover:after {
+  transform: rotate(-22deg);
+  transition: all 0.5s ease 0s;
+}
+.rain .right:hover ~ .drop {
+  --angle: 75deg;
 }
 .rain .right.center {
   right: 30vw;
