@@ -54,28 +54,10 @@ export default {
           500: '#facc15', // Tailwind default yellow-500 for intro animation dark mode
         }
       },
-      textShadow: { // Custom text shadow utility
-        sm: '0 1px 2px var(--tw-shadow-color)',
-        DEFAULT: '0 2px 4px var(--tw-shadow-color)',
-        md: '0 4px 6px var(--tw-shadow-color)',
-        lg: '0 8px 16px var(--tw-shadow-color)',
-        'glossy-light': '0 0 5px rgba(255,255,255,0.8), 0 0 10px rgba(255,255,255,0.5)',
-        'glossy-dark': '0 0 5px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5)',
-      },
-      // ... rest of the theme object
+      // Removed textShadow extension
     },
   },
   plugins: [
-    function ({ addUtilities, theme }) {
-      const newUtilities = {
-        '.text-shadow-glossy-light': {
-          textShadow: theme('textShadow.glossy-light'),
-        },
-        '.text-shadow-glossy-dark': {
-          textShadow: theme('textShadow.glossy-dark'),
-        },
-      };
-      addUtilities(newUtilities, ['responsive', 'hover']);
-    },
+    // Removed the plugin function
   ],
 }

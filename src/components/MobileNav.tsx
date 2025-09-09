@@ -83,26 +83,26 @@ const MobileNav: React.FC<MobileNavProps> = () => {
     <>
       <motion.button
         onClick={toggleMenu}
-        className="md:hidden p-2 relative w-9 h-9 flex flex-col justify-around items-center text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md z-50"
+        className="md:hidden p-2 relative w-9 h-9 flex flex-col justify-around items-center text-white dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md z-50" /* Changed text-gray-700 to text-white for light mode */
         aria-label={isOpen ? t.nav.close : t.nav.open}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <motion.span
-          className="block h-0.5 w-full bg-gray-700 dark:bg-gray-300 rounded-full" /* Changed bg-gray-300 to bg-gray-700 for light mode */
+          className="block h-0.5 w-full bg-white dark:bg-gray-300 rounded-full" /* Changed bg-gray-700 to bg-white for light mode */
           variants={line1Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.3 }}
         />
         <motion.span
-          className="block h-0.5 w-full bg-gray-700 dark:bg-gray-300 rounded-full" /* Changed bg-gray-300 to bg-gray-700 for light mode */
+          className="block h-0.5 w-full bg-white dark:bg-gray-300 rounded-full" /* Changed bg-gray-700 to bg-white for light mode */
           variants={line2Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.2 }}
         />
         <motion.span
-          className="block h-0.5 w-full bg-gray-700 dark:bg-gray-300 rounded-full" /* Changed bg-gray-300 to bg-gray-700 for light mode */
+          className="block h-0.5 w-full bg-white dark:bg-gray-300 rounded-full" /* Changed bg-gray-700 to bg-white for light mode */
           variants={line3Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.3 }}

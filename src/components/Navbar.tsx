@@ -33,12 +33,12 @@ const Navbar: React.FC<NavbarProps> = () => {
   }, []);
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 shadow-lg dark:bg-gray-800/95 dark:shadow-xl py-2' : 'bg-white/85 dark:bg-gray-900/85 py-4'}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 shadow-lg dark:bg-gray-800/95 dark:shadow-xl py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
             <Link href={getHomePath()} className="flex items-center">
-              <span className="text-base sm:text-lg font-bold text-white dark:text-gray-50 text-shadow-glossy-light dark:text-shadow-glossy-dark whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Changed text-gray-900 to text-white for light mode, added glossy text shadow */}
+              <span className="text-base sm:text-lg font-bold text-white dark:text-gray-50 whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Changed text-gray-900 to text-white, removed glossy text shadow */}
                 {t.hero.title}
               </span>
             </Link>
@@ -49,13 +49,13 @@ const Navbar: React.FC<NavbarProps> = () => {
             {navigationSections.map((section) => (
               <motion.div
                 key={section.id}
-                whileHover={{ scale: 1.1 }} // Removed hardcoded color, now relies on getLinkClasses
+                whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.95 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
                 <Link
                   href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
-                  className={`${getLinkClasses(section.id)} text-base text-gray-700 dark:text-gray-300`} /* Changed text-gray-300 to text-gray-700 for light mode */
+                  className={`${getLinkClasses(section.id)} text-base text-white dark:text-gray-300`} /* Changed text-gray-700 to text-white for light mode */
                 >
                   {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                 </Link>

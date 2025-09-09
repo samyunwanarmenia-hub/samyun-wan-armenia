@@ -29,7 +29,7 @@ const Footer = () => {
           {/* Column 1: Legal Info, Warning, and Social Media */}
           <div className="flex flex-col items-start justify-start p-4 md:p-6 rounded-xl bg-gray-100 dark:bg-gray-950 shadow-lg"> {/* Changed bg-gray-900 to bg-gray-100 for light mode */}
             <Link href={getHomePath()} className="flex items-center mb-4" aria-label={t.hero.title}>
-              <h2 className="text-2xl md:text-3xl font-bold text-white dark:text-white text-shadow-glossy-light dark:text-shadow-glossy-dark whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Changed text-gray-900 to text-white for light mode, added glossy text shadow */}
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Reverted text-white to text-gray-900 for light mode, removed glossy text shadow */}
                 {t.hero.title}
               </h2>
             </Link>

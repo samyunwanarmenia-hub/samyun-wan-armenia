@@ -72,13 +72,7 @@ const MainLayout = ({
     <> {/* Use React.Fragment instead of a div */}
       <AnimatedGradientBackground /> {/* Use the new animated background component */}
       
-      {/* New: Fixed black-to-transparent gradient overlay at the top */}
-      <motion.div
-        className="fixed top-0 left-0 w-full h-40 z-10 bg-gradient-to-b from-black to-transparent"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      />
+      {/* Removed: Fixed black-to-transparent gradient overlay at the top */}
       
       <DynamicNavbar />
       
