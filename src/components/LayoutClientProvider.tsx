@@ -9,11 +9,14 @@ import { useModals } from '@/hooks/useModals';
 import useActiveLink from '@/hooks/useActiveLink';
 import useNavigationUtils from '@/hooks/useNavigationUtils';
 import MainLayout from '@/layouts/MainLayout';
-import IntroAnimation from './IntroAnimation';
+// import IntroAnimation from './IntroAnimation'; // Удаляем статический импорт
 import { AnimatePresence, motion } from 'framer-motion';
 import { ThemeProvider } from '@/context/ThemeContext';
 import ToastProvider from '@/components/ToastProvider';
 import dynamic from 'next/dynamic';
+
+// Динамически импортируем IntroAnimation
+const DynamicIntroAnimation = dynamic(() => import('./IntroAnimation'), { ssr: false });
 
 // Dynamically import client-only components with ssr: false
 const DynamicYandexMetrikaTracker = dynamic(() => import('@/components/YandexMetrikaTracker'), { ssr: false });
@@ -160,7 +163,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
         <DynamicServiceWorkerRegister />
         <AnimatePresence mode="wait">
           {showIntroAnimation ? (
-            <IntroAnimation key="intro-animation" />
+            <DynamicIntroAnimation key="intro-animation" />
           ) : (
             <motion.div
               key="main-app-content"
