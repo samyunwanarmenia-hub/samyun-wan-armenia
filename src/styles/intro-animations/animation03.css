@@ -22,7 +22,7 @@
 .animation03 .circle_element01 {
   width: 13vw;
   height: 13vw;
-  border: 0.25vw solid var(--intro-border-green-medium);
+  border: 0.25rem solid var(--intro-border-green-medium); /* Changed from vw to rem */
   border-radius: 50%;
   animation: animation03_circle 0.3s ease-in-out 0.5s forwards,
     animation03_circle_element01 0.3s linear 0.9s forwards;
@@ -32,7 +32,7 @@
 .animation03 .circle_element02 {
   width: 9vw;
   height: 9vw;
-  border: 0.5vw solid var(--intro-border-green-dark);
+  border: 0.5rem solid var(--intro-border-green-dark); /* Changed from vw to rem */
   border-radius: 50%;
   animation: animation03_circle 0.4s ease-in-out 0.5s forwards,
     animation03_circle_element02 0.2s linear 1.0s forwards;
@@ -42,7 +42,7 @@
 .animation03 .circle_element03 {
   width: 4vw;
   height: 4vw;
-  border: 1vw solid var(--intro-border-gray-dark);
+  border: 1rem solid var(--intro-border-gray-dark); /* Changed from vw to rem */
   border-radius: 50%;
   animation: animation03_circle 0.45s ease-in-out 0.5s forwards,
     animation03_circle_element03 0.15s linear 1.4s forwards;
@@ -62,7 +62,7 @@
 
 @keyframes animation03_circle_element01 {
   0% {
-    border: 0.25vw solid var(--intro-border-green-medium);
+    border: 0.25rem solid var(--intro-border-green-medium); /* Changed from vw to rem */
   }
   100% {
     border: 0 solid var(--intro-border-green-medium);
@@ -71,7 +71,7 @@
 
 @keyframes animation03_circle_element02 {
   0% {
-    border: 0.5vw solid var(--intro-border-green-dark);
+    border: 0.5rem solid var(--intro-border-green-dark); /* Changed from vw to rem */
   }
   100% {
     border: 0 solid var(--intro-border-green-dark);
@@ -80,7 +80,7 @@
 
 @keyframes animation03_circle_element03 {
   0% {
-    border: 1vw solid var(--intro-border-gray-dark);
+    border: 1rem solid var(--intro-border-gray-dark); /* Changed from vw to rem */
   }
   100% {
     border: 0 solid var(--intro-border-gray-dark);
