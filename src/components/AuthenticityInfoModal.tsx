@@ -34,13 +34,13 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
       maxWidth="max-w-xl" // Adjusted max-width for a single column
     >
       <motion.div 
-        className="flex flex-col items-center text-center gap-6 mt-5" // Changed to single column flex layout
+        className="flex flex-col items-center text-center gap-6 mt-5" // Single column flex layout
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         <motion.div 
-          className="flex flex-col items-center text-center w-full" // Ensure it takes full width in its column
+          className="flex flex-col items-center text-center w-full" // Ensure it takes full width
           variants={itemVariants}
         >
           <motion.div
@@ -50,15 +50,15 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
             className="w-full h-auto rounded-xl shadow-lg border border-gray-300 dark:border-gray-600 mb-3 overflow-hidden"
           >
             <OptimizedImage 
-              src="/images/samyun-arm-original-whey-certificate-deferences.jpg"
-              alt="Samyun Wan Original vs Fake Differences" 
+              src="/images/samyun-arm-original-whey-certificate.jpg" // This is the certificate image
+              alt="Samyun Wan Original Certificate" 
               className="w-full h-auto object-cover"
               loading="eager"
               sizes="(max-width: 768px) 90vw, 400px"
             />
           </motion.div>
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
-            {t.authenticity.differencesDesc}
+            {t.authenticity.certificateDesc}
           </p>
         </motion.div>
 
