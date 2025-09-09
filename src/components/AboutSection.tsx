@@ -43,28 +43,50 @@ const AboutSection = () => {
           subtitle={t.about.subtitle}
         />
 
-        {/* New "Why Choose Us" section */}
-        <motion.div
-          className="mt-8 mb-12 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-3xl mx-auto text-center"
+        {/* New: Company Description */}
+        <motion.p
+          className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-8 text-center leading-relaxed"
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
           transition={{ delay: 0.2 }}
         >
+          {t.about.description}
+        </motion.p>
+
+        {/* New: Additional Content */}
+        <motion.p
+          className="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-12 text-center leading-relaxed"
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ delay: 0.3 }}
+        >
+          {t.about.content}
+        </motion.p>
+
+        {/* Existing "Why Choose Us" section */}
+        <motion.div
+          className="mt-8 mb-12 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-3xl mx-auto text-center"
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          transition={{ delay: 0.4 }}
+        >
           <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4">
             {t.about.whyChooseUsTitle}
           </h3>
           <ul className="list-disc list-inside text-left text-gray-700 dark:text-gray-300 space-y-2 text-base">
-            <motion.li variants={itemVariants} transition={{ delay: 0.3 }}>
+            <motion.li variants={itemVariants} transition={{ delay: 0.5 }}>
               {t.about.whyChooseUsOriginal}
             </motion.li>
-            <motion.li variants={itemVariants} transition={{ delay: 0.4 }}>
+            <motion.li variants={itemVariants} transition={{ delay: 0.6 }}>
               {t.about.whyChooseUsSafety}
             </motion.li>
-            <motion.li variants={itemVariants} transition={{ delay: 0.5 }}>
+            <motion.li variants={itemVariants} transition={{ delay: 0.7 }}>
               {t.about.whyChooseUsNoAdditives}
             </motion.li>
-            <motion.li variants={itemVariants} transition={{ delay: 0.6 }}>
+            <motion.li variants={itemVariants} transition={{ delay: 0.8 }}>
               {t.about.whyChooseUsTrust}
             </motion.li>
           </ul>
@@ -78,7 +100,7 @@ const AboutSection = () => {
               variants={itemVariants}
               initial="hidden"
               whileInView="visible"
-              transition={{ delay: index * 0.1 + 0.2 }}
+              transition={{ delay: index * 0.1 + 0.9 }}
               whileHover={{ 
                 scale: 1.05, 
                 y: -5, // Subtle lift
