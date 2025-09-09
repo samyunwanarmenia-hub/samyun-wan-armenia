@@ -79,7 +79,14 @@ const RootLayout = ({
   children: React.ReactNode;
 }) => {
   return (
-    <html lang="hy" className={`${inter.variable}`}> {/* Default lang to hy, will be updated by LayoutClientProvider */}
+    <html lang="hy" className={`${inter.variable}`}>
+      <head>
+        {/* Preconnect to important third-party origins */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://mc.yandex.ru" />
+        <link rel="preconnect" href="https://randomuser.me" />
+        <link rel="preconnect" href="https://images.unsplash.com" />
+      </head>
       <body>
         {children}
         <noscript>
