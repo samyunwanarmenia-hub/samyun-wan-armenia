@@ -26,9 +26,9 @@ body:active:after {
   position: absolute;
   width: 120vw;
   height: 100vh;
-  cursor: pointer;
   z-index: 0;
   left: -10vw;
+  pointer-events: none; /* Prevent rain background from intercepting clicks/touches */
 }
 .rain .left,
 .rain .right {
@@ -38,6 +38,8 @@ body:active:after {
   position: absolute;
   box-sizing: border-box;
   z-index: 2;
+  pointer-events: auto; /* Allow interaction with these specific areas */
+  cursor: pointer; /* Keep cursor pointer for these interactive areas */
 }
 .rain .left:hover ~ .drop {
   --angle: 105deg;
@@ -78,6 +80,8 @@ body:active:after {
 }
 .rain .right.center {
   right: 30vw;
+  pointer-events: auto; /* Allow interaction */
+  cursor: pointer;
 }
 .rain .right.center:after {
   display: none;
@@ -91,6 +95,8 @@ body:active:after {
 }
 .rain .left.center {
   left: 30vw;
+  pointer-events: auto; /* Allow interaction */
+  cursor: pointer;
 }
 .rain .left.center:hover ~ .drop {
   --angle: 95deg;
