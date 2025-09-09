@@ -96,6 +96,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
                 interactionEffect="burst"
                 gaEvent={{ category: 'Order', action: 'Click_Hero_OrderNow', label: mainProduct.labelKey }}
                 ymEvent={{ category: 'Order', action: 'Click_Hero_OrderNow', label: mainProduct.labelKey }}
+                className="animate-pulse-subtle" // Apply the new pulse animation here
               >
                 {t.hero.cta}
               </CallToActionButton>
