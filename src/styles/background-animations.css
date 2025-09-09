@@ -1,9 +1,20 @@
 /* =================== background-animations.css ==================== */
-/* Removed @keyframes BackgroundGradient */
+@keyframes BackgroundGradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 
 body {
-  /* Removed background and animation properties */
-  background: transparent; /* Ensure body background is transparent */
+  background: linear-gradient(135deg, #f7fcf7, #eef3f4, #f7fcf7); /* Light mode default */
+  background-size: 400% 400%;
+  animation: BackgroundGradient 15s ease infinite;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 500;
@@ -13,7 +24,9 @@ body {
 }
 
 .dark body {
-  background: transparent; /* Ensure body background is transparent */
+  background: linear-gradient(135deg, #0d1218, #18202b, #0d1218); /* Dark mode default */
+  background-size: 400% 400%;
+  animation: BackgroundGradient 15s ease infinite;
 }
 
 .background {
