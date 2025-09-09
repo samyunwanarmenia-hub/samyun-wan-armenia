@@ -6,8 +6,9 @@ const baseUrl = 'https://samyunwanarmenia.netlify.app'; // Replace with your act
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const languages = Object.keys(translations);
-  // Filter out 'home' and 'track-order' as they are handled by the root and language-specific roots/explicitly
-  const staticPages = navigationSections.map(section => section.id).filter(id => id !== 'home' && id !== 'track-order');
+  // Filter out 'home' as it's handled by the root and language-specific roots
+  // 'verify/qr' is a special page and will be added separately.
+  const mainNavPages = navigationSections.map(section => section.id).filter(id => id !== 'home');
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
   const lastModifiedDate = new Date().toISOString(); // Use dynamic date
@@ -28,7 +29,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   });
 
-  // 2. Add language-specific home pages and other static pages
+  // 2. Add language-specific home pages and all other main navigation pages
   languages.forEach(lang => {
     // Language-specific home page (e.g., /hy, /ru, /en)
     sitemapEntries.push({
@@ -46,8 +47,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       },
     });
 
-    // Other static pages for each language (e.g., /hy/about, /ru/benefits)
-    staticPages.forEach(page => {
+    // All other main navigation pages for each language (e.g., /hy/about, /ru/benefits, /hy/track-order)
+    mainNavPages.forEach(page => {
       const alternates: Record<string, string> = {};
       languages.forEach(altLang => {
         alternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${baseUrl}/${altLang}/${page}`;
@@ -59,14 +60,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: `${baseUrl}/${lang}/${page}`,
         lastModified: lastModifiedDate,
         changeFrequency: 'monthly',
-        priority: 0.8,
+        priority: 0.8, // Default priority for main navigation pages
         alternates: {
           languages: alternates,
         },
       });
     });
 
-    // Add the new /verify/qr page for each language
+    // Explicitly add the /verify/qr page for each language
     const qrVerifyAlternates: Record<string, string> = {};
     languages.forEach(altLang => {
       qrVerifyAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${baseUrl}/${altLang}/verify/qr`;
@@ -80,23 +81,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7, // Lower priority as it's a utility page
       alternates: {
         languages: qrVerifyAlternates,
-      },
-    });
-
-    // Add the new /track-order page for each language
-    const trackOrderAlternates: Record<string, string> = {};
-    languages.forEach(altLang => {
-      trackOrderAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${baseUrl}/${altLang}/track-order`;
-    });
-    trackOrderAlternates['x-default'] = `${baseUrl}/hy/track-order`; // x-default for track-order page points to default language track-order page
-
-    sitemapEntries.push({
-      url: `${baseUrl}/${lang}/track-order`,
-      lastModified: lastModifiedDate,
-      changeFrequency: 'weekly',
-      priority: 0.8, // Same priority as other main pages
-      alternates: {
-        languages: trackOrderAlternates,
       },
     });
   });
