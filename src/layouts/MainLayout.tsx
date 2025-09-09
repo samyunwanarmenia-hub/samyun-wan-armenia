@@ -102,6 +102,7 @@ const MainLayout = ({
             isOpen={authenticityModalOpen}
             onClose={closeAuthenticityModal}
             t={t}
+            currentLang={currentLang}
           />
         )}
         {callbackRequestModalOpen && (

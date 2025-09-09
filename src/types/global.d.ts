@@ -103,6 +103,7 @@ export interface TranslationKeys {
     follow: string;
     legalInfo: string; // New
     purchaseWarning: string; // New
+    howToDistinguishButton: string; // New: Button text for distinguishing original
     officialLinksIntro: string; // New
     officialLinksDisclaimer: string; // New
     productOriginal: string;
@@ -277,6 +278,7 @@ export interface AuthenticityInfoModalProps {
   isOpen: boolean;
   onClose: () => void;
   t: TranslationKeys;
+  currentLang: string; // Added currentLang
 }
 export interface AuthenticityInfoProps {}
 export interface AboutSectionProps {}

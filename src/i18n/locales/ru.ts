@@ -118,6 +118,7 @@ export const ru: TranslationKeys = {
     follow: 'Подпишитесь на нас',
     legalInfo: 'Юридическая информация / Предупреждение\nЭто не лекарство. Продукт не рекомендуется лицам младше 18 лет.',
     purchaseWarning: 'Мы рекомендуем приобретать продукт только из надежных источников для обеспечения безопасности вашего здоровья.',
+    howToDistinguishButton: 'Смотреть здесь', // Added missing translation
     officialLinksIntro: 'Официальные ссылки\nВсе наши настоящие и официальные страницы:',
     officialLinksDisclaimer: 'Внимание: другие страницы или мессенджеры нам не принадлежат. Только эти ссылки являются нашими официальными каналами связи.',
     productOriginal: 'Samyun Wan Оригинал',
@@ -177,8 +178,8 @@ export const ru: TranslationKeys = {
   productShowcase: {
     weightGainLabel: '+6 кг',
     weightLossLabel: '-10 кг',
-    weightLossDesc: 'Для набора веса',
-    weightGainDesc: 'Для снижения веса',
+    weightGainDesc: 'Для набора веса',
+    weightLossDesc: 'Для снижения веса',
     orderWeightGain: 'Заказать для набора веса',
     orderWeightLoss: 'Заказать для снижения веса',
   },

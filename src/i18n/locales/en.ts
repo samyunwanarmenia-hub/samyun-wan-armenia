@@ -118,6 +118,7 @@ export const en: TranslationKeys = {
     follow: 'Follow Us',
     legalInfo: 'Legal Information / Warning\nThis is not a medicine. The product is not recommended for persons under 18 years of age.',
     purchaseWarning: 'We recommend purchasing only from trusted sources to ensure your health and safety.',
+    howToDistinguishButton: 'See here', // Added missing translation
     officialLinksIntro: 'Official Links\nAll our real and official pages:',
     officialLinksDisclaimer: 'Attention: other pages or messengers do not belong to us. Only these links are our official communication channels.',
     productOriginal: 'Samyun Wan Original',
