@@ -101,7 +101,10 @@ export interface TranslationKeys {
     products: string;
     support: string;
     follow: string;
-    description: string;
+    legalInfo: string; // New
+    purchaseWarning: string; // New
+    officialLinksIntro: string; // New
+    officialLinksDisclaimer: string; // New
     productOriginal: string;
     productAuthenticity: string;
     productUsage: string;

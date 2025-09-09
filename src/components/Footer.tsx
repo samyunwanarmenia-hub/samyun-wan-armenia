@@ -24,17 +24,27 @@ const Footer = () => {
 
       <div className="container mx-auto relative z-10">
         <div className="grid md:grid-cols-3 gap-8 mb-12 max-w-7xl mx-auto">
-          {/* Column 1: Description and Social Media */}
+          {/* Column 1: Legal Info, Warning, and Social Media */}
           <div className="flex flex-col items-start justify-start p-4 md:p-6 rounded-xl bg-gray-900 dark:bg-gray-950 shadow-lg">
             <Link href={getHomePath()} className="flex items-center mb-4" aria-label={t.hero.title}>
               <h2 className="text-2xl md:text-3xl font-bold text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none">
                 {t.hero.title}
               </h2>
             </Link>
-            <p className="text-sm leading-relaxed mb-6">
-              {t.footer.description}
+            
+            <p className="text-sm leading-relaxed mb-4 whitespace-pre-line">
+              {t.footer.legalInfo}
             </p>
-            <div className="flex space-x-3">
+            <p className="text-sm leading-relaxed mb-4">
+              {t.footer.purchaseWarning}
+            </p>
+
+            <h3 className="font-bold text-lg mb-2 text-white">{t.footer.officialLinksIntro.split('\n')[0]}</h3>
+            <p className="text-sm leading-relaxed mb-4">
+              {t.footer.officialLinksIntro.split('\n')[1]}
+            </p>
+
+            <div className="flex space-x-3 mb-4">
               <motion.a
                 href="https://www.instagram.com/samyunwanarmenia"
                 target="_blank"
@@ -84,6 +94,9 @@ const Footer = () => {
                 <MessageCircle className="w-5 h-5" />
               </motion.a>
             </div>
+            <p className="text-xs leading-relaxed text-red-400 dark:text-red-300">
+              {t.footer.officialLinksDisclaimer}
+            </p>
           </div>
 
           {/* Column 2: About Links */}
