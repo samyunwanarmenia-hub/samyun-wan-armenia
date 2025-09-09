@@ -7,9 +7,5 @@
 @import '../styles/variables.css';
 @import '../styles/background-animations.css';
 @import '../styles/fab.css';
-@import '../styles/intro-animation.css';
-@import '../styles/intro-animations/animation01.css';
-@import '../styles/intro-animations/animation02.css';
-@import '../styles/intro-animations/animation03.css';
-@import '../styles/intro-animations/animation04.css';
+/* Removed intro-animation.css and its sub-animations, they are now imported directly in IntroAnimation.tsx */
 @import '../styles/components.css';

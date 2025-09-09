@@ -3,6 +3,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+// Import intro animation specific CSS files here
+import '@/styles/intro-animation.css';
+import '@/styles/intro-animations/animation01.css';
+import '@/styles/intro-animations/animation02.css';
+import '@/styles/intro-animations/animation03.css';
+import '@/styles/intro-animations/animation04.css';
+
 const IntroAnimation: React.FC = () => {
   return (
     <motion.div
