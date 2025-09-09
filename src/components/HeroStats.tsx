@@ -24,10 +24,10 @@ const HeroStats: React.FC<HeroStatsProps> = ({ t, stats, startDelay = 0 }) => { 
           animate="visible" // Directly animate on mount
           transition={{ delay: startDelay + index * 0.1 + 0.2 }} // Add startDelay to existing delay
         >
-          <div className="text-xl lg:text-2xl font-bold text-gray-900 dark:text-gray-50 mb-0.5">
+          <div className="text-xl lg:text-2xl font-bold text-gray-50 dark:text-gray-50"> {/* Changed text-gray-900 to text-gray-50 */}
             {stat.number}
           </div>
-          <div className="text-xs text-gray-700 dark:text-gray-300">{t.stats[stat.key]}</div>
+          <div className="text-xs text-gray-300 dark:text-gray-300">{t.stats[stat.key]}</div> {/* Changed text-gray-700 to text-gray-300 */}
         </motion.div>
       ))}
     </div>

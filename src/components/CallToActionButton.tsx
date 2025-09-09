@@ -86,7 +86,7 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
     primary: "bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:shadow-glow-green", // Ensure this uses glow-green
     secondary: "bg-gray-200 dark:bg-gray-700 text-brandRed-600 dark:text-brandRed-400 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-xl",
     outline: "border-2 border-brandRed-600 text-brandRed-600 hover:bg-brandRed-600 hover:text-white dark:border-brandRed-400 dark:text-brandRed-400 dark:hover:bg-brandRed-600 dark:hover:text-white",
-    ghost: "border-2 border-primary-600 dark:border-primary-400 text-primary-600 dark:text-primary-400 hover:bg-primary-100 dark:hover:bg-primary-800 hover:text-primary-700 dark:hover:text-primary-200",
+    ghost: "border-2 border-primary-600 dark:border-primary-400 text-primary-200 dark:text-primary-400 hover:bg-primary-100 dark:hover:bg-primary-800 hover:text-primary-700 dark:hover:text-primary-200", /* Changed text-primary-600 to text-primary-200 */
     subtle: "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-50 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-sm border border-gray-300 dark:border-gray-600",
   };
 

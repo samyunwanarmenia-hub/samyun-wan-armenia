@@ -48,7 +48,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             
             {/* Main Title (Samyun Wan Armenia) and Tagline */}
             <h1 
-              className="text-4xl lg:text-6xl font-bold mb-3 leading-tight text-gray-900 dark:text-gray-50"
+              className="text-4xl lg:text-6xl font-bold mb-3 leading-tight text-gray-50 dark:text-gray-50" /* Changed text-gray-900 to text-gray-50 */
             >
               <SplitTextAnimation 
                 text="Samyun Wan Armenia" 
@@ -58,7 +58,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               />
               {/* Tagline moved here */}
               <motion.p 
-                className="text-xs sm:text-sm lg:text-lg font-bold uppercase tracking-[2px] sm:tracking-[3px] lg:tracking-[5px] text-slogan-shine mt-1.5 mb-4 leading-relaxed relative overflow-hidden inline-block whitespace-nowrap"
+                className="block text-xs sm:text-sm lg:text-lg font-bold uppercase tracking-[2px] sm:tracking-[3px] lg:tracking-[5px] text-slogan-shine mt-1.5 mb-4 leading-relaxed relative overflow-hidden whitespace-nowrap" /* Removed inline-block */
                 variants={fadeInUpVariants}
                 initial="hidden"
                 animate="visible"
@@ -70,7 +70,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             
             {/* Subtitle moved here */}
             <motion.p 
-              className="block text-2xl lg:text-3xl font-bold mb-5 text-gray-900 dark:text-gradient dark:bg-gradient-to-r dark:from-primary-400 dark:to-secondary-400"
+              className="block text-2xl lg:text-3xl font-bold mb-5 text-gray-50 dark:text-gradient dark:bg-gradient-to-r dark:from-primary-400 dark:to-secondary-400" /* Changed text-gray-900 to text-gray-50 */
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"

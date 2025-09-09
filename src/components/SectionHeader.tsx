@@ -42,14 +42,14 @@ const SectionHeader: React.FC<SectionHeaderProps> = ({
       viewport={{ once: true, amount: 0.3 }}
     >
       <motion.h2 
-        className={`text-3xl lg:text-4xl font-bold text-gray-900 dark:text-gray-50 mb-5 ${titleClassName || ''}`}
+        className={`text-3xl lg:text-4xl font-bold text-gray-50 dark:text-gray-50 mb-5 ${titleClassName || ''}`} /* Changed text-gray-900 to text-gray-50 */
         variants={itemVariants}
       >
         {title}
       </motion.h2>
       {subtitle && (
         <motion.p 
-          className={`text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto ${subtitleClassName || ''}`}
+          className={`text-lg text-gray-300 dark:text-gray-300 max-w-3xl mx-auto ${subtitleClassName || ''}`} /* Changed text-gray-700 to text-gray-300 */
           variants={itemVariants}
         >
           {subtitle}

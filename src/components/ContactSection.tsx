@@ -62,8 +62,8 @@ const ContactSection = () => {
               >
                 <item.icon className="w-5 h-5 text-white" />
               </motion.div>
-              <h3 className="text-gray-900 dark:text-gray-50 text-lg font-bold">{t.contact[item.titleKey]}</h3>
-              <p className="text-gray-700 dark:text-gray-300 text-base" dangerouslySetInnerHTML={{ __html: item.key === 'phone' ? t.contact.phoneNumbers.description : item.details }} />
+              <h3 className="text-gray-50 dark:text-gray-50 text-lg font-bold">{t.contact[item.titleKey]}</h3> {/* Changed text-gray-900 to text-gray-50 */}
+              <p className="text-gray-300 dark:text-gray-300 text-base" dangerouslySetInnerHTML={{ __html: item.key === 'phone' ? t.contact.phoneNumbers.description : item.details }} /> {/* Changed text-gray-700 to text-gray-300 */}
             </motion.div>
           ))}
         </div>

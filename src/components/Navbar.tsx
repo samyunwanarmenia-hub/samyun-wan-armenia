@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
             <Link href={getHomePath()} className="flex items-center">
-              <span className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-50 whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Adjusted text size and added ellipsis for small screens */}
+              <span className="text-base sm:text-lg font-bold text-gray-50 dark:text-gray-50 whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Changed text-gray-900 to text-gray-50 */}
                 {t.hero.title}
               </span>
             </Link>
@@ -55,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = () => {
               >
                 <Link
                   href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
-                  className={`${getLinkClasses(section.id)} text-base`}
+                  className={`${getLinkClasses(section.id)} text-base text-gray-300 dark:text-gray-300`} /* Added text-gray-300 */
                 >
                   {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                 </Link>

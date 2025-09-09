@@ -83,8 +83,8 @@ const AuthenticityInfo = () => {
             >
               <QRCodeCanvas value={qrCodeValue} size={128} level="H" />
             </motion.div>
-            <p className="text-gray-700 dark:text-gray-300 font-semibold text-base">{t.hero.qrVerificationTitle}</p>
-            {t.hero.qrVerificationSubtitle && <p className="text-xs text-gray-500 dark:text-gray-400">{t.hero.qrVerificationSubtitle}</p>}
+            <p className="text-gray-300 dark:text-gray-300 font-semibold text-base">{t.hero.qrVerificationTitle}</p> {/* Changed text-gray-700 to text-gray-300 */}
+            {t.hero.qrVerificationSubtitle && <p className="text-xs text-gray-400 dark:text-gray-400">{t.hero.qrVerificationSubtitle}</p>} {/* Changed text-gray-500 to text-gray-400 */}
           </Link>
 
           {hasHowToDistinguishText && (
@@ -100,7 +100,7 @@ const AuthenticityInfo = () => {
 
           {hasPurchaseWarning && (
             <motion.p
-              className="text-gray-700 dark:text-gray-300 text-sm mt-6 mb-3 leading-relaxed"
+              className="text-gray-300 dark:text-gray-300 text-sm mt-6 mb-3 leading-relaxed" /* Changed text-gray-700 to text-gray-300 */
               variants={itemVariants}
               initial="hidden"
               animate="visible"

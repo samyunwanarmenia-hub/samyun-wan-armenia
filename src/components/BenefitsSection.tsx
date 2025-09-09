@@ -62,9 +62,9 @@ const BenefitsSection = () => {
                   >
                     <benefit.icon className="w-5 h-5 text-white" />
                   </motion.div>
-                  <h3 className="text-gray-900 dark:text-gray-50 text-xl font-bold">{t.benefits[benefit.key].title}</h3>
+                  <h3 className="text-gray-50 dark:text-gray-50 text-xl font-bold">{t.benefits[benefit.key].title}</h3> {/* Changed text-gray-900 to text-gray-50 */}
                 </div>
-                <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">{t.benefits[benefit.key].desc}</p>
+                <p className="text-gray-300 dark:text-gray-300 text-base leading-relaxed">{t.benefits[benefit.key].desc}</p> {/* Changed text-gray-700 to text-gray-300 */}
               </div>
             </motion.div>
           ))}
