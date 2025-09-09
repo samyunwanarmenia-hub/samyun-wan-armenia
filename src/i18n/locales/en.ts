@@ -117,8 +117,6 @@ export const en: TranslationKeys = {
     products: 'Products',
     support: 'Support',
     follow: 'Follow Us',
-    legalInfo: 'Legal Information / Warning\nThis is not a medicine. The product is not recommended for persons under 18 years of age.',
-    purchaseWarning: 'We recommend purchasing only from trusted sources to ensure your health and safety.',
     legalAndWarning: `Legal Information / Warning<br/>This is not a medicine. <span class="text-red-400 dark:text-red-300">The product is not recommended for persons under 14 years of age.</span><br/><br/>For your health and safety, WE STRONGLY ADVISE <br/><span class="text-red-400 dark:text-red-300">TO REFRAIN from purchasing or using products of unknown origin, allegedly certified:</span><br/><br/>Here are a few signs of how to distinguish a fake product.`,
     howToDistinguishButton: 'See here',
     officialLinksIntro: 'Official Links\nAll our real and official pages:',
