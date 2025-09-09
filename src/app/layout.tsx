@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import { viewport } from './viewport'; // Import the viewport object
 
 import '../app/globals.css';
 
@@ -72,6 +73,8 @@ export const metadata: Metadata = {
   // Explicitly add theme-color meta tag
   themeColor: '#86b486', // Using primary-500 for theme color
   // Removed 'other' property as preconnect links are now directly in the component
+  // Use the imported viewport object
+  viewport: viewport,
 };
 
 const RootLayout = ({
