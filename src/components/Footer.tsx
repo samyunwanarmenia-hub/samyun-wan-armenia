@@ -32,13 +32,16 @@ const Footer = () => {
               </h2>
             </Link>
             
-            <p className="text-sm leading-relaxed mb-4 whitespace-pre-line">
-              {t.footer.legalInfo}
+            {/* Legal Info / Warning Section */}
+            <h3 className="font-bold text-lg mb-2 text-white">{t.footer.legalInfo.split('\n')[0]}</h3>
+            <p className="text-sm leading-relaxed mb-2 whitespace-pre-line">
+              {t.footer.legalInfo.split('\n').slice(1).join('\n')}
             </p>
             <p className="text-sm leading-relaxed mb-4">
               {t.footer.purchaseWarning}
             </p>
 
+            {/* Official Links Section */}
             <h3 className="font-bold text-lg mb-2 text-white">{t.footer.officialLinksIntro.split('\n')[0]}</h3>
             <p className="text-sm leading-relaxed mb-4">
               {t.footer.officialLinksIntro.split('\n')[1]}
