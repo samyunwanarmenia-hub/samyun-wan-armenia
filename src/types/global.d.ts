@@ -56,6 +56,20 @@ export interface TranslationKeys {
     proven: { title: string; desc: string; };
     safe: { title: string; desc: string; };
     fast: { title: string; desc: string; };
+    // New translations for authenticity and warning sections
+    mainAuthenticityHeader: string;
+    whyChooseUs: {
+      title: string;
+      originalProduct: string;
+      safety: string;
+      noFakeAdditives: string;
+      customerTrust: string;
+    };
+    warningSection: {
+      mainText: string;
+      attention: string;
+      ageRestriction: string;
+    };
   };
   benefits: {
     title: string;

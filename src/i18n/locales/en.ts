@@ -52,7 +52,20 @@ export const en: TranslationKeys = {
     fast: {
       title: 'Fast Results',
       desc: 'First results within 1-2 weeks'
-    }
+    },
+    mainAuthenticityHeader: 'The only place in Armenia where you can confidently buy original Samyun Wan, with a QR code on each package and a guarantee of genuine product. Do not risk your health with fake products.',
+    whyChooseUs: {
+      title: 'Why Choose Us',
+      originalProduct: 'Original Product – We have been the official representative of Samyun Wan in Armenia for 6 years.',
+      safety: 'Safety – Each package has a QR code that allows you to verify authenticity.',
+      noFakeAdditives: 'No Fake Additives – Only original products, never drugs or harmful substances.',
+      customerTrust: 'Customer Trust – Our customers receive safe and genuine products.',
+    },
+    warningSection: {
+      mainText: 'We recommend buying only from trusted sellers. Join those who choose real and 100% original Samyun Wan with a QR code and safety.',
+      attention: 'ATTENTION',
+      ageRestriction: 'The product is not a medicine and is not intended for persons under 18 years of age',
+    },
   },
   benefits: {
     title: 'Benefits of Samyun Wan',
