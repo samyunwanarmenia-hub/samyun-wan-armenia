@@ -26,7 +26,7 @@ export const hy: TranslationKeys = {
     qrVerificationSubtitle: 'Սկանավորեք՝ ստուգելու համար',
     seo_title_addon: 'Samyun Wan ինչ է սա և նրա իրական ազդեցությունը | Սպորտային Սնունդ',
     qrBlockTitle: 'Ստուգեք իսկությունը', // New translation
-    qrBlockDescription: 'Սկանավորեք QR կոդը՝ համոզվելու համար, որ ունեք օրիգինալ Samyun Wan արտադրանք։', // New translation
+    qrBlockDescription: '', // Removed text as requested
   },
   stats: {
     customers: 'Գոհ հաճախորդներ',
