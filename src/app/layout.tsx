@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import { viewport } from './viewport'; // Import the viewport object
+// The viewport object is imported but its content is now handled by generateViewport
+// import { viewport } from './viewport'; // No longer needed to import directly here
 
 import '../app/globals.css';
 
@@ -70,11 +71,9 @@ export const metadata: Metadata = {
   icons: {
     apple: '/favicon.png', // Using favicon.png as apple-touch-icon
   },
-  // Explicitly add theme-color meta tag
-  themeColor: '#86b486', // Using primary-500 for theme color
-  // Removed 'other' property as preconnect links are now directly in the component
-  // Use the imported viewport object
-  viewport: viewport,
+  // themeColor and viewport are now handled by generateViewport in src/app/viewport.ts
+  // themeColor: '#86b486', 
+  // viewport: viewport,
 };
 
 const RootLayout = ({
