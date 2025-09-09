@@ -5,7 +5,7 @@
 /* Import modular CSS files */
 @import '../styles/base.css';
 @import '../styles/variables.css';
-@import '../styles/background-animations.css';
+/* Removed @import '../styles/background-animations.css'; */
 @import '../styles/fab.css';
 /* Removed @import '../styles/rain.css'; */
 /* Intro animation base styles and sub-animations are now imported directly in IntroAnimation.tsx */

@@ -38,9 +38,6 @@
   --intro-circle-border-brownish-green: theme('colors.primary.700');
   --intro-circle-bg: theme('colors.white'); /* White circle background */
   --intro-strip-dark-gray: theme('colors.gray.800');
-
-  /* New: CSS Custom Property for rain animation */
-  --angle: 91deg;
 }
 
 .dark {
@@ -80,11 +77,4 @@
   --intro-circle-border-brownish-green: theme('colors.primary.700');
   --intro-circle-bg: #1a1a1a;
   --intro-strip-dark-gray: theme('colors.gray.100');
-}
-
-/* Define the custom property for animation */
-@property --angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 91deg;
 }
