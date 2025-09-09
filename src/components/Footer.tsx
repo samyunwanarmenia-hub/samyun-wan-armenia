@@ -9,6 +9,7 @@ import useNavigationUtils from '@/hooks/useNavigationUtils';
 import { navigationSections } from '@/data/navigationSections';
 import CallToActionButton from './CallToActionButton'; // Import CallToActionButton
 import AnimatedArrow from './AnimatedArrow'; // Import AnimatedArrow
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 const Footer = () => {
   const { t, currentLang, openAuthenticityModal } = useLayoutContext();
@@ -64,54 +65,62 @@ const Footer = () => {
             </p>
 
             <div className="flex space-x-3 mb-4">
-              <motion.a
+              <InteractiveDiv
+                as="a"
                 href="https://www.instagram.com/samyunwanarmenia"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 bg-gray-700 border border-gray-600 rounded-md flex items-center justify-center text-white"
-                whileHover={{ scale: 1.2, backgroundColor: '#E1306C' }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 aria-label="Follow us on Instagram"
+                whileHoverScale={1.2}
+                hoverShadow="none"
+                hoverY={0}
+                style={{ backgroundColor: '#E1306C' }} // Apply specific color directly
               >
                 <Instagram className="w-6 h-6" />
-              </motion.a>
-              <motion.a
+              </InteractiveDiv>
+              <InteractiveDiv
+                as="a"
                 href="https://www.facebook.com/samyunwanarmenia"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 bg-gray-700 border border-gray-600 rounded-md flex items-center justify-center text-white"
-                whileHover={{ scale: 1.2, backgroundColor: '#1877F2' }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 aria-label="Follow us on Facebook"
+                whileHoverScale={1.2}
+                hoverShadow="none"
+                hoverY={0}
+                style={{ backgroundColor: '#1877F2' }} // Apply specific color directly
               >
                 <Facebook className="w-6 h-6" />
-              </motion.a>
-              <motion.a
+              </InteractiveDiv>
+              <InteractiveDiv
+                as="a"
                 href="https://t.me/samyunwanarmenia"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 bg-gray-700 border border-gray-600 rounded-md flex items-center justify-center text-white"
-                whileHover={{ scale: 1.2, backgroundColor: '#0088CC' }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 aria-label="Join us on Telegram"
+                whileHoverScale={1.2}
+                hoverShadow="none"
+                hoverY={0}
+                style={{ backgroundColor: '#0088CC' }} // Apply specific color directly
               >
                 <Send className="w-6 h-6" />
-              </motion.a>
-              <motion.a
+              </InteractiveDiv>
+              <InteractiveDiv
+                as="a"
                 href="https://wa.me/37496653666"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-9 h-9 bg-gray-700 border border-gray-600 rounded-md flex items-center justify-center text-white"
-                whileHover={{ scale: 1.2, backgroundColor: '#25D366' }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 aria-label="Chat with us on WhatsApp"
+                whileHoverScale={1.2}
+                hoverShadow="none"
+                hoverY={0}
+                style={{ backgroundColor: '#25D366' }} // Apply specific color directly
               >
                 <MessageCircle className="w-6 h-6" />
-              </motion.a>
+              </InteractiveDiv>
             </div>
             <p className="text-xs leading-relaxed text-red-400 dark:text-red-300">
               {t.footer.officialLinksDisclaimer}
@@ -124,15 +133,16 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               {aboutLinks.map((section) => (
                 <li key={section.id}>
-                  <motion.div
-                    whileHover={{ scale: 1.05, color: '#86b486' }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  <InteractiveDiv
+                    whileHoverScale={1.05}
+                    hoverY={0}
+                    hoverShadow="none"
+                    className="inline-block" // Ensure div doesn't take full width
                   >
                     <Link href={getSectionPath(section.id)} className="hover:text-primary-500 transition-colors" aria-label={t.nav[section.labelKey as keyof TranslationKeys['nav']]}>
                       {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                     </Link>
-                  </motion.div>
+                  </InteractiveDiv>
                 </li>
               ))}
             </ul>
@@ -144,39 +154,41 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               {productLinks.map((section) => (
                 <li key={section.id}>
-                  <motion.div
-                    whileHover={{ scale: 1.05, color: '#86b486' }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  <InteractiveDiv
+                    whileHoverScale={1.05}
+                    hoverY={0}
+                    hoverShadow="none"
+                    className="inline-block"
                   >
                     <Link href={getSectionPath(section.id)} className="hover:text-primary-500 transition-colors" aria-label={t.nav[section.labelKey as keyof TranslationKeys['nav']]}>
                       {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                     </Link>
-                  </motion.div>
+                  </InteractiveDiv>
                 </li>
               ))}
               <li>
-                <motion.button
+                <InteractiveDiv
+                  as="button"
                   onClick={openAuthenticityModal}
                   className="hover:text-primary-500 transition-colors text-sm text-left"
-                  whileHover={{ scale: 1.05, color: '#86b486' }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  aria-label={t.footer.productAuthenticity}
+                  whileHoverScale={1.05}
+                  hoverY={0}
+                  hoverShadow="none"
                 >
                   {t.footer.productAuthenticity}
-                </motion.button>
+                </InteractiveDiv>
               </li>
               <li>
-                <motion.div
-                  whileHover={{ scale: 1.05, color: '#86b486' }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                <InteractiveDiv
+                  whileHoverScale={1.05}
+                  hoverY={0}
+                  hoverShadow="none"
+                  className="inline-block"
                 >
                   <Link href="#" className="hover:text-primary-500 transition-colors" aria-label={t.footer.productUsage}>
                     {t.footer.productUsage}
                   </Link>
-                </motion.div>
+                </InteractiveDiv>
               </li>
             </ul>
           </div>

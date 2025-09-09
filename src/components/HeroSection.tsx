@@ -48,21 +48,21 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             
             {/* Main Title (Samyun Wan Armenia) and Tagline */}
             <h1 
-              className="text-4xl lg:text-6xl font-bold mb-3 leading-tight text-gray-900 dark:text-gray-50"
+              className="text-4xl lg:text-6xl font-bold mb-3 leading-tight text-gray-800 dark:text-gray-50"
             >
               <SplitTextAnimation 
                 text="Samyun Wan Armenia" 
-                delay={introEndDelay + 0.3} // Adjusted delay to start right after intro
+                delay={introEndDelay + 0.5} // Увеличена задержка
                 duration={1.2}
                 className="mb-1.5 lg:justify-start" 
               />
               {/* Tagline moved here */}
               <motion.p 
-                className="text-xs sm:text-sm lg:text-lg font-bold uppercase tracking-[2px] sm:tracking-[3px] lg:tracking-[5px] text-slogan-shine mt-1.5 mb-4 leading-relaxed relative overflow-hidden inline-block whitespace-nowrap"
+                className="block text-xs sm:text-sm lg:text-lg font-bold uppercase tracking-[2px] sm:tracking-[3px] lg:tracking-[5px] text-slogan-shine mt-1.5 mb-4 leading-relaxed relative overflow-hidden whitespace-nowrap"
                 variants={fadeInUpVariants}
                 initial="hidden"
                 animate="visible"
-                transition={{ delay: introEndDelay + 1.5 }} // Adjusted delay
+                transition={{ delay: introEndDelay + 1.5 }} // Увеличена задержка
               >
                 {t.hero.tagline}
               </motion.p>
@@ -70,11 +70,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             
             {/* Subtitle moved here */}
             <motion.p 
-              className="block text-2xl lg:text-3xl font-bold mb-5 text-gray-900 dark:text-gradient dark:bg-gradient-to-r dark:from-primary-400 dark:to-secondary-400"
+              className="block text-2xl lg:text-3xl font-bold mb-5 text-gray-600 dark:text-gradient-primary" // Применение нового класса
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
-              transition={{ delay: introEndDelay + 1.9 }} // Adjusted delay
+              transition={{ delay: introEndDelay + 1.0 }} // Увеличена задержка
             >
               {t.hero.subtitle}
             </motion.p>
@@ -85,7 +85,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
-              transition={{ delay: introEndDelay + 2.2 }} // Adjusted delay
+              transition={{ delay: introEndDelay + 2.0 }} // Увеличена задержка
             >
               <CallToActionButton 
                 onClick={() => openOrderModal(mainProduct.labelKey)}
@@ -115,12 +115,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             </motion.div>
 
             {/* HeroStats */}
-            <HeroStats t={t} stats={stats} startDelay={introEndDelay + 2.7} /> {/* Adjusted startDelay */}
+            <HeroStats t={t} stats={stats} startDelay={introEndDelay + 2.5} /> {/* Увеличена задержка */}
           </div>
 
           {/* Right Column: QR Code Block */}
           <div className="flex justify-center lg:justify-end items-center mt-10 lg:mt-0"> {/* Align right on large screens */}
-            <HeroQrCodeBlock delay={introEndDelay + 3.1} /> {/* Adjusted delay */}
+            <HeroQrCodeBlock delay={introEndDelay + 3.0} /> {/* Увеличена задержка */}
           </div>
         </div>
       </div>

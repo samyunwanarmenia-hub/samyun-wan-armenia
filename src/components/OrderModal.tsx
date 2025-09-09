@@ -6,6 +6,7 @@ import CallToActionButton from './CallToActionButton';
 import ModalWrapper from './ModalWrapper';
 import { motion } from 'framer-motion';
 import { useOrderForm } from '@/hooks/useOrderForm'; // Import the new hook
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -69,7 +70,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
           {productShowcaseData.map((product) => {
             const isSelected = selectedProducts.includes(product.labelKey);
             return (
-              <motion.div
+              <InteractiveDiv
                 key={product.labelKey}
                 className={`relative p-1.5 rounded-xl cursor-pointer transition-all duration-200 ${
                   isSelected
@@ -77,11 +78,10 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
                     : 'border-2 border-gray-300 dark:border-gray-600'
                 }`}
                 onClick={() => handleProductSelect(product.labelKey)}
-                initial={false} // Disable initial animation for consistent hover/tap
-                animate={{ scale: isSelected ? 1.05 : 1 }} // Scale up when selected
-                whileHover={{ scale: isSelected ? 1.08 : 1.05 }} // Further scale on hover if selected, or normal hover if not
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                whileHoverScale={isSelected ? 1.08 : 1.05} // Further scale on hover if selected, or normal hover if not
+                whileTapScale={0.95}
+                hoverY={0}
+                hoverShadow="none"
               >
                 <OptimizedImage
                   src={product.src}
@@ -92,7 +92,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
                 <p className="text-xs text-gray-900 dark:text-gray-50 mt-1.5 text-center font-medium">
                   {t.productShowcase[product.labelKey]}
                 </p>
-              </motion.div>
+              </InteractiveDiv>
             );
           })}
         </motion.div>

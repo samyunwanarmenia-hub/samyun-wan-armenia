@@ -30,7 +30,7 @@ interface MainLayoutProps {
 // Dynamically import client-only components with ssr: false
 const DynamicNavbar = dynamic(() => import('@/components/Navbar'), { ssr: false });
 const DynamicFooter = dynamic(() => import('@/components/Footer'), { ssr: false });
-const DynamicMovingBallsBackground = dynamic(() => import('@/components/MovingBallsBackground'), { ssr: false }); // Lazy load MovingBallsBackground
+// Removed DynamicSvgGradientBackground import
 const DynamicScrollToTopButton = dynamic(() => import('@/components/ScrollToTopButton'), { ssr: false }); // Lazy load ScrollToTopButton
 
 // Dynamically import modals with ssr: false
@@ -69,7 +69,7 @@ const MainLayout = ({
 
   return (
     <> {/* Use React.Fragment instead of a div */}
-      <DynamicMovingBallsBackground /> {/* Use lazy-loaded component */}
+      {/* Removed DynamicSvgGradientBackground */}
       
       <DynamicNavbar />
       

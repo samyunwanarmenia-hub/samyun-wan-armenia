@@ -6,6 +6,7 @@ import { ChevronDown } from 'lucide-react';
 import { FaqQuestionKey, FaqAnswerKey } from '../types/global';
 import SectionHeader from './SectionHeader';
 import { useLayoutContext } from '@/context/LayoutContext';
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 const FaqSection = () => {
   const { t } = useLayoutContext();
@@ -54,19 +55,16 @@ const FaqSection = () => {
 
         <div className="space-y-3">
           {questions.map((q, index) => (
-            <motion.div
+            <InteractiveDiv
               key={q.key}
               className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
               variants={itemVariants}
               initial="hidden"
               whileInView="visible"
               transition={{ delay: index * 0.1 + 0.2, type: "spring", stiffness: 400, damping: 17 }}
-              whileHover={{ 
-                scale: 1.02, 
-                y: -2, // Subtle lift
-                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.04)" // Enhanced shadow
-              }}
-              whileTap={{ scale: 0.98 }}
+              whileHoverScale={1.02}
+              hoverY={-2} // Subtle lift
+              hoverShadow="0 10px 20px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.04)" // Enhanced shadow
             >
               <motion.button
                 className="flex justify-between items-center w-full p-5 text-left text-lg font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
@@ -96,7 +94,7 @@ const FaqSection = () => {
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </InteractiveDiv>
           ))}
         </div>
       </div>

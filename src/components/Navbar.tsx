@@ -9,11 +9,14 @@ import Link from 'next/link';
 import useNavigationUtils from '@/hooks/useNavigationUtils';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useLayoutContext } from '@/context/LayoutContext';
-import { navigationSections } from '@/data/navigationSections'; // Import centralized data
+import { navigationSections } from '@/data/navigationSections';
+import { useTheme } from '@/context/ThemeContext'; // Import useTheme
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 const Navbar: React.FC<NavbarProps> = () => {
   const [scrolled, setScrolled] = useState(false);
   const { t, currentLang, getLinkClasses } = useLayoutContext();
+  const { theme } = useTheme(); // Get current theme
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);
 
   useEffect(() => {
@@ -32,13 +35,18 @@ const Navbar: React.FC<NavbarProps> = () => {
     };
   }, []);
 
+  // Determine text color based on scroll and theme
+  const textColorClass = scrolled 
+    ? 'text-gray-800 dark:text-gray-50' // Darker text on scrolled background
+    : 'text-gray-700 dark:text-gray-300'; // Lighter text on transparent background
+
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 shadow-lg dark:bg-gray-800/95 dark:shadow-xl py-2' : 'bg-white/85 dark:bg-gray-900/85 py-4'}`}>
+    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-gray-50/95 shadow-lg dark:bg-gray-800/95 dark:shadow-xl py-2' : 'bg-transparent py-4'}`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
             <Link href={getHomePath()} className="flex items-center">
-              <span className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-50 whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Adjusted text size and added ellipsis for small screens */}
+              <span className={`text-base sm:text-lg font-bold whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none ${textColorClass}`}>
                 {t.hero.title}
               </span>
             </Link>
@@ -47,19 +55,20 @@ const Navbar: React.FC<NavbarProps> = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
             {navigationSections.map((section) => (
-              <motion.div
+              <InteractiveDiv
                 key={section.id}
-                whileHover={{ scale: 1.1 }} // Removed hardcoded color, now relies on getLinkClasses
-                whileTap={{ scale: 0.95 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                whileHoverScale={1.1}
+                whileTapScale={0.95}
+                hoverY={0}
+                hoverShadow="none"
               >
                 <Link
                   href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
-                  className={`${getLinkClasses(section.id)} text-base`}
+                  className={`${getLinkClasses(section.id)} text-base ${textColorClass}`}
                 >
                   {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                 </Link>
-              </motion.div>
+              </InteractiveDiv>
             ))}
           </div>
 
@@ -70,7 +79,7 @@ const Navbar: React.FC<NavbarProps> = () => {
           </div>
 
           {/* Mobile Navigation (Hamburger Menu) */}
-          <MobileNav />
+          <MobileNav scrolled={scrolled} /> {/* Pass scrolled state to MobileNav */}
         </div>
       </div>
     </nav>

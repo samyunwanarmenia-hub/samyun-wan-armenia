@@ -6,6 +6,7 @@ import { QRCodeCanvas } from 'qrcode.react';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { ShieldCheck } from 'lucide-react'; // Using ShieldCheck icon for authenticity
 import Link from 'next/link'; // Import Link for internal navigation
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 interface HeroQrCodeBlockProps {
   delay?: number;
@@ -33,17 +34,13 @@ const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
   };
 
   return (
-    <motion.div
+    <InteractiveDiv
       className="mt-8 p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-xs sm:max-w-sm lg:max-w-md mx-auto text-center"
       variants={blockVariants}
       initial="hidden"
       animate="visible"
-      whileHover={{ 
-        scale: 1.05, 
-        y: -5, // Subtle lift
-        boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
-      }}
-      whileTap={{ scale: 0.98 }}
+      hoverY={-5} // Subtle lift
+      hoverShadow="0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
     >
       <div className="flex items-center justify-center mb-3">
         <ShieldCheck className="w-6 h-6 text-primary-600 dark:text-primary-400 mr-2" />
@@ -68,7 +65,7 @@ const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
           {t.hero.qrBlockDescription}
         </p>
       </Link>
-    </motion.div>
+    </InteractiveDiv>
   );
 };
 

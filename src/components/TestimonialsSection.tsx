@@ -6,7 +6,7 @@ import { Testimonial } from '../types/global';
 import SectionHeader from './SectionHeader';
 import { useLayoutContext } from '@/context/LayoutContext';
 import OptimizedImage from './OptimizedImage';
-// Removed generateReviewStructuredData import as it's no longer needed here
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 interface TestimonialsSectionProps {
   testimonials: Testimonial[];
@@ -20,11 +20,6 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
   // Combine userTestimonial with existing testimonials, placing userTestimonial first if it exists
   const combinedTestimonials = userTestimonial ? [userTestimonial, ...testimonials] : testimonials;
   const displayedTestimonials = combinedTestimonials.slice(0, 6);
-
-  // Removed reviewStructuredData generation as it's handled by the layout
-  // const reviewStructuredData = displayedTestimonials.map((testimonial: Testimonial) => 
-  //   generateReviewStructuredData(t, testimonial, currentLang)
-  // );
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -46,7 +41,6 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
 
   return (
     <>
-      {/* Removed script tag for structured data as it's handled by the layout */}
       <motion.section 
         id="testimonials" 
         className="relative py-12 overflow-hidden"
@@ -63,16 +57,13 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
             {displayedTestimonials.map((testimonial: Testimonial) => (
-              <motion.div 
+              <InteractiveDiv 
                 key={testimonial.id}
                 className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-700 group flex flex-col"
                 variants={itemVariants}
-                whileHover={{ 
-                  scale: 1.05, 
-                  y: -5, // Subtle lift
-                  boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
-                }}
-                whileTap={{ scale: 0.98 }}
+                whileHoverScale={1.05}
+                hoverY={-5} // Subtle lift
+                hoverShadow="0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
               >
                 <div className="flex items-center mb-3">
                   <OptimizedImage
@@ -98,7 +89,7 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
                 <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed flex-grow">
                   {currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.textEn}
                 </p>
-              </motion.div>
+              </InteractiveDiv>
             ))}
           </div>
         </div>

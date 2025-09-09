@@ -6,6 +6,7 @@ import { contactInfoData } from '../data/contactInfo';
 import CallToActionButton from './CallToActionButton';
 import SectionHeader from './SectionHeader';
 import { useLayoutContext } from '@/context/LayoutContext';
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 const ContactSection = () => {
   const { t, openContactModal } = useLayoutContext();
@@ -41,19 +42,15 @@ const ContactSection = () => {
 
         <div className="grid md:grid-cols-3 gap-6 mb-12 mx-auto max-w-6xl">
           {contactInfoData.map((item, index) => (
-            <motion.div 
+            <InteractiveDiv 
               key={item.key} 
               className="text-center bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-lg border border-gray-200 dark:border-gray-700 group"
               variants={itemVariants}
               initial="hidden"
               whileInView="visible"
               transition={{ delay: index * 0.1 + 0.2 }}
-              whileHover={{ 
-                scale: 1.05, 
-                y: -5, // Subtle lift
-                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
-              }}
-              whileTap={{ scale: 0.98 }}
+              hoverY={-5} // Subtle lift
+              hoverShadow="0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
             >
               <motion.div
                 className={`w-10 h-10 bg-gradient-to-r ${item.color} rounded-full flex items-center justify-center mx-auto mb-3`}
@@ -64,7 +61,7 @@ const ContactSection = () => {
               </motion.div>
               <h3 className="text-gray-900 dark:text-gray-50 text-lg font-bold">{t.contact[item.titleKey]}</h3>
               <p className="text-gray-700 dark:text-gray-300 text-base" dangerouslySetInnerHTML={{ __html: item.key === 'phone' ? t.contact.phoneNumbers.description : item.details }} />
-            </motion.div>
+            </InteractiveDiv>
           ))}
         </div>
 

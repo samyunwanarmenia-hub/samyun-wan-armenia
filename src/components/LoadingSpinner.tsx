@@ -23,9 +23,9 @@ const spinnerVariants = {
 const shadowPulseVariants = {
   animate: {
     boxShadow: [
-      "0 0 0px rgba(134, 180, 134, 0.4)", // primary-500 with 40% opacity
-      "0 0 15px rgba(134, 180, 134, 0.7)", // primary-500 with 70% opacity
-      "0 0 0px rgba(134, 180, 134, 0.4)",
+      "0 0 0px var(--primary-500-rgb-04)", // primary-500 with 40% opacity
+      "0 0 15px var(--primary-500-rgb-07)", // primary-500 with 70% opacity
+      "0 0 0px var(--primary-500-rgb-04)",
     ],
     transition: {
       repeat: Infinity,

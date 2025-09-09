@@ -10,14 +10,21 @@ import useNavigationUtils from '@/hooks/useNavigationUtils';
 import LanguageSwitcher from './LanguageSwitcher';
 import { MobileNavProps, TranslationKeys } from '@/types/global';
 import { navigationSections } from '@/data/navigationSections';
+import { useTheme } from '@/context/ThemeContext'; // Import useTheme to get current theme
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
-const MobileNav: React.FC<MobileNavProps> = () => {
+const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
   const { t, currentLang, getLinkClasses } = useLayoutContext();
+  const { theme } = useTheme(); // Get current theme for dynamic icon color
   const [isOpen, setIsOpen] = useState(false);
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);
-  // Removed: const { user } = useAuth(); // Get user from AuthContext
 
   const toggleMenu = () => setIsOpen(!isOpen);
+
+  // Determine icon color based on scroll and theme
+  const iconColorClass = scrolled
+    ? (theme === 'dark' ? 'bg-gray-300' : 'bg-gray-700') // Darker lines on scrolled light background, lighter on scrolled dark background
+    : (theme === 'dark' ? 'bg-gray-300' : 'bg-gray-500'); // Lighter lines on transparent dark background, darker on transparent light background
 
   // Variants for the hamburger lines
   const line1Variants = {
@@ -42,8 +49,8 @@ const MobileNav: React.FC<MobileNavProps> = () => {
       opacity: 0,
       transition: {
         type: 'spring',
-        stiffness: 250, // Increased stiffness for faster animation
-        damping: 25,    // Slightly decreased damping for snappier feel
+        stiffness: 250,
+        damping: 25,
         when: 'afterChildren',
         staggerChildren: 0.05,
         staggerDirection: -1,
@@ -54,8 +61,8 @@ const MobileNav: React.FC<MobileNavProps> = () => {
       opacity: 1,
       transition: {
         type: 'spring',
-        stiffness: 250, // Increased stiffness for faster animation
-        damping: 25,    // Slightly decreased damping for snappier feel
+        stiffness: 250,
+        damping: 25,
         when: 'beforeChildren',
         staggerChildren: 0.05,
       },
@@ -83,26 +90,26 @@ const MobileNav: React.FC<MobileNavProps> = () => {
     <>
       <motion.button
         onClick={toggleMenu}
-        className="md:hidden p-2 relative w-9 h-9 flex flex-col justify-around items-center text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md z-50"
+        className="md:hidden p-2 relative w-9 h-9 flex flex-col justify-around items-center focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md z-50"
         aria-label={isOpen ? t.nav.close : t.nav.open}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <motion.span
-          className="block h-0.5 w-full bg-gray-700 dark:bg-gray-300 rounded-full"
+          className={`block h-0.5 w-full rounded-full ${iconColorClass}`}
           variants={line1Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.3 }}
         />
         <motion.span
-          className="block h-0.5 w-full bg-gray-700 dark:bg-gray-300 rounded-full"
+          className={`block h-0.5 w-full rounded-full ${iconColorClass}`}
           variants={line2Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.2 }}
         />
         <motion.span
-          className="block h-0.5 w-full bg-gray-700 dark:bg-gray-300 rounded-full"
+          className={`block h-0.5 w-full rounded-full ${iconColorClass}`}
           variants={line3Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.3 }}
@@ -111,7 +118,7 @@ const MobileNav: React.FC<MobileNavProps> = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            className="fixed top-0 left-0 w-screen h-screen bg-white dark:bg-gray-900 z-40 overflow-y-auto shadow-lg max-w-[300px]"
+            className="fixed top-0 left-0 w-screen h-screen bg-gray-50 dark:bg-gray-900 z-40 overflow-y-auto shadow-lg max-w-[300px]"
             variants={menuVariants}
             initial="closed"
             animate="open"
@@ -120,7 +127,7 @@ const MobileNav: React.FC<MobileNavProps> = () => {
             <div className="flex justify-end p-4">
               <button
                 onClick={toggleMenu}
-                className="text-gray-700 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md"
+                className="text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md"
                 aria-label={t.nav.close}
               >
                 <X size={24} />
@@ -128,21 +135,21 @@ const MobileNav: React.FC<MobileNavProps> = () => {
             </div>
             <nav className="flex flex-col items-start space-y-6 pt-10 pb-6 pl-12">
               {navigationSections.map((section) => (
-                <motion.div 
-                  key={section.id} 
+                <InteractiveDiv
+                  key={section.id}
                   variants={menuItemVariants}
-                  whileHover={{ scale: 1.05, x: 5 }} // Added whileHover
-                  whileTap={{ scale: 0.95 }} // Added whileTap
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }} // Added transition
+                  whileHoverScale={1.05}
+                  hoverY={0}
+                  hoverShadow="none"
                 >
                   <Link
                     href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
                     onClick={() => setIsOpen(false)}
-                    className={getLinkClasses(section.id)}
+                    className={`${getLinkClasses(section.id)} text-gray-600 dark:text-gray-300`}
                   >
                     {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                   </Link>
-                </motion.div>
+                </InteractiveDiv>
               ))}
               <motion.div variants={menuItemVariants} className="mt-4">
                 <ThemeToggle onClose={() => setIsOpen(false)} />

@@ -5,6 +5,7 @@ import { TranslationKeys, ProductShowcaseItem, OpenOrderModalFunction } from '..
 import { productShowcaseData } from '../data/productShowcaseData';
 import OptimizedImage from './OptimizedImage';
 import CallToActionButton from './CallToActionButton';
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 interface SwipeableProductCarouselProps {
   t: TranslationKeys;
@@ -85,17 +86,13 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
           exit="exit"
           className="absolute inset-0 flex flex-col items-center justify-center p-6 group"
         >
-          <motion.div
+          <InteractiveDiv
             className="relative w-full h-full max-w-[300px] max-h-[450px] p-6 rounded-2xl overflow-hidden
                        bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700
                        flex flex-col items-center justify-center text-center"
             initial={{ boxShadow: "none" }}
-            whileHover={{ 
-              scale: 1.03,
-              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.1), var(--tw-shadow-glow-green)" // More pronounced shadow with glow
-            }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            whileHoverScale={1.03}
+            hoverShadow="0 20px 40px rgba(0, 0, 0, 0.2), 0 10px 20px rgba(0, 0, 0, 0.1), var(--tw-shadow-glow-green)" // More pronounced shadow with glow
           >
             <span
               className="absolute inset-0 rounded-2xl pointer-events-none transition-opacity duration-500
@@ -135,7 +132,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
             >
               {t.productShowcase[currentProduct.buttonTextKey]}
             </CallToActionButton>
-          </motion.div>
+          </InteractiveDiv>
         </motion.div>
       </AnimatePresence>
 

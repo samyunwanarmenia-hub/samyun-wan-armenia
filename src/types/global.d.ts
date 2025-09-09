@@ -308,7 +308,10 @@ export interface FaqSectionProps {
 export interface HeroSectionProps {
   stats: StatItem[];
 }
-export interface MobileNavProps {}
+export interface MobileNavProps {
+  scrolled: boolean; // Updated to reflect the new prop
+}
+
 export interface ReviewFormProps {
   onReviewSubmitted: (review: DbReview) => void;
 }

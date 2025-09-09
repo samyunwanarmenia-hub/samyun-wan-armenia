@@ -20,14 +20,14 @@ const ToastProvider = () => {
         success: {
           duration: 3000,
           iconTheme: {
-            primary: '#86b486', // primary-500
+            primary: 'var(--primary-500)', // primary-500
             secondary: 'white',
           },
         },
         error: {
           duration: 4000,
           iconTheme: {
-            primary: '#ef4444', // brandRed-400
+            primary: 'var(--brandRed-400)', // brandRed-400
             secondary: 'white',
           },
         },

@@ -5,7 +5,7 @@
 /* Import modular CSS files */
 @import '../styles/base.css';
 @import '../styles/variables.css';
-@import '../styles/background-animations.css';
+@import '../styles/background-animations.css'; /* Re-enabled and will be updated */
 @import '../styles/fab.css';
 @import '../styles/intro-animation.css';
 @import '../styles/intro-animations/animation01.css';
@@ -13,3 +13,26 @@
 @import '../styles/intro-animations/animation03.css';
 @import '../styles/intro-animations/animation04.css';
 @import '../styles/components.css';
+
+/* Removed old styles for SVG gradient background */
+/* #bg-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.5;
+  overflow: hidden;
+}
+
+#bg-wrap > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+} */
+
+/* Ensure body background is managed by background-animations.css */
+/* body {
+  background: none;
+} */
