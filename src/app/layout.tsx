@@ -2,8 +2,6 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import '../app/globals.css';
-// Removed: import { translations } from '@/i18n/translations';
-// Removed: const tHy = translations.hy;
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic', 'greek'],
@@ -71,6 +69,8 @@ export const metadata: Metadata = {
   icons: {
     apple: '/favicon.png', // Using favicon.png as apple-touch-icon
   },
+  // Explicitly add theme-color meta tag
+  themeColor: '#86b486', // Using primary-500 for theme color
 };
 
 const RootLayout = ({

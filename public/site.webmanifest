@@ -1,8 +1,8 @@
 {
   "name": "Samyun Wan Armenia",
   "short_name": "Samyun Wan",
-  "description": "Official distributor of Samyun Wan in Armenia. Weight gain and weight loss capsules.",
-  "start_url": "/",
+  "description": "Official distributor of Samyun Wan products in Armenia. Natural weight gain and weight loss solutions.",
+  "start_url": "/hy",
   "display": "standalone",
   "background_color": "#f7fcf7",
   "theme_color": "#86b486",
@@ -19,15 +19,9 @@
     },
     {
       "src": "/favicon.png",
-      "sizes": "192x192",
+      "sizes": "180x180",
       "type": "image/png",
-      "purpose": "maskable"
-    },
-    {
-      "src": "/favicon.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "apple touch icon"
     }
   ]
 }
