@@ -9,3 +9,47 @@
 @import '../styles/fab.css';
 /* Intro animation base styles and sub-animations are now imported directly in IntroAnimation.tsx */
 @import '../styles/components.css';
+
+/* Global body styles */
+body {
+  overflow: hidden; /* Keep overflow hidden as per user request */
+  background-color: #000030;
+  background-image: url("https://images.unsplash.com/photo-1536152470836-b943b246224c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80");
+  background-size: 100%;
+  background-position: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 500;
+  line-height: 1.7;
+  position: relative;
+  /* Removed overflow-x: hidden here as it's already in body */
+}
+
+/* Dark mode specific body styles - override if necessary, but for this background, it's consistent */
+.dark body {
+  background-color: #000030; /* Keep dark background color consistent */
+  background-image: url("https://images.unsplash.com/photo-1536152470836-b943b246224c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80");
+  background-size: 100%;
+  background-position: center;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    background-size: auto;
+    background-position: right;
+  }
+  .dark body { /* Apply responsive background to dark mode as well */
+    background-size: auto;
+    background-position: right;
+  }
+}
+
+/* Ensure html scroll behavior is smooth */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background-color: theme('colors.primary.500');
+  color: theme('colors.white');
+}
