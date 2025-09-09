@@ -79,7 +79,7 @@ const TrackOrderSection = () => {
               value={orderId}
               onChange={(e) => setOrderId(e.target.value)}
               required
-              whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+              whileFocus={{ scale: 1.01, borderColor: '#6c906c' }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}
             />
           </div>

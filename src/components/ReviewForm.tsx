@@ -113,7 +113,7 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                     value={name}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                     required
-                    whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+                    whileFocus={{ scale: 1.01, borderColor: '#6c906c' }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   />
                 </motion.div>
@@ -129,7 +129,7 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                     value={reviewText}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setReviewText(e.target.value)}
                     required
-                    whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+                    whileFocus={{ scale: 1.01, borderColor: '#6c906c' }}
                     transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   />
                 </motion.div>

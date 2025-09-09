@@ -131,7 +131,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
             value={address}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress(e.target.value)}
             required
-            whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+            whileFocus={{ scale: 1.01, borderColor: '#6c906c' }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             variants={itemVariants}
           />
@@ -142,7 +142,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
             value={phone}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
             required
-            whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+            whileFocus={{ scale: 1.01, borderColor: '#6c906c' }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             variants={itemVariants}
           />

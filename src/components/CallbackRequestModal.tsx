@@ -136,7 +136,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
             value={name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
             required
-            whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+            whileFocus={{ scale: 1.01, borderColor: '#6c906c' }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           />
         </motion.div>
@@ -152,7 +152,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
             value={phone}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
             required
-            whileFocus={{ scale: 1.01, borderColor: 'var(--primary-600)' }}
+            whileFocus={{ scale: 1.01, borderColor: '#6c906c' }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
           />
         </motion.div>
