@@ -7,5 +7,5 @@
 @import '../styles/variables.css';
 @import '../styles/background-animations.css';
 @import '../styles/fab.css';
-/* Removed intro-animation.css and its sub-animations, they are now imported directly in IntroAnimation.tsx */
+/* Intro animation base styles and sub-animations are now imported directly in IntroAnimation.tsx */
 @import '../styles/components.css';
