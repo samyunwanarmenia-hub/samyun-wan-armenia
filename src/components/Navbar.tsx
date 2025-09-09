@@ -38,7 +38,7 @@ const Navbar: React.FC<NavbarProps> = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center space-x-2">
             <Link href={getHomePath()} className="flex items-center">
-              <span className="text-base sm:text-lg font-bold text-gray-900 dark:text-gray-50 whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Changed text-gray-50 to text-gray-900 for light mode */}
+              <span className="text-base sm:text-lg font-bold text-white dark:text-gray-50 text-shadow-glossy-light dark:text-shadow-glossy-dark whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none"> {/* Changed text-gray-900 to text-white for light mode, added glossy text shadow */}
                 {t.hero.title}
               </span>
             </Link>

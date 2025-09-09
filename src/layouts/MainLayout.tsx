@@ -72,9 +72,9 @@ const MainLayout = ({
     <> {/* Use React.Fragment instead of a div */}
       <AnimatedGradientBackground /> {/* Use the new animated background component */}
       
-      {/* New: Semi-transparent overlay for text readability */}
+      {/* New: Fixed black-to-transparent gradient overlay at the top */}
       <motion.div
-        className="fixed inset-0 z-[5] bg-black/10 dark:bg-black/50" // Adjusted for light mode to add 10% darkening
+        className="fixed top-0 left-0 w-full h-40 z-10 bg-gradient-to-b from-black to-transparent"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
