@@ -56,20 +56,11 @@ export interface TranslationKeys {
     proven: { title: string; desc: string; };
     safe: { title: string; desc: string; };
     fast: { title: string; desc: string; };
-    // New translations for authenticity and warning sections
-    mainAuthenticityHeader: string;
-    whyChooseUs: {
-      title: string;
-      originalProduct: string;
-      safety: string;
-      noFakeAdditives: string;
-      customerTrust: string;
-    };
-    warningSection: {
-      mainText: string;
-      attention: string;
-      ageRestriction: string;
-    };
+    whyChooseUsTitle: string; // New: Title for "Why Choose Us" section
+    whyChooseUsOriginal: string; // New: Point 1 for "Why Choose Us"
+    whyChooseUsSafety: string; // New: Point 2 for "Why Choose Us"
+    whyChooseUsNoAdditives: string; // New: Point 3 for "Why Choose Us"
+    whyChooseUsTrust: string; // New: Point 4 for "Why Choose Us"
   };
   benefits: {
     title: string;
@@ -157,6 +148,8 @@ export interface TranslationKeys {
     recordingInstructions: string; // New
     recordingSuccess: string; // New
     recordingError: string; // New
+    purchaseWarning: string; // New: Warning about purchasing from trusted sellers
+    disclaimer: string; // New: Disclaimer about product not being medicine
   };
   loadingLinkModal: { // New: For the loading link modal
     title: string;
