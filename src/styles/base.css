@@ -40,17 +40,17 @@ html {
 }
 
 body {
-  font-family: var(--font-inter), sans-serif;
+  /* font-family is now defined in globals.css on html element */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 500;
-  font-size: 1.05rem;
+  font-size: 1.05rem; /* Consider moving this to Tailwind config or using responsive text classes */
   line-height: 1.7;
   position: relative;
   overflow-x: hidden;
 }
 
 ::selection {
-  background-color: #86b486;
-  color: #ffffff;
+  background-color: theme('colors.primary.500'); /* Using Tailwind color variable */
+  color: theme('colors.white'); /* Using Tailwind color variable */
 }

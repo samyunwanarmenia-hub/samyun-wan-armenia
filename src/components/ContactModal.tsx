@@ -53,7 +53,6 @@ const ContactModal = ({ isOpen, onClose, type, t }: ContactModalProps) => {
                 size="md"
                 gaEvent={{ category: 'Contact', action: 'Click_CallModal_Phone1', label: t.contactModal.callNumbers.number1 }}
                 ymEvent={{ category: 'Contact', action: 'Click_CallModal_Phone1', label: t.contactModal.callNumbers.number1 }}
-                // Removed whileHover, whileTap, transition as CallToActionButton handles them internally
               >
                 {t.contactModal.callNumbers.number1}
               </CallToActionButton>
@@ -66,7 +65,6 @@ const ContactModal = ({ isOpen, onClose, type, t }: ContactModalProps) => {
                 size="md"
                 gaEvent={{ category: 'Contact', action: 'Click_CallModal_Phone2', label: t.contactModal.callNumbers.number2 }}
                 ymEvent={{ category: 'Contact', action: 'Click_CallModal_Phone2', label: t.contactModal.callNumbers.number2 }}
-                // Removed whileHover, whileTap, transition as CallToActionButton handles them internally
               >
                 {t.contactModal.callNumbers.number2}
               </CallToActionButton>
@@ -84,7 +82,6 @@ const ContactModal = ({ isOpen, onClose, type, t }: ContactModalProps) => {
                 size="md"
                 gaEvent={{ category: 'Contact', action: 'Click_MessageModal_WhatsApp' }}
                 ymEvent={{ category: 'Contact', action: 'Click_MessageModal_WhatsApp' }}
-                // Removed whileHover, whileTap, transition as CallToActionButton handles them internally
               >
                 {t.contactModal.whatsapp}
               </CallToActionButton>
@@ -99,7 +96,6 @@ const ContactModal = ({ isOpen, onClose, type, t }: ContactModalProps) => {
                 size="md"
                 gaEvent={{ category: 'Contact', action: 'Click_MessageModal_FacebookMessenger' }}
                 ymEvent={{ category: 'Contact', action: 'Click_MessageModal_FacebookMessenger' }}
-                // Removed whileHover, whileTap, transition as CallToActionButton handles them internally
               >
                 {t.contactModal.facebookMessenger}
               </CallToActionButton>
