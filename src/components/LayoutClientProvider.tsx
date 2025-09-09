@@ -4,16 +4,16 @@ import { useState, useMemo, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { LayoutContext } from '@/context/LayoutContext';
 import { translations } from '@/i18n/translations';
-import { TranslationKeys, ContactModalType, ProductShowcaseItem, SectionId } from '@/types/global'; // Removed eslint-disable for TranslationKeys
+import { TranslationKeys, ContactModalType, ProductShowcaseItem, SectionId } from '@/types/global';
 import { useModals } from '@/hooks/useModals';
 import useActiveLink from '@/hooks/useActiveLink';
 import useNavigationUtils from '@/hooks/useNavigationUtils';
-import MainLayout from '@/layouts/MainLayout'; // Import MainLayout
-import IntroAnimation from './IntroAnimation'; // Import the new IntroAnimation component
-import { AnimatePresence, motion } from 'framer-motion'; // Import AnimatePresence and motion
-import { ThemeProvider } from '@/context/ThemeContext'; // Import ThemeProvider
-import ToastProvider from '@/components/ToastProvider'; // Import ToastProvider
-import dynamic from 'next/dynamic'; // Import dynamic for client-side components
+import MainLayout from '@/layouts/MainLayout';
+import IntroAnimation from './IntroAnimation';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ThemeProvider } from '@/context/ThemeContext';
+import ToastProvider from '@/components/ToastProvider';
+import dynamic from 'next/dynamic';
 
 // Dynamically import client-only components with ssr: false
 const DynamicYandexMetrikaTracker = dynamic(() => import('@/components/YandexMetrikaTracker'), { ssr: false });
@@ -33,7 +33,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
   const [currentLangState, setCurrentLangState] = useState<string>(initialLang);
   const [loadingLinkModalOpen, setLoadingLinkModalOpen] = useState(false);
   const [loadingLinkClientId, setLoadingLinkClientId] = useState<string | null>(null);
-  const [showIntroAnimation, setShowIntroAnimation] = useState(true); // New state for intro animation
+  const [showIntroAnimation, setShowIntroAnimation] = useState(true);
 
   // Determine if it's the QR verification page
   const isQrVerifyPage = useMemo(() => {
@@ -46,6 +46,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
     if (initialLang && initialLang !== currentLangState) {
       setCurrentLangState(initialLang);
     }
+    console.log('LayoutClientProvider - initial Lang:', initialLang, 'currentLangState:', currentLangState);
   }, [initialLang, currentLangState]);
 
   // Effect to manage intro animation and body overflow
@@ -88,7 +89,11 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
     };
   }, [currentLangState, isQrVerifyPage, showIntroAnimation]);
 
-  const t: TranslationKeys = useMemo(() => translations[currentLangState], [currentLangState]);
+  const t: TranslationKeys = useMemo(() => {
+    const selectedTranslations = translations[currentLangState];
+    console.log(`LayoutClientProvider - Memoized 't' object for lang '${currentLangState}':`, selectedTranslations);
+    return selectedTranslations;
+  }, [currentLangState]);
 
   const {
     contactModalOpen,
@@ -118,7 +123,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
   };
 
   const { getLinkClasses } = useActiveLink();
-  const { getHomePath, getSectionPath } = useNavigationUtils(currentLangState); // Передаем currentLangState сюда
+  const { getHomePath, getSectionPath } = useNavigationUtils(currentLangState);
 
   const setCurrentLang = (newLang: string) => {
     setCurrentLangState(newLang);
@@ -153,7 +158,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
         <DynamicGoogleAnalyticsTracker />
         <DynamicVisitTrackerWrapper />
         <DynamicServiceWorkerRegister />
-        <AnimatePresence mode="wait"> {/* Use mode="wait" to ensure one animation finishes before the next starts */}
+        <AnimatePresence mode="wait">
           {showIntroAnimation ? (
             <IntroAnimation key="intro-animation" />
           ) : (
@@ -161,8 +166,8 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
               key="main-app-content"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }} // Match IntroAnimation's exit duration
-              className="min-h-screen flex flex-col text-gray-900 dark:text-gray-50 relative overflow-hidden" // Apply layout classes here
+              transition={{ duration: 0.3 }}
+              className="min-h-screen flex flex-col text-gray-900 dark:text-gray-50 relative overflow-hidden"
             >
               {isQrVerifyPage ? (
                 children
@@ -181,7 +186,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
                   loadingLinkModalOpen={loadingLinkModalOpen}
                   closeLoadingLinkModal={closeLoadingLinkModal}
                   loadingLinkClientId={loadingLinkClientId}
-                  t={t} 
+                  t={t}
                   currentLang={currentLangState}
                 >
                   {children}

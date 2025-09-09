@@ -9,6 +9,11 @@ import { useLayoutContext } from '@/context/LayoutContext';
 const AboutSection = () => {
   const { t } = useLayoutContext();
 
+  console.log('AboutSection - Received t object:', t);
+  console.log('AboutSection - t.about.title:', t.about.title);
+  console.log('AboutSection - t.about.description:', t.about.description);
+  console.log('AboutSection - t.about.content:', t.about.content);
+
   type AboutItemKey = 'natural' | 'proven' | 'safe' | 'fast';
 
   const aboutItems: { key: AboutItemKey; icon: Icon; color: string; }[] = [
@@ -103,8 +108,8 @@ const AboutSection = () => {
               transition={{ delay: index * 0.1 + 0.9 }}
               whileHover={{ 
                 scale: 1.05, 
-                y: -5, // Subtle lift
-                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
+                y: -5,
+                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)"
               }}
               whileTap={{ scale: 0.98 }}
             >
