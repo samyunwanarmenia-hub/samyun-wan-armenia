@@ -2,56 +2,18 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Package, Clock, MapPin, User } from 'lucide-react';
+import { Search } from 'lucide-react'; // Removed Package, Clock, MapPin, User as they are no longer used
 import SectionHeader from './SectionHeader';
 import CallToActionButton from './CallToActionButton';
 import { useLayoutContext } from '@/context/LayoutContext';
 import LoadingSpinner from './LoadingSpinner';
 import { showError } from '@/utils/toast';
 
-// Placeholder for order data - in a real app, this would come from an API
-interface OrderStatus {
-  id: string;
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-  estimatedDelivery: string; // e.g., "2024-08-15"
-  deliveryTime: string; // e.g., "16:00 - 18:00"
-  currentLocation: string;
-  deliveryAgent: string;
-}
-
-const mockOrderData: Record<string, OrderStatus> = {
-  'ORDER123': {
-    id: 'ORDER123',
-    status: 'shipped',
-    estimatedDelivery: '2024-08-15',
-    deliveryTime: '16:00 - 18:00',
-    currentLocation: 'Yerevan Distribution Center',
-    deliveryAgent: 'Armen Gevorgyan',
-  },
-  'ORDER456': {
-    id: 'ORDER456',
-    status: 'processing',
-    estimatedDelivery: '2024-08-17',
-    deliveryTime: '10:00 - 12:00',
-    currentLocation: 'Warehouse',
-    deliveryAgent: 'N/A',
-  },
-  'ORDER789': {
-    id: 'ORDER789',
-    status: 'delivered',
-    estimatedDelivery: '2024-08-10',
-    deliveryTime: '14:30',
-    currentLocation: 'Customer Address',
-    deliveryAgent: 'Anna Petrosyan',
-  },
-};
-
 const TrackOrderSection = () => {
   const { t } = useLayoutContext();
   const [orderId, setOrderId] = useState<string>('');
-  const [orderStatus, setOrderStatus] = useState<OrderStatus | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null); // Keep error for input validation
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -63,39 +25,26 @@ const TrackOrderSection = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
-  const getStatusTranslation = (status: OrderStatus['status']) => {
-    switch (status) {
-      case 'pending': return t.trackOrder.statusPending;
-      case 'processing': return t.trackOrder.statusProcessing;
-      case 'shipped': return t.trackOrder.statusShipped;
-      case 'delivered': return t.trackOrder.statusDelivered;
-      case 'cancelled': return t.trackOrder.statusCancelled;
-      default: return status;
-    }
-  };
-
   const handleTrackOrder = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError(null);
-    setOrderStatus(null);
+    setError(null); // Clear previous errors
 
     if (!orderId.trim()) {
       showError(t.trackOrder.noOrderId);
+      setError(t.trackOrder.noOrderId); // Set error for display
       return;
     }
 
     setIsLoading(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // Simulate a small delay for UX feedback, then redirect
+    await new Promise(resolve => setTimeout(resolve, 500)); 
 
-    const foundOrder = mockOrderData[orderId.toUpperCase()];
+    const haypostTrackingUrl = `https://www.haypost.am/am/track-trace#${orderId.trim()}`;
+    window.open(haypostTrackingUrl, '_blank'); // Open in a new tab
 
-    if (foundOrder) {
-      setOrderStatus(foundOrder);
-    } else {
-      setError(t.trackOrder.statusNotFound);
-    }
     setIsLoading(false);
+    setOrderId(''); // Clear the input field after redirection
   };
 
   return (
@@ -156,7 +105,7 @@ const TrackOrderSection = () => {
             transition={{ duration: 0.3 }}
           >
             <LoadingSpinner />
-            <p className="ml-4 text-lg text-gray-700 dark:text-gray-300">{t.trackOrder.statusProcessing}</p>
+            <p className="ml-4 text-lg text-gray-700 dark:text-gray-300">{t.trackOrder.processingRequest}</p>
           </motion.div>
         )}
 
@@ -169,29 +118,6 @@ const TrackOrderSection = () => {
             transition={{ duration: 0.3 }}
           >
             <p className="text-lg font-semibold">{error}</p>
-          </motion.div>
-        )}
-
-        {orderStatus && !isLoading && !error && (
-          <motion.div
-            className="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
-            variants={itemVariants}
-            initial="hidden"
-            animate="visible"
-            transition={{ delay: 0.4 }}
-          >
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4 flex items-center">
-              <Package className="w-6 h-6 mr-2 text-primary-600 dark:text-primary-400" />
-              {t.trackOrder.orderStatus}: <span className="ml-2 text-primary-600 dark:text-primary-400">{getStatusTranslation(orderStatus.status)}</span>
-            </h3>
-            <div className="space-y-3 text-gray-700 dark:text-gray-300">
-              <p className="flex items-center"><Clock className="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400" /> <strong>{t.trackOrder.estimatedDelivery}:</strong> {orderStatus.estimatedDelivery}</p>
-              <p className="flex items-center"><Clock className="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400" /> <strong>{t.trackOrder.deliveryTime}:</strong> {orderStatus.deliveryTime}</p>
-              <p className="flex items-center"><MapPin className="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400" /> <strong>{t.trackOrder.deliveryLocation}:</strong> {orderStatus.currentLocation}</p>
-              {orderStatus.deliveryAgent !== 'N/A' && (
-                <p className="flex items-center"><User className="w-5 h-5 mr-2 text-gray-500 dark:text-gray-400" /> <strong>{t.trackOrder.deliveryAgent}:</strong> {orderStatus.deliveryAgent}</p>
-              )}
-            </div>
           </motion.div>
         )}
       </div>

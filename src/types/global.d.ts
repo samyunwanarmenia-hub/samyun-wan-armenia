@@ -201,20 +201,21 @@ export interface TranslationKeys {
     subtitle: string;
     orderIdPlaceholder: string;
     trackButton: string;
-    orderStatus: string;
-    statusPending: string;
-    statusProcessing: string;
-    statusShipped: string;
-    statusDelivered: string;
-    statusCancelled: string;
-    statusNotFound: string;
-    estimatedDelivery: string;
-    deliveryDate: string;
-    deliveryTime: string;
-    deliveryLocation: string;
-    deliveryAgent: string;
+    // Removed status-related keys as they are no longer used in the UI
+    // statusPending: string;
+    // statusProcessing: string;
+    // statusShipped: string;
+    // statusDelivered: string;
+    // statusCancelled: string;
+    statusNotFound: string; // Still useful for input validation if needed
+    // estimatedDelivery: string;
+    // deliveryDate: string;
+    // deliveryTime: string;
+    // deliveryLocation: string;
+    // deliveryAgent: string;
     noOrderId: string;
     enterOrderId: string;
+    processingRequest: string; // Added for loading state
   };
 }
 
