@@ -41,6 +41,9 @@ const Footer = () => {
               {t.footer.purchaseWarning}
             </p>
 
+            {/* Divider */}
+            <div className="w-full h-px bg-gray-700 dark:bg-gray-600 my-4" />
+
             {/* Official Links Section */}
             <h3 className="font-bold text-lg mb-2 text-white">{t.footer.officialLinksIntro.split('\n')[0]}</h3>
             <p className="text-sm leading-relaxed mb-4">
