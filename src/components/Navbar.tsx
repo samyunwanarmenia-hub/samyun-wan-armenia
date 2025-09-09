@@ -19,7 +19,7 @@ const Navbar: React.FC<NavbarProps> = () => {
   useEffect(() => {
     const handleScroll = () => {
       const offset = window.scrollY;
-      if (offset > 50) {
+      if (offset > 200) { // Changed scroll threshold from 50 to 200
         setScrolled(true);
       } else {
         setScrolled(false);
@@ -55,7 +55,7 @@ const Navbar: React.FC<NavbarProps> = () => {
               >
                 <Link
                   href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
-                  className={`${getLinkClasses(section.id)} text-base text-white dark:text-gray-300`} /* Changed text-gray-700 to text-white for light mode */
+                  className={`${getLinkClasses(section.id)} text-base ${scrolled ? 'text-gray-700 dark:text-gray-300' : 'text-white dark:text-gray-300'}`}
                 >
                   {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                 </Link>
