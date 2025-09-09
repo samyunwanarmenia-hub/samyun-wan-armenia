@@ -46,7 +46,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
     if (initialLang && initialLang !== currentLangState) {
       setCurrentLangState(initialLang);
     }
-    console.log('LayoutClientProvider - initial Lang:', initialLang, 'currentLangState:', currentLangState);
+    // Removed: console.log('LayoutClientProvider - initial Lang:', initialLang, 'currentLangState:', currentLangState);
   }, [initialLang, currentLangState]);
 
   // Effect to manage intro animation and body overflow
@@ -91,7 +91,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
 
   const t: TranslationKeys = useMemo(() => {
     const selectedTranslations = translations[currentLangState];
-    console.log(`LayoutClientProvider - Memoized 't' object for lang '${currentLangState}':`, selectedTranslations);
+    // Removed: console.log(`LayoutClientProvider - Memoized 't' object for lang '${currentLangState}':`, selectedTranslations);
     return selectedTranslations;
   }, [currentLangState]);
 

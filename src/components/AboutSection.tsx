@@ -9,10 +9,10 @@ import { useLayoutContext } from '@/context/LayoutContext';
 const AboutSection = () => {
   const { t } = useLayoutContext();
 
-  console.log('AboutSection - Received t object:', t);
-  console.log('AboutSection - t.about.title:', t.about.title);
-  console.log('AboutSection - t.about.description:', t.about.description);
-  console.log('AboutSection - t.about.content:', t.about.content);
+  // Removed: console.log('AboutSection - Received t object:', t);
+  // Removed: console.log('AboutSection - t.about.title:', t.about.title);
+  // Removed: console.log('AboutSection - t.about.description:', t.about.description);
+  // Removed: console.log('AboutSection - t.about.content:', t.about.content);
 
   type AboutItemKey = 'natural' | 'proven' | 'safe' | 'fast';
 

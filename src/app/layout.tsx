@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
 import '../app/globals.css';
-import { translations } from '@/i18n/translations';
-
+// Removed: import { translations } from '@/i18n/translations';
+// Removed: const tHy = translations.hy;
 
 const inter = Inter({
   subsets: ['latin', 'cyrillic', 'greek'],
@@ -11,19 +11,18 @@ const inter = Inter({
   display: 'swap',
 });
 
-const tHy = translations.hy;
-
 export const metadata: Metadata = {
+  // Generic title and description, will be overridden by [lang]/layout.tsx
   title: {
-    default: tHy.hero.title + ' - ' + tHy.hero.subtitle + ' | ' + tHy.hero.seo_title_addon,
-    template: `%s | ${tHy.hero.title}`,
+    default: 'Samyun Wan Armenia - Official Distributor',
+    template: `%s | Samyun Wan Armenia`,
   },
-  description: tHy.hero.tagline + ' ' + tHy.about.description + ' ' + tHy.benefits.subtitle,
-  keywords: `${tHy.hero.title}, ${tHy.hero.subtitle}, ${tHy.hero.tagline}, samyun wan, armenia, քաշի ավելացում, բնական կապսուլներ, ինդոնեզական, samyun wan оригинал ереван, նաբոր վеса հայաստան, Samyun Wan Armenia, weight gain, natural capsules, Indonesian, original Samyun Wan Yerevan, weight loss Armenia, sports nutrition, health supplements, ${tHy.about.natural.title}, ${tHy.benefits.appetite.title}, ${tHy.productShowcase.weightGainLabel}, ${tHy.productShowcase.weightLossLabel}, ${tHy.authenticity.title}, ${tHy.testimonials.title}, ${tHy.faq.q1}, ${tHy.contact.title}`,
+  description: 'Official distributor of Samyun Wan products in Armenia. Natural weight gain and weight loss solutions.',
+  keywords: 'samyun wan, armenia, weight gain, weight loss, natural supplements, original product',
   authors: [{ name: 'Samyun Wan Armenia' }, { name: 'Aleksandr Gevorgyan' }],
   openGraph: {
-    title: tHy.hero.title + ' - ' + tHy.hero.subtitle,
-    description: tHy.hero.tagline + ' ' + tHy.about.description,
+    title: 'Samyun Wan Armenia - Official Distributor',
+    description: 'Official distributor of Samyun Wan products in Armenia. Natural weight gain and weight loss solutions.',
     url: 'https://samyunwanarmenia.netlify.app',
     siteName: 'Samyun Wan Armenia - Official',
     images: [
@@ -31,16 +30,16 @@ export const metadata: Metadata = {
         url: 'https://samyunwanarmenia.netlify.app/optimized/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: tHy.hero.title + ' - ' + tHy.hero.subtitle,
+        alt: 'Samyun Wan Armenia Official Products',
       },
     ],
-    locale: 'hy_AM',
+    locale: 'hy_AM', // Default locale for root OG, will be overridden
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: tHy.hero.title + ' - ' + tHy.hero.subtitle,
-    description: tHy.hero.tagline + ' ' + tHy.about.description,
+    title: 'Samyun Wan Armenia - Official Distributor',
+    description: 'Official distributor of Samyun Wan products in Armenia. Natural weight gain and weight loss solutions.',
     images: ['https://samyunwanarmenia.netlify.app/optimized/og-image.jpg'],
     creator: '@samyunwanarmenia',
   },
@@ -80,7 +79,7 @@ const RootLayout = ({
   children: React.ReactNode;
 }) => {
   return (
-    <html lang="hy" className={`${inter.variable}`}>
+    <html lang="hy" className={`${inter.variable}`}> {/* Default lang to hy, will be updated by LayoutClientProvider */}
       <body>
         {children}
         <noscript>
