@@ -44,7 +44,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 500;
-  font-size: 1.05rem; /* Consider moving this to Tailwind config or using responsive text classes */
+  /* Removed fixed font-size to rely on Tailwind's responsive text utilities */
   line-height: 1.7;
   position: relative;
   overflow-x: hidden;
