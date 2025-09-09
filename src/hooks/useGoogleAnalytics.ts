@@ -29,6 +29,7 @@ export const useGoogleAnalytics = () => {
       const script = document.createElement('script');
       script.id = 'google-analytics-script';
       script.async = true;
+      script.defer = true; // Add defer attribute
       script.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`;
       
       const firstScript = document.getElementsByTagName('script')[0];
@@ -44,14 +45,17 @@ export const useGoogleAnalytics = () => {
       console.log('Google Analytics script injected and initialized.');
     };
 
-    // Delay the injection of the Google Analytics script
-    const scriptInjectionTimeout = setTimeout(injectGoogleAnalyticsScript, 3000); // Delay by 3 seconds
+    // Defer the injection of the Google Analytics script using requestIdleCallback
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(injectGoogleAnalyticsScript, { timeout: 2000 });
+      } else {
+        // Fallback to setTimeout if requestIdleCallback is not supported
+        setTimeout(injectGoogleAnalyticsScript, 3000);
+      }
+    }
 
     // Track page view on route change.
-    // The 'config' command also sends a page_view event by default.
-    // We only need to send it explicitly if we want to override default behavior or send additional parameters.
-    // For simple page views, the initial 'config' in injectGoogleAnalyticsScript is often enough for the first page.
-    // For subsequent navigations, we explicitly send a page_view event.
     if (pathname !== null) {
       const fullPath = pathname + (searchParams ? `?${searchParams.toString()}` : '');
       // Ensure gtag is available (it will be queued if not yet loaded)
@@ -61,9 +65,5 @@ export const useGoogleAnalytics = () => {
         page_title: document.title,
       });
     }
-
-    return () => {
-      clearTimeout(scriptInjectionTimeout);
-    };
   }, [pathname, searchParams]);
 };

@@ -26,6 +26,7 @@ export const useYandexMetrika = () => {
       const script = document.createElement('script');
       script.id = 'yandex-metrika-script';
       script.async = true;
+      script.defer = true; // Add defer attribute
       script.src = `https://mc.yandex.ru/metrika/tag.js?id=${YANDEX_METRIKA_ID}`;
       
       const firstScript = document.getElementsByTagName('script')[0];
@@ -47,8 +48,15 @@ export const useYandexMetrika = () => {
       console.log('Yandex Metrika script injected and initialized.');
     };
 
-    // Delay the injection of the Yandex Metrika script
-    const scriptInjectionTimeout = setTimeout(injectYandexMetrikaScript, 3000); // Delay by 3 seconds
+    // Defer the injection of the Yandex Metrika script using requestIdleCallback
+    if (typeof window !== 'undefined') {
+      if ('requestIdleCallback' in window) {
+        window.requestIdleCallback(injectYandexMetrikaScript, { timeout: 2000 });
+      } else {
+        // Fallback to setTimeout if requestIdleCallback is not supported
+        setTimeout(injectYandexMetrikaScript, 3000);
+      }
+    }
 
     // Track page view on route change.
     if (pathname !== null) {
@@ -56,9 +64,5 @@ export const useYandexMetrika = () => {
       // Ensure ym is available (it will be queued if not yet loaded)
       window.ym(YANDEX_METRIKA_ID, 'hit', fullPath);
     }
-
-    return () => {
-      clearTimeout(scriptInjectionTimeout);
-    };
   }, [pathname, searchParams]);
 };
