@@ -307,7 +307,6 @@ export interface AuthenticityInfoModalProps {
   t: TranslationKeys;
   currentLang: string;
 }
-export interface AuthenticityInfoProps {}
 export interface AboutSectionProps {}
 export interface BenefitsSectionProps {}
 export interface ProductShowcaseSectionProps {}
@@ -323,7 +322,9 @@ export interface FaqSectionProps {
 export interface HeroSectionProps {
   stats: StatItem[];
 }
-export interface MobileNavProps {}
+export interface MobileNavProps {
+  mobileIconColorClass?: string; // New prop for dynamic icon color
+}
 export interface ReviewFormProps {
   onReviewSubmitted: (review: DbReview) => void;
 }

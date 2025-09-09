@@ -11,11 +11,10 @@ import LanguageSwitcher from './LanguageSwitcher';
 import { MobileNavProps, TranslationKeys } from '@/types/global';
 import { navigationSections } from '@/data/navigationSections';
 
-const MobileNav: React.FC<MobileNavProps> = () => {
+const MobileNav: React.FC<MobileNavProps> = ({ mobileIconColorClass = 'bg-white dark:bg-gray-300' }) => { // Default to white for transparent/dark background
   const { t, currentLang, getLinkClasses } = useLayoutContext();
   const [isOpen, setIsOpen] = useState(false);
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);
-  // Removed: const { user } = useAuth(); // Get user from AuthContext
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
@@ -42,8 +41,8 @@ const MobileNav: React.FC<MobileNavProps> = () => {
       opacity: 0,
       transition: {
         type: 'spring',
-        stiffness: 250, // Increased stiffness for faster animation
-        damping: 25,    // Slightly decreased damping for snappier feel
+        stiffness: 250,
+        damping: 25,
         when: 'afterChildren',
         staggerChildren: 0.05,
         staggerDirection: -1,
@@ -54,8 +53,8 @@ const MobileNav: React.FC<MobileNavProps> = () => {
       opacity: 1,
       transition: {
         type: 'spring',
-        stiffness: 250, // Increased stiffness for faster animation
-        damping: 25,    // Slightly decreased damping for snappier feel
+        stiffness: 250,
+        damping: 25,
         when: 'beforeChildren',
         staggerChildren: 0.05,
       },
@@ -83,26 +82,26 @@ const MobileNav: React.FC<MobileNavProps> = () => {
     <>
       <motion.button
         onClick={toggleMenu}
-        className="md:hidden p-2 relative w-9 h-9 flex flex-col justify-around items-center text-white dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md z-50" /* Changed text-gray-700 to text-white for light mode */
+        className="md:hidden p-2 relative w-9 h-9 flex flex-col justify-around items-center text-white dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-md z-50"
         aria-label={isOpen ? t.nav.close : t.nav.open}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <motion.span
-          className="block h-0.5 w-full bg-white dark:bg-gray-300 rounded-full" /* Changed bg-gray-700 to bg-white for light mode */
+          className={`block h-0.5 w-full rounded-full ${mobileIconColorClass}`} // Use dynamic color class
           variants={line1Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.3 }}
         />
         <motion.span
-          className="block h-0.5 w-full bg-white dark:bg-gray-300 rounded-full" /* Changed bg-gray-700 to bg-white for light mode */
+          className={`block h-0.5 w-full rounded-full ${mobileIconColorClass}`} // Use dynamic color class
           variants={line2Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.2 }}
         />
         <motion.span
-          className="block h-0.5 w-full bg-white dark:bg-gray-300 rounded-full" /* Changed bg-gray-700 to bg-white for light mode */
+          className={`block h-0.5 w-full rounded-full ${mobileIconColorClass}`} // Use dynamic color class
           variants={line3Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.3 }}
@@ -128,17 +127,17 @@ const MobileNav: React.FC<MobileNavProps> = () => {
             </div>
             <nav className="flex flex-col items-start space-y-6 pt-10 pb-6 pl-12">
               {navigationSections.map((section) => (
-                <motion.div 
-                  key={section.id} 
+                <motion.div
+                  key={section.id}
                   variants={menuItemVariants}
-                  whileHover={{ scale: 1.05, x: 5 }} // Added whileHover
-                  whileTap={{ scale: 0.95 }} // Added whileTap
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }} // Added transition
+                  whileHover={{ scale: 1.05, x: 5 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 >
                   <Link
                     href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
                     onClick={() => setIsOpen(false)}
-                    className={`${getLinkClasses(section.id)} text-gray-700 dark:text-gray-300`} /* Changed text-gray-300 to text-gray-700 for light mode */
+                    className={`${getLinkClasses(section.id)} text-gray-700 dark:text-gray-300`}
                   >
                     {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                   </Link>
