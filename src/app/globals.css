@@ -7,40 +7,39 @@
 @import '../styles/variables.css';
 @import '../styles/background-animations.css';
 @import '../styles/fab.css';
+@import '../styles/rain.css'; /* New: Import rain specific styles */
 /* Intro animation base styles and sub-animations are now imported directly in IntroAnimation.tsx */
 @import '../styles/components.css';
 
 /* Global body styles */
 body {
-  overflow: hidden; /* Keep overflow hidden as per user request */
-  background-color: #000030;
-  background-image: url("https://images.unsplash.com/photo-1536152470836-b943b246224c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80");
-  background-size: 100%;
-  background-position: center;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Ensure overflow is hidden for the background animation */
+  background: linear-gradient(180deg, #07131c, #305472); /* New gradient background */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 500;
   line-height: 1.7;
   position: relative;
-  /* Removed overflow-x: hidden here as it's already in body */
 }
 
 /* Dark mode specific body styles - override if necessary, but for this background, it's consistent */
 .dark body {
-  background-color: #000030; /* Keep dark background color consistent */
-  background-image: url("https://images.unsplash.com/photo-1536152470836-b943b246224c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1476&q=80");
-  background-size: 100%;
-  background-position: center;
+  background: linear-gradient(180deg, #07131c, #305472); /* Keep dark background consistent */
 }
 
+/* Remove responsive background for body as it's now a gradient */
 @media only screen and (max-width: 600px) {
   body {
-    background-size: auto;
-    background-position: right;
+    background-size: cover; /* Ensure gradient covers on small screens */
+    background-position: center;
   }
-  .dark body { /* Apply responsive background to dark mode as well */
-    background-size: auto;
-    background-position: right;
+  .dark body {
+    background-size: cover;
+    background-position: center;
   }
 }
 

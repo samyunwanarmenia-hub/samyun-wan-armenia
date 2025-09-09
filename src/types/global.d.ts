@@ -12,8 +12,23 @@ declare global {
       l?: number; // Added for Yandex Metrika initialization
     };
     dataLayer: unknown[]; // Added for Google Analytics initialization
+    requestIdleCallback: ((callback: IdleRequestCallback, options?: IdleRequestOptions) => IdleCallbackHandle) | undefined;
+    cancelIdleCallback: ((handle: IdleCallbackHandle) => void) | undefined;
   }
 }
+
+interface IdleRequestOptions {
+  timeout?: number;
+}
+
+type IdleCallbackHandle = number;
+
+interface IdleDeadline {
+  readonly didTimeout: boolean;
+  timeRemaining(): DOMHighResTimeStamp;
+}
+
+type IdleRequestCallback = (deadline: IdleDeadline) => void;
 
 export interface TranslationKeys {
   nav: {
