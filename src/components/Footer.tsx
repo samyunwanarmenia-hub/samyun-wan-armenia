@@ -8,6 +8,7 @@ import { useLayoutContext } from '@/context/LayoutContext';
 import useNavigationUtils from '@/hooks/useNavigationUtils';
 import { navigationSections } from '@/data/navigationSections';
 import CallToActionButton from './CallToActionButton'; // Import CallToActionButton
+import AnimatedArrow from './AnimatedArrow'; // Import AnimatedArrow
 
 const Footer = () => {
   const { t, currentLang, openAuthenticityModal } = useLayoutContext();
@@ -34,23 +35,24 @@ const Footer = () => {
             </Link>
             
             {/* Legal Info / Warning Section */}
-            <h3 className="font-bold text-lg mb-2 text-white">{t.footer.legalInfo.split('\n')[0]}</h3>
-            <p className="text-sm leading-relaxed mb-2 whitespace-pre-line">
-              {t.footer.legalInfo.split('\n').slice(1).join('\n')}
-            </p>
-            <p className="text-sm leading-relaxed mb-4 whitespace-pre-line"> {/* Removed red color classes */}
-              {t.footer.purchaseWarning}
-            </p>
-            <CallToActionButton
-              onClick={openAuthenticityModal}
-              variant="ghost"
-              size="sm"
-              className="mt-2 mb-4"
-              gaEvent={{ category: 'Footer', action: 'Click_HowToDistinguish_Button' }}
-              ymEvent={{ category: 'Footer', action: 'Click_HowToDistinguish_Button' }}
-            >
-              {t.footer.howToDistinguishButton}
-            </CallToActionButton>
+            <p 
+              className="text-sm leading-relaxed mb-4 whitespace-pre-line"
+              dangerouslySetInnerHTML={{ __html: t.footer.legalAndWarning }}
+            />
+            
+            <div className="relative flex items-center"> {/* Container for button and arrow */}
+              <CallToActionButton
+                onClick={openAuthenticityModal}
+                variant="ghost"
+                size="sm"
+                className="mt-2 mb-4"
+                gaEvent={{ category: 'Footer', action: 'Click_HowToDistinguish_Button' }}
+                ymEvent={{ category: 'Footer', action: 'Click_HowToDistinguish_Button' }}
+              >
+                {t.footer.howToDistinguishButton}
+              </CallToActionButton>
+              <AnimatedArrow className="ml-2 mt-2 mb-4" /> {/* Position arrow next to button */}
+            </div>
 
             {/* Divider */}
             <div className="w-full h-px bg-gray-700 dark:bg-gray-600 my-4" />

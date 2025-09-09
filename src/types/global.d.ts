@@ -102,8 +102,7 @@ export interface TranslationKeys {
     products: string;
     support: string;
     follow: string;
-    legalInfo: string;
-    purchaseWarning: string;
+    legalAndWarning: string; // Added this new key
     howToDistinguishButton: string;
     officialLinksIntro: string;
     officialLinksDisclaimer: string;
