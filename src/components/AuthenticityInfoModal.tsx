@@ -39,7 +39,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
         initial="hidden"
         animate="visible"
       >
-        {/* Image showing differences */}
+        {/* Certificate Image */}
         <motion.div 
           className="flex flex-col items-center text-center w-full" // Ensure it takes full width
           variants={itemVariants}
@@ -51,16 +51,15 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
             className="w-full h-auto rounded-xl shadow-lg border border-gray-300 dark:border-gray-600 mb-3 overflow-hidden"
           >
             <OptimizedImage 
-              src="/images/samyun-arm-original-whey-certificate-deferences.jpg" // This is the differences image
-              alt="Samyun Wan Original vs Fake Differences" 
+              src="/images/samyun-arm-original-whey-certificate.jpg" // This is the certificate image
+              alt="Samyun Wan Original Certificate" 
               className="w-full h-auto object-cover"
               loading="eager"
               sizes="(max-width: 768px) 90vw, 400px"
             />
           </motion.div>
-          {/* Text placed between image and QR */}
           <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
-            {t.authenticity.differencesDesc}
+            {t.authenticity.certificateDesc}
           </p>
         </motion.div>
 
