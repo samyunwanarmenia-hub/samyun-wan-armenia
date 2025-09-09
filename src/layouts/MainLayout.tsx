@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { useLayoutContext } from '@/context/LayoutContext'; // Import useLayoutContext
 import { ContactModalType, ProductShowcaseItem, TranslationKeys } from '@/types/global'; // Import necessary types, including TranslationKeys
 import FloatingActionButton from '@/components/FloatingActionButton'; // Import the new FAB component
+import AnimatedGradientBackground from '@/components/AnimatedGradientBackground'; // Import the new animated background
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -30,7 +31,7 @@ interface MainLayoutProps {
 // Dynamically import client-only components with ssr: false
 const DynamicNavbar = dynamic(() => import('@/components/Navbar'), { ssr: false });
 const DynamicFooter = dynamic(() => import('@/components/Footer'), { ssr: false });
-const DynamicRainBackground = dynamic(() => import('@/components/RainBackground'), { ssr: false }); // Lazy load RainBackground
+// Removed DynamicRainBackground
 const DynamicScrollToTopButton = dynamic(() => import('@/components/ScrollToTopButton'), { ssr: false }); // Lazy load ScrollToTopButton
 
 // Dynamically import modals with ssr: false
@@ -69,7 +70,7 @@ const MainLayout = ({
 
   return (
     <> {/* Use React.Fragment instead of a div */}
-      <DynamicRainBackground /> {/* Use lazy-loaded component */}
+      <AnimatedGradientBackground /> {/* Use the new animated background component */}
       
       <DynamicNavbar />
       

@@ -446,15 +446,3 @@ export interface TrackOrderLayoutProps { // New layout prop interface
   children: React.ReactNode;
   params: { lang: string };
 }
-
-interface CommonMetadataOptions {
-  lang: string;
-  t: TranslationKeys;
-  pagePath: string;
-  title: string;
-  description: string;
-  keywords: string;
-  image: string;
-  imageAlt: string;
-  type?: 'website' | 'article';
-}

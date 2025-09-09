@@ -7,7 +7,7 @@
 @import '../styles/variables.css';
 @import '../styles/background-animations.css';
 @import '../styles/fab.css';
-@import '../styles/rain.css'; /* New: Import rain specific styles */
+/* Removed @import '../styles/rain.css'; */
 /* Intro animation base styles and sub-animations are now imported directly in IntroAnimation.tsx */
 @import '../styles/components.css';
 
@@ -18,7 +18,7 @@ body {
   margin: 0;
   padding: 0;
   /* Removed overflow: hidden; - now managed dynamically in LayoutClientProvider */
-  background: linear-gradient(180deg, #07131c, #305472); /* New gradient background */
+  background: #000; /* Set a solid black background as the SVG will provide the gradients */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-weight: 500;
@@ -28,7 +28,7 @@ body {
 
 /* Dark mode specific body styles - override if necessary, but for this background, it's consistent */
 .dark body {
-  background: linear-gradient(180deg, #07131c, #305472); /* Keep dark background consistent */
+  background: #000; /* Keep dark background consistent */
 }
 
 /* Remove responsive background for body as it's now a gradient */
