@@ -124,7 +124,7 @@ export const en: TranslationKeys = {
     products: 'Products',
     support: 'Support',
     follow: 'Follow Us',
-    description: 'Official Samyun Wan representative in Armenia. Premium Indonesian natural capsules for healthy weight gain.',
+    description: 'The only place in Armenia where you can confidently buy original Samyun Wan, with a QR code on each package and a guarantee of genuine product. Do not risk your health with fake products.',
     productOriginal: 'Samyun Wan Original',
     productAuthenticity: 'Authenticity Check',
     productUsage: 'Usage Guide',
