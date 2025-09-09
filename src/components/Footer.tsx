@@ -38,7 +38,7 @@ const Footer = () => {
             <p className="text-sm leading-relaxed mb-2 whitespace-pre-line">
               {t.footer.legalInfo.split('\n').slice(1).join('\n')}
             </p>
-            <p className="text-sm leading-relaxed mb-4 whitespace-pre-line text-red-400 dark:text-red-300"> {/* Applied red color here */}
+            <p className="text-sm leading-relaxed mb-4 whitespace-pre-line"> {/* Removed red color classes */}
               {t.footer.purchaseWarning}
             </p>
             <CallToActionButton
