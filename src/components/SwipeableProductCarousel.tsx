@@ -71,7 +71,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
 
   return (
     <div
-      className="relative w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6 border border-gray-200 dark:border-gray-700 overflow-hidden min-h-[450px]"
+      className="relative w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto bg-gray-50 dark:bg-gray-800 rounded-3xl shadow-2xl p-6 border border-gray-200 dark:border-gray-700 overflow-hidden min-h-[450px]"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
@@ -87,7 +87,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
         >
           <motion.div
             className="relative w-full h-full max-w-[300px] max-h-[450px] p-6 rounded-2xl overflow-hidden
-                       bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700
+                       bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700
                        flex flex-col items-center justify-center text-center"
             initial={{ boxShadow: "none" }}
             whileHover={{ 
@@ -141,7 +141,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
 
       <motion.button
         onClick={handlePrev}
-        className="absolute top-1/2 left-3 transform -translate-y-1/2 bg-white dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-700 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors z-20" /* Changed text-gray-50 to text-gray-700 for light mode */
+        className="absolute top-1/2 left-3 transform -translate-y-1/2 bg-gray-100 dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-700 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-20" /* Changed text-gray-50 to text-gray-700 for light mode */
         aria-label="Previous product"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
@@ -151,7 +151,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
       </motion.button>
       <motion.button
         onClick={handleNext}
-        className="absolute top-1/2 right-3 transform -translate-y-1/2 bg-white dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-700 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors z-20" /* Changed text-gray-50 to text-gray-700 for light mode */
+        className="absolute top-1/2 right-3 transform -translate-y-1/2 bg-gray-100 dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-700 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-20" /* Changed text-gray-50 to text-gray-700 for light mode */
         aria-label="Next product"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}

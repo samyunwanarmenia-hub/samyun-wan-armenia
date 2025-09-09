@@ -47,7 +47,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           onClick={onClose} // Close modal when clicking on backdrop
         >
           <motion.div
-            className={`bg-white dark:bg-gray-800 rounded-xl p-5 shadow-2xl relative w-full border border-gray-200 dark:border-gray-700 max-h-[90vh] overflow-y-auto ${maxWidth} ${className || ''}`}
+            className={`bg-gray-50 dark:bg-gray-800 rounded-xl p-5 shadow-2xl relative w-full border border-gray-200 dark:border-gray-700 max-h-[90vh] overflow-y-auto ${maxWidth} ${className || ''}`}
             variants={modalVariants}
             initial="hidden"
             animate="visible"

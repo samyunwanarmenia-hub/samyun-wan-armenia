@@ -56,7 +56,7 @@ const FaqSection = () => {
           {questions.map((q, index) => (
             <motion.div
               key={q.key}
-              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
+              className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
               variants={itemVariants}
               initial="hidden"
               whileInView="visible"

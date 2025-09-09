@@ -37,7 +37,7 @@ const BenefitsSection = () => {
           {benefitsItemsData.map((benefit, index) => (
             <motion.div 
               key={benefit.key}
-              className="relative overflow-hidden bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group"
+              className="relative overflow-hidden bg-gray-50 dark:bg-gray-800 rounded-3xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group"
               variants={itemVariants}
               initial="hidden"
               whileInView="visible"

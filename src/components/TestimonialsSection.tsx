@@ -65,7 +65,7 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
             {displayedTestimonials.map((testimonial: Testimonial) => (
               <motion.div 
                 key={testimonial.id}
-                className="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-700 group flex flex-col"
+                className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 shadow-lg border border-gray-200 dark:border-gray-700 group flex flex-col"
                 variants={itemVariants}
                 whileHover={{ 
                   scale: 1.05, 

@@ -43,7 +43,7 @@ const ContactSection = () => {
           {contactInfoData.map((item, index) => (
             <motion.div 
               key={item.key} 
-              className="text-center bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-lg border border-gray-200 dark:border-gray-700 group"
+              className="text-center bg-gray-50 dark:bg-gray-800 rounded-2xl p-5 shadow-lg border border-gray-200 dark:border-gray-700 group"
               variants={itemVariants}
               initial="hidden"
               whileInView="visible"

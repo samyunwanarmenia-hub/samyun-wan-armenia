@@ -65,7 +65,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
 
         {/* QR Code Block */}
         <motion.div
-          className="p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-xs sm:max-w-sm lg:max-w-md mx-auto text-center"
+          className="p-4 bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-xs sm:max-w-sm lg:max-w-md mx-auto text-center"
           variants={itemVariants} // Apply itemVariants for animation
           whileHover={{ 
             scale: 1.05, 
@@ -86,7 +86,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
             aria-label={t.hero.qrBlockTitle}
           >
             <motion.div
-              className="w-32 h-32 bg-white dark:bg-gray-700 rounded-xl mx-auto mb-3 flex items-center justify-center transform group-hover:scale-105 transition-all border border-gray-200 dark:border-gray-600 p-2"
+              className="w-32 h-32 bg-gray-100 dark:bg-gray-700 rounded-xl mx-auto mb-3 flex items-center justify-center transform group-hover:scale-105 transition-all border border-gray-200 dark:border-gray-600 p-2"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               transition={{ type: "spring", stiffness: 400, damping: 17 }}

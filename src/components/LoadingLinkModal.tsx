@@ -64,7 +64,7 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
       exit="hidden"
     >
       <motion.div
-        className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-2xl relative w-full max-w-sm flex flex-col items-center text-center border border-gray-200 dark:border-gray-700"
+        className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 shadow-2xl relative w-full max-w-sm flex flex-col items-center text-center border border-gray-200 dark:border-gray-700"
         variants={modalVariants}
         initial="hidden"
         animate="visible"

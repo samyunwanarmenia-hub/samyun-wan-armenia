@@ -64,7 +64,7 @@ const TrackOrderSection = () => {
 
         <motion.form
           onSubmit={handleTrackOrder}
-          className="flex flex-col sm:flex-row gap-4 mb-8 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
+          className="flex flex-col sm:flex-row gap-4 mb-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
           variants={itemVariants}
           initial="hidden"
           animate="visible"
@@ -98,7 +98,7 @@ const TrackOrderSection = () => {
 
         {isLoading && (
           <motion.div
-            className="flex justify-center items-center p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
+            className="flex justify-center items-center p-6 bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}

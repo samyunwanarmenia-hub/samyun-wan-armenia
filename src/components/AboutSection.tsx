@@ -72,7 +72,7 @@ const AboutSection = () => {
 
         {/* Existing "Why Choose Us" section */}
         <motion.div
-          className="mt-8 mb-12 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-3xl mx-auto text-center"
+          className="mt-8 mb-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-3xl mx-auto text-center"
           variants={itemVariants}
           initial="hidden"
           whileInView="visible"
@@ -101,7 +101,7 @@ const AboutSection = () => {
           {aboutItems.map((item, index) => (
             <motion.div 
               key={item.key}
-              className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group"
+              className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group"
               variants={itemVariants}
               initial="hidden"
               whileInView="visible"

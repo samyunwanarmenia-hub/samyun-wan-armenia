@@ -18,7 +18,7 @@
   --fab-action-shadow-rgb: 108, 144, 108;
   --fab-action-hover-bg: theme('colors.primary.500');
 
-  --slogan-base-color: theme('colors.gray.200'); /* Changed to lighter gray for light mode */
+  --slogan-base-color: theme('colors.gray.700'); /* Changed to darker gray for light mode */
   --slogan-shine-color: theme('colors.gray.50');
 
   /* Intro Animation Colors - Light Mode */
