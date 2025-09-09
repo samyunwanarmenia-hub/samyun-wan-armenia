@@ -1,8 +1,13 @@
 .fab-wrapper {
   position: fixed;
-  bottom: 3rem;
-  right: 2rem;
+  bottom: 1rem; /* Adjusted for smaller screens */
+  right: 1rem; /* Adjusted for smaller screens */
   z-index: 50;
+
+  @screen md { /* Apply larger spacing on medium screens and up */
+    bottom: 3rem;
+    right: 2rem;
+  }
 }
 
 .fab { /* Main FAB button */
@@ -12,12 +17,12 @@
   width: 4rem;
   height: 4rem;
   background: var(--fab-bg);
-  box-shadow: 0px 5px 20px var(--fab-shadow);
+  box-shadow: 0px 5px 20px var(--fab-shadow), var(--tw-shadow-glow-green); /* Added glow effect */
   transition: all 0.3s ease;
   z-index: 1;
   border-radius: 50%; /* Ensure it's a perfect circle */
   cursor: pointer;
-  opacity: 0.9;
+  opacity: 1; /* Ensure full opacity by default */
   display: flex; /* Added for centering icon */
   align-items: center; /* Added for centering icon */
   justify-content: center; /* Added for centering icon */
@@ -47,7 +52,7 @@
 
 .fab:hover {
   background: var(--fab-hover-bg);
-  box-shadow: 0px 5px 20px 5px var(--fab-hover-shadow);
+  box-shadow: 0px 5px 20px 5px var(--fab-hover-shadow), var(--tw-shadow-glow-green); /* Added glow effect on hover */
 }
 
 /* Removed .fab-dots related CSS */
@@ -81,7 +86,7 @@
   align-items: center;
   justify-content: center;
   color: White;
-  box-shadow: 0 0.1rem 1rem rgba(var(--fab-action-shadow-rgb), 0.82);
+  box-shadow: 0 0.1rem 1rem rgba(var(--fab-action-shadow-rgb), 0.82), var(--tw-shadow-glow-green); /* Added glow effect */
   opacity: 0.9;
   cursor: pointer;
   top: 50%;
@@ -91,4 +96,5 @@
 
 .fab-action:hover {
   background-color: var(--fab-action-hover-bg);
+  box-shadow: 0 0.1rem 1rem rgba(var(--fab-action-shadow-rgb), 0.82), var(--tw-shadow-glow-green); /* Added glow effect on hover */
 }
