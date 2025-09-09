@@ -74,7 +74,7 @@ const MainLayout = ({
       
       {/* New: Semi-transparent overlay for text readability */}
       <motion.div
-        className="fixed inset-0 z-[5] bg-white/30 dark:bg-black/50" // Adjusted for light mode
+        className="fixed inset-0 z-[5] bg-black/10 dark:bg-black/50" // Adjusted for light mode to add 10% darkening
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 0.5 }}
