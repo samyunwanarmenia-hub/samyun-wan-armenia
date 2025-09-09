@@ -71,6 +71,7 @@ export const metadata: Metadata = {
   },
   // Explicitly add theme-color meta tag
   themeColor: '#86b486', // Using primary-500 for theme color
+  // Removed 'other' property as preconnect links are now directly in the component
 };
 
 const RootLayout = ({
@@ -81,7 +82,7 @@ const RootLayout = ({
   return (
     <html lang="hy" className={`${inter.variable}`}>
       <head>
-        {/* Preconnect to important third-party origins */}
+        {/* Add preconnect links here */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://mc.yandex.ru" />
         <link rel="preconnect" href="https://randomuser.me" />
