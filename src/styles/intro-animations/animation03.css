@@ -22,37 +22,37 @@
 .animation03 .circle_element01 {
   width: 13vw;
   height: 13vw;
-  border: 0.25rem solid var(--intro-border-green-medium); /* Changed from vw to rem */
+  border: 0.25rem solid var(--intro-border-green-medium);
   border-radius: 50%;
   animation: animation03_circle 0.3s ease-in-out 0.5s forwards,
-    animation03_circle_element01 0.3s linear 0.9s forwards;
-  opacity: 0;
+             animation03_circle_element_fade_out 0.3s linear 0.9s forwards; /* Use new fade-out animation */
+  opacity: 0; /* Initial opacity */
 }
 
 .animation03 .circle_element02 {
   width: 9vw;
   height: 9vw;
-  border: 0.5rem solid var(--intro-border-green-dark); /* Changed from vw to rem */
+  border: 0.5rem solid var(--intro-border-green-dark);
   border-radius: 50%;
   animation: animation03_circle 0.4s ease-in-out 0.5s forwards,
-    animation03_circle_element02 0.2s linear 1.0s forwards;
+             animation03_circle_element_fade_out 0.2s linear 1.0s forwards; /* Use new fade-out animation */
   opacity: 0;
 }
 
 .animation03 .circle_element03 {
   width: 4vw;
   height: 4vw;
-  border: 1rem solid var(--intro-border-gray-dark); /* Changed from vw to rem */
+  border: 1rem solid var(--intro-border-gray-dark);
   border-radius: 50%;
   animation: animation03_circle 0.45s ease-in-out 0.5s forwards,
-    animation03_circle_element03 0.15s linear 1.4s forwards;
+             animation03_circle_element_fade_out 0.15s linear 1.4s forwards; /* Use new fade-out animation */
   opacity: 0;
 }
 
 @keyframes animation03_circle {
   0% {
     transform: scale3d(0, 0, 1);
-    opacity: 1;
+    opacity: 1; /* Keep opacity 1 during scale-in */
   }
   100% {
     transform: scale3d(1, 1, 1);
@@ -60,29 +60,14 @@
   }
 }
 
-@keyframes animation03_circle_element01 {
+/* New keyframes for fading out and scaling down */
+@keyframes animation03_circle_element_fade_out {
   0% {
-    border: 0.25rem solid var(--intro-border-green-medium); /* Changed from vw to rem */
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
   }
   100% {
-    border: 0 solid var(--intro-border-green-medium);
-  }
-}
-
-@keyframes animation03_circle_element02 {
-  0% {
-    border: 0.5rem solid var(--intro-border-green-dark); /* Changed from vw to rem */
-  }
-  100% {
-    border: 0 solid var(--intro-border-green-dark);
-  }
-}
-
-@keyframes animation03_circle_element03 {
-  0% {
-    border: 1rem solid var(--intro-border-gray-dark); /* Changed from vw to rem */
-  }
-  100% {
-    border: 0 solid var(--intro-border-gray-dark);
+    opacity: 0;
+    transform: scale3d(0.5, 0.5, 1); /* Scale down slightly as it fades */
   }
 }
