@@ -27,7 +27,7 @@ export const ru: TranslationKeys = {
     qrVerificationSubtitle: 'Сканируйте для проверки',
     seo_title_addon: 'Что такое Samyun Wan и его реальный эффект | Спортивное питание',
     qrBlockTitle: 'Проверьте подлинность',
-    qrBlockDescription: '',
+    qrBlockDescription: 'Отсканируйте QR-код, чтобы проверить подлинность продукта.',
   },
   stats: {
     customers: 'Довольных клиентов',
