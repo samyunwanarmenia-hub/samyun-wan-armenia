@@ -1,5 +1,4 @@
-@layer components {
-  /* =================== components.css ==================== */
+/* =================== components.css ==================== */
   .shadow-glow-green {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 15px rgba(134, 180, 134, 0.5);
   }
@@ -58,4 +57,3 @@
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15), 0 0 25px rgba(134, 180, 134, 0.6); /* Enhanced glow */
     }
   }
-}
