@@ -44,7 +44,7 @@ const LanguageSwitcher: React.FC = () => {
           key={lang.key}
           onClick={() => setCurrentLang(lang.key)}
           disabled={currentLang === lang.key}
-          className="text-sm text-gray-500 dark:text-gray-400 disabled:opacity-50 disabled:font-semibold disabled:text-primary-600 dark:disabled:text-primary-400 transition-colors"
+          className="text-sm text-gray-700 dark:text-gray-400 disabled:opacity-50 disabled:font-semibold disabled:text-primary-600 dark:disabled:text-primary-400 transition-colors" /* Changed text-gray-500 to text-gray-700 for light mode */
           aria-label={lang.ariaLabel}
           whileHover={{ scale: currentLang === lang.key ? 1 : 1.1 }}
           whileTap={{ scale: currentLang === lang.key ? 1 : 0.95 }}

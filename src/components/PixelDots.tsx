@@ -16,7 +16,8 @@ const PixelDots: React.FC<PixelDotsProps> = ({ className }) => {
       >
         {Array.from({ length: 16 }).map((_, i) => (
           // Changed bg-white to theme-aware
-          <div key={i} className="w-2 h-2 bg-gray-50 dark:bg-gray-300 rounded-sm" />
+          // Changed bg-gray-50 to bg-gray-300 for light mode
+          <div key={i} className="w-2 h-2 bg-gray-300 dark:bg-gray-300 rounded-sm" />
         ))}
       </div>
     </motion.div>
