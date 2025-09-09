@@ -29,6 +29,7 @@ body:active:after {
   z-index: 0;
   left: -10vw;
   pointer-events: none; /* Prevent rain background from intercepting clicks/touches */
+  cursor: default; /* Ensure cursor is default, not pointer, for the main rain area */
 }
 .rain .left,
 .rain .right {

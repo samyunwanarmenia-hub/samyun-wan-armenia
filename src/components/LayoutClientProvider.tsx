@@ -81,7 +81,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
     } else {
       document.body.classList.remove('body-blank');
       // ThemeContext will handle 'dark' class for other pages
-      // Only set overflow to hidden if intro animation is active
+      // Dynamically set overflow based on intro animation state
       document.body.style.overflow = showIntroAnimation ? 'hidden' : '';
     }
 

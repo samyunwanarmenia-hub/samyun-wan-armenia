@@ -17,7 +17,7 @@ body {
   height: 100vh;
   margin: 0;
   padding: 0;
-  overflow: hidden; /* Ensure overflow is hidden for the background animation */
+  /* Removed overflow: hidden; - now managed dynamically in LayoutClientProvider */
   background: linear-gradient(180deg, #07131c, #305472); /* New gradient background */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
