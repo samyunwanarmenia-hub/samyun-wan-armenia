@@ -55,49 +55,49 @@ const Footer = () => {
                 href="https://www.instagram.com/samyunwanarmenia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-white/10 rounded-md flex items-center justify-center text-white"
+                className="w-9 h-9 bg-gray-700 border border-gray-600 rounded-md flex items-center justify-center text-white"
                 whileHover={{ scale: 1.2, backgroundColor: '#E1306C' }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 aria-label="Follow us on Instagram"
               >
-                <Instagram className="w-5 h-5" />
+                <Instagram className="w-6 h-6" />
               </motion.a>
               <motion.a
                 href="https://www.facebook.com/samyunwanarmenia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-white/10 rounded-md flex items-center justify-center text-white"
+                className="w-9 h-9 bg-gray-700 border border-gray-600 rounded-md flex items-center justify-center text-white"
                 whileHover={{ scale: 1.2, backgroundColor: '#1877F2' }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 aria-label="Follow us on Facebook"
               >
-                <Facebook className="w-5 h-5" />
+                <Facebook className="w-6 h-6" />
               </motion.a>
               <motion.a
                 href="https://t.me/samyunwanarmenia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-white/10 rounded-md flex items-center justify-center text-white"
+                className="w-9 h-9 bg-gray-700 border border-gray-600 rounded-md flex items-center justify-center text-white"
                 whileHover={{ scale: 1.2, backgroundColor: '#0088CC' }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 aria-label="Join us on Telegram"
               >
-                <Send className="w-5 h-5" />
+                <Send className="w-6 h-6" />
               </motion.a>
               <motion.a
                 href="https://wa.me/37496653666"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-white/10 rounded-md flex items-center justify-center text-white"
+                className="w-9 h-9 bg-gray-700 border border-gray-600 rounded-md flex items-center justify-center text-white"
                 whileHover={{ scale: 1.2, backgroundColor: '#25D366' }}
                 whileTap={{ scale: 0.9 }}
                 transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 aria-label="Chat with us on WhatsApp"
               >
-                <MessageCircle className="w-5 h-5" />
+                <MessageCircle className="w-6 h-6" />
               </motion.a>
             </div>
             <p className="text-xs leading-relaxed text-red-400 dark:text-red-300">
