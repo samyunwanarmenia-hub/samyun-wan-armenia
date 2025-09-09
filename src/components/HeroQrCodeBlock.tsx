@@ -5,15 +5,18 @@ import { motion } from 'framer-motion';
 import { QRCodeCanvas } from 'qrcode.react';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { ShieldCheck } from 'lucide-react'; // Using ShieldCheck icon for authenticity
+import Link from 'next/link'; // Import Link for internal navigation
 
 interface HeroQrCodeBlockProps {
   delay?: number;
 }
 
 const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
-  const { t } = useLayoutContext();
+  const { t, currentLang } = useLayoutContext();
 
-  const qrCodeValue = `https://qr-wan.netlify.app/`; // External verification site
+  // Change qrCodeValue to point to the internal /verify/qr page
+  const qrCodeValue = `https://samyunwanarmenia.netlify.app/${currentLang}/verify/qr`; // Use dynamic currentLang
+  const qrLinkPath = `/${currentLang}/verify/qr`; // Internal link path
 
   const blockVariants = {
     hidden: { opacity: 0, y: 20, scale: 0.95 },
@@ -48,12 +51,10 @@ const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
           {t.hero.qrBlockTitle}
         </h3>
       </div>
-      <a 
-        href={qrCodeValue}
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link 
+        href={qrLinkPath} // Use Link for internal navigation
         className="group block p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
-        aria-label={t.hero.qrBlockTitle} // Added aria-label
+        aria-label={t.hero.qrBlockTitle}
       >
         <motion.div
           className="w-32 h-32 bg-white dark:bg-gray-700 rounded-xl mx-auto mb-3 flex items-center justify-center transform group-hover:scale-105 transition-all border border-gray-200 dark:border-gray-600 p-2"
@@ -66,7 +67,7 @@ const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
         <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
           {t.hero.qrBlockDescription}
         </p>
-      </a>
+      </Link>
     </motion.div>
   );
 };
