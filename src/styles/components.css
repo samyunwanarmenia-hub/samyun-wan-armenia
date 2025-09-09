@@ -27,7 +27,7 @@
     }
   }
 
-  /* New: Pulse animation for primary CTA button */
+  /* New: Pulse animation for primary CTA button using composited properties */
   .animate-pulse-subtle {
     animation: pulse-subtle 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
   }
@@ -35,10 +35,12 @@
   @keyframes pulse-subtle {
     0%, 100% {
       transform: scale(1);
+      opacity: 1; /* Full opacity for the button itself */
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 15px rgba(134, 180, 134, 0.5); /* Initial glow */
     }
     50% {
       transform: scale(1.02); /* Subtle scale increase */
+      opacity: 0.9; /* Slight opacity reduction */
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05), 0 0 25px rgba(134, 180, 134, 0.8); /* Enhanced glow */
     }
   }
@@ -50,10 +52,12 @@
   @keyframes pulse-subtle-dark {
     0%, 100% {
       transform: scale(1);
+      opacity: 1;
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15), 0 0 15px rgba(134, 180, 134, 0.3); /* Initial glow */
     }
     50% {
       transform: scale(1.02); /* Subtle scale increase */
+      opacity: 0.9;
       box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15), 0 0 25px rgba(134, 180, 134, 0.6); /* Enhanced glow */
     }
   }

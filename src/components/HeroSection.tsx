@@ -74,7 +74,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
-              transition={{ delay: introEndDelay + 1.9 }} // Adjusted delay
+              transition={{ delay: introEndDelay + 0.5 }} // Уменьшена задержка для LCP элемента
             >
               {t.hero.subtitle}
             </motion.p>
