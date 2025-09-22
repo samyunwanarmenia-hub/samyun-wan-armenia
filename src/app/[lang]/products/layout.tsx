@@ -1,6 +1,5 @@
 import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
-import { ReactNode } from 'react';
 import { generateProductStructuredData } from '@/utils/structuredDataUtils';
 import { productShowcaseData } from '@/data/productShowcaseData';
 import { ProductsLayoutProps } from '@/types/global';

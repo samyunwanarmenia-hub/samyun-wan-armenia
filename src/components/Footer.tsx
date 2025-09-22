@@ -1,7 +1,6 @@
 "use client"; // This is a client component
 
 import { Instagram, Facebook, MessageCircle, Send } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { TranslationKeys } from '../types/global';
 import Link from 'next/link';
 import { useLayoutContext } from '@/context/LayoutContext';

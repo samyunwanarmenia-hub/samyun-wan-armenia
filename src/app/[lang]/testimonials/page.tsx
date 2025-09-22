@@ -15,7 +15,7 @@ const TestimonialsPage = () => {
   const { t, currentLang } = useLayoutContext();
   const [dbTestimonials, setDbTestimonials] = useState<Testimonial[]>([]);
   const [userTestimonial, setUserTestimonial] = useState<Testimonial | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [_isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchTestimonials = async () => {

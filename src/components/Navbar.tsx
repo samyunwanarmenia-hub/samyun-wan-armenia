@@ -1,7 +1,6 @@
 "use client"; // This is a client component
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { NavbarProps, TranslationKeys } from '@/types/global';
 import MobileNav from './MobileNav';
 import ThemeToggle from './ThemeToggle';
@@ -16,7 +15,7 @@ import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 const Navbar: React.FC<NavbarProps> = () => {
   const [scrolled, setScrolled] = useState(false);
   const { t, currentLang, getLinkClasses } = useLayoutContext();
-  const { theme } = useTheme(); // Get current theme
+  const { theme: _theme } = useTheme(); // Get current theme
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);
 
   useEffect(() => {

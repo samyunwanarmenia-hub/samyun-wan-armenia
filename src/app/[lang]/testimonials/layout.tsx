@@ -1,6 +1,5 @@
 import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
-import { ReactNode } from 'react';
 import { baseTestimonials } from '@/data/testimonials';
 import { generateReviewStructuredData } from '@/utils/structuredDataUtils';
 import { TestimonialsLayoutProps } from '@/types/global';

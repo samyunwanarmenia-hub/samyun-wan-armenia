@@ -1,6 +1,5 @@
 import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
-import { ReactNode } from 'react';
 import { TrackOrderLayoutProps } from '@/types/global';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 

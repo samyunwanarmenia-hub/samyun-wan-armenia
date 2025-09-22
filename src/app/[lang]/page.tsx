@@ -5,7 +5,7 @@ import ProductShowcaseSection from '@/components/ProductShowcaseSection';
 
 const LangPage = async ({ params }: { params: { lang: string } }) => {
   const currentLang = params.lang as keyof typeof translations;
-  const t = translations[currentLang] || translations.hy;
+  const _t = translations[currentLang] || translations.hy;
 
   return (
     <>
