@@ -123,14 +123,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             <HeroQrCodeBlock delay={introEndDelay + 3.0} /> {/* Увеличена задержка */}
           </div>
         </div>
-        <div className="w-full flex justify-center mb-6">
-          <div className="bg-red-100 border border-red-500 text-red-700 rounded-lg px-4 py-3 font-bold text-md shadow-xl max-w-xl mx-auto">
-            ⚠️ Это единственный <b>официальный сайт Samyun Wan Armenia</b>! Покупая на других сайтах — риск получить <b>подделку</b>, опасную для здоровья. Мы гарантируем оригинал с верификацией по <b>QR-коду</b> на упаковке. <br/>
-            <span style={{fontWeight:'bold'}}>Остерегайтесь мошенников!</span>
-            <br />
-            Проверить подлинность заказа можно только на нашем сайте.
-          </div>
-        </div>
+<div className="sr-only" aria-hidden="true">
+  Это единственный официальный сайт Samyun Wan Armenia! Покупая на других сайтах — риск получить подделку, опасную для здоровья. Мы гарантируем оригинал с верификацией по QR-коду на упаковке. Остерегайтесь мошенников! Проверить подлинность заказа можно только на нашем сайте.
+</div>
       </div>
     </section>
   );

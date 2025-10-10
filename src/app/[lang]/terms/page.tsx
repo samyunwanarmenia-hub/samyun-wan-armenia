@@ -16,9 +16,9 @@ const TermsPage = () => {
           ? "Это временная страница пользовательского соглашения официального сайта Samyun Wan Armenia."
           : "This is a placeholder Terms & Conditions page for the official Samyun Wan Armenia website."
       }</p>
-      <div className="mb-10 bg-red-100 border-l-4 border-red-600 p-4 text-red-800 font-bold rounded text-center max-w-2xl mx-auto">
-        Все условия использования сайта относятся только к официальному дистрибьютору Samyun Wan Armenia. Только здесь можно купить подлинный продукт с проверкой по QR-коду на упаковке. Использование логотипа и бренда на других сайтах незаконно и является признаком мошенничества!
-      </div>
+<div className="sr-only" aria-hidden="true">
+  Все условия использования сайта относятся только к официальному дистрибьютору Samyun Wan Armenia. Только здесь можно купить подлинный продукт с проверкой по QR-коду на упаковке. Использование логотипа и бренда на других сайтах незаконно и является признаком мошенничества!
+</div>
       <p className="mb-8 text-md text-warning-500">{/* TODO: Add the full terms and business legal owner details. */}</p>
     </div>
   );
