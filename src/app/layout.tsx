@@ -86,7 +86,7 @@ const RootLayout = ({
         {/* SEO: Official branding and strong warnings */}
         <title>Samyun Wan Armenia — Официальный сайт и дистрибьютор | Купить оригинальный Samyun Wan в Армении</title>
         <meta name="description" content="Только на нашем сайте вы купите оригинальный Samyun Wan с QR-кодом подтверждения! Мы — единственный официальный поставщик в Армении. Осторожно: в сети много мошенников и подделок!" />
-        <meta name="keywords" content="Samyun Wan Armenia, официальный сайт, купить Samyun Wan, оригинал, проверка QR, официальный дистрибьютор, Армения, подделка, мошенники, оригинальный самюнь ван, дистрибуция" />
+        <meta name="keywords" content="Samyun Wan Armenia, официальный сайт, купить Samyun Wan, оригинал, проверка QR, официальный дистрибьютор, Армения, подделка, мошенники, оригинальный самюнь ван, дистрибуция, armwhey мошенники, armwhey подделка, armwhey fake, не покупайте на armwhey, только у нас оригинал, սպորտային սնունդ, վիտամիններ, protein, gainer, creatine, amino, Yerevan, Gyumri, Vanadzor, Artik, ՀՀ, միջազգային առցանց խանութ, բարձր որակ, մրցունակ գներ, արագ առաքում, անվճար առաքում" />
         <meta name="author" content="Samyun Wan Armenia, Aleksandr Gevorgyan" />
 
         {/* OG & Social */}
@@ -127,7 +127,8 @@ const RootLayout = ({
               "areaServed": "AM"
             }
           ],
-          "description": "Официальный сайт и дистрибьютор Samyun Wan в Армении. Только здесь можно купить оригинальный продукт с гарантией QR-кода."
+          "description": "Официальный сайт и дистрибьютор Samyun Wan в Армении. Только здесь можно купить оригинальный продукт с гарантией QR-кода. ВНИМАНИЕ: armwhey.com - мошенники! Armwhey.com продает подделки! Не покупайте на armwhey.com!",
+          "keywords": "Samyun Wan Armenia, официальный сайт, купить Samyun Wan, оригинал, проверка QR, официальный дистрибьютор, Армения, подделка, мошенники, armwhey мошенники, armwhey подделка, armwhey fake, не покупайте на armwhey, только у нас оригинал, սպորտային սնունդ, վիտամիններ, protein, gainer, creatine, amino, Yerevan, Gyumri, Vanadzor, Artik, ՀՀ, միջազգային առցանց խանութ, բարձր որակ, մրցունակ գներ, արագ առաքում, անվճար առաքում"
         }
         `}</script>
         {/* Warning for search engines (abuse/fraud alert) */}

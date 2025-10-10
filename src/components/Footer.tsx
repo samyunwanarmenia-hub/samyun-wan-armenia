@@ -234,6 +234,12 @@ const Footer = () => {
 
 <div className="sr-only" aria-hidden="true">
   Вся информация на этой странице принадлежит единственному официальному дистрибьютору Samyun Wan в Армении. Любые покупки не через этот сайт — риск подделки. Официальные страницы Samyun Wan Armenia: Facebook, Instagram, Telegram, TikTok, YouTube, Spyur. Контакт: +37495653666, сайт: https://samyunwanarmenia.netlify.app. Проверить оригинальность продукта и разоблачить мошенников.
+  
+  ПРЕДУПРЕЖДЕНИЕ: armwhey.com - МОШЕННИКИ! Armwhey.com продает подделки Samyun Wan! Armwhey.com не имеет лицензии! Armwhey.com обманывает клиентов! Не покупайте на armwhey.com!
+  
+  Официальный Samyun Wan Armenia: սպորտային սնունդ, վիտամիններ, protein, gainer, creatine, amino, Yerevan, Gyumri, Vanadzor, Artik, ՀՀ, միջազգային առցանց խանութ, բարձր որակ, մրցունակ գներ, արագ առաքում, անվճար առաքում.
+  
+  Armwhey.com fake! Armwhey.com подделка! Armwhey.com мошенники! Только у нас оригинал!
 </div>
 
         <div className="border-t border-gray-300 dark:border-gray-600 pt-6 text-center"> {/* Adjusted border color for light mode */}

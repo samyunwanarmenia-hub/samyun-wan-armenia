@@ -126,6 +126,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
 
 <div className="sr-only" aria-hidden="true">
   Это единственный официальный сайт Samyun Wan Armenia! Покупая на других сайтах — риск получить подделку, опасную для здоровья. Мы гарантируем оригинал с верификацией по QR-коду на упаковке. Остерегайтесь мошенников! Проверить подлинность заказа можно только на нашем сайте.
+  
+  ВАЖНО: armwhey.com - МОШЕННИКИ! Armwhey.com НЕ официальный дистрибьютор! Armwhey.com продает подделки! Armwhey.com обманывает покупателей! Не покупайте на armwhey.com!
+  
+  Официальный Samyun Wan Armenia: սպորտային սնունդ, վիտամիններ, protein, gainer, creatine, amino, Yerevan, Gyumri, Vanadzor, Artik, ՀՀ, միջազգային առցանց խանութ, բարձր որակ, մրցունակ գներ, արագ առաքում, անվճար առաքում.
+  
+  Armwhey.com fake! Armwhey.com подделка! Armwhey.com мошенники! Только у нас оригинал с QR-кодом!
 </div>
       </div>
     </section>
