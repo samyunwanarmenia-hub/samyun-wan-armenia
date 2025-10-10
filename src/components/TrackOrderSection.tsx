@@ -105,7 +105,8 @@ const TrackOrderSection = () => {
             transition={{ duration: 0.3 }}
           >
             <LoadingSpinner />
-            <p className="ml-4 text-lg text-gray-600 dark:text-gray-300">{t.trackOrder.processingRequest}</p> /* Changed text-gray-700 to text-gray-600 for light mode */
+            {/* Show loading message while processing order */}
+            <p className="ml-4 text-lg text-gray-700 dark:text-gray-300">{t.trackOrder.processingRequest}</p>
           </motion.div>
         )}
 

@@ -6,6 +6,7 @@ import { ChevronDown } from 'lucide-react';
 import { FaqQuestionKey, FaqAnswerKey } from '../types/global';
 import SectionHeader from './SectionHeader';
 import { useLayoutContext } from '@/context/LayoutContext';
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 const FaqSection = () => {
   const { t } = useLayoutContext();
@@ -41,7 +42,7 @@ const FaqSection = () => {
   return (
     <motion.section
       id="faq"
-      className="relative py-12 text-gray-800 dark:text-gray-50 overflow-hidden" /* Changed text-gray-900 to text-gray-800 for light mode */
+      className="relative py-12 text-gray-900 dark:text-gray-50 overflow-hidden"
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
@@ -54,22 +55,19 @@ const FaqSection = () => {
 
         <div className="space-y-3">
           {questions.map((q, index) => (
-            <motion.div
+            <InteractiveDiv
               key={q.key}
-              className="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
+              className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden"
               variants={itemVariants}
               initial="hidden"
               whileInView="visible"
               transition={{ delay: index * 0.1 + 0.2, type: "spring", stiffness: 400, damping: 17 }}
-              whileHover={{ 
-                scale: 1.02, 
-                y: -2, // Subtle lift
-                boxShadow: "0 10px 20px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.04)" // Enhanced shadow
-              }}
-              whileTap={{ scale: 0.98 }}
+              whileHoverScale={1.02}
+              hoverY={-2} // Subtle lift
+              hoverShadow="0 10px 20px rgba(0, 0, 0, 0.08), 0 3px 6px rgba(0, 0, 0, 0.04)" // Enhanced shadow
             >
               <motion.button
-                className="flex justify-between items-center w-full p-5 text-left text-lg font-semibold text-gray-800 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors" /* Changed text-gray-900 to text-gray-800 for light mode */
+                className="flex justify-between items-center w-full p-5 text-left text-lg font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
                 onClick={() => toggleQuestion(q.key)}
                 whileHover={{ scale: 1.01 }} // Slightly less scale for the button itself
                 whileTap={{ scale: 0.99 }}
@@ -90,13 +88,13 @@ const FaqSection = () => {
                     animate="visible"
                     exit="exit"
                     variants={accordionContentVariants}
-                    className="px-5 pb-5 text-gray-600 dark:text-gray-300 text-base leading-relaxed" /* Changed text-gray-700 to text-gray-600 for light mode */
+                    className="px-5 pb-5 text-gray-700 dark:text-gray-300 text-base leading-relaxed"
                   >
                     <p dangerouslySetInnerHTML={{ __html: t.faq[q.answerKey] }} />
                   </motion.div>
                 )}
               </AnimatePresence>
-            </motion.div>
+            </InteractiveDiv>
           ))}
         </div>
       </div>

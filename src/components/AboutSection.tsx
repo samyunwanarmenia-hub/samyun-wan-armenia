@@ -5,14 +5,10 @@ import { motion } from 'framer-motion';
 import { Icon } from '@/types/global';
 import SectionHeader from './SectionHeader';
 import { useLayoutContext } from '@/context/LayoutContext';
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 const AboutSection = () => {
   const { t } = useLayoutContext();
-
-  // Removed: console.log('AboutSection - Received t object:', t);
-  // Removed: console.log('AboutSection - t.about.title:', t.about.title);
-  // Removed: console.log('AboutSection - t.about.description:', t.about.description);
-  // Removed: console.log('AboutSection - t.about.content:', t.about.content);
 
   type AboutItemKey = 'natural' | 'proven' | 'safe' | 'fast';
 
@@ -71,12 +67,14 @@ const AboutSection = () => {
         </motion.p>
 
         {/* Existing "Why Choose Us" section */}
-        <motion.div
-          className="mt-8 mb-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-3xl mx-auto text-center"
-          variants={itemVariants}
+        <InteractiveDiv
+          className="mt-8 mb-12 p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-3xl mx-auto text-center"
           initial="hidden"
           whileInView="visible"
           transition={{ delay: 0.4 }}
+          variants={itemVariants}
+          hoverY={-5} // Subtle lift
+          hoverShadow="0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)"
         >
           <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-50 mb-4"> {/* Changed text-gray-900 to text-gray-800 for light mode */}
             {t.about.whyChooseUsTitle}
@@ -95,23 +93,19 @@ const AboutSection = () => {
               {t.about.whyChooseUsTrust}
             </motion.li>
           </ul>
-        </motion.div>
+        </InteractiveDiv>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto max-w-6xl">
           {aboutItems.map((item, index) => (
-            <motion.div 
+            <InteractiveDiv 
               key={item.key}
               className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group"
               variants={itemVariants}
               initial="hidden"
               whileInView="visible"
               transition={{ delay: index * 0.1 + 0.9 }}
-              whileHover={{ 
-                scale: 1.05, 
-                y: -5,
-                boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)"
-              }}
-              whileTap={{ scale: 0.98 }}
+              hoverY={-5} // Subtle lift
+              hoverShadow="0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)"
             >
               <div className="flex items-center mb-3">
                 <motion.div 
@@ -123,8 +117,8 @@ const AboutSection = () => {
                 </motion.div>
                 <h3 className="text-gray-800 dark:text-gray-50 text-lg font-bold">{t.about[item.key].title}</h3> {/* Changed text-gray-900 to text-gray-800 for light mode */}
               </div>
-              <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed">{t.about[item.key].desc}</p> {/* Changed text-gray-700 to text-gray-600 for light mode */}
-            </motion.div>
+              <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">{t.about[item.key].desc}</p>
+            </InteractiveDiv>
           ))}
         </div>
       </div>

@@ -58,6 +58,16 @@ export default {
     },
   },
   plugins: [
-    // Removed the plugin function
+    function({ addUtilities, theme }) {
+      const newUtilities = {
+        '.text-gradient-primary': {
+          background: `linear-gradient(to right, ${theme('colors.primary.400')}, ${theme('colors.secondary.400')})`,
+          '-webkit-background-clip': 'text',
+          'background-clip': 'text',
+          '-webkit-text-fill-color': 'transparent',
+        },
+      }
+      addUtilities(newUtilities, ['dark']); // Apply only in dark mode
+    }
   ],
 }

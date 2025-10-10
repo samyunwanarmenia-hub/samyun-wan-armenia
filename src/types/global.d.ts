@@ -323,8 +323,9 @@ export interface HeroSectionProps {
   stats: StatItem[];
 }
 export interface MobileNavProps {
-  mobileIconColorClass?: string; // New prop for dynamic icon color
+  scrolled: boolean; // Updated to reflect the new prop
 }
+
 export interface ReviewFormProps {
   onReviewSubmitted: (review: DbReview) => void;
 }

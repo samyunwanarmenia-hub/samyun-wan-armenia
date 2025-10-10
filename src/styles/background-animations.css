@@ -1,0 +1,20 @@
+/* =================== background-animations.css ==================== */
+@keyframes BackgroundGradient {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-gradient-start-light), var(--bg-gradient-mid-light), var(--bg-gradient-end-light));
+  background-size: 400% 400%;
+  animation: BackgroundGradient 15s ease infinite;
+  background-attachment: fixed; /* Keep background fixed during scroll */
+}
+
+.dark body {
+  background: linear-gradient(135deg, var(--bg-gradient-start-dark), var(--bg-gradient-mid-dark), var(--bg-gradient-end-dark));
+  background-size: 400% 400%;
+  animation: BackgroundGradient 15s ease infinite;
+  background-attachment: fixed; /* Keep background fixed during scroll */
+}

@@ -5,50 +5,34 @@
 /* Import modular CSS files */
 @import '../styles/base.css';
 @import '../styles/variables.css';
-/* Removed @import '../styles/background-animations.css'; */
+@import '../styles/background-animations.css'; /* Re-enabled and will be updated */
 @import '../styles/fab.css';
-/* Removed @import '../styles/rain.css'; */
-/* Intro animation base styles and sub-animations are now imported directly in IntroAnimation.tsx */
+@import '../styles/intro-animation.css';
+@import '../styles/intro-animations/animation01.css';
+@import '../styles/intro-animations/animation02.css';
+@import '../styles/intro-animations/animation03.css';
+@import '../styles/intro-animations/animation04.css';
 @import '../styles/components.css';
 
-/* Global body styles */
-body {
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  padding: 0;
-  /* Removed overflow: hidden; - now managed dynamically in LayoutClientProvider */
-  background: #000; /* Set a solid black background as the SVG will provide the gradients */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-weight: 500;
-  line-height: 1.7;
-  position: relative;
+/* Removed old styles for SVG gradient background */
+/* #bg-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.5;
+  overflow: hidden;
 }
 
-/* Dark mode specific body styles - override if necessary, but for this background, it's consistent */
-.dark body {
-  background: #000; /* Keep dark background consistent */
-}
+#bg-wrap > svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+} */
 
-/* Remove responsive background for body as it's now a gradient */
-@media only screen and (max-width: 600px) {
-  body {
-    background-size: cover; /* Ensure gradient covers on small screens */
-    background-position: center;
-  }
-  .dark body {
-    background-size: cover;
-    background-position: center;
-  }
-}
-
-/* Ensure html scroll behavior is smooth */
-html {
-  scroll-behavior: smooth;
-}
-
-::selection {
-  background-color: theme('colors.primary.500');
-  color: theme('colors.white');
-}
+/* Ensure body background is managed by background-animations.css */
+/* body {
+  background: none;
+} */

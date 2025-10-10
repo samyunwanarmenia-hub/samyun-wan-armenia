@@ -31,7 +31,7 @@ interface MainLayoutProps {
 // Dynamically import client-only components with ssr: false
 const DynamicNavbar = dynamic(() => import('@/components/Navbar'), { ssr: false });
 const DynamicFooter = dynamic(() => import('@/components/Footer'), { ssr: false });
-// Removed DynamicRainBackground
+// Removed DynamicSvgGradientBackground import
 const DynamicScrollToTopButton = dynamic(() => import('@/components/ScrollToTopButton'), { ssr: false }); // Lazy load ScrollToTopButton
 
 // Dynamically import modals with ssr: false
@@ -70,10 +70,7 @@ const MainLayout = ({
 
   return (
     <> {/* Use React.Fragment instead of a div */}
-      <AnimatedGradientBackground /> {/* Use the new animated background component */}
-      
-      {/* New: Fixed static gradient overlay at the top */}
-      <div className="fixed top-0 left-0 w-full h-60 z-10 bg-gradient-to-b from-black via-black/60 via-black/25 via-black/10 to-transparent" />
+      {/* Removed DynamicSvgGradientBackground */}
       
       <DynamicNavbar />
       

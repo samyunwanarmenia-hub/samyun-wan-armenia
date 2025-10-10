@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { QRCodeCanvas } from 'qrcode.react';
 import Link from 'next/link';
 import { ShieldCheck } from 'lucide-react';
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, onClose, t, currentLang }) => {
   const containerVariants = {
@@ -40,14 +41,14 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
         animate="visible"
       >
         {/* Certificate Image */}
-        <motion.div 
+        <InteractiveDiv 
           className="flex flex-col items-center text-center w-full" // Ensure it takes full width
           variants={itemVariants}
+          whileHoverScale={1.03}
+          hoverY={0}
+          hoverShadow="none"
         >
-          <motion.div
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.98 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          <div
             className="w-full h-auto rounded-xl shadow-lg border border-gray-300 dark:border-gray-600 mb-3 overflow-hidden"
           >
             <OptimizedImage 
@@ -57,22 +58,18 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
               loading="eager"
               sizes="(max-width: 768px) 90vw, 400px"
             />
-          </motion.div>
-          <p className="text-gray-600 dark:text-gray-300 text-base leading-relaxed mb-4"> {/* Changed text-gray-700 to text-gray-600 for light mode */}
+          </div>
+          <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
             {t.authenticity.certificateDesc}
           </p>
-        </motion.div>
+        </InteractiveDiv>
 
         {/* QR Code Block */}
-        <motion.div
-          className="p-4 bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-xs sm:max-w-sm lg:max-w-md mx-auto text-center"
+        <InteractiveDiv
+          className="p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-xs sm:max-w-sm lg:max-w-md mx-auto text-center"
           variants={itemVariants} // Apply itemVariants for animation
-          whileHover={{ 
-            scale: 1.05, 
-            y: -5,
-            boxShadow: "0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)"
-          }}
-          whileTap={{ scale: 0.98 }}
+          hoverY={-5}
+          hoverShadow="0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)"
         >
           <div className="flex items-center justify-center mb-3">
             <ShieldCheck className="w-6 h-6 text-primary-600 dark:text-primary-400 mr-2" />
@@ -97,7 +94,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
               {t.hero.qrBlockDescription}
             </p>
           </Link>
-        </motion.div>
+        </InteractiveDiv>
       </motion.div>
     </ModalWrapper>
   );

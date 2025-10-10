@@ -4,7 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { LayoutContext } from '@/context/LayoutContext';
 import { translations } from '@/i18n/translations';
-import { TranslationKeys, ContactModalType, ProductShowcaseItem, SectionId } from '@/types/global';
+import { TranslationKeys } from '@/types/global';
 import { useModals } from '@/hooks/useModals';
 import useActiveLink from '@/hooks/useActiveLink';
 import useNavigationUtils from '@/hooks/useNavigationUtils';

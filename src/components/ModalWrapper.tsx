@@ -2,6 +2,7 @@
 
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 interface ModalWrapperProps {
   isOpen: boolean;
@@ -47,23 +48,25 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           onClick={onClose} // Close modal when clicking on backdrop
         >
           <motion.div
-            className={`bg-gray-50 dark:bg-gray-800 rounded-xl p-5 shadow-2xl relative w-full border border-gray-200 dark:border-gray-700 max-h-[90vh] overflow-y-auto ${maxWidth} ${className || ''}`}
+            className={`bg-white dark:bg-gray-800 rounded-xl p-5 shadow-2xl relative w-full border border-gray-200 dark:border-gray-700 max-h-[90vh] overflow-y-auto ${maxWidth} ${className || ''}`}
             variants={modalVariants}
             initial="hidden"
             animate="visible"
             exit="exit"
             onClick={(e: React.MouseEvent) => e.stopPropagation()} // Prevent closing when clicking inside modal
           >
-            <motion.button 
+            <InteractiveDiv 
+              as="button"
               onClick={onClose} 
               className={`absolute top-3 right-3 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-red-600 hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-red-700 transition-colors ${closeButtonClassName || ''}`}
               aria-label="Close modal"
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              whileHoverScale={1.1}
+              whileTapScale={0.9}
+              hoverY={0}
+              hoverShadow="none"
             >
               <X className="w-5 h-5" />
-            </motion.button>
+            </InteractiveDiv>
             <h3 className={`text-xl font-bold text-gray-900 dark:text-gray-50 mb-5 text-center ${titleClassName || ''}`}>
               {title}
             </h3>

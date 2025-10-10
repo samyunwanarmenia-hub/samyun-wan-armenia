@@ -1,7 +1,6 @@
 "use client"; // This is a client component
 
 import { Instagram, Facebook, MessageCircle, Send } from 'lucide-react';
-import { motion } from 'framer-motion';
 import { TranslationKeys } from '../types/global';
 import Link from 'next/link';
 import { useLayoutContext } from '@/context/LayoutContext';
@@ -9,6 +8,7 @@ import useNavigationUtils from '@/hooks/useNavigationUtils';
 import { navigationSections } from '@/data/navigationSections';
 import CallToActionButton from './CallToActionButton'; // Import CallToActionButton
 import AnimatedArrow from './AnimatedArrow'; // Import AnimatedArrow
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 const Footer = () => {
   const { t, currentLang, openAuthenticityModal } = useLayoutContext();
@@ -34,6 +34,25 @@ const Footer = () => {
               </h2>
             </Link>
             
+            {/* Official Certification / Verified Badge & Trust Area */}
+            <div className="flex flex-col w-full items-center mb-4 mt-2">
+              <span className="text-xs text-green-400 mb-2 font-semibold">
+                {currentLang === "hy"
+                  ? "Պաշտոնական կայք / Սերտիֆիկացված ներկայացուցիչ"
+                  : currentLang === "ru"
+                  ? "Официальный сайт / Проверенный дистрибьютор"
+                  : "Official Site / Verified Distributor"}
+              </span>
+              <span className="text-xs text-gray-400">
+                {currentLang === "hy"
+                  ? "Հաստատեք պաշտոնական էջերը՝ "
+                  : currentLang === "ru"
+                  ? "Проверьте официальные страницы: "
+                  : "Verify official social profiles:"}
+                <a href="https://www.facebook.com/samyunwanarmenia" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline ml-1" aria-label="Facebook Samyun Wan Armenia (Official)">Facebook</a>,
+                <a href="https://t.me/samyunwanarmenia" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline ml-1" aria-label="Telegram Samyun Wan Armenia (Official)">Telegram</a>
+              </span>
+            </div>
             {/* Legal Info / Warning Section */}
             <p 
               className="text-sm leading-relaxed mb-4 whitespace-pre-line text-gray-600 dark:text-gray-300" // Changed text-gray-700 to text-gray-600 for light mode
@@ -64,58 +83,86 @@ const Footer = () => {
             </p>
 
             <div className="flex space-x-3 mb-4">
-              <motion.a
+              <InteractiveDiv
+                as="a"
                 href="https://www.instagram.com/samyunwanarmenia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-gray-300 border border-gray-400 rounded-md flex items-center justify-center text-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /* Changed text-gray-700 to text-gray-600 for light mode */
-                whileHover={{ scale: 1.2, backgroundColor: '#E1306C' }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                className="w-9 h-9 bg-gray-700 border border-gray-600 rounded-md flex items-center justify-center text-white"
                 aria-label="Follow us on Instagram"
+                whileHoverScale={1.2}
+                hoverShadow="none"
+                hoverY={0}
+                style={{ backgroundColor: '#E1306C' }} // Apply specific color directly
               >
                 <Instagram className="w-6 h-6" />
-              </motion.a>
-              <motion.a
+              </InteractiveDiv>
+              <InteractiveDiv
+                as="a"
                 href="https://www.facebook.com/samyunwanarmenia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-gray-300 border border-gray-400 rounded-md flex items-center justify-center text-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /* Changed text-gray-700 to text-gray-600 for light mode */
-                whileHover={{ scale: 1.2, backgroundColor: '#1877F2' }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                className="w-9 h-9 bg-gray-700 border border-gray-600 rounded-md flex items-center justify-center text-white"
                 aria-label="Follow us on Facebook"
+                whileHoverScale={1.2}
+                hoverShadow="none"
+                hoverY={0}
+                style={{ backgroundColor: '#1877F2' }} // Apply specific color directly
               >
                 <Facebook className="w-6 h-6" />
-              </motion.a>
-              <motion.a
+              </InteractiveDiv>
+              <InteractiveDiv
+                as="a"
                 href="https://t.me/samyunwanarmenia"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-gray-300 border border-gray-400 rounded-md flex items-center justify-center text-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /* Changed text-gray-700 to text-gray-600 for light mode */
-                whileHover={{ scale: 1.2, backgroundColor: '#0088CC' }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                className="w-9 h-9 bg-gray-700 border border-gray-600 rounded-md flex items-center justify-center text-white"
                 aria-label="Join us on Telegram"
+                whileHoverScale={1.2}
+                hoverShadow="none"
+                hoverY={0}
+                style={{ backgroundColor: '#0088CC' }} // Apply specific color directly
               >
                 <Send className="w-6 h-6" />
-              </motion.a>
-              <motion.a
+              </InteractiveDiv>
+              <InteractiveDiv
+                as="a"
                 href="https://wa.me/37496653666"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-9 h-9 bg-gray-300 border border-gray-400 rounded-md flex items-center justify-center text-gray-600 dark:bg-gray-700 dark:border-gray-600 dark:text-white" /* Changed text-gray-700 to text-gray-600 for light mode */
-                whileHover={{ scale: 1.2, backgroundColor: '#25D366' }}
-                whileTap={{ scale: 0.9 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                className="w-9 h-9 bg-gray-700 border border-gray-600 rounded-md flex items-center justify-center text-white"
                 aria-label="Chat with us on WhatsApp"
+                whileHoverScale={1.2}
+                hoverShadow="none"
+                hoverY={0}
+                style={{ backgroundColor: '#25D366' }} // Apply specific color directly
               >
                 <MessageCircle className="w-6 h-6" />
-              </motion.a>
+              </InteractiveDiv>
             </div>
             <p className="text-xs leading-relaxed text-red-600 dark:text-red-300"> {/* Adjusted text-red-400 to text-red-600 for light mode */}
               {t.footer.officialLinksDisclaimer}
             </p>
+
+            {/* Privacy Policy & Terms Links */}
+            <div className="w-full flex flex-col sm:flex-row sm:justify-between mt-4">
+              <Link href={`/${currentLang}/privacy`} className="text-xs text-gray-400 hover:text-primary-400 underline" aria-label="Privacy Policy">
+                {currentLang === "hy" ? "Գաղտնիության քաղաքականություն" : currentLang === "ru" ? "Политика конфиденциальности" : "Privacy Policy"}
+              </Link>
+              <Link href={`/${currentLang}/terms`} className="text-xs text-gray-400 hover:text-primary-400 underline mt-1 sm:mt-0 ml-0 sm:ml-3" aria-label="Terms & Conditions">
+                {currentLang === "hy" ? "Օգտագործման կանոններ" : currentLang === "ru" ? "Пользовательское соглашение" : "Terms & Conditions"}
+              </Link>
+            </div>
+            {/* Impersonator Info */}
+            <div className="mt-4">
+              <span className="text-xs text-red-500 block font-semibold">
+                {currentLang === "hy"
+                  ? "Զգուշացում. Կան կեղծ և չարաբաստիկ էջեր, որոնք ներկայացնում են որպես պաշտոնական: Ձեզ միայն այս կայքի և վերը նշված սոցիալական էջերի միջոցով է ուղարկվելու օրիգինալ ապրանք:"
+                  : currentLang === "ru"
+                  ? "Внимание: Существуют фальшивые и мошеннические сайты, выдающие себя за официальных поставщиков. Только этот сайт и указанные соцсети являются официальными."
+                  : "Warning: Fake and scam websites impersonate the brand. Only this site and the social accounts above are official."}
+              </span>
+            </div>
           </div>
 
           {/* Column 2: About Links */}
@@ -124,15 +171,16 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               {aboutLinks.map((section) => (
                 <li key={section.id}>
-                  <motion.div
-                    whileHover={{ scale: 1.05, color: '#86b486' }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  <InteractiveDiv
+                    whileHoverScale={1.05}
+                    hoverY={0}
+                    hoverShadow="none"
+                    className="inline-block" // Ensure div doesn't take full width
                   >
                     <Link href={getSectionPath(section.id)} className="text-gray-600 dark:text-gray-300 hover:text-primary-500 transition-colors" aria-label={t.nav[section.labelKey as keyof TranslationKeys['nav']]}> {/* Changed text-gray-700 to text-gray-600 for light mode */}
                       {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                     </Link>
-                  </motion.div>
+                  </InteractiveDiv>
                 </li>
               ))}
             </ul>
@@ -144,39 +192,41 @@ const Footer = () => {
             <ul className="space-y-2 text-sm">
               {productLinks.map((section) => (
                 <li key={section.id}>
-                  <motion.div
-                    whileHover={{ scale: 1.05, color: '#86b486' }}
-                    whileTap={{ scale: 0.95 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  <InteractiveDiv
+                    whileHoverScale={1.05}
+                    hoverY={0}
+                    hoverShadow="none"
+                    className="inline-block"
                   >
                     <Link href={getSectionPath(section.id)} className="text-gray-600 dark:text-gray-300 hover:text-primary-500 transition-colors" aria-label={t.nav[section.labelKey as keyof TranslationKeys['nav']]}> {/* Changed text-gray-700 to text-gray-600 for light mode */}
                       {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                     </Link>
-                  </motion.div>
+                  </InteractiveDiv>
                 </li>
               ))}
               <li>
-                <motion.button
+                <InteractiveDiv
+                  as="button"
                   onClick={openAuthenticityModal}
-                  className="text-gray-600 dark:text-gray-300 hover:text-primary-500 transition-colors text-sm text-left" /* Changed text-gray-700 to text-gray-600 for light mode */
-                  whileHover={{ scale: 1.05, color: '#86b486' }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  aria-label={t.footer.productAuthenticity}
+                  className="hover:text-primary-500 transition-colors text-sm text-left"
+                  whileHoverScale={1.05}
+                  hoverY={0}
+                  hoverShadow="none"
                 >
                   {t.footer.productAuthenticity}
-                </motion.button>
+                </InteractiveDiv>
               </li>
               <li>
-                <motion.div
-                  whileHover={{ scale: 1.05, color: '#86b486' }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                <InteractiveDiv
+                  whileHoverScale={1.05}
+                  hoverY={0}
+                  hoverShadow="none"
+                  className="inline-block"
                 >
                   <Link href="#" className="text-gray-600 dark:text-gray-300 hover:text-primary-500 transition-colors" aria-label={t.footer.productUsage}> {/* Changed text-gray-700 to text-gray-600 for light mode */}
                     {t.footer.productUsage}
                   </Link>
-                </motion.div>
+                </InteractiveDiv>
               </li>
             </ul>
           </div>

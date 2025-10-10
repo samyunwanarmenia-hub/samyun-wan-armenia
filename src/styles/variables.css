@@ -37,7 +37,18 @@
   --intro-line-color: theme('colors.gray.800'); /* Darker lines on light background, but not black */
   --intro-circle-border-brownish-green: theme('colors.primary.700');
   --intro-circle-bg: theme('colors.white'); /* White circle background */
-  --intro-strip-dark-gray: theme('colors.gray.700'); /* Changed to softer gray */
+  --intro-strip-dark-gray: theme('colors.gray.800');
+
+  /* New CSS variables for colors */
+  --primary-500: #86b486;
+  --primary-500-rgb-04: rgba(134, 180, 134, 0.4);
+  --primary-500-rgb-07: rgba(134, 180, 134, 0.7);
+  --brandRed-400: #ef4444;
+
+  /* Background Gradient Colors - Light Mode */
+  --bg-gradient-start-light: theme('colors.primary.50');
+  --bg-gradient-mid-light: theme('colors.secondary.100');
+  --bg-gradient-end-light: theme('colors.primary.50');
 }
 
 .dark {
@@ -77,4 +88,15 @@
   --intro-circle-border-brownish-green: theme('colors.primary.700');
   --intro-circle-bg: #1a1a1a;
   --intro-strip-dark-gray: theme('colors.gray.100');
+
+  /* New CSS variables for colors in dark mode */
+  --primary-500: #86b486;
+  --primary-500-rgb-04: rgba(134, 180, 134, 0.4);
+  --primary-500-rgb-07: rgba(134, 180, 134, 0.7);
+  --brandRed-400: #ef4444;
+
+  /* Background Gradient Colors - Dark Mode */
+  --bg-gradient-start-dark: theme('colors.gray.900');
+  --bg-gradient-mid-dark: theme('colors.gray.950');
+  --bg-gradient-end-dark: theme('colors.gray.900');
 }

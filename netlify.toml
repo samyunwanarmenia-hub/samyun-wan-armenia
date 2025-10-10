@@ -20,3 +20,18 @@
   to = "/hy"
   status = 301
   force = true
+
+# --- SEO Canonical Redirects ---
+[[redirects]]
+  from = "http://samyunwanarmenia.netlify.app/*"
+  to = "https://samyunwanarmenia.netlify.app/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/:path/"
+  to = "/:path"
+  status = 301
+  force = true
+  conditions = {Language = ["hy", "ru", "en"]}
+# TODO: If you add a custom domain, add an explicit canonical redirect from netlify.app to primary domain

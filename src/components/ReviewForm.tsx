@@ -105,7 +105,7 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                   <label htmlFor="name" className="block text-gray-800 dark:text-gray-50 text-sm font-bold mb-2"> {/* Changed text-gray-900 to text-gray-800 for light mode */}
                     {t.testimonials.namePlaceholder}
                   </label>
-                  <motion.input
+                  <input
                     type="text"
                     id="name"
                     className="shadow appearance-none border border-gray-200 dark:border-gray-600 rounded-lg w-full py-2.5 px-3 text-gray-800 dark:text-gray-50 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-600 bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400" /* Changed text-gray-900 to text-gray-800 for light mode */
@@ -113,15 +113,13 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                     value={name}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
                     required
-                    whileFocus={{ scale: 1.01, borderColor: '#6c906c' }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   />
                 </motion.div>
                 <motion.div className="mb-5" variants={itemVariants}>
                   <label htmlFor="review" className="block text-gray-800 dark:text-gray-50 text-sm font-bold mb-2"> {/* Changed text-gray-900 to text-gray-800 for light mode */}
                     {t.testimonials.reviewPlaceholder}
                   </label>
-                  <motion.textarea
+                  <textarea
                     id="review"
                     rows={4}
                     className="shadow appearance-none border border-gray-200 dark:border-gray-600 rounded-lg w-full py-2.5 px-3 text-gray-800 dark:text-gray-50 leading-tight focus:outline-none focus:ring-2 focus:ring-primary-600 bg-gray-100 dark:bg-gray-700 placeholder-gray-500 dark:placeholder-gray-400 resize-none" /* Changed text-gray-900 to text-gray-800 for light mode */
@@ -129,8 +127,6 @@ const ReviewForm = ({ onReviewSubmitted }: ReviewFormProps) => {
                     value={reviewText}
                     onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setReviewText(e.target.value)}
                     required
-                    whileFocus={{ scale: 1.01, borderColor: '#6c906c' }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                   />
                 </motion.div>
                 <motion.div 

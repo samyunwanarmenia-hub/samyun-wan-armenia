@@ -8,6 +8,7 @@ import { ProductType, CallbackPurpose, CallbackRequestModalProps } from '@/types
 import { sendTelegramMessage } from '@/utils/telegramApi';
 import { showSuccess, showError } from '@/utils/toast';
 import { motion } from 'framer-motion'; // Import motion
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onClose, t, currentLang }) => {
   const [name, setName] = useState<string>('');
@@ -129,15 +130,13 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
           variants={itemVariants}
         >
           <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
-          <motion.input
+          <input
             type="text"
             className="pl-10 pr-3 py-2.5 w-full bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-gray-800 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600" /* Changed text-gray-900 to text-gray-800 for light mode */
             placeholder={t.callbackRequest.namePlaceholder}
             value={name}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
             required
-            whileFocus={{ scale: 1.01, borderColor: '#6c906c' }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           />
         </motion.div>
         <motion.div 
@@ -145,15 +144,13 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
           variants={itemVariants}
         >
           <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500 w-5 h-5" />
-          <motion.input
+          <input
             type="tel"
             className="pl-10 pr-3 py-2.5 w-full bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-lg text-gray-800 dark:text-gray-50 placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary-600" /* Changed text-gray-900 to text-gray-800 for light mode */
             placeholder={t.callbackRequest.phonePlaceholder}
             value={phone}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
             required
-            whileFocus={{ scale: 1.01, borderColor: '#6c906c' }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
           />
         </motion.div>
 
@@ -162,11 +159,11 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
             {t.callbackRequest.productTypeLabel}
           </label>
           <div className="flex flex-col space-y-2">
-            <motion.label 
+            <InteractiveDiv 
               className="inline-flex items-center"
-              whileHover={{ scale: 1.02, x: 5 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              whileHoverScale={1.02}
+              hoverY={0}
+              hoverShadow="none"
             >
               <input
                 type="radio"
@@ -177,13 +174,13 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 onChange={() => setProductType('weightGain')}
                 required
               />
-              <span className="ml-2 text-gray-600 dark:text-gray-200 text-base">{t.callbackRequest.weightGainOption}</span> {/* Changed text-gray-700 to text-gray-600 for light mode */}
-            </motion.label>
-            <motion.label 
+              <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.weightGainOption}</span>
+            </InteractiveDiv>
+            <InteractiveDiv 
               className="inline-flex items-center"
-              whileHover={{ scale: 1.02, x: 5 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              whileHoverScale={1.02}
+              hoverY={0}
+              hoverShadow="none"
             >
               <input
                 type="radio"
@@ -194,8 +191,8 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 onChange={() => setProductType('weightLoss')}
                 required
               />
-              <span className="ml-2 text-gray-600 dark:text-gray-200 text-base">{t.callbackRequest.weightLossOption}</span> {/* Changed text-gray-700 to text-gray-600 for light mode */}
-            </motion.label>
+              <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.weightLossOption}</span>
+            </InteractiveDiv>
           </div>
         </motion.div>
 
@@ -204,11 +201,11 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
             {t.callbackRequest.purposeLabel}
           </label>
           <div className="flex flex-col space-y-2">
-            <motion.label 
+            <InteractiveDiv 
               className="inline-flex items-center"
-              whileHover={{ scale: 1.02, x: 5 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              whileHoverScale={1.02}
+              hoverY={0}
+              hoverShadow="none"
             >
               <input
                 type="radio"
@@ -219,13 +216,13 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 onChange={() => setPurpose('details')}
                 required
               />
-              <span className="ml-2 text-gray-600 dark:text-gray-200 text-base">{t.callbackRequest.purposeDetails}</span> {/* Changed text-gray-700 to text-gray-600 for light mode */}
-            </motion.label>
-            <motion.label 
+              <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.purposeDetails}</span>
+            </InteractiveDiv>
+            <InteractiveDiv 
               className="inline-flex items-center"
-              whileHover={{ scale: 1.02, x: 5 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              whileHoverScale={1.02}
+              hoverY={0}
+              hoverShadow="none"
             >
               <input
                 type="radio"
@@ -236,13 +233,13 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 onChange={() => setPurpose('orders')}
                 required
               />
-              <span className="ml-2 text-gray-600 dark:text-gray-200 text-base">{t.callbackRequest.purposeOrders}</span> {/* Changed text-gray-700 to text-gray-600 for light mode */}
-            </motion.label>
-            <motion.label 
+              <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.purposeOrders}</span>
+            </InteractiveDiv>
+            <InteractiveDiv 
               className="inline-flex items-center"
-              whileHover={{ scale: 1.02, x: 5 }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              whileHoverScale={1.02}
+              hoverY={0}
+              hoverShadow="none"
             >
               <input
                 type="radio"
@@ -253,8 +250,8 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
                 onChange={() => setPurpose('other')}
                 required
               />
-              <span className="ml-2 text-gray-600 dark:text-gray-200 text-base">{t.callbackRequest.purposeOther}</span> {/* Changed text-gray-700 to text-gray-600 for light mode */}
-            </motion.label>
+              <span className="ml-2 text-gray-800 dark:text-gray-200 text-base">{t.callbackRequest.purposeOther}</span>
+            </InteractiveDiv>
           </div>
         </motion.div>
 

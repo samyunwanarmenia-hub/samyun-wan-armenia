@@ -5,6 +5,7 @@ import { TranslationKeys } from '../types/global';
 import LoadingSpinner from './LoadingSpinner';
 import { X, Copy } from 'lucide-react';
 import { showSuccess, showError } from '../utils/toast';
+import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
 interface LoadingLinkModalProps {
   isOpen: boolean;
@@ -64,22 +65,24 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
       exit="hidden"
     >
       <motion.div
-        className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 shadow-2xl relative w-full max-w-sm flex flex-col items-center text-center border border-gray-200 dark:border-gray-700"
+        className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-2xl relative w-full max-w-sm flex flex-col items-center text-center border border-gray-200 dark:border-gray-700"
         variants={modalVariants}
         initial="hidden"
         animate="visible"
         exit="exit"
       >
-        <motion.button 
+        <InteractiveDiv 
+          as="button"
           onClick={onClose} 
           className="absolute top-3 right-3 p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-red-600 hover:bg-gray-300 dark:hover:bg-gray-600 hover:text-red-700 transition-colors"
           aria-label="Close modal"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          whileHoverScale={1.1}
+          whileTapScale={0.9}
+          hoverY={0}
+          hoverShadow="none"
         >
           <X className="w-5 h-5" />
-        </motion.button>
+        </InteractiveDiv>
         <motion.div 
           className="flex flex-col items-center text-center"
           variants={containerVariants}
@@ -89,10 +92,10 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
           <motion.div className="w-24 h-24 mb-6 flex items-center justify-center" variants={itemVariants}>
             <LoadingSpinner />
           </motion.div>
-          <motion.h3 className="text-2xl font-bold text-gray-800 dark:text-gray-50 mb-4" variants={itemVariants}> {/* Changed text-gray-900 to text-gray-800 for light mode */}
+          <motion.h3 className="text-2xl font-bold text-gray-900 dark:text-gray-50 mb-4" variants={itemVariants}>
             {t.loadingLinkModal.title}
           </motion.h3>
-          <motion.p className="text-gray-600 dark:text-gray-300 text-lg mb-2" variants={itemVariants}> {/* Changed text-gray-700 to text-gray-600 for light mode */}
+          <motion.p className="text-gray-700 dark:text-gray-300 text-lg mb-2" variants={itemVariants}>
             {t.loadingLinkModal.message}
           </motion.p>
           <motion.p className="text-gray-500 dark:text-gray-400 text-sm mb-4" variants={itemVariants}>
@@ -101,32 +104,36 @@ const LoadingLinkModal = ({ isOpen, t, clientId, onClose }: LoadingLinkModalProp
 
           {clientId && (
             <motion.div className="flex flex-col items-center mb-6" variants={itemVariants}>
-              <p className="text-gray-600 dark:text-gray-400 text-xs mb-2">Your Client ID:</p> {/* Changed text-gray-700 to text-gray-600 for light mode */}
+              <p className="text-gray-500 dark:text-gray-400 text-xs mb-2">Your Client ID:</p>
               <div className="flex items-center bg-gray-100 dark:bg-gray-700 rounded-lg px-3 py-2 border border-gray-200 dark:border-gray-600">
-                <code className="text-gray-700 dark:text-gray-200 text-sm mr-2">{clientId}</code> {/* Changed text-gray-800 to text-gray-700 for light mode */}
-                <motion.button
+                <code className="text-gray-800 dark:text-gray-200 text-sm mr-2">{clientId}</code>
+                <InteractiveDiv
+                  as="button"
                   onClick={handleCopyClientId}
                   className="text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-50 transition-colors" 
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  whileHoverScale={1.1}
+                  whileTapScale={0.9}
+                  hoverY={0}
+                  hoverShadow="none"
                 >
                   <Copy className="w-4 h-4" />
-                </motion.button>
+                </InteractiveDiv>
               </div>
             </motion.div>
           )}
 
-          <motion.button
+          <InteractiveDiv
+            as="button"
             onClick={onClose}
-            className="bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-50 font-bold py-3 px-8 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transform hover:scale-105 transition-all mt-4" /* Changed text-gray-800 to text-gray-700 for light mode */
-            whileHover={{ scale: 1.08 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+            className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-50 font-bold py-3 px-8 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transform hover:scale-105 transition-all mt-4"
+            whileHoverScale={1.08}
+            whileTapScale={0.95}
+            hoverY={0}
+            hoverShadow="none"
             variants={itemVariants}
           >
             Close
-          </motion.button>
+          </InteractiveDiv>
         </motion.div>
       </motion.div>
     </motion.div>
