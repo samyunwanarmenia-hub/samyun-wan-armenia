@@ -146,10 +146,10 @@ const Footer = () => {
 
             {/* Privacy Policy & Terms Links */}
             <div className="w-full flex flex-col sm:flex-row sm:justify-between mt-4">
-              <Link href={getSectionPath('privacy') || '/hy/privacy'} className="text-xs text-gray-400 hover:text-primary-400 underline" aria-label="Privacy Policy">
+              <Link href={`/${currentLang}/privacy`} className="text-xs text-gray-400 hover:text-primary-400 underline" aria-label="Privacy Policy">
                 {currentLang === "hy" ? "Գաղտնիության քաղաքականություն" : currentLang === "ru" ? "Политика конфиденциальности" : "Privacy Policy"}
               </Link>
-              <Link href={getSectionPath('terms') || '/hy/terms'} className="text-xs text-gray-400 hover:text-primary-400 underline mt-1 sm:mt-0 ml-0 sm:ml-3" aria-label="Terms & Conditions">
+              <Link href={`/${currentLang}/terms`} className="text-xs text-gray-400 hover:text-primary-400 underline mt-1 sm:mt-0 ml-0 sm:ml-3" aria-label="Terms & Conditions">
                 {currentLang === "hy" ? "Օգտագործման կանոններ" : currentLang === "ru" ? "Пользовательское соглашение" : "Terms & Conditions"}
               </Link>
             </div>

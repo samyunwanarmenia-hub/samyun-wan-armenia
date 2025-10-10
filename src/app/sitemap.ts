@@ -54,8 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         alternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${baseUrl}/${altLang}/${page}`;
       });
       // x-default for sub-pages points to the default language version of that specific page
-      alternates['x-default'] = `${baseUrl}/hy/${page}`; 
-
+      alternates['x-default'] = `${baseUrl}/hy/${page}`;
       sitemapEntries.push({
         url: `${baseUrl}/${lang}/${page}`,
         lastModified: lastModifiedDate,
@@ -63,6 +62,24 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.8, // Default priority for main navigation pages
         alternates: {
           languages: alternates,
+        },
+      });
+    });
+
+    // --- ADD PRIVACY/TERMS LEGAL PAGES ---
+    ['privacy', 'terms'].forEach(legalPage => {
+      const legalAlternates: Record<string, string> = {};
+      languages.forEach(altLang => {
+        legalAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${baseUrl}/${altLang}/${legalPage}`;
+      });
+      legalAlternates['x-default'] = `${baseUrl}/hy/${legalPage}`;
+      sitemapEntries.push({
+        url: `${baseUrl}/${lang}/${legalPage}`,
+        lastModified: lastModifiedDate,
+        changeFrequency: 'monthly',
+        priority: 0.5,
+        alternates: {
+          languages: legalAlternates,
         },
       });
     });

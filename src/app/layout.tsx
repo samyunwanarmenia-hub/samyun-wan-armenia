@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
+import Head from 'next/head';
 
 import '../app/globals.css';
 
@@ -79,21 +80,30 @@ const RootLayout = ({
   children: React.ReactNode;
 }) => {
   return (
-    <html lang="hy" className={`${inter.variable}`}> {/* Default lang to hy, will be updated by LayoutClientProvider */}
-      <body>
-        {children}
-        <noscript>
-          <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
-              src="https://mc.yandex.ru/watch/103962073" 
-              alt="" 
-              style={{ position: 'absolute', left: '-9999px' }} 
-            />
-          </div>
-        </noscript>
-      </body>
-    </html>
+    <>
+      <Head>
+        {/* Preconnect for Google Fonts and Netlify assets for performance */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* If Netlify serves static assets from a CDN domain, add it here */}
+        {/* <link rel="preconnect" href="https://assets.samyunwanarmenia.netlify.app" crossOrigin="anonymous" /> */}
+      </Head>
+      <html lang="hy" className={`${inter.variable}`}> {/* Default lang to hy, will be updated by LayoutClientProvider */}
+        <body>
+          {children}
+          <noscript>
+            <div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src="https://mc.yandex.ru/watch/103962073" 
+                alt="" 
+                style={{ position: 'absolute', left: '-9999px' }} 
+              />
+            </div>
+          </noscript>
+        </body>
+      </html>
+    </>
   );
 };
 

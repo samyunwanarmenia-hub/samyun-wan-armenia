@@ -4,23 +4,21 @@ export const generateOrganizationStructuredData = (t: TranslationKeys, currentLa
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
-    name: t.hero.title + ' - ' + t.hero.subtitle, // Use translated title
-    url: `https://samyunwanarmenia.netlify.app/${currentLang}`, // Use language-specific URL
-    logo: 'https://samyunwanarmenia.netlify.app/optimized/logo.jpg',
-    contactPoint: {
-      '@type': 'ContactPoint',
-      telephone: t.contact.phoneNumbers.number1, // Use translated phone number
-      contactType: 'customer service',
-      areaServed: currentLang === 'hy' ? 'AM' : currentLang === 'ru' ? 'RU' : 'US', // Example: Armenia, Russia, USA
-      availableLanguage: currentLang,
-    },
+    name: 'Samyun Wan Armenia',
+    url: 'https://samyunwanarmenia.netlify.app/',
+    logo: 'https://samyunwanarmenia.netlify.app/images/og-image.jpg', // TODO: Replace with official logo if available as PNG/SVG
     sameAs: [
-      'https://www.facebook.com/samyunwanarmenia',
-      'https://www.instagram.com/samyunwan_armenia_original',
-      'https://t.me/samyunwanarmenia', // Added Telegram
-      'https://wa.me/37496653666', // Added WhatsApp
+      'https://www.facebook.com/samyunwanarmenia', // TODO: Verify official Facebook URL
+      'https://t.me/samyunwanarmenia', // TODO: Confirm Telegram link is official
+      'https://www.instagram.com/samyunwanarmenia' // TODO: Confirm correct Instagram handle
     ],
-    "inLanguage": currentLang,
+    contactPoint: [{
+      '@type': 'ContactPoint',
+      telephone: '+37495653666', // TODO: Confirm this is the main business phone for customer service
+      contactType: 'customer service',
+      areaServed: 'AM',
+    }],
+    inLanguage: currentLang,
   };
 };
 

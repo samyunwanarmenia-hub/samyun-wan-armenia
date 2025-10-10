@@ -15,8 +15,6 @@ export const en: TranslationKeys = {
     english: 'English',
     open: 'Open menu',
     close: 'Close menu',
-    privacy: 'Privacy Policy',
-    terms: 'Terms & Conditions',
   },
   hero: {
     title: 'Samyun Wan Armenia',
