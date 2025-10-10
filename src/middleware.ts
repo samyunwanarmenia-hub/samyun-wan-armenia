@@ -17,14 +17,14 @@ export function middleware(request: NextRequest) {
     return;
   }
 
-  // If no locale, rewrite the URL to include the default locale.
+  // If no locale, redirect to include the default locale.
   // This will handle both '/' and other paths like '/about'.
   // For '/', it becomes '/hy'.
   // For '/about', it becomes '/hy/about'.
   const url = request.nextUrl.clone();
   url.pathname = `/${defaultLocale}${pathname}`;
   
-  return NextResponse.rewrite(url);
+  return NextResponse.redirect(url);
 }
 
 export const config = {
