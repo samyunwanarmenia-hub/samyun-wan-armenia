@@ -232,6 +232,21 @@ const Footer = () => {
           </div>
         </div>
 
+        <div className="w-full py-4 px-4 mt-6 rounded bg-yellow-100 border border-yellow-500 text-yellow-800 max-w-2xl mx-auto font-bold text-center shadow">
+          Вся информация на этой странице принадлежит единственному <b>официальному дистрибьютору Samyun Wan в Армении</b>.<br/> Любые покупки не через этот сайт — <b>риск подделки</b>.
+        </div>
+        <div className="w-full py-4 px-4 mt-3 bg-blue-50 border border-blue-400 text-blue-900 rounded text-xs font-semibold max-w-2xl mx-auto text-center">
+          Официальные страницы Samyun Wan Armenia:<br/>
+          <a href="https://www.facebook.com/samyunwanarmenia/" rel="noopener noreferrer" target="_blank">Facebook</a> |
+          <a href="https://www.instagram.com/samyunwanarmenia/" rel="noopener noreferrer" target="_blank">Instagram</a> |
+          <a href="https://t.me/samyunwanarmenia" rel="noopener noreferrer" target="_blank">Telegram</a> |
+          <a href="https://www.tiktok.com/@samyunwanarmenia/" rel="noopener noreferrer" target="_blank">TikTok</a> |
+          <a href="https://www.youtube.com/@samyunwanarmenia" rel="noopener noreferrer" target="_blank">YouTube</a> |
+          <a href="https://www.spyur.am/ru/companies/samyun-wan-armenia-weight-loss-and-weight-gain-center/52453/" rel="noopener noreferrer" target="_blank">Spyur</a><br/>
+          Контакт: <b>+37495653666</b>, сайт: <a href="https://samyunwanarmenia.netlify.app">https://samyunwanarmenia.netlify.app</a><br/>
+          <a href="/hy/verify/qr" style={{fontWeight:'bold',color:'#008a00'}}>Проверить оригинальность продукта и разоблачить мошенников</a>
+        </div>
+
         <div className="border-t border-gray-300 dark:border-gray-600 pt-6 text-center"> {/* Adjusted border color for light mode */}
           <p className="text-sm text-gray-600 dark:text-gray-300"> {/* Changed text-gray-700 to text-gray-600 for light mode */}
             © 2025 Samyun Wan Armenia. {t.footer.allRightsReserved} | {t.footer.officialRepresentative}

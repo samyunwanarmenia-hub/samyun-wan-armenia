@@ -83,6 +83,56 @@ const RootLayout = ({
   return (
     <>
       <Head>
+        {/* SEO: Official branding and strong warnings */}
+        <title>Samyun Wan Armenia — Официальный сайт и дистрибьютор | Купить оригинальный Samyun Wan в Армении</title>
+        <meta name="description" content="Только на нашем сайте вы купите оригинальный Samyun Wan с QR-кодом подтверждения! Мы — единственный официальный поставщик в Армении. Осторожно: в сети много мошенников и подделок!" />
+        <meta name="keywords" content="Samyun Wan Armenia, официальный сайт, купить Samyun Wan, оригинал, проверка QR, официальный дистрибьютор, Армения, подделка, мошенники, оригинальный самюнь ван, дистрибуция" />
+        <meta name="author" content="Samyun Wan Armenia, Aleksandr Gevorgyan" />
+
+        {/* OG & Social */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Samyun Wan Armenia — Официальный сайт и дистрибьютор" />
+        <meta property="og:description" content="Только у нас — оригинальный Samyun Wan с гарантией, проверкой по QR-коду на упаковке и официальной поддержкой производителя! Остерегайтесь фейковых сайтов!" />
+        <meta property="og:url" content="https://samyunwanarmenia.netlify.app/" />
+        <meta property="og:image" content="https://samyunwanarmenia.netlify.app/optimized/og-image.jpg" />
+        <meta property="og:site_name" content="Samyun Wan Armenia — Официальный сайт" />
+        <meta property="og:locale" content="hy_AM" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Samyun Wan Armenia — Официальный сайт и дистрибьютор" />
+        <meta name="twitter:description" content="Официальная продажа Samyun Wan в Армении. Только оригинал, только у дистрибьютора! QR-код подтверждения подлинности." />
+        <meta name="twitter:image" content="https://samyunwanarmenia.netlify.app/optimized/og-image.jpg" />
+        
+        {/* Organization Schema.org — официальный дистрибьютор */}
+        <script type="application/ld+json">{`
+        {
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          "name": "Samyun Wan Armenia",
+          "url": "https://samyunwanarmenia.netlify.app",
+          "logo": "https://samyunwanarmenia.netlify.app/optimized/og-image.jpg",
+          "sameAs": [
+            "https://www.facebook.com/samyunwanarmenia/",
+            "https://www.instagram.com/samyunwanarmenia/",
+            "https://www.tiktok.com/@samyunwanarmenia/",
+            "https://t.me/samyunwanarmenia",
+            "https://www.youtube.com/@samyunwanarmenia",
+            "https://www.spyur.am/ru/companies/samyun-wan-armenia-weight-loss-and-weight-gain-center/52453/",
+            "https://www.spyur.am/en/companies/samyun-wan-armenia-weight-loss-and-weight-gain-center/52453/"
+          ],
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "telephone": "+37495653666",
+              "contactType": "customer support",
+              "areaServed": "AM"
+            }
+          ],
+          "description": "Официальный сайт и дистрибьютор Samyun Wan в Армении. Только здесь можно купить оригинальный продукт с гарантией QR-кода."
+        }
+        `}</script>
+        {/* Warning for search engines (abuse/fraud alert) */}
+        <meta name="robots" content="index, follow, max-snippet:-1, max-video-preview:-1, max-image-preview:large" />
+        <meta name="google-site-verification" content="zAW0LZsUTQ179ySPIQOmESS0xJZldVzO8ZhNvDMCSCg" />
         {/* Preconnect for Google Fonts and Netlify assets for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
