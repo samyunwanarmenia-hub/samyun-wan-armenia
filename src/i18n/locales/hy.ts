@@ -18,7 +18,6 @@ export const hy: TranslationKeys = {
   },
   hero: {
     title: 'Samyun Wan Armenia',
-    facebookFollow: 'Հետևեք մեր թարմացումներին Facebook-ում',
     subtitle: 'Քաշի կարգավորման ՕՐԻԳԻՆԱԼ և ԱՐԴՅՈՒՆԱՎԵՏ միջոցներ ',
     tagline: 'Փոխելով կազմվածքդ կփոխվի քո կյանքը ',
     cta: 'Պատվիրել հիմա',

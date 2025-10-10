@@ -18,7 +18,6 @@ export const en: TranslationKeys = {
   },
   hero: {
     title: 'Samyun Wan Armenia',
-    facebookFollow: 'Follow our updates on Facebook',
     subtitle: 'ORIGINAL and EFFECTIVE weight management solutions',
     tagline: 'Changing your physique will change your life',
     cta: 'Order Now',
