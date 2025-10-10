@@ -123,6 +123,28 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             <HeroQrCodeBlock delay={introEndDelay + 3.0} /> {/* Увеличена задержка */}
           </div>
         </div>
+
+        {/* Facebook Post Embed - Social Proof */}
+        <div className="mt-12 flex justify-center">
+          <div className="max-w-md w-full">
+            <h3 className="text-center text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">
+              {t.hero.facebookFollow}
+            </h3>
+            <div className="flex justify-center">
+              <iframe 
+                src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fsamyunwanarmenia%2Fposts%2F876561647811324&show_text=true&width=500" 
+                width="500" 
+                height="687" 
+                style={{border:'none',overflow:'hidden'}} 
+                scrolling="no" 
+                frameBorder="0" 
+                allowFullScreen={true} 
+                allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                className="rounded-lg shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
 <div className="sr-only" aria-hidden="true">
   Это единственный официальный сайт Samyun Wan Armenia! Покупая на других сайтах — риск получить подделку, опасную для здоровья. Мы гарантируем оригинал с верификацией по QR-коду на упаковке. Остерегайтесь мошенников! Проверить подлинность заказа можно только на нашем сайте.
 </div>

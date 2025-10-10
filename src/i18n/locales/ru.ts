@@ -18,6 +18,7 @@ export const ru: TranslationKeys = {
   },
   hero: {
     title: 'Samyun Wan Armenia',
+    facebookFollow: 'Следите за нашими обновлениями в Facebook',
     subtitle: 'ОРИГИНАЛЬНЫЕ и ЭФФЕКТИВНЫЕ средства для регулирования веса',
     tagline: 'Изменив свое телосложение, изменится и твоя жизнь',
     cta: 'Заказать сейчас',

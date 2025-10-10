@@ -58,6 +58,7 @@ export interface TranslationKeys {
     seo_title_addon: string;
     qrBlockTitle: string;
     qrBlockDescription: string;
+    facebookFollow: string;
   };
   stats: {
     customers: string;
