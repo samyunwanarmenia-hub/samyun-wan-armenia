@@ -34,4 +34,5 @@
   status = 301
   force = true
   conditions = {Language = ["hy", "ru", "en"]}
+  except = ["/"]
 # TODO: If you add a custom domain, add an explicit canonical redirect from netlify.app to primary domain
