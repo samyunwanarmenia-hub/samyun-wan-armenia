@@ -100,6 +100,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
         languages: qrVerifyAlternates,
       },
     });
+
+    // Add the /how-to-identify-fake page for each language
+    const fakeIdentifyAlternates: Record<string, string> = {};
+    languages.forEach(altLang => {
+      fakeIdentifyAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${baseUrl}/${altLang}/how-to-identify-fake`;
+    });
+    fakeIdentifyAlternates['x-default'] = `${baseUrl}/hy/how-to-identify-fake`;
+
+    sitemapEntries.push({
+      url: `${baseUrl}/${lang}/how-to-identify-fake`,
+      lastModified: lastModifiedDate,
+      changeFrequency: 'weekly',
+      priority: 0.9, // High priority for anti-fraud page
+      alternates: {
+        languages: fakeIdentifyAlternates,
+      },
+    });
   });
 
   return sitemapEntries;
