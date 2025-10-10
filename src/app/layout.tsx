@@ -63,7 +63,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'googleae71d8a26990efe6',
+    google: 'zAW0LZsUTQ179ySPIQOmESS0xJZldVzO8ZhNvDMCSCg',
   },
   // PWA Manifest
   manifest: '/site.webmanifest',
