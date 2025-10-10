@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import React from 'react';
 
-// Define the props interface with any to avoid complex typing issues
+// Define the props interface with proper typing
 interface InteractiveDivProps {
   children?: React.ReactNode;
   className?: string;
@@ -12,7 +12,7 @@ interface InteractiveDivProps {
   hoverShadow?: string;
   hoverY?: number;
   as?: React.ElementType;
-  [key: string]: any; // Allow any additional props
+  [key: string]: unknown; // Allow any additional props with proper typing
 }
 
 // Create the component
@@ -30,7 +30,7 @@ const InteractiveDiv = React.forwardRef<HTMLElement, InteractiveDivProps>(
     },
     ref
   ) => {
-    const MotionComponent = motion(Component as any);
+    const MotionComponent = motion(Component as React.ElementType);
 
     return (
       <MotionComponent
@@ -43,7 +43,7 @@ const InteractiveDiv = React.forwardRef<HTMLElement, InteractiveDivProps>(
         }}
         whileTap={{ scale: whileTapScale }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
-        {...(rest as any)}
+        {...(rest as Record<string, unknown>)}
       >
         {children}
       </MotionComponent>

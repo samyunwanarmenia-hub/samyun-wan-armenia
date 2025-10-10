@@ -4,7 +4,7 @@ import React from "react";
 import { useLayoutContext } from '@/context/LayoutContext';
 
 const PrivacyPage = () => {
-  const { t, currentLang } = useLayoutContext();
+  const { currentLang } = useLayoutContext();
   // TODO: Replace this placeholder with the official Privacy Policy legal text and add organization details before launch.
   return (
     <div className="max-w-3xl mx-auto py-16 px-4 text-center text-gray-900 dark:text-gray-50">

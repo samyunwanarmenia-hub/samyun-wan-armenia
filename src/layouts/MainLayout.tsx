@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic';
 import { useLayoutContext } from '@/context/LayoutContext'; // Import useLayoutContext
 import { ContactModalType, ProductShowcaseItem, TranslationKeys } from '@/types/global'; // Import necessary types, including TranslationKeys
 import FloatingActionButton from '@/components/FloatingActionButton'; // Import the new FAB component
-import AnimatedGradientBackground from '@/components/AnimatedGradientBackground'; // Import the new animated background
 
 interface MainLayoutProps {
   children: React.ReactNode;
