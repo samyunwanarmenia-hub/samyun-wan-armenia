@@ -14,4 +14,6 @@ export const navigationSections: NavSection[] = [
   { id: 'faq', labelKey: 'faq' },
   { id: 'contact', labelKey: 'contact' },
   { id: 'track-order', labelKey: 'trackOrder' }, // New navigation item
+  { id: 'privacy', labelKey: 'privacy' },
+  { id: 'terms', labelKey: 'terms' },
 ];

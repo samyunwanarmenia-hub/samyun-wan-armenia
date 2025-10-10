@@ -15,6 +15,8 @@ export const hy: TranslationKeys = {
     english: 'Անգլերեն',
     open: 'Բացել մենյուն',
     close: 'Փակել մենյուն',
+    privacy: 'Գաղտնիության քաղաքականություն',
+    terms: 'Օգտագործման կանոններ',
   },
   hero: {
     title: 'Samyun Wan Armenia',

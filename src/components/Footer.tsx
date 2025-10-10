@@ -34,6 +34,25 @@ const Footer = () => {
               </h2>
             </Link>
             
+            {/* Official Certification / Verified Badge & Trust Area */}
+            <div className="flex flex-col w-full items-center mb-4 mt-2">
+              <span className="text-xs text-green-400 mb-2 font-semibold">
+                {currentLang === "hy"
+                  ? "Պաշտոնական կայք / Սերտիֆիկացված ներկայացուցիչ"
+                  : currentLang === "ru"
+                  ? "Официальный сайт / Проверенный дистрибьютор"
+                  : "Official Site / Verified Distributor"}
+              </span>
+              <span className="text-xs text-gray-400">
+                {currentLang === "hy"
+                  ? "Հաստատեք պաշտոնական էջերը՝ "
+                  : currentLang === "ru"
+                  ? "Проверьте официальные страницы: "
+                  : "Verify official social profiles:"}
+                <a href="https://www.facebook.com/samyunwanarmenia" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline ml-1" aria-label="Facebook Samyun Wan Armenia (Official)">Facebook</a>,
+                <a href="https://t.me/samyunwanarmenia" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline ml-1" aria-label="Telegram Samyun Wan Armenia (Official)">Telegram</a>
+              </span>
+            </div>
             {/* Legal Info / Warning Section */}
             <p 
               className="text-sm leading-relaxed mb-4 whitespace-pre-line"
@@ -124,6 +143,26 @@ const Footer = () => {
             <p className="text-xs leading-relaxed text-red-400 dark:text-red-300">
               {t.footer.officialLinksDisclaimer}
             </p>
+
+            {/* Privacy Policy & Terms Links */}
+            <div className="w-full flex flex-col sm:flex-row sm:justify-between mt-4">
+              <Link href={getSectionPath('privacy') || '/hy/privacy'} className="text-xs text-gray-400 hover:text-primary-400 underline" aria-label="Privacy Policy">
+                {currentLang === "hy" ? "Գաղտնիության քաղաքականություն" : currentLang === "ru" ? "Политика конфиденциальности" : "Privacy Policy"}
+              </Link>
+              <Link href={getSectionPath('terms') || '/hy/terms'} className="text-xs text-gray-400 hover:text-primary-400 underline mt-1 sm:mt-0 ml-0 sm:ml-3" aria-label="Terms & Conditions">
+                {currentLang === "hy" ? "Օգտագործման կանոններ" : currentLang === "ru" ? "Пользовательское соглашение" : "Terms & Conditions"}
+              </Link>
+            </div>
+            {/* Impersonator Info */}
+            <div className="mt-4">
+              <span className="text-xs text-red-500 block font-semibold">
+                {currentLang === "hy"
+                  ? "Զգուշացում. Կան կեղծ և չարաբաստիկ էջեր, որոնք ներկայացնում են որպես պաշտոնական: Ձեզ միայն այս կայքի և վերը նշված սոցիալական էջերի միջոցով է ուղարկվելու օրիգինալ ապրանք:"
+                  : currentLang === "ru"
+                  ? "Внимание: Существуют фальшивые и мошеннические сайты, выдающие себя за официальных поставщиков. Только этот сайт и указанные соцсети являются официальными."
+                  : "Warning: Fake and scam websites impersonate the brand. Only this site and the social accounts above are official."}
+              </span>
+            </div>
           </div>
 
           {/* Column 2: About Links */}
