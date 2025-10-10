@@ -1,9 +1,9 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Как отличить оригинальный Samyun Wan от подделки | armwhey.com мошенники',
-  description: 'Узнайте, как отличить оригинальный Samyun Wan от подделки. ВНИМАНИЕ: armwhey.com - мошенники! Только у нас оригинал с QR-кодом!',
-  keywords: 'Samyun Wan оригинал, как отличить подделку, armwhey мошенники, armwhey подделка, QR-код проверка, официальный дистрибьютор',
+  title: 'Как отличить оригинальный Samyun Wan от подделки | Официальный дистрибьютор',
+  description: 'Узнайте, как отличить оригинальный Samyun Wan от подделки. Только у нас оригинал с QR-кодом!',
+  keywords: 'Samyun Wan оригинал, как отличить подделку, QR-код проверка, официальный дистрибьютор',
 };
 
 const HowToIdentifyFakePage = () => {
@@ -23,11 +23,11 @@ const HowToIdentifyFakePage = () => {
           <div className="space-y-8">
             <div className="bg-red-100 border-l-4 border-red-500 p-6 rounded-lg">
               <h2 className="text-2xl font-bold text-red-800 mb-4">
-                ⚠️ ВНИМАНИЕ: armwhey.com - МОШЕННИКИ!
+                ⚠️ ВНИМАНИЕ: Остерегайтесь подделок!
               </h2>
               <p className="text-red-700 text-lg">
-                armwhey.com НЕ является официальным дистрибьютором Samyun Wan! 
-                armwhey.com продает подделки! Не покупайте на armwhey.com!
+                В интернете много мошенников, которые продают подделки! 
+                Покупайте только у официального дистрибьютора!
               </p>
             </div>
 
@@ -47,11 +47,11 @@ const HowToIdentifyFakePage = () => {
 
               <div className="bg-red-100 border-l-4 border-red-500 p-6 rounded-lg">
                 <h3 className="text-xl font-bold text-red-800 mb-4">
-                  ❌ Подделка (armwhey.com)
+                  ❌ Подделка
                 </h3>
                 <ul className="space-y-2 text-red-700">
                   <li>• НЕТ QR-кода на упаковке</li>
-                  <li>• Продается на armwhey.com (мошенники!)</li>
+                  <li>• Продается на неизвестных сайтах</li>
                   <li>• Поддельная упаковка</li>
                   <li>• Нет сертификата</li>
                   <li>• Опасна для здоровья!</li>
@@ -66,7 +66,7 @@ const HowToIdentifyFakePage = () => {
               <ol className="space-y-2 text-blue-700">
                 <li>1. Проверьте QR-код на упаковке</li>
                 <li>2. Покупайте только у официального дистрибьютора</li>
-                <li>3. Остерегайтесь armwhey.com - это мошенники!</li>
+                <li>3. Остерегайтесь неизвестных сайтов</li>
                 <li>4. Звоните +37495653666 для проверки</li>
               </ol>
             </div>

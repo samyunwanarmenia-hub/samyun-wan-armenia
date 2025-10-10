@@ -1,12 +1,12 @@
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Как отличить оригинальный Samyun Wan от подделки | armwhey.com мошенники',
-  description: 'Узнайте, как отличить оригинальный Samyun Wan от подделки. ВНИМАНИЕ: armwhey.com - мошенники! Только у нас оригинал с QR-кодом!',
-  keywords: 'Samyun Wan оригинал, как отличить подделку, armwhey мошенники, armwhey подделка, QR-код проверка, официальный дистрибьютор',
+  title: 'Как отличить оригинальный Samyun Wan от подделки | Официальный дистрибьютор',
+  description: 'Узнайте, как отличить оригинальный Samyun Wan от подделки. Только у нас оригинал с QR-кодом!',
+  keywords: 'Samyun Wan оригинал, как отличить подделку, QR-код проверка, официальный дистрибьютор',
   openGraph: {
     title: 'Как отличить оригинальный Samyun Wan от подделки',
-    description: 'ВНИМАНИЕ: armwhey.com - мошенники! Только у нас оригинал с QR-кодом!',
+    description: 'Только у нас оригинал с QR-кодом!',
     type: 'article',
   },
 };

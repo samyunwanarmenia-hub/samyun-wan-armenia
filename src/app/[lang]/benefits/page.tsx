@@ -1,5 +1,3 @@
-"use client";
-
 import BenefitsSection from '@/components/BenefitsSection';
 
 const BenefitsPage = () => {
