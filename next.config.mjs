@@ -4,6 +4,7 @@ import path from 'path'; // Import the path module
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
+  trailingSlash: false,
   images: {
     remotePatterns: [
       {

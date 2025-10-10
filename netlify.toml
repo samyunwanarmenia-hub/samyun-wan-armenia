@@ -14,13 +14,6 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# This rule forces the root path to redirect to the default language
-[[redirects]]
-  from = "/"
-  to = "/hy"
-  status = 301
-  force = true
-
 # --- SEO Canonical Redirects ---
 [[redirects]]
   from = "http://samyunwanarmenia.netlify.app/*"
@@ -28,11 +21,29 @@
   status = 301
   force = true
 
+# Redirect root to default language
 [[redirects]]
-  from = "/:path/"
-  to = "/:path"
+  from = "/"
+  to = "/hy"
   status = 301
   force = true
-  conditions = {Language = ["hy", "ru", "en"]}
-  except = ["/"]
+
+# Remove trailing slashes for language paths only
+[[redirects]]
+  from = "/hy/"
+  to = "/hy"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ru/"
+  to = "/ru"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/"
+  to = "/en"
+  status = 301
+  force = true
 # TODO: If you add a custom domain, add an explicit canonical redirect from netlify.app to primary domain
