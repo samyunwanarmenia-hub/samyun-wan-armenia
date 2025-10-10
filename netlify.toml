@@ -20,4 +20,11 @@
   to = "https://samyunwanarmenia.netlify.app/:splat"
   status = 301
   force = true
+
+# Redirect root to default language
+[[redirects]]
+  from = "/"
+  to = "/hy"
+  status = 301
+  force = true
 # TODO: If you add a custom domain, add an explicit canonical redirect from netlify.app to primary domain
