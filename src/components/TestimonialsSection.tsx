@@ -66,12 +66,37 @@ const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: Tes
                 hoverShadow="0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
               >
                 <div className="flex items-center mb-3">
-                  <OptimizedImage
-                    src={testimonial.image}
-                    alt={currentLang === 'hy' ? testimonial.name : currentLang === 'ru' ? testimonial.nameRu : testimonial.nameEn}
-                    className="w-10 h-10 rounded-full mr-3 object-cover"
-                    sizes="40px"
-                  />
+                  {/^https?:\/\//.test(testimonial.image) ? (
+                    /* External avatar: use native img to avoid local optimization pipeline */
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={testimonial.image}
+                      alt={
+                        currentLang === 'hy'
+                          ? testimonial.name
+                          : currentLang === 'ru'
+                          ? testimonial.nameRu
+                          : testimonial.nameEn
+                      }
+                      className="w-10 h-10 rounded-full mr-3 object-cover"
+                      width={40}
+                      height={40}
+                      loading="lazy"
+                    />
+                  ) : (
+                    <OptimizedImage
+                      src={testimonial.image}
+                      alt={
+                        currentLang === 'hy'
+                          ? testimonial.name
+                          : currentLang === 'ru'
+                          ? testimonial.nameRu
+                          : testimonial.nameEn
+                      }
+                      className="w-10 h-10 rounded-full mr-3 object-cover"
+                      sizes="40px"
+                    />
+                  )}
                   <div>
                     <h5 className="font-bold text-gray-800 dark:text-gray-50 text-sm"> {/* Changed text-gray-900 to text-gray-800 for light mode */}
                       {currentLang === 'hy' ? testimonial.name : currentLang === 'ru' ? testimonial.nameRu : testimonial.nameEn}
