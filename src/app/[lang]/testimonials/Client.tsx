@@ -9,7 +9,6 @@ import { sendTelegramMessage } from '@/utils/telegramApi';
 import { showSuccess, showError } from '@/utils/toast';
 import { baseTestimonials } from '@/data/testimonials';
 import { formatNameInitialLastName } from '@/utils/testimonialGenerator';
-import { supabase } from '@/integrations/supabase/client';
 
 const TestimonialsPageClient = () => {
   const { t, currentLang } = useLayoutContext();
@@ -18,49 +17,8 @@ const TestimonialsPageClient = () => {
   const [_isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const fetchTestimonials = async () => {
-      setIsLoading(true);
-      const enableReviews = process.env.NEXT_PUBLIC_ENABLE_SUPABASE_REVIEWS === 'true';
-      const allowedHost = (() => { try { return new URL(SITE_URL).hostname; } catch { return null; } })();
-      const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-      const isProdHost = allowedHost ? hostname === allowedHost : false;
-
-      if (!supabase || !enableReviews || !isProdHost) {
-        setIsLoading(false);
-        return;
-      }
-
-      try {
-        const { data: dbReviews, error } = await supabase
-          .from('reviews')
-          .select('*')
-          .order('created_at', { ascending: false });
-
-        if (error) {
-          console.warn('Supabase reviews fetch failed:', error.message);
-        } else {
-          const fetched: Testimonial[] = (dbReviews || []).map((review: DbReview) => ({
-            id: review.id,
-            name: formatNameInitialLastName(review.name),
-            nameRu: formatNameInitialLastName(review.name),
-            nameEn: formatNameInitialLastName(review.name),
-            image: `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 100)}.jpg`,
-            rating: review.rating || 5,
-            result: t.testimonials.newReviewLabel,
-            textHy: review.text,
-            textRu: review.text,
-            textEn: review.text,
-          }));
-          setDbTestimonials(fetched);
-        }
-      } catch (err) {
-        console.warn('Supabase fetch threw error:', err);
-      }
-      setIsLoading(false);
-    };
-
-    fetchTestimonials();
-  }, [t.testimonials.newReviewLabel]);
+    setIsLoading(false);
+  }, []);
 
   const combinedTestimonials = useMemo(() => {
     const initial = [...baseTestimonials, ...dbTestimonials];
