@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
+import { SITE_URL } from '@/config/siteConfig';
 
 const YANDEX_METRIKA_ID = 103962073; // Your Yandex.Metrika counter ID
 
@@ -10,6 +11,13 @@ export const useYandexMetrika = () => {
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    const allowedHost = (() => {
+      try { return new URL(SITE_URL).hostname; } catch { return null; }
+    })();
+    const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    // Load Metrika только на продакшн-домене, чтобы избежать cookie warning локально
+    const domainOk = allowedHost ? hostname === allowedHost : false;
+
     // Ensure ym is defined globally before script injection
     // This allows ym calls to be queued even before the main script loads.
     if (typeof window !== 'undefined') {
@@ -21,6 +29,10 @@ export const useYandexMetrika = () => {
     const injectYandexMetrikaScript = () => {
       if (typeof window === 'undefined' || document.getElementById('yandex-metrika-script')) {
         return; // Already loaded or not in browser
+      }
+      if (!domainOk) {
+        console.warn('Yandex Metrika skipped due to hostname mismatch', { hostname, allowedHost });
+        return;
       }
 
       const script = document.createElement('script');
@@ -59,7 +71,7 @@ export const useYandexMetrika = () => {
     }
 
     // Track page view on route change.
-    if (pathname !== null) {
+    if (pathname !== null && domainOk) {
       const fullPath = pathname + (searchParams ? `?${searchParams.toString()}` : '');
       // Ensure ym is available (it will be queued if not yet loaded)
       window.ym(YANDEX_METRIKA_ID, 'hit', fullPath);

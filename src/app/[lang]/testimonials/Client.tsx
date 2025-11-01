@@ -20,28 +20,37 @@ const TestimonialsPageClient = () => {
   useEffect(() => {
     const fetchTestimonials = async () => {
       setIsLoading(true);
-      const { data: dbReviews, error } = await supabase
-        .from('reviews')
-        .select('*')
-        .order('created_at', { ascending: false });
+      if (!supabase) {
+        // No Supabase configured — skip remote fetch gracefully
+        setIsLoading(false);
+        return;
+      }
 
-      if (error) {
-        console.error('Error fetching reviews from Supabase:', error.message);
-        showError('Failed to load reviews.');
-      } else {
-        const fetched: Testimonial[] = (dbReviews || []).map((review: DbReview) => ({
-          id: review.id,
-          name: formatNameInitialLastName(review.name),
-          nameRu: formatNameInitialLastName(review.name),
-          nameEn: formatNameInitialLastName(review.name),
-          image: `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 100)}.jpg`,
-          rating: review.rating || 5,
-          result: t.testimonials.newReviewLabel,
-          textHy: review.text,
-          textRu: review.text,
-          textEn: review.text,
-        }));
-        setDbTestimonials(fetched);
+      try {
+        const { data: dbReviews, error } = await supabase
+          .from('reviews')
+          .select('*')
+          .order('created_at', { ascending: false });
+
+        if (error) {
+          console.warn('Supabase reviews fetch failed:', error.message);
+        } else {
+          const fetched: Testimonial[] = (dbReviews || []).map((review: DbReview) => ({
+            id: review.id,
+            name: formatNameInitialLastName(review.name),
+            nameRu: formatNameInitialLastName(review.name),
+            nameEn: formatNameInitialLastName(review.name),
+            image: `https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 100)}.jpg`,
+            rating: review.rating || 5,
+            result: t.testimonials.newReviewLabel,
+            textHy: review.text,
+            textRu: review.text,
+            textEn: review.text,
+          }));
+          setDbTestimonials(fetched);
+        }
+      } catch (err) {
+        console.warn('Supabase fetch threw error:', err);
       }
       setIsLoading(false);
     };
@@ -102,4 +111,3 @@ const TestimonialsPageClient = () => {
 };
 
 export default TestimonialsPageClient;
-

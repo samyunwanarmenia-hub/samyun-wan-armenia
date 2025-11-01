@@ -28,3 +28,13 @@
   status = 301
   force = true
 # TODO: If you add a custom domain, add an explicit canonical redirect from netlify.app to primary domain
+
+[[redirects]]
+  from = "/_next/*"
+  to = "/_next/:splat"
+  status = 200
+
+[[headers]]
+  for = "/_next/static/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
