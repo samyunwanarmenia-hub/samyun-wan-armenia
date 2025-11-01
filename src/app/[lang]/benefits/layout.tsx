@@ -1,20 +1,31 @@
-import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
+import { translations } from '@/i18n/translations';
 import { benefitsItemsData } from '@/data/benefitsItems';
 import { BenefitsLayoutProps } from '@/types/global';
-import { generateCommonMetadata } from '@/utils/metadataUtils'; // Import the new utility
+import { generateCommonMetadata } from '@/utils/metadataUtils';
+import { SITE_URL } from '@/config/siteConfig';
 
 export async function generateMetadata({ params }: BenefitsLayoutProps): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;
-  const t = translations[lang] || translations.hy; // Fallback to Armenian
+  const t = translations[lang] || translations.hy;
 
   const benefitKeywords = benefitsItemsData.map(item => t.benefits[item.key].title).join(', ');
   const benefitDescriptions = benefitsItemsData.map(item => t.benefits[item.key].desc).join('; ');
 
-  const pageTitle = t.hero.title + ' - ' + t.benefits.title;
-  const pageDescription = t.benefits.subtitle + ' ' + benefitDescriptions;
-  const pageKeywords = `${t.hero.title}, ${t.benefits.title}, ${t.benefits.subtitle}, samyun wan, armenia, ${benefitKeywords}, քաշի ավելացում, բնական կապսուլներ, ինդոնեզական, samyun wan оригинал ереван, նաբոր վеса հայաստան, appetite enhancement, weight gain, immunity boost, energy levels, metabolism improvement, mood enhancement`;
-  const pageImage = 'https://samyunwanarmenia.netlify.app/optimized/samyun-vitamin-gain-whey-600w.jpg'; // Specific image for benefits page
+  const pageTitle = `${t.hero.title} - ${t.benefits.title}`;
+  const pageDescription = `${t.benefits.subtitle} ${benefitDescriptions}`.trim();
+  const pageKeywords = [
+    t.hero.title,
+    t.benefits.title,
+    t.benefits.subtitle,
+    'Samyun Wan Armenia',
+    benefitKeywords,
+    'Samyun Wan преимущества',
+    'Samyun Wan արդյունքներ',
+  ]
+    .filter(Boolean)
+    .join(', ');
+  const pageImage = `${SITE_URL}/optimized/samyun-vitamin-gain-whey-600w.jpg`;
   const pageImageAlt = t.benefits.title;
 
   return generateCommonMetadata({

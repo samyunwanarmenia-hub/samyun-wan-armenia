@@ -1,8 +1,7 @@
 import { MetadataRoute } from 'next';
 import { translations } from '@/i18n/translations';
 import { navigationSections } from '@/data/navigationSections';
-
-const baseUrl = 'https://samyunwanarmenia.netlify.app'; // Replace with your actual base URL
+import { SITE_URL } from '@/config/siteConfig';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const languages = Object.keys(translations);
@@ -15,16 +14,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // 1. Add root URL
   sitemapEntries.push({
-    url: baseUrl,
+    url: SITE_URL,
     lastModified: lastModifiedDate,
     changeFrequency: 'weekly',
     priority: 1.0,
     alternates: {
       languages: {
-        'hy-AM': `${baseUrl}/hy`,
-        'ru-RU': `${baseUrl}/ru`,
-        'en-US': `${baseUrl}/en`,
-        'x-default': baseUrl,
+        'hy-AM': `${SITE_URL}/hy`,
+        'ru-RU': `${SITE_URL}/ru`,
+        'en-US': `${SITE_URL}/en`,
+        'x-default': SITE_URL,
       },
     },
   });
@@ -33,16 +32,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
   languages.forEach(lang => {
     // Language-specific home page (e.g., /hy, /ru, /en)
     sitemapEntries.push({
-      url: `${baseUrl}/${lang}`,
+      url: `${SITE_URL}/${lang}`,
       lastModified: lastModifiedDate,
       changeFrequency: 'weekly',
       priority: 0.9,
       alternates: {
         languages: {
-          'hy-AM': `${baseUrl}/hy`,
-          'ru-RU': `${baseUrl}/ru`,
-          'en-US': `${baseUrl}/en`,
-          'x-default': `${baseUrl}/hy`, // x-default for language root points to default language root
+          'hy-AM': `${SITE_URL}/hy`,
+          'ru-RU': `${SITE_URL}/ru`,
+          'en-US': `${SITE_URL}/en`,
+          'x-default': `${SITE_URL}/hy`, // x-default for language root points to default language root
         },
       },
     });
@@ -51,12 +50,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     mainNavPages.forEach(page => {
       const alternates: Record<string, string> = {};
       languages.forEach(altLang => {
-        alternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${baseUrl}/${altLang}/${page}`;
+        alternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${SITE_URL}/${altLang}/${page}`;
       });
       // x-default for sub-pages points to the default language version of that specific page
-      alternates['x-default'] = `${baseUrl}/hy/${page}`;
+      alternates['x-default'] = `${SITE_URL}/hy/${page}`;
       sitemapEntries.push({
-        url: `${baseUrl}/${lang}/${page}`,
+        url: `${SITE_URL}/${lang}/${page}`,
         lastModified: lastModifiedDate,
         changeFrequency: 'monthly',
         priority: 0.8, // Default priority for main navigation pages
@@ -70,11 +69,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ['privacy', 'terms'].forEach(legalPage => {
       const legalAlternates: Record<string, string> = {};
       languages.forEach(altLang => {
-        legalAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${baseUrl}/${altLang}/${legalPage}`;
+        legalAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${SITE_URL}/${altLang}/${legalPage}`;
       });
-      legalAlternates['x-default'] = `${baseUrl}/hy/${legalPage}`;
+      legalAlternates['x-default'] = `${SITE_URL}/hy/${legalPage}`;
       sitemapEntries.push({
-        url: `${baseUrl}/${lang}/${legalPage}`,
+        url: `${SITE_URL}/${lang}/${legalPage}`,
         lastModified: lastModifiedDate,
         changeFrequency: 'monthly',
         priority: 0.5,
@@ -87,12 +86,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Explicitly add the /verify/qr page for each language
     const qrVerifyAlternates: Record<string, string> = {};
     languages.forEach(altLang => {
-      qrVerifyAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${baseUrl}/${altLang}/verify/qr`;
+      qrVerifyAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${SITE_URL}/${altLang}/verify/qr`;
     });
-    qrVerifyAlternates['x-default'] = `${baseUrl}/hy/verify/qr`; // x-default for verify/qr page points to default language verify/qr page
+    qrVerifyAlternates['x-default'] = `${SITE_URL}/hy/verify/qr`; // x-default for verify/qr page points to default language verify/qr page
 
     sitemapEntries.push({
-      url: `${baseUrl}/${lang}/verify/qr`,
+      url: `${SITE_URL}/${lang}/verify/qr`,
       lastModified: lastModifiedDate,
       changeFrequency: 'monthly',
       priority: 0.7, // Lower priority as it's a utility page
@@ -104,12 +103,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     // Add the /how-to-identify-fake page for each language
     const fakeIdentifyAlternates: Record<string, string> = {};
     languages.forEach(altLang => {
-      fakeIdentifyAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${baseUrl}/${altLang}/how-to-identify-fake`;
+      fakeIdentifyAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${SITE_URL}/${altLang}/how-to-identify-fake`;
     });
-    fakeIdentifyAlternates['x-default'] = `${baseUrl}/hy/how-to-identify-fake`;
+    fakeIdentifyAlternates['x-default'] = `${SITE_URL}/hy/how-to-identify-fake`;
 
     sitemapEntries.push({
-      url: `${baseUrl}/${lang}/how-to-identify-fake`,
+      url: `${SITE_URL}/${lang}/how-to-identify-fake`,
       lastModified: lastModifiedDate,
       changeFrequency: 'weekly',
       priority: 0.9, // High priority for anti-fraud page

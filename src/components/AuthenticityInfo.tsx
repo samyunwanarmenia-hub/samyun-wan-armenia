@@ -8,6 +8,7 @@ import { QRCodeCanvas } from 'qrcode.react';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { useInView } from 'react-intersection-observer';
 import Link from 'next/link'; // Import Link for internal navigation
+import { SITE_URL } from '@/config/siteConfig';
 
 const AuthenticityInfo = () => {
   const { t, openAuthenticityModal, currentLang } = useLayoutContext();
@@ -18,7 +19,7 @@ const AuthenticityInfo = () => {
   });
 
   // Updated QR code value and link path to point to the internal /verify/qr page
-  const qrCodeValue = `https://samyunwanarmenia.netlify.app/${currentLang}/verify/qr`;
+  const qrCodeValue = `${SITE_URL}/${currentLang}/verify/qr`;
   const qrLinkPath = `/${currentLang}/verify/qr`;
 
   const hasAttentionText = !!t.authenticity.attention;

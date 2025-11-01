@@ -1,23 +1,39 @@
 import { TranslationKeys, FaqQuestionKey, FaqAnswerKey, ProductShowcaseItem, Testimonial } from '@/types/global';
+import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
 
 export const generateOrganizationStructuredData = (t: TranslationKeys, currentLang: string) => {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Samyun Wan Armenia',
-    url: 'https://samyunwanarmenia.netlify.app/',
-    logo: 'https://samyunwanarmenia.netlify.app/images/og-image.jpg', // TODO: Replace with official logo if available as PNG/SVG
+    url: SITE_URL,
+    logo: `${SITE_URL}/optimized/og-image.jpg`,
     sameAs: [
-      'https://www.facebook.com/samyunwanarmenia', // TODO: Verify official Facebook URL
-      'https://t.me/samyunwanarmenia', // TODO: Confirm Telegram link is official
-      'https://www.instagram.com/samyunwanarmenia' // TODO: Confirm correct Instagram handle
+      'https://facebook.com/samyunwanarmenia',
+      'https://instagram.com/samyunwanarmenia',
+      'https://tiktok.com/@samyunwanarmenia',
+      'https://youtube.com/@samyunwanarmenia',
+      'https://t.me/samyunwanarmenia',
+      'https://wa.me/37495653666',
+      'https://wa.me/37496653666',
+      'https://m.me/samyunwanarmenia',
     ],
-    contactPoint: [{
-      '@type': 'ContactPoint',
-      telephone: '+37495653666', // TODO: Confirm this is the main business phone for customer service
-      contactType: 'customer service',
-      areaServed: 'AM',
-    }],
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: PRIMARY_PHONE,
+        contactType: 'customer support',
+        areaServed: 'AM',
+        availableLanguage: ['hy', 'ru', 'en'],
+      },
+      {
+        '@type': 'ContactPoint',
+        telephone: SECONDARY_PHONE,
+        contactType: 'sales',
+        areaServed: 'AM',
+        availableLanguage: ['hy', 'ru', 'en'],
+      },
+    ],
     inLanguage: currentLang,
   };
 };
@@ -40,10 +56,10 @@ export const generateFaqStructuredData = (t: TranslationKeys, currentLang: strin
   }));
 
   return {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": mainEntity,
-    "inLanguage": currentLang,
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: mainEntity,
+    inLanguage: currentLang,
   };
 };
 
@@ -59,27 +75,27 @@ export const generateProductStructuredData = (
   const imageUrl = `${baseUrl}${product.src}`; // Full URL for the image
 
   return {
-    "@context": "https://schema.org/",
-    "@type": "Product",
-    "name": productName,
-    "image": imageUrl,
-    "description": productDescription,
-    "sku": `SW-${product.labelKey.toUpperCase()}-${currentLang.toUpperCase()}`, // Unique SKU
-    "brand": {
-      "@type": "Brand",
-      "name": t.hero.title // Samyun Wan Armenia
+    '@context': 'https://schema.org/',
+    '@type': 'Product',
+    name: productName,
+    image: imageUrl,
+    description: productDescription,
+    sku: `SW-${product.labelKey.toUpperCase()}-${currentLang.toUpperCase()}`, // Unique SKU
+    brand: {
+      '@type': 'Brand',
+      name: t.hero.title, // Samyun Wan Armenia
     },
-    "offers": {
-      "@type": "Offer",
-      "url": productUrl,
-      "priceCurrency": "AMD",
-      "price": product.price,
-      "itemCondition": "https://schema.org/NewCondition",
-      "availability": "https://schema.org/InStock",
-      "seller": {
-        "@type": "Organization",
-        "name": t.hero.title
-      }
+    offers: {
+      '@type': 'Offer',
+      url: productUrl,
+      priceCurrency: 'AMD',
+      price: product.price,
+      itemCondition: 'https://schema.org/NewCondition',
+      availability: 'https://schema.org/InStock',
+      seller: {
+        '@type': 'Organization',
+        name: t.hero.title,
+      },
     },
     // You can add aggregateRating here if you have reviews for individual products
     // "aggregateRating": {
@@ -96,11 +112,6 @@ export const generateWebSiteStructuredData = (baseUrl: string, t: TranslationKey
     '@type': 'WebSite',
     url: baseUrl,
     name: t.hero.title,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${baseUrl}/search?q={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
   };
 };
 

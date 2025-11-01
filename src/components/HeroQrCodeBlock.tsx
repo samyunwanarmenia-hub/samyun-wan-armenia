@@ -7,6 +7,7 @@ import { useLayoutContext } from '@/context/LayoutContext';
 import { ShieldCheck } from 'lucide-react'; // Using ShieldCheck icon for authenticity
 import Link from 'next/link'; // Import Link for internal navigation
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
+import { SITE_URL } from '@/config/siteConfig';
 
 interface HeroQrCodeBlockProps {
   delay?: number;
@@ -16,7 +17,7 @@ const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
   const { t, currentLang } = useLayoutContext();
 
   // Change qrCodeValue to point to the internal /verify/qr page
-  const qrCodeValue = `https://samyunwanarmenia.netlify.app/${currentLang}/verify/qr`; // Use dynamic currentLang
+  const qrCodeValue = `${SITE_URL}/${currentLang}/verify/qr`; // Use dynamic currentLang
   const qrLinkPath = `/${currentLang}/verify/qr`; // Internal link path
 
   const blockVariants = {

@@ -1,8 +1,7 @@
 import { Metadata } from 'next';
 import { translations } from '@/i18n/translations';
 import { TranslationKeys } from '@/types/global';
-
-const baseUrl = 'https://samyunwanarmenia.netlify.app'; // Your actual base URL
+import { SITE_URL } from '@/config/siteConfig';
 
 interface CommonMetadataOptions {
   lang: string;
@@ -27,14 +26,14 @@ export const generateCommonMetadata = ({
   imageAlt,
   type = 'website',
 }: CommonMetadataOptions): Metadata => {
-  const pageUrl = `${baseUrl}/${lang}${pagePath ? `/${pagePath}` : ''}`;
+  const pageUrl = `${SITE_URL}/${lang}${pagePath ? `/${pagePath}` : ''}`;
 
   const alternatesLanguages: Record<string, string> = {};
   Object.keys(translations).forEach(locale => {
-    alternatesLanguages[`${locale}-${locale === 'hy' ? 'AM' : locale === 'ru' ? 'RU' : 'US'}`] = 
-      `${baseUrl}/${locale}${pagePath ? `/${pagePath}` : ''}`;
+    alternatesLanguages[`${locale}-${locale === 'hy' ? 'AM' : locale === 'ru' ? 'RU' : 'US'}`] =
+      `${SITE_URL}/${locale}${pagePath ? `/${pagePath}` : ''}`;
   });
-  alternatesLanguages['x-default'] = `${baseUrl}/hy${pagePath ? `/${pagePath}` : ''}`;
+  alternatesLanguages['x-default'] = `${SITE_URL}/hy${pagePath ? `/${pagePath}` : ''}`;
 
   return {
     title: {
@@ -47,12 +46,12 @@ export const generateCommonMetadata = ({
       title: title,
       description: description,
       url: pageUrl,
-      siteName: 'Samyun Wan Armenia - Official',
+      siteName: 'Samyun Wan Armenia — Официальный дистрибьютор',
       images: [
         {
           url: image,
-          width: 1200, // Default width, can be overridden
-          height: 630, // Default height, can be overridden
+          width: 1200,
+          height: 630,
           alt: imageAlt,
         },
       ],

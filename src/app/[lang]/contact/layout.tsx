@@ -1,22 +1,28 @@
-import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
+import { translations } from '@/i18n/translations';
 import { contactInfoData } from '@/data/contactInfo';
 import { ContactLayoutProps } from '@/types/global';
-import { generateCommonMetadata } from '@/utils/metadataUtils'; // Import the new utility
+import { generateCommonMetadata } from '@/utils/metadataUtils';
+import { SITE_URL } from '@/config/siteConfig';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;
-  const t = translations[lang] || translations.hy; // Fallback to Armenian
+  const t = translations[lang] || translations.hy;
 
-  const contactDetails = contactInfoData.map(item => {
-    if (item.key === 'phone') return t.contact.phoneNumbers.description;
-    return item.details;
-  }).join('; ');
+  const contactDetails = contactInfoData
+    .map(item => (item.key === 'phone' ? t.contact.phoneNumbers.description : item.details))
+    .join('; ');
 
-  const pageTitle = t.hero.title + ' - ' + t.nav.contact;
-  const pageDescription = t.contact.title + ' ' + contactDetails;
-  const pageKeywords = `${t.hero.title}, ${t.nav.contact}, samyun wan, armenia, contact us, address, phone, working hours, связаться, адрес, телефон, часы работы`;
-  const pageImage = 'https://samyunwanarmenia.netlify.app/optimized/samyun-wan-armenia-600w.jpg'; // Generic image for contact
+  const pageTitle = `${t.hero.title} - ${t.nav.contact}`;
+  const pageDescription = `${t.contact.title}. ${contactDetails}`.trim();
+  const pageKeywords = [
+    t.hero.title,
+    t.nav.contact,
+    'Samyun Wan Armenia',
+    'контакты Samyun Wan',
+    'Samyun Wan կապ',
+  ].join(', ');
+  const pageImage = `${SITE_URL}/optimized/samyun-wan-armenia-600w.jpg`;
   const pageImageAlt = t.nav.contact;
 
   return generateCommonMetadata({

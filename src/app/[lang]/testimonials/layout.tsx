@@ -1,24 +1,29 @@
-import { translations } from '@/i18n/translations';
 import { Metadata } from 'next';
+import { translations } from '@/i18n/translations';
 import { baseTestimonials } from '@/data/testimonials';
 import { generateReviewStructuredData } from '@/utils/structuredDataUtils';
 import { TestimonialsLayoutProps } from '@/types/global';
-import { generateCommonMetadata } from '@/utils/metadataUtils'; // Import the new utility
+import { generateCommonMetadata } from '@/utils/metadataUtils';
+import { SITE_URL } from '@/config/siteConfig';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;
-  const t = translations[lang] || translations.hy; // Fallback to Armenian
+  const t = translations[lang] || translations.hy;
 
-  const reviewKeywords = baseTestimonials.map(item => {
-    if (lang === 'hy') return item.name;
-    if (lang === 'ru') return item.nameRu;
-    return item.nameEn;
-  }).join(', ');
+  const reviewKeywords = baseTestimonials
+    .map(item => (lang === 'hy' ? item.name : lang === 'ru' ? item.nameRu : item.nameEn))
+    .join(', ');
 
-  const pageTitle = t.hero.title + ' - ' + t.testimonials.title;
+  const pageTitle = `${t.hero.title} - ${t.testimonials.title}`;
   const pageDescription = t.testimonials.formSubtitle;
-  const pageKeywords = `${t.hero.title}, ${t.testimonials.title}, samyun wan, armenia, ${reviewKeywords}, отзывы, Samyun Wan отзывы, customer reviews, weight gain reviews`;
-  const pageImage = 'https://samyunwanarmenia.netlify.app/optimized/samyun-wan-armenia-original-600w.jpg'; // Generic image for testimonials
+  const pageKeywords = [
+    t.hero.title,
+    t.testimonials.title,
+    'Samyun Wan Armenia отзывы',
+    'Samyun Wan կարծիքներ',
+    reviewKeywords,
+  ].join(', ');
+  const pageImage = `${SITE_URL}/optimized/samyun-wan-armenia-original-600w.jpg`;
   const pageImageAlt = t.testimonials.title;
 
   return generateCommonMetadata({
@@ -36,8 +41,8 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 const TestimonialsLayout = ({ children, params }: TestimonialsLayoutProps) => {
   const lang = params.lang as keyof typeof translations;
   const t = translations[lang] || translations.hy;
-  const reviewStructuredData = baseTestimonials.map(testimonial => 
-    generateReviewStructuredData(t, testimonial, lang)
+  const reviewStructuredData = baseTestimonials.map(testimonial =>
+    generateReviewStructuredData(t, testimonial, lang),
   );
 
   return (

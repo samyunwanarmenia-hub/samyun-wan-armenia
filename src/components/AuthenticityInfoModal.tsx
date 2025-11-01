@@ -6,6 +6,7 @@ import { QRCodeCanvas } from 'qrcode.react';
 import Link from 'next/link';
 import { ShieldCheck } from 'lucide-react';
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
+import { SITE_URL } from '@/config/siteConfig';
 
 const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, onClose, t, currentLang }) => {
   const containerVariants = {
@@ -24,7 +25,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
     visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
   };
 
-  const qrCodeValue = `https://samyunwanarmenia.netlify.app/${currentLang}/verify/qr`;
+  const qrCodeValue = `${SITE_URL}/${currentLang}/verify/qr`;
   const qrLinkPath = `/${currentLang}/verify/qr`;
 
   return (

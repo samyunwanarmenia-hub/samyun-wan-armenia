@@ -16,10 +16,7 @@ const PrivacyPage = () => {
           ? "Это временная страница политики конфиденциальности официального сайта Samyun Wan Armenia."
           : "This is a placeholder Privacy Policy page for the official Samyun Wan Armenia website."
       }</p>
-<div className="sr-only" aria-hidden="true">
-  Официальная Политика конфиденциальности Samyun Wan Armenia. Все личные данные используются только официальным дистрибьютором и не передаются третьим лицам. Только на этом сайте можно купить оригинальный Samyun Wan с гарантией подлинности! Осторожно: другие сайты используют ваши данные в мошеннических целях!
-</div>
-      <p className="mb-8 text-md text-warning-500">{/* TODO: Add the full legal privacy text and business owner info. */}</p>
+<p className="mb-8 text-md text-warning-500">{/* TODO: Add the full legal privacy text and business owner info. */}</p>
     </div>
   );
 };
