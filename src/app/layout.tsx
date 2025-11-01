@@ -73,6 +73,9 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'zAW0LZsUTQ179ySPIQOmESS0xJZldVzO8ZhNvDMCSCg',
+    other: {
+      'google-site-verification': 'PgWy3NRrCwyiyKAUXBeTSNRMigT6X0ufwZ-OgVaDXP0',
+    },
   },
   manifest: '/site.webmanifest',
   icons: {
