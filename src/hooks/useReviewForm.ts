@@ -23,6 +23,9 @@ export const useReviewForm = ({ t, onReviewSubmitted, initialName = '' }: UseRev
 
     setIsSubmitting(true);
     try {
+      if (!supabase) {
+        throw new Error('Reviews service is not configured.');
+      }
       const { data, error } = await supabase
         .from('reviews')
         .insert([

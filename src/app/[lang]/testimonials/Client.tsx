@@ -20,8 +20,12 @@ const TestimonialsPageClient = () => {
   useEffect(() => {
     const fetchTestimonials = async () => {
       setIsLoading(true);
-      if (!supabase) {
-        // No Supabase configured — skip remote fetch gracefully
+      const enableReviews = process.env.NEXT_PUBLIC_ENABLE_SUPABASE_REVIEWS === 'true';
+      const allowedHost = (() => { try { return new URL(SITE_URL).hostname; } catch { return null; } })();
+      const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+      const isProdHost = allowedHost ? hostname === allowedHost : false;
+
+      if (!supabase || !enableReviews || !isProdHost) {
         setIsLoading(false);
         return;
       }
@@ -59,7 +63,7 @@ const TestimonialsPageClient = () => {
   }, [t.testimonials.newReviewLabel]);
 
   const combinedTestimonials = useMemo(() => {
-    const initial = [...dbTestimonials, ...baseTestimonials];
+    const initial = [...baseTestimonials, ...dbTestimonials];
     if (userTestimonial) initial.unshift(userTestimonial);
     const unique = Array.from(new Map(initial.map(item => [item.id, item])).values());
     return unique.map(testimonial => ({
