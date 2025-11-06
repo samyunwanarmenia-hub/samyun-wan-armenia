@@ -1,7 +1,7 @@
-import { redirect } from 'next/navigation';
+import { permanentRedirect } from 'next/navigation';
 
 const RootPage = () => {
-  redirect('/hy');
+  permanentRedirect('/hy');
 };
 
 export default RootPage;

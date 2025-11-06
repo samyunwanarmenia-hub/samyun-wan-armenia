@@ -3,20 +3,26 @@
 import { useEffect } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
-const GOOGLE_ANALYTICS_ID = 'G-082YC0D78R'; // Your Google Analytics Measurement ID
+const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export const useGoogleAnalytics = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    if (!GOOGLE_ANALYTICS_ID) {
+      console.warn('NEXT_PUBLIC_GA_ID is not configured. Google Analytics is disabled.');
+      return;
+    }
+
     // Ensure dataLayer and gtag are defined globally before script injection
     // This allows gtag calls to be queued even before the main script loads.
     if (typeof window !== 'undefined') {
       window.dataLayer = window.dataLayer || [];
       if (typeof window.gtag !== 'function') {
-        // Use rest parameters instead of 'arguments'
-        window.gtag = function(...args: unknown[]) { window.dataLayer.push(args); };
+        window.gtag = function (...args: unknown[]) {
+          window.dataLayer.push(args);
+        };
       }
     }
 
@@ -31,6 +37,10 @@ export const useGoogleAnalytics = () => {
       script.async = true;
       script.defer = true; // Add defer attribute
       script.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`;
+      script.onload = () => {
+        window.gtag('js', new Date());
+        window.gtag('config', GOOGLE_ANALYTICS_ID);
+      };
       
       const firstScript = document.getElementsByTagName('script')[0];
       if (firstScript && firstScript.parentNode) {
@@ -38,11 +48,6 @@ export const useGoogleAnalytics = () => {
       } else {
         document.head.appendChild(script);
       }
-
-      // Initial configuration after script is added to DOM
-      window.gtag('js', new Date());
-      window.gtag('config', GOOGLE_ANALYTICS_ID);
-      console.log('Google Analytics script injected and initialized.');
     };
 
     // Defer the injection of the Google Analytics script using requestIdleCallback
@@ -56,9 +61,8 @@ export const useGoogleAnalytics = () => {
     }
 
     // Track page view on route change.
-    if (pathname !== null) {
+    if (pathname !== null && typeof window !== 'undefined' && typeof window.gtag === 'function') {
       const fullPath = pathname + (searchParams ? `?${searchParams.toString()}` : '');
-      // Ensure gtag is available (it will be queued if not yet loaded)
       window.gtag('event', 'page_view', {
         page_path: fullPath,
         page_location: window.location.href,

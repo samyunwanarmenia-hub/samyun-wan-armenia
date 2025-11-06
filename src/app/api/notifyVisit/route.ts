@@ -3,14 +3,12 @@ import { headers } from 'next/headers';
 import { UAParser } from 'ua-parser-js';
 import { NotifyVisitBody } from '@/types/global';
 
-const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const SUPABASE_SERVICE_ROLE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
 
 export async function POST(request: Request) {
-  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-    console.error('Missing environment variables for Supabase or Telegram.');
+  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+    console.error('Missing Telegram credentials for notifyVisit.');
     return NextResponse.json({ error: 'Server configuration error.' }, { status: 500 });
   }
 
@@ -105,13 +103,6 @@ ${utmParams ? `<b>📊 ${utmParams}</b>\n` : ''}
 `;
 
     // 7️⃣ Send to Telegram
-    const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-    const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-
-    if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-      return NextResponse.json({ error: 'Telegram credentials not set' }, { status: 500 });
-    }
-
     const response = await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

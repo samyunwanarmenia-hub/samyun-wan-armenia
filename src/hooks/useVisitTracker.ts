@@ -49,7 +49,7 @@ export const useVisitTracker = () => {
           };
           
           try {
-            await notifyVisit(bodyData, utmQueryParams);
+            await notifyVisit(bodyData, utmQueryParams, true);
             sessionStorage.setItem(SESSION_KEY, currentTime.toString());
           } catch (error) {
             console.warn(

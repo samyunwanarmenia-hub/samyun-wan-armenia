@@ -1,4 +1,8 @@
+import fs from 'node:fs';
+import path from 'node:path';
+
 import { MetadataRoute } from 'next';
+
 import { translations } from '@/i18n/translations';
 import { navigationSections } from '@/data/navigationSections';
 import { SITE_URL } from '@/config/siteConfig';
@@ -18,16 +22,50 @@ const mapLanguageCode = (locale: string) => {
   return 'en-US';
 };
 
+const SOURCE_FILE_MAP: Record<string, string> = {
+  root: 'src/app/page.tsx',
+  home: 'src/app/[lang]/page.tsx',
+  about: 'src/app/[lang]/about/page.tsx',
+  benefits: 'src/app/[lang]/benefits/page.tsx',
+  products: 'src/app/[lang]/products/page.tsx',
+  testimonials: 'src/app/[lang]/testimonials/page.tsx',
+  faq: 'src/app/[lang]/faq/page.tsx',
+  contact: 'src/app/[lang]/contact/page.tsx',
+  'track-order': 'src/app/[lang]/track-order/page.tsx',
+  privacy: 'src/app/[lang]/privacy/page.tsx',
+  terms: 'src/app/[lang]/terms/page.tsx',
+  'verify/qr': 'src/app/[lang]/verify/qr/page.tsx',
+  'how-to-identify-fake': 'src/app/[lang]/how-to-identify-fake/page.tsx',
+};
+
+const fallbackLastModified =
+  process.env.NEXT_BUILD_TIMESTAMP ??
+  process.env.NETLIFY_BUILD_TIME ??
+  new Date().toISOString();
+
+const getLastModifiedForKey = (key: string) => {
+  const source = SOURCE_FILE_MAP[key] ?? SOURCE_FILE_MAP.home;
+  if (!source) {
+    return fallbackLastModified;
+  }
+
+  try {
+    const stats = fs.statSync(path.join(process.cwd(), source));
+    return stats.mtime.toISOString();
+  } catch {
+    return fallbackLastModified;
+  }
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const languages = Object.keys(translations);
   const mainNavPages = navigationSections.map(section => section.id).filter(id => id !== 'home');
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
-  const lastModifiedDate = new Date().toISOString();
 
   sitemapEntries.push({
     url: withTrailingSlash(SITE_URL),
-    lastModified: lastModifiedDate,
+    lastModified: getLastModifiedForKey('root'),
     changeFrequency: 'weekly',
     priority: 1.0,
     alternates: {
@@ -43,7 +81,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   languages.forEach(lang => {
     sitemapEntries.push({
       url: buildUrl(lang),
-      lastModified: lastModifiedDate,
+      lastModified: getLastModifiedForKey('home'),
       changeFrequency: 'weekly',
       priority: 0.9,
       alternates: {
@@ -64,7 +102,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       alternates['x-default'] = buildUrl('hy', page);
       sitemapEntries.push({
         url: buildUrl(lang, page),
-        lastModified: lastModifiedDate,
+        lastModified: getLastModifiedForKey(page),
         changeFrequency: 'monthly',
         priority: 0.8,
         alternates: {
@@ -81,7 +119,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       legalAlternates['x-default'] = buildUrl('hy', legalPage);
       sitemapEntries.push({
         url: buildUrl(lang, legalPage),
-        lastModified: lastModifiedDate,
+        lastModified: getLastModifiedForKey(legalPage),
         changeFrequency: 'monthly',
         priority: 0.5,
         alternates: {
@@ -98,7 +136,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     sitemapEntries.push({
       url: buildUrl(lang, 'verify', 'qr'),
-      lastModified: lastModifiedDate,
+      lastModified: getLastModifiedForKey('verify/qr'),
       changeFrequency: 'monthly',
       priority: 0.7,
       alternates: {
@@ -114,7 +152,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     sitemapEntries.push({
       url: buildUrl(lang, 'how-to-identify-fake'),
-      lastModified: lastModifiedDate,
+      lastModified: getLastModifiedForKey('how-to-identify-fake'),
       changeFrequency: 'weekly',
       priority: 0.9,
       alternates: {

@@ -1,7 +1,8 @@
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
+
 import { translations } from '@/i18n/translations';
-import { generateOrganizationStructuredData, generateWebSiteStructuredData } from '@/utils/structuredDataUtils';
+import { generateWebSiteStructuredData } from '@/utils/structuredDataUtils';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import LayoutClientProvider from '@/components/LayoutClientProvider';
 import { SITE_URL } from '@/config/siteConfig';
@@ -22,10 +23,8 @@ export async function generateMetadata({ params }: LangLayoutProps): Promise<Met
     t.hero.subtitle,
     t.hero.tagline,
     'Samyun Wan Armenia',
-    'Samyun Wan оригинал',
-    'Samyun Wan QR',
-    'Samyun Wan Հայաստան',
-    'Samyun Wan գնել',
+    'Samyun Wan QR verification',
+    'Samyun Wan authenticity check',
     t.authenticity.title,
     t.testimonials.title,
     t.contact.title,
@@ -53,15 +52,10 @@ export async function generateStaticParams() {
 const LangLayout = ({ children, params }: LangLayoutProps) => {
   const lang = params.lang as keyof typeof translations;
   const t = translations[lang] || translations.hy;
-  const organizationStructuredData = generateOrganizationStructuredData(t, lang);
   const webSiteStructuredData = generateWebSiteStructuredData(SITE_URL, t);
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationStructuredData) }}
-      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteStructuredData) }}

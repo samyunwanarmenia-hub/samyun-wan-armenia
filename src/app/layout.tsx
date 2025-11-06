@@ -1,20 +1,21 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Script from 'next/script';
+import { headers } from 'next/headers';
 
 import '../app/globals.css';
 
 import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
 
 const inter = Inter({
-  subsets: ['latin', 'cyrillic', 'greek'],
+  subsets: ['latin', 'cyrillic'],
   variable: '--font-inter',
   display: 'swap',
 });
 
-const DEFAULT_META_TITLE = 'Samyun Wan Armenia — Официальный дистрибьютор';
+const DEFAULT_META_TITLE = 'Samyun Wan Armenia — Official distributor in Armenia';
 const DEFAULT_META_DESCRIPTION =
-  'Официальный дистрибьютор Samyun Wan в Армении. Оригинальная продукция с QR-проверкой подлинности, консультацией и доставкой по всей стране.';
+  'Official store of Samyun Wan Armenia. Authentic Samyun Wan products with QR verification, multilingual support, and fast nationwide delivery.';
 const OG_IMAGE = `${SITE_URL}/optimized/og-image.jpg`;
 
 export const metadata: Metadata = {
@@ -25,19 +26,19 @@ export const metadata: Metadata = {
   },
   description: DEFAULT_META_DESCRIPTION,
   keywords:
-    'Samyun Wan Armenia, оригинальный Samyun Wan, проверка QR-кода, официальный дистрибьютор, натуральные добавки, контроль веса, доставка по Армении',
+    'Samyun Wan, Samyun Wan Armenia, QR verification, weight gain supplements, authentic Samyun Wan, Armenia official store',
   authors: [{ name: 'Samyun Wan Armenia' }, { name: 'Aleksandr Gevorgyan' }],
   openGraph: {
     title: DEFAULT_META_TITLE,
     description: DEFAULT_META_DESCRIPTION,
     url: SITE_URL,
-    siteName: 'Samyun Wan Armenia — Официальный дистрибьютор',
+    siteName: 'Samyun Wan Armenia',
     images: [
       {
         url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: 'Samyun Wan Armenia — оригинальная продукция с QR-проверкой',
+        alt: 'Samyun Wan Armenia official distributor',
       },
     ],
     locale: 'hy_AM',
@@ -90,7 +91,7 @@ const organizationStructuredData = {
   url: SITE_URL,
   logo: OG_IMAGE,
   description:
-    'Samyun Wan Armenia — официальный дистрибьютор оригинальных продуктов Samyun Wan в Армении с проверкой QR-кода и поддержкой производителя.',
+    'Samyun Wan Armenia is the official representative delivering authentic Samyun Wan products with QR verification and direct support.',
   sameAs: [
     'https://facebook.com/samyunwanarmenia',
     'https://instagram.com/samyunwanarmenia',
@@ -133,7 +134,7 @@ const productStructuredData = {
   '@type': 'Product',
   name: 'Samyun Wan Armenia Original',
   description:
-    'Оригинальный комплекс Samyun Wan с проверкой QR-кода для комфортного набора или контроля веса. Доступно только у официального дистрибьютора в Армении.',
+    'Authentic Samyun Wan complex with QR verification delivered directly from the official representative in Armenia.',
   image: OG_IMAGE,
   brand: {
     '@type': 'Brand',
@@ -153,23 +154,16 @@ const productStructuredData = {
 
 const SUPPORTED_HTML_LANGS = new Set(['hy', 'ru', 'en']);
 
-const resolveHtmlLang = (paramsLang?: string) => {
-  if (!paramsLang) {
-    return 'hy';
+const resolveHtmlLang = () => {
+  const headerLang = headers().get('x-current-lang');
+  if (headerLang && SUPPORTED_HTML_LANGS.has(headerLang)) {
+    return headerLang;
   }
-
-  const normalizedLang = paramsLang.toLowerCase();
-  return SUPPORTED_HTML_LANGS.has(normalizedLang) ? normalizedLang : 'hy';
+  return 'hy';
 };
 
-const RootLayout = ({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { lang?: string };
-}) => {
-  const htmlLang = resolveHtmlLang(params?.lang);
+const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  const htmlLang = resolveHtmlLang();
 
   return (
     <html lang={htmlLang} className={inter.variable} suppressHydrationWarning>
@@ -197,5 +191,3 @@ const RootLayout = ({
 };
 
 export default RootLayout;
-
-
