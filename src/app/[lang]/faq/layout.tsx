@@ -3,6 +3,7 @@ import { translations } from '@/i18n/translations';
 import { FaqLayoutProps } from '@/types/global';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { SITE_URL } from '@/config/siteConfig';
+import { generateFaqStructuredData } from '@/utils/structuredDataUtils';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang = params.lang as keyof typeof translations;
@@ -32,8 +33,20 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   });
 }
 
-const FaqLayout = ({ children }: FaqLayoutProps) => {
-  return <>{children}</>;
+const FaqLayout = ({ children, params }: FaqLayoutProps) => {
+  const lang = params.lang as keyof typeof translations;
+  const t = translations[lang] || translations.hy;
+  const faqStructuredData = generateFaqStructuredData(t, lang);
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+      />
+      {children}
+    </>
+  );
 };
 
 export default FaqLayout;

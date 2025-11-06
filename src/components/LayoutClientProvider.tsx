@@ -10,7 +10,7 @@ import useActiveLink from '@/hooks/useActiveLink';
 import useNavigationUtils from '@/hooks/useNavigationUtils';
 import MainLayout from '@/layouts/MainLayout';
 // import IntroAnimation from './IntroAnimation'; // Удаляем статический импорт
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from '@/context/ThemeContext';
 import ToastProvider from '@/components/ToastProvider';
 import dynamic from 'next/dynamic';
@@ -161,42 +161,33 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
         <DynamicGoogleAnalyticsTracker />
         <DynamicVisitTrackerWrapper />
         <DynamicServiceWorkerRegister />
-        <AnimatePresence mode="wait">
-          {showIntroAnimation ? (
-            <DynamicIntroAnimation key="intro-animation" />
+        <div className="min-h-screen flex flex-col text-gray-900 dark:text-gray-50 relative">
+          {isQrVerifyPage ? (
+            children
           ) : (
-            <motion.div
-              key="main-app-content"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.3 }}
-              className="min-h-screen flex flex-col text-gray-900 dark:text-gray-50 relative overflow-hidden"
+            <MainLayout
+              contactModalOpen={contactModalOpen}
+              contactModalType={contactModalType}
+              orderModalOpen={orderModalOpen}
+              initialSelectedProduct={initialSelectedProduct}
+              authenticityModalOpen={authenticityModalOpen}
+              callbackRequestModalOpen={callbackRequestModalOpen}
+              closeContactModal={closeContactModal}
+              closeOrderModal={closeOrderModal}
+              closeAuthenticityModal={closeAuthenticityModal}
+              closeCallbackRequestModal={closeCallbackRequestModal}
+              loadingLinkModalOpen={loadingLinkModalOpen}
+              closeLoadingLinkModal={closeLoadingLinkModal}
+              loadingLinkClientId={loadingLinkClientId}
+              t={t}
+              currentLang={currentLangState}
             >
-              {isQrVerifyPage ? (
-                children
-              ) : (
-                <MainLayout
-                  contactModalOpen={contactModalOpen}
-                  contactModalType={contactModalType}
-                  orderModalOpen={orderModalOpen}
-                  initialSelectedProduct={initialSelectedProduct}
-                  authenticityModalOpen={authenticityModalOpen}
-                  callbackRequestModalOpen={callbackRequestModalOpen}
-                  closeContactModal={closeContactModal}
-                  closeOrderModal={closeOrderModal}
-                  closeAuthenticityModal={closeAuthenticityModal}
-                  closeCallbackRequestModal={closeCallbackRequestModal}
-                  loadingLinkModalOpen={loadingLinkModalOpen}
-                  closeLoadingLinkModal={closeLoadingLinkModal}
-                  loadingLinkClientId={loadingLinkClientId}
-                  t={t}
-                  currentLang={currentLangState}
-                >
-                  {children}
-                </MainLayout>
-              )}
-            </motion.div>
+              {children}
+            </MainLayout>
           )}
+        </div>
+        <AnimatePresence>
+          {showIntroAnimation && <DynamicIntroAnimation key="intro-animation" />}
         </AnimatePresence>
       </ThemeProvider>
     </LayoutContext.Provider>

@@ -3,77 +3,84 @@ import { translations } from '@/i18n/translations';
 import { navigationSections } from '@/data/navigationSections';
 import { SITE_URL } from '@/config/siteConfig';
 
+const withTrailingSlash = (url: string) => (url.endsWith('/') ? url : `${url}/`);
+const buildUrl = (...segments: string[]) => {
+  const cleanedSegments = segments
+    .filter(Boolean)
+    .map(segment => segment.replace(/^\/+|\/+$/g, ''));
+
+  return [SITE_URL, ...cleanedSegments].join('/').replace(/\/+$/g, '');
+};
+
+const mapLanguageCode = (locale: string) => {
+  if (locale === 'hy') return 'hy-AM';
+  if (locale === 'ru') return 'ru-RU';
+  return 'en-US';
+};
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const languages = Object.keys(translations);
-  // Filter out 'home' as it's handled by the root and language-specific roots
-  // 'verify/qr' is a special page and will be added separately.
   const mainNavPages = navigationSections.map(section => section.id).filter(id => id !== 'home');
 
   const sitemapEntries: MetadataRoute.Sitemap = [];
-  const lastModifiedDate = new Date().toISOString(); // Use dynamic date
+  const lastModifiedDate = new Date().toISOString();
 
-  // 1. Add root URL
   sitemapEntries.push({
-    url: SITE_URL,
+    url: withTrailingSlash(SITE_URL),
     lastModified: lastModifiedDate,
     changeFrequency: 'weekly',
     priority: 1.0,
     alternates: {
       languages: {
-        'hy-AM': `${SITE_URL}/hy`,
-        'ru-RU': `${SITE_URL}/ru`,
-        'en-US': `${SITE_URL}/en`,
-        'x-default': SITE_URL,
+        'hy-AM': buildUrl('hy'),
+        'ru-RU': buildUrl('ru'),
+        'en-US': buildUrl('en'),
+        'x-default': withTrailingSlash(SITE_URL),
       },
     },
   });
 
-  // 2. Add language-specific home pages and all other main navigation pages
   languages.forEach(lang => {
-    // Language-specific home page (e.g., /hy, /ru, /en)
     sitemapEntries.push({
-      url: `${SITE_URL}/${lang}`,
+      url: buildUrl(lang),
       lastModified: lastModifiedDate,
       changeFrequency: 'weekly',
       priority: 0.9,
       alternates: {
         languages: {
-          'hy-AM': `${SITE_URL}/hy`,
-          'ru-RU': `${SITE_URL}/ru`,
-          'en-US': `${SITE_URL}/en`,
-          'x-default': `${SITE_URL}/hy`, // x-default for language root points to default language root
+          'hy-AM': buildUrl('hy'),
+          'ru-RU': buildUrl('ru'),
+          'en-US': buildUrl('en'),
+          'x-default': buildUrl('hy'),
         },
       },
     });
 
-    // All other main navigation pages for each language (e.g., /hy/about, /ru/benefits, /hy/track-order)
     mainNavPages.forEach(page => {
       const alternates: Record<string, string> = {};
       languages.forEach(altLang => {
-        alternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${SITE_URL}/${altLang}/${page}`;
+        alternates[mapLanguageCode(altLang)] = buildUrl(altLang, page);
       });
-      // x-default for sub-pages points to the default language version of that specific page
-      alternates['x-default'] = `${SITE_URL}/hy/${page}`;
+      alternates['x-default'] = buildUrl('hy', page);
       sitemapEntries.push({
-        url: `${SITE_URL}/${lang}/${page}`,
+        url: buildUrl(lang, page),
         lastModified: lastModifiedDate,
         changeFrequency: 'monthly',
-        priority: 0.8, // Default priority for main navigation pages
+        priority: 0.8,
         alternates: {
           languages: alternates,
         },
       });
     });
 
-    // --- ADD PRIVACY/TERMS LEGAL PAGES ---
     ['privacy', 'terms'].forEach(legalPage => {
       const legalAlternates: Record<string, string> = {};
       languages.forEach(altLang => {
-        legalAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${SITE_URL}/${altLang}/${legalPage}`;
+        legalAlternates[mapLanguageCode(altLang)] = buildUrl(altLang, legalPage);
       });
-      legalAlternates['x-default'] = `${SITE_URL}/hy/${legalPage}`;
+      legalAlternates['x-default'] = buildUrl('hy', legalPage);
       sitemapEntries.push({
-        url: `${SITE_URL}/${lang}/${legalPage}`,
+        url: buildUrl(lang, legalPage),
         lastModified: lastModifiedDate,
         changeFrequency: 'monthly',
         priority: 0.5,
@@ -83,35 +90,33 @@ export default function sitemap(): MetadataRoute.Sitemap {
       });
     });
 
-    // Explicitly add the /verify/qr page for each language
     const qrVerifyAlternates: Record<string, string> = {};
     languages.forEach(altLang => {
-      qrVerifyAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${SITE_URL}/${altLang}/verify/qr`;
+      qrVerifyAlternates[mapLanguageCode(altLang)] = buildUrl(altLang, 'verify', 'qr');
     });
-    qrVerifyAlternates['x-default'] = `${SITE_URL}/hy/verify/qr`; // x-default for verify/qr page points to default language verify/qr page
+    qrVerifyAlternates['x-default'] = buildUrl('hy', 'verify', 'qr');
 
     sitemapEntries.push({
-      url: `${SITE_URL}/${lang}/verify/qr`,
+      url: buildUrl(lang, 'verify', 'qr'),
       lastModified: lastModifiedDate,
       changeFrequency: 'monthly',
-      priority: 0.7, // Lower priority as it's a utility page
+      priority: 0.7,
       alternates: {
         languages: qrVerifyAlternates,
       },
     });
 
-    // Add the /how-to-identify-fake page for each language
     const fakeIdentifyAlternates: Record<string, string> = {};
     languages.forEach(altLang => {
-      fakeIdentifyAlternates[`${altLang}-${altLang === 'hy' ? 'AM' : altLang === 'ru' ? 'RU' : 'US'}`] = `${SITE_URL}/${altLang}/how-to-identify-fake`;
+      fakeIdentifyAlternates[mapLanguageCode(altLang)] = buildUrl(altLang, 'how-to-identify-fake');
     });
-    fakeIdentifyAlternates['x-default'] = `${SITE_URL}/hy/how-to-identify-fake`;
+    fakeIdentifyAlternates['x-default'] = buildUrl('hy', 'how-to-identify-fake');
 
     sitemapEntries.push({
-      url: `${SITE_URL}/${lang}/how-to-identify-fake`,
+      url: buildUrl(lang, 'how-to-identify-fake'),
       lastModified: lastModifiedDate,
       changeFrequency: 'weekly',
-      priority: 0.9, // High priority for anti-fraud page
+      priority: 0.9,
       alternates: {
         languages: fakeIdentifyAlternates,
       },

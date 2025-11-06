@@ -1,11 +1,7 @@
 import { ReactNode } from 'react';
 import { Metadata } from 'next';
 import { translations } from '@/i18n/translations';
-import {
-  generateOrganizationStructuredData,
-  generateFaqStructuredData,
-  generateWebSiteStructuredData,
-} from '@/utils/structuredDataUtils';
+import { generateOrganizationStructuredData, generateWebSiteStructuredData } from '@/utils/structuredDataUtils';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import LayoutClientProvider from '@/components/LayoutClientProvider';
 import { SITE_URL } from '@/config/siteConfig';
@@ -58,7 +54,6 @@ const LangLayout = ({ children, params }: LangLayoutProps) => {
   const lang = params.lang as keyof typeof translations;
   const t = translations[lang] || translations.hy;
   const organizationStructuredData = generateOrganizationStructuredData(t, lang);
-  const faqStructuredData = generateFaqStructuredData(t, lang);
   const webSiteStructuredData = generateWebSiteStructuredData(SITE_URL, t);
 
   return (
@@ -66,10 +61,6 @@ const LangLayout = ({ children, params }: LangLayoutProps) => {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationStructuredData) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
       />
       <script
         type="application/ld+json"

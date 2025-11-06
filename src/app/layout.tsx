@@ -128,37 +128,6 @@ const organizationStructuredData = {
   },
 };
 
-const faqStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: [
-    {
-      '@type': 'Question',
-      name: 'Где купить оригинальный Samyun Wan в Армении?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Покупайте продукцию Samyun Wan у официального дистрибьютора Samyun Wan Armenia. Мы предоставляем проверку QR-кода, консультации и доставку по всей Армении.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Как проверить подлинность Samyun Wan?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Проверяйте QR-код на упаковке через официальный сайт Samyun Wan Armenia или раздел проверки QR. При необходимости свяжитесь с нами для подтверждения заказа.',
-      },
-    },
-    {
-      '@type': 'Question',
-      name: 'Как связаться с официальным дистрибьютором Samyun Wan Armenia?',
-      acceptedAnswer: {
-        '@type': 'Answer',
-        text: 'Свяжитесь с нами по телефонам +374 95 653666 или +374 96 653666, а также через Facebook Messenger, WhatsApp или Telegram. Все ссылки указаны на официальном сайте.',
-      },
-    },
-  ],
-};
-
 const productStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'Product',
@@ -182,19 +151,31 @@ const productStructuredData = {
   },
 };
 
+const SUPPORTED_HTML_LANGS = new Set(['hy', 'ru', 'en']);
+
+const resolveHtmlLang = (paramsLang?: string) => {
+  if (!paramsLang) {
+    return 'hy';
+  }
+
+  const normalizedLang = paramsLang.toLowerCase();
+  return SUPPORTED_HTML_LANGS.has(normalizedLang) ? normalizedLang : 'hy';
+};
+
 const RootLayout = ({
   children,
+  params,
 }: {
   children: React.ReactNode;
+  params: { lang?: string };
 }) => {
+  const htmlLang = resolveHtmlLang(params?.lang);
+
   return (
-    <html lang="hy" className={inter.variable}>
+    <html lang={htmlLang} className={inter.variable} suppressHydrationWarning>
       <body>
         <Script id="ld-organization" type="application/ld+json">
           {JSON.stringify(organizationStructuredData)}
-        </Script>
-        <Script id="ld-faq" type="application/ld+json">
-          {JSON.stringify(faqStructuredData)}
         </Script>
         <Script id="ld-product" type="application/ld+json">
           {JSON.stringify(productStructuredData)}
@@ -216,3 +197,5 @@ const RootLayout = ({
 };
 
 export default RootLayout;
+
+
