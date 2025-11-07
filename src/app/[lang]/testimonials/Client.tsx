@@ -12,7 +12,7 @@ import { formatNameInitialLastName } from '@/utils/testimonialGenerator';
 
 const TestimonialsPageClient = () => {
   const { t, currentLang } = useLayoutContext();
-  const [dbTestimonials, setDbTestimonials] = useState<Testimonial[]>([]);
+  const dbTestimonials: Testimonial[] = [];
   const [userTestimonial, setUserTestimonial] = useState<Testimonial | null>(null);
   const [_isLoading, setIsLoading] = useState<boolean>(true);
 

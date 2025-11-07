@@ -96,6 +96,8 @@ export const metadata: Metadata = {
   },
 };
 
+const organizationDescription = `${OFFICIAL_ACTIVITY}. ${OFFICIAL_CLASSIFICATION}. ${OFFICIAL_CITY}.`;
+
 const organizationStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -103,8 +105,8 @@ const organizationStructuredData = {
   legalName: OFFICIAL_BUSINESS_NAME,
   url: SITE_URL,
   logo: OG_IMAGE,
-  description:
-    'Samyun Wan Armenia is the official representative delivering authentic Samyun Wan products with QR verification and direct support.',
+  description: organizationDescription,
+  keywords: [OFFICIAL_ACTIVITY, OFFICIAL_CLASSIFICATION].join(', '),
   sameAs: [
     'https://facebook.com/samyunwanarmenia',
     'https://instagram.com/samyunwanarmenia',
