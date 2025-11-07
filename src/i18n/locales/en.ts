@@ -127,7 +127,7 @@ export const en: TranslationKeys = {
     productUsage: 'Usage Guide',
     allRightsReserved: 'All rights reserved.',
     officialRepresentative: 'Official representative of Samyun Wan in Armenia',
-    viewOfficialDossier: 'View official dossier'
+    viewOfficialDossier: 'View official dossier',
   },
   verification: {
     title: 'Official verification',
