@@ -13,3 +13,12 @@ export const SITE_URL = normalizedSiteUrl && normalizedSiteUrl.length > 0 ? norm
 
 export const PRIMARY_PHONE = '+37495653666';
 export const SECONDARY_PHONE = '+37496653666';
+
+export const OFFICIAL_BUSINESS_NAME = '«САМЮН ВАН АРМЕНИЯ» Центр снижения и набора веса';
+export const DIRECTOR_NAME = 'Александр Геворкян';
+export const OFFICIAL_ACTIVITY =
+  'Представитель торговой марки «Samyun Wan» — консультации и сопровождение по снижению и набору веса';
+export const OFFICIAL_CLASSIFICATION =
+  'Spyur классификатор: Компании и НКО → Здравоохранение → Коррекция веса';
+export const OFFICIAL_CITY = 'Армения, Ереван';
+export const OFFICIAL_REGISTRY_LAST_UPDATE = '24.06.2025';

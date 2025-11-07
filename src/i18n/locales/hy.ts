@@ -10,6 +10,7 @@ export const hy: TranslationKeys = {
     faq: 'Հաճախ տրվող հարցեր',
     products: 'Ապրանքներ',
     trackOrder: 'Հետեւել պատվերին', // New translation
+        official: 'Պաշտոնական վավերացում',
     armenian: 'Հայերեն',
     russian: 'Ռուսերեն',
     english: 'Անգլերեն',
@@ -126,6 +127,7 @@ export const hy: TranslationKeys = {
     productUsage: 'Օգտագործման ուղեցույց',
     allRightsReserved: 'Բոլոր իրավունքները պաշտպանված են։',
     officialRepresentative: 'Ինդոնեզական արտադրանքի պաշտոնական ներկայացուցիչ'
+    viewOfficialDossier: 'Դիտել պաշտոնական փաստաթղթերը',
   },
   contactModal: {
     chooseCall: 'Ընտրեք համար զանգելու համար',
@@ -210,6 +212,28 @@ export const hy: TranslationKeys = {
     selectProductType: 'Խնդրում ենք ընտրել ապրանքի տեսակը։',
     selectPurpose: 'Խնդրում ենք ընտրել զանգի նպատակը։',
   },
+  verification: {
+    title: 'Պաշտոնական հաստատում',
+    subtitle: 'Samyun Wan Armenia-ն գրանցված է որպես «ՍԱՄՅՈՒՆ ՎԱՆ ԱՐՄԵՆԻԱ» քաշի կառավարման կենտրոն։ Ստորև ներկայացված հղումները հաստատում են մեր լիազորությունները։',
+    badge: 'Samyun Wan-ի պաշտոնական ներկայացուցիչը Հայաստանում',
+    socialTitle: 'Ստուգված սոցիալական հարթակներ',
+    socialDescription: 'Այս էջերը վարում է մեր կենտրոնական գրասենյակը և նշված են պայմանագրերում։',
+    registryTitle: 'Ռեեստրներ և ոլորտային գրառումներ',
+    registryDescription: 'Spyur 52453 քարտը հաստատում է, որ «ՍԱՄՅՈՒՆ ՎԱՆ ԱՐՄԵՆԻԱ» գրանցված է Հայաստանում որպես քաշի կարգավորման կենտրոն։',
+    trademarkTitle: 'Ապրանքանիշ և իրավական կարգավիճակ',
+    trademarkDescription: 'Spyur-ի «SAMYUN WAN» որոնումը ցույց է տալիս մեր բացառիկ իրավունքը ապրանքանիշի օգտագործման վրա Հայաստանում։',
+    documentsTitle: 'Փաստաթղթերի արխիվ',
+    documentsDescription: 'Լիցենզիաների և լիազորագրերի սկաները հասանելի են պաշտպանված Google Drive թղթապանակում։',
+    contactsTitle: 'Պաշտոնական կապի ուղիներ',
+    contactsDescription: 'Օգտագործեք միայն հրապարակված հեռախոսահամարներն ու մեսենջերները, որպեսզի խուսափեք խարդախ փորձերից։',
+    legalNameLabel: 'Իրավական անվանում',
+    directorLabel: 'Ղեկավար',
+    activityLabel: 'Գործունեություն',
+    classificationLabel: 'Spyur դասակարգում',
+    addressLabel: 'Գործունեության հասցե',
+    lastUpdatedLabel: 'Վերջին թարմացում',
+  },
+
   trackOrder: { // New section for track order page
     title: 'Պատվերի հետևում',
     subtitle: 'Մուտքագրեք Ձեր պատվերի համարը՝ դրա կարգավիճակը ստուգելու համար։',

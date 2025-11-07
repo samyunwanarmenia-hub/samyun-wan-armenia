@@ -40,6 +40,7 @@ export interface TranslationKeys {
     faq: string;
     products: string;
     trackOrder: string; // Added
+    official: string;
     armenian: string;
     russian: string;
     english: string;
@@ -126,6 +127,28 @@ export interface TranslationKeys {
     productUsage: string;
     allRightsReserved: string;
     officialRepresentative: string;
+    viewOfficialDossier: string;
+  };
+  verification: {
+    title: string;
+    subtitle: string;
+    badge: string;
+    socialTitle: string;
+    socialDescription: string;
+    registryTitle: string;
+    registryDescription: string;
+    trademarkTitle: string;
+    trademarkDescription: string;
+    documentsTitle: string;
+    documentsDescription: string;
+    contactsTitle: string;
+    contactsDescription: string;
+    legalNameLabel: string;
+    directorLabel: string;
+    activityLabel: string;
+    classificationLabel: string;
+    addressLabel: string;
+    lastUpdatedLabel: string;
   };
   contactModal: {
     chooseCall: string;
@@ -261,7 +284,7 @@ export interface StatItem {
   key: 'customers' | 'experience';
 }
 
-export type SectionId = 'home' | 'about' | 'benefits' | 'products' | 'authenticity' | 'cta' | 'testimonials' | 'contact' | 'faq' | 'track-order'; // Added 'track-order'
+export type SectionId = 'home' | 'about' | 'benefits' | 'products' | 'authenticity' | 'cta' | 'testimonials' | 'contact' | 'faq' | 'track-order' | 'official';
 
 export type ContactModalType = 'call' | 'message';
 

@@ -5,7 +5,17 @@ import { headers } from 'next/headers';
 
 import '../app/globals.css';
 
-import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
+import {
+  SITE_URL,
+  PRIMARY_PHONE,
+  SECONDARY_PHONE,
+  OFFICIAL_BUSINESS_NAME,
+  DIRECTOR_NAME,
+  OFFICIAL_ACTIVITY,
+  OFFICIAL_CLASSIFICATION,
+  OFFICIAL_CITY,
+  OFFICIAL_REGISTRY_LAST_UPDATE,
+} from '@/config/siteConfig';
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -90,6 +100,7 @@ const organizationStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
   name: 'Samyun Wan Armenia',
+  legalName: OFFICIAL_BUSINESS_NAME,
   url: SITE_URL,
   logo: OG_IMAGE,
   description:
@@ -103,6 +114,11 @@ const organizationStructuredData = {
     'https://wa.me/37495653666',
     'https://wa.me/37496653666',
     'https://m.me/samyunwanarmenia',
+    'https://www.spyur.am/am/companies/samyun-wan-armenia-weight-loss-and-weight-gain-center/52453/',
+    'https://www.spyur.am/ru/companies/samyun-wan-armenia-weight-loss-and-weight-gain-center/52453/',
+    'https://www.spyur.am/en/companies/samyun-wan-armenia-weight-loss-and-weight-gain-center/52453/',
+    'https://www.spyur.am/en/trademarks/?trademark=%22SAMYUN+WAN%22&search=1',
+    'https://share.google/CGBO0M5UovfwgV3JM',
   ],
   contactPoint: [
     {
@@ -123,12 +139,36 @@ const organizationStructuredData = {
   address: {
     '@type': 'PostalAddress',
     addressCountry: 'AM',
-    addressLocality: 'Yerevan',
+    addressLocality: OFFICIAL_CITY,
   },
   areaServed: {
     '@type': 'Country',
     name: 'Armenia',
   },
+  founder: {
+    '@type': 'Person',
+    name: DIRECTOR_NAME,
+  },
+  identifier: [
+    {
+      '@type': 'PropertyValue',
+      propertyID: 'Spyur ID',
+      value: '52453',
+      url: 'https://www.spyur.am/en/companies/samyun-wan-armenia-weight-loss-and-weight-gain-center/52453/',
+    },
+    {
+      '@type': 'PropertyValue',
+      propertyID: 'Last update',
+      value: OFFICIAL_REGISTRY_LAST_UPDATE,
+    },
+  ],
+  hasCredential: [
+    {
+      '@type': 'CreativeWork',
+      url: 'https://www.spyur.am/en/trademarks/?trademark=%22SAMYUN+WAN%22&search=1',
+      name: 'Spyur trademark register entry for “SAMYUN WAN”',
+    },
+  ],
 };
 
 const productStructuredData = {

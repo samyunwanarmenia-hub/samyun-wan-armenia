@@ -10,6 +10,7 @@ export const ru: TranslationKeys = {
     faq: 'Часто задаваемые вопросы',
     products: 'Продукты',
     trackOrder: 'Отследить заказ', // New translation
+        official: 'Проверка статуса',
     armenian: 'Армянский',
     russian: 'Русский',
     english: 'Английский',
@@ -126,6 +127,7 @@ export const ru: TranslationKeys = {
     productUsage: 'Руководство по использованию',
     allRightsReserved: 'Все права защищены.',
     officialRepresentative: 'Официальный представитель индонезийской продукции'
+    viewOfficialDossier: '��������� ���������� ������������',
   },
   contactModal: {
     chooseCall: 'Выберите номер для звонка',
@@ -210,6 +212,28 @@ export const ru: TranslationKeys = {
     selectProductType: 'Пожалуйста, выберите тип продукта.',
     selectPurpose: 'Пожалуйста, выберите цель звонка.',
   },
+  verification: {
+    title: 'Проверка официального представителя',
+    subtitle: 'Ниже указаны открытые источники и документы, подтверждающие наш статус Samyun Wan Armenia.',
+    badge: 'Официальный представитель Samyun Wan в Армении',
+    socialTitle: 'Подтверждённые профили',
+    socialDescription: 'Все профили ведёт центральный офис и они указаны в договоре представительства.',
+    registryTitle: 'Государственные и отраслевые реестры',
+    registryDescription: 'Досье Spyur №52453 подтверждает, что “САМЮН ВАН АРМЕНИЯ” зарегистрирована как центр снижения и набора веса.',
+    trademarkTitle: 'Торговые марки и правовой статус',
+    trademarkDescription: 'Поиск “SAMYUN WAN” в базе Spyur подтверждает наше право продвигать бренд на территории Армении.',
+    documentsTitle: 'Скан-копии и доверенности',
+    documentsDescription: 'Свежие сканы лицензий, доверенностей и договоров доступны в защищённой папке Google Drive.',
+    contactsTitle: 'Официальные каналы связи',
+    contactsDescription: 'Используйте только перечисленные телефоны и мессенджеры — они принадлежат головному офису Samyun Wan Armenia.',
+    legalNameLabel: 'Официальное наименование',
+    directorLabel: 'Руководитель',
+    activityLabel: 'Вид деятельности',
+    classificationLabel: 'Классификатор Spyur',
+    addressLabel: 'Адрес ведения деятельности',
+    lastUpdatedLabel: 'Дата последнего обновления',
+  },
+
   trackOrder: { // New section for track order page
     title: 'Отслеживание заказа',
     subtitle: 'Введите номер вашего заказа, чтобы проверить его статус.',

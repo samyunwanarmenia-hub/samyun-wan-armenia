@@ -14,7 +14,7 @@ const Footer = () => {
   const { t, currentLang, openAuthenticityModal } = useLayoutContext();
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);
 
-  const aboutLinks = navigationSections.filter(s => ['about', 'benefits', 'testimonials', 'contact'].includes(s.id));
+  const aboutLinks = navigationSections.filter(s => ['about', 'benefits', 'testimonials', 'contact', 'official'].includes(s.id));
   const productLinks = navigationSections.filter(s => ['products', 'faq'].includes(s.id));
 
   return (
@@ -52,6 +52,12 @@ const Footer = () => {
                 <a href="https://www.facebook.com/samyunwanarmenia" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline ml-1" aria-label="Facebook Samyun Wan Armenia (Official)">Facebook</a>,
                 <a href="https://t.me/samyunwanarmenia" target="_blank" rel="noopener noreferrer" className="text-blue-300 underline ml-1" aria-label="Telegram Samyun Wan Armenia (Official)">Telegram</a>
               </span>
+              <Link
+                href={getSectionPath('official')}
+                className="mt-3 inline-flex items-center px-4 py-1.5 text-xs font-semibold text-emerald-900 bg-emerald-300/80 rounded-full hover:bg-emerald-300 transition-colors"
+              >
+                {t.footer.viewOfficialDossier}
+              </Link>
             </div>
             {/* Legal Info / Warning Section */}
             <p 
