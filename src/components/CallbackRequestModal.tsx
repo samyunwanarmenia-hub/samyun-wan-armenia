@@ -9,6 +9,7 @@ import { sendTelegramMessage } from '@/utils/telegramApi';
 import { showSuccess, showError } from '@/utils/toast';
 import { motion } from 'framer-motion'; // Import motion
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
+import { trackGAEvent } from '@/utils/analytics';
 
 const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onClose, t, currentLang }) => {
   const [name, setName] = useState<string>('');
@@ -61,12 +62,11 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
       onClose();
 
       // Analytics event for successful callback request
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'Submit_CallbackRequest_Success', {
-          event_category: 'Callback_Request',
-          event_label: `${productTypeTranslated} - ${purposeTranslated}`,
-        });
-      }
+      trackGAEvent({
+        action: 'Submit_CallbackRequest_Success',
+        category: 'Callback_Request',
+        label: `${productTypeTranslated} - ${purposeTranslated}`,
+      });
       if (typeof window !== 'undefined' && window.ym) {
         window.ym(103962073, 'reachGoal', 'Submit_CallbackRequest_Success', {
           category: 'Callback_Request',
@@ -78,12 +78,11 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
       console.error("Error submitting callback request:", error);
       showError(error instanceof Error ? error.message : "Failed to send callback request. Please try again.");
       // Analytics event for failed callback request
-      if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', 'Submit_CallbackRequest_Failure', {
-          event_category: 'Callback_Request',
-          event_label: error instanceof Error ? error.message : 'Unknown Error',
-        });
-      }
+      trackGAEvent({
+        action: 'Submit_CallbackRequest_Failure',
+        category: 'Callback_Request',
+        label: error instanceof Error ? error.message : 'Unknown Error',
+      });
       if (typeof window !== 'undefined' && window.ym) {
         window.ym(103962073, 'reachGoal', 'Submit_CallbackRequest_Failure', {
           category: 'Callback_Request',

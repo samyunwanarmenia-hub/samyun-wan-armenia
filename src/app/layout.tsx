@@ -7,6 +7,8 @@ import '../app/globals.css';
 
 import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
 
+const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
+
 const inter = Inter({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-inter',
@@ -174,6 +176,26 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <Script id="ld-product" type="application/ld+json">
           {JSON.stringify(productStructuredData)}
         </Script>
+        {GOOGLE_ANALYTICS_ID && (
+          <>
+            <Script
+              id="ga-tag-manager"
+              src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga-initializer" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){window.dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GOOGLE_ANALYTICS_ID}', {
+                  anonymize_ip: true,
+                  send_page_view: false
+                });
+              `}
+            </Script>
+          </>
+        )}
         {children}
         <noscript>
           <div>

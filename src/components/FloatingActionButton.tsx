@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Phone, PhoneCall, Menu, X } from 'lucide-react';
 import { ContactModalType } from '../types/global';
 import { useLayoutContext } from '@/context/LayoutContext';
+import { trackGAEvent } from '@/utils/analytics';
 
 interface FloatingActionButtonProps {
   openContactModal: (type: ContactModalType) => void;
@@ -19,12 +20,11 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
     setIsOpen(!isOpen);
 
     // Analytics for opening/closing FAB menu
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', isOpen ? 'Close_FAB_Menu' : 'Open_FAB_Menu', {
-        event_category: 'FAB_Interaction',
-        event_label: isOpen ? 'Closed' : 'Opened',
-      });
-    }
+    trackGAEvent({
+      action: isOpen ? 'Close_FAB_Menu' : 'Open_FAB_Menu',
+      category: 'FAB_Interaction',
+      label: isOpen ? 'Closed' : 'Opened',
+    });
     if (typeof window !== 'undefined' && window.ym) {
       window.ym(103962073, 'reachGoal', isOpen ? 'Close_FAB_Menu' : 'Open_FAB_Menu', {
         category: 'FAB_Interaction',
@@ -38,12 +38,11 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
     setIsOpen(false); // Close menu after clicking an item
 
     // Analytics for menu item click
-    if (typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', 'Click_FAB_MenuItem', {
-        event_category: 'FAB_Interaction',
-        event_label: gaEventLabel,
-      });
-    }
+    trackGAEvent({
+      action: 'Click_FAB_MenuItem',
+      category: 'FAB_Interaction',
+      label: gaEventLabel,
+    });
     if (typeof window !== 'undefined' && window.ym) {
       window.ym(103962073, 'reachGoal', 'Click_FAB_MenuItem', {
         category: 'FAB_Interaction',

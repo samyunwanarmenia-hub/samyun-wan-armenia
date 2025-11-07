@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ExplosionEffect from './ExplosionEffect';
 import PixelExplosion from './PixelExplosion';
 import { Icon, AnalyticsEvent } from '../types/global';
+import { trackGAEvent } from '@/utils/analytics';
 
 interface CallToActionButtonProps {
   children: React.ReactNode;
@@ -50,11 +51,10 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
       setEffectCoords({ x: e.clientX, y: e.clientY });
     }
     
-    if (gaEvent && typeof window !== 'undefined' && window.gtag) {
-      window.gtag('event', gaEvent.action, {
-        event_category: gaEvent.category,
-        event_label: gaEvent.label || (typeof children === 'string' ? children : undefined),
-        value: gaEvent.value,
+    if (gaEvent) {
+      trackGAEvent({
+        ...gaEvent,
+        label: gaEvent.label || (typeof children === 'string' ? children : undefined),
       });
     }
 

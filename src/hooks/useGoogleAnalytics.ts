@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
@@ -8,66 +8,64 @@ const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
 export const useGoogleAnalytics = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const hasWarnedRef = useRef(false);
 
   useEffect(() => {
     if (!GOOGLE_ANALYTICS_ID) {
-      console.warn('NEXT_PUBLIC_GA_ID is not configured. Google Analytics is disabled.');
+      if (!hasWarnedRef.current) {
+        console.warn('NEXT_PUBLIC_GA_ID is not configured. Google Analytics is disabled.');
+        hasWarnedRef.current = true;
+      }
       return;
     }
 
-    // Ensure dataLayer and gtag are defined globally before script injection
-    // This allows gtag calls to be queued even before the main script loads.
-    if (typeof window !== 'undefined') {
-      window.dataLayer = window.dataLayer || [];
-      if (typeof window.gtag !== 'function') {
-        window.gtag = function (...args: unknown[]) {
-          window.dataLayer.push(args);
-        };
-      }
+    if (typeof window === 'undefined') {
+      return;
     }
 
-    // Function to inject the Google Analytics script
-    const injectGoogleAnalyticsScript = () => {
-      if (typeof window === 'undefined' || document.getElementById('google-analytics-script')) {
-        return; // Already loaded or not in browser
-      }
-
-      const script = document.createElement('script');
-      script.id = 'google-analytics-script';
-      script.async = true;
-      script.defer = true; // Add defer attribute
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`;
-      script.onload = () => {
-        window.gtag('js', new Date());
-        window.gtag('config', GOOGLE_ANALYTICS_ID);
+    window.dataLayer = window.dataLayer || [];
+    if (typeof window.gtag !== 'function') {
+      window.gtag = function (...args: unknown[]) {
+        window.dataLayer.push(args);
       };
-      
-      const firstScript = document.getElementsByTagName('script')[0];
-      if (firstScript && firstScript.parentNode) {
-        firstScript.parentNode.insertBefore(script, firstScript);
-      } else {
-        document.head.appendChild(script);
-      }
-    };
-
-    // Defer the injection of the Google Analytics script using requestIdleCallback
-    if (typeof window !== 'undefined') {
-      if ('requestIdleCallback' in window) {
-        window.requestIdleCallback(injectGoogleAnalyticsScript, { timeout: 2000 });
-      } else {
-        // Fallback to setTimeout if requestIdleCallback is not supported
-        setTimeout(injectGoogleAnalyticsScript, 3000);
-      }
     }
 
-    // Track page view on route change.
-    if (pathname !== null && typeof window !== 'undefined' && typeof window.gtag === 'function') {
-      const fullPath = pathname + (searchParams ? `?${searchParams.toString()}` : '');
-      window.gtag('event', 'page_view', {
+    if (!pathname) {
+      return;
+    }
+
+    const searchString = searchParams?.toString();
+    const fullPath = searchString ? `${pathname}?${searchString}` : pathname;
+
+    const sendPageView = () => {
+      if (typeof window === 'undefined') {
+        return;
+      }
+
+      const payload = {
         page_path: fullPath,
         page_location: window.location.href,
         page_title: document.title,
-      });
+      };
+
+      if (typeof window.gtag === 'function') {
+        window.gtag('config', GOOGLE_ANALYTICS_ID, payload);
+        window.gtag('event', 'page_view', payload);
+      } else if (Array.isArray(window.dataLayer)) {
+        window.dataLayer.push({
+          event: 'page_view',
+          ...payload,
+        });
+      }
+    };
+
+    // Use requestIdleCallback when available to avoid blocking user interactions during navigation changes.
+    if ('requestIdleCallback' in window && window.requestIdleCallback) {
+      const handle = window.requestIdleCallback(sendPageView, { timeout: 2000 });
+      return () => window.cancelIdleCallback && window.cancelIdleCallback(handle);
     }
+
+    const timeoutId = window.setTimeout(sendPageView, 0);
+    return () => window.clearTimeout(timeoutId);
   }, [pathname, searchParams]);
 };
