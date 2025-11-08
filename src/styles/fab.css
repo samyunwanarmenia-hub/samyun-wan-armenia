@@ -4,6 +4,10 @@
   bottom: 1rem; /* Adjusted for smaller screens */
   right: 1rem; /* Adjusted for smaller screens */
   z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
 
   @screen md { /* Apply larger spacing on medium screens and up */
     bottom: 3rem;
@@ -56,46 +60,63 @@
   box-shadow: 0px 5px 20px 5px var(--fab-hover-shadow), var(--tw-shadow-glow-green); /* Added glow effect on hover */
 }
 
-/* Removed .fab-dots related CSS */
-
-.fab-wheel {
-  position: absolute;
-  bottom: 0; /* Position relative to wrapper */
-  right: 0; /* Position relative to wrapper */
-  border: 1px solid theme('colors.gray.300');
-  border-radius: 50%;
-  width: 10rem;
-  height: 10rem;
-  pointer-events: none; /* Default to non-interactive */
+.fab-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  align-items: flex-end;
+  width: min(280px, calc(100vw - 2.5rem));
+  margin-bottom: 4.5rem;
 }
 
-.dark .fab-wheel {
-  border: 1px solid theme('colors.gray.700');
+@screen md {
+  .fab-menu {
+    width: 280px;
+  }
 }
 
-.fab-wheel.open { /* New class 'open' */
-  pointer-events: auto; /* Interactive when open */
+.fab-menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  color: #0f172a;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.15);
+  backdrop-filter: blur(12px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: left;
 }
 
-.fab-action {
-  position: absolute;
-  background: var(--fab-action-bg);
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
+.fab-menu-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.2);
+}
+
+.dark .fab-menu-item {
+  background: rgba(15, 23, 42, 0.9);
+  color: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+}
+
+.fab-menu-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 999px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: White;
-  box-shadow: 0 0.1rem 1rem rgba(var(--fab-action-shadow-rgb), 0.82), var(--tw-shadow-glow-green); /* Added glow effect */
-  opacity: 0.9;
-  cursor: pointer;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); /* Center the action button relative to the wheel's center */
+  color: white;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.25);
 }
 
-.fab-action:hover {
-  background-color: var(--fab-action-hover-bg);
-  box-shadow: 0 0.1rem 1rem rgba(var(--fab-action-shadow-rgb), 0.82), var(--tw-shadow-glow-green); /* Added glow effect on hover */
+.fab-menu-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
 }

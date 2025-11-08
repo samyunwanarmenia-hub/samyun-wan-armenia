@@ -58,8 +58,8 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       action: () => openContactModal('call'),
       gaLabel: 'Call_FAB_Menu',
       ymLabel: 'Call_FAB_Menu',
-      angle: 0, // Angle for positioning
       ariaLabel: t.contactModal.callUsButton,
+      accent: '#f97316',
     },
     {
       label: t.contactModal.whatsapp,
@@ -67,8 +67,8 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       action: () => openContactModal('message'),
       gaLabel: 'WhatsApp_FAB_Menu',
       ymLabel: 'WhatsApp_FAB_Menu',
-      angle: 45, // Angle for positioning
       ariaLabel: t.contactModal.whatsapp,
+      accent: '#22c55e',
     },
     {
       label: t.contactModal.callbackButton,
@@ -76,15 +76,43 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       action: openCallbackRequestModal,
       gaLabel: 'Callback_FAB_Menu',
       ymLabel: 'Callback_FAB_Menu',
-      angle: 90, // Angle for positioning
       ariaLabel: t.contactModal.callbackButton,
+      accent: '#0ea5e9',
     },
   ];
 
-  const radius = 80; // Distance from center for action buttons
-
   return (
     <div className="fab-wrapper">
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            className="fab-menu"
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ duration: 0.2 }}
+          >
+            {menuItemsData.map((item, index) => (
+              <motion.button
+                key={item.label}
+                className="fab-menu-item"
+                onClick={() => handleMenuItemClick(item.action, item.gaLabel, item.ymLabel)}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                transition={{ delay: index * 0.05 }}
+                aria-label={item.ariaLabel}
+              >
+                <span className="fab-menu-icon" aria-hidden style={{ backgroundColor: item.accent }}>
+                  <item.icon className="w-5 h-5" />
+                </span>
+                <span className="fab-menu-text">{item.label}</span>
+              </motion.button>
+            ))}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <motion.button
         className={`fab ${isOpen ? 'open' : ''}`} // Add 'open' class when FAB is open
         onClick={handleToggle}
@@ -108,40 +136,6 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
         </AnimatePresence>
       </motion.button>
 
-      <motion.div
-        id="fab-wheel"
-        className={`fab-wheel ${isOpen ? 'open' : ''}`} // Add 'open' class when FAB is open
-        initial={{ scale: 0 }}
-        animate={isOpen ? { scale: 1 } : { scale: 0 }}
-        transition={{ type: "spring", stiffness: 600, damping: 20 }}
-      >
-        {menuItemsData.map((item, index) => {
-          const angleRad = (item.angle * Math.PI) / 180;
-          const xOffset = -radius * Math.sin(angleRad);
-          const yOffset = -radius * Math.cos(angleRad);
-
-          return (
-            <motion.div
-              key={index}
-              className="fab-action"
-              initial={{ opacity: 0, scale: 0, x: 0, y: 0, pointerEvents: 'none' }} // Default pointerEvents to none
-              animate={isOpen ? { opacity: 1, scale: 1, x: xOffset, y: yOffset, pointerEvents: 'auto' } : { opacity: 0, scale: 0, x: 0, y: 0, pointerEvents: 'none' }} // Toggle pointerEvents
-              transition={{
-                delay: isOpen ? index * 0.05 : (menuItemsData.length - 1 - index) * 0.02,
-                type: "spring",
-                stiffness: 600,
-                damping: 20
-              }}
-              onClick={() => handleMenuItemClick(item.action, item.gaLabel, item.ymLabel)}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label={item.ariaLabel}
-            >
-              <item.icon className="w-6 h-6" />
-            </motion.div>
-          );
-        })}
-      </motion.div>
     </div>
   );
 };

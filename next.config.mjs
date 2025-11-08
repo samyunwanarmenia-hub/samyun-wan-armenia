@@ -27,6 +27,15 @@ const nextConfig = {
     };
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: '/samyun-wan-armenia.html',
+        destination: '/hy',
+        permanent: true,
+      },
+    ];
+  },
   // Add other configurations as needed
 };
 

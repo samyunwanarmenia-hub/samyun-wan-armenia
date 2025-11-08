@@ -40,12 +40,16 @@ export interface TranslationKeys {
     faq: string;
     products: string;
     trackOrder: string; // Added
-    official: string;
     armenian: string;
     russian: string;
     english: string;
     open: string;
     close: string;
+  };
+  seo?: {
+    metaTitle: string;
+    metaDescription: string;
+    metaKeywords: string;
   };
   hero: {
     title: string;
@@ -121,35 +125,11 @@ export interface TranslationKeys {
     follow: string;
     legalAndWarning: string; // Added this new key
     howToDistinguishButton: string;
-    officialLinksIntro: string;
-    officialLinksDisclaimer: string;
     productOriginal: string;
     productAuthenticity: string;
     productUsage: string;
     allRightsReserved: string;
-    officialRepresentative: string;
-    viewOfficialDossier: string;
-  };
-  verification: {
-    title: string;
-    subtitle: string;
-    badge: string;
-    socialTitle: string;
-    socialDescription: string;
-    registryTitle: string;
-    registryDescription: string;
-    trademarkTitle: string;
-    trademarkDescription: string;
-    documentsTitle: string;
-    documentsDescription: string;
-    contactsTitle: string;
-    contactsDescription: string;
-    legalNameLabel: string;
-    directorLabel: string;
-    activityLabel: string;
-    classificationLabel: string;
-    addressLabel: string;
-    lastUpdatedLabel: string;
+    caution: string;
   };
   contactModal: {
     chooseCall: string;
@@ -285,7 +265,7 @@ export interface StatItem {
   key: 'customers' | 'experience';
 }
 
-export type SectionId = 'home' | 'about' | 'benefits' | 'products' | 'authenticity' | 'cta' | 'testimonials' | 'contact' | 'faq' | 'track-order' | 'official';
+export type SectionId = 'home' | 'about' | 'benefits' | 'products' | 'authenticity' | 'cta' | 'testimonials' | 'contact' | 'faq' | 'track-order';
 
 export type ContactModalType = 'call' | 'message';
 

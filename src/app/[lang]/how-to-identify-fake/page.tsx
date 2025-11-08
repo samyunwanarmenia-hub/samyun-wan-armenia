@@ -1,10 +1,7 @@
-import { Metadata } from 'next';
+import { buildPageMetadata } from '@/utils/pageMetadata';
 
-export const metadata: Metadata = {
-  title: 'Как отличить оригинальный Samyun Wan от подделки | Официальный дистрибьютор',
-  description: 'Узнайте, как отличить оригинальный Samyun Wan от подделки. Только у нас оригинал с QR-кодом!',
-  keywords: 'Samyun Wan оригинал, как отличить подделку, QR-код проверка, официальный дистрибьютор',
-};
+export const generateMetadata = ({ params }: { params: { lang: string } }) =>
+  buildPageMetadata(params.lang, 'how-to-identify-fake');
 
 const HowToIdentifyFakePage = () => {
   return (

@@ -10,7 +10,7 @@ const useNavigationUtils = (currentLang: string) => {
 
   const getSectionPath = useCallback((sectionId: SectionId) => {
     // These sections are now dedicated pages
-    const pageRoutes: SectionId[] = ['products', 'about', 'benefits', 'testimonials', 'faq', 'contact', 'track-order', 'official'];
+    const pageRoutes: SectionId[] = ['products', 'about', 'benefits', 'testimonials', 'faq', 'contact', 'track-order'];
     
     if (pageRoutes.includes(sectionId)) {
       return `/${currentLang}/${sectionId}`;

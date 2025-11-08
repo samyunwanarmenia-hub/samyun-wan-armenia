@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { useLayoutContext } from '@/context/LayoutContext'; // Import useLayoutContext
 import { ContactModalType, ProductShowcaseItem, TranslationKeys } from '@/types/global'; // Import necessary types, including TranslationKeys
 import FloatingActionButton from '@/components/FloatingActionButton'; // Import the new FAB component
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -69,7 +70,7 @@ const MainLayout = ({
 
   return (
     <> {/* Use React.Fragment instead of a div */}
-      {/* Removed DynamicSvgGradientBackground */}
+      <AnimatedBackground />
       
       <DynamicNavbar />
       

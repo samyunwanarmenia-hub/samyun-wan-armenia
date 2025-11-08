@@ -46,7 +46,7 @@ export const generateCommonMetadata = ({
       title: title,
       description: description,
       url: pageUrl,
-      siteName: 'Samyun Wan Armenia — Официальный дистрибьютор',
+      siteName: 'Samyun Wan Armenia – Official representative in Armenia',
       images: [
         {
           url: image,

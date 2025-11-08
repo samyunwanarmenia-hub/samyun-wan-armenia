@@ -1,11 +1,15 @@
 import { Suspense } from 'react';
 
 import LoadingSpinner from '@/components/LoadingSpinner';
+import { buildPageMetadata } from '@/utils/pageMetadata';
 
 import QrVerifyClient, { QrVerifyPageProps } from './QrVerifyClient';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
+
+export const generateMetadata = ({ params }: { params: { lang: string } }) =>
+  buildPageMetadata(params.lang, 'verify/qr');
 
 const SuspenseFallback = () => (
   <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900">

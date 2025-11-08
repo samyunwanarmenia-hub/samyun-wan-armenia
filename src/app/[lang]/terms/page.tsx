@@ -1,22 +1,24 @@
-"use client";
+import { LEGAL_COPY, type SupportedLang, buildPageMetadata } from '@/utils/pageMetadata';
 
-import React from "react";
-import { useLayoutContext } from '@/context/LayoutContext';
+export const generateMetadata = ({ params }: { params: { lang: string } }) =>
+  buildPageMetadata(params.lang, 'terms');
 
-const TermsPage = () => {
-  const { currentLang } = useLayoutContext();
-  // TODO: Add the full Terms & Conditions legal text and org details before launch.
+const PLACEHOLDER_NOTICE: Record<SupportedLang, string> = {
+  hy: 'Վերջնական կանոնները կհրապարակենք շուտով։',
+  ru: 'Окончательная версия условий будет опубликована в ближайшее время.',
+  en: 'Full terms & conditions will be published here soon.',
+};
+
+const TermsPage = ({ params }: { params: { lang: string } }) => {
+  const lang = (params.lang as SupportedLang) || 'hy';
+  const copy = LEGAL_COPY[lang] ?? LEGAL_COPY.hy;
+  const notice = PLACEHOLDER_NOTICE[lang] ?? PLACEHOLDER_NOTICE.hy;
+
   return (
     <div className="max-w-3xl mx-auto py-16 px-4 text-center text-gray-900 dark:text-gray-50">
-      <h1 className="text-3xl font-bold mb-6">{currentLang === "hy" ? "Օգտագործման կանոններ" : currentLang === "ru" ? "Пользовательское соглашение" : "Terms & Conditions"}</h1>
-      <p className="mb-8 text-lg">{
-        currentLang === "hy"
-          ? "Սա Samyun Wan Armenia պաշտոնական կայքի օգտագործման կանոնների էջի նախնական տարբերակն է։"
-          : currentLang === "ru"
-          ? "Это временная страница пользовательского соглашения официального сайта Samyun Wan Armenia."
-          : "This is a placeholder Terms & Conditions page for the official Samyun Wan Armenia website."
-      }</p>
-<p className="mb-8 text-md text-warning-500">{/* TODO: Add the full terms and business legal owner details. */}</p>
+      <h1 className="text-3xl font-bold mb-6">{copy.termsTitle}</h1>
+      <p className="mb-8 text-lg">{copy.termsDescription}</p>
+      <p className="mb-8 text-md text-warning-500">{notice}</p>
     </div>
   );
 };

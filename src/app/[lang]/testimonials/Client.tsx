@@ -12,7 +12,6 @@ import { formatNameInitialLastName } from '@/utils/testimonialGenerator';
 
 const TestimonialsPageClient = () => {
   const { t, currentLang } = useLayoutContext();
-  const dbTestimonials: Testimonial[] = [];
   const [userTestimonial, setUserTestimonial] = useState<Testimonial | null>(null);
   const [_isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -21,6 +20,7 @@ const TestimonialsPageClient = () => {
   }, []);
 
   const combinedTestimonials = useMemo(() => {
+    const dbTestimonials: Testimonial[] = [];
     const initial = [...baseTestimonials, ...dbTestimonials];
     if (userTestimonial) initial.unshift(userTestimonial);
     const unique = Array.from(new Map(initial.map(item => [item.id, item])).values());
@@ -30,7 +30,7 @@ const TestimonialsPageClient = () => {
       nameRu: formatNameInitialLastName(testimonial.nameRu),
       nameEn: formatNameInitialLastName(testimonial.nameEn),
     }));
-  }, [dbTestimonials, userTestimonial]);
+  }, [userTestimonial]);
 
   const handleReviewSubmitted = async (newReview: DbReview) => {
     const newAvatarIndex = combinedTestimonials.length + 20;

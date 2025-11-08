@@ -1,4 +1,4 @@
-import { TranslationKeys } from '../../types/global';
+﻿import { TranslationKeys } from '../../types/global';
 
 export const en: TranslationKeys = {
   nav: {
@@ -10,7 +10,6 @@ export const en: TranslationKeys = {
     faq: 'FAQ',
     products: 'Products',
     trackOrder: 'Track Order', // New translation
-    official: 'Official Proof',
     armenian: 'Armenian',
     russian: 'Russian',
     english: 'English',
@@ -121,41 +120,11 @@ export const en: TranslationKeys = {
     follow: 'Follow Us',
     legalAndWarning: `Legal Information / Warning<br/>This is not a medicine. <span class="text-red-400 dark:text-red-300">The product is not recommended for persons under 14 years of age.</span><br/><br/>For your health and safety, WE STRONGLY ADVISE <br/><span class="text-red-400 dark:text-red-300">TO REFRAIN from purchasing or using products of unknown origin, allegedly certified:</span><br/><br/>Here are a few signs of how to distinguish a fake product.`,
     howToDistinguishButton: 'See here',
-    officialLinksIntro: 'Official Links\nAll our real and official pages:',
-    officialLinksDisclaimer: 'Attention: other pages or messengers do not belong to us. Only these links are our official communication channels.',
     productOriginal: 'Samyun Wan Original',
     productAuthenticity: 'Authenticity Check',
     productUsage: 'Usage Guide',
     allRightsReserved: 'All rights reserved.',
-    officialRepresentative: 'Official representative of Samyun Wan in Armenia',
-    viewOfficialDossier: 'View official dossier',
-  },
-  verification: {
-    title: 'Official verification',
-    subtitle:
-      'Samyun Wan Armenia is the registered national representative. Use the sources below to verify our license, director and legal standing.',
-    badge: 'Official Samyun Wan distributor in Armenia',
-    socialTitle: 'Verified social profiles',
-    socialDescription:
-      'Only the accounts listed below are controlled by our headquarters and referenced in the Spyur dossier.',
-    registryTitle: 'Registry & industry records',
-    registryDescription:
-      'The Spyur business directory (ID 52453) lists “SAMYUN WAN ARMENIA” as a weight management center and official brand representative.',
-    trademarkTitle: 'Trademarks & legal status',
-    trademarkDescription:
-      'The Spyur trademark search for “SAMYUN WAN” confirms our exclusive right to promote and support the brand in Armenia.',
-    documentsTitle: 'Document archive',
-    documentsDescription:
-      'Scanned copies of licenses, powers of attorney and brand agreements are available in a protected Google Drive folder.',
-    contactsTitle: 'Official contact channels',
-    contactsDescription:
-      'Always use the published phone numbers and messengers. They connect you directly with the central office.',
-    legalNameLabel: 'Legal name',
-    directorLabel: 'Director',
-    activityLabel: 'Business activity',
-    classificationLabel: 'Spyur classification',
-    addressLabel: 'Operating address',
-    lastUpdatedLabel: 'Last verified on',
+    caution: 'Use only the contact methods published on this site and beware of fake pages.',
   },
   contactModal: {
     chooseCall: 'Choose a number to call',
@@ -177,7 +146,7 @@ export const en: TranslationKeys = {
     addressPlaceholder: 'Delivery Address',
     phonePlaceholder: 'Phone Number',
     orderButton: 'Order',
-    orderSuccess1: 'Your order has been accepted. Thank you! 💚',
+    orderSuccess1: 'Your order has been accepted. Thank you! рџ’љ',
     orderSuccess2: 'Before 22:00, the courier will contact you in advance and deliver the order.',
     invalidPhone: 'Please enter a valid phone number.',
     selectProducts: 'Select product(s) to order:',
