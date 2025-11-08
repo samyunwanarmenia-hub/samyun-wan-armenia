@@ -49,6 +49,7 @@ export interface TranslationKeys {
   };
   hero: {
     title: string;
+    facebookFollow: string;
     subtitle: string;
     tagline: string;
     cta: string;
