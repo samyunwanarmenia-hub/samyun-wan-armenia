@@ -52,6 +52,37 @@ body {
   opacity: 0.85;
 }
 
+.hero-overlays {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  width: 33.333%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.02);
+  mix-blend-mode: screen;
+}
+
+.hero-overlay--first {
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.hero-overlay--second {
+  left: 33.333%;
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.hero-overlay--third {
+  left: 66.666%;
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
 .ambient-orb {
   position: absolute;
   width: clamp(200px, 25vw, 320px);

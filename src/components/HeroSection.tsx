@@ -30,6 +30,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
 
   return (
     <section id="home" className="relative min-h-screen flex items-center overflow-hidden py-12">
+      <div className="hero-overlays">
+        <span className="hero-overlay hero-overlay--first" />
+        <span className="hero-overlay hero-overlay--second" />
+        <span className="hero-overlay hero-overlay--third" />
+      </div>
       <div className="container mx-auto px-4 relative z-10 max-w-7xl">
         <div className="lg:grid lg:grid-cols-2 lg:gap-8 items-center"> {/* Grid for desktop layout */}
           {/* Left Column: Main content */}

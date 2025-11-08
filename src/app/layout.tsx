@@ -16,6 +16,7 @@ import {
   OFFICIAL_CITY,
   OFFICIAL_REGISTRY_LAST_UPDATE,
 } from '@/config/siteConfig';
+import { productShowcaseData } from '@/data/productShowcaseData';
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -173,6 +174,9 @@ const organizationStructuredData = {
   ],
 };
 
+const heroProduct = productShowcaseData[0];
+const priceValidUntil = new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString().split('T')[0];
+
 const productStructuredData = {
   '@context': 'https://schema.org',
   '@type': 'Product',
@@ -188,10 +192,18 @@ const productStructuredData = {
     '@type': 'Offer',
     url: SITE_URL,
     priceCurrency: 'AMD',
+    price: heroProduct.price ?? 0,
+    priceValidUntil,
     availability: 'https://schema.org/InStock',
     seller: {
       '@type': 'Organization',
       name: 'Samyun Wan Armenia',
+    },
+    priceSpecification: {
+      '@type': 'PriceSpecification',
+      price: heroProduct.price ?? 0,
+      priceCurrency: 'AMD',
+      priceValidUntil,
     },
   },
 };
