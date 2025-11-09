@@ -1,4 +1,5 @@
 import { buildPageMetadata } from '@/utils/pageMetadata';
+import { QR_VERIFICATION_URL } from '@/config/siteConfig';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
   buildPageMetadata(params.lang, 'how-to-identify-fake');
@@ -66,7 +67,7 @@ const HowToIdentifyFakePage = () => {
 
             <div className="text-center">
               <a 
-                href="/hy/verify/qr" 
+                href={QR_VERIFICATION_URL} 
                 className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-blue-700 transition-colors"
               >
                 Проверить подлинность продукта

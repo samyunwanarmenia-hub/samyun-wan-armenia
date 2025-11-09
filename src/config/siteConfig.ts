@@ -10,6 +10,7 @@ if (typeof window === 'undefined' && process.env.NODE_ENV === 'production' && !n
 }
 
 export const SITE_URL = normalizedSiteUrl && normalizedSiteUrl.length > 0 ? normalizedSiteUrl : DEFAULT_SITE_URL;
+export const QR_VERIFICATION_URL = 'https://qr-wan.netlify.app/';
 
 export const PRIMARY_PHONE = '+37495653666';
 export const SECONDARY_PHONE = '+37496653666';

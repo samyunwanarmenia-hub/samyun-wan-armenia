@@ -7,20 +7,17 @@ import SectionHeader from './SectionHeader';
 import { QRCodeCanvas } from 'qrcode.react';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { useInView } from 'react-intersection-observer';
-import Link from 'next/link'; // Import Link for internal navigation
-import { SITE_URL } from '@/config/siteConfig';
+import { QR_VERIFICATION_URL } from '@/config/siteConfig';
 
 const AuthenticityInfo = () => {
-  const { t, openAuthenticityModal, currentLang } = useLayoutContext();
+  const { t, openAuthenticityModal } = useLayoutContext();
 
   const { ref, inView: _inView } = useInView({
     triggerOnce: true,
     threshold: 0.3,
   });
 
-  // Updated QR code value and link path to point to the internal /verify/qr page
-  const qrCodeValue = `${SITE_URL}/${currentLang}/verify/qr`;
-  const qrLinkPath = `/${currentLang}/verify/qr`;
+  const qrCodeValue = QR_VERIFICATION_URL;
 
   const hasAttentionText = !!t.authenticity.attention;
   const hasHowToDistinguishText = !!t.authenticity.howToDistinguish;
@@ -70,9 +67,9 @@ const AuthenticityInfo = () => {
             </motion.span>
           )}
 
-          {/* Changed to a Link component for internal navigation */}
-          <Link 
-            href={qrLinkPath}
+          {/* Use external QR verification link */}
+          <a 
+            href={QR_VERIFICATION_URL}
             className="group mb-3 flex flex-col items-center p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 w-full cursor-pointer"
             aria-label={t.hero.qrVerificationTitle}
           >
@@ -86,7 +83,7 @@ const AuthenticityInfo = () => {
             </motion.div>
             <p className="text-gray-600 dark:text-gray-300 font-semibold text-base">{t.hero.qrVerificationTitle}</p> {/* Changed text-gray-700 to text-gray-600 for light mode */}
             {t.hero.qrVerificationSubtitle && <p className="text-xs text-gray-400 dark:text-gray-400">{t.hero.qrVerificationSubtitle}</p>} {/* text-gray-400 is fine */}
-          </Link>
+          </a>
 
           {hasHowToDistinguishText && (
             <CallToActionButton

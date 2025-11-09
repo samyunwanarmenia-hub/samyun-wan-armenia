@@ -5,20 +5,17 @@ import { motion } from 'framer-motion';
 import { QRCodeCanvas } from 'qrcode.react';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { ShieldCheck } from 'lucide-react'; // Using ShieldCheck icon for authenticity
-import Link from 'next/link'; // Import Link for internal navigation
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
-import { SITE_URL } from '@/config/siteConfig';
+import { QR_VERIFICATION_URL } from '@/config/siteConfig';
 
 interface HeroQrCodeBlockProps {
   delay?: number;
 }
 
 const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
-  const { t, currentLang } = useLayoutContext();
+  const { t } = useLayoutContext();
 
-  // Change qrCodeValue to point to the internal /verify/qr page
-  const qrCodeValue = `${SITE_URL}/${currentLang}/verify/qr`; // Use dynamic currentLang
-  const qrLinkPath = `/${currentLang}/verify/qr`; // Internal link path
+  const qrCodeValue = QR_VERIFICATION_URL;
 
   const blockVariants = {
     hidden: { opacity: 0, y: 20, scale: 0.95 },
@@ -49,8 +46,8 @@ const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
           {t.hero.qrBlockTitle}
         </h3>
       </div>
-      <Link 
-        href={qrLinkPath} // Use Link for internal navigation
+      <a 
+        href={QR_VERIFICATION_URL}
         className="group block p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
         aria-label={t.hero.qrBlockTitle}
       >
@@ -65,7 +62,7 @@ const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
         <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed"> {/* Changed text-gray-700 to text-gray-600 for light mode */}
           {t.hero.qrBlockDescription}
         </p>
-      </Link>
+      </a>
     </InteractiveDiv>
   );
 };

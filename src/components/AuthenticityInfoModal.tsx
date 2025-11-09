@@ -3,12 +3,11 @@ import { AuthenticityInfoModalProps } from '@/types/global';
 import ModalWrapper from './ModalWrapper';
 import { motion } from 'framer-motion';
 import { QRCodeCanvas } from 'qrcode.react';
-import Link from 'next/link';
 import { ShieldCheck } from 'lucide-react';
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
-import { SITE_URL } from '@/config/siteConfig';
+import { QR_VERIFICATION_URL } from '@/config/siteConfig';
 
-const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, onClose, t, currentLang }) => {
+const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, onClose, t }) => {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -25,8 +24,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
     visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: "easeOut" } },
   };
 
-  const qrCodeValue = `${SITE_URL}/${currentLang}/verify/qr`;
-  const qrLinkPath = `/${currentLang}/verify/qr`;
+  const qrCodeValue = QR_VERIFICATION_URL;
 
   return (
     <ModalWrapper
@@ -78,8 +76,8 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
               {t.hero.qrBlockTitle}
             </h3>
           </div>
-          <Link 
-            href={qrLinkPath}
+          <a 
+            href={QR_VERIFICATION_URL}
             className="group block p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
             aria-label={t.hero.qrBlockTitle}
           >
@@ -94,7 +92,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
             <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed"> {/* Changed text-gray-700 to text-gray-600 for light mode */}
               {t.hero.qrBlockDescription}
             </p>
-          </Link>
+          </a>
         </InteractiveDiv>
       </motion.div>
     </ModalWrapper>
