@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   return generateCommonMetadata({
     lang,
     t,
-    pagePath: 'verify/qr',
+    pagePath: 'https://qr-wan.netlify.app/',
     title: pageTitle,
     description: pageDescription,
     keywords: pageKeywords,
