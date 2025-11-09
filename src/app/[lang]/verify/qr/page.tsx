@@ -1,26 +1,11 @@
-import { Suspense } from 'react';
-
-import LoadingSpinner from '@/components/LoadingSpinner';
-import { buildPageMetadata } from '@/utils/pageMetadata';
-
-import QrVerifyClient, { QrVerifyPageProps } from './QrVerifyClient';
+import { QR_VERIFICATION_URL } from '@/config/siteConfig';
+import { redirect } from 'next/navigation';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
-export const generateMetadata = ({ params }: { params: { lang: string } }) =>
-  buildPageMetadata(params.lang, 'verify/qr');
-
-const SuspenseFallback = () => (
-  <div className="flex min-h-screen items-center justify-center bg-gray-50 dark:bg-gray-900">
-    <LoadingSpinner />
-  </div>
-);
-
-const QrVerifyPage = (props: QrVerifyPageProps) => (
-  <Suspense fallback={<SuspenseFallback />}>
-    <QrVerifyClient {...props} />
-  </Suspense>
-);
+const QrVerifyPage = () => {
+  redirect(QR_VERIFICATION_URL);
+};
 
 export default QrVerifyPage;

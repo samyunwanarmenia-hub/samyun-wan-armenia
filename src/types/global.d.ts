@@ -309,7 +309,6 @@ export interface AuthenticityInfoModalProps {
   isOpen: boolean;
   onClose: () => void;
   t: TranslationKeys;
-  currentLang: string;
 }
 export interface AboutSectionProps {}
 export interface BenefitsSectionProps {}
