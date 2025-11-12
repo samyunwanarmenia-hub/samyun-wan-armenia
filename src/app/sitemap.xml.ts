@@ -7,7 +7,6 @@ import { translations } from '@/i18n/translations';
 import { SITE_URL } from '@/config/siteConfig';
 import { SITE_PAGE_CONFIG, type SitePageKey } from '@/utils/pageMetadata';
 
-const withTrailingSlash = (url: string) => (url.endsWith('/') ? url : `${url}/`);
 const buildUrl = (...segments: string[]) => {
   const cleanedSegments = segments
     .filter(Boolean)
@@ -64,7 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const sitemapEntries: MetadataRoute.Sitemap = [];
 
   sitemapEntries.push({
-    url: withTrailingSlash(SITE_URL),
+    url: buildUrl('hy'),
     lastModified: getLastModifiedForKey('root'),
     changeFrequency: 'weekly',
     priority: 1.0,
@@ -73,7 +72,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         'hy-AM': buildUrl('hy'),
         'ru-RU': buildUrl('ru'),
         'en-US': buildUrl('en'),
-        'x-default': withTrailingSlash(SITE_URL),
+        'x-default': buildUrl('hy'),
       },
     },
   });

@@ -82,7 +82,7 @@ export const metadata: Metadata = {
       'hy-AM': `${SITE_URL}/hy`,
       'ru-RU': `${SITE_URL}/ru`,
       'en-US': `${SITE_URL}/en`,
-      'x-default': SITE_URL,
+      'x-default': `${SITE_URL}/hy`,
     },
   },
   verification: {
