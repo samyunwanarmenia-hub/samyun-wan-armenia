@@ -173,6 +173,26 @@ export interface TranslationKeys {
     recordingError: string;
     purchaseWarning: string;
     disclaimer: string;
+    fakeWarning: string;
+    fakeWarningText: string;
+    originalTitle: string;
+    originalFeature1: string;
+    originalFeature2: string;
+    originalFeature3: string;
+    originalFeature4: string;
+    originalFeature5: string;
+    fakeTitle: string;
+    fakeFeature1: string;
+    fakeFeature2: string;
+    fakeFeature3: string;
+    fakeFeature4: string;
+    fakeFeature5: string;
+    verificationTitle: string;
+    verificationStep1: string;
+    verificationStep2: string;
+    verificationStep3: string;
+    verificationStep4: string;
+    verifyButton: string;
   };
   loadingLinkModal: {
     title: string;

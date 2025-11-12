@@ -209,9 +209,6 @@ const Footer = () => {
               </Link>
             </div>
 
-            <div className="mt-4">
-              <span className="text-xs text-red-500 block font-semibold">{t.footer.caution}</span>
-            </div>
           </div>
         </div>
 

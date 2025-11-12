@@ -9,8 +9,24 @@ const resolveLangFromPath = (pathname: string): string => {
   return candidate && SUPPORTED_LANGS.has(candidate) ? candidate : 'hy';
 };
 
+const detectBrowserLanguage = (request: NextRequest): string => {
+  const acceptLang = request.headers.get('accept-language') || '';
+  const browserLang = acceptLang.split(',')[0]?.split('-')[0]?.toLowerCase() || '';
+  return SUPPORTED_LANGS.has(browserLang) ? browserLang : 'hy';
+};
+
 export function middleware(request: NextRequest) {
-  const lang = resolveLangFromPath(request.nextUrl.pathname);
+  const { pathname } = request.nextUrl;
+  
+  // Редирект с root path на язык пользователя (302 temporary redirect)
+  if (pathname === '/') {
+    const targetLang = detectBrowserLanguage(request);
+    const url = request.nextUrl.clone();
+    url.pathname = `/${targetLang}`;
+    return NextResponse.redirect(url, 302);
+  }
+  
+  const lang = resolveLangFromPath(pathname);
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set('x-current-lang', lang);
 
@@ -22,5 +38,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(png|jpg|jpeg|gif|svg|webp)).*)'],
+  matcher: ['/((?!_next/static|_next/image|favicon.ico|.*\\.(png|jpg|jpeg|gif|svg|webp|api)).*)'],
 };
