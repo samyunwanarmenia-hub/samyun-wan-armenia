@@ -110,6 +110,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
                 alt={currentProduct.alt}
                 className="w-28 h-28 object-contain drop-shadow-lg" 
                 loading="eager"
+                fetchPriority="high"
                 sizes="(max-width: 768px) 112px, 150px" 
               />
             </motion.div>

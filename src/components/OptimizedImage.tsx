@@ -11,11 +11,13 @@ interface OptimizedImageProps {
   className?: string;
   loading?: 'eager' | 'lazy';
   sizes?: string; // e.g., "(max-width: 600px) 100vw, 50vw"
+  fetchPriority?: 'high' | 'low' | 'auto';
 }
 
-const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, loading = 'lazy', sizes }) => {
+const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, loading = 'lazy', sizes, fetchPriority = 'auto' }) => {
   const [imageError, setImageError] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false); // New state for image load status
+  const isEager = loading === 'eager' || fetchPriority === 'high';
 
   // Extract base name from the src prop
   const lastSlashIndex = src.lastIndexOf('/');
@@ -62,11 +64,12 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, lo
         alt={alt}
         className={className}
         loading={loading}
+        fetchPriority={fetchPriority}
         onError={handleImageError}
         onLoad={handleImageLoad} // Call handleImageLoad on successful load
-        initial={{ opacity: 0 }}
-        animate={{ opacity: imageLoaded ? 1 : 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        initial={isEager ? { opacity: 1 } : { opacity: 0 }}
+        animate={isEager ? { opacity: 1 } : { opacity: imageLoaded ? 1 : 0 }}
+        transition={isEager ? {} : { duration: 0.3, ease: "easeOut" }}
       />
     </picture>
   );

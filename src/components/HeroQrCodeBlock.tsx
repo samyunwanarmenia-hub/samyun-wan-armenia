@@ -24,8 +24,8 @@ const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
       y: 0, 
       scale: 1, 
       transition: { 
-        duration: 0.6, 
-        ease: "easeOut", 
+        duration: 0.4, 
+        ease: [0.16, 1, 0.3, 1], 
         delay: delay 
       } 
     }

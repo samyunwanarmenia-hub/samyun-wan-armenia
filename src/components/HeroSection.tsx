@@ -58,8 +58,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             >
               <SplitTextAnimation 
                 text="Samyun Wan Armenia" 
-                delay={introEndDelay + 0.5} // Увеличена задержка
-                duration={1.2}
+                delay={0} // No delay for LCP element
+                duration={0.8} // Faster animation
                 className="mb-1.5 lg:justify-start" 
               />
               {/* Tagline moved here */}
@@ -68,7 +68,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
                 variants={fadeInUpVariants}
                 initial="hidden"
                 animate="visible"
-                transition={{ delay: introEndDelay + 1.5 }} // Увеличена задержка
+                transition={{ delay: 0.3 }} // Reduced delay for faster LCP
               >
                 {t.hero.tagline}
               </motion.p>
@@ -80,7 +80,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
-              transition={{ delay: introEndDelay + 1.0 }} // Увеличена задержка
+              transition={{ delay: 0.2 }} // Reduced delay for faster LCP
             >
               {t.hero.subtitle}
             </motion.p>
@@ -126,7 +126,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
 
           {/* Right Column: QR Code Block */}
           <div className="flex justify-center lg:justify-end items-center mt-10 lg:mt-0"> {/* Align right on large screens */}
-            <HeroQrCodeBlock delay={introEndDelay + 3.0} /> {/* Увеличена задержка */}
+            <HeroQrCodeBlock delay={0.5} /> {/* Reduced delay for faster LCP */}
           </div>
         </div>
       </div>
