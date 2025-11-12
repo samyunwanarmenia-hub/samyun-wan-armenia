@@ -76,9 +76,10 @@ const MainLayout = ({
       
       <motion.main 
         className="flex-grow pt-16 relative z-10" 
+        style={{ willChange: 'opacity' }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.5, delay: 0.1 }}
+        transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
       >
         {children}
       </motion.main>

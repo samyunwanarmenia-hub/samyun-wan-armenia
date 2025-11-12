@@ -36,6 +36,7 @@ const InteractiveDiv = React.forwardRef<HTMLElement, InteractiveDivProps>(
       <MotionComponent
         ref={ref}
         className={className}
+        style={{ willChange: 'transform' }}
         whileHover={{
           scale: whileHoverScale,
           y: hoverY,

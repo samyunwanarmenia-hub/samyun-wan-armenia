@@ -11,18 +11,19 @@ const BenefitsSection = () => {
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } } // Faster, smoother easing
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } } // Faster, smoother easing
   };
 
   return (
     <motion.section 
       id="benefits" 
       className="relative py-12 overflow-hidden"
+      style={{ willChange: 'transform, opacity' }}
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"

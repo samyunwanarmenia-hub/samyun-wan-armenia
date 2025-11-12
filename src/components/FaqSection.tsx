@@ -18,12 +18,12 @@ const FaqSection = () => {
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } } // Faster, smoother easing
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } } // Faster, smoother easing
   };
 
   const accordionContentVariants = {
@@ -45,6 +45,7 @@ const FaqSection = () => {
     <motion.section
       id="faq"
       className="relative py-12 text-gray-900 dark:text-gray-50 overflow-hidden"
+      style={{ willChange: 'transform, opacity' }}
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
@@ -70,6 +71,7 @@ const FaqSection = () => {
             >
               <motion.button
                 className="flex justify-between items-center w-full p-5 text-left text-lg font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                style={{ willChange: 'transform' }}
                 onClick={() => toggleQuestion(q.key)}
                 whileHover={{ scale: 1.01 }} // Slightly less scale for the button itself
                 whileTap={{ scale: 0.99 }}
@@ -77,8 +79,9 @@ const FaqSection = () => {
               >
                 {t.faq[q.key]}
                 <motion.div
+                  style={{ willChange: 'transform' }}
                   animate={{ rotate: openQuestion === q.key ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 >
                   <ChevronDown className="w-5 h-5 text-primary-600 dark:text-primary-400" />
                 </motion.div>

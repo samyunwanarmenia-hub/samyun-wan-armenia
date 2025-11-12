@@ -17,10 +17,10 @@ interface HeroSectionProps {
 const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
   const { t, openOrderModal } = useLayoutContext();
 
-  // Variants for general fade-in-up animation
+  // Variants for general fade-in-up animation - optimized with transform
   const fadeInUpVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.9, ease: "easeOut" } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } } // Faster, smoother easing
   };
 
   const mainProduct = productShowcaseData[0]; // Still need this for the order button
@@ -42,6 +42,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             {/* Guarantee Badge */}
             <motion.div 
               className="inline-flex items-center bg-primary-100/50 text-primary-600 px-3 py-1.5 rounded-full text-sm font-semibold mb-5 dark:bg-primary-900/50 dark:text-primary-400"
+              style={{ willChange: 'transform, opacity' }}
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"
