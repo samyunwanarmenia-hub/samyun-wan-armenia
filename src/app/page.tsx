@@ -1,4 +1,8 @@
 import type { Metadata } from 'next';
+import { statsData } from '@/data/stats';
+import HeroSection from '@/components/HeroSection';
+import ProductShowcaseSection from '@/components/ProductShowcaseSection';
+import LayoutClientProvider from '@/components/LayoutClientProvider';
 
 export const metadata: Metadata = {
   robots: {
@@ -8,7 +12,12 @@ export const metadata: Metadata = {
 };
 
 const RootPage = () => {
-  return null;
+  return (
+    <LayoutClientProvider initialLang="hy">
+      <HeroSection stats={statsData} />
+      <ProductShowcaseSection />
+    </LayoutClientProvider>
+  );
 };
 
 export default RootPage;

@@ -3,8 +3,8 @@
 import TestimonialsSection from '@/components/TestimonialsSection';
 import ReviewForm from '@/components/ReviewForm';
 import { useLayoutContext } from '@/context/LayoutContext';
-import { Testimonial, DbReview } from '@/types/global';
-import { useState, useMemo, useEffect } from 'react';
+import { DbReview } from '@/types/global';
+import { useMemo } from 'react';
 import { sendTelegramMessage } from '@/utils/telegramApi';
 import { showSuccess, showError } from '@/utils/toast';
 import { baseTestimonials } from '@/data/testimonials';
@@ -12,46 +12,21 @@ import { formatNameInitialLastName } from '@/utils/testimonialGenerator';
 
 const TestimonialsPageClient = () => {
   const { t, currentLang } = useLayoutContext();
-  const [userTestimonial, setUserTestimonial] = useState<Testimonial | null>(null);
-  const [_isLoading, setIsLoading] = useState<boolean>(true);
-
-  useEffect(() => {
-    setIsLoading(false);
-  }, []);
 
   const combinedTestimonials = useMemo(() => {
-    const dbTestimonials: Testimonial[] = [];
-    const initial = [...baseTestimonials, ...dbTestimonials];
-    if (userTestimonial) initial.unshift(userTestimonial);
-    const unique = Array.from(new Map(initial.map(item => [item.id, item])).values());
+    const unique = Array.from(new Map(baseTestimonials.map(item => [item.id, item])).values());
     return unique.map(testimonial => ({
       ...testimonial,
       name: formatNameInitialLastName(testimonial.name),
       nameRu: formatNameInitialLastName(testimonial.nameRu),
       nameEn: formatNameInitialLastName(testimonial.nameEn),
     }));
-  }, [userTestimonial]);
+  }, []);
 
   const handleReviewSubmitted = async (newReview: DbReview) => {
-    const newAvatarIndex = combinedTestimonials.length + 20;
-    const gender = newAvatarIndex % 2 === 0 ? 'men' : 'women';
-
-    const formattedReview: Testimonial = {
-      id: newReview.id,
-      name: formatNameInitialLastName(newReview.name),
-      nameRu: formatNameInitialLastName(newReview.name),
-      nameEn: formatNameInitialLastName(newReview.name),
-      image: `https://randomuser.me/api/portraits/${gender}/${newAvatarIndex % 100}.jpg`,
-      rating: newReview.rating || 5,
-      result: t.testimonials.newReviewLabel,
-      textHy: newReview.text,
-      textRu: newReview.text,
-      textEn: newReview.text,
-    };
-    setUserTestimonial(formattedReview);
-
     try {
-      const telegramMessage = `<b>New Review Submitted!</b>\n\n<b>Name:</b> ${newReview.name}\n<b>Review:</b> ${newReview.text}\n\n<b>Language:</b> ${currentLang.toUpperCase()}`;
+      // Send only to Telegram - do not publish on the page
+      const telegramMessage = `<b>🌟 Новый отзыв!</b>\n\n<b>Имя:</b> ${newReview.name}\n<b>Отзыв:</b> ${newReview.text}\n<b>Рейтинг:</b> ${newReview.rating || 5}/5\n\n<b>Язык:</b> ${currentLang.toUpperCase()}`;
       await sendTelegramMessage(telegramMessage);
       showSuccess(t.testimonials.thankYou);
     } catch (error: unknown) {
@@ -65,7 +40,6 @@ const TestimonialsPageClient = () => {
       <TestimonialsSection
         testimonials={combinedTestimonials}
         currentLang={currentLang}
-        userTestimonial={userTestimonial}
       />
       <ReviewForm onReviewSubmitted={handleReviewSubmitted} />
     </>

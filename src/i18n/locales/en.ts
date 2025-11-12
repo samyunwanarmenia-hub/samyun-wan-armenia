@@ -210,7 +210,11 @@ export const en: TranslationKeys = {
     q3: 'Are there side effects from using Samyun Wan?',
     a3: 'Samyun Wan is made from natural ingredients and has no side effects.',
     q4: 'Contraindications',
-    a4: 'NOT RECOMMENDED FOR:<br />Pregnant women<br />Nursing mothers<br />Children under 14 years old'
+    a4: 'NOT RECOMMENDED FOR:<br />Pregnant women<br />Nursing mothers<br />Children under 14 years old',
+    q5: '',
+    a5: '',
+    q6: '',
+    a6: ''
   },
   callbackRequest: {
     title: 'Request a Callback',

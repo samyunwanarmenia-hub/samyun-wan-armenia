@@ -37,6 +37,8 @@ const FaqSection = () => {
     { key: 'q2', answerKey: 'a2' },
     { key: 'q3', answerKey: 'a3' },
     { key: 'q4', answerKey: 'a4' },
+    { key: 'q5', answerKey: 'a5' },
+    { key: 'q6', answerKey: 'a6' },
   ];
 
   return (

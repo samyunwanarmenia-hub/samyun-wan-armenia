@@ -11,15 +11,13 @@ import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 interface TestimonialsSectionProps {
   testimonials: Testimonial[];
   currentLang: string;
-  userTestimonial: Testimonial | null; // Added userTestimonial prop
 }
 
-const TestimonialsSection = ({ testimonials, currentLang, userTestimonial }: TestimonialsSectionProps) => {
+const TestimonialsSection = ({ testimonials, currentLang }: TestimonialsSectionProps) => {
   const { t } = useLayoutContext();
   
-  // Combine userTestimonial with existing testimonials, placing userTestimonial first if it exists
-  const combinedTestimonials = userTestimonial ? [userTestimonial, ...testimonials] : testimonials;
-  const displayedTestimonials = combinedTestimonials.slice(0, 6);
+  // Show only base testimonials - user reviews are sent to Telegram only
+  const displayedTestimonials = testimonials.slice(0, 6);
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },

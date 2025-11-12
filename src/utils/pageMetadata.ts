@@ -75,11 +75,33 @@ export const SITE_PAGE_CONFIG: Record<SitePageKey, SitePageDefinition> = {
     path: '',
     priority: 0.9,
     changeFrequency: 'weekly',
-    buildCopy: t => ({
+    buildCopy: (t, lang) => ({
       title: `${t.hero.title} – ${t.hero.subtitle}`,
       description: `${t.hero.tagline} ${t.about.description}`,
-      keywords: buildKeywords(t.hero.title, t.hero.subtitle, t.nav.products, t.benefits.title, t.contact.title),
-      imageAlt: `${t.hero.title} hero`,
+      keywords: buildKeywords(
+        t.hero.title,
+        t.hero.subtitle,
+        // Long-tail keywords for better SEO
+        lang === 'ru' 
+          ? 'как набрать вес безопасно в Армении 2025'
+          : lang === 'en'
+          ? 'how to gain weight safely in Armenia 2025'
+          : 'ինչպես անվտանգ քաշ ավելացնել Հայաստանում 2025',
+        lang === 'ru'
+          ? 'оригинальный Samyun Wan с QR проверкой Ереван'
+          : lang === 'en'
+          ? 'original Samyun Wan with QR verification Yerevan'
+          : 'օրիգինալ Samyun Wan QR ստուգմամբ Երևան',
+        lang === 'ru'
+          ? 'где купить настоящий Samyun Wan Armenia доставка'
+          : lang === 'en'
+          ? 'where to buy authentic Samyun Wan Armenia delivery'
+          : 'որտեղ գնել իրական Samyun Wan Armenia առաքում',
+        t.nav.products,
+        t.benefits.title,
+        t.contact.title
+      ),
+      imageAlt: `${t.hero.title} - оригинальный продукт для набора веса с QR верификацией`,
     }),
   },
   about: {
@@ -120,16 +142,27 @@ export const SITE_PAGE_CONFIG: Record<SitePageKey, SitePageDefinition> = {
     path: 'products',
     priority: 0.8,
     changeFrequency: 'weekly',
-    buildCopy: t => ({
+    buildCopy: (t, lang) => ({
       title: t.nav.products,
       description: `${t.productShowcase.weightGainDesc} / ${t.productShowcase.weightLossDesc}. ${t.orderModal.title}`,
       keywords: buildKeywords(
         t.nav.products,
+        // Long-tail keywords
+        lang === 'ru'
+          ? 'купить Samyun Wan Armenia для набора веса с доставкой Ереван'
+          : lang === 'en'
+          ? 'buy Samyun Wan Armenia for weight gain delivery Yerevan'
+          : 'գնել Samyun Wan Armenia քաշի ավելացման առաքում Երևան',
+        lang === 'ru'
+          ? 'цена оригинального Samyun Wan Armenia 2025 официальный представитель'
+          : lang === 'en'
+          ? 'price original Samyun Wan Armenia 2025 official representative'
+          : 'գին օրիգինալ Samyun Wan Armenia 2025 պաշտոնական ներկայացուցիչ',
         t.productShowcase.orderWeightGain,
         t.productShowcase.orderWeightLoss,
         t.hero.guarantee,
       ),
-      imageAlt: t.nav.products,
+      imageAlt: `${t.nav.products} - оригинальные витамины для набора и снижения веса с сертификатом`,
     }),
   },
   testimonials: {
@@ -196,16 +229,27 @@ export const SITE_PAGE_CONFIG: Record<SitePageKey, SitePageDefinition> = {
     path: 'how-to-identify-fake',
     priority: 0.9,
     changeFrequency: 'weekly',
-    buildCopy: t => ({
+    buildCopy: (t, lang) => ({
       title: t.authenticity.howToDistinguish,
       description: `${t.authenticity.differencesDesc} ${t.authenticity.certificateDesc}`,
       keywords: buildKeywords(
         t.authenticity.howToDistinguish,
         t.authenticity.title,
+        // Long-tail keywords
+        lang === 'ru'
+          ? 'как отличить поддельный Samyun Wan от оригинала 2025'
+          : lang === 'en'
+          ? 'how to distinguish fake Samyun Wan from original 2025'
+          : 'ինչպես տարբերել կեղծ Samyun Wan-ը օրիգինալից 2025',
+        lang === 'ru'
+          ? 'признаки подделки Samyun Wan Armenia проверка QR кода'
+          : lang === 'en'
+          ? 'signs of fake Samyun Wan Armenia QR code verification'
+          : 'կեղծ Samyun Wan Armenia նշաններ QR կոդի ստուգում',
         t.authenticity.attention,
         t.authenticity.qrScanInstructions,
       ),
-      imageAlt: t.authenticity.title,
+      imageAlt: `${t.authenticity.title} - сравнение оригинального и поддельного продукта с QR кодом`,
     }),
   },
   'verify/qr': {

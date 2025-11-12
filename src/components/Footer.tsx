@@ -93,7 +93,7 @@ const Footer = () => {
               dangerouslySetInnerHTML={{ __html: t.footer.legalAndWarning }}
             />
 
-            <div className="flex items-center gap-3 mb-6">
+            <div className="relative flex items-center gap-3 mb-6">
               <CallToActionButton
                 onClick={openAuthenticityModal}
                 variant="ghost"
@@ -103,7 +103,7 @@ const Footer = () => {
               >
                 {t.footer.howToDistinguishButton}
               </CallToActionButton>
-              <AnimatedArrow />
+              <AnimatedArrow className="left-full ml-2" />
             </div>
 
             <div className="flex flex-wrap gap-3 mb-4">

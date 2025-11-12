@@ -174,39 +174,24 @@ const organizationStructuredData = {
   ],
 };
 
-const heroProduct = productShowcaseData[0];
-const priceValidUntil = new Date(new Date().setMonth(new Date().getMonth() + 1)).toISOString().split('T')[0];
+import { generateProductSchema, generateLocalBusinessSchema } from '@/utils/schemaUtils';
+import { baseTestimonials } from '@/data/testimonials';
 
-const productStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Product',
+const heroProduct = productShowcaseData[0];
+
+// Product schema with reviews and aggregate rating
+const productStructuredData = generateProductSchema({
   name: 'Samyun Wan Armenia Original',
   description:
     'Authentic Samyun Wan complex with QR verification delivered directly from the official representative in Armenia.',
   image: OG_IMAGE,
-  brand: {
-    '@type': 'Brand',
-    name: 'Samyun Wan',
-  },
-  offers: {
-    '@type': 'Offer',
-    url: SITE_URL,
-    priceCurrency: 'AMD',
-    price: heroProduct.price ?? 0,
-    priceValidUntil,
-    availability: 'https://schema.org/InStock',
-    seller: {
-      '@type': 'Organization',
-      name: 'Samyun Wan Armenia',
-    },
-    priceSpecification: {
-      '@type': 'PriceSpecification',
-      price: heroProduct.price ?? 0,
-      priceCurrency: 'AMD',
-      priceValidUntil,
-    },
-  },
-};
+  price: heroProduct.price ?? 0,
+  priceCurrency: 'AMD',
+  reviews: baseTestimonials,
+});
+
+// Local Business schema for better local SEO
+const localBusinessStructuredData = generateLocalBusinessSchema();
 
 const SUPPORTED_HTML_LANGS = new Set(['hy', 'ru', 'en']);
 
@@ -229,6 +214,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         </Script>
         <Script id="ld-product" type="application/ld+json">
           {JSON.stringify(productStructuredData)}
+        </Script>
+        <Script id="ld-localbusiness" type="application/ld+json">
+          {JSON.stringify(localBusinessStructuredData)}
         </Script>
         {GOOGLE_ANALYTICS_ID && (
           <>

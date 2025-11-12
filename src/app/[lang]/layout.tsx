@@ -4,6 +4,7 @@ import { Metadata } from 'next';
 import { translations } from '@/i18n/translations';
 import { generateWebSiteStructuredData } from '@/utils/structuredDataUtils';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
+import { generateBreadcrumbSchema } from '@/utils/schemaUtils';
 import LayoutClientProvider from '@/components/LayoutClientProvider';
 import { SITE_URL } from '@/config/siteConfig';
 
@@ -53,12 +54,21 @@ const LangLayout = ({ children, params }: LangLayoutProps) => {
   const lang = params.lang as keyof typeof translations;
   const t = translations[lang] || translations.hy;
   const webSiteStructuredData = generateWebSiteStructuredData(SITE_URL, t);
+  
+  // Breadcrumb schema for better navigation in search results
+  const breadcrumbData = generateBreadcrumbSchema([
+    { name: t.hero.title, url: `${SITE_URL}/${lang}` },
+  ]);
 
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteStructuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
       />
       <LayoutClientProvider initialLang={params.lang}>{children}</LayoutClientProvider>
     </>

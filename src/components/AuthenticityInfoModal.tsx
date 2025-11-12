@@ -51,8 +51,8 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
             className="w-full h-auto rounded-xl shadow-lg border border-gray-300 dark:border-gray-600 mb-3 overflow-hidden"
           >
             <OptimizedImage 
-              src="/images/samyun-arm-original-whey-certificate.jpg" // This is the certificate image
-              alt="Samyun Wan Original Certificate" 
+              src="/images/samyun-arm-original-whey-certificate.jpg"
+              alt="Samyun Wan оригинальный сертификат подлинности с защитными элементами QR код верификация Armenia" 
               className="w-full h-auto object-cover"
               loading="eager"
               sizes="(max-width: 768px) 90vw, 400px"
