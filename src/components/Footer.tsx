@@ -126,7 +126,7 @@ const Footer = () => {
               ))}
             </div>
 
-            <p className="text-xs leading-relaxed text-red-600 dark:text-red-300">{t.footer.caution}</p>
+            <p className="text-xs leading-relaxed text-red-700 dark:text-red-400">{t.footer.caution}</p>
 
           </div>
 
@@ -153,7 +153,7 @@ const Footer = () => {
               <InteractiveDiv
                 as="button"
                 onClick={() => openContactModal('call')}
-                className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-primary-500 rounded-md text-primary-600 dark:text-primary-300"
+                className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-primary-500 rounded-md text-primary-700 dark:text-primary-300"
                 whileHoverScale={1.03}
               >
                 <MessageCircle className="w-5 h-5" />
@@ -164,7 +164,7 @@ const Footer = () => {
                 href="https://wa.me/37495653666"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-green-500 rounded-md text-green-600"
+                className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-green-500 rounded-md text-green-700 dark:text-green-400"
                 whileHoverScale={1.03}
                 style={{ backgroundColor: '#25D36610' }}
               >
@@ -193,14 +193,14 @@ const Footer = () => {
             </ul>
 
             <div className="w-full flex flex-col sm:flex-row sm:justify-between mt-4">
-              <Link href={`/${currentLang}/privacy`} className="text-xs text-gray-400 hover:text-primary-400 underline" aria-label="Privacy Policy">
+              <Link href={`/${currentLang}/privacy`} className="text-xs text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 underline" aria-label="Privacy Policy">
                 {currentLang === 'hy'
                   ? 'Գաղտնիության քաղաքականություն'
                   : currentLang === 'ru'
                     ? 'Политика конфиденциальности'
                     : 'Privacy Policy'}
               </Link>
-              <Link href={`/${currentLang}/terms`} className="text-xs text-gray-400 hover:text-primary-400 underline mt-1 sm:mt-0" aria-label="Terms & Conditions">
+              <Link href={`/${currentLang}/terms`} className="text-xs text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 underline mt-1 sm:mt-0" aria-label="Terms & Conditions">
                 {currentLang === 'hy'
                   ? 'Օգտագործման պայմաններ'
                   : currentLang === 'ru'

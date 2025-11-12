@@ -95,6 +95,10 @@ export const metadata: Metadata = {
   icons: {
     apple: '/favicon.png',
   },
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#86b486' },
+    { media: '(prefers-color-scheme: dark)', color: '#86b486' },
+  ],
 };
 
 const organizationDescription = `${OFFICIAL_ACTIVITY}. ${OFFICIAL_CLASSIFICATION}. ${OFFICIAL_CITY}.`;
