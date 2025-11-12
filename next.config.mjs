@@ -36,6 +36,25 @@ const nextConfig = {
       },
     ];
   },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Link',
+            value: [
+              '<https://www.google.com>; rel=preconnect; crossorigin=anonymous',
+              '<https://www.googletagmanager.com>; rel=preconnect; crossorigin=anonymous',
+              '<https://stats.g.doubleclick.net>; rel=preconnect; crossorigin=anonymous',
+              '<https://googleads.g.doubleclick.net>; rel=preconnect; crossorigin=anonymous',
+              '<https://analytics.google.com>; rel=preconnect; crossorigin=anonymous',
+            ].join(', '),
+          },
+        ],
+      },
+    ];
+  },
   // Add other configurations as needed
 };
 

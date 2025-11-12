@@ -88,6 +88,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
                   alt={product.alt}
                   className="w-16 h-16 object-contain rounded-lg"
                   loading="eager"
+                  sizes="64px"
                 />
                 <p className="text-gray-800 dark:text-gray-50 mt-1.5 text-center font-medium"> {/* Changed text-gray-900 to text-gray-800 for light mode */}
                   {t.productShowcase[product.labelKey]}

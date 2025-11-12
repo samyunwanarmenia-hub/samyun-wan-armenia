@@ -110,7 +110,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
                 alt={currentProduct.alt}
                 className="w-28 h-28 object-contain drop-shadow-lg" 
                 loading="eager"
-                sizes="112px" 
+                sizes="(max-width: 768px) 112px, 150px" 
               />
             </motion.div>
             <h3 className="text-xl font-bold text-gray-800 dark:text-gray-50 mb-2 text-center"> {/* Changed text-gray-900 to text-gray-800 for light mode */}
