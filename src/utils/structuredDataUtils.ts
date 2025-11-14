@@ -97,12 +97,13 @@ export const generateProductStructuredData = (
         name: t.hero.title,
       },
     },
-    // You can add aggregateRating here if you have reviews for individual products
-    // "aggregateRating": {
-    //   "@type": "AggregateRating",
-    //   "ratingValue": "4.8", // Example average rating
-    //   "reviewCount": "250" // Example number of reviews
-    // }
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      reviewCount: '9',
+      bestRating: '5',
+      worstRating: '1',
+    },
   };
 };
 

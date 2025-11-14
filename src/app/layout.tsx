@@ -208,7 +208,20 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <html lang={htmlLang} className={inter.variable} suppressHydrationWarning>
+      <head>
+        <meta name="google-site-verification" content="wb9GCDk-wt5v-HAkvfJRISYA0m5UP-OoN6LryTqpE-4" />
+      </head>
       <body>
+        <Script id="google-site-verification-2" strategy="beforeInteractive" dangerouslySetInnerHTML={{
+          __html: `
+            (function() {
+              var meta = document.createElement('meta');
+              meta.name = 'google-site-verification';
+              meta.content = 'wb9GCDk-wt5v-HAkvfJRISYA0m5UP-OoN6LryTqpE-4';
+              document.getElementsByTagName('head')[0].appendChild(meta);
+            })();
+          `
+        }} />
         <Script id="ld-organization" type="application/ld+json">
           {JSON.stringify(organizationStructuredData)}
         </Script>
