@@ -89,6 +89,7 @@ export const metadata: Metadata = {
     google: 'zAW0LZsUTQ179ySPIQOmESS0xJZldVzO8ZhNvDMCSCg',
     other: {
       'google-site-verification': 'nlUPA3O_2GwQOozqcohOUEOvoy4MZToVGD38VV6IkAE',
+      'google-site-verification-2': 'wb9GCDk-wt5v-HAkvfJRISYA0m5UP-OoN6LryTqpE-4',
     },
   },
   manifest: '/site.webmanifest',
@@ -212,16 +213,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <meta name="google-site-verification" content="wb9GCDk-wt5v-HAkvfJRISYA0m5UP-OoN6LryTqpE-4" />
       </head>
       <body>
-        <Script id="google-site-verification-2" strategy="beforeInteractive" dangerouslySetInnerHTML={{
-          __html: `
-            (function() {
-              var meta = document.createElement('meta');
-              meta.name = 'google-site-verification';
-              meta.content = 'wb9GCDk-wt5v-HAkvfJRISYA0m5UP-OoN6LryTqpE-4';
-              document.getElementsByTagName('head')[0].appendChild(meta);
-            })();
-          `
-        }} />
         <Script id="ld-organization" type="application/ld+json">
           {JSON.stringify(organizationStructuredData)}
         </Script>
