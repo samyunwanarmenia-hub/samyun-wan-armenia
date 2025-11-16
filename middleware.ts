@@ -1,18 +1,17 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-
-const SUPPORTED_LANGS = new Set(['hy', 'ru', 'en']);
+import { resolveLang } from './src/config/locales';
 
 const resolveLangFromPath = (pathname: string): string => {
   const segments = pathname.split('/').filter(Boolean);
   const candidate = segments[0]?.toLowerCase();
-  return candidate && SUPPORTED_LANGS.has(candidate) ? candidate : 'hy';
+  return resolveLang(candidate);
 };
 
 const detectBrowserLanguage = (request: NextRequest): string => {
   const acceptLang = request.headers.get('accept-language') || '';
   const browserLang = acceptLang.split(',')[0]?.split('-')[0]?.toLowerCase() || '';
-  return SUPPORTED_LANGS.has(browserLang) ? browserLang : 'hy';
+  return resolveLang(browserLang);
 };
 
 export function middleware(request: NextRequest) {

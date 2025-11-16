@@ -173,3 +173,76 @@ export const generateWebPageSchema = (data: {
   };
 };
 
+export const generateArticleSchema = (options: {
+  headline: string;
+  description: string;
+  url: string;
+  image: string;
+  authorName: string;
+  publisherName: string;
+  datePublished: string;
+  dateModified?: string;
+  inLanguage: string;
+}) => ({
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': options.url,
+  },
+  headline: options.headline,
+  description: options.description,
+  image: options.image,
+  author: {
+    '@type': 'Organization',
+    name: options.authorName,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: options.publisherName,
+    logo: {
+      '@type': 'ImageObject',
+      url: options.image,
+    },
+  },
+  datePublished: options.datePublished,
+  dateModified: options.dateModified ?? options.datePublished,
+  inLanguage: options.inLanguage,
+});
+
+export const generateBlogPostingSchema = (options: {
+  headline: string;
+  description: string;
+  url: string;
+  image: string;
+  authorName: string;
+  datePublished: string;
+  publisherName: string;
+  inLanguage: string;
+  keywords?: string[];
+}) => ({
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  mainEntityOfPage: {
+    '@type': 'WebPage',
+    '@id': options.url,
+  },
+  headline: options.headline,
+  description: options.description,
+  image: options.image,
+  author: {
+    '@type': 'Person',
+    name: options.authorName,
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: options.publisherName,
+    logo: {
+      '@type': 'ImageObject',
+      url: options.image,
+    },
+  },
+  datePublished: options.datePublished,
+  inLanguage: options.inLanguage,
+  keywords: options.keywords,
+});

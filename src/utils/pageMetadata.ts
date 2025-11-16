@@ -4,9 +4,7 @@ import { translations } from '@/i18n/translations';
 import type { TranslationKeys } from '@/types/global';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { SITE_URL } from '@/config/siteConfig';
-
-const SUPPORTED_LANGS = ['hy', 'ru', 'en'] as const;
-export type SupportedLang = (typeof SUPPORTED_LANGS)[number];
+import { resolveLang as normalizeLang, type SupportedLang } from '@/config/locales';
 
 export type SitePageKey =
   | 'home'
@@ -18,6 +16,7 @@ export type SitePageKey =
   | 'contact'
   | 'track-order'
   | 'how-to-identify-fake'
+  | 'blogs'
   | 'verify/qr'
   | 'privacy'
   | 'terms';
@@ -252,6 +251,31 @@ export const SITE_PAGE_CONFIG: Record<SitePageKey, SitePageDefinition> = {
       imageAlt: `${t.authenticity.title} - сравнение оригинального и поддельного продукта с QR кодом`,
     }),
   },
+  blogs: {
+    path: 'blogs',
+    priority: 0.9,
+    changeFrequency: 'weekly',
+    buildCopy: (t, lang) => {
+      const article = t.article;
+      const extraKeywords = article.metaKeywords
+        .split(',')
+        .map(keyword => keyword.trim())
+        .filter(Boolean);
+
+      return {
+        title: article.metaTitle,
+        description: article.metaDescription,
+        keywords: buildKeywords(
+          article.title,
+          article.subtitle,
+          ...extraKeywords,
+          lang === 'ru' ? 'блог Samyun Wan' : lang === 'en' ? 'Samyun Wan blog guide' : 'Samyun Wan բլոգ',
+          article.ctaLabel
+        ),
+        imageAlt: article.title,
+      };
+    },
+  },
   'verify/qr': {
     path: 'verify/qr',
     priority: 0.7,
@@ -298,11 +322,17 @@ export const SITE_PAGE_CONFIG: Record<SitePageKey, SitePageDefinition> = {
   },
 };
 
-const resolveLang = (lang: string): SupportedLang =>
-  (SUPPORTED_LANGS.includes(lang as SupportedLang) ? (lang as SupportedLang) : 'hy');
+interface BuildPageMetadataOptions {
+  canonicalPath?: string;
+  type?: 'website' | 'article';
+}
 
-export const buildPageMetadata = (lang: string, key: SitePageKey): Metadata => {
-  const normalizedLang = resolveLang(lang);
+export const buildPageMetadata = (
+  lang: string,
+  key: SitePageKey,
+  options?: BuildPageMetadataOptions
+): Metadata => {
+  const normalizedLang = normalizeLang(lang);
   const t = translations[normalizedLang] || translations.hy;
   const config = SITE_PAGE_CONFIG[key];
 
@@ -322,5 +352,7 @@ export const buildPageMetadata = (lang: string, key: SitePageKey): Metadata => {
     keywords: keywordList.join(', '),
     image: OG_IMAGE,
     imageAlt: imageAlt ?? title,
+    type: options?.type,
+    canonicalPath: options?.canonicalPath,
   });
 };

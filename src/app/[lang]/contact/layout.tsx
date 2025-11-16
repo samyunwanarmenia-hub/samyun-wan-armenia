@@ -4,10 +4,11 @@ import { contactInfoData } from '@/data/contactInfo';
 import { ContactLayoutProps } from '@/types/global';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { SITE_URL } from '@/config/siteConfig';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const lang = params.lang as keyof typeof translations;
-  const t = translations[lang] || translations.hy;
+  const lang: SupportedLang = resolveLang(params.lang);
+  const t = translations[lang];
 
   const contactDetails = contactInfoData
     .map(item => (item.key === 'phone' ? t.contact.phoneNumbers.description : item.details))

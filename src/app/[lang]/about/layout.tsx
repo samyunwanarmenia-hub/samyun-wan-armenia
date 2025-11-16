@@ -3,10 +3,11 @@ import { Metadata } from 'next';
 import { AboutLayoutProps } from '@/types/global';
 import { generateCommonMetadata } from '@/utils/metadataUtils'; // Import the new utility
 import { SITE_URL } from '@/config/siteConfig';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const lang = params.lang as keyof typeof translations;
-  const t = translations[lang] || translations.hy; // Fallback to Armenian
+  const lang: SupportedLang = resolveLang(params.lang);
+  const t = translations[lang];
 
   const pageTitle = t.hero.title + ' - ' + t.nav.about;
   const pageDescription = t.about.description;

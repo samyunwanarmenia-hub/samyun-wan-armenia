@@ -4,10 +4,11 @@ import { benefitsItemsData } from '@/data/benefitsItems';
 import { BenefitsLayoutProps } from '@/types/global';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { SITE_URL } from '@/config/siteConfig';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 
 export async function generateMetadata({ params }: BenefitsLayoutProps): Promise<Metadata> {
-  const lang = params.lang as keyof typeof translations;
-  const t = translations[lang] || translations.hy;
+  const lang: SupportedLang = resolveLang(params.lang);
+  const t = translations[lang];
 
   const benefitKeywords = benefitsItemsData.map(item => t.benefits[item.key].title).join(', ');
   const benefitDescriptions = benefitsItemsData.map(item => t.benefits[item.key].desc).join('; ');

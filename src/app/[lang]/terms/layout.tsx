@@ -2,10 +2,11 @@ import { Metadata } from 'next';
 import { translations } from '@/i18n/translations';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { SITE_URL } from '@/config/siteConfig';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const lang = params.lang || 'hy';
-  const t = translations[lang as keyof typeof translations] || translations.hy;
+  const lang: SupportedLang = resolveLang(params.lang);
+  const t = translations[lang];
 
   const pageTitle = `${t.hero.title} | Terms & Conditions`;
   const pageDescription =

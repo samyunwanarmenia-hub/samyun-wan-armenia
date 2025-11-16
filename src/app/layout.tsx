@@ -1,9 +1,7 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import Script from 'next/script';
-import { headers } from 'next/headers';
-
-import '../app/globals.css';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import Script from "next/script";
+import "../app/globals.css";
 
 import {
   SITE_URL,
@@ -15,213 +13,119 @@ import {
   OFFICIAL_CLASSIFICATION,
   OFFICIAL_CITY,
   OFFICIAL_REGISTRY_LAST_UPDATE,
-} from '@/config/siteConfig';
-import { productShowcaseData } from '@/data/productShowcaseData';
+} from "@/config/siteConfig";
+
+import { productShowcaseData } from "@/data/productShowcaseData";
+import { generateProductSchema, generateLocalBusinessSchema } from "@/utils/schemaUtils";
+import { baseTestimonials } from "@/data/testimonials";
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const inter = Inter({
-  subsets: ['latin', 'cyrillic'],
-  variable: '--font-inter',
-  display: 'swap',
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-inter",
+  display: "swap",
 });
 
-const DEFAULT_META_TITLE = 'Samyun Wan Armenia — Official distributor in Armenia';
-const DEFAULT_META_DESCRIPTION =
-  'Official store of Samyun Wan Armenia. Authentic Samyun Wan products with QR verification, multilingual support, and fast nationwide delivery.';
 const OG_IMAGE = `${SITE_URL}/optimized/og-image.jpg`;
 
+/* 
+ RootLayout metadata must stay MINIMAL.
+ FULL SEO is handled inside [lang]/layout.tsx
+*/
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: {
-    default: DEFAULT_META_TITLE,
-    template: `%s | Samyun Wan Armenia`,
-  },
-  description: DEFAULT_META_DESCRIPTION,
-  keywords:
-    'Samyun Wan, Samyun Wan Armenia, QR verification, weight gain supplements, authentic Samyun Wan, Armenia official store',
-  authors: [{ name: 'Samyun Wan Armenia' }, { name: 'Aleksandr Gevorgyan' }],
-  openGraph: {
-    title: DEFAULT_META_TITLE,
-    description: DEFAULT_META_DESCRIPTION,
-    url: SITE_URL,
-    siteName: 'Samyun Wan Armenia',
-    images: [
-      {
-        url: OG_IMAGE,
-        width: 1200,
-        height: 630,
-        alt: 'Samyun Wan Armenia official distributor',
-      },
-    ],
-    locale: 'hy_AM',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    site: '@samyunwanarmenia',
-    creator: '@samyunwanarmenia',
-    title: DEFAULT_META_TITLE,
-    description: DEFAULT_META_DESCRIPTION,
-    images: [OG_IMAGE],
-  },
   robots: {
     index: true,
     follow: true,
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
     },
-  },
-  alternates: {
-    canonical: SITE_URL,
-    languages: {
-      'hy-AM': `${SITE_URL}/hy`,
-      'ru-RU': `${SITE_URL}/ru`,
-      'en-US': `${SITE_URL}/en`,
-      'x-default': `${SITE_URL}/hy`,
-    },
-  },
-  verification: {
-    google: 'zAW0LZsUTQ179ySPIQOmESS0xJZldVzO8ZhNvDMCSCg',
-    other: {
-      'google-site-verification': 'nlUPA3O_2GwQOozqcohOUEOvoy4MZToVGD38VV6IkAE',
-      'google-site-verification-2': 'wb9GCDk-wt5v-HAkvfJRISYA0m5UP-OoN6LryTqpE-4',
-    },
-  },
-  manifest: '/site.webmanifest',
-  icons: {
-    apple: '/favicon.png',
   },
 };
 
-const organizationDescription = `${OFFICIAL_ACTIVITY}. ${OFFICIAL_CLASSIFICATION}. ${OFFICIAL_CITY}.`;
-
+/* --------- ORGANIZATION SCHEMA --------- */
 const organizationStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'Organization',
-  name: 'Samyun Wan Armenia',
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Samyun Wan Armenia",
   legalName: OFFICIAL_BUSINESS_NAME,
   url: SITE_URL,
   logo: OG_IMAGE,
-  description: organizationDescription,
-  keywords: [OFFICIAL_ACTIVITY, OFFICIAL_CLASSIFICATION].join(', '),
+  description: `${OFFICIAL_ACTIVITY}. ${OFFICIAL_CLASSIFICATION}. ${OFFICIAL_CITY}.`,
+  keywords: [OFFICIAL_ACTIVITY, OFFICIAL_CLASSIFICATION].join(", "),
   sameAs: [
-    'https://facebook.com/samyunwanarmenia',
-    'https://instagram.com/samyunwanarmenia',
-    'https://tiktok.com/@samyunwanarmenia',
-    'https://youtube.com/@samyunwanarmenia',
-    'https://t.me/samyunwanarmenia',
-    'https://wa.me/37495653666',
-    'https://wa.me/37496653666',
-    'https://m.me/samyunwanarmenia',
-    'https://www.spyur.am/am/companies/samyun-wan-armenia-weight-loss-and-weight-gain-center/52453/',
-    'https://www.spyur.am/ru/companies/samyun-wan-armenia-weight-loss-and-weight-gain-center/52453/',
-    'https://www.spyur.am/en/companies/samyun-wan-armenia-weight-loss-and-weight-gain-center/52453/',
-    'https://www.spyur.am/en/trademarks/?trademark=%22SAMYUN+WAN%22&search=1',
-    'https://share.google/CGBO0M5UovfwgV3JM',
+    "https://facebook.com/samyunwanarmenia",
+    "https://instagram.com/samyunwanarmenia",
+    "https://tiktok.com/@samyunwanarmenia",
+    "https://youtube.com/@samyunwanarmenia",
+    "https://t.me/samyunwanarmenia",
+    "https://wa.me/37495653666",
+    "https://wa.me/37496653666",
+    "https://m.me/samyunwanarmenia",
   ],
   contactPoint: [
     {
-      '@type': 'ContactPoint',
+      "@type": "ContactPoint",
       telephone: PRIMARY_PHONE,
-      contactType: 'customer support',
-      areaServed: 'AM',
-      availableLanguage: ['hy', 'ru', 'en'],
+      contactType: "customer support",
+      areaServed: "AM",
+      availableLanguage: ["hy", "ru", "en"],
     },
     {
-      '@type': 'ContactPoint',
+      "@type": "ContactPoint",
       telephone: SECONDARY_PHONE,
-      contactType: 'sales',
-      areaServed: 'AM',
-      availableLanguage: ['hy', 'ru', 'en'],
+      contactType: "sales",
+      areaServed: "AM",
+      availableLanguage: ["hy", "ru", "en"],
     },
   ],
   address: {
-    '@type': 'PostalAddress',
-    addressCountry: 'AM',
+    "@type": "PostalAddress",
+    addressCountry: "AM",
     addressLocality: OFFICIAL_CITY,
   },
-  areaServed: {
-    '@type': 'Country',
-    name: 'Armenia',
-  },
-  founder: {
-    '@type': 'Person',
-    name: DIRECTOR_NAME,
-  },
+  areaServed: { "@type": "Country", name: "Armenia" },
+  founder: { "@type": "Person", name: DIRECTOR_NAME },
   identifier: [
-    {
-      '@type': 'PropertyValue',
-      propertyID: 'Spyur ID',
-      value: '52453',
-      url: 'https://www.spyur.am/en/companies/samyun-wan-armenia-weight-loss-and-weight-gain-center/52453/',
-    },
-    {
-      '@type': 'PropertyValue',
-      propertyID: 'Last update',
-      value: OFFICIAL_REGISTRY_LAST_UPDATE,
-    },
-  ],
-  hasCredential: [
-    {
-      '@type': 'CreativeWork',
-      url: 'https://www.spyur.am/en/trademarks/?trademark=%22SAMYUN+WAN%22&search=1',
-      name: 'Spyur trademark register entry for “SAMYUN WAN”',
-    },
+    { "@type": "PropertyValue", propertyID: "Registry Update", value: OFFICIAL_REGISTRY_LAST_UPDATE },
   ],
 };
 
-import { generateProductSchema, generateLocalBusinessSchema } from '@/utils/schemaUtils';
-import { baseTestimonials } from '@/data/testimonials';
-
+/* --------- PRODUCT SCHEMA --------- */
 const heroProduct = productShowcaseData[0];
 
-// Product schema with reviews and aggregate rating
 const productStructuredData = generateProductSchema({
-  name: 'Samyun Wan Armenia Original',
+  name: "Samyun Wan Armenia Original",
   description:
-    'Authentic Samyun Wan complex with QR verification delivered directly from the official representative in Armenia.',
+    "Authentic Samyun Wan complex with QR verification delivered directly from the official representative in Armenia.",
   image: OG_IMAGE,
   price: heroProduct.price ?? 0,
-  priceCurrency: 'AMD',
+  priceCurrency: "AMD",
   reviews: baseTestimonials,
 });
 
-// Local Business schema for better local SEO
+/* --------- LOCAL BUSINESS SCHEMA --------- */
 const localBusinessStructuredData = generateLocalBusinessSchema();
 
-const SUPPORTED_HTML_LANGS = new Set(['hy', 'ru', 'en']);
-
-const resolveHtmlLang = () => {
-  const headerLang = headers().get('x-current-lang');
-  if (headerLang && SUPPORTED_HTML_LANGS.has(headerLang)) {
-    return headerLang;
-  }
-  return 'hy';
-};
-
+/* --------- ROOT LAYOUT --------- */
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
-  const htmlLang = resolveHtmlLang();
-
   return (
-    <html lang={htmlLang} className={inter.variable} suppressHydrationWarning>
+    <html lang="hy" className={inter.variable} suppressHydrationWarning>
       <head>
-        <meta name="google-site-verification" content="wb9GCDk-wt5v-HAkvfJRISYA0m5UP-OoN6LryTqpE-4" />
-      </head>
-      <body>
-        <Script id="ld-organization" type="application/ld+json">
+        <Script id="ld-org" type="application/ld+json">
           {JSON.stringify(organizationStructuredData)}
         </Script>
         <Script id="ld-product" type="application/ld+json">
           {JSON.stringify(productStructuredData)}
         </Script>
-        <Script id="ld-localbusiness" type="application/ld+json">
+        <Script id="ld-local" type="application/ld+json">
           {JSON.stringify(localBusinessStructuredData)}
         </Script>
+      </head>
+
+      <body>
         {GOOGLE_ANALYTICS_ID && (
           <>
             <Script
@@ -229,7 +133,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
               src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
               strategy="afterInteractive"
             />
-            <Script id="ga-initializer" strategy="afterInteractive">
+            <Script id="ga-init" strategy="afterInteractive">
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){window.dataLayer.push(arguments);}
@@ -242,16 +146,15 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             </Script>
           </>
         )}
+
         {children}
+
         <noscript>
-          <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="https://mc.yandex.ru/watch/103962073"
-              alt=""
-              style={{ position: 'absolute', left: '-9999px' }}
-            />
-          </div>
+          <img
+            src="https://mc.yandex.ru/watch/103962073"
+            alt=""
+            style={{ position: "absolute", left: "-9999px" }}
+          />
         </noscript>
       </body>
     </html>

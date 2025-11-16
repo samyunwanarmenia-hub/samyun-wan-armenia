@@ -3,10 +3,11 @@ import { translations } from '@/i18n/translations';
 import { QrVerifyLayoutProps } from '@/types/global';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { SITE_URL } from '@/config/siteConfig';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const lang = params.lang as keyof typeof translations;
-  const t = translations[lang] || translations.hy;
+  const lang: SupportedLang = resolveLang(params.lang);
+  const t = translations[lang];
 
   const pageTitle = `${t.hero.title} - ${t.authenticity.title}`;
   const pageDescription = t.authenticity.qrScanInstructions;

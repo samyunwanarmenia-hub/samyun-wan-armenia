@@ -40,7 +40,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
 
   // Determine if it's the QR verification page
   const isQrVerifyPage = useMemo(() => {
-    const pathSegments = pathname.split('/').filter(Boolean);
+    const pathSegments = (pathname ?? '').split('/').filter(Boolean);
     return pathSegments.length >= 2 && pathSegments[1] === 'verify' && pathSegments[2] === 'qr';
   }, [pathname]);
 

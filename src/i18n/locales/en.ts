@@ -1,4 +1,4 @@
-﻿import { TranslationKeys } from '../../types/global';
+import { TranslationKeys } from '../../types/global';
 
 export const en: TranslationKeys = {
   nav: {
@@ -188,6 +188,93 @@ export const en: TranslationKeys = {
     verificationStep3: '3. Beware of unknown websites',
     verificationStep4: '4. Call +37495653666 for verification',
     verifyButton: 'Verify Product Authenticity',
+  },
+  article: {
+    metaTitle: 'Samyun Wan real reviews, in-depth study, risks, and trusted buying guide',
+    metaDescription: 'Before buying Samyun Wan, study real user feedback, ingredients, usage guidance, contraindications, and safety checks that separate originals from fakes.',
+    metaKeywords: 'Samyun Wan, Samyun Wan capsules, Samyun Wan Armenia, Samyun Wan real reviews, Samyun Wan results, Samyun Wan side effects, safe weight gain supplements, appetite boosters, natural muscle gain, verified seller guide',
+    title: 'Samyun Wan real reviews, full study, risks, and trusted buying guide',
+    subtitle: 'Security, ingredients, and consumer feedback you need before you buy',
+    intro: 'Look beyond marketing promises: examine real user feedback, ingredients, contraindications, and the safety signals behind fake Samyun Wan offers.',
+    sections: [
+      {
+        id: 'capsules',
+        heading: 'What to know about Samyun Wan capsules',
+        description: 'The capsules often appear on marketplaces for 5000 AMD, claiming Indonesian origin and side-effect-free composition, yet most sellers refuse to disclose certificates or official registration.',
+        bullets: [
+          'Demand a certificate of conformity and scan the QR code on every package.',
+          'Unverified batches with unknown ingredients should be avoided.',
+          'Official sellers respond immediately with documentation and QR verification.',
+        ],
+      },
+      {
+        id: 'audience',
+        heading: 'Who needs Samyun Wan',
+        description: 'It is designed for people who struggle to gain weight, especially after illnesses or when appetite is minimal.',
+        bullets: [
+          'Naturally slim bodies that struggle to add mass',
+          'Those recovering from chronic conditions with lost appetite',
+          'People with irregular eating patterns or extremely fast metabolism',
+          'Athletes looking for safe, certified mass gain support',
+        ],
+      },
+      {
+        id: 'advantages',
+        heading: 'Benefits of Samyun Wan',
+        description: 'Herbal extracts help lift appetite and support nutrient absorption without synthetic fillers.',
+        bullets: [
+          'Herbal-based composition with no harmful additives',
+          'Stimulates appetite for more frequent balanced meals',
+          'Promotes faster weight gain with supportive digestion',
+          'Minimal side effects when taken as directed',
+        ],
+      },
+      {
+        id: 'results',
+        heading: 'Results according to real users',
+        description: 'People report not just extra weight but also better digestion, immunity, joint comfort, and energy.',
+        bullets: [
+          'Improved digestive performance and nutrient uptake',
+          'Stronger immunity and resistance to infections',
+          'Healthier joints and defined body structure',
+          'More energy, better workouts, and higher resilience',
+        ],
+      },
+      {
+        id: 'side-effects',
+        heading: 'Samyun Wan side effects to be aware of',
+        description: 'Side effects are rare (around 2.5%) and usually tied to misuse or sensitivity.',
+        bullets: [
+          'Drowsiness during the first two or three days',
+          'Mild edema when taking two capsules daily without enough hydration',
+          'Skin rash when combining with excessively high protein intake',
+        ],
+      },
+      {
+        id: 'contraindications',
+        heading: 'Contraindications and safety notes',
+        description: 'Only buy from licensed sellers—counterfeit products may disrupt hormones or strain the liver.',
+        bullets: [
+          'Check licenses, certificates, and official contact details',
+          'Avoid anonymous marketplaces or unknown links',
+          'Pair the supplement with professional nutrition and training advice',
+        ],
+      },
+      {
+        id: 'usage',
+        heading: 'How to use Samyun Wan safely and effectively',
+        description: 'Combine it with a balanced diet, strength training, and restful habits for sustainable mass gain.',
+        bullets: [
+          'Balanced, nutrient-dense meals throughout the day',
+          'Strength workouts and progressive overload',
+          'Adequate sleep, hydration, and daily routine',
+          'A nutritionist or coach to guide the regimen',
+        ],
+      },
+    ],
+    conclusion: 'This holistic approach lets you gain weight confidently, trusting only certified Samyun Wan while keeping your health on track.',
+    ctaLabel: 'Order certified Samyun Wan today',
+    ctaLink: 'https://samyunwanarmenia.netlify.app/en',
   },
   loadingLinkModal: {
     title: 'Loading Link',

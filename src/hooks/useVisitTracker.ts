@@ -14,7 +14,7 @@ export const useVisitTracker = () => {
     const NOTIFICATION_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 
     // NEW: Do not track general visits on the QR verification page
-    if (pathname.includes('/verify/qr')) {
+    if (pathname?.includes('/verify/qr')) {
       return;
     }
 
@@ -36,14 +36,14 @@ export const useVisitTracker = () => {
             utm_campaign: searchParams?.get('utm_campaign') || null,
           };
 
-          const bodyData = { 
-            lat: null, 
-            lon: null, 
-            screenWidth, 
-            screenHeight, 
-            pagePath: pathname,
-            deviceVendor,
-            deviceModel,
+            const bodyData = {
+              lat: null, 
+              lon: null, 
+              screenWidth, 
+              screenHeight, 
+              pagePath: pathname ?? '/',
+              deviceVendor,
+              deviceModel,
             cpuArchitecture,
             clientTimezone,
           };

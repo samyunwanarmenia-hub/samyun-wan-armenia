@@ -117,7 +117,7 @@ const QrVerifyClient = ({ params: _params }: QrVerifyPageProps) => {
         screenWidth: window.innerWidth,
         screenHeight: window.innerHeight,
         isQrScan: true,
-        pagePath: pathname,
+        pagePath: pathname ?? '/',
         deviceVendor,
         deviceModel,
         cpuArchitecture,

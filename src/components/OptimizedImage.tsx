@@ -1,77 +1,57 @@
 "use client";
 
 import { useState } from 'react';
-import { ImageOff } from 'lucide-react'; // Import ImageOff icon
-import { IMAGE_OPTIMIZED_WIDTHS } from '@/config/imageConfig'; // Import centralized widths
-import { motion } from 'framer-motion'; // Import motion
+import Image from 'next/image';
+import { ImageOff } from 'lucide-react';
 
 interface OptimizedImageProps {
-  src: string; // Expected format: /images/my-image.jpg
+  src: string;
   alt: string;
+  width?: number;
+  height?: number;
   className?: string;
-  loading?: 'eager' | 'lazy';
-  sizes?: string; // e.g., "(max-width: 600px) 100vw, 50vw"
-  fetchPriority?: 'high' | 'low' | 'auto';
+  loading?: 'lazy' | 'eager';
+  sizes?: string;
+  priority?: boolean;
+  fetchPriority?: 'auto' | 'high' | 'low';
 }
 
-const OptimizedImage: React.FC<OptimizedImageProps> = ({ src, alt, className, loading = 'lazy', sizes, fetchPriority = 'auto' }) => {
+const OptimizedImage: React.FC<OptimizedImageProps> = ({
+  src,
+  alt,
+  width = 1200,
+  height = 800,
+  className,
+  loading = 'lazy',
+  sizes = '(max-width: 768px) 100vw, 50vw',
+  priority = false,
+  fetchPriority = 'auto',
+}) => {
   const [imageError, setImageError] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false); // New state for image load status
-  const isEager = loading === 'eager' || fetchPriority === 'high';
-
-  // Extract base name from the src prop
-  const lastSlashIndex = src.lastIndexOf('/');
-  const lastDotIndex = src.lastIndexOf('.');
-  const baseName = src.substring(lastSlashIndex + 1, lastDotIndex);
-
-  const handleImageError = () => {
-    setImageError(true);
-    console.error(`Failed to load image: ${src}`);
-  };
-
-  const handleImageLoad = () => {
-    setImageLoaded(true);
-  };
 
   if (imageError) {
     return (
-      <div className={`flex items-center justify-center bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded-lg ${className}`}>
-        <ImageOff className="w-1/2 h-1/2" /> {/* Adjust size as needed */}
+      <div
+        className={`flex items-center justify-center rounded-2xl bg-gray-200 p-6 text-gray-500 dark:bg-gray-800 dark:text-gray-300 ${className}`}
+      >
+        <ImageOff className="h-10 w-10" />
       </div>
     );
   }
 
-  // Generate srcset for different formats and sizes
-  const generateSrcset = (format: 'jpg' | 'webp' | 'avif') => {
-    const widths = IMAGE_OPTIMIZED_WIDTHS; // Use centralized widths
-    return widths.map((width: number) => `/optimized/${baseName}-${width}w.${format} ${width}w`).join(', ');
-  };
-
-  // Determine the default src for the <img> tag (smallest optimized JPG)
-  const defaultJpgSrc = `/optimized/${baseName}-150w.jpg`;
-
   return (
-    <picture>
-      {/* Try AVIF first */}
-      <source type="image/avif" srcSet={generateSrcset('avif')} sizes={sizes} />
-      {/* Then WebP */}
-      <source type="image/webp" srcSet={generateSrcset('webp')} sizes={sizes} />
-      {/* Fallback to smallest optimized JPG if AVIF/WebP fail or are not supported */}
-      <motion.img
-        src={defaultJpgSrc} // Default fallback to the smallest optimized JPG
-        srcSet={generateSrcset('jpg')}
-        sizes={sizes}
-        alt={alt}
-        className={className}
-        loading={loading}
-        fetchPriority={fetchPriority}
-        onError={handleImageError}
-        onLoad={handleImageLoad} // Call handleImageLoad on successful load
-        initial={isEager ? { opacity: 1 } : { opacity: 0 }}
-        animate={isEager ? { opacity: 1 } : { opacity: imageLoaded ? 1 : 0 }}
-        transition={isEager ? {} : { duration: 0.3, ease: "easeOut" }}
-      />
-    </picture>
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      className={className}
+      loading={loading}
+      sizes={sizes}
+      priority={priority}
+      fetchPriority={fetchPriority}
+      onError={() => setImageError(true)}
+    />
   );
 };
 

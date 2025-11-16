@@ -194,6 +194,23 @@ export interface TranslationKeys {
     verificationStep4: string;
     verifyButton: string;
   };
+  article: {
+    metaTitle: string;
+    metaDescription: string;
+    metaKeywords: string;
+    title: string;
+    subtitle: string;
+    intro: string;
+    sections: {
+      id: string;
+      heading: string;
+      description: string;
+      bullets?: string[];
+    }[];
+    conclusion: string;
+    ctaLabel: string;
+    ctaLink: string;
+  };
   loadingLinkModal: {
     title: string;
     message: string;

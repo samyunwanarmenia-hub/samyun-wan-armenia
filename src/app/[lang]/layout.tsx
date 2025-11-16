@@ -6,7 +6,9 @@ import { generateWebSiteStructuredData } from '@/utils/structuredDataUtils';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { generateBreadcrumbSchema } from '@/utils/schemaUtils';
 import LayoutClientProvider from '@/components/LayoutClientProvider';
+import HtmlLangSetter from '@/components/HtmlLangSetter';
 import { SITE_URL } from '@/config/siteConfig';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 
 interface LangLayoutProps {
   children: ReactNode;
@@ -14,7 +16,7 @@ interface LangLayoutProps {
 }
 
 export async function generateMetadata({ params }: LangLayoutProps): Promise<Metadata> {
-  const lang = params.lang as keyof typeof translations;
+  const lang = resolveLang(params.lang);
   const t = translations[lang] || translations.hy;
 
   const pageTitle = `${t.hero.title} - ${t.hero.subtitle} | ${t.hero.seo_title_addon}`;
@@ -51,10 +53,10 @@ export async function generateStaticParams() {
 }
 
 const LangLayout = ({ children, params }: LangLayoutProps) => {
-  const lang = params.lang as keyof typeof translations;
+  const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang] || translations.hy;
   const webSiteStructuredData = generateWebSiteStructuredData(SITE_URL, t);
-  
+
   // Breadcrumb schema for better navigation in search results
   const breadcrumbData = generateBreadcrumbSchema([
     { name: t.hero.title, url: `${SITE_URL}/${lang}` },
@@ -62,6 +64,7 @@ const LangLayout = ({ children, params }: LangLayoutProps) => {
 
   return (
     <>
+      <HtmlLangSetter lang={lang} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteStructuredData) }}

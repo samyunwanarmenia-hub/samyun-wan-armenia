@@ -113,6 +113,12 @@ export const generateWebSiteStructuredData = (baseUrl: string, t: TranslationKey
     '@type': 'WebSite',
     url: baseUrl,
     name: t.hero.title,
+    description: t.hero.subtitle,
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${baseUrl}/blogs?search={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
   };
 };
 

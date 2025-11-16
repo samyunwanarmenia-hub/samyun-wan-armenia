@@ -1,4 +1,5 @@
-import { LEGAL_COPY, type SupportedLang, buildPageMetadata } from '@/utils/pageMetadata';
+import { LEGAL_COPY, buildPageMetadata } from '@/utils/pageMetadata';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 import LegalPageLayout from '@/components/LegalPageLayout';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
@@ -11,7 +12,7 @@ const PLACEHOLDER_NOTICE: Record<SupportedLang, string> = {
 };
 
 const PrivacyPage = ({ params }: { params: { lang: string } }) => {
-  const lang = (params.lang as SupportedLang) || 'hy';
+  const lang: SupportedLang = resolveLang(params.lang);
   const copy = LEGAL_COPY[lang] ?? LEGAL_COPY.hy;
   const notice = PLACEHOLDER_NOTICE[lang] ?? PLACEHOLDER_NOTICE.hy;
 

@@ -5,10 +5,11 @@ import { productShowcaseData } from '@/data/productShowcaseData';
 import { ProductsLayoutProps } from '@/types/global';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { SITE_URL } from '@/config/siteConfig';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const lang = params.lang as keyof typeof translations;
-  const t = translations[lang] || translations.hy;
+  const lang: SupportedLang = resolveLang(params.lang);
+  const t = translations[lang];
 
   const pageTitle = `${t.hero.title} - ${t.productShowcase.weightGainLabel} & ${t.productShowcase.weightLossLabel} | ${t.nav.products}`;
   const pageDescription = `${t.productShowcase.weightGainDesc} | ${t.productShowcase.weightLossDesc} | ${t.hero.tagline} ${t.authenticity.howToDistinguish}`.trim();
@@ -40,8 +41,8 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 }
 
 const ProductsLayout = ({ children, params }: ProductsLayoutProps) => {
-  const lang = params.lang as keyof typeof translations;
-  const t = translations[lang] || translations.hy;
+  const lang: SupportedLang = resolveLang(params.lang);
+  const t = translations[lang];
 
   const productStructuredData = productShowcaseData.map(product =>
     generateProductStructuredData(t, product, lang, SITE_URL),

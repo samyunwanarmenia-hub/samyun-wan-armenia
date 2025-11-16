@@ -1,19 +1,13 @@
-import type { Metadata } from 'next';
-import { statsData } from '@/data/stats';
-import HeroSection from '@/components/HeroSection';
-import ProductShowcaseSection from '@/components/ProductShowcaseSection';
-import LayoutClientProvider from '@/components/LayoutClientProvider';
+import type { Metadata } from "next";
+import { buildPageMetadata } from "@/utils/pageMetadata";
 
-export const metadata: Metadata = {
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    },
-  },
-};
+import { statsData } from "@/data/stats";
+import HeroSection from "@/components/HeroSection";
+import ProductShowcaseSection from "@/components/ProductShowcaseSection";
+import LayoutClientProvider from "@/components/LayoutClientProvider";
+
+export const generateMetadata = async (): Promise<Metadata> =>
+  buildPageMetadata("hy", "home", { canonicalPath: "/", type: "website" });
 
 const RootPage = () => {
   return (

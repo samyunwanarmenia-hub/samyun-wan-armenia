@@ -4,10 +4,11 @@ import { FaqLayoutProps } from '@/types/global';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { SITE_URL } from '@/config/siteConfig';
 import { generateFaqStructuredData } from '@/utils/structuredDataUtils';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
-  const lang = params.lang as keyof typeof translations;
-  const t = translations[lang] || translations.hy;
+  const lang: SupportedLang = resolveLang(params.lang);
+  const t = translations[lang];
 
   const pageTitle = `${t.hero.title} - ${t.nav.faq}`;
   const pageDescription = t.faq.q1;
@@ -34,8 +35,8 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 }
 
 const FaqLayout = ({ children, params }: FaqLayoutProps) => {
-  const lang = params.lang as keyof typeof translations;
-  const t = translations[lang] || translations.hy;
+  const lang: SupportedLang = resolveLang(params.lang);
+  const t = translations[lang];
   const faqStructuredData = generateFaqStructuredData(t, lang);
 
   return (
