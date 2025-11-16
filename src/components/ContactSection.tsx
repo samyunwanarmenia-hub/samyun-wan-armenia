@@ -93,6 +93,25 @@ const ContactSection = () => {
             {t.contact.whatsappButton}
           </CallToActionButton>
         </motion.div>
+
+        <div className="mt-10 flex flex-col items-center gap-3">
+          <p className="text-center text-base lg:text-lg font-semibold text-gray-900 dark:text-gray-50">
+            {t.hero.facebookFollow}
+          </p>
+          <div className="w-full max-w-[500px]">
+            <iframe
+              src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fsamyunwanarmenia%2Fposts%2Fpfbid02kG1Bz8B3ywzAe5XTfGRFmRtiReAcAPUnq4nw1sCUHg86NaTqAsMaKi2zaTeLb2ubl&show_text=true&width=500"
+              width="500"
+              height="507"
+              style={{ border: 'none', overflow: 'hidden' }}
+              scrolling="no"
+              frameBorder="0"
+              allowFullScreen
+              allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+              title="Samyun Wan Armenia Facebook post"
+            />
+          </div>
+        </div>
       </div>
     </motion.section>
   );
