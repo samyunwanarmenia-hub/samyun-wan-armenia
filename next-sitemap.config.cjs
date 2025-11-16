@@ -8,13 +8,59 @@ const LOCALE_CODES = {
 };
 const DEFAULT_LANG = 'hy';
 
+const SITE_PAGES = [
+  { path: '', changefreq: 'weekly', priority: 0.9 },
+  { path: 'about', changefreq: 'monthly', priority: 0.8 },
+  { path: 'benefits', changefreq: 'monthly', priority: 0.8 },
+  { path: 'products', changefreq: 'weekly', priority: 0.8 },
+  { path: 'testimonials', changefreq: 'monthly', priority: 0.7 },
+  { path: 'faq', changefreq: 'monthly', priority: 0.7 },
+  { path: 'contact', changefreq: 'weekly', priority: 0.7 },
+  { path: 'track-order', changefreq: 'weekly', priority: 0.7 },
+  { path: 'how-to-identify-fake', changefreq: 'weekly', priority: 0.9 },
+  { path: 'verify/qr', changefreq: 'monthly', priority: 0.7 },
+  { path: 'privacy', changefreq: 'monthly', priority: 0.4 },
+  { path: 'terms', changefreq: 'monthly', priority: 0.4 },
+];
+
 const normalizeUrl = url => url.replace(/\/+$/, '');
 
-const buildHref = (baseUrl, lang, pathSegments) => {
-  const parts = [lang, ...pathSegments].filter(Boolean);
-  const joined = parts.join('/');
-  return `${baseUrl}/${joined}`.replace(/\/+$/, '');
+const formatSegments = segments =>
+  segments
+    .flatMap(segment => segment.split('/'))
+    .map(segment => segment.replace(/^\/+|\/+$/g, ''))
+    .filter(Boolean);
+
+const buildLocalizedUrl = (baseUrl, lang, segments) => {
+  const sanitizedSegments = formatSegments(segments);
+  const path = sanitizedSegments.length ? `/${sanitizedSegments.join('/')}` : '';
+  return `${baseUrl}/${lang}${path}`.replace(/\/+$/, '');
 };
+
+const buildAlternateRefs = (baseUrl, segments) => {
+  const sanitizedSegments = formatSegments(segments);
+
+  const refs = SUPPORTED_LANGS.map(lang => ({
+    hreflang: LOCALE_CODES[lang],
+    href: buildLocalizedUrl(baseUrl, lang, sanitizedSegments),
+    hrefIsAbsolute: true,
+  }));
+
+  refs.push({
+    hreflang: 'x-default',
+    href: buildLocalizedUrl(baseUrl, DEFAULT_LANG, sanitizedSegments),
+    hrefIsAbsolute: true,
+  });
+
+  return refs;
+};
+
+const createLocalizedEntry = (baseUrl, lang, page) => ({
+  loc: buildLocalizedUrl(baseUrl, lang, [page.path]),
+  changefreq: page.changefreq,
+  priority: page.priority,
+  alternateRefs: buildAlternateRefs(baseUrl, [page.path]),
+});
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
@@ -24,32 +70,16 @@ module.exports = {
   priority: 0.7,
   sitemapSize: 5000,
   outDir: './public',
-  transform: async (config, path) => {
-    const normalizedBaseUrl = normalizeUrl(config.siteUrl);
-    const cleanedPath = path.replace(/^\/+|\/+$/g, '');
-    const segments = cleanedPath.split('/').filter(Boolean);
-    const hasLangPrefix = SUPPORTED_LANGS.includes(segments[0]);
-    const pathSegments = hasLangPrefix ? segments.slice(1) : segments;
-    const pathForLoc = path.startsWith('/') ? path : `/${path}`;
-    const loc = `${normalizedBaseUrl}${pathForLoc}`;
+  additionalPaths: async config => {
+    const baseUrl = normalizeUrl(config.siteUrl);
+    const entries = [];
 
-    const alternateRefs = SUPPORTED_LANGS.map(lang => ({
-      hreflang: LOCALE_CODES[lang],
-      href: buildHref(normalizedBaseUrl, lang, pathSegments),
-    }));
-
-    alternateRefs.push({
-      hreflang: 'x-default',
-      href: buildHref(normalizedBaseUrl, DEFAULT_LANG, pathSegments),
+    SITE_PAGES.forEach(page => {
+      SUPPORTED_LANGS.forEach(lang => {
+        entries.push(createLocalizedEntry(baseUrl, lang, page));
+      });
     });
 
-    const basePriority = path === '/' || cleanedPath === '' ? 1 : 0.8;
-
-    return {
-      loc,
-      changefreq: 'weekly',
-      priority: basePriority,
-      alternateRefs,
-    };
+    return entries;
   },
 };
