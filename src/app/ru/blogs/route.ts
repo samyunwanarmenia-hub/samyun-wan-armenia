@@ -1,11 +1,13 @@
 import { promises as fs } from 'fs';
+import path from 'path';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-static';
 
+const htmlPath = path.join(process.cwd(), 'src', 'app', 'ru', 'blogs', 'page.html');
+
 async function readHtml(): Promise<string> {
-  const fileUrl = new URL('./page.html', import.meta.url);
-  return fs.readFile(fileUrl, 'utf8');
+  return fs.readFile(htmlPath, 'utf8');
 }
 
 export async function GET() {
