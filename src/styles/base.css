@@ -53,3 +53,43 @@ body {
   background-color: theme('colors.primary.500');
   color: theme('colors.white');
 }
+
+/* Dark mode overrides for legacy/static blocks (e.g., blogs HTML) */
+html.dark {
+  color-scheme: dark;
+  --theme-surface: #0f172a !important;
+  --theme-soft: #0c1424 !important;
+  --theme-text: #e2e8f0 !important;
+  --theme-muted: #94a3b8 !important;
+  --theme-border: rgba(148, 163, 184, 0.28) !important;
+  --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.35) !important;
+}
+
+html.dark body {
+  background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.04), transparent 26%),
+    radial-gradient(circle at 90% 10%, rgba(108, 144, 108, 0.06), transparent 28%),
+    #0b1220;
+  color: var(--theme-text);
+}
+
+html.dark .breadcrumbs,
+html.dark .article,
+html.dark .metric-pill,
+html.dark .footer,
+html.dark .header,
+html.dark .card,
+html.dark .btn,
+html.dark .badge {
+  background-color: var(--theme-surface);
+  color: var(--theme-text);
+  border-color: var(--theme-border);
+  box-shadow: var(--shadow-soft);
+}
+
+html.dark a {
+  color: #9fc49f;
+}
+
+html.dark a:hover {
+  color: #b8d4b8;
+}
