@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   return generateCommonMetadata({
     lang,
     t,
-    pagePath: 'https://qr-wan.netlify.app/',
+    pagePath: 'verify/qr', // почему исправлено: удаляем внешний домен, чтобы canonical/hreflang строились на samyun-wan.life
     title: pageTitle,
     description: pageDescription,
     keywords: pageKeywords,

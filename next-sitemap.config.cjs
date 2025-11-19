@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 
-const DEFAULT_SITE_URL = 'https://samyunwanarmenia.netlify.app';
+const DEFAULT_SITE_URL = 'https://samyun-wan.life';
 
 const BLOG_POSTS = require('./src/data/blogs/blogPosts.json');
 
@@ -116,6 +116,14 @@ module.exports = {
 
     // Homepage
     entries.push(createRootEntry(baseUrl));
+
+    // Static public /blogs (non-i18n) page
+    entries.push({
+      loc: `${baseUrl}/blogs`,
+      changefreq: 'weekly',
+      priority: 0.9,
+      alternateRefs: buildAlternateRefs(baseUrl, ['blogs']),
+    });
 
     // All pages for all languages
     SITE_PAGES.forEach(page => {

@@ -294,7 +294,7 @@ export const hy: TranslationKeys = {
     conclusion:
       'Այս մոտեցումը թույլ է տալիս ավելացնել ոչ միայն քաշը, այլև առողջ լինել՝ վստահորեն ընտրելով օրիգինալ Samyun Wan-ը։',
     ctaLabel: 'Պատվիրեք Samyun Wan սերտիֆիկատով',
-    ctaLink: 'https://samyunwanarmenia.netlify.app/hy',
+    ctaLink: 'https://samyun-wan.life/hy',
   },
   loadingLinkModal: {
     title: 'Հղումը բեռնվում է',

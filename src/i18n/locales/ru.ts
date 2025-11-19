@@ -280,7 +280,7 @@ export const ru: TranslationKeys = {
     ],
     conclusion: 'Такой подход позволяет уверенно выбирать оригинал и добиваться красивого, здорового тела.',
     ctaLabel: 'Купите оригинальный Samyun Wan с сертификатом',
-    ctaLink: 'https://samyunwanarmenia.netlify.app/ru',
+    ctaLink: 'https://samyun-wan.life/ru',
   },
   loadingLinkModal: {
     title: 'Загрузка ссылки',

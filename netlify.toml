@@ -17,11 +17,17 @@
 # --- SEO Canonical Redirects ---
 [[redirects]]
   from = "http://samyunwanarmenia.netlify.app/*"
-  to = "https://samyunwanarmenia.netlify.app/:splat"
+  to = "https://samyun-wan.life/:splat"
   status = 301
   force = true
 
-# TODO: If you add a custom domain, add an explicit canonical redirect from netlify.app to primary domain
+[[redirects]]
+  from = "https://samyunwanarmenia.netlify.app/*"
+  to = "https://samyun-wan.life/:splat"
+  status = 301
+  force = true
+
+# Keep Netlify preview assets working while forcing canonical domain
 
 [[redirects]]
   from = "/_next/*"

@@ -274,7 +274,7 @@ export const en: TranslationKeys = {
     ],
     conclusion: 'This holistic approach lets you gain weight confidently, trusting only certified Samyun Wan while keeping your health on track.',
     ctaLabel: 'Order certified Samyun Wan today',
-    ctaLink: 'https://samyunwanarmenia.netlify.app/en',
+    ctaLink: 'https://samyun-wan.life/en',
   },
   loadingLinkModal: {
     title: 'Loading Link',

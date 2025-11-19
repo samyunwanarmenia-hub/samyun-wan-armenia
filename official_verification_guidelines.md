@@ -1,40 +1,31 @@
 # Official Verification Guidelines for Samyun Wan Armenia
 
-## 1. Google Search Console (GSC) Verification
-- Go to https://search.google.com/search-console/
-- Click ‘Add Property’ > enter `https://samyunwanarmenia.netlify.app/` as the canonical URL
-- Choose verification method:
-  - **HTML File**: If possible, upload the verification HTML (googleae71d8a26990efe6.html is already set).
-  - **Meta Tag**: Check `<meta name="google-site-verification">` is present (already in Next.js layout/meta).
-- Once verified, go to ‘Sitemaps’ > submit `/sitemap.xml`
-- Use the URL Inspection tool to request indexing for primary and new legal pages after deployment
+## 1) Google Search Console (GSC)
+- Go to https://search.google.com/search-console/ and add a URL-prefix property for `https://samyun-wan.life/` (custom domain is now primary).
+- Verify via **HTML file** (googleae71d8a26990efe6.html is already present) or **meta tag** (`google-site-verification` is set in layout/meta).
+- Submit `/sitemap.xml` in **Sitemaps** once deployed.
+- Use **URL Inspection → Request indexing** for homepage, products, and new legal pages after each release.
 
-## 2. Google Business Profile/Map Listing (Local SEO)
-- Visit https://www.google.com/business/
-- Click ‘Manage now’ and search for your business/location
-- If not found, ‘Add your business to Google’
-- Fill out business name: **Samyun Wan Armenia**
-- Use official phone and address (match site footer/contact exactly)
-- Add your website URL: `https://samyunwanarmenia.netlify.app/`
-- Choose relevant category (e.g., Health & Wellness Shop, Supplement Store)
-- Complete Google’s verification (mail, SMS, or video call as prompted)
-- Add business hours and additional info for authority
+## 2) Google Business Profile (Local SEO)
+- Open https://www.google.com/business/ → “Manage now”.
+- Add/claim **Samyun Wan Armenia** with the same phone/address as the site footer/contact.
+- Website URL: `https://samyun-wan.life/`.
+- Pick the best category (e.g., Health & Wellness Shop / Supplement Store).
+- Complete Google verification (mail/SMS/video) and fill business hours and photos.
 
-## 3. How to Report Fake or Impersonator Sites
-- Use the templates in `IMPOSTOR_ACTION_TEMPLATES.txt`
-- Collect links, screenshots, and proof of official status (business registration, trademark, photos of packaging, official invoices)
-- Report via Google Legal, Facebook/Instagram report, Telegram abuse, TikTok report, and relevant complaint forms
-- Always reference the official site: https://samyunwanarmenia.netlify.app/
+## 3) Report Fake or Impersonator Pages
+- Use the templates in `IMPOSTOR_ACTION_TEMPLATES.txt`.
+- Collect proof (screenshots, registry docs, packaging photos, invoices).
+- File reports via Google Legal, Facebook/Instagram, Telegram abuse, TikTok, and other complaint forms.
+- Always reference the official site: https://samyun-wan.life/.
 
-## 4. Ongoing Verification & Best Practices
-- Ensure meta title always says: “Samyun Wan Armenia – Official Distributor”
-- The only verified socials should be listed in both schema.org JSON-LD and in the site footer
-- Sitemaps and robots.txt should always be available from `/`
-- For each major site change (domain, social, logo), update verification details everywhere
-- Keep proof-of-ownership docs ready for new batches of complaints or if your listing is disputed
-- Run Google Rich Results Test and Search Console enhancements every quarter
+## 4) Ongoing Best Practices
+- Keep title consistent: “Samyun Wan Armenia — Official Distributor”.
+- List only verified socials in schema.org JSON-LD and in the site footer.
+- Ensure `/robots.txt` and `/sitemap.xml` stay live after each deploy.
+- Update verification everywhere when domain/social/logo changes.
+- Keep proof-of-ownership docs handy for disputes.
+- Run Google Rich Results Test and Search Console Enhancements quarterly.
 
 ---
-**Questions?**
-Refer to `SEO-IMPROVEMENTS.md` for the latest code/SEO structure
-or contact your developer/SEO lead for schema and verification changes.
+Questions? See `docs/seo-roadmap.md` for current SEO tasks and structure.

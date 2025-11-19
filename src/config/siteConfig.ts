@@ -1,4 +1,4 @@
-export const DEFAULT_SITE_URL = 'https://samyunwanarmenia.netlify.app';
+export const DEFAULT_SITE_URL = 'https://samyun-wan.life';
 
 const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 const normalizedSiteUrl = rawSiteUrl ? rawSiteUrl.replace(/\/+$/, '') : undefined;
