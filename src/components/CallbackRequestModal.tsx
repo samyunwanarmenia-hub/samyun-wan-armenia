@@ -9,7 +9,7 @@ import { sendTelegramMessage } from '@/utils/telegramApi';
 import { showSuccess, showError } from '@/utils/toast';
 import { motion } from 'framer-motion'; // Import motion
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
-import { trackGAEvent } from '@/utils/analytics';
+import { trackGAEvent, trackGoogleAdsConversion } from '@/utils/analytics';
 
 const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onClose, t, currentLang }) => {
   const [name, setName] = useState<string>('');
@@ -67,6 +67,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
         category: 'Callback_Request',
         label: `${productTypeTranslated} - ${purposeTranslated}`,
       });
+      trackGoogleAdsConversion({ label: 'Submit_CallbackRequest_Success' });
       if (typeof window !== 'undefined' && window.ym) {
         window.ym(103962073, 'reachGoal', 'Submit_CallbackRequest_Success', {
           category: 'Callback_Request',
@@ -83,6 +84,7 @@ const CallbackRequestModal: React.FC<CallbackRequestModalProps> = ({ isOpen, onC
         category: 'Callback_Request',
         label: error instanceof Error ? error.message : 'Unknown Error',
       });
+      trackGoogleAdsConversion({ label: 'Submit_CallbackRequest_Failure' });
       if (typeof window !== 'undefined' && window.ym) {
         window.ym(103962073, 'reachGoal', 'Submit_CallbackRequest_Failure', {
           category: 'Callback_Request',

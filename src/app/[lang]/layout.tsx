@@ -2,7 +2,6 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 
 import { translations } from '@/i18n/translations';
-import { generateWebSiteStructuredData } from '@/utils/structuredDataUtils';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { generateBreadcrumbSchema } from '@/utils/schemaUtils';
 import LayoutClientProvider from '@/components/LayoutClientProvider';
@@ -55,9 +54,32 @@ export async function generateStaticParams() {
 const LangLayout = ({ children, params }: LangLayoutProps) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang] || translations.hy;
-  const webSiteStructuredData = generateWebSiteStructuredData(SITE_URL, t);
 
-  // Breadcrumb schema for better navigation in search results
+  const logoUrl = `${SITE_URL}/optimized/logo.png`;
+
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Samyun Wan Armenia',
+    url: SITE_URL,
+    logo: logoUrl,
+    sameAs: [
+      'https://instagram.com/samyunwanarmenia',
+      'https://facebook.com/samyunwanarmenia',
+      'https://t.me/samyunwanarmenia',
+      'https://www.tiktok.com/@samyunwanarmenia',
+      'https://www.youtube.com/@samyunwanarmenia',
+    ],
+  };
+
+  const webSiteStructuredData = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    url: SITE_URL,
+    name: t.hero.title,
+    inLanguage: lang === 'hy' ? 'hy-AM' : lang === 'ru' ? 'ru-RU' : 'en-US',
+  };
+
   const breadcrumbData = generateBreadcrumbSchema([
     { name: t.hero.title, url: `${SITE_URL}/${lang}` },
   ]);
@@ -65,6 +87,7 @@ const LangLayout = ({ children, params }: LangLayoutProps) => {
   return (
     <>
       <HtmlLangSetter lang={lang} />
+
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteStructuredData) }}
@@ -73,7 +96,14 @@ const LangLayout = ({ children, params }: LangLayoutProps) => {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
       />
-      <LayoutClientProvider initialLang={params.lang}>{children}</LayoutClientProvider>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+
+      <LayoutClientProvider initialLang={params.lang}>
+        {children}
+      </LayoutClientProvider>
     </>
   );
 };

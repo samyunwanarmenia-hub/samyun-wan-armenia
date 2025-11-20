@@ -1,23 +1,26 @@
 import { TranslationKeys, FaqQuestionKey, FaqAnswerKey, ProductShowcaseItem, Testimonial } from '@/types/global';
 import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
 
+const LOGO_URL = `${SITE_URL}/optimized/logo.png`;
+const SOCIAL_LINKS = [
+  'https://instagram.com/samyunwanarmenia',
+  'https://facebook.com/samyunwanarmenia',
+  'https://t.me/samyunwanarmenia',
+  'https://www.tiktok.com/@samyunwanarmenia',
+  'https://www.youtube.com/@samyunwanarmenia',
+  'https://wa.me/37495653666',
+  'https://wa.me/37496653666',
+  'https://m.me/samyunwanarmenia',
+];
+
 export const generateOrganizationStructuredData = (t: TranslationKeys, currentLang: string) => {
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: 'Samyun Wan Armenia',
     url: SITE_URL,
-    logo: `${SITE_URL}/optimized/og-image.jpg`,
-    sameAs: [
-      'https://facebook.com/samyunwanarmenia',
-      'https://instagram.com/samyunwanarmenia',
-      'https://tiktok.com/@samyunwanarmenia',
-      'https://youtube.com/@samyunwanarmenia',
-      'https://t.me/samyunwanarmenia',
-      'https://wa.me/37495653666',
-      'https://wa.me/37496653666',
-      'https://m.me/samyunwanarmenia',
-    ],
+    logo: LOGO_URL,
+    sameAs: SOCIAL_LINKS,
     contactPoint: [
       {
         '@type': 'ContactPoint',
@@ -114,11 +117,6 @@ export const generateWebSiteStructuredData = (baseUrl: string, t: TranslationKey
     url: baseUrl,
     name: t.hero.title,
     description: t.hero.subtitle,
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: `${baseUrl}/blogs?search={search_term_string}`,
-      'query-input': 'required name=search_term_string',
-    },
   };
 };
 

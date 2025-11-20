@@ -20,6 +20,7 @@ import { generateProductSchema, generateLocalBusinessSchema } from "@/utils/sche
 import { baseTestimonials } from "@/data/testimonials";
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
+const GOOGLE_ADS_ID = 'AW-17742658374';
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -28,6 +29,7 @@ const inter = Inter({
 });
 
 const OG_IMAGE = `${SITE_URL}/optimized/og-image.jpg`;
+const LOGO_URL = `${SITE_URL}/optimized/logo.png`;
 
 /* 
  RootLayout metadata must stay MINIMAL.
@@ -52,15 +54,15 @@ const organizationStructuredData = {
   name: "Samyun Wan Armenia",
   legalName: OFFICIAL_BUSINESS_NAME,
   url: SITE_URL,
-  logo: OG_IMAGE,
+  logo: LOGO_URL,
   description: `${OFFICIAL_ACTIVITY}. ${OFFICIAL_CLASSIFICATION}. ${OFFICIAL_CITY}.`,
   keywords: [OFFICIAL_ACTIVITY, OFFICIAL_CLASSIFICATION].join(", "),
   sameAs: [
-    "https://facebook.com/samyunwanarmenia",
     "https://instagram.com/samyunwanarmenia",
-    "https://tiktok.com/@samyunwanarmenia",
-    "https://youtube.com/@samyunwanarmenia",
+    "https://facebook.com/samyunwanarmenia",
     "https://t.me/samyunwanarmenia",
+    "https://www.tiktok.com/@samyunwanarmenia",
+    "https://www.youtube.com/@samyunwanarmenia",
     "https://wa.me/37495653666",
     "https://wa.me/37496653666",
     "https://m.me/samyunwanarmenia",
@@ -126,11 +128,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       </head>
 
       <body>
-        {GOOGLE_ANALYTICS_ID && (
+        {(GOOGLE_ANALYTICS_ID || GOOGLE_ADS_ID) && (
           <>
             <Script
               id="ga-tag-manager"
-              src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID}`}
+              src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID || GOOGLE_ADS_ID}`}
               strategy="afterInteractive"
             />
             <Script id="ga-init" strategy="afterInteractive">
@@ -138,10 +140,8 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){window.dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${GOOGLE_ANALYTICS_ID}', {
-                  anonymize_ip: true,
-                  send_page_view: false
-                });
+                ${GOOGLE_ANALYTICS_ID ? `gtag('config', '${GOOGLE_ANALYTICS_ID}', { anonymize_ip: true, send_page_view: false });` : ''}
+                gtag('config', '${GOOGLE_ADS_ID}');
               `}
             </Script>
           </>

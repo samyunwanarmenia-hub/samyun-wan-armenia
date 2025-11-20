@@ -1,15 +1,22 @@
 import FaqSection from '@/components/FaqSection';
 import { buildPageMetadata } from '@/utils/pageMetadata';
 import { translations } from '@/i18n/translations';
-import { generateFAQSchema } from '@/utils/schemaUtils';
+import { generateBreadcrumbSchema, generateFAQSchema } from '@/utils/schemaUtils';
+import { SITE_URL } from '@/config/siteConfig';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 import Script from 'next/script';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
   buildPageMetadata(params.lang, 'faq');
 
 const FaqPage = ({ params }: { params: { lang: string } }) => {
-  const currentLang = params.lang as keyof typeof translations;
+  const currentLang: SupportedLang = resolveLang(params.lang);
   const t = translations[currentLang] || translations.hy;
+
+  const breadcrumbData = generateBreadcrumbSchema([
+    { name: t.hero.title, url: `${SITE_URL}/${currentLang}` },
+    { name: t.nav.faq, url: `${SITE_URL}/${currentLang}/faq` },
+  ]);
 
   // Generate FAQ schema for rich snippets
   const faqData = [
@@ -26,6 +33,10 @@ const FaqPage = ({ params }: { params: { lang: string } }) => {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+      />
       <Script id="faq-schema" type="application/ld+json">
         {JSON.stringify(faqSchema)}
       </Script>

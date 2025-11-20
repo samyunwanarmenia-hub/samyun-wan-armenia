@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { MessageCircle, Phone, PhoneCall, Menu, X } from 'lucide-react';
 import { ContactModalType } from '../types/global';
 import { useLayoutContext } from '@/context/LayoutContext';
-import { trackGAEvent } from '@/utils/analytics';
+import { trackGAEvent, trackGoogleAdsConversion } from '@/utils/analytics';
 
 interface FloatingActionButtonProps {
   openContactModal: (type: ContactModalType) => void;
@@ -25,6 +25,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       category: 'FAB_Interaction',
       label: isOpen ? 'Closed' : 'Opened',
     });
+    trackGoogleAdsConversion({ label: isOpen ? 'Close_FAB_Menu' : 'Open_FAB_Menu' });
     if (typeof window !== 'undefined' && window.ym) {
       window.ym(103962073, 'reachGoal', isOpen ? 'Close_FAB_Menu' : 'Open_FAB_Menu', {
         category: 'FAB_Interaction',
@@ -43,6 +44,7 @@ const FloatingActionButton = ({ openContactModal, openCallbackRequestModal }: Fl
       category: 'FAB_Interaction',
       label: gaEventLabel,
     });
+    trackGoogleAdsConversion({ label: gaEventLabel });
     if (typeof window !== 'undefined' && window.ym) {
       window.ym(103962073, 'reachGoal', 'Click_FAB_MenuItem', {
         category: 'FAB_Interaction',

@@ -14,7 +14,7 @@ Notice the holographic stickers, embossed logos, and color gradients. Originals 
 
 ## Step 2 – Scan the QR code
 
-Use a secure scanner and confirm the URL shows `https://qr-wan.netlify.app`. If the code redirects to other domains or adds extra query parameters, decline the offer.
+Use a secure scanner and confirm the URL shows `https://samyun-wan.life/verify/qr`. If the code redirects to other domains or adds extra query parameters, decline the offer.
 
 ## Step 3 – Verify the seller
 

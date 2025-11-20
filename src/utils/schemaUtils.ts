@@ -1,12 +1,24 @@
 import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
 import type { Testimonial } from '@/types/global';
 
+const LOGO_URL = `${SITE_URL}/optimized/logo.png`;
+const SOCIAL_LINKS = [
+  'https://instagram.com/samyunwanarmenia',
+  'https://facebook.com/samyunwanarmenia',
+  'https://t.me/samyunwanarmenia',
+  'https://www.tiktok.com/@samyunwanarmenia',
+  'https://www.youtube.com/@samyunwanarmenia',
+  'https://wa.me/37495653666',
+  'https://wa.me/37496653666',
+  'https://m.me/samyunwanarmenia',
+];
+
 // Product Schema with Reviews and AggregateRating
 export const generateProductSchema = (product: {
   name: string;
   description: string;
   image: string;
-  price: number;
+  price: number | string;
   priceCurrency?: string;
   reviews?: Testimonial[];
 }) => {
@@ -28,7 +40,7 @@ export const generateProductSchema = (product: {
       '@type': 'Offer',
       url: SITE_URL,
       priceCurrency: product.priceCurrency || 'AMD',
-      price: product.price,
+      price: product.price.toString(),
       priceValidUntil,
       availability: 'https://schema.org/InStock',
       seller: {
@@ -36,48 +48,6 @@ export const generateProductSchema = (product: {
         name: 'Samyun Wan Armenia',
       },
     },
-  };
-
-  // Always add aggregateRating - required by Google
-  let aggregateRatingValue = '4.9';
-  let reviewCount = 9;
-
-  // Add reviews if available
-  if (product.reviews && product.reviews.length > 0) {
-    const validReviews = product.reviews.slice(0, 10).filter(r => r.rating >= 4);
-    
-    if (validReviews.length > 0) {
-      // Calculate aggregate rating from reviews
-      const totalRating = validReviews.reduce((sum, r) => sum + r.rating, 0);
-      aggregateRatingValue = (totalRating / validReviews.length).toFixed(1);
-      reviewCount = validReviews.length;
-
-      // Add individual reviews
-      schema.review = validReviews.map((review, index) => ({
-        '@type': 'Review',
-        reviewRating: {
-          '@type': 'Rating',
-          ratingValue: review.rating.toString(),
-          bestRating: '5',
-          worstRating: '1',
-        },
-        author: {
-          '@type': 'Person',
-          name: review.name,
-        },
-        reviewBody: review.textRu || review.textHy || review.textEn,
-        datePublished: new Date(Date.now() - index * 86400000).toISOString().split('T')[0],
-      }));
-    }
-  }
-
-  // Always add aggregateRating (required by Google)
-  schema.aggregateRating = {
-    '@type': 'AggregateRating',
-    ratingValue: aggregateRatingValue,
-    reviewCount: reviewCount.toString(),
-    bestRating: '5',
-    worstRating: '1',
   };
 
   return schema;
@@ -119,7 +89,7 @@ export const generateLocalBusinessSchema = () => {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Samyun Wan Armenia',
-    image: `${SITE_URL}/optimized/og-image.jpg`,
+    image: LOGO_URL,
     '@id': SITE_URL,
     url: SITE_URL,
     telephone: PRIMARY_PHONE,
@@ -141,10 +111,7 @@ export const generateLocalBusinessSchema = () => {
       closes: '22:00',
     },
     sameAs: [
-      'https://facebook.com/samyunwanarmenia',
-      'https://instagram.com/samyunwanarmenia',
-      'https://tiktok.com/@samyunwanarmenia',
-      'https://t.me/samyunwanarmenia',
+      ...SOCIAL_LINKS,
       `https://wa.me/${PRIMARY_PHONE.replace(/\+/g, '')}`,
       `https://wa.me/${SECONDARY_PHONE.replace(/\+/g, '')}`,
     ],
@@ -197,14 +164,14 @@ export const generateArticleSchema = (options: {
     '@type': 'Organization',
     name: options.authorName,
   },
-  publisher: {
-    '@type': 'Organization',
-    name: options.publisherName,
-    logo: {
-      '@type': 'ImageObject',
-      url: options.image,
+    publisher: {
+      '@type': 'Organization',
+      name: options.publisherName,
+      logo: {
+        '@type': 'ImageObject',
+        url: LOGO_URL,
+      },
     },
-  },
   datePublished: options.datePublished,
   dateModified: options.dateModified ?? options.datePublished,
   inLanguage: options.inLanguage,
@@ -234,14 +201,14 @@ export const generateBlogPostingSchema = (options: {
     '@type': 'Person',
     name: options.authorName,
   },
-  publisher: {
-    '@type': 'Organization',
-    name: options.publisherName,
-    logo: {
-      '@type': 'ImageObject',
-      url: options.image,
+    publisher: {
+      '@type': 'Organization',
+      name: options.publisherName,
+      logo: {
+        '@type': 'ImageObject',
+        url: LOGO_URL,
+      },
     },
-  },
   datePublished: options.datePublished,
   inLanguage: options.inLanguage,
   keywords: options.keywords,

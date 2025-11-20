@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ExplosionEffect from './ExplosionEffect';
 import PixelExplosion from './PixelExplosion';
 import { Icon, AnalyticsEvent } from '../types/global';
-import { trackGAEvent } from '@/utils/analytics';
+import { trackGAEvent, trackGoogleAdsConversion } from '@/utils/analytics';
 
 interface CallToActionButtonProps {
   children: React.ReactNode;
@@ -52,9 +52,14 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
     }
     
     if (gaEvent) {
+      const label = gaEvent.label || (typeof children === 'string' ? children : undefined);
       trackGAEvent({
         ...gaEvent,
-        label: gaEvent.label || (typeof children === 'string' ? children : undefined),
+        label,
+      });
+      // Ads conversion for key CTA actions
+      trackGoogleAdsConversion({
+        label: gaEvent.action,
       });
     }
 

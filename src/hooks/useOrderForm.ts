@@ -5,6 +5,7 @@ import { TranslationKeys, ProductShowcaseItem } from '@/types/global';
 import { productShowcaseData } from '@/data/productShowcaseData';
 import { sendTelegramMessage } from '@/utils/telegramApi';
 import { showSuccess, showError } from '@/utils/toast';
+import { trackGoogleAdsConversion } from '@/utils/analytics';
 
 interface UseOrderFormProps {
   t: TranslationKeys;
@@ -100,6 +101,11 @@ export const useOrderForm = ({ t, currentLang, initialSelectedProductKey, onClos
       setPhone('');
       setSelectedProducts([]);
       onClose();
+
+      // Google Ads conversion for successful order submission
+      const sanitizedPhone = phone.replace(/[^\d]/g, '');
+      const transactionId = `order_${Date.now()}_${sanitizedPhone.slice(-4)}`;
+      trackGoogleAdsConversion({ value: totalPrice, currency: 'AMD', transactionId });
     } catch (error: unknown) {
       console.error("Error submitting order:", error);
       showError(error instanceof Error ? error.message : "Failed to send order. Please try again.");
