@@ -34,7 +34,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
       maxWidth="max-w-xl" // Adjusted max-width for a single column
     >
       <motion.div 
-        className="flex flex-col items-center text-center gap-6 mt-5" // Single column flex layout
+        className="flex flex-col items-center text-center gap-6 mt-5 bg-gradient-to-b from-slate-50 via-white to-slate-100 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 rounded-2xl p-4 sm:p-6"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
@@ -48,7 +48,7 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
           hoverShadow="none"
         >
           <div
-            className="w-full h-auto rounded-xl shadow-lg border border-gray-300 dark:border-gray-600 mb-3 overflow-hidden"
+            className="w-full h-auto rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 mb-3 overflow-hidden bg-white dark:bg-gray-800"
           >
             <OptimizedImage 
               src="/images/samyun-arm-original-whey-certificate.jpg"
@@ -58,14 +58,14 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
               sizes="(max-width: 768px) 90vw, 400px"
             />
           </div>
-          <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed mb-4">
+          <p className="text-gray-800 dark:text-gray-200 text-base leading-relaxed mb-4">
             {t.authenticity.certificateDesc}
           </p>
         </InteractiveDiv>
 
         {/* QR Code Block */}
         <InteractiveDiv
-          className="p-4 bg-white dark:bg-gray-800 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-xs sm:max-w-sm lg:max-w-md mx-auto text-center"
+          className="p-4 bg-gradient-to-br from-white via-slate-50 to-slate-100 dark:from-gray-800 dark:via-gray-800 dark:to-gray-900 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700 max-w-xs sm:max-w-sm lg:max-w-md mx-auto text-center"
           variants={itemVariants} // Apply itemVariants for animation
           hoverY={-5}
           hoverShadow="0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)"

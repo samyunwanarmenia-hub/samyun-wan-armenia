@@ -50,7 +50,7 @@ const Navbar: React.FC<NavbarProps> = () => {
       <div className="container">
         <div className="grid grid-cols-[auto,1fr,auto] items-center gap-3 md:gap-6 min-h-[68px]">
           <Link href={getHomePath()} className="flex items-center min-w-0 justify-self-start">
-            <span className="block text-[clamp(17px,3.4vw,22px)] font-bold leading-snug tracking-[-0.01em] text-primary-700 dark:text-primary-200 whitespace-normal max-w-[280px] drop-shadow-sm">
+            <span className="block text-[clamp(17px,3.4vw,22px)] font-bold leading-snug tracking-[-0.01em] text-primary-800 dark:text-primary-200 whitespace-normal max-w-[280px] drop-shadow-[0_1px_6px_rgba(255,255,255,0.7)]">
               {t.hero.title}
             </span>
           </Link>

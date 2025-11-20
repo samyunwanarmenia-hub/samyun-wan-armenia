@@ -3,6 +3,7 @@
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
+import { useEffect, useRef } from 'react';
 
 interface ModalWrapperProps {
   isOpen: boolean;
@@ -25,6 +26,37 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
   closeButtonClassName,
   maxWidth = 'max-w-sm', // Default max-width
 }) => {
+  const pushedStateRef = useRef(false);
+
+  // Allow hardware back button to close the modal (useful on mobile)
+  useEffect(() => {
+    if (!isOpen) {
+      pushedStateRef.current = false;
+      return;
+    }
+
+    const stateData = { modal: true, title };
+    window.history.pushState(stateData, '');
+    pushedStateRef.current = true;
+
+    const handlePopState = () => {
+      if (isOpen) {
+        onClose();
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      // If modal was opened and is closing via UI, remove the extra history entry
+      if (pushedStateRef.current && window.history.state?.modal) {
+        window.history.back();
+      }
+      pushedStateRef.current = false;
+    };
+  }, [isOpen, onClose, title]);
+
   const backdropVariants = {
     hidden: { opacity: 0 },
     visible: { opacity: 1 }
@@ -48,7 +80,7 @@ const ModalWrapper: React.FC<ModalWrapperProps> = ({
           onClick={onClose} // Close modal when clicking on backdrop
         >
           <motion.div
-            className={`bg-white dark:bg-gray-800 rounded-xl p-5 shadow-2xl relative w-full border border-gray-200 dark:border-gray-700 max-h-[90vh] overflow-y-auto ${maxWidth} ${className || ''}`}
+            className={`bg-white dark:bg-gray-800 rounded-2xl p-5 shadow-2xl relative w-full border border-gray-200 dark:border-gray-700 max-h-[90vh] overflow-y-auto ${maxWidth} ${className || ''}`}
             variants={modalVariants}
             initial="hidden"
             animate="visible"

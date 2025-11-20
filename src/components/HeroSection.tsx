@@ -54,13 +54,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             
             {/* Main Title (Samyun Wan Armenia) and Tagline */}
             <h1 
-              className="text-4xl lg:text-6xl font-bold mb-3 leading-tight text-gray-800 dark:text-gray-50"
+              className="text-4xl lg:text-6xl font-extrabold mb-3 leading-tight text-gray-900 dark:text-gray-50 drop-shadow-[0_2px_10px_rgba(255,255,255,0.8)]"
             >
               <SplitTextAnimation 
                 text="Samyun Wan Armenia" 
                 delay={0} // No delay for LCP element
                 duration={0.8} // Faster animation
-                className="mb-1.5 lg:justify-start" 
+                className="mb-1.5 lg:justify-start text-gray-900 dark:text-gray-50"
               />
               {/* Tagline moved here */}
               <motion.p 
