@@ -101,7 +101,7 @@ const TestimonialsSection = ({ testimonials, currentLang }: TestimonialsSectionP
                     </h5>
                     <div className="flex">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 text-yellow-400 fill-current" />
+                        <Star key={`${testimonial.id}-star-${i}`} className="w-3 h-3 text-yellow-400 fill-current" />
                       ))}
                     </div>
                   </div>

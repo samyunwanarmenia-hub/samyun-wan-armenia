@@ -17,7 +17,7 @@ const HeroStats: React.FC<HeroStatsProps> = ({ t, stats, startDelay = 0 }) => { 
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
       {stats.map((stat: StatItem, index: number) => (
         <motion.div 
-          key={index} 
+          key={stat.key} 
           className="text-center"
           variants={statItemVariants}
           initial="hidden"

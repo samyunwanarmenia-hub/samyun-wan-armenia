@@ -46,6 +46,7 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
   const tLang = translations[lang] || translations.hy;
   const translation = post.translations[lang];
   const permalink = `${SITE_URL}/${lang}/blogs/${params.slug}`;
+  const inLanguage = lang === 'hy' ? 'hy-AM' : lang === 'ru' ? 'ru-RU' : 'en-US';
   const breadcrumbData = generateBreadcrumbSchema([
     { name: tLang.hero.title, url: `${SITE_URL}/${lang}` },
     { name: tLang.article.title, url: `${SITE_URL}/${lang}/blogs` },
@@ -59,7 +60,7 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
     authorName: post.author,
     publisherName: 'Samyun Wan Armenia',
     datePublished: post.publishedAt,
-    inLanguage: lang,
+    inLanguage,
     keywords: translation.tags,
   });
 

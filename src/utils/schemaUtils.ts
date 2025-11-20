@@ -2,7 +2,7 @@ import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
 import type { Testimonial } from '@/types/global';
 
 const LOGO_URL = `${SITE_URL}/optimized/logo.png`;
-const SOCIAL_LINKS = [
+export const SOCIAL_LINKS = [
   'https://instagram.com/samyunwanarmenia',
   'https://facebook.com/samyunwanarmenia',
   'https://t.me/samyunwanarmenia',
@@ -12,6 +12,14 @@ const SOCIAL_LINKS = [
   'https://wa.me/37496653666',
   'https://m.me/samyunwanarmenia',
 ];
+
+const toAbsoluteUrl = (value?: string) => {
+  if (!value) {
+    return SITE_URL;
+  }
+
+  return value.startsWith('http') ? value : `${SITE_URL}${value}`;
+};
 
 // Product Schema with Reviews and AggregateRating
 export const generateProductSchema = (product: {
@@ -54,7 +62,13 @@ export const generateProductSchema = (product: {
 };
 
 // FAQPage Schema
-export const generateFAQSchema = (faqs: Array<{ question: string; answer: string }>) => {
+export const generateFAQSchema = (
+  faqs: Array<{ question: string; answer: string }>,
+  options?: { lang?: string; pageUrl?: string },
+) => {
+  const langCode =
+    options?.lang === 'hy' ? 'hy-AM' : options?.lang === 'ru' ? 'ru-RU' : options?.lang === 'en' ? 'en-US' : undefined;
+
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
@@ -66,6 +80,15 @@ export const generateFAQSchema = (faqs: Array<{ question: string; answer: string
         text: faq.answer,
       },
     })),
+    ...(langCode ? { inLanguage: langCode } : {}),
+    ...(options?.pageUrl
+      ? {
+          mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': toAbsoluteUrl(options.pageUrl),
+          },
+        }
+      : {}),
   };
 };
 
@@ -85,12 +108,20 @@ export const generateBreadcrumbSchema = (breadcrumbs: Array<{ name: string; url:
 
 // LocalBusiness Schema
 export const generateLocalBusinessSchema = () => {
+  const sameAs = Array.from(
+    new Set([
+      ...SOCIAL_LINKS,
+      `https://wa.me/${PRIMARY_PHONE.replace(/\+/g, '')}`,
+      `https://wa.me/${SECONDARY_PHONE.replace(/\+/g, '')}`,
+    ]),
+  );
+
   return {
     '@context': 'https://schema.org',
     '@type': 'LocalBusiness',
     name: 'Samyun Wan Armenia',
     image: LOGO_URL,
-    '@id': SITE_URL,
+    '@id': `${SITE_URL}#local-business`,
     url: SITE_URL,
     telephone: PRIMARY_PHONE,
     priceRange: '$$',
@@ -110,11 +141,7 @@ export const generateLocalBusinessSchema = () => {
       opens: '09:00',
       closes: '22:00',
     },
-    sameAs: [
-      ...SOCIAL_LINKS,
-      `https://wa.me/${PRIMARY_PHONE.replace(/\+/g, '')}`,
-      `https://wa.me/${SECONDARY_PHONE.replace(/\+/g, '')}`,
-    ],
+    sameAs,
   };
 };
 
@@ -155,11 +182,11 @@ export const generateArticleSchema = (options: {
   '@type': 'Article',
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': options.url,
+    '@id': toAbsoluteUrl(options.url),
   },
   headline: options.headline,
   description: options.description,
-  image: options.image,
+  image: toAbsoluteUrl(options.image),
   author: {
     '@type': 'Organization',
     name: options.authorName,
@@ -184,6 +211,7 @@ export const generateBlogPostingSchema = (options: {
   image: string;
   authorName: string;
   datePublished: string;
+  dateModified?: string;
   publisherName: string;
   inLanguage: string;
   keywords?: string[];
@@ -192,11 +220,11 @@ export const generateBlogPostingSchema = (options: {
   '@type': 'BlogPosting',
   mainEntityOfPage: {
     '@type': 'WebPage',
-    '@id': options.url,
+    '@id': toAbsoluteUrl(options.url),
   },
   headline: options.headline,
   description: options.description,
-  image: options.image,
+  image: toAbsoluteUrl(options.image),
   author: {
     '@type': 'Person',
     name: options.authorName,
@@ -210,6 +238,7 @@ export const generateBlogPostingSchema = (options: {
       },
     },
   datePublished: options.datePublished,
+  dateModified: options.dateModified ?? options.datePublished,
   inLanguage: options.inLanguage,
   keywords: options.keywords,
 });

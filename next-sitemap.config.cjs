@@ -15,6 +15,17 @@ const LOCALE_CODES = {
 const DEFAULT_LANG = 'hy';
 
 const ROOT_ENTRY = { changefreq: 'weekly', priority: 0.9 };
+const NOW_ISO = new Date().toISOString();
+
+const normalizeLastmod = value => {
+  const candidate = new Date(value);
+  if (isNaN(candidate.getTime())) {
+    return NOW_ISO;
+  }
+
+  const now = new Date();
+  return candidate > now ? NOW_ISO : candidate.toISOString();
+};
 
 const SITE_PAGES = [
   { path: '', changefreq: 'weekly', priority: 0.9 },
@@ -78,6 +89,7 @@ const createLocalizedEntry = (baseUrl, lang, page) => ({
   loc: buildLocalizedUrl(baseUrl, lang, [page.path]),
   changefreq: page.changefreq,
   priority: page.priority,
+  lastmod: NOW_ISO,
   alternateRefs: buildAlternateRefs(baseUrl, [page.path]),
 });
 
@@ -86,6 +98,7 @@ const createRootEntry = baseUrl => ({
   loc: baseUrl,
   changefreq: ROOT_ENTRY.changefreq,
   priority: ROOT_ENTRY.priority,
+  lastmod: NOW_ISO,
   alternateRefs: buildAlternateRefs(baseUrl, []),
 });
 
@@ -95,7 +108,7 @@ const createBlogPostEntries = baseUrl =>
       loc: buildLocalizedUrl(baseUrl, lang, ['blogs', post.slug]),
       changefreq: 'weekly',
       priority: 0.8,
-      lastmod: post.publishedAt,
+      lastmod: normalizeLastmod(post.publishedAt),
       alternateRefs: buildAlternateRefs(baseUrl, ['blogs', post.slug]),
     })),
   );
@@ -107,6 +120,7 @@ module.exports = {
   outDir: './public',
   sitemapSize: 50,
 
+  autoLastmod: false,
   changefreq: 'weekly',
   priority: 0.7,
 

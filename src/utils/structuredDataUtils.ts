@@ -1,17 +1,27 @@
 import { TranslationKeys, FaqQuestionKey, FaqAnswerKey, ProductShowcaseItem, Testimonial } from '@/types/global';
 import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
+import { SOCIAL_LINKS } from '@/utils/schemaUtils';
+import { baseTestimonials } from '@/data/testimonials';
 
 const LOGO_URL = `${SITE_URL}/optimized/logo.png`;
-const SOCIAL_LINKS = [
-  'https://instagram.com/samyunwanarmenia',
-  'https://facebook.com/samyunwanarmenia',
-  'https://t.me/samyunwanarmenia',
-  'https://www.tiktok.com/@samyunwanarmenia',
-  'https://www.youtube.com/@samyunwanarmenia',
-  'https://wa.me/37495653666',
-  'https://wa.me/37496653666',
-  'https://m.me/samyunwanarmenia',
-];
+
+const calculateAggregateRating = (testimonials: Testimonial[]) => {
+  if (!Array.isArray(testimonials) || testimonials.length === 0) {
+    return null;
+  }
+
+  const total = testimonials.reduce((sum, item) => sum + (item.rating || 0), 0);
+  const ratingValue = (total / testimonials.length).toFixed(2);
+
+  return {
+    ratingValue,
+    reviewCount: testimonials.length.toString(),
+    bestRating: '5',
+    worstRating: '1',
+  };
+};
+
+const AGGREGATE_RATING = calculateAggregateRating(baseTestimonials);
 
 export const generateOrganizationStructuredData = (t: TranslationKeys, currentLang: string) => {
   return {
@@ -76,6 +86,12 @@ export const generateProductStructuredData = (
   const productDescription = t.productShowcase[product.descKey as keyof TranslationKeys['productShowcase']]; // Explicit type assertion
   const productUrl = `${baseUrl}/${currentLang}/products`; // Link to the products page
   const imageUrl = `${baseUrl}${product.src}`; // Full URL for the image
+  const aggregateRating = AGGREGATE_RATING
+    ? {
+        '@type': 'AggregateRating',
+        ...AGGREGATE_RATING,
+      }
+    : undefined;
 
   return {
     '@context': 'https://schema.org/',
@@ -92,7 +108,7 @@ export const generateProductStructuredData = (
       '@type': 'Offer',
       url: productUrl,
       priceCurrency: 'AMD',
-      price: product.price,
+      price: product.price.toString(),
       itemCondition: 'https://schema.org/NewCondition',
       availability: 'https://schema.org/InStock',
       seller: {
@@ -100,13 +116,7 @@ export const generateProductStructuredData = (
         name: t.hero.title,
       },
     },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: '4.9',
-      reviewCount: '9',
-      bestRating: '5',
-      worstRating: '1',
-    },
+    ...(aggregateRating ? { aggregateRating } : {}),
   };
 };
 
@@ -131,6 +141,7 @@ export const generateReviewStructuredData = (
   return {
     '@context': 'https://schema.org',
     '@type': 'Review',
+    inLanguage: currentLang === 'hy' ? 'hy-AM' : currentLang === 'ru' ? 'ru-RU' : 'en-US',
     author: {
       '@type': 'Person',
       name: authorName,
@@ -143,7 +154,7 @@ export const generateReviewStructuredData = (
     },
     reviewBody: reviewBody,
     itemReviewed: {
-      '@type': 'Organization',
+      '@type': 'Brand',
       name: t.hero.title,
     },
   };

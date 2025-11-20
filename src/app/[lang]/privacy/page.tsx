@@ -1,6 +1,9 @@
 import { LEGAL_COPY, buildPageMetadata } from '@/utils/pageMetadata';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import LegalPageLayout from '@/components/LegalPageLayout';
+import { translations } from '@/i18n/translations';
+import { generateBreadcrumbSchema } from '@/utils/schemaUtils';
+import { SITE_URL } from '@/config/siteConfig';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
   buildPageMetadata(params.lang, 'privacy');
@@ -15,14 +18,26 @@ const PrivacyPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const copy = LEGAL_COPY[lang] ?? LEGAL_COPY.hy;
   const notice = PLACEHOLDER_NOTICE[lang] ?? PLACEHOLDER_NOTICE.hy;
+  const t = translations[lang] || translations.hy;
+
+  const breadcrumbData = generateBreadcrumbSchema([
+    { name: t.hero.title, url: `${SITE_URL}/${lang}` },
+    { name: copy.privacyTitle, url: `${SITE_URL}/${lang}/privacy` },
+  ]);
 
   return (
-    <LegalPageLayout
-      title={copy.privacyTitle}
-      description={copy.privacyDescription}
-      notice={notice}
-      type="privacy"
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+      />
+      <LegalPageLayout
+        title={copy.privacyTitle}
+        description={copy.privacyDescription}
+        notice={notice}
+        type="privacy"
+      />
+    </>
   );
 };
 

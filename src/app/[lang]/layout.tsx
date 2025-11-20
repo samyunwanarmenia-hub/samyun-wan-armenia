@@ -3,7 +3,6 @@ import { Metadata } from 'next';
 
 import { translations } from '@/i18n/translations';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
-import { generateBreadcrumbSchema } from '@/utils/schemaUtils';
 import LayoutClientProvider from '@/components/LayoutClientProvider';
 import HtmlLangSetter from '@/components/HtmlLangSetter';
 import { SITE_URL } from '@/config/siteConfig';
@@ -55,34 +54,14 @@ const LangLayout = ({ children, params }: LangLayoutProps) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang] || translations.hy;
 
-  const logoUrl = `${SITE_URL}/optimized/logo.png`;
-
-  const organizationSchema = {
-    '@context': 'https://schema.org',
-    '@type': 'Organization',
-    name: 'Samyun Wan Armenia',
-    url: SITE_URL,
-    logo: logoUrl,
-    sameAs: [
-      'https://instagram.com/samyunwanarmenia',
-      'https://facebook.com/samyunwanarmenia',
-      'https://t.me/samyunwanarmenia',
-      'https://www.tiktok.com/@samyunwanarmenia',
-      'https://www.youtube.com/@samyunwanarmenia',
-    ],
-  };
-
   const webSiteStructuredData = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
+    '@id': `${SITE_URL}#website`,
     url: SITE_URL,
     name: t.hero.title,
     inLanguage: lang === 'hy' ? 'hy-AM' : lang === 'ru' ? 'ru-RU' : 'en-US',
   };
-
-  const breadcrumbData = generateBreadcrumbSchema([
-    { name: t.hero.title, url: `${SITE_URL}/${lang}` },
-  ]);
 
   return (
     <>
@@ -94,14 +73,10 @@ const LangLayout = ({ children, params }: LangLayoutProps) => {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteStructuredData) }}
       />
 
-      <LayoutClientProvider initialLang={params.lang}>
+      <LayoutClientProvider initialLang={lang}>
         {children}
       </LayoutClientProvider>
     </>

@@ -2,7 +2,7 @@ import ContactSection from '@/components/ContactSection';
 import { buildPageMetadata } from '@/utils/pageMetadata';
 import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
 import { translations } from '@/i18n/translations';
-import { generateBreadcrumbSchema } from '@/utils/schemaUtils';
+import { generateBreadcrumbSchema, SOCIAL_LINKS } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
@@ -20,10 +20,16 @@ const ContactPage = ({ params }: { params: { lang: string } }) => {
   const contactSchema = {
     '@context': 'https://schema.org',
     '@type': 'ContactPage',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/${lang}/contact`,
+    },
     mainEntity: {
       '@type': 'Organization',
+      '@id': `${SITE_URL}#organization`,
       name: 'Samyun Wan Armenia',
       url: `${SITE_URL}/${lang}/contact`,
+      sameAs: SOCIAL_LINKS,
       contactPoint: [
         {
           '@type': 'ContactPoint',

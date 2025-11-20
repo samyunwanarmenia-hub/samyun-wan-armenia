@@ -23,7 +23,6 @@ const BenefitsSection = () => {
     <motion.section 
       id="benefits" 
       className="relative py-12 overflow-hidden"
-      style={{ willChange: 'transform, opacity' }}
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"

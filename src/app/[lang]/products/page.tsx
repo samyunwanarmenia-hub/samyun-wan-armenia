@@ -5,6 +5,7 @@ import { translations } from '@/i18n/translations';
 import { SITE_URL } from '@/config/siteConfig';
 import { generateBreadcrumbSchema, generateProductSchema } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
+import { baseTestimonials } from '@/data/testimonials';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
   buildPageMetadata(params.lang, 'products');
@@ -18,11 +19,35 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
     { name: t.nav.products, url: `${SITE_URL}/${lang}/products` },
   ]);
 
+  const aggregateRating = (() => {
+    if (!Array.isArray(baseTestimonials) || baseTestimonials.length === 0) {
+      return null;
+    }
+
+    const total = baseTestimonials.reduce((sum, review) => sum + (review.rating || 0), 0);
+    return {
+      '@type': 'AggregateRating',
+      ratingValue: (total / baseTestimonials.length).toFixed(2),
+      reviewCount: baseTestimonials.length.toString(),
+      bestRating: '5',
+      worstRating: '1',
+    };
+  })();
+
+  const priceValidUntil = (() => {
+    const date = new Date();
+    date.setMonth(date.getMonth() + 6);
+    return date.toISOString().split('T')[0];
+  })();
+
+  const productsPageUrl = `${SITE_URL}/${lang}/products`;
+
   const productSchemas = productShowcaseData.map(product => {
     const name = t.productShowcase[product.labelKey];
     const description = t.productShowcase[product.descKey];
     const image = `${SITE_URL}${product.src}`;
-    const url = `${SITE_URL}/${lang}/products`;
+    const url = productsPageUrl;
+    const productId = `${productsPageUrl}#${product.labelKey}`;
 
     const schema = generateProductSchema({
       name,
@@ -35,12 +60,21 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
 
     return {
       ...schema,
+      '@id': productId,
+      inLanguage: lang === 'hy' ? 'hy-AM' : lang === 'ru' ? 'ru-RU' : 'en-US',
       sku: `SW-${product.labelKey.toUpperCase()}-${lang.toUpperCase()}`,
       mpn: `MPN-${product.labelKey.toUpperCase()}`,
       offers: {
         ...(schema as any).offers,
         url,
+        priceValidUntil,
         availability: 'https://schema.org/InStock',
+        itemCondition: 'https://schema.org/NewCondition',
+      },
+      ...(aggregateRating ? { aggregateRating } : {}),
+      mainEntityOfPage: {
+        '@type': 'WebPage',
+        '@id': productsPageUrl,
       },
       brand: {
         '@type': 'Brand',

@@ -19,6 +19,14 @@ const formatDate = (value: string, lang: SupportedLang) => {
 };
 
 const BlogPreviewCard: React.FC<BlogPreviewCardProps> = ({ preview, lang }) => {
+  const normalizedSrc =
+    (preview.heroImage &&
+      (preview.heroImage.startsWith('http') || preview.heroImage.startsWith('/images') || preview.heroImage.startsWith('/optimized')
+        ? preview.heroImage
+        : `/${preview.heroImage.replace(/^\/+/, '')}`)) ||
+    '/optimized/og-image.jpg';
+  const normalizedAlt = preview.heroImageAlt || preview.title;
+
   return (
     <article className="flex flex-col overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-lg dark:border-gray-700 dark:bg-gray-900 transition hover:-translate-y-1 hover:shadow-2xl">
       <Link
@@ -51,11 +59,12 @@ const BlogPreviewCard: React.FC<BlogPreviewCardProps> = ({ preview, lang }) => {
 
         <div className="relative h-40 w-40 overflow-hidden rounded-2xl border border-gray-200 dark:border-gray-700">
           <Image
-            src={preview.heroImage}
-            alt={preview.heroImageAlt}
+            src={normalizedSrc}
+            alt={normalizedAlt}
             fill
             sizes="(max-width: 640px) 100vw, 160px"
             className="object-cover transition duration-300 group-hover:scale-105"
+            unoptimized
           />
         </div>
       </Link>

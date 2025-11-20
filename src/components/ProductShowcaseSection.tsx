@@ -22,7 +22,6 @@ const ProductShowcaseSection = () => {
     <motion.section
       id="products"
       className="relative py-12 overflow-hidden"
-      style={{ willChange: 'transform, opacity' }}
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible" // Changed to whileInView

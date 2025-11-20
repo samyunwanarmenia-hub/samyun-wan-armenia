@@ -2,16 +2,28 @@ import { buildPageMetadata } from '@/utils/pageMetadata';
 import { QR_VERIFICATION_URL } from '@/config/siteConfig';
 import { translations } from '@/i18n/translations';
 import type { TranslationKeys } from '@/types/global';
+import { generateBreadcrumbSchema } from '@/utils/schemaUtils';
+import { SITE_URL } from '@/config/siteConfig';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
   buildPageMetadata(params.lang, 'how-to-identify-fake');
 
 const HowToIdentifyFakePage = ({ params }: { params: { lang: string } }) => {
-  const currentLang = params.lang as keyof typeof translations;
+  const currentLang: SupportedLang = resolveLang(params.lang);
   const t: TranslationKeys = translations[currentLang] || translations.hy;
+
+  const breadcrumbData = generateBreadcrumbSchema([
+    { name: t.hero.title, url: `${SITE_URL}/${currentLang}` },
+    { name: t.authenticity.howToDistinguish, url: `${SITE_URL}/${currentLang}/how-to-identify-fake` },
+  ]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800 py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
+      />
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
           <h1 className="text-4xl font-bold text-center mb-8 text-gray-800 dark:text-white">

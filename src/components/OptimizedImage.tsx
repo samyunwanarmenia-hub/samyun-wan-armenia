@@ -28,6 +28,27 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   fetchPriority = 'auto',
 }) => {
   const [imageError, setImageError] = useState(false);
+  const normalizeSrc = (value?: string) => {
+    if (!value) return null;
+    const trimmed = value.trim();
+    if (!trimmed) return null;
+    if (/^(https?:)?\/\//i.test(trimmed) || trimmed.startsWith('data:') || trimmed.startsWith('blob:')) {
+      return trimmed;
+    }
+    return trimmed.startsWith('/') ? trimmed : `/${trimmed}`;
+  };
+
+  const normalizedSrc = normalizeSrc(src);
+
+  if (!normalizedSrc) {
+    return (
+      <div
+        className={`flex items-center justify-center rounded-2xl bg-gray-200 p-6 text-gray-500 dark:bg-gray-800 dark:text-gray-300 ${className}`}
+      >
+        <ImageOff className="h-10 w-10" />
+      </div>
+    );
+  }
 
   if (imageError) {
     return (
@@ -51,6 +72,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       priority={priority}
       fetchPriority={fetchPriority}
       onError={() => setImageError(true)}
+      unoptimized
     />
   );
 };

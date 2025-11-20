@@ -15,9 +15,7 @@ import {
   OFFICIAL_REGISTRY_LAST_UPDATE,
 } from "@/config/siteConfig";
 
-import { productShowcaseData } from "@/data/productShowcaseData";
-import { generateProductSchema, generateLocalBusinessSchema } from "@/utils/schemaUtils";
-import { baseTestimonials } from "@/data/testimonials";
+import { generateLocalBusinessSchema, SOCIAL_LINKS } from "@/utils/schemaUtils";
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
 const GOOGLE_ADS_ID = 'AW-17742658374';
@@ -28,7 +26,6 @@ const inter = Inter({
   display: "swap",
 });
 
-const OG_IMAGE = `${SITE_URL}/optimized/og-image.jpg`;
 const LOGO_URL = `${SITE_URL}/optimized/logo.png`;
 
 /* 
@@ -50,6 +47,7 @@ export const metadata: Metadata = {
 /* --------- ORGANIZATION SCHEMA --------- */
 const organizationStructuredData = {
   "@context": "https://schema.org",
+  "@id": `${SITE_URL}#organization`,
   "@type": "Organization",
   name: "Samyun Wan Armenia",
   legalName: OFFICIAL_BUSINESS_NAME,
@@ -57,16 +55,8 @@ const organizationStructuredData = {
   logo: LOGO_URL,
   description: `${OFFICIAL_ACTIVITY}. ${OFFICIAL_CLASSIFICATION}. ${OFFICIAL_CITY}.`,
   keywords: [OFFICIAL_ACTIVITY, OFFICIAL_CLASSIFICATION].join(", "),
-  sameAs: [
-    "https://instagram.com/samyunwanarmenia",
-    "https://facebook.com/samyunwanarmenia",
-    "https://t.me/samyunwanarmenia",
-    "https://www.tiktok.com/@samyunwanarmenia",
-    "https://www.youtube.com/@samyunwanarmenia",
-    "https://wa.me/37495653666",
-    "https://wa.me/37496653666",
-    "https://m.me/samyunwanarmenia",
-  ],
+  sameAs: SOCIAL_LINKS,
+  inLanguage: ["hy-AM", "ru-RU", "en-US"],
   contactPoint: [
     {
       "@type": "ContactPoint",
@@ -95,19 +85,6 @@ const organizationStructuredData = {
   ],
 };
 
-/* --------- PRODUCT SCHEMA --------- */
-const heroProduct = productShowcaseData[0];
-
-const productStructuredData = generateProductSchema({
-  name: "Samyun Wan Armenia Original",
-  description:
-    "Authentic Samyun Wan complex with QR verification delivered directly from the official representative in Armenia.",
-  image: OG_IMAGE,
-  price: heroProduct.price ?? 0,
-  priceCurrency: "AMD",
-  reviews: baseTestimonials,
-});
-
 /* --------- LOCAL BUSINESS SCHEMA --------- */
 const localBusinessStructuredData = generateLocalBusinessSchema();
 
@@ -118,9 +95,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
       <head>
         <Script id="ld-org" type="application/ld+json">
           {JSON.stringify(organizationStructuredData)}
-        </Script>
-        <Script id="ld-product" type="application/ld+json">
-          {JSON.stringify(productStructuredData)}
         </Script>
         <Script id="ld-local" type="application/ld+json">
           {JSON.stringify(localBusinessStructuredData)}

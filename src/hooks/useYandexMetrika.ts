@@ -12,6 +12,8 @@ const EXTRA_ALLOWED_HOSTS = (process.env.NEXT_PUBLIC_METRIKA_ALLOWED_HOSTS || ''
   .map(host => host.trim().toLowerCase())
   .filter(Boolean);
 
+const STATIC_ALLOWED_HOSTS = ['samyun-wan.life', 'www.samyun-wan.life'];
+
 export const useYandexMetrika = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -26,7 +28,7 @@ export const useYandexMetrika = () => {
     })();
 
     const hostname = typeof window !== 'undefined' ? window.location.hostname.toLowerCase() : '';
-    const allowedHostnames = new Set([defaultHost, ...EXTRA_ALLOWED_HOSTS].filter(Boolean));
+    const allowedHostnames = new Set([...STATIC_ALLOWED_HOSTS, defaultHost, ...EXTRA_ALLOWED_HOSTS].filter(Boolean));
     const domainOk = hostname ? allowedHostnames.has(hostname) : false;
 
     if (typeof window !== 'undefined') {

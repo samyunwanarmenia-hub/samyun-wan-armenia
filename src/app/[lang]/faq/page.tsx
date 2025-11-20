@@ -29,7 +29,10 @@ const FaqPage = ({ params }: { params: { lang: string } }) => {
     { question: t.faq.q7, answer: t.faq.a7 },
   ];
 
-  const faqSchema = generateFAQSchema(faqData);
+  const faqSchema = generateFAQSchema(faqData, {
+    lang: currentLang,
+    pageUrl: `${SITE_URL}/${currentLang}/faq`,
+  });
 
   return (
     <>

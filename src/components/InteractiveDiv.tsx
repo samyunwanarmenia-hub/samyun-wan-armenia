@@ -31,12 +31,12 @@ const InteractiveDiv = React.forwardRef<HTMLElement, InteractiveDivProps>(
     ref
   ) => {
     const MotionComponent = motion(Component as React.ElementType);
+    const mergedClassName = ['transform-gpu', className].filter(Boolean).join(' ');
 
     return (
       <MotionComponent
         ref={ref}
-        className={className}
-        style={{ willChange: 'transform' }}
+        className={mergedClassName}
         whileHover={{
           scale: whileHoverScale,
           y: hoverY,

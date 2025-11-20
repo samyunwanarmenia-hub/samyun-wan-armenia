@@ -42,7 +42,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             {/* Guarantee Badge */}
             <motion.div 
               className="inline-flex items-center bg-primary-100/50 text-primary-600 px-3 py-1.5 rounded-full text-sm font-semibold mb-5 dark:bg-primary-900/50 dark:text-primary-400"
-              style={{ willChange: 'transform, opacity' }}
               variants={fadeInUpVariants}
               initial="hidden"
               animate="visible"

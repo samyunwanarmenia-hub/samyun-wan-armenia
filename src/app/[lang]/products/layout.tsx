@@ -1,7 +1,5 @@
 import { Metadata } from 'next';
 import { translations } from '@/i18n/translations';
-import { generateProductStructuredData } from '@/utils/structuredDataUtils';
-import { productShowcaseData } from '@/data/productShowcaseData';
 import { ProductsLayoutProps } from '@/types/global';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { SITE_URL } from '@/config/siteConfig';
@@ -42,23 +40,9 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 
 const ProductsLayout = ({ children, params }: ProductsLayoutProps) => {
   const lang: SupportedLang = resolveLang(params.lang);
-  const t = translations[lang];
-
-  const productStructuredData = productShowcaseData.map(product =>
-    generateProductStructuredData(t, product, lang, SITE_URL),
-  );
 
   return (
-    <>
-      {productStructuredData.map((data, index) => (
-        <script
-          key={`product-schema-${index}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-        />
-      ))}
-      {children}
-    </>
+    <>{children}</>
   );
 };
 

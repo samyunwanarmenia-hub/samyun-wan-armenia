@@ -9,6 +9,7 @@ export const useGoogleAnalytics = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const hasWarnedRef = useRef(false);
+  const searchParamsString = searchParams?.toString() ?? '';
 
   useEffect(() => {
     if (!GOOGLE_ANALYTICS_ID) {
@@ -34,8 +35,7 @@ export const useGoogleAnalytics = () => {
       return;
     }
 
-    const searchString = searchParams?.toString();
-    const fullPath = searchString ? `${pathname}?${searchString}` : pathname;
+    const fullPath = searchParamsString ? `${pathname}?${searchParamsString}` : pathname;
 
     const sendPageView = () => {
       if (typeof window === 'undefined') {
@@ -67,5 +67,5 @@ export const useGoogleAnalytics = () => {
 
     const timeoutId = window.setTimeout(sendPageView, 0);
     return () => window.clearTimeout(timeoutId);
-  }, [pathname, searchParams]);
+  }, [pathname, searchParamsString]);
 };

@@ -46,7 +46,6 @@ const FaqSection = () => {
     <motion.section
       id="faq"
       className="relative py-12 text-gray-900 dark:text-gray-50 overflow-hidden"
-      style={{ willChange: 'transform, opacity' }}
       variants={sectionVariants}
       initial="hidden"
       whileInView="visible"
@@ -72,7 +71,6 @@ const FaqSection = () => {
             >
               <motion.button
                 className="flex justify-between items-center w-full p-5 text-left text-lg font-semibold text-gray-900 dark:text-gray-50 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
-                style={{ willChange: 'transform' }}
                 onClick={() => toggleQuestion(q.key)}
                 whileHover={{ scale: 1.01 }} // Slightly less scale for the button itself
                 whileTap={{ scale: 0.99 }}
@@ -80,7 +78,6 @@ const FaqSection = () => {
               >
                 {t.faq[q.key]}
                 <motion.div
-                  style={{ willChange: 'transform' }}
                   animate={{ rotate: openQuestion === q.key ? 180 : 0 }}
                   transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
                 >

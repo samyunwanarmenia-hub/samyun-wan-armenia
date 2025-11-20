@@ -75,8 +75,7 @@ const MainLayout = ({
       <DynamicNavbar />
       
       <motion.main 
-        className="flex-grow pt-16 relative z-10" 
-        style={{ willChange: 'opacity' }}
+        className="flex-grow pt-16 relative z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}

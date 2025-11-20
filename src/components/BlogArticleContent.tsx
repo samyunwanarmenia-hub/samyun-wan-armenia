@@ -21,17 +21,28 @@ const BlogArticleContent = ({
   readingTimeMinutes,
   lang,
 }: BlogArticleContentProps) => {
+  const heroSrc =
+    (translation.heroImage &&
+      (translation.heroImage.startsWith('http') || translation.heroImage.startsWith('/images') || translation.heroImage.startsWith('/optimized')
+        ? translation.heroImage
+        : `/${translation.heroImage.replace(/^\/+/, '')}`)) ||
+    '/optimized/og-image.jpg';
+  const heroAlt = translation.heroImageAlt || translation.title;
+  const heroWidth = translation.heroImageWidth || 1200;
+  const heroHeight = translation.heroImageHeight || 800;
+
   return (
     <article className="space-y-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-xl dark:border-gray-700 dark:bg-gray-950">
       <div className="relative overflow-hidden rounded-2xl border border-gray-100 dark:border-gray-800">
         <Image
-          src={translation.heroImage}
-          alt={translation.heroImageAlt}
-          width={translation.heroImageWidth}
-          height={translation.heroImageHeight}
+          src={heroSrc}
+          alt={heroAlt}
+          width={heroWidth}
+          height={heroHeight}
           sizes="(max-width: 768px) 100vw, 900px"
           priority
           className="h-auto w-full object-cover"
+          unoptimized
         />
       </div>
 

@@ -35,7 +35,15 @@ const extractBlogsHtml = () => {
       .filter(Boolean)
       .join('\n');
 
-    return { bodyHtml, inlineStyles };
+    const cleanedBody = bodyHtml.replace(
+      /<script[^>]+type=["']application\/ld\+json["'][^>]*>[\s\S]*?<\/script>/gi,
+      '',
+    );
+    const sanitizedBody = cleanedBody
+      .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
+      .replace(/<noscript[\s\S]*?<\/noscript>/gi, '');
+
+    return { bodyHtml: sanitizedBody, inlineStyles };
   } catch (error) {
     console.error('Failed to read blogs HTML file:', error);
     return {
@@ -50,19 +58,24 @@ const BlogsPage = ({ params }: { params: { lang: string } }) => {
   const t = translations[lang] || translations.hy;
   const previews = getBlogPreviews(lang);
   const breadcrumbData = generateBreadcrumbSchema([
+    { name: t.hero.title, url: `${SITE_URL}/${lang}` },
     { name: t.article.title, url: `${SITE_URL}/${lang}/blogs` },
   ]);
 
+  const inLanguage = lang === 'hy' ? 'hy-AM' : lang === 'ru' ? 'ru-RU' : 'en-US';
   const featured = previews[0];
   const articleSchema = generateArticleSchema({
     headline: t.article.metaTitle,
     description: t.article.metaDescription,
-    image: featured?.heroImage ?? `${SITE_URL}/optimized/og-image.jpg`,
+    image:
+      featured?.heroImage?.startsWith('http') || !featured?.heroImage
+        ? featured?.heroImage ?? `${SITE_URL}/optimized/og-image.jpg`
+        : `${SITE_URL}${featured.heroImage}`,
     url: `${SITE_URL}/${lang}/blogs`,
     authorName: 'Samyun Wan Armenia',
     datePublished: featured?.publishedAt ?? new Date().toISOString(),
     publisherName: 'Samyun Wan Armenia',
-    inLanguage: lang,
+    inLanguage,
   });
 
   const { bodyHtml, inlineStyles } = extractBlogsHtml();
