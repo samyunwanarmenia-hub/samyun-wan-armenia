@@ -124,7 +124,41 @@ export const ru: TranslationKeys = {
     products: 'Продукты',
     support: 'Поддержка',
     follow: 'Подпишитесь на нас',
-    legalAndWarning: `Юридическая информация / Предупреждение<br/>Это не лекарство. <span class="text-red-700 dark:text-red-400">Продукт не рекомендуется лицам младше 14 лет.</span><br/><br/>Исходя из соображений вашего здоровья и безопасности, НАСТОЯТЕЛЬНО РЕКОМЕНДУЕМ <br/><span class="text-red-700 dark:text-red-400">ВОЗДЕРЖАТЬСЯ от покупки или использования продукта неизвестного происхождения, якобы сертифицированного:</span><br/><br/>Вот несколько признаков, как отличить поддельный продукт.`,
+    legalAndWarning: `<section class="footer-warning" aria-label="Предупреждение">
+      <div class="footer-warning__grid footer-warning__grid--balanced">
+        <article class="footer-warning__card footer-warning__card--lead">
+          <p class="footer-warning__title">Предупреждение</p>
+          <p class="footer-warning__subtitle">Это не лекарство</p>
+          <p class="footer-warning__text">Не применяйте препарат самостоятельно и не заменяйте им назначенное лечение.</p>
+          <ul class="footer-warning__list">
+            <li>беременным женщинам</li>
+            <li>кормящим матерям</li>
+            <li>детям младше 12 лет</li>
+          </ul>
+        </article>
+        <article class="footer-warning__card footer-warning__card--info">
+          <p class="footer-warning__heading">О нас</p>
+          <p class="footer-warning__text">Наша команда — официальный представитель бренда в Армении.</p>
+          <ul class="footer-warning__details">
+            <li>Официальная доставка по всей Армении</li>
+            <li>Персональные программы и сопровождение</li>
+            <li>Поддержка в Telegram и WhatsApp</li>
+          </ul>
+          <a class="footer-warning__action" href="#about">Подробнее</a>
+        </article>
+        <article class="footer-warning__card footer-warning__card--products">
+          <p class="footer-warning__heading">Продукция</p>
+          <p class="footer-warning__text">Поставляем только оригинальные наборы Samyun Wan с QR-проверкой.</p>
+          <ul class="footer-warning__details">
+            <li>Комплекты и комплексные программы</li>
+            <li>Лимитированные серии</li>
+            <li>Прозрачное происхождение и документы</li>
+          </ul>
+          <a class="footer-warning__action" href="#products">Смотреть каталог</a>
+        </article>
+      </div>
+      <p class="footer-warning__note">Используйте только каналы связи, указанные на сайте, и заранее проверяйте подлинность товара.</p>
+    </section>`,
     howToDistinguishButton: 'Смотреть здесь',
     productOriginal: 'Samyun Wan Оригинал',
     productAuthenticity: 'Проверка подлинности',

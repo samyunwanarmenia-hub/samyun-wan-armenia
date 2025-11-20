@@ -118,7 +118,41 @@ export const en: TranslationKeys = {
     products: 'Products',
     support: 'Support',
     follow: 'Follow Us',
-    legalAndWarning: `Legal Information / Warning<br/>This is not a medicine. <span class="text-red-700 dark:text-red-400">The product is not recommended for persons under 14 years of age.</span><br/><br/>For your health and safety, WE STRONGLY ADVISE <br/><span class="text-red-700 dark:text-red-400">TO REFRAIN from purchasing or using products of unknown origin, allegedly certified:</span><br/><br/>Here are a few signs of how to distinguish a fake product.`,
+    legalAndWarning: `<section class="footer-warning" aria-label="Warning message">
+      <div class="footer-warning__grid footer-warning__grid--balanced">
+        <article class="footer-warning__card footer-warning__card--lead">
+          <p class="footer-warning__title">Warning</p>
+          <p class="footer-warning__subtitle">This is not a medicine</p>
+          <p class="footer-warning__text">Do not self-prescribe or replace professional treatment with this product.</p>
+          <ul class="footer-warning__list">
+            <li>pregnant women</li>
+            <li>breastfeeding mothers</li>
+            <li>children under 12 years of age</li>
+          </ul>
+        </article>
+        <article class="footer-warning__card footer-warning__card--info">
+          <p class="footer-warning__heading">About us</p>
+          <p class="footer-warning__text">Our team is the official representative of the brand in Armenia.</p>
+          <ul class="footer-warning__details">
+            <li>Official delivery across Armenia</li>
+            <li>Personal approach and programs</li>
+            <li>Support via Telegram and WhatsApp channels</li>
+          </ul>
+          <a class="footer-warning__action" href="#about">More details</a>
+        </article>
+        <article class="footer-warning__card footer-warning__card--products">
+          <p class="footer-warning__heading">Products</p>
+          <p class="footer-warning__text">We provide only original Samyun Wan products with QR verification.</p>
+          <ul class="footer-warning__details">
+            <li>Complete kits and bundle programs</li>
+            <li>Limited-edition releases</li>
+            <li>Full transaction transparency</li>
+          </ul>
+          <a class="footer-warning__action" href="#products">View products</a>
+        </article>
+      </div>
+      <p class="footer-warning__note">Use only the official platform contact channels and verify authenticity beforehand.</p>
+    </section>`,
     howToDistinguishButton: 'See here',
     productOriginal: 'Samyun Wan Original',
     productAuthenticity: 'Authenticity Check',

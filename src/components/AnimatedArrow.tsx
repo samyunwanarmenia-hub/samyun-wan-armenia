@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { ArrowLeft } from 'lucide-react';
 
 interface AnimatedArrowProps {
   className?: string;
@@ -10,7 +10,7 @@ interface AnimatedArrowProps {
 const AnimatedArrow: React.FC<AnimatedArrowProps> = ({ className }) => {
   const arrowVariants = {
     animate: {
-      x: [0, 5, 0], // Move right, then back
+      x: [0, -5, 0], // Move left, then back
       opacity: [0, 1, 1, 0], // Fade in, stay, fade out
       transition: {
         x: {
@@ -34,7 +34,7 @@ const AnimatedArrow: React.FC<AnimatedArrowProps> = ({ className }) => {
       initial={{ x: 0, opacity: 0 }}
       animate="animate"
     >
-      <ArrowRight className="w-5 h-5 text-primary-500 dark:text-primary-400" />
+      <ArrowLeft className="w-8 h-8 text-primary-500 dark:text-primary-400" />
     </motion.div>
   );
 };

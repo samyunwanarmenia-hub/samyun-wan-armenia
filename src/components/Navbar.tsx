@@ -1,21 +1,19 @@
 "use client"; // This is a client component
 
-import { useState, useEffect } from 'react';
-import { NavbarProps, TranslationKeys } from '@/types/global';
-import MobileNav from './MobileNav';
-import ThemeToggle from './ThemeToggle';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { NavbarProps, TranslationKeys } from '@/types/global';
 import useNavigationUtils from '@/hooks/useNavigationUtils';
-import LanguageSwitcher from './LanguageSwitcher';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { navigationSections } from '@/data/navigationSections';
-import { useTheme } from '@/context/ThemeContext'; // Import useTheme
-import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
+import MobileNav from './MobileNav';
+import ThemeToggle from './ThemeToggle';
+import LanguageSwitcher from './LanguageSwitcher';
+import InteractiveDiv from './InteractiveDiv';
 
 const Navbar: React.FC<NavbarProps> = () => {
   const [scrolled, setScrolled] = useState(false);
   const { t, currentLang, getLinkClasses } = useLayoutContext();
-  const { theme: _theme } = useTheme(); // Get current theme
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);
 
   useEffect(() => {
@@ -34,51 +32,55 @@ const Navbar: React.FC<NavbarProps> = () => {
     };
   }, []);
 
-  // Determine text color based on scroll and theme
-  const textColorClass = scrolled 
-    ? 'text-gray-800 dark:text-gray-50' // Darker text on scrolled background
-    : 'text-gray-700 dark:text-gray-300'; // Lighter text on transparent background
+  const navSurfaceClass = scrolled
+    ? 'bg-white/90 dark:bg-slate-900/90 shadow-lg border-b border-white/40 dark:border-white/10'
+    : 'bg-white/75 dark:bg-slate-900/75 backdrop-blur-xl border-b border-white/20 dark:border-white/5 shadow-[0_4px_24px_rgba(0,0,0,0.08)]';
+
+  const safeAreaStyle = {
+    paddingTop: 'calc(env(safe-area-inset-top) + 10px)',
+    paddingLeft: 'max(1rem, env(safe-area-inset-left))',
+    paddingRight: 'max(1rem, env(safe-area-inset-right))',
+  };
 
   return (
-    <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-gray-50/95 shadow-lg dark:bg-gray-800/95 dark:shadow-xl py-2' : 'bg-transparent py-4'}`}>
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center space-x-2">
-            <Link href={getHomePath()} className="flex items-center">
-              <span className={`text-base sm:text-lg font-bold whitespace-nowrap overflow-hidden text-ellipsis max-w-[180px] sm:max-w-none ${textColorClass}`}>
-                {t.hero.title}
-              </span>
-            </Link>
-          </div>
+    <nav
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${navSurfaceClass}`}
+      style={safeAreaStyle}
+    >
+      <div className="mx-auto max-w-6xl px-0 sm:px-2">
+        <div className="flex items-center justify-between gap-3 md:grid md:grid-cols-[auto,1fr,auto] md:gap-8 min-h-[64px]">
+          <Link href={getHomePath()} className="flex items-center min-w-0">
+            <span className="truncate text-lg sm:text-xl font-semibold leading-none tracking-tight text-gray-900 dark:text-gray-50">
+              {t.hero.title}
+            </span>
+          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-6">
+          <ul className="hidden md:flex items-center justify-center gap-6 lg:gap-8">
             {navigationSections.map((section) => (
-              <InteractiveDiv
-                key={section.id}
-                whileHoverScale={1.1}
-                whileTapScale={0.95}
-                hoverY={0}
-                hoverShadow="none"
-              >
-                <Link
-                  href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
-                  className={`${getLinkClasses(section.id)} text-base ${textColorClass}`}
+              <li key={section.id}>
+                <InteractiveDiv
+                  whileHoverScale={1.06}
+                  whileTapScale={0.96}
+                  hoverY={0}
+                  hoverShadow="none"
                 >
-                  {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
-                </Link>
-              </InteractiveDiv>
+                  <Link
+                    href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
+                    className={`${getLinkClasses(section.id)} text-sm lg:text-[15px] font-medium leading-none tracking-tight px-2 py-2 rounded-md`}
+                  >
+                    {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
+                  </Link>
+                </InteractiveDiv>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          {/* Language Selector and Theme Toggle for Desktop */}
-          <div className="hidden md:flex items-center space-x-3">
+          <div className="hidden md:flex items-center justify-end gap-3">
             <LanguageSwitcher />
             <ThemeToggle />
           </div>
 
-          {/* Mobile Navigation (Hamburger Menu) */}
-          <MobileNav scrolled={scrolled} /> {/* Pass scrolled state to MobileNav */}
+          <MobileNav scrolled={scrolled} />
         </div>
       </div>
     </nav>
