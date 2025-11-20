@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { QRCodeCanvas } from 'qrcode.react';
 import { useLayoutContext } from '@/context/LayoutContext';
@@ -14,6 +14,11 @@ interface HeroQrCodeBlockProps {
 
 const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
   const { t } = useLayoutContext();
+  const [canRenderQr, setCanRenderQr] = useState(false);
+
+  useEffect(() => {
+    setCanRenderQr(true);
+  }, []);
 
   const qrCodeValue = QR_VERIFICATION_URL;
 
@@ -57,7 +62,11 @@ const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
-          <QRCodeCanvas value={qrCodeValue} size={128} level="H" />
+          {canRenderQr ? (
+            <QRCodeCanvas value={qrCodeValue} size={128} level="H" />
+          ) : (
+            <div className="w-full h-full bg-gray-200 dark:bg-gray-600 rounded" aria-hidden />
+          )}
         </motion.div>
         <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed"> {/* Changed text-gray-700 to text-gray-600 for light mode */}
           {t.hero.qrBlockDescription}

@@ -36,7 +36,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
   const [currentLangState, setCurrentLangState] = useState<string>(initialLang);
   const [loadingLinkModalOpen, setLoadingLinkModalOpen] = useState(false);
   const [loadingLinkClientId, setLoadingLinkClientId] = useState<string | null>(null);
-  const [showIntroAnimation, setShowIntroAnimation] = useState(true);
+  const [showIntroAnimation, setShowIntroAnimation] = useState(false);
 
   // Determine if it's the QR verification page
   const isQrVerifyPage = useMemo(() => {
@@ -56,16 +56,14 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
   useEffect(() => {
     const animationDuration = 1300; // Adjusted duration for a smoother transition
 
+    // Start animation on client to avoid SSR/CSR markup mismatch
+    setShowIntroAnimation(true);
     const timer = setTimeout(() => {
       setShowIntroAnimation(false);
     }, animationDuration);
 
-    // Set initial overflow hidden for the animation
-    document.body.style.overflow = 'hidden';
-
     return () => {
       clearTimeout(timer);
-      // Restore overflow when component unmounts or animation finishes
       document.body.style.overflow = '';
     };
   }, []); // Run only once on mount

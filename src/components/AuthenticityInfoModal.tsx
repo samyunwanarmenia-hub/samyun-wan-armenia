@@ -6,8 +6,17 @@ import { QRCodeCanvas } from 'qrcode.react';
 import { ShieldCheck } from 'lucide-react';
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 import { QR_VERIFICATION_URL } from '@/config/siteConfig';
+import { useEffect, useState } from 'react';
 
 const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, onClose, t }) => {
+  const [canRenderQr, setCanRenderQr] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setCanRenderQr(true);
+    }
+  }, [isOpen]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -79,20 +88,24 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
           <a 
             href={QR_VERIFICATION_URL}
             className="group block p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
-            aria-label={t.hero.qrBlockTitle}
-          >
-            <motion.div
-              className="w-32 h-32 bg-gray-100 dark:bg-gray-700 rounded-xl mx-auto mb-3 flex items-center justify-center transform group-hover:scale-105 transition-all border border-gray-200 dark:border-gray-600 p-2"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <QRCodeCanvas value={qrCodeValue} size={128} level="H" />
-            </motion.div>
-            <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed"> {/* Changed text-gray-700 to text-gray-600 for light mode */}
-              {t.hero.qrBlockDescription}
-            </p>
-          </a>
+        aria-label={t.hero.qrBlockTitle}
+      >
+        <motion.div
+          className="w-32 h-32 bg-gray-100 dark:bg-gray-700 rounded-xl mx-auto mb-3 flex items-center justify-center transform group-hover:scale-105 transition-all border border-gray-200 dark:border-gray-600 p-2"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        >
+          {canRenderQr ? (
+            <QRCodeCanvas value={qrCodeValue} size={128} level="H" />
+          ) : (
+            <div className="w-full h-full bg-gray-200 dark:bg-gray-600 rounded" aria-hidden />
+          )}
+        </motion.div>
+        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed"> {/* Changed text-gray-700 to text-gray-600 for light mode */}
+          {t.hero.qrBlockDescription}
+        </p>
+      </a>
         </InteractiveDiv>
       </motion.div>
     </ModalWrapper>
