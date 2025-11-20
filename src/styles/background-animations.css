@@ -43,6 +43,66 @@ body {
   }
 }
 
+@keyframes GridDrift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-24px, -18px, 0) scale(1.02);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes BeamFlowPrimary {
+  0% {
+    transform: translate3d(-6%, -4%, 0) rotate(-14deg) scale(1);
+    opacity: 0.65;
+  }
+  50% {
+    transform: translate3d(6%, 5%, 0) rotate(-10deg) scale(1.05);
+    opacity: 0.92;
+  }
+  100% {
+    transform: translate3d(-6%, -4%, 0) rotate(-14deg) scale(1);
+    opacity: 0.65;
+  }
+}
+
+@keyframes BeamFlowSecondary {
+  0% {
+    transform: translate3d(8%, 12%, 0) rotate(11deg) scale(1);
+    opacity: 0.58;
+  }
+  50% {
+    transform: translate3d(-10%, -6%, 0) rotate(8deg) scale(1.06);
+    opacity: 0.86;
+  }
+  100% {
+    transform: translate3d(8%, 12%, 0) rotate(11deg) scale(1);
+    opacity: 0.58;
+  }
+}
+
+@keyframes DustDrift {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  50% {
+    background-position: 36px -20px, -28px 32px;
+  }
+  100% {
+    background-position: 0 0, 0 0;
+  }
+}
+
+@keyframes NoiseShift {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-8px, 6px, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
 .ambient-background {
   position: fixed;
   inset: 0;
@@ -50,6 +110,82 @@ body {
   overflow: hidden;
   z-index: -1;
   opacity: 0.85;
+}
+
+.background-grid {
+  position: absolute;
+  inset: -12% -8%;
+  background-image:
+    linear-gradient(90deg, var(--bg-grid-line) 1px, transparent 1px),
+    linear-gradient(180deg, var(--bg-grid-line) 1px, transparent 1px);
+  background-size: 140px 140px;
+  mix-blend-mode: soft-light;
+  filter: drop-shadow(0 0 30px var(--bg-grid-shadow));
+  opacity: 0.32;
+  animation: GridDrift 26s ease-in-out infinite;
+}
+
+.background-beams {
+  position: absolute;
+  inset: -18% -12%;
+  mix-blend-mode: screen;
+  filter: blur(32px);
+  opacity: 0.85;
+}
+
+.background-beam {
+  position: absolute;
+  width: 58%;
+  height: 22%;
+  border-radius: 999px;
+}
+
+.background-beam--primary {
+  top: 6%;
+  left: -6%;
+  background: linear-gradient(120deg, transparent 12%, var(--bg-beam-primary) 45%, transparent 82%);
+  animation: BeamFlowPrimary 18s ease-in-out infinite;
+}
+
+.background-beam--secondary {
+  bottom: 8%;
+  right: -10%;
+  height: 18%;
+  width: 62%;
+  background: linear-gradient(100deg, transparent 8%, var(--bg-beam-secondary) 52%, transparent 90%);
+  animation: BeamFlowSecondary 21s ease-in-out infinite;
+}
+
+.background-beam--accent {
+  top: 38%;
+  right: 12%;
+  height: 16%;
+  width: 36%;
+  background: radial-gradient(circle at 30% 50%, var(--bg-beam-accent), transparent 65%);
+  filter: blur(28px);
+  opacity: 0.5;
+}
+
+.background-dust {
+  position: absolute;
+  inset: -2% -2%;
+  background-image:
+    radial-gradient(circle at 20% 30%, var(--bg-dust-foreground) 1px, transparent 1px),
+    radial-gradient(circle at 80% 70%, var(--bg-dust-accent) 1px, transparent 1px);
+  background-size: 120px 120px, 180px 180px;
+  mix-blend-mode: soft-light;
+  opacity: 0.45;
+  animation: DustDrift 24s ease-in-out infinite;
+}
+
+.background-noise {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 0.8px, transparent 0.9px);
+  background-size: 16px 16px;
+  opacity: var(--bg-noise-opacity);
+  mix-blend-mode: soft-light;
+  animation: NoiseShift 2.4s steps(2) infinite;
 }
 
 .hero-overlays {
@@ -124,4 +260,36 @@ body {
 
 .dark .ambient-orb--three {
   background: radial-gradient(circle, rgba(255, 199, 134, 0.45), rgba(18, 18, 47, 0));
+}
+
+@media (max-width: 768px) {
+  .background-grid {
+    inset: -18% -12%;
+    background-size: 110px 110px;
+    opacity: 0.24;
+  }
+
+  .background-beams {
+    opacity: 0.7;
+    filter: blur(26px);
+  }
+
+  .background-dust {
+    opacity: 0.3;
+    background-size: 90px 90px, 140px 140px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body,
+  .dark body,
+  .ambient-orb,
+  .background-beam,
+  .background-grid,
+  .background-dust,
+  .background-noise {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

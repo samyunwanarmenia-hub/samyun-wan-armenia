@@ -237,6 +237,8 @@ export interface TranslationKeys {
     a5: string;
     q6: string;
     a6: string;
+    q7: string;
+    a7: string;
   };
   callbackRequest: {
     title: string;
@@ -339,8 +341,8 @@ export interface BenefitItem {
 
 export type OpenOrderModalFunction = (productKey?: ProductShowcaseItem['labelKey']) => void;
 
-export type FaqQuestionKey = 'q1' | 'q2' | 'q3' | 'q4' | 'q5' | 'q6';
-export type FaqAnswerKey = 'a1' | 'a2' | 'a3' | 'a4' | 'a5' | 'a6';
+export type FaqQuestionKey = 'q1' | 'q2' | 'q3' | 'q4' | 'q5' | 'q6' | 'q7';
+export type FaqAnswerKey = 'a1' | 'a2' | 'a3' | 'a4' | 'a5' | 'a6' | 'a7';
 export type FaqTranslationKey = FaqQuestionKey | FaqAnswerKey;
 
 export type Icon = React.ElementType;

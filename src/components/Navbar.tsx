@@ -34,53 +34,34 @@ const Navbar: React.FC<NavbarProps> = () => {
 
   const navSurfaceClass = scrolled
     ? 'bg-white/90 dark:bg-slate-900/90 shadow-lg border-b border-white/40 dark:border-white/10'
-    : 'bg-white/75 dark:bg-slate-900/75 backdrop-blur-xl border-b border-white/20 dark:border-white/5 shadow-[0_4px_24px_rgba(0,0,0,0.08)]';
+    : 'bg-white/75 dark:bg-slate-900/75 backdrop-blur-xl border-b border-white/40 dark:border-white/5 shadow-[0_4px_24px_rgba(0,0,0,0.08)]';
 
   const safeAreaStyle = {
-    paddingTop: 'calc(env(safe-area-inset-top) + 10px)',
-    paddingLeft: 'max(1rem, env(safe-area-inset-left))',
-    paddingRight: 'max(1rem, env(safe-area-inset-right))',
+    paddingTop: 'calc(env(safe-area-inset-top) + 20px)',
+    paddingLeft: 'max(env(safe-area-inset-left), 10px)',
+    paddingRight: 'max(env(safe-area-inset-right), 10px)',
   };
 
   return (
     <nav
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${navSurfaceClass}`}
+      className={`fixed inset-x-0 top-0 z-[120] transition-all duration-100 ${navSurfaceClass}`}
       style={safeAreaStyle}
     >
-      <div className="mx-auto max-w-6xl px-0 sm:px-2">
-        <div className="flex items-center justify-between gap-3 md:grid md:grid-cols-[auto,1fr,auto] md:gap-8 min-h-[64px]">
-          <Link href={getHomePath()} className="flex items-center min-w-0">
-            <span className="truncate text-lg sm:text-xl font-semibold leading-none tracking-tight text-gray-900 dark:text-gray-50">
+      <div className="container">
+        <div className="grid grid-cols-[auto,1fr,auto] items-center gap-3 md:gap-6 min-h-[68px]">
+          <Link href={getHomePath()} className="flex items-center min-w-0 justify-self-start">
+            <span className="block text-[clamp(17px,3.4vw,22px)] font-bold leading-snug tracking-[-0.01em] text-primary-700 dark:text-primary-200 whitespace-normal max-w-[280px] drop-shadow-sm">
               {t.hero.title}
             </span>
           </Link>
 
-          <ul className="hidden md:flex items-center justify-center gap-6 lg:gap-8">
-            {navigationSections.map((section) => (
-              <li key={section.id}>
-                <InteractiveDiv
-                  whileHoverScale={1.06}
-                  whileTapScale={0.96}
-                  hoverY={0}
-                  hoverShadow="none"
-                >
-                  <Link
-                    href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
-                    className={`${getLinkClasses(section.id)} text-sm lg:text-[15px] font-medium leading-none tracking-tight px-2 py-2 rounded-md`}
-                  >
-                    {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
-                  </Link>
-                </InteractiveDiv>
-              </li>
-            ))}
-          </ul>
-
-          <div className="hidden md:flex items-center justify-end gap-3">
-            <LanguageSwitcher />
-            <ThemeToggle />
+          <div className="flex items-center justify-end gap-2 justify-self-end">
+            <div className="hidden md:flex items-center justify-end gap-3 rounded-full border border-white/40 dark:border-white/10 bg-white/70 dark:bg-slate-800/60 px-3 py-1.5 shadow-sm backdrop-blur">
+              <LanguageSwitcher />
+              <ThemeToggle />
+            </div>
+            <MobileNav scrolled={scrolled} />
           </div>
-
-          <MobileNav scrolled={scrolled} />
         </div>
       </div>
     </nav>

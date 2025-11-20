@@ -16,6 +16,12 @@ export const en: TranslationKeys = {
     open: 'Open menu',
     close: 'Close menu',
   },
+  seo: {
+    metaTitle: 'What is Samyun Wan and what sellers hide',
+    metaDescription:
+      'Before buying Samyun Wan, learn the real composition, effects, and the facts sellers hide so you only choose the safe option.',
+    metaKeywords: 'Samyun Wan, Samyun Wan Armenia, weight gain, natural supplement, counterfeit warning',
+  },
   hero: {
     title: 'Samyun Wan Armenia',
     facebookFollow: 'Follow our updates on Facebook',
@@ -23,7 +29,7 @@ export const en: TranslationKeys = {
     tagline: 'Changing your physique will change your life',
     cta: 'Order Now',
     consultation: 'Free Consultation',
-    guarantee: '100% Original Guarantee',
+    guarantee: '100% Natural',
     qrVerificationTitle: 'Scan QR Code',
     qrVerificationSubtitle: 'Scan to verify',
     seo_title_addon: 'What is Samyun Wan and its real effect | Sports Nutrition',
@@ -36,53 +42,53 @@ export const en: TranslationKeys = {
   },
   about: {
     title: 'Why Choose Samyun Wan Armenia',
-    subtitle: 'The Only Official Representative in Armenia',
-    description: 'Samyun Wan Armenia is the official representative of Samyun Wan in Armenia. We offer only original and high-quality products for healthy weight gain and overall well-being.',
-    content: 'Our goal is to provide you with the best natural solutions to improve your health and physique. We believe that natural ingredients can work wonders, and our products are a vivid proof of that.',
+    subtitle: '5 years on the Armenian market, 60,000 happy buyers, the only official representative in Armenia',
+    description: 'Samyun Wan Armenia is the official representative of Samyun Wan in Armenia. We offer only original and high-quality products for healthy weight gain or loss using exclusively safe solutions.',
+    content: 'Our goal is to provide you with the best herbal solutions to improve your health and physique. We believe natural ingredients can work wonders, and Samyun Wan is clear proof.',
     natural: {
       title: 'Natural Ingredients',
-      desc: 'Made from 100% natural herbs, without chemical additives'
+      desc: '100% natural, made from 6 types of herbs, without chemical additives'
     },
     proven: {
       title: 'Proven Effectiveness',
-      desc: 'Thousands of satisfied customers worldwide'
+      desc: 'Tens of thousands of satisfied customers in Armenia'
     },
     safe: {
       title: 'Safe to Use',
-      desc: 'Minimal side effects, medical supervision'
+      desc: 'Minimal side effects'
     },
     fast: {
       title: 'Fast Results',
-      desc: 'First results within 1-2 weeks'
+      desc: 'First results noticeable within 1-2 weeks'
     },
     whyChooseUsTitle: 'Why Choose Us',
-    whyChooseUsOriginal: 'Original Product – We have been the official representative of Samyun Wan in Armenia for 6 years.',
-    whyChooseUsSafety: 'Safety – Each package has a QR code, which allows you to verify authenticity.',
-    whyChooseUsNoAdditives: 'No Fake Additives – Only original products, never drugs or harmful substances.',
-    whyChooseUsTrust: 'Customer Trust – Our customers receive safe and genuine products.',
+    whyChooseUsOriginal: 'Original product - we have been the official representative of Samyun Wan in Armenia for 6 years.',
+    whyChooseUsSafety: 'Safety - Every pack has a QR badge you can scan to verify authenticity; your health and trust come first for us.',
+    whyChooseUsNoAdditives: 'Only original products - Herbal ingredients, DOES NOT CONTAIN dexamethasone.',
+    whyChooseUsTrust: 'Customer trust - Noticeable results, real appetite boost.',
   },
   benefits: {
     title: 'Benefits of Samyun Wan',
-    subtitle: 'Proven results by thousands of customers',
+    subtitle: 'Proven results by tens of thousands of customers',
     appetite: {
       title: 'Appetite Enhancement',
-      desc: 'Naturally increases appetite and improves well-being'
+      desc: 'Naturally increases appetite and creates a strong desire to eat'
     },
     weight: {
       title: 'Weight Gain',
-      desc: 'Healthy increase in muscle mass and overall weight'
+      desc: 'Increases muscle mass and overall weight in a healthy way'
     },
     immunity: {
       title: 'Immunity Boost',
       desc: 'Strengthens the immune system and improves digestion'
     },
-  energy: {
-      title: 'Energy Levels',
-      desc: 'Increases energy levels and reduces fatigue'
+    energy: {
+      title: 'Energy',
+      desc: 'Provides plenty of energy and reduces fatigue thanks to better nutrition'
     },
     metabolism: {
-      title: 'Metabolism Improvement',
-      desc: 'Enhances metabolism and nutrient absorption'
+      title: 'Metabolism',
+      desc: 'Improves metabolism and nutrient absorption — the secret to fast results'
     },
     mood: {
       title: 'Mood Enhancement',
@@ -118,41 +124,7 @@ export const en: TranslationKeys = {
     products: 'Products',
     support: 'Support',
     follow: 'Follow Us',
-    legalAndWarning: `<section class="footer-warning" aria-label="Warning message">
-      <div class="footer-warning__grid footer-warning__grid--balanced">
-        <article class="footer-warning__card footer-warning__card--lead">
-          <p class="footer-warning__title">Warning</p>
-          <p class="footer-warning__subtitle">This is not a medicine</p>
-          <p class="footer-warning__text">Do not self-prescribe or replace professional treatment with this product.</p>
-          <ul class="footer-warning__list">
-            <li>pregnant women</li>
-            <li>breastfeeding mothers</li>
-            <li>children under 12 years of age</li>
-          </ul>
-        </article>
-        <article class="footer-warning__card footer-warning__card--info">
-          <p class="footer-warning__heading">About us</p>
-          <p class="footer-warning__text">Our team is the official representative of the brand in Armenia.</p>
-          <ul class="footer-warning__details">
-            <li>Official delivery across Armenia</li>
-            <li>Personal approach and programs</li>
-            <li>Support via Telegram and WhatsApp channels</li>
-          </ul>
-          <a class="footer-warning__action" href="#about">More details</a>
-        </article>
-        <article class="footer-warning__card footer-warning__card--products">
-          <p class="footer-warning__heading">Products</p>
-          <p class="footer-warning__text">We provide only original Samyun Wan products with QR verification.</p>
-          <ul class="footer-warning__details">
-            <li>Complete kits and bundle programs</li>
-            <li>Limited-edition releases</li>
-            <li>Full transaction transparency</li>
-          </ul>
-          <a class="footer-warning__action" href="#products">View products</a>
-        </article>
-      </div>
-      <p class="footer-warning__note">Use only the official platform contact channels and verify authenticity beforehand.</p>
-    </section>`,
+    legalAndWarning: `<span class="text-yellow-500 dark:text-yellow-300">Warning</span><br/> This is not a medicine, however:<br/> <span class="text-red-700 dark:text-red-300">Not recommended for pregnant women, nursing mothers, or anyone under 12.</span><br/><br/>For your health and safety, <span class="text-yellow-500 dark:text-yellow-300"><br/>WE URGE YOU</span> <br/><span class="text-red-700 dark:text-red-400">TO AVOID buying or using supposedly "certified" products of unknown origin.</span><br/><br/><span class="text-green-600 dark:text-green-300 font-semibold">Here are a few signs to tell a fake product from the original.</span>`,
     howToDistinguishButton: 'See here',
     productOriginal: 'Samyun Wan Original',
     productAuthenticity: 'Authenticity Check',
@@ -180,30 +152,30 @@ export const en: TranslationKeys = {
     addressPlaceholder: 'Delivery Address',
     phonePlaceholder: 'Phone Number',
     orderButton: 'Order',
-    orderSuccess1: 'Your order has been accepted. Thank you! рџ’љ',
+    orderSuccess1: 'Your order has been accepted. Thank you! 💚',
     orderSuccess2: 'Before 22:00, the courier will contact you in advance and deliver the order.',
     invalidPhone: 'Please enter a valid phone number.',
-    selectProducts: 'Select product(s) to order:',
-    freeDeliveryMessage: 'Free delivery in Yerevan'
+    selectProducts: 'Select product(s):',
+    freeDeliveryMessage: 'Free delivery'
   },
   authenticity: {
     title: 'Distinguish the Original',
     howToDistinguish: 'How to distinguish the original',
     attention: 'ATTENTION',
-    certificateDesc: 'This is the authenticity certificate for Samyun Wan. Pay attention to the logo and protective elements.',
-    differencesDesc: 'This image shows how to distinguish original Samyun Wan from fake. Follow the instructions to avoid counterfeits.',
+    certificateDesc: 'Pay attention to the logo and protective elements on the certificate.',
+    differencesDesc: 'This image shows how to tell original Samyun Wan from fake. Follow these instructions to avoid counterfeits.',
     waitingForLink: 'Please wait while our operator sends you the link.',
     qrScanInstructions: 'Scan the QR code to verify product authenticity.',
     qrScanSuccess: 'Request sent successfully.',
     qrScanError: 'QR code scan failed.',
     processingRequest: 'Please wait, your request is being processed.',
-    recordingInstructions: 'Record a short video of the product for verification.',
-    recordingSuccess: 'Video sent successfully for verification.',
-    recordingError: 'Video recording or sending failed.',
-    purchaseWarning: 'We recommend buying only from trusted sellers. Join those who choose real and 100% original Samyun Wan with a QR code and safety.',
-    disclaimer: 'Attention: The product is not a medicine and is not intended for persons under 18 years of age.',
-    fakeWarning: '⚠️ WARNING: Beware of Counterfeits!',
-    fakeWarningText: 'There are many scammers online selling fakes! Buy only from the official distributor!',
+    recordingInstructions: 'checking.',
+    recordingSuccess: 'verified.',
+    recordingError: 'failed.',
+    purchaseWarning: 'We recommend buying only from trusted sellers. Choose real and 100% original Samyun Wan with a QR code and safety.',
+    disclaimer: 'Attention: This is not a medicine; it is a food supplement made from herbal raw materials.',
+    fakeWarning: 'ATTENTION — avoid counterfeits',
+    fakeWarningText: 'Before buying Samyun Wan, study the real effects, composition, usage instructions, contraindications, and the reasons there are so many fakes. High demand has led to products made in unknown places with no quality control that do not match the manufacturer\'s formula. Many sellers do not provide certificates or state registration, which proves the goods are unreliable. Do NOT be fooled. Do NOT save money at the expense of your health. No store or online platform can show a real originality certificate for Samyun Wan. Any "paper" is either fake or just a generic supplement import document, often expired and unrelated to Samyun Wan. The QR security mark is placed at the upper-left of the expiration block (not on the top edge or the sides). Scan it to check authenticity. Packs without this QR mark are fake or of unknown origin. Counterfeits often contain large amounts of dexamethasone or other hormones that do not match the original formula and can seriously harm your health. Our company has been on the Armenian market for more than 5 years and works only with original, certified products. Tens of thousands of loyal buyers trust us. Do not trust dubious offers on marketplaces or social media for 3000 AMD that come without QR, documents, or proof of safety.',
     originalTitle: '✅ Original Samyun Wan',
     originalFeature1: '• QR code on the package for verification',
     originalFeature2: '• Purchased only from official distributor',
@@ -211,103 +183,116 @@ export const en: TranslationKeys = {
     originalFeature4: '• Certificate of authenticity',
     originalFeature5: '• Contact: +37495653666',
     fakeTitle: '❌ Counterfeit',
-    fakeFeature1: '• NO QR code on the package',
+    fakeFeature1: '• No QR code on the package',
     fakeFeature2: '• Sold on unknown websites',
     fakeFeature3: '• Fake packaging',
     fakeFeature4: '• No certificate',
-    fakeFeature5: '• Dangerous to health!',
+    fakeFeature5: '• Dangerous to health, contains dexamethasone',
     verificationTitle: '🔍 How to Verify Authenticity',
-    verificationStep1: '1. Check the QR code on the package',
-    verificationStep2: '2. Buy only from the official distributor',
+    verificationStep1: '1. Check the QR code in the upper-left area of the expiration date block (not on the top edge or sides) as shown',
+    verificationStep2: '2. Beware of buying from list.am or other marketplaces',
     verificationStep3: '3. Beware of unknown websites',
     verificationStep4: '4. Call +37495653666 for verification',
     verifyButton: 'Verify Product Authenticity',
   },
   article: {
-    metaTitle: 'Samyun Wan real reviews, in-depth study, risks, and trusted buying guide',
-    metaDescription: 'Before buying Samyun Wan, study real user feedback, ingredients, usage guidance, contraindications, and safety checks that separate originals from fakes.',
-    metaKeywords: 'Samyun Wan, Samyun Wan capsules, Samyun Wan Armenia, Samyun Wan real reviews, Samyun Wan results, Samyun Wan side effects, safe weight gain supplements, appetite boosters, natural muscle gain, verified seller guide',
-    title: 'Samyun Wan real reviews, full study, risks, and trusted buying guide',
-    subtitle: 'Security, ingredients, and consumer feedback you need before you buy',
-    intro: 'Look beyond marketing promises: examine real user feedback, ingredients, contraindications, and the safety signals behind fake Samyun Wan offers.',
+    metaTitle:
+      'Samyun Wan real reviews, full study, dangers, and trusted buying guide',
+    metaDescription:
+      'Before buying Samyun Wan, review real experiences, ingredients, side effects, and the reasons fakes appear so you can choose safely.',
+    metaKeywords:
+      'Samyun Wan, Samyun Wan capsules, Samyun Wan Armenia, Samyun Wan real reviews, Samyun Wan results, Samyun Wan original vs fake, Samyun Wan damage, Samyun Wan safety, weight gain supplements, appetite boosters, natural weight gain, safe weight gain methods, how to verify Samyun Wan, is Samyun Wan dangerous, where to buy Samyun Wan with certificate',
+    title: 'Samyun Wan real reviews, full study, dangers, and trusted buying guide',
+    subtitle: 'A guide to safety, ingredients, and real experience before you buy',
+    intro:
+      'Before buying Samyun Wan it is important to look past the ads and understand real user feedback, side risks, contraindications, and the issues sellers avoid mentioning. Fake versions often contain unknown ingredients that can harm health.',
     sections: [
       {
         id: 'capsules',
-        heading: 'What to know about Samyun Wan capsules',
-        description: 'The capsules often appear on marketplaces for 5000 AMD, claiming Indonesian origin and side-effect-free composition, yet most sellers refuse to disclose certificates or official registration.',
+        heading: 'Samyun Wan capsules - what you need to know',
+        description:
+          'Some sellers offer the capsules online for 5000 AMD claiming they are original, yet rarely show a certificate or state registration.',
         bullets: [
           'Demand a certificate of conformity and scan the QR code on every package.',
-          'Unverified batches with unknown ingredients should be avoided.',
-          'Official sellers respond immediately with documentation and QR verification.',
+          'Products of unknown origin with poor-quality ingredients are dangerous and often contain high doses of dexamethasone or other hormones.',
         ],
       },
       {
         id: 'audience',
         heading: 'Who needs Samyun Wan',
-        description: 'It is designed for people who struggle to gain weight, especially after illnesses or when appetite is minimal.',
+        description:
+          'The supplement is intended for people who struggle to gain weight, especially after losing weight or appetite.',
         bullets: [
-          'Naturally slim bodies that struggle to add mass',
-          'Those recovering from chronic conditions with lost appetite',
-          'People with irregular eating patterns or extremely fast metabolism',
-          'Athletes looking for safe, certified mass gain support',
+          'Naturally slim body types',
+          'Those who lost weight after chronic illnesses',
+          'People with appetite loss or irregular eating',
+          'People with metabolic issues who cannot gain weight',
         ],
       },
       {
         id: 'advantages',
         heading: 'Benefits of Samyun Wan',
-        description: 'Herbal extracts help lift appetite and support nutrient absorption without synthetic fillers.',
+        description:
+          'The supplement is made from herbal ingredients and can support dynamic, healthy weight gain without harmful additives.',
         bullets: [
-          'Herbal-based composition with no harmful additives',
-          'Stimulates appetite for more frequent balanced meals',
-          'Promotes faster weight gain with supportive digestion',
-          'Minimal side effects when taken as directed',
+          'Herbal-based composition with no chemical additives',
+          'Appetite boost and the ability to eat more frequently',
+          'Faster nutrient absorption and better digestion',
+          '8-10 kg total weight gain with proper use',
         ],
       },
       {
         id: 'results',
         heading: 'Results according to real users',
-        description: 'People report not just extra weight but also better digestion, immunity, joint comfort, and energy.',
+        description:
+          'Users note improved digestion, immunity, joint comfort, energy, and overall resilience.',
         bullets: [
-          'Improved digestive performance and nutrient uptake',
-          'Stronger immunity and resistance to infections',
-          'Healthier joints and defined body structure',
-          'More energy, better workouts, and higher resilience',
+          'Better digestion and nutrient absorption',
+          'Stronger immunity',
+          'Improved joint stability',
+          'More energy and less fatigue',
+          'Clearer body shape and tone',
+          'Higher physical endurance',
         ],
       },
       {
         id: 'side-effects',
-        heading: 'Samyun Wan side effects to be aware of',
-        description: 'Side effects are rare (around 2.5%) and usually tied to misuse or sensitivity.',
+        heading: 'Real side effects to watch',
+        description:
+          'Side effects are rare and mostly linked to misuse or individual sensitivity.',
         bullets: [
           'Drowsiness during the first two or three days',
-          'Mild edema when taking two capsules daily without enough hydration',
-          'Skin rash when combining with excessively high protein intake',
+          'Mild edema when taking two capsules a day',
+          'Skin rash when protein intake is too high',
         ],
       },
       {
         id: 'contraindications',
         heading: 'Contraindications and safety notes',
-        description: 'Only buy from licensed sellers—counterfeit products may disrupt hormones or strain the liver.',
+        description:
+          'Not recommended for pregnant women, breastfeeding mothers, children under 12, and people with chronic conditions. Counterfeits can be especially harmful.',
         bullets: [
-          'Check licenses, certificates, and official contact details',
-          'Avoid anonymous marketplaces or unknown links',
-          'Pair the supplement with professional nutrition and training advice',
+          'Verify the reliability of the seller',
+          'Counterfeits can disrupt hormones',
+          'May trigger allergic reactions and liver issues',
         ],
       },
       {
         id: 'usage',
         heading: 'How to use Samyun Wan safely and effectively',
-        description: 'Combine it with a balanced diet, strength training, and restful habits for sustainable mass gain.',
+        description:
+          'Combine the supplement with healthy food, training, and recovery to gain weight responsibly.',
         bullets: [
-          'Balanced, nutrient-dense meals throughout the day',
-          'Strength workouts and progressive overload',
-          'Adequate sleep, hydration, and daily routine',
-          'A nutritionist or coach to guide the regimen',
+          'Balanced, high-calorie nutrition',
+          'Workouts and strength training',
+          'Enough sleep and daily routine',
+          'Consult a nutritionist or coach',
         ],
       },
     ],
-    conclusion: 'This holistic approach lets you gain weight confidently, trusting only certified Samyun Wan while keeping your health on track.',
-    ctaLabel: 'Order certified Samyun Wan today',
+    conclusion:
+      'This approach helps you gain weight and stay healthy while confidently choosing Samyun Wan.',
+    ctaLabel: 'Order Samyun Wan',
     ctaLink: 'https://samyun-wan.life/en',
   },
   loadingLinkModal: {
@@ -324,18 +309,20 @@ export const en: TranslationKeys = {
     orderWeightLoss: 'Order for Weight Loss',
   },
   faq: {
-    q1: 'How to distinguish original Samyun Wan from fake?',
-    a1: 'Check the QR code on the packaging.',
-    q2: 'How long does it to gain weight?',
-    a2: 'With 1-2 months of regular use.',
-    q3: 'Are there side effects from using Samyun Wan?',
-    a3: 'Samyun Wan is made from natural ingredients and has no side effects.',
-    q4: 'Contraindications',
-    a4: 'NOT RECOMMENDED FOR:<br />Pregnant women<br />Nursing mothers<br />Children under 14 years old',
-    q5: '',
-    a5: '',
-    q6: '',
-    a6: ''
+    q1: 'Pill usage guidelines.',
+    a1: 'The box has 21 pills: 20 red and 1 white. Take one pill per day at breakfast with food. The white pill is a double-effect pill; take it on day 10.',
+    q2: 'How often can I repeat or continue taking the pills?',
+    a2: 'The pills act gradually and start working fully from day 5, so it is best to continue without breaks to achieve greater results.',
+    q3: 'How to distinguish original Samyun Wan from fake?',
+    a3: 'The original has a QR code in the upper-left area of the expiration date field (not on the top). Scan it to confirm.',
+    q4: 'How long does it take to gain weight?',
+    a4: 'Every body is individual, but one box usually adds at least 6 kg (6-8 kg in 21 days).',
+    q5: 'Are there side effects from using Samyun Wan?',
+    a5: 'Samyun Wan is made from natural ingredients and has no side effects.',
+    q6: 'Contraindications',
+    a6: 'NOT RECOMMENDED FOR:<br />Pregnant women<br />Nursing mothers<br />Children under 14 years old',
+    q7: 'Bought a cheaper option and got no results?',
+    a7: 'Some China-made products look almost identical but contain dexamethasone instead of herbal ingredients. Weight gain is minimal or temporary from water retention. These cheaper, non-herbal versions often have high doses of dexamethasone and other hormones. Sellers claim they are original by pointing to a QR on the top of the box, but that mark appears on all generic boxes. The real product has a unique QR in the upper-left of the expiry block (as shown); scan it to verify.'
   },
   callbackRequest: {
     title: 'Request a Callback',

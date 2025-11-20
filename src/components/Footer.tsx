@@ -248,8 +248,10 @@ const Footer = () => {
   ];
 
   const cautionNote = (
-    <div className="mt-auto border-t border-white/10 pt-4 text-xs text-slate-400 leading-6">
-      {t.footer.caution}
+    <div className="mt-auto pt-4">
+      <div className="rounded-xl border border-amber-300/70 bg-amber-500/10 px-3 py-2 text-xs font-semibold text-amber-100 leading-6 shadow-[0_10px_30px_rgba(0,0,0,0.15)]">
+        {t.footer.caution}
+      </div>
     </div>
   );
 
@@ -290,14 +292,14 @@ const Footer = () => {
             <div className="relative flex flex-wrap items-center gap-3">
               <button
                 type="button"
-                className="cta"
+                className="cta shadow-[0_14px_36px_rgba(0,0,0,0.25)] ring-2 ring-white/70 ring-offset-2 ring-offset-slate-950 transition-transform duration-200 hover:-translate-y-0.5 min-w-[180px] px-5 py-3 animate-pulse"
                 onClick={openAuthenticityModal}
                 aria-label={t.footer.howToDistinguishButton}
               >
                 <span className="cta__arrow">
                   <span className="cta__arrow-body" />
                 </span>
-                <span className="cta__label">{t.footer.howToDistinguishButton}</span>
+                <span className="cta__label text-base font-semibold">{t.footer.howToDistinguishButton}</span>
               </button>
             </div>
             <div className="flex flex-wrap gap-2">

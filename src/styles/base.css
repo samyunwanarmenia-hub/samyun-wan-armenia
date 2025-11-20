@@ -40,6 +40,18 @@ html {
   scroll-behavior: smooth;
 }
 
+:root {
+  --theme-surface: #eef2f5;
+  --theme-soft: #e4eaef;
+  --theme-text: #111827;
+  --theme-muted: #475569;
+  --theme-border: rgba(15, 23, 42, 0.12);
+  --shadow-soft: 0 14px 38px rgba(0, 0, 0, 0.1);
+  --glow-mint: rgba(134, 180, 134, 0.16);
+  --glow-blue: rgba(116, 155, 200, 0.14);
+  --glow-gold: rgba(250, 204, 21, 0.1);
+}
+
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -47,6 +59,47 @@ body {
   line-height: 1.7;
   position: relative;
   overflow-x: hidden;
+  background:
+    radial-gradient(circle at 12% 18%, var(--glow-mint), transparent 32%),
+    radial-gradient(circle at 88% 10%, var(--glow-blue), transparent 30%),
+    radial-gradient(circle at 20% 78%, var(--glow-gold), transparent 28%),
+    linear-gradient(135deg, #f6f8fb 0%, #e9f1ed 55%, #edf1f7 100%);
+  color: var(--theme-text);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: -20% -10% auto;
+  height: 60%;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(40% 60% at 20% 30%, rgba(134, 180, 134, 0.2), transparent 55%),
+    radial-gradient(35% 55% at 75% 25%, rgba(116, 155, 200, 0.14), transparent 60%),
+    radial-gradient(45% 65% at 55% 70%, rgba(250, 204, 21, 0.1), transparent 60%);
+  filter: blur(40px);
+  opacity: 0.7;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.35), transparent 27%),
+    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.25), transparent 25%),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 30%, rgba(255, 255, 255, 0.06));
+  mix-blend-mode: screen;
+  opacity: 0.65;
+}
+
+html.dark body::before,
+html.dark body::after {
+  opacity: 0.08;
+  filter: blur(0);
 }
 
 ::selection {
@@ -63,12 +116,17 @@ html.dark {
   --theme-muted: #94a3b8 !important;
   --theme-border: rgba(148, 163, 184, 0.28) !important;
   --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.35) !important;
+  --glow-mint: rgba(134, 180, 134, 0.14);
+  --glow-blue: rgba(116, 155, 200, 0.12);
+  --glow-gold: rgba(250, 204, 21, 0.08);
 }
 
 html.dark body {
-  background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.04), transparent 26%),
-    radial-gradient(circle at 90% 10%, rgba(108, 144, 108, 0.06), transparent 28%),
-    #0b1220;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(134, 180, 134, 0.08), transparent 32%),
+    radial-gradient(circle at 82% 12%, rgba(116, 155, 200, 0.08), transparent 30%),
+    radial-gradient(circle at 24% 78%, rgba(250, 204, 21, 0.06), transparent 32%),
+    linear-gradient(140deg, #0b1220 0%, #0d1527 45%, #0b111d 100%);
   color: var(--theme-text);
 }
 
@@ -92,4 +150,21 @@ html.dark a {
 
 html.dark a:hover {
   color: #b8d4b8;
+}
+
+html.dark body::before {
+  background:
+    radial-gradient(40% 60% at 20% 30%, rgba(134, 180, 134, 0.12), transparent 55%),
+    radial-gradient(35% 55% at 75% 25%, rgba(116, 155, 200, 0.1), transparent 60%),
+    radial-gradient(45% 65% at 55% 70%, rgba(250, 204, 21, 0.06), transparent 60%);
+  opacity: 0.18;
+  filter: blur(50px);
+}
+
+html.dark body::after {
+  opacity: 0.12;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.12), transparent 27%),
+    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.08), transparent 25%),
+    linear-gradient(120deg, rgba(255, 255, 255, 0.05), transparent 32%, rgba(255, 255, 255, 0.04));
 }

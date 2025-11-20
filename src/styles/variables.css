@@ -49,6 +49,16 @@
   --bg-gradient-start-light: theme('colors.primary.50');
   --bg-gradient-mid-light: theme('colors.secondary.100');
   --bg-gradient-end-light: theme('colors.primary.50');
+
+  /* Background accent layers */
+  --bg-beam-primary: rgba(134, 180, 134, 0.36);
+  --bg-beam-secondary: rgba(255, 181, 120, 0.3);
+  --bg-beam-accent: rgba(128, 158, 255, 0.28);
+  --bg-grid-line: rgba(255, 255, 255, 0.22);
+  --bg-grid-shadow: rgba(255, 255, 255, 0.08);
+  --bg-dust-foreground: rgba(255, 255, 255, 0.28);
+  --bg-dust-accent: rgba(134, 180, 134, 0.18);
+  --bg-noise-opacity: 0.14;
 }
 
 .dark {
@@ -99,4 +109,14 @@
   --bg-gradient-start-dark: theme('colors.gray.900');
   --bg-gradient-mid-dark: theme('colors.gray.950');
   --bg-gradient-end-dark: theme('colors.gray.900');
+
+  /* Background accent layers */
+  --bg-beam-primary: rgba(110, 178, 153, 0.42);
+  --bg-beam-secondary: rgba(255, 161, 120, 0.3);
+  --bg-beam-accent: rgba(131, 156, 255, 0.34);
+  --bg-grid-line: rgba(255, 255, 255, 0.12);
+  --bg-grid-shadow: rgba(0, 0, 0, 0.18);
+  --bg-dust-foreground: rgba(255, 255, 255, 0.18);
+  --bg-dust-accent: rgba(110, 178, 153, 0.22);
+  --bg-noise-opacity: 0.1;
 }
