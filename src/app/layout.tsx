@@ -105,17 +105,18 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         {(GOOGLE_ANALYTICS_ID || GOOGLE_ADS_ID) && (
           <>
             <Script
-              id="ga-tag-manager"
-              src={`https://www.googletagmanager.com/gtag/js?id=${GOOGLE_ANALYTICS_ID || GOOGLE_ADS_ID}`}
+              id="google-gtag-aw-script"
+              src="https://www.googletagmanager.com/gtag/js?id=AW-17742658374"
               strategy="afterInteractive"
             />
-            <Script id="ga-init" strategy="afterInteractive">
+            <Script id="google-gtag-aw-init" strategy="afterInteractive">
               {`
+                // Google tag (gtag.js)
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){window.dataLayer.push(arguments);}
                 gtag('js', new Date());
-                ${GOOGLE_ANALYTICS_ID ? `gtag('config', '${GOOGLE_ANALYTICS_ID}', { anonymize_ip: true, send_page_view: false });` : ''}
                 gtag('config', '${GOOGLE_ADS_ID}');
+                ${GOOGLE_ANALYTICS_ID ? `gtag('config', '${GOOGLE_ANALYTICS_ID}', { anonymize_ip: true, send_page_view: false });` : ''}
               `}
             </Script>
           </>
