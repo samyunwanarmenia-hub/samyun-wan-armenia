@@ -1,97 +1,105 @@
-const CACHE_STATIC_NAME = 'samyunwan-static-v2'; // Cache for static assets (updated version)
-const CACHE_DYNAMIC_NAME = 'samyunwan-dynamic-v1'; // Cache for dynamic requests
+// Bump version to force-update older caches that may serve stale HTML
+const CACHE_VERSION = 'v3';
+const CACHE_STATIC_NAME = `samyunwan-static-${CACHE_VERSION}`;
+const CACHE_DYNAMIC_NAME = `samyunwan-dynamic-${CACHE_VERSION}`;
 
+// Keep only non-HTML assets in the precache to avoid serving stale pages
 const STATIC_URLS_TO_CACHE = [
-  '/',
-  '/hy',
-  '/ru',
-  '/en',
   '/favicon.ico',
   '/favicon.png',
   '/site.webmanifest',
   '/loading.gif',
-  // Add your font files here if they are critical and not handled by dynamic caching
   '/fonts/CalSans-SemiBold.woff2',
   '/fonts/Inter-Bold.woff2',
   '/fonts/Inter-Medium.woff2',
   '/fonts/Inter-Regular.woff2',
   '/fonts/Inter-SemiBold.woff2',
-  // Add other critical static assets that don't change often
 ];
 
-self.addEventListener('install', (event) => {
-  console.log('[Service Worker] Installing Service Worker ...', event);
+self.addEventListener('install', event => {
   event.waitUntil(
-    caches.open(CACHE_STATIC_NAME)
-      .then((cache) => {
-        console.log('[Service Worker] Precaching App Shell');
-        return cache.addAll(STATIC_URLS_TO_CACHE);
-      })
+    caches.open(CACHE_STATIC_NAME).then(cache => cache.addAll(STATIC_URLS_TO_CACHE)),
   );
+  self.skipWaiting();
 });
 
-self.addEventListener('activate', (event) => {
-  console.log('[Service Worker] Activating Service Worker ...', event);
+self.addEventListener('activate', event => {
   event.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(keyList.map((key) => {
-        if (key !== CACHE_STATIC_NAME && key !== CACHE_DYNAMIC_NAME) {
-          console.log('[Service Worker] Removing old cache.', key);
-          return caches.delete(key);
-        }
-      }));
-    })
+    caches.keys().then(keys =>
+      Promise.all(
+        keys.map(key => {
+          if (key !== CACHE_STATIC_NAME && key !== CACHE_DYNAMIC_NAME) {
+            return caches.delete(key);
+          }
+          return undefined;
+        }),
+      ),
+    ),
   );
-  return self.clients.claim();
+  self.clients.claim();
 });
 
-self.addEventListener('fetch', (event) => {
-  // Check if the request is for a static asset that should be served cache-first
-  const isStaticAsset = STATIC_URLS_TO_CACHE.some(url => event.request.url.includes(url));
-  const isOptimizedImage = event.request.url.includes('/optimized/');
+// Network-first for navigations (HTML) to keep SEO/content fresh
+const isNavigationRequest = request =>
+  request.mode === 'navigate' ||
+  (request.method === 'GET' && request.headers.get('accept')?.includes('text/html'));
+
+self.addEventListener('fetch', event => {
+  const { request } = event;
+  const url = request.url;
+  const isStaticAsset = STATIC_URLS_TO_CACHE.some(path => url.includes(path));
+  const isOptimizedImage = url.includes('/optimized/');
+
+  if (isNavigationRequest(request)) {
+    event.respondWith(
+      fetch(request)
+        .then(response => {
+          // Cache the latest HTML for offline fallback
+          const copy = response.clone();
+          caches.open(CACHE_DYNAMIC_NAME).then(cache => cache.put(request, copy));
+          return response;
+        })
+        .catch(async () => {
+          const cached = await caches.match(request);
+          return (
+            cached ||
+            new Response('<h1>Offline</h1>', { headers: { 'Content-Type': 'text/html' } })
+          );
+        }),
+    );
+    return;
+  }
 
   if (isStaticAsset || isOptimizedImage) {
     event.respondWith(
-      caches.match(event.request).then((response) => {
-        if (response) {
-          return response; // Serve from cache if available
-        }
-        // If not in static cache, try network and then add to dynamic cache
-        return fetch(event.request).then((networkResponse) => {
-          return caches.open(CACHE_DYNAMIC_NAME).then((cache) => {
-            cache.put(event.request.url, networkResponse.clone());
-            return networkResponse;
-          });
-        }).catch(() => {
-          // Fallback for network failure if not in cache
-          // You might want to return an offline page here for navigation requests
-          console.log('[Service Worker] Network request failed for:', event.request.url);
-          return new Response('<h1>Offline</h1>', { headers: { 'Content-Type': 'text/html' } });
-        });
-      })
+      caches.match(request).then(cached => {
+        if (cached) return cached;
+        return fetch(request)
+          .then(response => {
+            const copy = response.clone();
+            caches.open(CACHE_DYNAMIC_NAME).then(cache => cache.put(request, copy));
+            return response;
+          })
+          .catch(() => new Response('<h1>Offline</h1>', { headers: { 'Content-Type': 'text/html' } }));
+      }),
     );
-  } else {
-    // For all other requests (e.g., API calls, external resources), use network-first strategy
-    event.respondWith(
-      fetch(event.request)
-        .then((networkResponse) => {
-          // Cache successful network responses dynamically
-          return caches.open(CACHE_DYNAMIC_NAME).then((cache) => {
-            cache.put(event.request.url, networkResponse.clone());
-            return networkResponse;
-          });
-        })
-        .catch(() => {
-          // If network fails, try to serve from cache
-          return caches.match(event.request).then((cacheResponse) => {
-            if (cacheResponse) {
-              return cacheResponse;
-            }
-            // If not in cache either, return a fallback
-            console.log('[Service Worker] Network and cache failed for:', event.request.url);
-            return new Response('<h1>Offline</h1>', { headers: { 'Content-Type': 'text/html' } });
-          });
-        })
-    );
+    return;
   }
+
+  // Default: network-first with dynamic caching
+  event.respondWith(
+    fetch(request)
+      .then(response => {
+        const copy = response.clone();
+        caches.open(CACHE_DYNAMIC_NAME).then(cache => cache.put(request, copy));
+        return response;
+      })
+      .catch(async () => {
+        const cached = await caches.match(request);
+        return (
+          cached ||
+          new Response('<h1>Offline</h1>', { headers: { 'Content-Type': 'text/html' } })
+        );
+      }),
+  );
 });
