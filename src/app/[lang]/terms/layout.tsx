@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import { translations } from '@/i18n/translations';
-import { generateCommonMetadata } from '@/utils/metadataUtils';
+import { generateMetadata as generatePageMetadata } from '@/utils/pageMetadata';
 import { SITE_URL } from '@/config/siteConfig';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 
@@ -11,17 +11,18 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   const pageTitle = `${t.hero.title} | Terms & Conditions`;
   const pageDescription =
     'Условия использования официального сайта Samyun Wan Armenia. Правила заказа, доставки и проверки оригинальности продукции.';
-  const pageImage = `${SITE_URL}/optimized/og-image.jpg`;
+  const pageImage = `${SITE_URL}/api/og/${lang}?title=${encodeURIComponent(pageTitle)}`;
 
-  return generateCommonMetadata({
+  return generatePageMetadata({
     lang,
-    t,
+    titleKey: 'terms.title',
+    descriptionKey: 'terms.description',
+    keywords: [`${t.hero.title}`, 'terms', 'Samyun Wan Armenia'],
     pagePath: 'terms',
-    title: pageTitle,
-    description: pageDescription,
-    keywords: `${t.hero.title}, terms, Samyun Wan Armenia`,
     image: pageImage,
     imageAlt: pageTitle,
+    titleOverride: pageTitle,
+    descriptionOverride: pageDescription,
   });
 }
 

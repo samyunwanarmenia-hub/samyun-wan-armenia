@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { translations } from '@/i18n/translations';
 import { contactInfoData } from '@/data/contactInfo';
 import { ContactLayoutProps } from '@/types/global';
-import { generateCommonMetadata } from '@/utils/metadataUtils';
+import { generateMetadata as generatePageMetadata } from '@/utils/pageMetadata';
 import { SITE_URL } from '@/config/siteConfig';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 
@@ -22,19 +22,20 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     'Samyun Wan Armenia',
     'контакты Samyun Wan',
     'Samyun Wan կապ',
-  ].join(', ');
-  const pageImage = `${SITE_URL}/optimized/samyun-wan-armenia-600w.jpg`;
+  ];
+  const pageImage = `${SITE_URL}/api/og/${lang}?title=${encodeURIComponent(pageTitle)}`;
   const pageImageAlt = t.nav.contact;
 
-  return generateCommonMetadata({
+  return generatePageMetadata({
     lang,
-    t,
-    pagePath: 'contact',
-    title: pageTitle,
-    description: pageDescription,
+    titleKey: 'nav.contact',
+    descriptionKey: 'contact.title',
     keywords: pageKeywords,
+    pagePath: 'contact',
     image: pageImage,
     imageAlt: pageImageAlt,
+    titleOverride: pageTitle,
+    descriptionOverride: pageDescription,
   });
 }
 

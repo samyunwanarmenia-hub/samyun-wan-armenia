@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { translations } from '@/i18n/translations';
 import { ProductsLayoutProps } from '@/types/global';
-import { generateCommonMetadata } from '@/utils/metadataUtils';
+import { generateMetadata as generatePageMetadata } from '@/utils/pageMetadata';
 import { SITE_URL } from '@/config/siteConfig';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 
@@ -9,37 +9,29 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang];
 
-  const pageTitle = `${t.hero.title} - ${t.productShowcase.weightGainLabel} & ${t.productShowcase.weightLossLabel} | ${t.nav.products}`;
+  const pageTitle = `${t.nav.products} - ${t.hero.title}`;
   const pageDescription = `${t.productShowcase.weightGainDesc} | ${t.productShowcase.weightLossDesc} | ${t.hero.tagline} ${t.authenticity.howToDistinguish}`.trim();
-  const pageKeywords = [
-    t.hero.title,
-    t.nav.products,
-    t.productShowcase.weightGainLabel,
-    t.productShowcase.weightLossLabel,
-    'Samyun Wan Armenia',
-    'Samyun Wan original',
-    'Samyun Wan QR',
-    'Самюн Ван продукция',
-    'Սամյուն Վան',
-  ].join(', ');
-  const pageImage = `${SITE_URL}/optimized/samyun-wan-armenia-weight-gain-vitamin-original-whay-arm-600w.jpg`;
-  const pageImageAlt = t.productShowcase.weightGainLabel;
 
-  return generateCommonMetadata({
+  return generatePageMetadata({
     lang,
-    t,
+    titleKey: 'nav.products',
+    descriptionKey: 'productShowcase.weightGainDesc',
+    keywords: [
+      t.productShowcase.weightGainLabel,
+      t.productShowcase.weightLossLabel,
+      t.authenticity.howToDistinguish,
+    ],
     pagePath: 'products',
-    title: pageTitle,
-    description: pageDescription,
-    keywords: pageKeywords,
-    image: pageImage,
-    imageAlt: pageImageAlt,
+    image: `${SITE_URL}/api/og/${lang}?title=${encodeURIComponent(pageTitle)}`,
+    imageAlt: t.productShowcase.weightGainLabel,
     type: 'website',
+    titleOverride: pageTitle,
+    descriptionOverride: pageDescription,
   });
 }
 
 const ProductsLayout = ({ children, params }: ProductsLayoutProps) => {
-  const lang: SupportedLang = resolveLang(params.lang);
+  const _lang: SupportedLang = resolveLang(params.lang);
 
   return (
     <>{children}</>

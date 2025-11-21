@@ -2,8 +2,9 @@ import ContactSection from '@/components/ContactSection';
 import { buildPageMetadata } from '@/utils/pageMetadata';
 import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
 import { translations } from '@/i18n/translations';
-import { generateBreadcrumbSchema, SOCIAL_LINKS } from '@/utils/schemaUtils';
+import { generateBreadcrumbs, SOCIAL_LINKS } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
+import ScriptLD from '@/components/ScriptLD';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
   buildPageMetadata(params.lang, 'contact');
@@ -12,10 +13,7 @@ const ContactPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang] || translations.hy;
 
-  const breadcrumbData = generateBreadcrumbSchema([
-    { name: t.hero.title, url: `${SITE_URL}/${lang}` },
-    { name: t.contact.title, url: `${SITE_URL}/${lang}/contact` },
-  ]);
+  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['contact'] });
 
   const contactSchema = {
     '@context': 'https://schema.org',
@@ -52,14 +50,8 @@ const ContactPage = ({ params }: { params: { lang: string } }) => {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
-      />
+      <ScriptLD json={breadcrumbData} />
+      <ScriptLD json={contactSchema} />
       <ContactSection />
     </>
   );

@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { translations } from '@/i18n/translations';
 import { TrackOrderLayoutProps } from '@/types/global';
-import { generateCommonMetadata } from '@/utils/metadataUtils';
+import { generateMetadata as generatePageMetadata } from '@/utils/pageMetadata';
 import { SITE_URL } from '@/config/siteConfig';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 
@@ -17,19 +17,20 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     'Samyun Wan Armenia',
     'отследить заказ Samyun Wan',
     'Samyun Wan պատվերի ստուգում',
-  ].join(', ');
-  const pageImage = `${SITE_URL}/optimized/samyun-wan-product-600w.jpg`;
+  ];
+  const pageImage = `${SITE_URL}/api/og/${lang}?title=${encodeURIComponent(pageTitle)}`;
   const pageImageAlt = t.nav.trackOrder;
 
-  return generateCommonMetadata({
+  return generatePageMetadata({
     lang,
-    t,
-    pagePath: 'track-order',
-    title: pageTitle,
-    description: pageDescription,
+    titleKey: 'nav.trackOrder',
+    descriptionKey: 'trackOrder.subtitle',
     keywords: pageKeywords,
+    pagePath: 'track-order',
     image: pageImage,
     imageAlt: pageImageAlt,
+    titleOverride: pageTitle,
+    descriptionOverride: pageDescription,
   });
 }
 

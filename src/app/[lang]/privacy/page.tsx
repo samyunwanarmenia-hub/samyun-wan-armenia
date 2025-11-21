@@ -2,8 +2,8 @@ import { LEGAL_COPY, buildPageMetadata } from '@/utils/pageMetadata';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import LegalPageLayout from '@/components/LegalPageLayout';
 import { translations } from '@/i18n/translations';
-import { generateBreadcrumbSchema } from '@/utils/schemaUtils';
-import { SITE_URL } from '@/config/siteConfig';
+import { generateBreadcrumbs } from '@/utils/schemaUtils';
+import ScriptLD from '@/components/ScriptLD';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
   buildPageMetadata(params.lang, 'privacy');
@@ -20,17 +20,11 @@ const PrivacyPage = ({ params }: { params: { lang: string } }) => {
   const notice = PLACEHOLDER_NOTICE[lang] ?? PLACEHOLDER_NOTICE.hy;
   const t = translations[lang] || translations.hy;
 
-  const breadcrumbData = generateBreadcrumbSchema([
-    { name: t.hero.title, url: `${SITE_URL}/${lang}` },
-    { name: copy.privacyTitle, url: `${SITE_URL}/${lang}/privacy` },
-  ]);
+  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['privacy'] });
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-      />
+      <ScriptLD json={breadcrumbData} />
       <LegalPageLayout
         title={copy.privacyTitle}
         description={copy.privacyDescription}

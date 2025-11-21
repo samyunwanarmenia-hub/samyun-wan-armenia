@@ -1,4 +1,6 @@
 import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
+import { translations } from '@/i18n/translations';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 import type { Testimonial } from '@/types/global';
 
 const LOGO_URL = `${SITE_URL}/optimized/logo.png`;
@@ -94,6 +96,33 @@ export const generateFAQSchema = (
   };
 };
 
+export const generateFAQSchemaFromTranslations = (lang: string) => {
+  const normalized: SupportedLang = resolveLang(lang);
+  const t = translations[normalized] || translations.hy;
+  const faqPairs = [
+    { q: t.faq.q1, a: t.faq.a1 },
+    { q: t.faq.q2, a: t.faq.a2 },
+    { q: t.faq.q3, a: t.faq.a3 },
+    { q: t.faq.q4, a: t.faq.a4 },
+    { q: t.faq.q5, a: t.faq.a5 },
+    { q: t.faq.q6, a: t.faq.a6 },
+    { q: t.faq.q7, a: t.faq.a7 },
+  ];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqPairs.map(pair => ({
+      '@type': 'Question',
+      name: pair.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: pair.a,
+      },
+    })),
+  };
+};
+
 // BreadcrumbList Schema
 export const generateBreadcrumbSchema = (breadcrumbs: Array<{ name: string; url: string }>) => {
   return {
@@ -106,6 +135,45 @@ export const generateBreadcrumbSchema = (breadcrumbs: Array<{ name: string; url:
       item: crumb.url,
     })),
   };
+};
+
+export const generateBreadcrumbs = ({
+  lang,
+  segments,
+}: {
+  lang: string;
+  segments: string[];
+}) => {
+  const normalized: SupportedLang = resolveLang(lang);
+  const t = translations[normalized] || translations.hy;
+
+  const labelMap: Record<string, string> = {
+    home: t.nav.home,
+    about: t.nav.about,
+    benefits: t.nav.benefits,
+    products: t.nav.products,
+    testimonials: t.nav.testimonials,
+    contact: t.nav.contact,
+    faq: t.nav.faq,
+    'track-order': t.nav.trackOrder ?? 'Track order',
+    blogs: t.article?.title ?? 'Blogs',
+    'how-to-identify-fake': t.authenticity?.title ?? 'Authenticity',
+    privacy: 'Privacy',
+    terms: 'Terms',
+  };
+
+  const items = [
+    { name: t.nav.home, url: `${SITE_URL}/${normalized}` },
+    ...segments.map((segment, idx) => {
+      const slug = segments.slice(0, idx + 1).join('/');
+      return {
+        name: labelMap[segment] || segment,
+        url: `${SITE_URL}/${normalized}/${slug}`,
+      };
+    }),
+  ];
+
+  return generateBreadcrumbSchema(items);
 };
 
 // LocalBusiness Schema

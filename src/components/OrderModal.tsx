@@ -7,6 +7,7 @@ import ModalWrapper from './ModalWrapper';
 import { motion } from 'framer-motion';
 import { useOrderForm } from '@/hooks/useOrderForm'; // Import the new hook
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
+import { translations } from '@/i18n/translations';
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -71,6 +72,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
             const isSelected = selectedProducts.includes(product.labelKey);
             const productAlt =
               (product.altKey && t.productShowcase[product.altKey]) ||
+              (product.altKey && translations.en?.productShowcase?.[product.altKey as keyof typeof translations.en.productShowcase]) ||
               product.alt ||
               t.productShowcase.weightGainDesc;
             return (

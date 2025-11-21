@@ -1,28 +1,22 @@
 import AboutSection from '@/components/AboutSection';
 import { buildPageMetadata } from '@/utils/pageMetadata';
 import { translations } from '@/i18n/translations';
-import { generateBreadcrumbSchema } from '@/utils/schemaUtils';
-import { SITE_URL } from '@/config/siteConfig';
+import { generateBreadcrumbs } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
+import ScriptLD from '@/components/ScriptLD';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
   buildPageMetadata(params.lang, 'about');
 
 const AboutPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
-  const t = translations[lang] || translations.hy;
+  const _t = translations[lang] || translations.hy;
 
-  const breadcrumbData = generateBreadcrumbSchema([
-    { name: t.hero.title, url: `${SITE_URL}/${lang}` },
-    { name: t.about.title, url: `${SITE_URL}/${lang}/about` },
-  ]);
+  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['about'] });
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-      />
+      <ScriptLD json={breadcrumbData} />
       <AboutSection />
     </>
   );

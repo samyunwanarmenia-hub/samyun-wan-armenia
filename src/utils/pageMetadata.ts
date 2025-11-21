@@ -36,9 +36,70 @@ interface SitePageDefinition {
   };
 }
 
-const OG_IMAGE = `${SITE_URL}/optimized/og-image.jpg`;
-
 const buildKeywords = (...values: Array<string | undefined>) => values.filter(Boolean) as string[];
+
+const resolveTranslationKey = (obj: any, key: string | undefined) => {
+  if (!key) return undefined;
+  return key.split('.').reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : undefined), obj);
+};
+
+const truncateDescription = (text: string, limit = 160) => {
+  if (!text) return '';
+  if (text.length <= limit) return text;
+  return `${text.slice(0, limit).trimEnd()}...`;
+};
+
+type GenerateMetadataOptions = {
+  lang: string;
+  titleKey: string;
+  descriptionKey: string;
+  keywords?: string[];
+  pagePath?: string;
+  image?: string;
+  imageAlt?: string;
+  canonicalPath?: string;
+  type?: 'website' | 'article';
+  titleOverride?: string;
+  descriptionOverride?: string;
+};
+
+export const generateMetadata = ({
+  lang,
+  titleKey,
+  descriptionKey,
+  keywords = [],
+  pagePath = '',
+  image,
+  imageAlt,
+  canonicalPath,
+  type = 'website',
+  titleOverride,
+  descriptionOverride,
+}: GenerateMetadataOptions): Metadata => {
+  const normalizedLang = normalizeLang(lang);
+  const t = translations[normalizedLang] || translations.hy;
+
+  const translatedTitle = titleOverride ?? (resolveTranslationKey(t, titleKey) as string) ?? titleKey;
+  const translatedDescription =
+    descriptionOverride ?? (resolveTranslationKey(t, descriptionKey) as string) ?? descriptionKey;
+
+  const finalDescription = truncateDescription(translatedDescription);
+  const keywordList = Array.from(new Set([...(keywords || []), ...getSeoKeywords(normalizedLang)]));
+  const ogImage = image ?? `${SITE_URL}/api/og/${normalizedLang}?title=${encodeURIComponent(translatedTitle)}`;
+
+  return generateCommonMetadata({
+    lang: normalizedLang,
+    t,
+    pagePath,
+    title: `${translatedTitle} | Samyun Wan Armenia`,
+    description: finalDescription,
+    keywords: keywordList.join(', '),
+    image: ogImage,
+    imageAlt: imageAlt ?? translatedTitle,
+    type,
+    canonicalPath,
+  });
+};
 
 export const LEGAL_COPY: Record<
   SupportedLang,
@@ -345,16 +406,17 @@ export const buildPageMetadata = (
   const keywordList = keywords.length ? keywords : [title, t.hero.title];
   const extendedKeywords = Array.from(new Set([...keywordList, ...getSeoKeywords(normalizedLang)]));
 
-  return generateCommonMetadata({
+  return generateMetadata({
     lang: normalizedLang,
-    t,
+    titleKey: 'hero.title',
+    descriptionKey: 'hero.tagline',
     pagePath: config.path,
-    title,
-    description,
-    keywords: extendedKeywords.join(', '),
-    image: OG_IMAGE,
+    keywords: extendedKeywords,
+    image: `${SITE_URL}/api/og/${normalizedLang}?title=${encodeURIComponent(title)}`,
     imageAlt: imageAlt ?? title,
-    type: options?.type,
     canonicalPath: options?.canonicalPath,
+    type: options?.type,
+    titleOverride: title,
+    descriptionOverride: description,
   });
 };

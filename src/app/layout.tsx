@@ -14,9 +14,10 @@ import {
   OFFICIAL_CITY,
   OFFICIAL_REGISTRY_LAST_UPDATE,
 } from "@/config/siteConfig";
-
 import { generateLocalBusinessSchema, SOCIAL_LINKS } from "@/utils/schemaUtils";
 import { SEO_KEYWORDS } from "@/config/seoKeywords";
+import ScriptLD from "@/components/ScriptLD";
+import { SUPPORTED_LANGS } from "@/config/locales";
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
 const GOOGLE_ADS_ID = 'AW-17742658374';
@@ -90,17 +91,27 @@ const organizationStructuredData = {
 /* --------- LOCAL BUSINESS SCHEMA --------- */
 const localBusinessStructuredData = generateLocalBusinessSchema(SEO_KEYWORDS.hy);
 
+/* --------- WEBSITE + SEARCH SCHEMA --------- */
+const websiteStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  url: SITE_URL,
+  name: "Samyun Wan Armenia",
+  potentialAction: SUPPORTED_LANGS.map(lang => ({
+    "@type": "SearchAction",
+    target: `${SITE_URL}/${lang}/search?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  })),
+};
+
 /* --------- ROOT LAYOUT --------- */
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="hy" className={inter.variable} suppressHydrationWarning>
       <head>
-        <Script id="ld-org" type="application/ld+json">
-          {JSON.stringify(organizationStructuredData)}
-        </Script>
-        <Script id="ld-local" type="application/ld+json">
-          {JSON.stringify(localBusinessStructuredData)}
-        </Script>
+        <ScriptLD json={organizationStructuredData} />
+        <ScriptLD json={localBusinessStructuredData} />
+        <ScriptLD json={websiteStructuredData} />
       </head>
 
       <body>

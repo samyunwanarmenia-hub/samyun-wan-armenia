@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { translations } from '@/i18n/translations';
 import { QrVerifyLayoutProps } from '@/types/global';
-import { generateCommonMetadata } from '@/utils/metadataUtils';
+import { generateMetadata as generatePageMetadata } from '@/utils/pageMetadata';
 import { SITE_URL } from '@/config/siteConfig';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 
@@ -17,19 +17,20 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     'Samyun Wan Armenia',
     'QR проверка Samyun Wan',
     'Samyun Wan ստուգում',
-  ].join(', ');
-  const pageImage = `${SITE_URL}/optimized/samyun-wan-product-600w.jpg`;
+  ];
+  const pageImage = `${SITE_URL}/api/og/${lang}?title=${encodeURIComponent(pageTitle)}`;
   const pageImageAlt = t.authenticity.title;
 
-  return generateCommonMetadata({
+  return generatePageMetadata({
     lang,
-    t,
-    pagePath: 'verify/qr', // почему исправлено: удаляем внешний домен, чтобы canonical/hreflang строились на samyun-wan.life
-    title: pageTitle,
-    description: pageDescription,
+    titleKey: 'authenticity.title',
+    descriptionKey: 'authenticity.qrScanInstructions',
     keywords: pageKeywords,
+    pagePath: 'verify/qr',
     image: pageImage,
     imageAlt: pageImageAlt,
+    titleOverride: pageTitle,
+    descriptionOverride: pageDescription,
   });
 }
 

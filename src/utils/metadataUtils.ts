@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
 import { TranslationKeys } from '@/types/global';
 import { SITE_URL } from '@/config/siteConfig';
-import { DEFAULT_LANG, LOCALE_CODES } from '@/config/locales';
+import { LOCALE_CODES } from '@/config/locales';
 
 interface CommonMetadataOptions {
   lang: keyof typeof LOCALE_CODES;
@@ -50,7 +50,7 @@ const buildAlternateLanguages = (segments: string[]) => {
 
   // почему исправлено: x-default должен совпадать с sitemap, иначе Google игнорирует hreflang
   const hasPath = segments.length > 0;
-  result['x-default'] = hasPath ? buildLocalizedUrl(DEFAULT_LANG, segments) : SITE_URL;
+  result['x-default'] = hasPath ? buildLocalizedUrl('en', segments) : `${SITE_URL}/en`;
   return result;
 };
 

@@ -11,8 +11,8 @@ const LOCALE_CODES = {
   en: 'en-US',
 };
 
-// IMPORTANT FIX: Google requires real x-default pointing to root
-const DEFAULT_LANG = 'hy';
+// IMPORTANT FIX: Google requires real x-default pointing to English
+const DEFAULT_LANG = 'en';
 
 const ROOT_ENTRY = { changefreq: 'weekly', priority: 0.9 };
 const NOW_ISO = new Date().toISOString();
@@ -31,7 +31,7 @@ const SITE_PAGES = [
   { path: '', changefreq: 'weekly', priority: 0.9 },
   { path: 'about', changefreq: 'monthly', priority: 0.8 },
   { path: 'benefits', changefreq: 'monthly', priority: 0.8 },
-  { path: 'products', changefreq: 'weekly', priority: 0.8 },
+  { path: 'products', changefreq: 'weekly', priority: 1.0 },
   { path: 'testimonials', changefreq: 'monthly', priority: 0.7 },
   { path: 'faq', changefreq: 'monthly', priority: 0.7 },
   { path: 'contact', changefreq: 'weekly', priority: 0.7 },
@@ -74,10 +74,7 @@ const buildAlternateRefs = (baseUrl, segments) => {
   // Should point to LANGUAGE-LESS homepage (or main lang)
   refs.push({
     hreflang: 'x-default',
-    href:
-      sanitizedSegments.length === 0
-        ? `${baseUrl}`
-        : buildLocalizedUrl(baseUrl, DEFAULT_LANG, sanitizedSegments),
+    href: sanitizedSegments.length === 0 ? `${baseUrl}/en` : buildLocalizedUrl(baseUrl, DEFAULT_LANG, sanitizedSegments),
     hrefIsAbsolute: true,
   });
 

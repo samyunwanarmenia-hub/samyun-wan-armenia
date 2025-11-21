@@ -3,9 +3,10 @@ import { translations } from '@/i18n/translations';
 import { baseTestimonials } from '@/data/testimonials';
 import { generateReviewStructuredData } from '@/utils/structuredDataUtils';
 import { TestimonialsLayoutProps } from '@/types/global';
-import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { SITE_URL } from '@/config/siteConfig';
 import { resolveLang, type SupportedLang } from '@/config/locales';
+import { generateMetadata as generatePageMetadata } from '@/utils/pageMetadata';
+import ScriptLD from '@/components/ScriptLD';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang: SupportedLang = resolveLang(params.lang);
@@ -23,19 +24,21 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     'Samyun Wan Armenia отзывы',
     'Samyun Wan կարծիքներ',
     reviewKeywords,
-  ].join(', ');
-  const pageImage = `${SITE_URL}/optimized/samyun-wan-armenia-original-600w.jpg`;
+  ];
+  const pageImage = `${SITE_URL}/api/og/${lang}?title=${encodeURIComponent(pageTitle)}`;
   const pageImageAlt = t.testimonials.title;
 
-  return generateCommonMetadata({
+  return generatePageMetadata({
     lang,
-    t,
-    pagePath: 'testimonials',
-    title: pageTitle,
-    description: pageDescription,
+    titleKey: 'testimonials.title',
+    descriptionKey: 'testimonials.formSubtitle',
     keywords: pageKeywords,
+    pagePath: 'testimonials',
     image: pageImage,
     imageAlt: pageImageAlt,
+    type: 'website',
+    titleOverride: pageTitle,
+    descriptionOverride: pageDescription,
   });
 }
 
@@ -49,11 +52,7 @@ const TestimonialsLayout = ({ children, params }: TestimonialsLayoutProps) => {
   return (
     <>
       {reviewStructuredData.map((data, index) => (
-        <script
-          key={`review-schema-${index}`}
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
-        />
+        <ScriptLD key={`review-schema-${index}`} json={data} />
       ))}
       {children}
     </>

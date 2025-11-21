@@ -4,10 +4,11 @@ import { translations } from '@/i18n/translations';
 import { getBlogPost, getBlogStaticParams } from '@/data/blogs';
 import BlogArticleContent from '@/components/BlogArticleContent';
 import { buildBlogPostMetadata } from '@/utils/blogMetadata';
-import { generateBlogPostingSchema, generateBreadcrumbSchema } from '@/utils/schemaUtils';
+import { generateBlogPostingSchema, generateBreadcrumbs } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import { notFound } from 'next/navigation';
 import { SITE_URL } from '@/config/siteConfig';
+import ScriptLD from '@/components/ScriptLD';
 
 interface BlogDetailPageProps {
   params: { lang: string; slug: string };
@@ -47,11 +48,7 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
   const translation = post.translations[lang];
   const permalink = `${SITE_URL}/${lang}/blogs/${params.slug}`;
   const inLanguage = lang === 'hy' ? 'hy-AM' : lang === 'ru' ? 'ru-RU' : 'en-US';
-  const breadcrumbData = generateBreadcrumbSchema([
-    { name: tLang.hero.title, url: `${SITE_URL}/${lang}` },
-    { name: tLang.article.title, url: `${SITE_URL}/${lang}/blogs` },
-    { name: translation.title, url: permalink },
-  ]);
+  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['blogs', params.slug] });
   const blogPostingSchema = generateBlogPostingSchema({
     headline: translation.title,
     description: translation.summary,
@@ -66,14 +63,8 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
-      />
+      <ScriptLD json={breadcrumbData} />
+      <ScriptLD json={blogPostingSchema} />
 
       <section className="px-4 py-10 md:py-14 lg:py-16">
         <div className="mx-auto max-w-5xl space-y-6 lg:space-y-10">

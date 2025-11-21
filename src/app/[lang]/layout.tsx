@@ -2,12 +2,12 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 
 import { translations } from '@/i18n/translations';
-import { generateCommonMetadata } from '@/utils/metadataUtils';
 import LayoutClientProvider from '@/components/LayoutClientProvider';
 import HtmlLangSetter from '@/components/HtmlLangSetter';
 import { SITE_URL } from '@/config/siteConfig';
 import { resolveLang, type SupportedLang } from '@/config/locales';
-import { getSeoKeywords } from '@/config/seoKeywords';
+import { generateMetadata as generatePageMetadata } from '@/utils/pageMetadata';
+import ScriptLD from '@/components/ScriptLD';
 
 interface LangLayoutProps {
   children: ReactNode;
@@ -18,32 +18,21 @@ export async function generateMetadata({ params }: LangLayoutProps): Promise<Met
   const lang = resolveLang(params.lang);
   const t = translations[lang] || translations.hy;
 
-  const pageTitle = `${t.hero.title} - ${t.hero.subtitle} | ${t.hero.seo_title_addon}`;
-  const pageDescription = `${t.hero.tagline} ${t.about.description} ${t.benefits.subtitle}`.trim();
-  const pageKeywords = [
-    t.hero.title,
-    t.hero.subtitle,
-    t.hero.tagline,
-    'Samyun Wan Armenia',
-    'Samyun Wan QR verification',
-    'Samyun Wan authenticity check',
-    t.authenticity.title,
-    t.testimonials.title,
-    t.contact.title,
-    ...getSeoKeywords(lang),
-  ];
-  const pageImage = `${SITE_URL}/optimized/og-image.jpg`;
-  const pageImageAlt = `${t.hero.title} - ${t.hero.subtitle}`;
-
-  return generateCommonMetadata({
+  return generatePageMetadata({
     lang,
-    t,
+    titleKey: 'hero.title',
+    descriptionKey: 'hero.tagline',
+    keywords: [
+      t.hero.subtitle,
+      t.hero.tagline,
+      t.authenticity.title,
+      t.contact.title,
+    ],
     pagePath: '',
-    title: pageTitle,
-    description: pageDescription,
-    keywords: Array.from(new Set(pageKeywords)).join(', '),
-    image: pageImage,
-    imageAlt: pageImageAlt,
+    image: `${SITE_URL}/api/og/${lang}?title=${encodeURIComponent(t.hero.title)}`,
+    imageAlt: `${t.hero.title} - ${t.hero.subtitle}`,
+    titleOverride: `${t.hero.title} - ${t.hero.subtitle}`,
+    descriptionOverride: `${t.hero.tagline} ${t.about.description} ${t.benefits.subtitle}`.trim(),
   });
 }
 
@@ -69,14 +58,7 @@ const LangLayout = ({ children, params }: LangLayoutProps) => {
     <>
       <HtmlLangSetter lang={lang} />
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteStructuredData) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteStructuredData) }}
-      />
+      <ScriptLD json={webSiteStructuredData} />
 
       <LayoutClientProvider initialLang={lang}>
         {children}

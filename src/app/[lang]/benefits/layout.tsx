@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 import { translations } from '@/i18n/translations';
 import { benefitsItemsData } from '@/data/benefitsItems';
 import { BenefitsLayoutProps } from '@/types/global';
-import { generateCommonMetadata } from '@/utils/metadataUtils';
+import { generateMetadata as generatePageMetadata } from '@/utils/pageMetadata';
 import { SITE_URL } from '@/config/siteConfig';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 
@@ -26,18 +26,20 @@ export async function generateMetadata({ params }: BenefitsLayoutProps): Promise
   ]
     .filter(Boolean)
     .join(', ');
-  const pageImage = `${SITE_URL}/optimized/samyun-vitamin-gain-whey-600w.jpg`;
+  const keywordArray = pageKeywords.split(',').map(item => item.trim()).filter(Boolean);
+  const pageImage = `${SITE_URL}/api/og/${lang}?title=${encodeURIComponent(pageTitle)}`;
   const pageImageAlt = t.benefits.title;
 
-  return generateCommonMetadata({
+  return generatePageMetadata({
     lang,
-    t,
+    titleKey: 'benefits.title',
+    descriptionKey: 'benefits.subtitle',
+    keywords: keywordArray,
     pagePath: 'benefits',
-    title: pageTitle,
-    description: pageDescription,
-    keywords: pageKeywords,
     image: pageImage,
     imageAlt: pageImageAlt,
+    titleOverride: pageTitle,
+    descriptionOverride: pageDescription,
   });
 }
 

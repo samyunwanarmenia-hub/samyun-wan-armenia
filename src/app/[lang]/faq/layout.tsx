@@ -1,10 +1,11 @@
 import { Metadata } from 'next';
 import { translations } from '@/i18n/translations';
 import { FaqLayoutProps } from '@/types/global';
-import { generateCommonMetadata } from '@/utils/metadataUtils';
+import { generateMetadata as generatePageMetadata } from '@/utils/pageMetadata';
 import { SITE_URL } from '@/config/siteConfig';
 import { generateFaqStructuredData } from '@/utils/structuredDataUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
+import ScriptLD from '@/components/ScriptLD';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang: SupportedLang = resolveLang(params.lang);
@@ -18,19 +19,21 @@ export async function generateMetadata({ params }: { params: { lang: string } })
     'Samyun Wan Armenia FAQ',
     'Samyun Wan հարցեր',
     'Samyun Wan вопросы',
-  ].join(', ');
-  const pageImage = `${SITE_URL}/optimized/samyun-wan-product-600w.jpg`;
+  ];
+  const pageImage = `${SITE_URL}/api/og/${lang}?title=${encodeURIComponent(pageTitle)}`;
   const pageImageAlt = t.nav.faq;
 
-  return generateCommonMetadata({
+  return generatePageMetadata({
     lang,
-    t,
-    pagePath: 'faq',
-    title: pageTitle,
-    description: pageDescription,
+    titleKey: 'nav.faq',
+    descriptionKey: 'faq.q1',
     keywords: pageKeywords,
+    pagePath: 'faq',
     image: pageImage,
     imageAlt: pageImageAlt,
+    type: 'website',
+    titleOverride: pageTitle,
+    descriptionOverride: pageDescription,
   });
 }
 
@@ -41,10 +44,7 @@ const FaqLayout = ({ children, params }: FaqLayoutProps) => {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
-      />
+      <ScriptLD json={faqStructuredData} />
       {children}
     </>
   );

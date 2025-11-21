@@ -1,28 +1,22 @@
 import TrackOrderSection from '@/components/TrackOrderSection';
 import { buildPageMetadata } from '@/utils/pageMetadata';
 import { translations } from '@/i18n/translations';
-import { generateBreadcrumbSchema } from '@/utils/schemaUtils';
-import { SITE_URL } from '@/config/siteConfig';
+import { generateBreadcrumbs } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
+import ScriptLD from '@/components/ScriptLD';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
   buildPageMetadata(params.lang, 'track-order');
 
 const TrackOrderPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
-  const t = translations[lang] || translations.hy;
+  const _t = translations[lang] || translations.hy;
 
-  const breadcrumbData = generateBreadcrumbSchema([
-    { name: t.hero.title, url: `${SITE_URL}/${lang}` },
-    { name: t.trackOrder.title, url: `${SITE_URL}/${lang}/track-order` },
-  ]);
+  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['track-order'] });
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbData) }}
-      />
+      <ScriptLD json={breadcrumbData} />
       <TrackOrderSection />
     </>
   );

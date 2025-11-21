@@ -6,6 +6,7 @@ import { productShowcaseData } from '../data/productShowcaseData';
 import OptimizedImage from './OptimizedImage';
 import CallToActionButton from './CallToActionButton';
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
+import { translations } from '@/i18n/translations';
 
 interface SwipeableProductCarouselProps {
   t: TranslationKeys;
@@ -30,8 +31,11 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
   };
 
   const currentProduct: ProductShowcaseItem = productShowcaseData[currentIndex];
+  const fallbackEnAlt =
+    currentProduct.altKey && translations.en?.productShowcase?.[currentProduct.altKey as keyof typeof translations.en.productShowcase];
   const currentAlt =
     (currentProduct.altKey && t.productShowcase[currentProduct.altKey]) ||
+    fallbackEnAlt ||
     currentProduct.alt ||
     t.productShowcase.weightGainDesc;
 
