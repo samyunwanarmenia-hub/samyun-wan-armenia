@@ -16,6 +16,7 @@ import {
 } from "@/config/siteConfig";
 
 import { generateLocalBusinessSchema, SOCIAL_LINKS } from "@/utils/schemaUtils";
+import { SEO_KEYWORDS } from "@/config/seoKeywords";
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
 const GOOGLE_ADS_ID = 'AW-17742658374';
@@ -42,6 +43,7 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
+  keywords: SEO_KEYWORDS.hy.join(', '),
 };
 
 /* --------- ORGANIZATION SCHEMA --------- */
@@ -86,7 +88,7 @@ const organizationStructuredData = {
 };
 
 /* --------- LOCAL BUSINESS SCHEMA --------- */
-const localBusinessStructuredData = generateLocalBusinessSchema();
+const localBusinessStructuredData = generateLocalBusinessSchema(SEO_KEYWORDS.hy);
 
 /* --------- ROOT LAYOUT --------- */
 const RootLayout = ({ children }: { children: React.ReactNode }) => {

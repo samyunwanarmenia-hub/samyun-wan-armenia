@@ -5,6 +5,7 @@ import type { TranslationKeys } from '@/types/global';
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { SITE_URL } from '@/config/siteConfig';
 import { resolveLang as normalizeLang, type SupportedLang } from '@/config/locales';
+import { getSeoKeywords } from '@/config/seoKeywords';
 
 export type SitePageKey =
   | 'home'
@@ -342,6 +343,7 @@ export const buildPageMetadata = (
 
   const { title, description, keywords, imageAlt } = config.buildCopy(t, normalizedLang);
   const keywordList = keywords.length ? keywords : [title, t.hero.title];
+  const extendedKeywords = Array.from(new Set([...keywordList, ...getSeoKeywords(normalizedLang)]));
 
   return generateCommonMetadata({
     lang: normalizedLang,
@@ -349,7 +351,7 @@ export const buildPageMetadata = (
     pagePath: config.path,
     title,
     description,
-    keywords: keywordList.join(', '),
+    keywords: extendedKeywords.join(', '),
     image: OG_IMAGE,
     imageAlt: imageAlt ?? title,
     type: options?.type,

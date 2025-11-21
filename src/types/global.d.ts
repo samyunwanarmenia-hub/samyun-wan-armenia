@@ -223,6 +223,11 @@ export interface TranslationKeys {
     weightLossDesc: string;
     orderWeightGain: string;
     orderWeightLoss: string;
+    weightGainAlt: string;
+    weightLossAlt: string;
+    seoHeading: string;
+    seoSubheading: string;
+    seoParagraph: string;
   };
   faq: {
     q1: string;
@@ -326,7 +331,8 @@ export interface ContactInfoItem {
 
 export interface ProductShowcaseItem {
   src: string;
-  alt: string;
+  alt?: string;
+  altKey?: 'weightGainAlt' | 'weightLossAlt';
   labelKey: 'weightGainLabel' | 'weightLossLabel';
   descKey: 'weightLossDesc' | 'weightGainDesc';
   buttonTextKey: 'orderWeightGain' | 'orderWeightLoss';

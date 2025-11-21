@@ -33,6 +33,17 @@ const ProductShowcaseSection = () => {
           // Removed subtitle={t.hero.tagline}
           // Removed t={t}
         />
+        <div className="text-center max-w-2xl mx-auto space-y-2 mb-6">
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-100">
+            {t.productShowcase.seoHeading}
+          </h2>
+          <h3 className="text-sm font-medium text-primary-700 dark:text-primary-300">
+            {t.productShowcase.seoSubheading}
+          </h3>
+          <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
+            {t.productShowcase.seoParagraph}
+          </p>
+        </div>
         <motion.div
           className="w-full flex justify-center"
           variants={itemVariants}

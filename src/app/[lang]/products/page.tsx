@@ -6,6 +6,7 @@ import { SITE_URL } from '@/config/siteConfig';
 import { generateBreadcrumbSchema, generateProductSchema } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import { baseTestimonials } from '@/data/testimonials';
+import { getSeoKeywords } from '@/config/seoKeywords';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
   buildPageMetadata(params.lang, 'products');
@@ -41,6 +42,7 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
   })();
 
   const productsPageUrl = `${SITE_URL}/${lang}/products`;
+  const seoKeywords = getSeoKeywords(lang);
 
   const productSchemas = productShowcaseData.map(product => {
     const name = t.productShowcase[product.labelKey];
@@ -56,6 +58,7 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
       price: product.price,
       priceCurrency: 'AMD',
       reviews: [],
+      keywords: seoKeywords,
     });
 
     return {

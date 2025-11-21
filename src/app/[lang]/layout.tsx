@@ -7,6 +7,7 @@ import LayoutClientProvider from '@/components/LayoutClientProvider';
 import HtmlLangSetter from '@/components/HtmlLangSetter';
 import { SITE_URL } from '@/config/siteConfig';
 import { resolveLang, type SupportedLang } from '@/config/locales';
+import { getSeoKeywords } from '@/config/seoKeywords';
 
 interface LangLayoutProps {
   children: ReactNode;
@@ -29,7 +30,8 @@ export async function generateMetadata({ params }: LangLayoutProps): Promise<Met
     t.authenticity.title,
     t.testimonials.title,
     t.contact.title,
-  ].join(', ');
+    ...getSeoKeywords(lang),
+  ];
   const pageImage = `${SITE_URL}/optimized/og-image.jpg`;
   const pageImageAlt = `${t.hero.title} - ${t.hero.subtitle}`;
 
@@ -39,7 +41,7 @@ export async function generateMetadata({ params }: LangLayoutProps): Promise<Met
     pagePath: '',
     title: pageTitle,
     description: pageDescription,
-    keywords: pageKeywords,
+    keywords: Array.from(new Set(pageKeywords)).join(', '),
     image: pageImage,
     imageAlt: pageImageAlt,
   });

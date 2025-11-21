@@ -307,6 +307,11 @@ export const ru: TranslationKeys = {
     weightLossDesc: 'Для снижения веса',
     orderWeightGain: 'Заказать для набора веса',
     orderWeightLoss: 'Заказать для снижения веса',
+    weightGainAlt: 'samyun wan капсулы для набора веса, samyun wan купить в Ереване, оригинал samyun wan армения, натуральный продукт доставка по Армении',
+    weightLossAlt: 'капсулы Samyun Wan для снижения веса, samyun wan армения оригинал, купить в Ереване доставка по Армении',
+    seoHeading: 'Samyun Wan Армения — натуральный продукт и капсулы для набора веса',
+    seoSubheading: 'samyun wan купить в Ереване • доставка по Армении • samyun wan оригинал',
+    seoParagraph: 'Оригинал samyun wan армения: натуральный продукт, капсулы для набора веса и витамины для массы. Samyun Wan купить в Ереване с доставкой по Армении — authentic Samyun Wan для безопасного результата.',
   },
   faq: {
     q1: 'Правила приема таблеток.',

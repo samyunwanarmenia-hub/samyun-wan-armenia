@@ -69,6 +69,10 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
         >
           {productShowcaseData.map((product) => {
             const isSelected = selectedProducts.includes(product.labelKey);
+            const productAlt =
+              (product.altKey && t.productShowcase[product.altKey]) ||
+              product.alt ||
+              t.productShowcase.weightGainDesc;
             return (
               <InteractiveDiv
                 key={product.labelKey}
@@ -85,7 +89,7 @@ const OrderModal = ({ isOpen, onClose, t, currentLang, initialSelectedProductKey
               >
                 <OptimizedImage
                   src={product.src}
-                  alt={product.alt}
+                  alt={productAlt}
                   className="w-16 h-16 object-contain rounded-lg"
                   loading="eager"
                   sizes="64px"

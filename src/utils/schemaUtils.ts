@@ -29,6 +29,7 @@ export const generateProductSchema = (product: {
   price: number | string;
   priceCurrency?: string;
   reviews?: Testimonial[];
+  keywords?: string[];
 }) => {
   const priceValidUntil = new Date(new Date().setMonth(new Date().getMonth() + 1))
     .toISOString()
@@ -56,6 +57,7 @@ export const generateProductSchema = (product: {
         name: 'Samyun Wan Armenia',
       },
     },
+    ...(product.keywords?.length ? { keywords: product.keywords } : {}),
   };
 
   return schema;
@@ -107,7 +109,7 @@ export const generateBreadcrumbSchema = (breadcrumbs: Array<{ name: string; url:
 };
 
 // LocalBusiness Schema
-export const generateLocalBusinessSchema = () => {
+export const generateLocalBusinessSchema = (keywords?: string[]) => {
   const sameAs = Array.from(
     new Set([
       ...SOCIAL_LINKS,
@@ -142,6 +144,7 @@ export const generateLocalBusinessSchema = () => {
       closes: '22:00',
     },
     sameAs,
+    ...(keywords?.length ? { keywords } : {}),
   };
 };
 

@@ -30,6 +30,10 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
   };
 
   const currentProduct: ProductShowcaseItem = productShowcaseData[currentIndex];
+  const currentAlt =
+    (currentProduct.altKey && t.productShowcase[currentProduct.altKey]) ||
+    currentProduct.alt ||
+    t.productShowcase.weightGainDesc;
 
   const carouselVariants = {
     enter: (direction: number) => ({
@@ -107,7 +111,7 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
             >
               <OptimizedImage
                 src={currentProduct.src}
-                alt={currentProduct.alt}
+                alt={currentAlt}
                 className="w-28 h-28 object-contain drop-shadow-lg" 
                 loading="eager"
                 fetchPriority="high"

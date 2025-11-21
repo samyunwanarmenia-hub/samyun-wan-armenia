@@ -307,6 +307,11 @@ export const en: TranslationKeys = {
     weightLossDesc: 'For Weight Loss',
     orderWeightGain: 'Order for Weight Gain',
     orderWeightLoss: 'Order for Weight Loss',
+    weightGainAlt: 'Samuyn Wan weight gain capsules, natural weight gain product, authentic Samyun Wan Armenia, buy Samyun Wan Armenia with delivery',
+    weightLossAlt: 'Samyun Wan Armenia capsules for weight loss, authentic Samyun Wan, natural weight gain supplement alternative',
+    seoHeading: 'authentic Samyun Wan Armenia — weight gain capsules and natural weight gain product',
+    seoSubheading: 'buy Samyun Wan Armenia • authentic Samyun Wan • weight gain supplement',
+    seoParagraph: 'Order authentic Samyun Wan Armenia: natural weight gain product, trusted weight gain supplement, and Samuyn Wan capsules with delivery across Armenia for safe muscle mass growth.',
   },
   faq: {
     q1: 'Pill usage guidelines.',
