@@ -72,7 +72,6 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       priority={priority}
       fetchPriority={fetchPriority}
       onError={() => setImageError(true)}
-      unoptimized
     />
   );
 };

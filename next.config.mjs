@@ -6,8 +6,8 @@ const nextConfig = {
   swcMinify: true,
   trailingSlash: false,
   images: {
-    // Avoid runtime optimizer issues and serve local images as-is
-    unoptimized: true,
+    // Use the built-in optimizer to ship smaller, modern formats
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
         protocol: 'https',

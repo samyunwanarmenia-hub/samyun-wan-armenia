@@ -2,7 +2,7 @@ import { ProductShowcaseItem } from '../types/global';
 
 export const productShowcaseData: ProductShowcaseItem[] = [
   {
-    src: '/images/samyun-wan-weight-gain-qr.jpg',
+    src: '/optimized/samyun-wan-weight-gain-qr-300w.webp',
     altKey: 'weightGainAlt',
     labelKey: 'weightGainLabel',
     descKey: 'weightGainDesc',
@@ -10,7 +10,7 @@ export const productShowcaseData: ProductShowcaseItem[] = [
     price: 14000,
   },
   {
-    src: '/images/samyun-wan-slim-weight-loss-vitamin-original-whay-arm.png',
+    src: '/optimized/samyun-wan-slim-weight-loss-vitamin-original-whay-arm-300w.webp',
     altKey: 'weightLossAlt',
     labelKey: 'weightLossLabel',
     descKey: 'weightLossDesc',

@@ -225,15 +225,15 @@
     0 center / 200% 2px repeat-x;
   background-position-x: 100%;
   animation: cta-move-right 2s linear infinite;
-  -webkit-mask-image: url('https://assets.codepen.io/165585/arrow-dots.svg');
-  mask-image: url('https://assets.codepen.io/165585/arrow-dots.svg');
+  -webkit-mask-image: url('/assets/arrow-dots.svg');
+  mask-image: url('/assets/arrow-dots.svg');
   mask-position: center;
 }
 
 .cta__arrow-body::after {
-  background-image: url("https://assets.codepen.io/165585/arrow-dots.svg");
-  -webkit-mask-image: url('https://assets.codepen.io/165585/arrow-dots-mask.svg');
-  mask-image: url('https://assets.codepen.io/165585/arrow-dots-mask.svg');
+  background-image: url("/assets/arrow-dots.svg");
+  -webkit-mask-image: url('/assets/arrow-dots-mask.svg');
+  mask-image: url('/assets/arrow-dots-mask.svg');
   mask-position: center;
   background-position: center;
   filter: drop-shadow(0 0.5px 0.5px rgba(255, 255, 255, 0.5)) drop-shadow(0 0.25px 0.75px rgba(255, 255, 255, 0.5));

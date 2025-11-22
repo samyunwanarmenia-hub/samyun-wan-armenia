@@ -120,9 +120,9 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <Script
               id="google-gtag-aw-script"
               src="https://www.googletagmanager.com/gtag/js?id=AW-17742658374"
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="google-gtag-aw-init" strategy="afterInteractive">
+            <Script id="google-gtag-aw-init" strategy="lazyOnload">
               {`
                 // Google tag (gtag.js)
                 window.dataLayer = window.dataLayer || [];
