@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import type { SupportedLang } from '@/config/locales';
+import { LOCALE_CODES, type SupportedLang } from '@/config/locales';
 
 interface HtmlLangSetterProps {
   lang: SupportedLang;
@@ -10,7 +10,7 @@ interface HtmlLangSetterProps {
 
 const HtmlLangSetter = ({ lang }: HtmlLangSetterProps) => {
   useEffect(() => {
-    document.documentElement.lang = lang;
+    document.documentElement.lang = LOCALE_CODES[lang] || lang;
   }, [lang]);
 
   return null;

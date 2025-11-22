@@ -38,7 +38,6 @@ const SITE_PAGES = [
   { path: 'track-order', changefreq: 'weekly', priority: 0.7 },
   { path: 'blogs', changefreq: 'weekly', priority: 0.9 },
   { path: 'how-to-identify-fake', changefreq: 'weekly', priority: 0.9 },
-  { path: 'verify/qr', changefreq: 'monthly', priority: 0.7 },
   { path: 'privacy', changefreq: 'monthly', priority: 0.4 },
   { path: 'terms', changefreq: 'monthly', priority: 0.4 },
 ];
@@ -127,14 +126,6 @@ module.exports = {
 
     // Homepage
     entries.push(createRootEntry(baseUrl));
-
-    // Static public /blogs (non-i18n) page
-    entries.push({
-      loc: `${baseUrl}/blogs`,
-      changefreq: 'weekly',
-      priority: 0.9,
-      alternateRefs: buildAlternateRefs(baseUrl, ['blogs']),
-    });
 
     // All pages for all languages
     SITE_PAGES.forEach(page => {

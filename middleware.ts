@@ -1,9 +1,11 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
-import { resolveLang } from './src/config/locales';
+import { isSupportedLang, resolveLang } from './src/config/locales';
+
+const splitPath = (pathname: string) => pathname.split('/').filter(Boolean);
 
 const resolveLangFromPath = (pathname: string): string => {
-  const segments = pathname.split('/').filter(Boolean);
+  const segments = splitPath(pathname);
   const candidate = segments[0]?.toLowerCase();
   return resolveLang(candidate);
 };
@@ -12,6 +14,12 @@ const detectBrowserLanguage = (request: NextRequest): string => {
   const acceptLang = request.headers.get('accept-language') || '';
   const browserLang = acceptLang.split(',')[0]?.split('-')[0]?.toLowerCase() || '';
   return resolveLang(browserLang);
+};
+
+const hasLangPrefix = (pathname: string): boolean => {
+  const segments = splitPath(pathname);
+  const candidate = segments[0]?.toLowerCase();
+  return isSupportedLang(candidate);
 };
 
 export function middleware(request: NextRequest) {
@@ -23,6 +31,15 @@ export function middleware(request: NextRequest) {
     const url = request.nextUrl.clone();
     url.pathname = `/${targetLang}`;
     return NextResponse.redirect(url, 302);
+  }
+  
+  const isQrVerificationPath = pathname === '/verify/qr' || pathname.startsWith('/verify/qr/');
+
+  if (!hasLangPrefix(pathname) && isQrVerificationPath) {
+    const targetLang = detectBrowserLanguage(request);
+    const url = request.nextUrl.clone();
+    url.pathname = `/${targetLang}/verify/qr`;
+    return NextResponse.redirect(url, 308);
   }
   
   const lang = resolveLangFromPath(pathname);

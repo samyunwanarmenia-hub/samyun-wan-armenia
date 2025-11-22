@@ -40,6 +40,25 @@
   status = 301
   force = true
 
+# Force canonical domain + HTTPS (avoid www and http scheme)
+[[redirects]]
+  from = "http://www.samyun-wan.life/*"
+  to = "https://samyun-wan.life/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.samyun-wan.life/*"
+  to = "https://samyun-wan.life/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://samyun-wan.life/*"
+  to = "https://samyun-wan.life/:splat"
+  status = 301
+  force = true
+
 # Keep Netlify preview assets working while forcing canonical domain
 
 [[redirects]]

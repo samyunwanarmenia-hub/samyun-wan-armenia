@@ -14,6 +14,7 @@ interface OptimizedImageProps {
   sizes?: string;
   priority?: boolean;
   fetchPriority?: 'auto' | 'high' | 'low';
+  unoptimized?: boolean;
 }
 
 const OptimizedImage: React.FC<OptimizedImageProps> = ({
@@ -26,6 +27,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   sizes = '(max-width: 768px) 100vw, 50vw',
   priority = false,
   fetchPriority = 'auto',
+  unoptimized = true,
 }) => {
   const [imageError, setImageError] = useState(false);
   const normalizeSrc = (value?: string) => {
@@ -62,7 +64,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
 
   return (
     <Image
-      src={src}
+      src={normalizedSrc}
       alt={alt}
       width={width}
       height={height}
@@ -71,6 +73,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       sizes={sizes}
       priority={priority}
       fetchPriority={fetchPriority}
+      unoptimized={unoptimized}
       onError={() => setImageError(true)}
     />
   );

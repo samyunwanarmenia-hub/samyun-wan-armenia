@@ -1,8 +1,7 @@
-import { QR_VERIFICATION_URL, SITE_URL } from '@/config/siteConfig';
+import { QR_VERIFICATION_URL } from '@/config/siteConfig';
 import { translations } from '@/i18n/translations';
 import { generateBreadcrumbs } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
-import { redirect } from 'next/navigation';
 import ScriptLD from '@/components/ScriptLD';
 
 export const dynamic = 'force-dynamic';
@@ -13,9 +12,6 @@ const QrVerifyPage = ({ params }: { params: { lang: string } }) => {
   const t = translations[lang] || translations.hy;
 
   const breadcrumbData = generateBreadcrumbs({ lang, segments: ['verify', 'qr'] });
-
-  // Perform an immediate server redirect to the canonical QR verification URL
-  redirect(QR_VERIFICATION_URL);
 
   return (
     <>

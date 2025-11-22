@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { headers } from "next/headers";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "../app/globals.css";
@@ -17,7 +18,7 @@ import {
 import { generateLocalBusinessSchema, SOCIAL_LINKS } from "@/utils/schemaUtils";
 import { SEO_KEYWORDS } from "@/config/seoKeywords";
 import ScriptLD from "@/components/ScriptLD";
-import { SUPPORTED_LANGS } from "@/config/locales";
+import { DEFAULT_LANG, isSupportedLang, LOCALE_CODES, resolveLang, SUPPORTED_LANGS } from "@/config/locales";
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
 const GOOGLE_ADS_ID = 'AW-17742658374';
@@ -105,9 +106,39 @@ const websiteStructuredData = {
 };
 
 /* --------- ROOT LAYOUT --------- */
+export const dynamic = "force-dynamic";
+
+const extractLangFromPath = (rawPath?: string | null): typeof SUPPORTED_LANGS[number] | null => {
+  if (!rawPath) return null;
+
+  let pathname = rawPath;
+  if (rawPath.includes("://")) {
+    try {
+      pathname = new URL(rawPath).pathname;
+    } catch {
+      pathname = rawPath;
+    }
+  }
+
+  const candidate = pathname.split("/").filter(Boolean)[0]?.toLowerCase();
+  return isSupportedLang(candidate) ? (candidate as typeof SUPPORTED_LANGS[number]) : null;
+};
+
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
+  const headerList = headers();
+  const headerLang = headerList.get("x-current-lang") || undefined;
+
+  const fallbackPathLang =
+    extractLangFromPath(headerList.get("x-invoke-path")) ||
+    extractLangFromPath(headerList.get("x-matched-path")) ||
+    extractLangFromPath(headerList.get("x-forwarded-uri")) ||
+    extractLangFromPath(headerLang);
+
+  const resolvedLang = resolveLang(headerLang || fallbackPathLang || DEFAULT_LANG);
+  const htmlLang = LOCALE_CODES[resolvedLang] || resolvedLang;
+
   return (
-    <html lang="hy" className={inter.variable} suppressHydrationWarning>
+    <html lang={htmlLang} className={inter.variable} suppressHydrationWarning>
       <head>
         <ScriptLD json={organizationStructuredData} />
         <ScriptLD json={localBusinessStructuredData} />
