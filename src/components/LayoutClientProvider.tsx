@@ -10,13 +10,9 @@ import useActiveLink from '@/hooks/useActiveLink';
 import useNavigationUtils from '@/hooks/useNavigationUtils';
 import MainLayout from '@/layouts/MainLayout';
 // import IntroAnimation from './IntroAnimation'; // Удаляем статический импорт
-import { AnimatePresence } from 'framer-motion';
 import { ThemeProvider } from '@/context/ThemeContext';
 import ToastProvider from '@/components/ToastProvider';
 import dynamic from 'next/dynamic';
-
-// Динамически импортируем IntroAnimation
-const DynamicIntroAnimation = dynamic(() => import('./IntroAnimation'), { ssr: false });
 
 // Dynamically import client-only components with ssr: false
 const DynamicYandexMetrikaTracker = dynamic(() => import('@/components/YandexMetrikaTracker'), { ssr: false });
@@ -36,7 +32,6 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
   const [currentLangState, setCurrentLangState] = useState<string>(initialLang);
   const [loadingLinkModalOpen, setLoadingLinkModalOpen] = useState(false);
   const [loadingLinkClientId, setLoadingLinkClientId] = useState<string | null>(null);
-  const [showIntroAnimation, setShowIntroAnimation] = useState(false);
 
   // Determine if it's the QR verification page
   const isQrVerifyPage = useMemo(() => {
@@ -52,22 +47,6 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
     // Removed: console.log('LayoutClientProvider - initial Lang:', initialLang, 'currentLangState:', currentLangState);
   }, [initialLang, currentLangState]);
 
-  // Effect to manage intro animation and body overflow
-  useEffect(() => {
-    const animationDuration = 1300; // Adjusted duration for a smoother transition
-
-    // Start animation on client to avoid SSR/CSR markup mismatch
-    setShowIntroAnimation(true);
-    const timer = setTimeout(() => {
-      setShowIntroAnimation(false);
-    }, animationDuration);
-
-    return () => {
-      clearTimeout(timer);
-      document.body.style.overflow = '';
-    };
-  }, []); // Run only once on mount
-
   // Effect to update the HTML lang attribute and body classes
   useEffect(() => {
     document.documentElement.lang = currentLangState;
@@ -79,8 +58,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
     } else {
       document.body.classList.remove('body-blank');
       // ThemeContext will handle 'dark' class for other pages
-      // Dynamically set overflow based on intro animation state
-      document.body.style.overflow = showIntroAnimation ? 'hidden' : '';
+      document.body.style.overflow = '';
     }
 
     return () => {
@@ -88,7 +66,7 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
       document.body.classList.remove('body-blank');
       document.body.style.overflow = ''; // Always reset overflow on cleanup
     };
-  }, [currentLangState, isQrVerifyPage, showIntroAnimation]);
+  }, [currentLangState, isQrVerifyPage]);
 
   const t: TranslationKeys = useMemo(() => {
     const selectedTranslations = translations[currentLangState];
@@ -184,9 +162,6 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
             </MainLayout>
           )}
         </div>
-        <AnimatePresence>
-          {showIntroAnimation && <DynamicIntroAnimation key="intro-animation" />}
-        </AnimatePresence>
       </ThemeProvider>
     </LayoutContext.Provider>
   );

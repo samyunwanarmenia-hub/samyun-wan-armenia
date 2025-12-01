@@ -367,7 +367,9 @@ export interface TestimonialsSectionProps {
   currentLang: string;
   userTestimonial: Testimonial | null;
 }
-export interface ContactSectionProps {}
+export interface ContactSectionProps {
+  translations?: TranslationKeys;
+}
 export interface FaqSectionProps {
   params: { lang: string };
 }

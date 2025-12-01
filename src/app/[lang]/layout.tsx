@@ -2,12 +2,10 @@ import { ReactNode } from 'react';
 import { Metadata } from 'next';
 
 import { translations } from '@/i18n/translations';
-import LayoutClientProvider from '@/components/LayoutClientProvider';
 import HtmlLangSetter from '@/components/HtmlLangSetter';
 import { SITE_URL } from '@/config/siteConfig';
-import { resolveLang, type SupportedLang } from '@/config/locales';
+import { resolveLang, type SupportedLang, SUPPORTED_LANGS } from '@/config/locales';
 import { generateMetadata as generatePageMetadata } from '@/utils/pageMetadata';
-import ScriptLD from '@/components/ScriptLD';
 
 interface LangLayoutProps {
   children: ReactNode;
@@ -37,32 +35,16 @@ export async function generateMetadata({ params }: LangLayoutProps): Promise<Met
 }
 
 export async function generateStaticParams() {
-  const locales = Object.keys(translations);
-  return locales.map(lang => ({ lang }));
+  return SUPPORTED_LANGS.map(lang => ({ lang }));
 }
 
 const LangLayout = ({ children, params }: LangLayoutProps) => {
   const lang: SupportedLang = resolveLang(params.lang);
-  const t = translations[lang] || translations.hy;
-
-  const webSiteStructuredData = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    '@id': `${SITE_URL}#website`,
-    url: SITE_URL,
-    name: t.hero.title,
-    inLanguage: lang === 'hy' ? 'hy-AM' : lang === 'ru' ? 'ru-RU' : 'en-US',
-  };
 
   return (
     <>
       <HtmlLangSetter lang={lang} />
-
-      <ScriptLD json={webSiteStructuredData} />
-
-      <LayoutClientProvider initialLang={lang}>
-        {children}
-      </LayoutClientProvider>
+      {children}
     </>
   );
 };

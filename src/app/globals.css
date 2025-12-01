@@ -7,11 +7,6 @@
 @import '../styles/variables.css';
 @import '../styles/background-animations.css'; /* Re-enabled and will be updated */
 @import '../styles/fab.css';
-@import '../styles/intro-animation.css';
-@import '../styles/intro-animations/animation01.css';
-@import '../styles/intro-animations/animation02.css';
-@import '../styles/intro-animations/animation03.css';
-@import '../styles/intro-animations/animation04.css';
 @import '../styles/components.css';
 
 @layer base {

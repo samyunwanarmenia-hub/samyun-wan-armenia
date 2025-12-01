@@ -1,7 +1,8 @@
-import { translations } from '@/i18n/translations';
-import { statsData } from '@/data/stats'; // Import statsData directly
+import { Suspense } from 'react';
 import dynamic from 'next/dynamic';
 import { buildPageMetadata } from '@/utils/pageMetadata';
+import { resolveLang, type SupportedLang } from '@/config/locales';
+import { translations } from '@/i18n/translations';
 
 // Lazy load sections to reduce initial bundle size
 const HeroSection = dynamic(() => import('@/components/HeroSection'), {
@@ -16,13 +17,34 @@ export const generateMetadata = ({ params }: { params: { lang: string } }) =>
   buildPageMetadata(params.lang, 'home');
 
 const LangPage = async ({ params }: { params: { lang: string } }) => {
-  const currentLang = params.lang as keyof typeof translations;
-  const _t = translations[currentLang] || translations.hy;
+  const currentLang: SupportedLang = resolveLang(params.lang);
+  const { statsData } = await import('@/data/stats');
+  const t = translations[currentLang] || translations.hy;
+  const heroFallbackLabel = `Loading ${t.hero.title}`;
+  const productsFallbackLabel = `Loading ${t.nav.products}`;
 
   return (
     <>
-      <HeroSection stats={statsData} />
-      <ProductShowcaseSection />
+      <Suspense
+        fallback={
+          <section
+            className="min-h-[320px] rounded-3xl bg-gray-200/70 dark:bg-gray-800/60 animate-pulse"
+            aria-label={heroFallbackLabel}
+          />
+        }
+      >
+        <HeroSection stats={statsData} />
+      </Suspense>
+      <Suspense
+        fallback={
+          <section
+            className="min-h-[420px] mt-6 rounded-3xl bg-gray-200/70 dark:bg-gray-800/60 animate-pulse"
+            aria-label={productsFallbackLabel}
+          />
+        }
+      >
+        <ProductShowcaseSection />
+      </Suspense>
     </>
   );
 };

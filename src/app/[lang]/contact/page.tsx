@@ -52,7 +52,7 @@ const ContactPage = ({ params }: { params: { lang: string } }) => {
     <>
       <ScriptLD json={breadcrumbData} />
       <ScriptLD json={contactSchema} />
-      <ContactSection />
+      <ContactSection translations={t} />
     </>
   );
 };

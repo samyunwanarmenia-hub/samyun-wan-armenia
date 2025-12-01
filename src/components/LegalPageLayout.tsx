@@ -8,9 +8,22 @@ interface LegalPageLayoutProps {
   description: string;
   notice?: string;
   type: 'privacy' | 'terms';
+  versionLabel?: string;
+  versionValue?: string;
+  effectiveDateLabel?: string;
+  effectiveDateValue?: string;
 }
 
-const LegalPageLayout = ({ title, description, notice, type }: LegalPageLayoutProps) => {
+const LegalPageLayout = ({
+  title,
+  description,
+  notice,
+  type,
+  versionLabel,
+  versionValue,
+  effectiveDateLabel,
+  effectiveDateValue,
+}: LegalPageLayoutProps) => {
   const Icon = type === 'privacy' ? Shield : FileText;
 
   const containerVariants = {
@@ -63,11 +76,35 @@ const LegalPageLayout = ({ title, description, notice, type }: LegalPageLayoutPr
 
           {/* Description */}
           <motion.p
-            className="text-lg text-gray-600 dark:text-gray-300 text-center leading-relaxed mb-8"
+            className="text-lg text-gray-600 dark:text-gray-300 text-center leading-relaxed mb-6"
             variants={itemVariants}
           >
             {description}
           </motion.p>
+
+          {(versionValue || effectiveDateValue) && (
+            <motion.div
+              className="mb-6 flex flex-col items-center gap-1 text-sm text-gray-500 dark:text-gray-400"
+              variants={itemVariants}
+            >
+              {versionValue ? (
+                <span>
+                  <span className="font-semibold text-gray-700 dark:text-gray-200">
+                    {versionLabel ?? 'Version'}:
+                  </span>{' '}
+                  {versionValue}
+                </span>
+              ) : null}
+              {effectiveDateValue ? (
+                <span>
+                  <span className="font-semibold text-gray-700 dark:text-gray-200">
+                    {effectiveDateLabel ?? 'Effective date'}:
+                  </span>{' '}
+                  {effectiveDateValue}
+                </span>
+              ) : null}
+            </motion.div>
+          )}
 
           {/* Notice */}
           {notice && (

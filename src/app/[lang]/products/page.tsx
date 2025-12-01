@@ -12,6 +12,8 @@ import ScriptLD from '@/components/ScriptLD';
 export const generateMetadata = ({ params }: { params: { lang: string } }) =>
   buildPageMetadata(params.lang, 'products');
 
+export const revalidate = 60 * 60 * 12;
+
 const ProductsPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang] || translations.hy;
@@ -84,10 +86,33 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
     };
   });
 
-  const graphSchema =
-    productSchemas.length === 1
-      ? productSchemas[0]
-      : { '@context': 'https://schema.org', '@graph': productSchemas };
+  const productCollectionSchema = {
+    '@type': 'ProductCollection',
+    '@id': `${productsPageUrl}#collection`,
+    name: t.productShowcase.seoHeading ?? t.hero.title,
+    description: t.productShowcase.seoParagraph ?? t.hero.subtitle,
+    url: productsPageUrl,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': productsPageUrl,
+    },
+    hasOfferCatalog: {
+      '@type': 'OfferCatalog',
+      name: t.productShowcase.seoHeading ?? t.nav.products,
+      itemListElement: productSchemas.map((productSchema, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+          '@id': productSchema['@id'],
+        },
+      })),
+    },
+  };
+
+  const graphSchema = {
+    '@context': 'https://schema.org',
+    '@graph': [...productSchemas, productCollectionSchema],
+  };
 
   return (
     <>

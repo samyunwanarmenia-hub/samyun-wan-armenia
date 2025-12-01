@@ -5,6 +5,8 @@ import { ContactLayoutProps } from '@/types/global';
 import { generateMetadata as generatePageMetadata } from '@/utils/pageMetadata';
 import { SITE_URL } from '@/config/siteConfig';
 import { resolveLang, type SupportedLang } from '@/config/locales';
+import ScriptLD from '@/components/ScriptLD';
+import type { TranslationKeys } from '@/types/global';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang: SupportedLang = resolveLang(params.lang);
@@ -39,8 +41,64 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   });
 }
 
-const ContactLayout = ({ children }: ContactLayoutProps) => {
-  return <>{children}</>;
+const normalizeText = (value: string) => value.replace(/<br\s*\/?>/gi, ', ').replace(/<[^>]+>/g, '').trim();
+
+const buildContactSchema = (lang: SupportedLang, t: TranslationKeys) => {
+  const phoneNumbers = [
+    t.contact.phoneNumbers?.number1,
+    t.contact.phoneNumbers?.number2,
+  ].filter(Boolean);
+
+  const addressItem = contactInfoData.find(item => item.key === 'address');
+  const hoursSpecification = [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+      opens: '09:00',
+      closes: '23:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Sunday',
+      opens: '10:00',
+      closes: '18:00',
+    },
+  ];
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'Samyun Wan Armenia',
+    url: `${SITE_URL}/${lang}/contact`,
+    image: `${SITE_URL}/optimized/og-image.jpg`,
+    telephone: phoneNumbers,
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: normalizeText(addressItem?.details ?? '1 Teryan St'),
+      addressLocality: 'Yerevan',
+      addressCountry: 'AM',
+    },
+    contactPoint: phoneNumbers.map(phone => ({
+      '@type': 'ContactPoint',
+      telephone: phone,
+      contactType: 'customer support',
+      availableLanguage: ['hy-AM', 'ru-RU', 'en-US'],
+    })),
+    openingHoursSpecification: hoursSpecification,
+  };
+};
+
+const ContactLayout = ({ children, params }: ContactLayoutProps) => {
+  const lang: SupportedLang = resolveLang(params.lang);
+  const t = translations[lang] || translations.hy;
+  const contactSchema = buildContactSchema(lang, t);
+
+  return (
+    <>
+      <ScriptLD json={contactSchema} />
+      {children}
+    </>
+  );
 };
 
 export default ContactLayout;

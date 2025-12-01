@@ -7,9 +7,15 @@ import CallToActionButton from './CallToActionButton';
 import SectionHeader from './SectionHeader';
 import { useLayoutContext } from '@/context/LayoutContext';
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
+import type { TranslationKeys } from '@/types/global';
 
-const ContactSection = () => {
-  const { t, openContactModal } = useLayoutContext();
+interface ContactSectionProps {
+  translations?: TranslationKeys;
+}
+
+const ContactSection = ({ translations }: ContactSectionProps) => {
+  const { t: contextTranslations, openContactModal } = useLayoutContext();
+  const t = translations ?? contextTranslations;
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },

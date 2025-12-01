@@ -1,12 +1,29 @@
 import { LEGAL_COPY, buildPageMetadata } from '@/utils/pageMetadata';
-import { resolveLang, type SupportedLang } from '@/config/locales';
+import { resolveLang, type SupportedLang, SUPPORTED_LANGS } from '@/config/locales';
 import LegalPageLayout from '@/components/LegalPageLayout';
 import { translations } from '@/i18n/translations';
 import { generateBreadcrumbs } from '@/utils/schemaUtils';
 import ScriptLD from '@/components/ScriptLD';
+import { PRIVACY_EFFECTIVE_DATE, PRIVACY_POLICY_VERSION } from '@/config/siteConfig';
 
-export const generateMetadata = ({ params }: { params: { lang: string } }) =>
-  buildPageMetadata(params.lang, 'privacy');
+export const generateMetadata = ({ params }: { params: { lang: string } }) => {
+  const baseMetadata = buildPageMetadata(params.lang, 'privacy');
+  const languageAlternates = SUPPORTED_LANGS.reduce<Record<string, string>>((acc, locale) => {
+    acc[locale] = `/${locale}/privacy`;
+    return acc;
+  }, {});
+
+  return {
+    ...baseMetadata,
+    alternates: {
+      ...(baseMetadata.alternates ?? {}),
+      languages: {
+        ...(baseMetadata.alternates?.languages ?? {}),
+        ...languageAlternates,
+      },
+    },
+  };
+};
 
 const PLACEHOLDER_NOTICE: Record<SupportedLang, string> = {
   hy: 'Վերջնական իրավական տեքստը շուտով կավելացնենք այս բաժնում։',
@@ -14,11 +31,18 @@ const PLACEHOLDER_NOTICE: Record<SupportedLang, string> = {
   en: 'Full legal text will be published here soon.',
 };
 
+const META_LABELS: Record<SupportedLang, { version: string; effectiveDate: string }> = {
+  hy: { version: 'Տարբերակ', effectiveDate: 'Ուժի մեջ է մտնում' },
+  ru: { version: 'Версия', effectiveDate: 'Дата вступления в силу' },
+  en: { version: 'Version', effectiveDate: 'Effective date' },
+};
+
 const PrivacyPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const copy = LEGAL_COPY[lang] ?? LEGAL_COPY.hy;
   const notice = PLACEHOLDER_NOTICE[lang] ?? PLACEHOLDER_NOTICE.hy;
   const t = translations[lang] || translations.hy;
+  const { version, effectiveDate } = META_LABELS[lang] ?? META_LABELS.hy;
 
   const breadcrumbData = generateBreadcrumbs({ lang, segments: ['privacy'] });
 
@@ -30,6 +54,10 @@ const PrivacyPage = ({ params }: { params: { lang: string } }) => {
         description={copy.privacyDescription}
         notice={notice}
         type="privacy"
+        versionLabel={version}
+        versionValue={PRIVACY_POLICY_VERSION}
+        effectiveDateLabel={effectiveDate}
+        effectiveDateValue={PRIVACY_EFFECTIVE_DATE}
       />
     </>
   );

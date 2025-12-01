@@ -1,4 +1,4 @@
-import { Viewport } from 'next';
+﻿import { Viewport } from 'next';
 
 export const viewport: Viewport = {
   themeColor: [
@@ -7,11 +7,8 @@ export const viewport: Viewport = {
   ],
   width: 'device-width',
   initialScale: 1,
-  // You can add other viewport-related meta tags here
-  // For example, for Apple Web App:
-  // appleWebApp: {
-  //   capable: true,
-  //   statusBarStyle: 'default',
-  //   title: 'Samyun Wan Armenia', // This would come from translations
-  // },
+  maximumScale: 1,
+  userScalable: false,
+  interactiveWidget: 'resizes-visual',
+  viewportFit: 'cover',
 };

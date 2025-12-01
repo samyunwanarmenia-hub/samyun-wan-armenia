@@ -9,9 +9,21 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang];
 
-  const pageTitle = t.hero.title + ' - ' + t.nav.about;
+  const pageTitle = `${t.hero.title} - ${t.nav.about}`;
   const pageDescription = t.about.description;
-  const pageKeywords = `${t.hero.title}, ${t.nav.about}, samyun wan, armenia, official representative, natural ingredients, proven effectiveness, safe to use, fast results`.split(',').map(item => item.trim());
+  const keywordCandidates = [
+    t.hero.title,
+    t.nav.about,
+    t.about.subtitle,
+    'Samyun Wan',
+    'Armenia',
+    'official representative',
+    'natural ingredients',
+    'proven effectiveness',
+    'safe to use',
+    'fast results',
+  ];
+  const pageKeywords = Array.from(new Set(keywordCandidates.filter(Boolean)));
   const pageImage = `${SITE_URL}/api/og/${lang}?title=${encodeURIComponent(pageTitle)}`; // Generic image for about page
   const pageImageAlt = t.nav.about;
 

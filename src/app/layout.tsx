@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "../app/globals.css";
@@ -18,10 +18,11 @@ import {
 import { generateLocalBusinessSchema, SOCIAL_LINKS } from "@/utils/schemaUtils";
 import { SEO_KEYWORDS } from "@/config/seoKeywords";
 import ScriptLD from "@/components/ScriptLD";
+import LayoutClientProvider from "@/components/LayoutClientProvider";
 import { DEFAULT_LANG, isSupportedLang, LOCALE_CODES, resolveLang, SUPPORTED_LANGS } from "@/config/locales";
 
-const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID;
-const GOOGLE_ADS_ID = 'AW-17742658374';
+const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID || "";
+const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -126,7 +127,15 @@ const extractLangFromPath = (rawPath?: string | null): typeof SUPPORTED_LANGS[nu
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const headerList = headers();
+  const cookieStore = cookies();
   const headerLang = headerList.get("x-current-lang") || undefined;
+  const analyticsConsent =
+    cookieStore.get("analytics_consent")?.value === "granted" ||
+    cookieStore.get("analytics_consent")?.value === "true";
+  const marketingConsent =
+    cookieStore.get("marketing_consent")?.value === "granted" ||
+    cookieStore.get("marketing_consent")?.value === "true";
+  const allowAnalyticsScripts = (analyticsConsent || marketingConsent) && (GOOGLE_ANALYTICS_ID || GOOGLE_ADS_ID);
 
   const fallbackPathLang =
     extractLangFromPath(headerList.get("x-invoke-path")) ||
@@ -143,30 +152,54 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
         <ScriptLD json={organizationStructuredData} />
         <ScriptLD json={localBusinessStructuredData} />
         <ScriptLD json={websiteStructuredData} />
-      </head>
-
-      <body>
-        {(GOOGLE_ANALYTICS_ID || GOOGLE_ADS_ID) && (
+        {allowAnalyticsScripts && (
           <>
+            {/* Google tag (gtag.js) */}
             <Script
               id="google-gtag-aw-script"
-              src="https://www.googletagmanager.com/gtag/js?id=AW-17742658374"
-              strategy="lazyOnload"
+              src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(
+                GOOGLE_ADS_ID || GOOGLE_ANALYTICS_ID,
+              )}`}
+              strategy="afterInteractive"
             />
-            <Script id="google-gtag-aw-init" strategy="lazyOnload">
+            <Script id="google-gtag-aw-init" strategy="afterInteractive">
               {`
-                // Google tag (gtag.js)
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){window.dataLayer.push(arguments);}
                 gtag('js', new Date());
-                gtag('config', '${GOOGLE_ADS_ID}');
+                ${GOOGLE_ADS_ID ? `gtag('config', '${GOOGLE_ADS_ID}');` : ''}
                 ${GOOGLE_ANALYTICS_ID ? `gtag('config', '${GOOGLE_ANALYTICS_ID}', { anonymize_ip: true, send_page_view: false });` : ''}
+              `}
+            </Script>
+            <Script id="google-gtag-aw-conversion-helper" strategy="afterInteractive">
+              {`
+                function gtag_report_conversion(url) {
+                  const callback = function () {
+                    if (typeof url !== 'undefined') {
+                      window.location = url;
+                    }
+                  };
+                  if (typeof window.gtag === 'function' && '${GOOGLE_ADS_ID}') {
+                    gtag('event', 'conversion', {
+                      send_to: '${GOOGLE_ADS_ID}/f5pkCOXT0MkbEMb2rYxC',
+                      value: 1.0,
+                      currency: 'USD',
+                      event_callback: callback,
+                    });
+                  }
+                  return false;
+                }
+                window.gtag_report_conversion = gtag_report_conversion;
               `}
             </Script>
           </>
         )}
+      </head>
 
-        {children}
+      <body>
+        <LayoutClientProvider initialLang={resolvedLang}>
+          {children}
+        </LayoutClientProvider>
 
         <noscript>
           <img

@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og';
 import type { NextRequest } from 'next/server';
 import { translations } from '@/i18n/translations';
-import { resolveLang, type SupportedLang } from '@/config/locales';
+import { DEFAULT_LANG, resolveLang, type SupportedLang } from '@/config/locales';
 import { SITE_URL } from '@/config/siteConfig';
 
 export const runtime = 'edge';
@@ -9,14 +9,47 @@ export const revalidate = 3600;
 
 const WIDTH = 1200;
 const HEIGHT = 630;
+const TITLE_LIMIT = 120;
+const SUBTITLE_LIMIT = 200;
+const FONT_URL = 'https://fonts.gstatic.com/s/inter/v12/UcCO3FwrK3iLTQA62nQQ.ttf';
+
+let cachedFontData: ArrayBuffer | null = null;
+
+const getInterFont = async () => {
+  if (cachedFontData) return cachedFontData;
+  const response = await fetch(FONT_URL);
+  if (!response.ok) {
+    throw new Error('Failed to load Inter font for OG image');
+  }
+  cachedFontData = await response.arrayBuffer();
+  return cachedFontData;
+};
+
+const sanitizeText = (value: string | null, fallback: string, limit: number) => {
+  if (!value) return fallback;
+  const clean = value.replace(/[<>]/g, '').trim();
+  if (!clean) return fallback;
+  return clean.length > limit ? `${clean.slice(0, limit - 1)}…` : clean;
+};
 
 export async function GET(req: NextRequest, { params }: { params: { lang: string } }) {
   const { searchParams } = new URL(req.url);
-  const lang: SupportedLang = resolveLang(params.lang);
-  const t = translations[lang] || translations.hy;
+  let lang: SupportedLang = DEFAULT_LANG;
+  try {
+    lang = resolveLang(params.lang);
+  } catch {
+    lang = DEFAULT_LANG;
+  }
 
-  const title = searchParams.get('title') || `${t.hero.title} | Samyun Wan Armenia`;
-  const subtitle = searchParams.get('subtitle') || t.hero.subtitle || t.hero.tagline || '';
+  const t = translations[lang] || translations[DEFAULT_LANG];
+
+  const defaultTitle = `${t.hero.title} | Samyun Wan Armenia`;
+  const defaultSubtitle = t.hero.subtitle || t.hero.tagline || '';
+
+  const title = sanitizeText(searchParams.get('title'), defaultTitle, TITLE_LIMIT);
+  const subtitle = sanitizeText(searchParams.get('subtitle'), defaultSubtitle, SUBTITLE_LIMIT);
+
+  const fontData = await getInterFont().catch(() => null);
 
   return new ImageResponse(
     (
@@ -30,7 +63,7 @@ export async function GET(req: NextRequest, { params }: { params: { lang: string
           alignItems: 'center',
           background: 'linear-gradient(135deg, #f7fbe7 0%, #e0f2f1 100%)',
           color: '#0f172a',
-          fontFamily: 'Arial, sans-serif',
+          fontFamily: '"Inter", Arial, sans-serif',
           padding: '60px',
         }}
       >
@@ -68,7 +101,7 @@ export async function GET(req: NextRequest, { params }: { params: { lang: string
         </div>
         <h1
           style={{
-            fontSize: '60px',
+            fontSize: '56px',
             lineHeight: 1.1,
             textAlign: 'center',
             margin: '0 0 20px',
@@ -92,6 +125,19 @@ export async function GET(req: NextRequest, { params }: { params: { lang: string
         </p>
       </div>
     ),
-    { width: WIDTH, height: HEIGHT },
+    {
+      width: WIDTH,
+      height: HEIGHT,
+      fonts: fontData
+        ? [
+            {
+              name: 'Inter',
+              data: fontData,
+              style: 'normal',
+              weight: 700,
+            },
+          ]
+        : undefined,
+    },
   );
 }

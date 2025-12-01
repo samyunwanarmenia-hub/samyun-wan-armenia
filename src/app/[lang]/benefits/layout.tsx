@@ -10,23 +10,21 @@ export async function generateMetadata({ params }: BenefitsLayoutProps): Promise
   const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang];
 
-  const benefitKeywords = benefitsItemsData.map(item => t.benefits[item.key].title).join(', ');
+  const benefitTitles = benefitsItemsData.map(item => t.benefits[item.key].title);
   const benefitDescriptions = benefitsItemsData.map(item => t.benefits[item.key].desc).join('; ');
 
   const pageTitle = `${t.hero.title} - ${t.benefits.title}`;
   const pageDescription = `${t.benefits.subtitle} ${benefitDescriptions}`.trim();
-  const pageKeywords = [
+  const keywordCandidates = [
     t.hero.title,
     t.benefits.title,
     t.benefits.subtitle,
     'Samyun Wan Armenia',
-    benefitKeywords,
+    ...benefitTitles,
     'Samyun Wan преимущества',
     'Samyun Wan արդյունքներ',
-  ]
-    .filter(Boolean)
-    .join(', ');
-  const keywordArray = pageKeywords.split(',').map(item => item.trim()).filter(Boolean);
+  ];
+  const pageKeywords = Array.from(new Set(keywordCandidates.filter(Boolean)));
   const pageImage = `${SITE_URL}/api/og/${lang}?title=${encodeURIComponent(pageTitle)}`;
   const pageImageAlt = t.benefits.title;
 
@@ -34,7 +32,7 @@ export async function generateMetadata({ params }: BenefitsLayoutProps): Promise
     lang,
     titleKey: 'benefits.title',
     descriptionKey: 'benefits.subtitle',
-    keywords: keywordArray,
+    keywords: pageKeywords,
     pagePath: 'benefits',
     image: pageImage,
     imageAlt: pageImageAlt,

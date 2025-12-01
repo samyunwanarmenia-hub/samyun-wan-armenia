@@ -3,9 +3,7 @@ import { translations } from '@/i18n/translations';
 import { FaqLayoutProps } from '@/types/global';
 import { generateMetadata as generatePageMetadata } from '@/utils/pageMetadata';
 import { SITE_URL } from '@/config/siteConfig';
-import { generateFaqStructuredData } from '@/utils/structuredDataUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
-import ScriptLD from '@/components/ScriptLD';
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const lang: SupportedLang = resolveLang(params.lang);
@@ -37,17 +35,8 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   });
 }
 
-const FaqLayout = ({ children, params }: FaqLayoutProps) => {
-  const lang: SupportedLang = resolveLang(params.lang);
-  const t = translations[lang];
-  const faqStructuredData = generateFaqStructuredData(t, lang);
-
-  return (
-    <>
-      <ScriptLD json={faqStructuredData} />
-      {children}
-    </>
-  );
+const FaqLayout = ({ children }: FaqLayoutProps) => {
+  return <>{children}</>;
 };
 
 export default FaqLayout;

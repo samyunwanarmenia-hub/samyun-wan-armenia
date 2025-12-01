@@ -1,6 +1,5 @@
+import { cache } from 'react';
 import type { Metadata } from 'next';
-import { translations } from '@/i18n/translations';
-
 import { getBlogPost, getBlogStaticParams } from '@/data/blogs';
 import BlogArticleContent from '@/components/BlogArticleContent';
 import { buildBlogPostMetadata } from '@/utils/blogMetadata';
@@ -10,6 +9,8 @@ import { notFound } from 'next/navigation';
 import { SITE_URL } from '@/config/siteConfig';
 import ScriptLD from '@/components/ScriptLD';
 
+const fetchBlogPost = cache((slug: string) => getBlogPost(slug));
+
 interface BlogDetailPageProps {
   params: { lang: string; slug: string };
 }
@@ -17,13 +18,13 @@ interface BlogDetailPageProps {
 export async function generateMetadata({
   params,
 }: BlogDetailPageProps): Promise<Metadata> {
-  const post = getBlogPost(params.slug);
+  const post = fetchBlogPost(params.slug);
   if (!post) {
     notFound();
   }
 
   const lang: SupportedLang = resolveLang(params.lang);
-  const translation = post?.translations[lang];
+  const translation = post.translations[lang] || post.translations.hy;
 
   return buildBlogPostMetadata({
     lang,
@@ -38,22 +39,22 @@ export function generateStaticParams() {
 }
 
 const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
-  const post = getBlogPost(params.slug);
+  const post = fetchBlogPost(params.slug);
   if (!post) {
     notFound();
   }
 
   const lang: SupportedLang = resolveLang(params.lang);
-  const tLang = translations[lang] || translations.hy;
-  const translation = post.translations[lang];
+  const translation = post.translations[lang] || post.translations.hy;
   const permalink = `${SITE_URL}/${lang}/blogs/${params.slug}`;
   const inLanguage = lang === 'hy' ? 'hy-AM' : lang === 'ru' ? 'ru-RU' : 'en-US';
   const breadcrumbData = generateBreadcrumbs({ lang, segments: ['blogs', params.slug] });
+  const heroImageFallback = translation.heroImage || post.heroImage || `${SITE_URL}/optimized/og-image.jpg`;
   const blogPostingSchema = generateBlogPostingSchema({
     headline: translation.title,
     description: translation.summary,
     url: permalink,
-    image: translation.heroImage,
+    image: heroImageFallback,
     authorName: post.author,
     publisherName: 'Samyun Wan Armenia',
     datePublished: post.publishedAt,
