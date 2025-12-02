@@ -60,15 +60,16 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
       reviews: [],
       keywords: seoKeywords,
     });
+    const { offers, ...schemaWithoutOffers } = schema;
 
     return {
-      ...schema,
+      ...schemaWithoutOffers,
       '@id': productId,
       inLanguage: lang === 'hy' ? 'hy-AM' : lang === 'ru' ? 'ru-RU' : 'en-US',
       sku: `SW-${product.labelKey.toUpperCase()}-${lang.toUpperCase()}`,
       mpn: `MPN-${product.labelKey.toUpperCase()}`,
       offers: {
-        ...(schema as any).offers,
+        ...offers,
         url,
         priceValidUntil,
         availability: 'https://schema.org/InStock',

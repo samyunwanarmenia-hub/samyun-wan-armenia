@@ -98,7 +98,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
     if (isOpen) {
       setIsOpen(false);
     }
-  }, [pathname]);
+  }, [pathname, isOpen]);
 
   // Prevent background scrolling when the menu is open
   useEffect(() => {

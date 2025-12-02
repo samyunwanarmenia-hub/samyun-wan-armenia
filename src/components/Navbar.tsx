@@ -2,19 +2,17 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { NavbarProps, TranslationKeys } from '@/types/global';
+import { NavbarProps } from '@/types/global';
 import useNavigationUtils from '@/hooks/useNavigationUtils';
 import { useLayoutContext } from '@/context/LayoutContext';
-import { navigationSections } from '@/data/navigationSections';
 import MobileNav from './MobileNav';
 import ThemeToggle from './ThemeToggle';
 import LanguageSwitcher from './LanguageSwitcher';
-import InteractiveDiv from './InteractiveDiv';
 
 const Navbar: React.FC<NavbarProps> = () => {
   const [scrolled, setScrolled] = useState(false);
-  const { t, currentLang, getLinkClasses } = useLayoutContext();
-  const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);
+  const { t, currentLang } = useLayoutContext();
+  const { getHomePath } = useNavigationUtils(currentLang);
 
   useEffect(() => {
     const handleScroll = () => {

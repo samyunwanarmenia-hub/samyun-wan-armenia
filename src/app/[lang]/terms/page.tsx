@@ -1,7 +1,6 @@
 import { LEGAL_COPY, buildPageMetadata } from '@/utils/pageMetadata';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import LegalPageLayout from '@/components/LegalPageLayout';
-import { translations } from '@/i18n/translations';
 import { generateBreadcrumbs } from '@/utils/schemaUtils';
 import ScriptLD from '@/components/ScriptLD';
 
@@ -18,7 +17,6 @@ const TermsPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const copy = LEGAL_COPY[lang] ?? LEGAL_COPY.hy;
   const notice = PLACEHOLDER_NOTICE[lang] ?? PLACEHOLDER_NOTICE.hy;
-  const t = translations[lang] || translations.hy;
 
   const breadcrumbData = generateBreadcrumbs({ lang, segments: ['terms'] });
 

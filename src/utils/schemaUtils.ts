@@ -23,6 +23,34 @@ const toAbsoluteUrl = (value?: string) => {
   return value.startsWith('http') ? value : `${SITE_URL}${value}`;
 };
 
+type OfferSchema = {
+  '@type': 'Offer';
+  url: string;
+  priceCurrency: string;
+  price: string;
+  priceValidUntil: string;
+  availability: string;
+  itemCondition?: string;
+  seller: {
+    '@type': 'Organization';
+    name: string;
+  };
+};
+
+export type ProductSchema = {
+  '@context': 'https://schema.org';
+  '@type': 'Product';
+  name: string;
+  description: string;
+  image: string;
+  brand: {
+    '@type': 'Brand';
+    name: string;
+  };
+  offers: OfferSchema;
+  keywords?: string[];
+};
+
 // Product Schema with Reviews and AggregateRating
 export const generateProductSchema = (product: {
   name: string;
@@ -32,12 +60,12 @@ export const generateProductSchema = (product: {
   priceCurrency?: string;
   reviews?: Testimonial[];
   keywords?: string[];
-}) => {
+}): ProductSchema => {
   const priceValidUntil = new Date(new Date().setMonth(new Date().getMonth() + 1))
     .toISOString()
     .split('T')[0];
 
-  const schema: Record<string, unknown> = {
+  const schema: ProductSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,

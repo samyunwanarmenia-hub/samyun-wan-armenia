@@ -204,7 +204,7 @@ const FooterNavCard = ({
 
 const Footer = () => {
   const { t, currentLang, openAuthenticityModal } = useLayoutContext();
-  const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);
+  const { getSectionPath } = useNavigationUtils(currentLang);
 
   const aboutLinks = navigationSections.filter(section =>
     ['about', 'benefits', 'testimonials', 'contact'].includes(section.id),

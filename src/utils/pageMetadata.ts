@@ -38,9 +38,14 @@ interface SitePageDefinition {
 
 const buildKeywords = (...values: Array<string | undefined>) => values.filter(Boolean) as string[];
 
-const resolveTranslationKey = (obj: any, key: string | undefined) => {
+const resolveTranslationKey = (obj: unknown, key: string | undefined) => {
   if (!key) return undefined;
-  return key.split('.').reduce((acc, part) => (acc && acc[part] !== undefined ? acc[part] : undefined), obj);
+  return key.split('.').reduce<unknown>((acc, part) => {
+    if (acc && typeof acc === 'object' && part in (acc as Record<string, unknown>)) {
+      return (acc as Record<string, unknown>)[part];
+    }
+    return undefined;
+  }, obj);
 };
 
 const truncateDescription = (text: string, limit = 160) => {
