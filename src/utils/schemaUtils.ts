@@ -31,6 +31,37 @@ type OfferSchema = {
   priceValidUntil: string;
   availability: string;
   itemCondition?: string;
+  hasMerchantReturnPolicy: {
+    '@type': 'MerchantReturnPolicy';
+    returnPolicyCategory: string;
+  };
+  shippingDetails: Array<{
+    '@type': 'OfferShippingDetails';
+    shippingDestination: {
+      '@type': 'DefinedRegion';
+      addressCountry: string;
+    };
+    shippingRate: {
+      '@type': 'MonetaryAmount';
+      value: string;
+      currency: string;
+    };
+    deliveryTime?: {
+      '@type': 'ShippingDeliveryTime';
+      handlingTime?: {
+        '@type': 'QuantitativeValue';
+        minValue: number;
+        maxValue: number;
+        unitCode: string;
+      };
+      transitTime?: {
+        '@type': 'QuantitativeValue';
+        minValue: number;
+        maxValue: number;
+        unitCode: string;
+      };
+    };
+  }>;
   seller: {
     '@type': 'Organization';
     name: string;
@@ -82,6 +113,39 @@ export const generateProductSchema = (product: {
       price: product.price.toString(),
       priceValidUntil,
       availability: 'https://schema.org/InStock',
+      hasMerchantReturnPolicy: {
+        '@type': 'MerchantReturnPolicy',
+        returnPolicyCategory: 'https://schema.org/NoReturn',
+      },
+      shippingDetails: [
+        {
+          '@type': 'OfferShippingDetails',
+          shippingDestination: {
+            '@type': 'DefinedRegion',
+            addressCountry: 'AM',
+          },
+          shippingRate: {
+            '@type': 'MonetaryAmount',
+            value: '0',
+            currency: product.priceCurrency || 'AMD',
+          },
+          deliveryTime: {
+            '@type': 'ShippingDeliveryTime',
+            handlingTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 0,
+              maxValue: 1,
+              unitCode: 'd',
+            },
+            transitTime: {
+              '@type': 'QuantitativeValue',
+              minValue: 1,
+              maxValue: 3,
+              unitCode: 'd',
+            },
+          },
+        },
+      ],
       seller: {
         '@type': 'Organization',
         name: 'Samyun Wan Armenia',
