@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { buildPageMetadata } from '@/utils/pageMetadata';
-import { QR_VERIFICATION_URL } from '@/config/siteConfig';
+import { QR_VERIFICATION_URL, QR_VERIFICATION_REL } from '@/config/siteConfig';
 import { translations } from '@/i18n/translations';
 import type { TranslationKeys } from '@/types/global';
 import { generateBreadcrumbs } from '@/utils/schemaUtils';
@@ -90,6 +90,8 @@ const HowToIdentifyFakePage = ({ params }: { params: { lang: string } }) => {
                 <div className="text-center">
                   <a 
                     href={QR_VERIFICATION_URL} 
+                    rel={QR_VERIFICATION_REL}
+                    target="_blank"
                     className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg text-lg font-bold hover:bg-blue-700 transition-colors"
                   >
                     {t.authenticity.verifyButton}

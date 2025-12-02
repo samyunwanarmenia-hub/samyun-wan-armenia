@@ -2,7 +2,7 @@
 
 ## Findings (current status)
 - `public/blogs/index.html` — удалён (устаревший каноникал/OG/LD на Netlify больше не мешает).
-- `dev.html` — ссылки на `qr-wan.netlify.app` заменены на `https://samyun-wan.life/verify/qr`.
+- `dev.html` — ссылки теперь ведут на `https://qr-wan.netlify.app/` (помечены nofollow для избежания индексации).
 - `tmp_hy_blogs.html` — нет строк с Netlify, оставить как офлайн-выгрузку, если не публикуется.
 - `public/sitemap-0.xml` — корректно указывает на `https://samyun-wan.life/*`.
 - Redirectы в `netlify.toml` для `*.netlify.app` → `samyun-wan.life` уже есть.

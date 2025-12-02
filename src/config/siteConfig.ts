@@ -1,7 +1,11 @@
 export const DEFAULT_SITE_URL = 'https://samyun-wan.life';
+const DEFAULT_QR_VERIFICATION_URL = 'https://qr-wan.netlify.app/';
 
 const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
 const normalizedSiteUrl = rawSiteUrl ? rawSiteUrl.replace(/\/+$/, '') : undefined;
+const rawQrVerificationUrl = process.env.NEXT_PUBLIC_QR_VERIFICATION_URL?.trim();
+
+const normalizeUrlWithTrailingSlash = (url: string): string => `${url.replace(/\/+$/, '')}/`;
 
 if (typeof window === 'undefined' && process.env.NODE_ENV === 'production' && !normalizedSiteUrl) {
   throw new Error(
@@ -10,7 +14,13 @@ if (typeof window === 'undefined' && process.env.NODE_ENV === 'production' && !n
 }
 
 export const SITE_URL = normalizedSiteUrl && normalizedSiteUrl.length > 0 ? normalizedSiteUrl : DEFAULT_SITE_URL;
-export const QR_VERIFICATION_URL = `${SITE_URL}/verify/qr`;
+const resolvedQrUrl =
+  rawQrVerificationUrl && rawQrVerificationUrl.length > 0
+    ? normalizeUrlWithTrailingSlash(rawQrVerificationUrl)
+    : normalizeUrlWithTrailingSlash(DEFAULT_QR_VERIFICATION_URL);
+
+export const QR_VERIFICATION_URL = resolvedQrUrl;
+export const QR_VERIFICATION_REL = 'noopener noreferrer nofollow';
 
 const DEFAULT_PRIMARY_PHONE = '+37495653666';
 const DEFAULT_SECONDARY_PHONE = '+37496653666';

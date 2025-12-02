@@ -6,7 +6,7 @@ import { QRCodeCanvas } from 'qrcode.react';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { ShieldCheck } from 'lucide-react'; // Using ShieldCheck icon for authenticity
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
-import { QR_VERIFICATION_URL } from '@/config/siteConfig';
+import { QR_VERIFICATION_URL, QR_VERIFICATION_REL } from '@/config/siteConfig';
 
 interface HeroQrCodeBlockProps {
   delay?: number;
@@ -53,6 +53,8 @@ const HeroQrCodeBlock: React.FC<HeroQrCodeBlockProps> = ({ delay = 0 }) => {
       </div>
       <a 
         href={QR_VERIFICATION_URL}
+        rel={QR_VERIFICATION_REL}
+        target="_blank"
         className="group block p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
         aria-label={t.hero.qrBlockTitle}
       >

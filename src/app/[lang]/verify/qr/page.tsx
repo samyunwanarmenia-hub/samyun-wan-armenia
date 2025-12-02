@@ -1,4 +1,4 @@
-import { QR_VERIFICATION_URL } from '@/config/siteConfig';
+import { QR_VERIFICATION_URL, QR_VERIFICATION_REL } from '@/config/siteConfig';
 import { translations } from '@/i18n/translations';
 import { generateBreadcrumbs } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
@@ -23,6 +23,8 @@ const QrVerifyPage = ({ params }: { params: { lang: string } }) => {
           <a
             className="mt-6 inline-block rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white shadow-md transition hover:bg-blue-700"
             href={QR_VERIFICATION_URL}
+            rel={QR_VERIFICATION_REL}
+            target="_blank"
           >
             {t.authenticity.verifyButton}
           </a>

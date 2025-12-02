@@ -7,7 +7,7 @@ import SectionHeader from './SectionHeader';
 import { QRCodeCanvas } from 'qrcode.react';
 import { useLayoutContext } from '@/context/LayoutContext';
 import { useInView } from 'react-intersection-observer';
-import { QR_VERIFICATION_URL } from '@/config/siteConfig';
+import { QR_VERIFICATION_URL, QR_VERIFICATION_REL } from '@/config/siteConfig';
 
 const AuthenticityInfo = () => {
   const { t, openAuthenticityModal } = useLayoutContext();
@@ -70,6 +70,8 @@ const AuthenticityInfo = () => {
           {/* Use external QR verification link */}
           <a 
             href={QR_VERIFICATION_URL}
+            rel={QR_VERIFICATION_REL}
+            target="_blank"
             className="group mb-3 flex flex-col items-center p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200 w-full cursor-pointer"
             aria-label={t.hero.qrVerificationTitle}
           >

@@ -152,6 +152,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const marketingConsent =
     cookieStore.get("marketing_consent")?.value === "granted" ||
     cookieStore.get("marketing_consent")?.value === "true";
+  const hasTagManagerConsent = (analyticsConsent || marketingConsent) && !!GTM_ID;
   const allowAnalyticsScripts = (analyticsConsent || marketingConsent) && (GOOGLE_ANALYTICS_ID || GOOGLE_ADS_ID);
 
   const fallbackPathLang =
@@ -166,17 +167,15 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang={htmlLang} className={inter.variable} suppressHydrationWarning>
       <head>
-        {/* Google Tag Manager */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        {hasTagManagerConsent && (
+          <Script id="gtm-init" strategy="afterInteractive">
+            {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','${GTM_ID}');`,
-          }}
-        />
-        {/* End Google Tag Manager */}
+})(window,document,'script','dataLayer','${GTM_ID}');`}
+          </Script>
+        )}
         <ScriptLD json={organizationStructuredData} />
         <ScriptLD json={localBusinessStructuredData} />
         <ScriptLD json={websiteStructuredData} />
@@ -226,16 +225,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       </head>
 
       <body>
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
-            height="0"
-            width="0"
-            style={{ display: "none", visibility: "hidden" }}
-          />
-        </noscript>
-        {/* End Google Tag Manager (noscript) */}
+        {hasTagManagerConsent && (
+          <noscript>
+            <iframe
+              src={`https://www.googletagmanager.com/ns.html?id=${GTM_ID}`}
+              height="0"
+              width="0"
+              style={{ display: "none", visibility: "hidden" }}
+            />
+          </noscript>
+        )}
         <LayoutClientProvider initialLang={resolvedLang}>
           {children}
         </LayoutClientProvider>

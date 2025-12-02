@@ -129,7 +129,7 @@ export const BLOGS_PAGE_CONTENT: Partial<Record<SupportedLang, BlogsPageContent>
         id: 'authenticity',
         heading: 'Анализ упаковки и QR‑проверка',
         description:
-          'Оригинальный Samyun Wan имеет чёткую полиграфию и уникальный QR‑код. Сканируйте его на samyun-wan.life/verify/qr и сверяйте результат с оператором.',
+          'Оригинальный Samyun Wan имеет чёткую полиграфию и уникальный QR‑код. Сканируйте его на https://qr-wan.netlify.app/ и сверяйте результат с оператором.',
         bullets: [
           'Размытые печати или «переливающийся» логотип — признак кустарной подделки.',
           'QR не должен вести на случайные домены или выдавать ошибку.',
@@ -221,7 +221,7 @@ export const BLOGS_PAGE_CONTENT: Partial<Record<SupportedLang, BlogsPageContent>
         id: 'authenticity',
         heading: 'Authenticate every package',
         description:
-          'Original Samyun Wan ships with premium print quality and a unique QR badge. Scan it at samyun-wan.life/verify/qr and confirm the result with our operator.',
+          'Original Samyun Wan ships with premium print quality and a unique QR badge. Scan it at https://qr-wan.netlify.app/ and confirm the result with our operator.',
         bullets: [
           'Blurred seals or off-color labels = counterfeit.',
           'A QR code must load the official verification page without odd redirects.',

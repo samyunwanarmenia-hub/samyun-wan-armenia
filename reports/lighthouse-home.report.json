@@ -4583,7 +4583,7 @@
                 "width": 286,
                 "height": 202
               },
-              "snippet": "<a href=\"https://samyun-wan.life/verify/qr\" class=\"group block p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transit…\" aria-label=\"Ստուգեք իսկությունը\">",
+              "snippet": "<a href=\"https://qr-wan.netlify.app/\" class=\"group block p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transit…\" aria-label=\"Ստուգեք իսկությունը\">",
               "nodeLabel": "Սկանավորեք QR կոդը՝ ապրանքի իսկությունը ստուգելու համար։",
               "explanation": "Fix any of the following:\n  Text inside the element is not included in the accessible name"
             }

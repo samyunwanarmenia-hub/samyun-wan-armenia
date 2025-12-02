@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { QRCodeCanvas } from 'qrcode.react';
 import { ShieldCheck } from 'lucide-react';
 import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
-import { QR_VERIFICATION_URL } from '@/config/siteConfig';
+import { QR_VERIFICATION_URL, QR_VERIFICATION_REL } from '@/config/siteConfig';
 import { useEffect, useState } from 'react';
 
 const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, onClose, t }) => {
@@ -87,6 +87,8 @@ const AuthenticityInfoModal: React.FC<AuthenticityInfoModalProps> = ({ isOpen, o
           </div>
           <a 
             href={QR_VERIFICATION_URL}
+            rel={QR_VERIFICATION_REL}
+            target="_blank"
             className="group block p-2 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
         aria-label={t.hero.qrBlockTitle}
       >
