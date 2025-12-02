@@ -24,6 +24,7 @@ import { DEFAULT_LANG, isSupportedLang, LOCALE_CODES, resolveLang, SUPPORTED_LAN
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID || "";
 const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "";
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-56D2LTZS";
+const THEME_COLOR = "#86b486";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: "Samyun Wan Armenia",
   manifest: "/site.webmanifest",
-  themeColor: "#86b486",
+  themeColor: THEME_COLOR,
   appleWebApp: {
     capable: true,
     title: "Samyun Wan Armenia",
@@ -179,6 +180,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <ScriptLD json={organizationStructuredData} />
         <ScriptLD json={localBusinessStructuredData} />
         <ScriptLD json={websiteStructuredData} />
+        <meta name="theme-color" content={THEME_COLOR} />
         {allowAnalyticsScripts && (
           <>
             {/* Google tag (gtag.js) */}
