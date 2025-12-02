@@ -1,5 +1,5 @@
 // Bump version to force-update older caches that may serve stale HTML
-const CACHE_VERSION = 'v3';
+const CACHE_VERSION = 'v4';
 const CACHE_STATIC_NAME = `samyunwan-static-${CACHE_VERSION}`;
 const CACHE_DYNAMIC_NAME = `samyunwan-dynamic-${CACHE_VERSION}`;
 
@@ -8,6 +8,10 @@ const STATIC_URLS_TO_CACHE = [
   '/favicon.ico',
   '/favicon.png',
   '/site.webmanifest',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
+  '/icons/icon-maskable-512.png',
+  '/icons/apple-touch-icon.png',
   '/loading.gif',
   '/fonts/CalSans-SemiBold.woff2',
   '/fonts/Inter-Bold.woff2',
