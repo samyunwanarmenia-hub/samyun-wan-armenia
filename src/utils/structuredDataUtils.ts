@@ -2,6 +2,7 @@ import { TranslationKeys, FaqQuestionKey, FaqAnswerKey, ProductShowcaseItem, Tes
 import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
 import { SOCIAL_LINKS } from '@/utils/schemaUtils';
 import { baseTestimonials } from '@/data/testimonials';
+import { LOCALE_CODES, resolveLang } from '@/config/locales';
 
 const LOGO_URL = `${SITE_URL}/optimized/logo.png`;
 
@@ -24,6 +25,9 @@ const calculateAggregateRating = (testimonials: Testimonial[]) => {
 const AGGREGATE_RATING = calculateAggregateRating(baseTestimonials);
 
 export const generateOrganizationStructuredData = (t: TranslationKeys, currentLang: string) => {
+  const langCode = LOCALE_CODES[resolveLang(currentLang)];
+  const availableLanguages = Object.values(LOCALE_CODES);
+
   return {
     '@context': 'https://schema.org',
     '@type': 'Organization',
@@ -37,21 +41,23 @@ export const generateOrganizationStructuredData = (t: TranslationKeys, currentLa
         telephone: PRIMARY_PHONE,
         contactType: 'customer support',
         areaServed: 'AM',
-        availableLanguage: ['hy', 'ru', 'en'],
+        availableLanguage: availableLanguages,
       },
       {
         '@type': 'ContactPoint',
         telephone: SECONDARY_PHONE,
         contactType: 'sales',
         areaServed: 'AM',
-        availableLanguage: ['hy', 'ru', 'en'],
+        availableLanguage: availableLanguages,
       },
     ],
-    inLanguage: currentLang,
+    inLanguage: langCode,
   };
 };
 
 export const generateFaqStructuredData = (t: TranslationKeys, currentLang: string) => {
+  const langCode = LOCALE_CODES[resolveLang(currentLang)];
+
   const questions: { key: FaqQuestionKey; answerKey: FaqAnswerKey }[] = [
     { key: 'q1', answerKey: 'a1' },
     { key: 'q2', answerKey: 'a2' },
@@ -72,7 +78,7 @@ export const generateFaqStructuredData = (t: TranslationKeys, currentLang: strin
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
     mainEntity: mainEntity,
-    inLanguage: currentLang,
+    inLanguage: langCode,
   };
 };
 
@@ -82,6 +88,7 @@ export const generateProductStructuredData = (
   currentLang: string,
   baseUrl: string
 ) => {
+  const langCode = LOCALE_CODES[resolveLang(currentLang)];
   const productName = t.productShowcase[product.labelKey as keyof TranslationKeys['productShowcase']]; // Explicit type assertion
   const productDescription = t.productShowcase[product.descKey as keyof TranslationKeys['productShowcase']]; // Explicit type assertion
   const productUrl = `${baseUrl}/${currentLang}/products`; // Link to the products page
@@ -99,6 +106,7 @@ export const generateProductStructuredData = (
     name: productName,
     image: imageUrl,
     description: productDescription,
+    inLanguage: langCode,
     sku: `SW-${product.labelKey.toUpperCase()}-${currentLang.toUpperCase()}`, // Unique SKU
     brand: {
       '@type': 'Brand',
@@ -135,13 +143,14 @@ export const generateReviewStructuredData = (
   testimonial: Testimonial,
   currentLang: string
 ) => {
+  const langCode = LOCALE_CODES[resolveLang(currentLang)];
   const authorName = currentLang === 'hy' ? testimonial.name : currentLang === 'ru' ? testimonial.nameRu : testimonial.nameEn;
   const reviewBody = currentLang === 'hy' ? testimonial.textHy : currentLang === 'ru' ? testimonial.textRu : testimonial.textEn;
 
   return {
     '@context': 'https://schema.org',
     '@type': 'Review',
-    inLanguage: currentLang === 'hy' ? 'hy-AM' : currentLang === 'ru' ? 'ru-RU' : 'en-US',
+    inLanguage: langCode,
     author: {
       '@type': 'Person',
       name: authorName,

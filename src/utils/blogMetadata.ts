@@ -2,7 +2,7 @@ import { Metadata } from 'next';
 
 import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { translations } from '@/i18n/translations';
-import { resolveLang as normalizeLang } from '@/config/locales';
+import { resolveLang as normalizeLang, LOCALE_CODES } from '@/config/locales';
 import { BlogPost, BlogTranslation } from '@/data/blogs';
 import { SITE_URL } from '@/config/siteConfig';
 
@@ -38,10 +38,12 @@ export const buildArticleJsonLd = ({
   const normalizedLang = normalizeLang(lang);
   const pageUrl = `${SITE_URL}/${normalizedLang}/blogs/${slug}`;
   const logo = `${SITE_URL}/optimized/logo.png`;
+  const langCode = LOCALE_CODES[normalizedLang];
+  const blogUrl = `${SITE_URL}/${normalizedLang}/blogs`;
 
   return {
     '@context': 'https://schema.org',
-    '@type': 'NewsArticle',
+    '@type': 'BlogPosting',
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': pageUrl,
@@ -62,6 +64,13 @@ export const buildArticleJsonLd = ({
         '@type': 'ImageObject',
         url: logo,
       },
+    },
+    inLanguage: langCode,
+    isPartOf: {
+      '@type': 'Blog',
+      '@id': blogUrl,
+      name: 'Samyun Wan Armenia Blog',
+      url: blogUrl,
     },
   };
 };

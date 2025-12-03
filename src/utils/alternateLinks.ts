@@ -17,9 +17,9 @@ export const buildAlternates = (path = ''): AlternateLinks => {
   return {
     canonical: hyPath,
     languages: {
-      hy: hyPath,
-      ru: ruPath,
-      en: enPath,
+      'hy-AM': hyPath,
+      'ru-RU': ruPath,
+      'en-US': enPath,
       'x-default': hyPath,
     },
   };

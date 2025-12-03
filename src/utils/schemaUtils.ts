@@ -1,6 +1,6 @@
 import { SITE_URL, PRIMARY_PHONE, SECONDARY_PHONE } from '@/config/siteConfig';
 import { translations } from '@/i18n/translations';
-import { resolveLang, type SupportedLang } from '@/config/locales';
+import { resolveLang, type SupportedLang, LOCALE_CODES } from '@/config/locales';
 import type { Testimonial } from '@/types/global';
 
 const LOGO_URL = `${SITE_URL}/optimized/logo.png`;
@@ -74,12 +74,35 @@ export type ProductSchema = {
   name: string;
   description: string;
   image: string;
+  '@id'?: string;
+  url?: string;
+  sku?: string;
+  mpn?: string;
   brand: {
     '@type': 'Brand';
     name: string;
   };
   offers: OfferSchema;
+  inLanguage?: string;
+  mainEntityOfPage?: {
+    '@type': 'WebPage';
+    '@id': string;
+  };
   keywords?: string[];
+  aggregateRating?: {
+    '@type': 'AggregateRating';
+    ratingValue: string;
+    reviewCount: string;
+    bestRating: string;
+    worstRating: string;
+  };
+  review?: Array<{
+    '@type': 'Review';
+    author: { '@type': 'Person'; name: string };
+    reviewBody: string;
+    reviewRating: { '@type': 'Rating'; ratingValue: string; bestRating: string; worstRating: string };
+    inLanguage?: string;
+  }>;
 };
 
 // Product Schema with Reviews and AggregateRating
@@ -91,14 +114,69 @@ export const generateProductSchema = (product: {
   priceCurrency?: string;
   reviews?: Testimonial[];
   keywords?: string[];
+  url?: string;
+  productId?: string;
+  sku?: string;
+  mpn?: string;
+  lang?: SupportedLang;
+  priceValidUntil?: string;
+  availability?: string;
+  itemCondition?: string;
+  mainEntityOfPage?: { '@type': 'WebPage'; '@id': string };
 }): ProductSchema => {
-  const priceValidUntil = new Date(new Date().setMonth(new Date().getMonth() + 1))
-    .toISOString()
-    .split('T')[0];
+  const priceValidUntil =
+    product.priceValidUntil ??
+    new Date(new Date().setMonth(new Date().getMonth() + 1))
+      .toISOString()
+      .split('T')[0];
+  const langCode = product.lang ? LOCALE_CODES[resolveLang(product.lang)] : undefined;
+  const reviewsWithRating = (product.reviews || []).filter(review => typeof review.rating === 'number');
+  const aggregateRating =
+    reviewsWithRating.length > 0
+      ? {
+          '@type': 'AggregateRating',
+          ratingValue: (
+            reviewsWithRating.reduce((sum, review) => sum + (review.rating || 0), 0) / reviewsWithRating.length
+          ).toFixed(2),
+          reviewCount: reviewsWithRating.length.toString(),
+          bestRating: '5',
+          worstRating: '1',
+        } as const
+      : undefined;
+
+  const review: NonNullable<ProductSchema['review']> = reviewsWithRating.map(reviewItem => {
+    const reviewAuthor =
+      product.lang === 'ru'
+        ? reviewItem.nameRu
+        : product.lang === 'en'
+          ? reviewItem.nameEn
+          : reviewItem.name;
+    const reviewBody =
+      product.lang === 'ru'
+        ? reviewItem.textRu
+        : product.lang === 'en'
+          ? reviewItem.textEn
+          : reviewItem.textHy;
+
+    return {
+      '@type': 'Review' as const,
+      author: { '@type': 'Person' as const, name: reviewAuthor || reviewItem.nameEn || reviewItem.name },
+      reviewBody: reviewBody || '',
+      reviewRating: {
+        '@type': 'Rating' as const,
+        ratingValue: (reviewItem.rating ?? 5).toString(),
+        bestRating: '5',
+        worstRating: '1',
+      },
+      ...(langCode ? { inLanguage: langCode } : {}),
+    };
+  });
 
   const schema: ProductSchema = {
     '@context': 'https://schema.org',
     '@type': 'Product',
+    '@id': product.productId,
+    url: product.url,
     name: product.name,
     description: product.description,
     image: product.image,
@@ -108,11 +186,12 @@ export const generateProductSchema = (product: {
     },
     offers: {
       '@type': 'Offer',
-      url: SITE_URL,
+      url: product.url ?? SITE_URL,
       priceCurrency: product.priceCurrency || 'AMD',
       price: product.price.toString(),
       priceValidUntil,
-      availability: 'https://schema.org/InStock',
+      availability: product.availability ?? 'https://schema.org/InStock',
+      itemCondition: product.itemCondition ?? 'https://schema.org/NewCondition',
       hasMerchantReturnPolicy: {
         '@type': 'MerchantReturnPolicy',
         returnPolicyCategory: 'https://schema.org/NoReturn',
@@ -151,6 +230,12 @@ export const generateProductSchema = (product: {
         name: 'Samyun Wan Armenia',
       },
     },
+    ...(product.sku ? { sku: product.sku } : {}),
+    ...(product.mpn ? { mpn: product.mpn } : {}),
+    ...(product.mainEntityOfPage ? { mainEntityOfPage: product.mainEntityOfPage } : {}),
+    ...(langCode ? { inLanguage: langCode } : {}),
+    ...(aggregateRating ? { aggregateRating } : {}),
+    ...(review.length ? { review } : {}),
     ...(product.keywords?.length ? { keywords: product.keywords } : {}),
   };
 
@@ -162,8 +247,7 @@ export const generateFAQSchema = (
   faqs: Array<{ question: string; answer: string }>,
   options?: { lang?: string; pageUrl?: string },
 ) => {
-  const langCode =
-    options?.lang === 'hy' ? 'hy-AM' : options?.lang === 'ru' ? 'ru-RU' : options?.lang === 'en' ? 'en-US' : undefined;
+  const langCode = options?.lang ? LOCALE_CODES[resolveLang(options.lang)] : undefined;
 
   return {
     '@context': 'https://schema.org',
@@ -191,6 +275,8 @@ export const generateFAQSchema = (
 export const generateFAQSchemaFromTranslations = (lang: string) => {
   const normalized: SupportedLang = resolveLang(lang);
   const t = translations[normalized] || translations.hy;
+  const langCode = LOCALE_CODES[normalized];
+  const pageUrl = `${SITE_URL}/${normalized}/faq`;
   const faqPairs = [
     { q: t.faq.q1, a: t.faq.a1 },
     { q: t.faq.q2, a: t.faq.a2 },
@@ -204,6 +290,11 @@ export const generateFAQSchemaFromTranslations = (lang: string) => {
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
+    inLanguage: langCode,
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': pageUrl,
+    },
     mainEntity: faqPairs.map(pair => ({
       '@type': 'Question',
       name: pair.q,
@@ -223,8 +314,10 @@ export const generateBreadcrumbSchema = (breadcrumbs: Array<{ name: string; url:
     itemListElement: breadcrumbs.map((crumb, index) => ({
       '@type': 'ListItem',
       position: index + 1,
-      name: crumb.name,
-      item: crumb.url,
+      item: {
+        '@id': crumb.url,
+        name: crumb.name,
+      },
     })),
   };
 };
@@ -334,7 +427,7 @@ export const generateWebPageSchema = (data: {
     url: data.url,
     name: data.name,
     description: data.description,
-    inLanguage: data.lang === 'hy' ? 'hy-AM' : data.lang === 'ru' ? 'ru-RU' : 'en-US',
+    inLanguage: LOCALE_CODES[resolveLang(data.lang)],
     isPartOf: {
       '@type': 'WebSite',
       name: 'Samyun Wan Armenia',
@@ -367,14 +460,14 @@ export const generateArticleSchema = (options: {
     '@type': 'Organization',
     name: options.authorName,
   },
-    publisher: {
-      '@type': 'Organization',
-      name: options.publisherName,
-      logo: {
-        '@type': 'ImageObject',
-        url: LOGO_URL,
-      },
+  publisher: {
+    '@type': 'Organization',
+    name: options.publisherName,
+    logo: {
+      '@type': 'ImageObject',
+      url: LOGO_URL,
     },
+  },
   datePublished: options.datePublished,
   dateModified: options.dateModified ?? options.datePublished,
   inLanguage: options.inLanguage,
@@ -405,14 +498,14 @@ export const generateBlogPostingSchema = (options: {
     '@type': 'Person',
     name: options.authorName,
   },
-    publisher: {
-      '@type': 'Organization',
-      name: options.publisherName,
-      logo: {
-        '@type': 'ImageObject',
-        url: LOGO_URL,
-      },
+  publisher: {
+    '@type': 'Organization',
+    name: options.publisherName,
+    logo: {
+      '@type': 'ImageObject',
+      url: LOGO_URL,
     },
+  },
   datePublished: options.datePublished,
   dateModified: options.dateModified ?? options.datePublished,
   inLanguage: options.inLanguage,

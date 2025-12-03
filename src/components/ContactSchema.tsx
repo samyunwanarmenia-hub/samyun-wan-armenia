@@ -1,4 +1,6 @@
 import Script from 'next/script';
+import { LOCALE_CODES, type SupportedLang } from '@/config/locales';
+import { baseTestimonials } from '@/data/testimonials';
 
 type Address = {
   streetAddress: string;
@@ -8,14 +10,29 @@ type Address = {
   postalCode?: string;
 };
 
+type GeoCoordinates = {
+  latitude: number;
+  longitude: number;
+};
+
+type OpeningHoursSpecification = {
+  '@type': 'OpeningHoursSpecification';
+  dayOfWeek: string | string[];
+  opens: string;
+  closes: string;
+};
+
 type ContactSchemaProps = {
   name: string;
   url: string;
   telephone: string;
   secondaryTelephone?: string;
   address: Address;
-  openingHours?: string[];
+  openingHoursSpecification?: OpeningHoursSpecification[];
   sameAs?: string[];
+  priceRange?: string;
+  geo?: GeoCoordinates;
+  lang: SupportedLang;
 };
 
 const ContactSchema = ({
@@ -24,15 +41,19 @@ const ContactSchema = ({
   telephone,
   secondaryTelephone,
   address,
-  openingHours,
+  openingHoursSpecification,
   sameAs,
+  priceRange,
+  geo,
+  lang,
 }: ContactSchemaProps) => {
+  const availableLanguages = Object.values(LOCALE_CODES);
   const contactPoints = [
     {
       '@type': 'ContactPoint',
       telephone,
       contactType: 'customer support',
-      availableLanguage: ['hy', 'ru', 'en'],
+      availableLanguage: availableLanguages,
     },
   ];
 
@@ -41,9 +62,54 @@ const ContactSchema = ({
       '@type': 'ContactPoint',
       telephone: secondaryTelephone,
       contactType: 'sales',
-      availableLanguage: ['hy', 'ru', 'en'],
+      availableLanguage: availableLanguages,
     });
   }
+
+  const langCode = LOCALE_CODES[lang];
+  const reviews = baseTestimonials.map(testimonial => {
+    const author =
+      lang === 'ru'
+        ? testimonial.nameRu
+        : lang === 'en'
+          ? testimonial.nameEn
+          : testimonial.name;
+    const reviewBody =
+      lang === 'ru'
+        ? testimonial.textRu
+        : lang === 'en'
+          ? testimonial.textEn
+          : testimonial.textHy;
+
+    return {
+      '@type': 'Review',
+      author: {
+        '@type': 'Person',
+        name: author || testimonial.nameEn || testimonial.name,
+      },
+      reviewBody: reviewBody || '',
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: (testimonial.rating ?? 5).toString(),
+        bestRating: '5',
+        worstRating: '1',
+      },
+      inLanguage: langCode,
+    };
+  });
+
+  const aggregateRating =
+    reviews.length > 0
+      ? {
+          '@type': 'AggregateRating',
+          ratingValue: (
+            baseTestimonials.reduce((sum, review) => sum + (review.rating || 0), 0) / baseTestimonials.length
+          ).toFixed(2),
+          reviewCount: reviews.length.toString(),
+          bestRating: '5',
+          worstRating: '1',
+        }
+      : undefined;
 
   const data = {
     '@context': 'https://schema.org',
@@ -51,14 +117,22 @@ const ContactSchema = ({
     name,
     url,
     telephone,
-    ...(secondaryTelephone ? { additionalProperty: [{ '@type': 'PropertyValue', name: 'Secondary Phone', value: secondaryTelephone }] } : {}),
+    inLanguage: langCode,
+    priceRange: priceRange ?? 'AMD 14000-15000',
     address: {
       '@type': 'PostalAddress',
       ...address,
     },
     contactPoint: contactPoints,
-    ...(openingHours?.length ? { openingHours } : {}),
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: geo?.latitude ?? 40.1872,
+      longitude: geo?.longitude ?? 44.5152,
+    },
+    ...(openingHoursSpecification?.length ? { openingHoursSpecification } : {}),
     ...(sameAs?.length ? { sameAs } : {}),
+    ...(aggregateRating ? { aggregateRating } : {}),
+    ...(reviews.length ? { review: reviews } : {}),
   };
 
   return (

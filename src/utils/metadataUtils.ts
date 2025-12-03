@@ -45,9 +45,9 @@ const buildAlternateLanguages = (segments: string[]) => {
   const suffix = segments.length ? `/${segments.join('/')}` : '';
 
   return {
-    hy: `${SITE_URL}/hy${suffix}`,
-    ru: `${SITE_URL}/ru${suffix}`,
-    en: `${SITE_URL}/en${suffix}`,
+    'hy-AM': `${SITE_URL}/hy${suffix}`,
+    'ru-RU': `${SITE_URL}/ru${suffix}`,
+    'en-US': `${SITE_URL}/en${suffix}`,
     'x-default': `${SITE_URL}/hy${suffix}`,
   };
 };
@@ -99,20 +99,10 @@ export const generateCommonMetadata = ({
       title,
       description,
       images: [image],
-      creator: '@samyunwanarmenia',
     },
     alternates: {
       canonical: canonicalUrl,
       languages: buildAlternateLanguages(pathSegments),
-    },
-    other: {
-      'og:url': canonicalUrl,
-      'og:site_name': t.hero.title,
-      'og:locale': locale,
-      'twitter:card': 'summary_large_image',
-      'twitter:title': title,
-      'twitter:description': description,
-      'twitter:image': image,
     },
   };
 };

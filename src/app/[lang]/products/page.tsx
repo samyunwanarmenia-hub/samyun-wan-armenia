@@ -4,12 +4,11 @@ import { productShowcaseData } from '@/data/productShowcaseData';
 import { translations } from '@/i18n/translations';
 import { SITE_URL } from '@/config/siteConfig';
 import { generateProductSchema, buildBreadcrumbItems } from '@/utils/schemaUtils';
-import { resolveLang, type SupportedLang } from '@/config/locales';
+import { resolveLang, type SupportedLang, LOCALE_CODES } from '@/config/locales';
 import { baseTestimonials } from '@/data/testimonials';
 import { getSeoKeywords } from '@/config/seoKeywords';
 import ScriptLD from '@/components/ScriptLD';
 import { buildAlternates } from '@/utils/alternateLinks';
-import ProductSchema from '@/components/ProductSchema';
 import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) => {
@@ -25,23 +24,9 @@ export const revalidate = 60 * 60 * 12;
 const ProductsPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang] || translations.hy;
+  const langCode = LOCALE_CODES[lang];
 
   const breadcrumbItems = buildBreadcrumbItems({ lang, segments: ['products'] });
-
-  const aggregateRating = (() => {
-    if (!Array.isArray(baseTestimonials) || baseTestimonials.length === 0) {
-      return null;
-    }
-
-    const total = baseTestimonials.reduce((sum, review) => sum + (review.rating || 0), 0);
-    return {
-      '@type': 'AggregateRating',
-      ratingValue: (total / baseTestimonials.length).toFixed(2),
-      reviewCount: baseTestimonials.length.toString(),
-      bestRating: '5',
-      worstRating: '1',
-    };
-  })();
 
   const priceValidUntil = (() => {
     const date = new Date();
@@ -60,43 +45,29 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
 
   const productSchemas = localizedProducts.map(product => {
     const image = `${SITE_URL}${product.src}`;
-    const url = productsPageUrl;
     const productId = `${productsPageUrl}#${product.labelKey}`;
 
-    const schema = generateProductSchema({
+    return generateProductSchema({
       name: product.name,
       description: product.description,
       image,
       price: product.price,
       priceCurrency: 'AMD',
-      reviews: [],
+      reviews: baseTestimonials,
       keywords: seoKeywords,
-    });
-    const { offers, ...schemaWithoutOffers } = schema;
-
-    return {
-      ...schemaWithoutOffers,
-      '@id': productId,
-      inLanguage: lang === 'hy' ? 'hy-AM' : lang === 'ru' ? 'ru-RU' : 'en-US',
+      url: productsPageUrl,
+      productId,
       sku: `SW-${product.labelKey.toUpperCase()}-${lang.toUpperCase()}`,
       mpn: `MPN-${product.labelKey.toUpperCase()}`,
-      offers: {
-        ...offers,
-        url,
-        priceValidUntil,
-        availability: 'https://schema.org/InStock',
-        itemCondition: 'https://schema.org/NewCondition',
-      },
-      ...(aggregateRating ? { aggregateRating } : {}),
+      lang,
+      priceValidUntil,
+      availability: 'https://schema.org/InStock',
+      itemCondition: 'https://schema.org/NewCondition',
       mainEntityOfPage: {
         '@type': 'WebPage',
         '@id': productsPageUrl,
       },
-      brand: {
-        '@type': 'Brand',
-        name: 'Samyun Wan',
-      },
-    };
+    });
   });
 
   const productCollectionSchema = {
@@ -105,6 +76,7 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
     name: t.productShowcase.seoHeading ?? t.hero.title,
     description: t.productShowcase.seoParagraph ?? t.hero.subtitle,
     url: productsPageUrl,
+    inLanguage: langCode,
     mainEntityOfPage: {
       '@type': 'WebPage',
       '@id': productsPageUrl,
@@ -131,14 +103,6 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
     <>
       <BreadcrumbSchema items={breadcrumbItems} />
       <ScriptLD json={graphSchema} />
-      {localizedProducts.map(product => (
-        <ProductSchema
-          key={product.labelKey}
-          name={product.name}
-          description={product.description}
-          price={product.price.toString()}
-        />
-      ))}
       <ProductShowcaseSection />
     </>
   );
