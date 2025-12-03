@@ -96,10 +96,8 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
 
   // Close the menu automatically on route changes
   useEffect(() => {
-    if (isOpen) {
-      setIsOpen(false);
-    }
-  }, [pathname, isOpen]);
+    setIsOpen(false);
+  }, [pathname]);
 
   // Close on Escape
   useEffect(() => {
@@ -181,7 +179,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
             />
             <motion.div
               id="mobile-nav-drawer"
-              className="fixed top-0 left-0 h-screen w-[82vw] max-w-[360px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-r border-gray-200/70 dark:border-gray-800/70 shadow-2xl z-[120]"
+              className="fixed top-0 left-0 h-screen w-[90vw] max-w-[420px] sm:max-w-[460px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-r border-gray-200/70 dark:border-gray-800/70 shadow-2xl z-[120]"
               style={safeAreaMenuStyle}
               variants={menuVariants}
               initial="closed"
