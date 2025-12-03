@@ -23,3 +23,23 @@
 - Redirects: в `netlify.toml` уже настроены `*.netlify.app` → `samyun-wan.life`; верифицировать `curl -I` с http/https.
 - Доступность: `dev.html` не публиковать/не ссылать наружу.
 - Перекраул: отправить `sitemap.xml`, запустить URL Inspection для главных/языковых/продуктовых/блоговых страниц.
+
+## Google Search Console - чек-лист (ручные действия)
+- Live Test + Request Indexing: в URL Inspection вбить https://samyun-wan.life/hy, выполнить Live Test и сразу запросить индексацию.
+- Пересдать sitemap: в разделе Sitemaps повторно отправить https://samyun-wan.life/sitemap.xml, убедиться в статусе Success и свежей дате.
+- Coverage/Pages: найти /hy; если статус “Crawled currently not indexed” или “Duplicate without user-selected canonical”, зафиксировать для последующего фиксинга.
+- Внутренние ссылки/soft 404: проверить, что /hy доступен из меню/футера и с содержимым, достаточным для исключения soft 404.
+- WAF/бот-фильтр: по логам убедиться, что Googlebot не получает 403/капчу на /hy и отвечает 200.
+## SEO-аудит (индексация и контент)
+- GSC: добавить домен как Domain property (samyun-wan.life), убедиться, что не остался только старый Netlify-домен.
+- Sitemaps: отправить `https://samyun-wan.life/sitemap.xml` в GSC; проверить статус и дату получения.
+- Coverage/Pages: посмотреть Indexed / Crawled currently not indexed / Duplicate without user-selected canonical; если есть проблемные статусы, зафиксировать URL.
+- Тайтлы (усилить вариативность):
+  - Главная: `Samyun Wan Armenia – Քաշի ավելացման օրիգինալ հավելում Երևանում и Հայաստանում`.
+  - Продукт: `Samyun Wan capsulls – Քաշի ավելացման орիգинал • 14,000 դրամ`.
+  - About: `Samyun Wan Armenia – Պաշտոնական ներկայացուցիչը Հայաստանում`.
+  - Блог-посты: `Samyun Wan սննդակարգ – Ընդհանուր առողջ ծրագիր քաշի ավելացման համար`.
+- Контент: на продуктовой странице расширить блоки — симптомы/когда нужно, кому подходит/нельзя, схема приёма, FAQ.
+- Ключевые запросы (встраивать естественно в H1/H2, первые абзацы, FAQ, блог):
+  - HY: Samyun Wan Հայաստան; Սամյուն Վան գնել; Samyun Wan Երևան; քաշի ավելացման դեղեր; քաշի ավելացման հավելում բնական; օրիգինալ Samyun Wan Հայաստան.
+  - RU: Samyun Wan купить в Ереване; Самюн ван оригинал Армения; таблетки для набора веса Ереван.

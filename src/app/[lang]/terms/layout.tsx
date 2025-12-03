@@ -10,7 +10,7 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 
   const pageTitle = `${t.hero.title} | Terms & Conditions`;
   const pageDescription =
-    'Условия использования официального сайта Samyun Wan Armenia. Правила заказа, доставки и проверки оригинальности продукции.';
+    'User agreement and medical disclaimer for Samyun Wan Armenia: ordering, payment, refunds, data processing, and safety requirements.';
   const pageImage = `${SITE_URL}/api/og/${lang}?title=${encodeURIComponent(pageTitle)}`;
 
   return generatePageMetadata({

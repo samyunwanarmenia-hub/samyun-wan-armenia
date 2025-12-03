@@ -8,7 +8,12 @@
     "heroImageAlt": "Official Samyun Wan Armenian certificate with QR badge",
     "heroImageWidth": 1200,
     "heroImageHeight": 800,
-    "tags": ["Samyun Wan", "authenticity", "QR verification", "official seller"],
+    "tags": [
+      "Samyun Wan",
+      "authenticity",
+      "QR verification",
+      "official seller"
+    ],
     "translations": {
       "hy": {
         "title": "Ինչպես ստուգել Samyun Wan-ի օրիգինալությունն Հայաստանում",
@@ -20,9 +25,9 @@
             "body": "Նայեք հելո տիպի նշաններին, գեղարվեստական կտորներին և վեբ էջում նշված գրանցմանը։"
           },
           {
-              "heading": "Քայլ 2։ QR ստուգում",
-              "body": "Սկանավորեք QR կոդը և համոզվեք, որ սերվերը պատկանում է Samyun Wan-ի պաշտոնական ներկայացուցիչին։",
-              "bullets": [
+            "heading": "Քայլ 2։ QR ստուգում",
+            "body": "Սկանավորեք QR կոդը և համոզվեք, որ սերվերը պատկանում է Samyun Wan-ի պաշտոնական ներկայացուցիչին։",
+            "bullets": [
               "Տվյալներ պետք է նույնն լինեն պաշտոնական կայքի հետ",
               "QR հասցեն պետք է բացվի https://qr-wan.netlify.app/ վրա"
             ]
@@ -32,7 +37,11 @@
             "body": "Միշտ ստացեք հաշիվ, որի վրա նշվում է Samyun Wan Armenia-ի մենթորիան և QR ստուգման արդյունքները։"
           }
         ],
-        "tags": ["Samyun Wan", "հաշվետվություն", "QR"]
+        "tags": [
+          "Samyun Wan",
+          "հաշվետվություն",
+          "QR"
+        ]
       },
       "ru": {
         "title": "Как проверить оригинальный Samyun Wan в Армении",
@@ -52,7 +61,12 @@
             "body": "Попросите сертификат и номер партии, указанный на официальном сайте."
           }
         ],
-        "tags": ["Samyun Wan", "проверка", "QR", "автентичность"]
+        "tags": [
+          "Samyun Wan",
+          "проверка",
+          "QR",
+          "автентичность"
+        ]
       },
       "en": {
         "title": "How to verify original Samyun Wan in Armenia",
@@ -68,7 +82,11 @@
             "body": "Scan the code with a secure app and ensure it redirects to our QR verification hub without redirects or unknown domains."
           }
         ],
-        "tags": ["Samyun Wan", "authenticity", "buyer's guide"],
+        "tags": [
+          "Samyun Wan",
+          "authenticity",
+          "buyer's guide"
+        ],
         "markdownPath": "content/blogs/how-to-verify-samyun-wan.en.md"
       }
     }
@@ -82,24 +100,40 @@
     "heroImageAlt": "Samyun Wan gainer jars and measuring spoon",
     "heroImageWidth": 1200,
     "heroImageHeight": 800,
-    "tags": ["weight gain", "Samyun Wan", "nutrition plan"],
+    "tags": [
+      "weight gain",
+      "Samyun Wan",
+      "nutrition plan"
+    ],
     "translations": {
       "hy": {
-        "title": "Ընդհանուր առողջ հրահանգ Samyun Wan-ով",
-        "subtitle": "Զանգվածային սննդակարգ, որը ներառում է օրգանական հավելուկներ ու բնական բաղադրիչներ",
-        "summary": "Միացրեք Samyun Wan Armenia-ի ծրագրերը ապրելակերպի հետ՝ վայելելով կալորիաների բալանսը և շաբաթական 5 օր մարզումները։",
+        "title": "Samyun Wan․ իրական կարծիքներ, ամբողջական ուսումնասիրություն, վտանգներ և վստահելի գնման ուղեցույց | Samyun Wan Armenia",
+        "subtitle": "Samyun Wan․ իրական կարծիքներ, ամբողջական ուսումնասիրություն, վտանգներ և վստահելի գնման ուղեցույց | Samyun Wan Armenia",
+        "summary": "Samyun Wan․ իրական կարծիքներ, ամբողջական ուսումնասիրություն, վտանգներ և վստահելի գնման ուղեցույց | Samyun Wan Armenia | Samyun Wan Armenia Samyun Wan — իրական ազդեցություններ, կողմնակի ռիսկեր և օրիգինալը տարբերելու եղանակները ԳԼԽԱՎՈՐ Կարծիքներ Հաճախ տրվող հարցեր Կապվեք մեզ հետ Samyun Wan — ինչ ազդեցություն ունի և ինչպես տարբերել օրիգինալը Samyun Wan Armenia — официальные контакты Телефоны: +37495653666 , +37496653666 Соцсети: https://facebook.com/samyunwanarmenia https://instagram.com/samyunwanarmenia https://youtube.com/samyunwanarmenia https://m.me/samyunwanarmenia https://t.me/samyunwanarme",
         "sections": [
           {
-            "heading": "Առաջին շաբաթ՝ ադապտացիա",
-            "body": "Խորհուրդ է տրվում խուսափել պատահական ածխաջրերից և ավելացնել քիչ քանակությամբ Samyun Wan մոտ 30 գրամ օրական։"
+            "heading": "Samyun Wan Armenia բլոգի բովանդակություն",
+            "body": "Samyun Wan․ իրական կարծիքներ, ամբողջական ուսումնասիրություն, վտանգներ և վստահելի գնման ուղեցույց | Samyun Wan Armenia | Samyun Wan Armenia Samyun Wan — իրական ազդեցություններ, կողմնակի ռիսկեր և օրիգինալը տարբերելու եղանակները ԳԼԽԱՎՈՐ Կարծիքներ Հաճախ տրվող հարցեր Կապվեք մեզ հետ Samyun Wan — ինչ ազդեցություն ունի և ինչպես տարբերել օրիգինալը Samyun Wan Armenia — официальные контакты Телефоны: +37495653666 , +37496653666 Соцсети: https://facebook.com/samyunwanarmenia https://instagram.com/samyunwanarmenia https://youtube.com/samyunwanarmenia https://m.me/samyunwanarmenia https://t.me/samyunwanarme"
           },
           {
-            "heading": "Մոտացեք երկրորդ շաբաթին",
-            "body": "Ավելացրեք սպիտակուցային համադրություններ և անասնային արդյունքում առաջացվող պոլիէներգիա։",
-            "bullets": ["2.5 լ ջուր օրական", "5 ճաշ մեր երկու անգամ"]
+            "heading": "Օգտակար հղումներ ու հարցումներ",
+            "body": "SEO և ինդեքսացիայի համար հիմնական էջերը և հաղորդակցման ուղիները",
+            "bullets": [
+              "Samyun Wan Հայաստան — արտադրանք և գներ: https://samyun-wan.life/hy/products",
+              "Սամյուն Վան գնել Երևանում — պատվիրել առցանց կամ հեռ. +37495653666",
+              "Samyun Wan Armenia պաշտոնական կապ — https://samyun-wan.life/hy/contact",
+              "Սամյուն Վան FAQ ու սննդակարգ — https://samyun-wan.life/hy/faq",
+              "Բոլոր բլոգները — https://samyun-wan.life/hy/blogs"
+            ]
           }
         ],
-        "tags": ["Samyun Wan", "տեսարակություն", "բալանս"]
+        "tags": [
+          "Samyun Wan Հայաստան",
+          "Սամյուն Վան գնել",
+          "Samyun Wan Երևան",
+          "քաշի ավելացման հավելում",
+          "Samyun Wan բլոգ"
+        ]
       },
       "ru": {
         "title": "Сбалансированный план набора веса",
@@ -115,7 +149,11 @@
             "body": "Увеличивайте порции, добавляйте сложные углеводы и контролируйте белковый баланс."
           }
         ],
-        "tags": ["Samyun Wan", "план питания", "набор массы"]
+        "tags": [
+          "Samyun Wan",
+          "план питания",
+          "набор массы"
+        ]
       },
       "en": {
         "title": "Balanced weight-gain plan with Samyun Wan",
@@ -135,7 +173,11 @@
             "body": "Prioritize 7–8 hours of sleep, magnesium-rich foods, and gentle stretching to keep cortisol low."
           }
         ],
-        "tags": ["Samyun Wan", "weight gain", "protocol"]
+        "tags": [
+          "Samyun Wan",
+          "weight gain",
+          "protocol"
+        ]
       }
     }
   }

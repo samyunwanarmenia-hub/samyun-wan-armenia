@@ -113,26 +113,26 @@ export const LEGAL_COPY: Record<
   hy: {
     privacyTitle: 'Գաղտնիության քաղաքականություն',
     privacyDescription:
-      'Samyun Wan Armenia կայքը պաշտպանում է այցելուների տվյալները և օգտագործում է դրանք միայն պատվերների և կապի կազմակերպման համար։',
-    termsTitle: 'Օգտագործման կանոններ',
+      'Samyun Wan Armenia-ն հավաքում և օգտագործում է միայն այն տվյալները, որոնք անհրաժեշտ են պատվերի մշակման, վճարման, առաքման և հաճախորդի աջակցության համար։ Տվյալները չեն փոխանցվում երրորդ կողմերին՝ բացառությամբ օրենքով պահանջված դեպքերի։',
+    termsTitle: 'Օգտագործման պայմաններ և պատասխանատվության սահմանափակում',
     termsDescription:
-      'Կայքը ներկայացնում է Samyun Wan Armenia-ի պաշտոնական առաջարկները, և դրա օգտագործումը ենթադրում է կանոնների ընդունում։',
+      'Պատվերների, վճարման և վերադարձի հիմնական պայմաններ Samyun Wan Armenia-ի համար, տվյալների օգտագործում և բժշկական հայտարարագիր. կայքի տեղեկանքը տեղեկացնող է, մինչև ընդունելը խորհրդակցեք բժշկի հետ, հակացուցված է հղիության/կրծքով կերակրման դեպքում, մինչև 18 տարեկանում կամ քրոնիկ հիվանդությունների դեպքում առանց բժշկի հաստատման։',
   },
   ru: {
     privacyTitle: 'Политика конфиденциальности',
     privacyDescription:
-      'Samyun Wan Armenia защищает персональные данные клиентов и использует их только для обработки заказов и обратной связи.',
-    termsTitle: 'Пользовательское соглашение',
+      'Samyun Wan Armenia собирает и использует только данные, необходимые для оформления заказа, оплаты, доставки и поддержки клиента. Данные не передаются третьим лицам, кроме как по закону или для выполнения доставки.',
+    termsTitle: 'Пользовательское соглашение и отказ от ответственности',
     termsDescription:
-      'Используя сайт Samyun Wan Armenia, вы подтверждаете согласие с правилами заказа и проверки подлинности продукции.',
+      'Условия заказа и оплаты: заявки через сайт/мессенджеры, предоплата по согласованию, возврат возможен при целостности упаковки и сохранности товара. Обработка персональных данных — только для оплаты, доставки и поддержки. Медицинский отказ: информация на сайте не является рекомендацией, перед приемом консультируйтесь с врачом; противопоказано при беременности/ГВ, до 18 лет и при хронических заболеваниях без разрешения врача.',
   },
   en: {
     privacyTitle: 'Privacy Policy',
     privacyDescription:
-      'Samyun Wan Armenia protects visitor data and uses it solely to process orders and provide tailored support.',
-    termsTitle: 'Terms & Conditions',
+      'Samyun Wan Armenia collects and uses only the data needed to process orders, take payments, deliver products, and support customers. Data is not shared with third parties except when required by law or to fulfill delivery.',
+    termsTitle: 'User Agreement & Medical Disclaimer',
     termsDescription:
-      'Using the Samyun Wan Armenia website implies agreement with our ordering rules and authenticity checks.',
+      'Ordering and payment terms, personal data use for payments/shipping/support, and medical disclaimer: site info is not medical advice; consult your doctor; not for pregnancy/breastfeeding, under 18, or chronic conditions without physician approval.',
   },
 };
 
