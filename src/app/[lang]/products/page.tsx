@@ -3,13 +3,14 @@ import { buildPageMetadata } from '@/utils/pageMetadata';
 import { productShowcaseData } from '@/data/productShowcaseData';
 import { translations } from '@/i18n/translations';
 import { SITE_URL } from '@/config/siteConfig';
-import { generateBreadcrumbs, generateProductSchema } from '@/utils/schemaUtils';
+import { generateProductSchema, buildBreadcrumbItems } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import { baseTestimonials } from '@/data/testimonials';
 import { getSeoKeywords } from '@/config/seoKeywords';
 import ScriptLD from '@/components/ScriptLD';
 import { buildAlternates } from '@/utils/alternateLinks';
 import ProductSchema from '@/components/ProductSchema';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) => {
   const alternates = buildAlternates('/products');
@@ -25,7 +26,7 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang] || translations.hy;
 
-  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['products'] });
+  const breadcrumbItems = buildBreadcrumbItems({ lang, segments: ['products'] });
 
   const aggregateRating = (() => {
     if (!Array.isArray(baseTestimonials) || baseTestimonials.length === 0) {
@@ -128,7 +129,7 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
 
   return (
     <>
-      <ScriptLD json={breadcrumbData} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <ScriptLD json={graphSchema} />
       {localizedProducts.map(product => (
         <ProductSchema

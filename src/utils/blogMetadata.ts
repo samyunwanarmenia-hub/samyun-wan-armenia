@@ -4,6 +4,7 @@ import { generateCommonMetadata } from '@/utils/metadataUtils';
 import { translations } from '@/i18n/translations';
 import { resolveLang as normalizeLang } from '@/config/locales';
 import { BlogPost, BlogTranslation } from '@/data/blogs';
+import { SITE_URL } from '@/config/siteConfig';
 
 interface BlogMetadataOptions {
   lang: string;
@@ -12,6 +13,58 @@ interface BlogMetadataOptions {
   translation: BlogTranslation;
   canonicalPath?: string;
 }
+
+interface ArticleSchemaOptions {
+  lang: string;
+  slug: string;
+  title: string;
+  description: string;
+  image: string;
+  datePublished: string;
+  dateModified?: string;
+  authorName: string;
+}
+
+export const buildArticleJsonLd = ({
+  lang,
+  slug,
+  title,
+  description,
+  image,
+  datePublished,
+  dateModified,
+  authorName,
+}: ArticleSchemaOptions) => {
+  const normalizedLang = normalizeLang(lang);
+  const pageUrl = `${SITE_URL}/${normalizedLang}/blogs/${slug}`;
+  const logo = `${SITE_URL}/optimized/logo.png`;
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'NewsArticle',
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': pageUrl,
+    },
+    headline: title,
+    description,
+    image: [image],
+    datePublished,
+    dateModified: dateModified ?? datePublished,
+    author: {
+      '@type': 'Person',
+      name: authorName,
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Samyun Wan Armenia',
+      logo: {
+        '@type': 'ImageObject',
+        url: logo,
+      },
+    },
+  };
+};
 
 export const buildBlogPostMetadata = ({
   lang,

@@ -1,8 +1,8 @@
 import { LEGAL_COPY, buildPageMetadata } from '@/utils/pageMetadata';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import LegalPageLayout from '@/components/LegalPageLayout';
-import { generateBreadcrumbs } from '@/utils/schemaUtils';
-import ScriptLD from '@/components/ScriptLD';
+import { buildBreadcrumbItems } from '@/utils/schemaUtils';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import { buildAlternates } from '@/utils/alternateLinks';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) => {
@@ -24,11 +24,11 @@ const TermsPage = ({ params }: { params: { lang: string } }) => {
   const copy = LEGAL_COPY[lang] ?? LEGAL_COPY.hy;
   const notice = PLACEHOLDER_NOTICE[lang] ?? PLACEHOLDER_NOTICE.hy;
 
-  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['terms'] });
+  const breadcrumbItems = buildBreadcrumbItems({ lang, segments: ['terms'] });
 
   return (
     <>
-      <ScriptLD json={breadcrumbData} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <LegalPageLayout
         title={copy.termsTitle}
         description={copy.termsDescription}

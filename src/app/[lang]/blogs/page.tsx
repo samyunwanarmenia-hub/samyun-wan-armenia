@@ -6,11 +6,12 @@ import path from 'path';
 import { translations } from '@/i18n/translations';
 import { buildPageMetadata } from '@/utils/pageMetadata';
 import { getBlogPreviews } from '@/data/blogs';
-import { generateArticleSchema, generateBreadcrumbs } from '@/utils/schemaUtils';
+import { generateArticleSchema, buildBreadcrumbItems } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import { SITE_URL } from '@/config/siteConfig';
 import ScriptLD from '@/components/ScriptLD';
 import { buildAlternates } from '@/utils/alternateLinks';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }): Metadata => {
   const alternates = buildAlternates('/blogs');
@@ -64,7 +65,7 @@ const BlogsPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang] || translations.hy;
   const previews = getBlogPreviews(lang);
-  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['blogs'] });
+  const breadcrumbItems = buildBreadcrumbItems({ lang, segments: ['blogs'] });
 
   const inLanguage = lang === 'hy' ? 'hy-AM' : lang === 'ru' ? 'ru-RU' : 'en-US';
   const featured = previews[0];
@@ -87,7 +88,7 @@ const BlogsPage = ({ params }: { params: { lang: string } }) => {
   return (
     <>
       <ScriptLD json={articleSchema} />
-      <ScriptLD json={breadcrumbData} />
+      <BreadcrumbSchema items={breadcrumbItems} />
 
       {inlineStyles ? (
         <style id="blogs-inline-styles" dangerouslySetInnerHTML={{ __html: inlineStyles }} />

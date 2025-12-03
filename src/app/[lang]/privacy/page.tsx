@@ -1,8 +1,8 @@
 import { LEGAL_COPY, buildPageMetadata } from '@/utils/pageMetadata';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import LegalPageLayout from '@/components/LegalPageLayout';
-import { generateBreadcrumbs } from '@/utils/schemaUtils';
-import ScriptLD from '@/components/ScriptLD';
+import { buildBreadcrumbItems } from '@/utils/schemaUtils';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import { PRIVACY_EFFECTIVE_DATE, PRIVACY_POLICY_VERSION } from '@/config/siteConfig';
 import { buildAlternates } from '@/utils/alternateLinks';
 
@@ -32,11 +32,11 @@ const PrivacyPage = ({ params }: { params: { lang: string } }) => {
   const notice = PLACEHOLDER_NOTICE[lang] ?? PLACEHOLDER_NOTICE.hy;
   const { version, effectiveDate } = META_LABELS[lang] ?? META_LABELS.hy;
 
-  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['privacy'] });
+  const breadcrumbItems = buildBreadcrumbItems({ lang, segments: ['privacy'] });
 
   return (
     <>
-      <ScriptLD json={breadcrumbData} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <LegalPageLayout
         title={copy.privacyTitle}
         description={copy.privacyDescription}

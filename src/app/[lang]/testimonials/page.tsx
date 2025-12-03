@@ -1,10 +1,9 @@
 import dynamic from 'next/dynamic';
 
 import { buildPageMetadata } from '@/utils/pageMetadata';
-import { translations } from '@/i18n/translations';
-import { generateBreadcrumbs } from '@/utils/schemaUtils';
+import { buildBreadcrumbItems } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
-import ScriptLD from '@/components/ScriptLD';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import { buildAlternates } from '@/utils/alternateLinks';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) => {
@@ -19,13 +18,12 @@ const TestimonialsPageClient = dynamic(() => import('./Client'), { ssr: false })
 
 const TestimonialsPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
-  const _t = translations[lang] || translations.hy;
 
-  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['testimonials'] });
+  const breadcrumbItems = buildBreadcrumbItems({ lang, segments: ['testimonials'] });
 
   return (
     <>
-      <ScriptLD json={breadcrumbData} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <TestimonialsPageClient />
     </>
   );

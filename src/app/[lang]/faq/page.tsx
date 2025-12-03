@@ -1,9 +1,10 @@
 import FaqSection from '@/components/FaqSection';
 import { buildPageMetadata } from '@/utils/pageMetadata';
-import { generateBreadcrumbs, generateFAQSchemaFromTranslations } from '@/utils/schemaUtils';
+import { generateFAQSchemaFromTranslations, buildBreadcrumbItems } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import ScriptLD from '@/components/ScriptLD';
 import { buildAlternates } from '@/utils/alternateLinks';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) => {
   const alternates = buildAlternates('/faq');
@@ -16,12 +17,12 @@ export const generateMetadata = ({ params }: { params: { lang: string } }) => {
 const FaqPage = ({ params }: { params: { lang: string } }) => {
   const currentLang: SupportedLang = resolveLang(params.lang);
 
-  const breadcrumbData = generateBreadcrumbs({ lang: currentLang, segments: ['faq'] });
+  const breadcrumbItems = buildBreadcrumbItems({ lang: currentLang, segments: ['faq'] });
   const faqSchema = generateFAQSchemaFromTranslations(currentLang);
 
   return (
     <>
-      <ScriptLD json={breadcrumbData} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <ScriptLD json={faqSchema} />
       <FaqSection />
     </>

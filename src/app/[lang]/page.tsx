@@ -4,6 +4,8 @@ import { buildPageMetadata } from '@/utils/pageMetadata';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import { translations } from '@/i18n/translations';
 import { buildAlternates } from '@/utils/alternateLinks';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
+import { buildBreadcrumbItems } from '@/utils/schemaUtils';
 
 // Lazy load sections to reduce initial bundle size
 const HeroSection = dynamic(() => import('@/components/HeroSection'), {
@@ -28,9 +30,11 @@ const LangPage = async ({ params }: { params: { lang: string } }) => {
   const t = translations[currentLang] || translations.hy;
   const heroFallbackLabel = `Loading ${t.hero.title}`;
   const productsFallbackLabel = `Loading ${t.nav.products}`;
+  const breadcrumbItems = buildBreadcrumbItems({ lang: currentLang, segments: [] });
 
   return (
     <>
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Suspense
         fallback={
           <section

@@ -22,7 +22,8 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
   const pathname = usePathname();
   const previousOverflow = useRef<string | null>(null);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  const toggleMenu = () => setIsOpen(prev => !prev);
+  const closeMenu = () => setIsOpen(false);
 
   const iconColorClass = scrolled
     ? (theme === 'dark' ? 'bg-gray-200' : 'bg-gray-800')
@@ -100,6 +101,23 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
     }
   }, [pathname, isOpen]);
 
+  // Close on Escape
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        closeMenu();
+      }
+    };
+
+    if (isOpen) {
+      window.addEventListener('keydown', onKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  }, [isOpen]);
+
   // Prevent background scrolling when the menu is open
   useEffect(() => {
     if (isOpen) {
@@ -122,6 +140,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
     <>
       <motion.button
         onClick={toggleMenu}
+        type="button"
         className="relative w-12 h-12 inline-flex flex-col items-center justify-center gap-1.5 rounded-full border-2 border-primary-500/70 bg-gradient-to-br from-white to-primary-50 dark:from-gray-800 dark:to-primary-900/30 backdrop-blur-lg shadow-[0_12px_34px_rgba(0,0,0,0.18)] focus:outline-none focus:ring-2 focus:ring-primary-500/80 z-[130]"
         aria-label={isOpen ? t.nav.close : t.nav.open}
         aria-expanded={isOpen}
@@ -151,57 +170,71 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
       </motion.button>
       <AnimatePresence>
         {isOpen && (
-          <motion.div
-            id="mobile-nav-drawer"
-            className="fixed top-0 left-0 h-screen w-[82vw] max-w-[360px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-r border-gray-200/70 dark:border-gray-800/70 shadow-2xl z-[120]"
-            style={safeAreaMenuStyle}
-            variants={menuVariants}
-            initial="closed"
-            animate="open"
-            exit="closed"
-          >
+          <>
+            <motion.div
+              key="mobile-nav-overlay"
+              className="fixed inset-0 bg-black/30 backdrop-blur-sm z-[115]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={closeMenu}
+            />
+            <motion.div
+              id="mobile-nav-drawer"
+              className="fixed top-0 left-0 h-screen w-[82vw] max-w-[360px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-r border-gray-200/70 dark:border-gray-800/70 shadow-2xl z-[120]"
+              style={safeAreaMenuStyle}
+              variants={menuVariants}
+              initial="closed"
+              animate="open"
+              exit="closed"
+            >
               <div className="flex flex-col h-full overflow-hidden">
                 <div className="flex items-center justify-between px-6">
                   <Link
                     href={getHomePath()}
-                    onClick={() => setIsOpen(false)}
+                    onClick={closeMenu}
                     className="text-base font-semibold leading-snug tracking-tight text-gray-900 dark:text-gray-50 max-w-[220px] whitespace-normal"
                   >
                     {t.hero.title}
                   </Link>
-                <button
-                  onClick={toggleMenu}
-                  className="text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-full p-1"
-                  aria-label={t.nav.close}
-                >
-                  <X size={24} />
-                </button>
-              </div>
-              <nav className="flex flex-col items-start gap-5 px-6 py-8 overflow-y-auto">
-                {navigationSections.map((section) => (
-                  <InteractiveDiv
-                    key={section.id}
-                    variants={menuItemVariants}
-                    whileHoverScale={1.05}
-                    hoverY={0}
-                    hoverShadow="none"
+                  <button
+                    onClick={closeMenu}
+                    className="text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-full p-1"
+                    aria-label={t.nav.close}
+                    type="button"
                   >
-                    <Link
-                      href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
-                      onClick={() => setIsOpen(false)}
-                      className={`${getLinkClasses(section.id)} text-base font-medium tracking-tight text-gray-800 dark:text-gray-200`}
+                    <X size={24} />
+                  </button>
+                </div>
+                <nav className="flex flex-col items-start gap-5 px-6 py-8 overflow-y-auto">
+                  {navigationSections.map(section => (
+                    <InteractiveDiv
+                      key={section.id}
+                      variants={menuItemVariants}
+                      whileHoverScale={1.05}
+                      hoverY={0}
+                      hoverShadow="none"
                     >
-                      {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
-                    </Link>
-                  </InteractiveDiv>
-                ))}
-                <motion.div variants={menuItemVariants} className="flex items-center gap-3 pt-3 border-t border-gray-100/80 dark:border-gray-800/70 w-full">
-                  <LanguageSwitcher />
-                  <ThemeToggle onClose={() => setIsOpen(false)} />
-                </motion.div>
-              </nav>
-            </div>
-          </motion.div>
+                      <Link
+                        href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
+                        onClick={closeMenu}
+                        className={`${getLinkClasses(section.id)} text-base font-medium tracking-tight text-gray-800 dark:text-gray-200`}
+                      >
+                        {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
+                      </Link>
+                    </InteractiveDiv>
+                  ))}
+                  <motion.div
+                    variants={menuItemVariants}
+                    className="flex items-center gap-3 pt-3 border-t border-gray-100/80 dark:border-gray-800/70 w-full"
+                  >
+                    <LanguageSwitcher />
+                    <ThemeToggle onClose={closeMenu} />
+                  </motion.div>
+                </nav>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>

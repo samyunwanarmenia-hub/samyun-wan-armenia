@@ -229,29 +229,31 @@ export const generateBreadcrumbSchema = (breadcrumbs: Array<{ name: string; url:
   };
 };
 
-export const generateBreadcrumbs = ({
+export const buildBreadcrumbItems = ({
   lang,
   segments,
 }: {
   lang: string;
   segments: string[];
-}) => {
+}): Array<{ name: string; url: string }> => {
   const normalized: SupportedLang = resolveLang(lang);
   const t = translations[normalized] || translations.hy;
+  const navLabels = t.nav as Record<string, string>;
 
   const labelMap: Record<string, string> = {
-    home: t.nav.home,
-    about: t.nav.about,
-    benefits: t.nav.benefits,
-    products: t.nav.products,
-    testimonials: t.nav.testimonials,
-    contact: t.nav.contact,
-    faq: t.nav.faq,
-    'track-order': t.nav.trackOrder ?? 'Track order',
+    home: navLabels.home || t.hero.title,
+    about: navLabels.about,
+    benefits: navLabels.benefits,
+    products: navLabels.products,
+    testimonials: navLabels.testimonials,
+    contact: navLabels.contact,
+    faq: navLabels.faq,
+    'track-order': navLabels.trackOrder ?? 'Track order',
     blogs: t.article?.title ?? 'Blogs',
     'how-to-identify-fake': t.authenticity?.title ?? 'Authenticity',
-    privacy: 'Privacy',
-    terms: 'Terms',
+    privacy: navLabels.privacy ?? 'Privacy',
+    terms: navLabels.terms ?? 'Terms',
+    verify: t.authenticity?.qrScanInstructions ?? 'Verify',
   };
 
   const items = [
@@ -265,6 +267,17 @@ export const generateBreadcrumbs = ({
     }),
   ];
 
+  return items;
+};
+
+export const generateBreadcrumbs = ({
+  lang,
+  segments,
+}: {
+  lang: string;
+  segments: string[];
+}) => {
+  const items = buildBreadcrumbItems({ lang, segments });
   return generateBreadcrumbSchema(items);
 };
 

@@ -2,10 +2,10 @@ import { Suspense } from 'react';
 import BenefitsSection from '@/components/BenefitsSection';
 import { buildPageMetadata } from '@/utils/pageMetadata';
 import { translations } from '@/i18n/translations';
-import { generateBreadcrumbs } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
-import ScriptLD from '@/components/ScriptLD';
 import { buildAlternates } from '@/utils/alternateLinks';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
+import { buildBreadcrumbItems } from '@/utils/schemaUtils';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) => {
   const alternates = buildAlternates('/benefits');
@@ -21,12 +21,12 @@ const BenefitsPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang] || translations.hy;
 
-  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['benefits'] });
+  const breadcrumbItems = buildBreadcrumbItems({ lang, segments: ['benefits'] });
   const fallbackLabel = `${t.benefits.title} placeholder`;
 
   return (
     <>
-      <ScriptLD json={breadcrumbData} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Suspense
         fallback={
           <section

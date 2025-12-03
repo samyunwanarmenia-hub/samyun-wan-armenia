@@ -2,13 +2,14 @@ import { cache } from 'react';
 import type { Metadata } from 'next';
 import { getBlogPost, getBlogStaticParams } from '@/data/blogs';
 import BlogArticleContent from '@/components/BlogArticleContent';
-import { buildBlogPostMetadata } from '@/utils/blogMetadata';
-import { generateBlogPostingSchema, generateBreadcrumbs } from '@/utils/schemaUtils';
+import { buildArticleJsonLd, buildBlogPostMetadata } from '@/utils/blogMetadata';
+import { buildBreadcrumbItems } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import { notFound } from 'next/navigation';
 import { SITE_URL } from '@/config/siteConfig';
 import ScriptLD from '@/components/ScriptLD';
 import { buildAlternates } from '@/utils/alternateLinks';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 const fetchBlogPost = cache((slug: string) => getBlogPost(slug));
 
@@ -52,26 +53,23 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
 
   const lang: SupportedLang = resolveLang(params.lang);
   const translation = post.translations[lang] || post.translations.hy;
-  const permalink = `${SITE_URL}/${lang}/blogs/${params.slug}`;
-  const inLanguage = lang === 'hy' ? 'hy-AM' : lang === 'ru' ? 'ru-RU' : 'en-US';
-  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['blogs', params.slug] });
+  const breadcrumbItems = buildBreadcrumbItems({ lang, segments: ['blogs', params.slug] });
   const heroImageFallback = translation.heroImage || post.heroImage || `${SITE_URL}/optimized/og-image.jpg`;
-  const blogPostingSchema = generateBlogPostingSchema({
-    headline: translation.title,
+  const articleSchema = buildArticleJsonLd({
+    lang,
+    slug: params.slug,
+    title: translation.title,
     description: translation.summary,
-    url: permalink,
-    image: heroImageFallback,
-    authorName: post.author,
-    publisherName: 'Samyun Wan Armenia',
+    image: heroImageFallback.startsWith('http') ? heroImageFallback : `${SITE_URL}${heroImageFallback}`,
     datePublished: post.publishedAt,
-    inLanguage,
-    keywords: translation.tags,
+    dateModified: post.publishedAt,
+    authorName: post.author,
   });
 
   return (
     <>
-      <ScriptLD json={breadcrumbData} />
-      <ScriptLD json={blogPostingSchema} />
+      <BreadcrumbSchema items={breadcrumbItems} />
+      <ScriptLD json={articleSchema} />
 
       <section className="px-4 py-10 md:py-14 lg:py-16">
         <div className="mx-auto max-w-5xl space-y-6 lg:space-y-10">

@@ -1,8 +1,8 @@
 import { QR_VERIFICATION_URL, QR_VERIFICATION_REL } from '@/config/siteConfig';
 import { translations } from '@/i18n/translations';
-import { generateBreadcrumbs } from '@/utils/schemaUtils';
+import { buildBreadcrumbItems } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
-import ScriptLD from '@/components/ScriptLD';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import { buildPageMetadata } from '@/utils/pageMetadata';
 import { buildAlternates } from '@/utils/alternateLinks';
 
@@ -13,6 +13,10 @@ export const generateMetadata = ({ params }: { params: { lang: string } }) => {
   const alternates = buildAlternates('/verify/qr');
   return {
     ...buildPageMetadata(params.lang, 'verify/qr', { canonicalPath: alternates.canonical }),
+    robots: {
+      index: false,
+      follow: true,
+    },
     alternates,
   };
 };
@@ -21,11 +25,11 @@ const QrVerifyPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const t = translations[lang] || translations.hy;
 
-  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['verify', 'qr'] });
+  const breadcrumbItems = buildBreadcrumbItems({ lang, segments: ['verify', 'qr'] });
 
   return (
     <>
-      <ScriptLD json={breadcrumbData} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-8 text-center">
         <div className="max-w-xl rounded-2xl bg-white p-8 shadow-2xl">
           <h1 className="text-2xl font-bold text-gray-900">{t.authenticity.qrScanInstructions}</h1>

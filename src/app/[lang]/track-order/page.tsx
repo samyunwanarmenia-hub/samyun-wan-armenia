@@ -1,9 +1,8 @@
 import TrackOrderSection from '@/components/TrackOrderSection';
 import { buildPageMetadata } from '@/utils/pageMetadata';
-import { translations } from '@/i18n/translations';
-import { generateBreadcrumbs } from '@/utils/schemaUtils';
+import { buildBreadcrumbItems } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
-import ScriptLD from '@/components/ScriptLD';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 import { buildAlternates } from '@/utils/alternateLinks';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) => {
@@ -16,13 +15,12 @@ export const generateMetadata = ({ params }: { params: { lang: string } }) => {
 
 const TrackOrderPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);
-  const _t = translations[lang] || translations.hy;
 
-  const breadcrumbData = generateBreadcrumbs({ lang, segments: ['track-order'] });
+  const breadcrumbItems = buildBreadcrumbItems({ lang, segments: ['track-order'] });
 
   return (
     <>
-      <ScriptLD json={breadcrumbData} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <TrackOrderSection />
     </>
   );

@@ -4,22 +4,13 @@ import { Inter } from "next/font/google";
 import Script from "next/script";
 import "../app/globals.css";
 
-import {
-  SITE_URL,
-  PRIMARY_PHONE,
-  SECONDARY_PHONE,
-  OFFICIAL_BUSINESS_NAME,
-  DIRECTOR_NAME,
-  OFFICIAL_ACTIVITY,
-  OFFICIAL_CLASSIFICATION,
-  OFFICIAL_CITY,
-  OFFICIAL_REGISTRY_LAST_UPDATE,
-} from "@/config/siteConfig";
-import { generateLocalBusinessSchema, SOCIAL_LINKS } from "@/utils/schemaUtils";
+import { SITE_URL } from "@/config/siteConfig";
+import { generateLocalBusinessSchema } from "@/utils/schemaUtils";
 import { SEO_KEYWORDS } from "@/config/seoKeywords";
 import ScriptLD from "@/components/ScriptLD";
 import LayoutClientProvider from "@/components/LayoutClientProvider";
 import { DEFAULT_LANG, isSupportedLang, LOCALE_CODES, resolveLang, SUPPORTED_LANGS } from "@/config/locales";
+import OrganizationSchema from "@/components/OrganizationSchema";
 
 const GOOGLE_ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_ID || "";
 const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "";
@@ -31,8 +22,6 @@ const inter = Inter({
   variable: "--font-inter",
   display: "swap",
 });
-
-const LOGO_URL = `${SITE_URL}/optimized/logo.png`;
 
 /* 
  RootLayout metadata must stay MINIMAL.
@@ -64,47 +53,6 @@ export const metadata: Metadata = {
     },
   },
   keywords: SEO_KEYWORDS.hy.join(', '),
-};
-
-/* --------- ORGANIZATION SCHEMA --------- */
-const organizationStructuredData = {
-  "@context": "https://schema.org",
-  "@id": `${SITE_URL}#organization`,
-  "@type": "Organization",
-  name: "Samyun Wan Armenia",
-  legalName: OFFICIAL_BUSINESS_NAME,
-  url: SITE_URL,
-  logo: LOGO_URL,
-  description: `${OFFICIAL_ACTIVITY}. ${OFFICIAL_CLASSIFICATION}. ${OFFICIAL_CITY}.`,
-  keywords: [OFFICIAL_ACTIVITY, OFFICIAL_CLASSIFICATION].join(", "),
-  sameAs: SOCIAL_LINKS,
-  inLanguage: ["hy-AM", "ru-RU", "en-US"],
-  contactPoint: [
-    {
-      "@type": "ContactPoint",
-      telephone: PRIMARY_PHONE,
-      contactType: "customer support",
-      areaServed: "AM",
-      availableLanguage: ["hy", "ru", "en"],
-    },
-    {
-      "@type": "ContactPoint",
-      telephone: SECONDARY_PHONE,
-      contactType: "sales",
-      areaServed: "AM",
-      availableLanguage: ["hy", "ru", "en"],
-    },
-  ],
-  address: {
-    "@type": "PostalAddress",
-    addressCountry: "AM",
-    addressLocality: OFFICIAL_CITY,
-  },
-  areaServed: { "@type": "Country", name: "Armenia" },
-  founder: { "@type": "Person", name: DIRECTOR_NAME },
-  identifier: [
-    { "@type": "PropertyValue", propertyID: "Registry Update", value: OFFICIAL_REGISTRY_LAST_UPDATE },
-  ],
 };
 
 /* --------- LOCAL BUSINESS SCHEMA --------- */
@@ -176,11 +124,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','${GTM_ID}');`}
           </Script>
         )}
-        <ScriptLD json={organizationStructuredData} />
+        <OrganizationSchema />
         <ScriptLD json={localBusinessStructuredData} />
         <ScriptLD json={websiteStructuredData} />
         <meta name="theme-color" content={THEME_COLOR} />
         <meta name="robots" content="max-image-preview:large" />
+        <meta name="google-site-verification" content="-ufBwSDlPw84KU4RYrWhcWzUQVz3ymn3YdTSwbdJd_E" />
         {allowAnalyticsScripts && (
           <>
             {/* Google tag (gtag.js) */}

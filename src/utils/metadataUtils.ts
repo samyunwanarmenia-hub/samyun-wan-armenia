@@ -68,6 +68,7 @@ export const generateCommonMetadata = ({
   const pathSegments = sanitizedPagePath ? sanitizedPagePath.split('/').filter(Boolean) : [];
   const defaultPageUrl = buildLocalizedUrl(lang, pathSegments);
   const canonicalUrl = canonicalPath ? ensureAbsolute(canonicalPath) : defaultPageUrl;
+  const locale = LOCALE_CODES[lang];
 
   return {
     metadataBase: new URL(SITE_URL),
@@ -90,7 +91,7 @@ export const generateCommonMetadata = ({
           alt: imageAlt,
         },
       ],
-      locale: LOCALE_CODES[lang],
+      locale,
       type,
     },
     twitter: {
@@ -103,6 +104,15 @@ export const generateCommonMetadata = ({
     alternates: {
       canonical: canonicalUrl,
       languages: buildAlternateLanguages(pathSegments),
+    },
+    other: {
+      'og:url': canonicalUrl,
+      'og:site_name': t.hero.title,
+      'og:locale': locale,
+      'twitter:card': 'summary_large_image',
+      'twitter:title': title,
+      'twitter:description': description,
+      'twitter:image': image,
     },
   };
 };

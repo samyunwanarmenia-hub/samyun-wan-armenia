@@ -3,10 +3,10 @@ import { buildPageMetadata } from '@/utils/pageMetadata';
 import { QR_VERIFICATION_URL, QR_VERIFICATION_REL } from '@/config/siteConfig';
 import { translations } from '@/i18n/translations';
 import type { TranslationKeys } from '@/types/global';
-import { generateBreadcrumbs } from '@/utils/schemaUtils';
+import { buildBreadcrumbItems } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
-import ScriptLD from '@/components/ScriptLD';
 import { buildAlternates } from '@/utils/alternateLinks';
+import BreadcrumbSchema from '@/components/BreadcrumbSchema';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) => {
   const alternates = buildAlternates('/how-to-identify-fake');
@@ -22,12 +22,12 @@ const HowToIdentifyFakePage = ({ params }: { params: { lang: string } }) => {
   const currentLang: SupportedLang = resolveLang(params.lang);
   const t: TranslationKeys = translations[currentLang] || translations.hy;
 
-  const breadcrumbData = generateBreadcrumbs({ lang: currentLang, segments: ['how-to-identify-fake'] });
+  const breadcrumbItems = buildBreadcrumbItems({ lang: currentLang, segments: ['how-to-identify-fake'] });
   const fallbackLabel = `${t.authenticity.howToDistinguish} placeholder`;
 
   return (
     <>
-      <ScriptLD json={breadcrumbData} />
+      <BreadcrumbSchema items={breadcrumbItems} />
       <Suspense
         fallback={
           <section
