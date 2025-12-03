@@ -42,16 +42,14 @@ const ensureAbsolute = (value: string | undefined) => {
 };
 
 const buildAlternateLanguages = (segments: string[]) => {
-  const result: Record<string, string> = {};
+  const suffix = segments.length ? `/${segments.join('/')}` : '';
 
-  Object.entries(LOCALE_CODES).forEach(([locale, hreflang]) => {
-    result[hreflang] = buildLocalizedUrl(locale, segments);
-  });
-
-  // почему исправлено: x-default должен совпадать с sitemap, иначе Google игнорирует hreflang
-  const hasPath = segments.length > 0;
-  result['x-default'] = hasPath ? buildLocalizedUrl('en', segments) : `${SITE_URL}/en`;
-  return result;
+  return {
+    hy: `${SITE_URL}/hy${suffix}`,
+    ru: `${SITE_URL}/ru${suffix}`,
+    en: `${SITE_URL}/en${suffix}`,
+    'x-default': `${SITE_URL}/hy${suffix}`,
+  };
 };
 
 export const generateCommonMetadata = ({

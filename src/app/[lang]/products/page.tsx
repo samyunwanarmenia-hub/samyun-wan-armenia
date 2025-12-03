@@ -8,9 +8,16 @@ import { resolveLang, type SupportedLang } from '@/config/locales';
 import { baseTestimonials } from '@/data/testimonials';
 import { getSeoKeywords } from '@/config/seoKeywords';
 import ScriptLD from '@/components/ScriptLD';
+import { buildAlternates } from '@/utils/alternateLinks';
+import ProductSchema from '@/components/ProductSchema';
 
-export const generateMetadata = ({ params }: { params: { lang: string } }) =>
-  buildPageMetadata(params.lang, 'products');
+export const generateMetadata = ({ params }: { params: { lang: string } }) => {
+  const alternates = buildAlternates('/products');
+  return {
+    ...buildPageMetadata(params.lang, 'products', { canonicalPath: alternates.canonical }),
+    alternates,
+  };
+};
 
 export const revalidate = 60 * 60 * 12;
 
@@ -44,16 +51,20 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
   const productsPageUrl = `${SITE_URL}/${lang}/products`;
   const seoKeywords = getSeoKeywords(lang);
 
-  const productSchemas = productShowcaseData.map(product => {
-    const name = t.productShowcase[product.labelKey];
-    const description = t.productShowcase[product.descKey];
+  const localizedProducts = productShowcaseData.map(product => ({
+    ...product,
+    name: t.productShowcase[product.labelKey],
+    description: t.productShowcase[product.descKey],
+  }));
+
+  const productSchemas = localizedProducts.map(product => {
     const image = `${SITE_URL}${product.src}`;
     const url = productsPageUrl;
     const productId = `${productsPageUrl}#${product.labelKey}`;
 
     const schema = generateProductSchema({
-      name,
-      description,
+      name: product.name,
+      description: product.description,
       image,
       price: product.price,
       priceCurrency: 'AMD',
@@ -119,6 +130,14 @@ const ProductsPage = ({ params }: { params: { lang: string } }) => {
     <>
       <ScriptLD json={breadcrumbData} />
       <ScriptLD json={graphSchema} />
+      {localizedProducts.map(product => (
+        <ProductSchema
+          key={product.labelKey}
+          name={product.name}
+          description={product.description}
+          price={product.price.toString()}
+        />
+      ))}
       <ProductShowcaseSection />
     </>
   );

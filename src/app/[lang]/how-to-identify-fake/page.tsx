@@ -6,9 +6,15 @@ import type { TranslationKeys } from '@/types/global';
 import { generateBreadcrumbs } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import ScriptLD from '@/components/ScriptLD';
+import { buildAlternates } from '@/utils/alternateLinks';
 
-export const generateMetadata = ({ params }: { params: { lang: string } }) =>
-  buildPageMetadata(params.lang, 'how-to-identify-fake');
+export const generateMetadata = ({ params }: { params: { lang: string } }) => {
+  const alternates = buildAlternates('/how-to-identify-fake');
+  return {
+    ...buildPageMetadata(params.lang, 'how-to-identify-fake', { canonicalPath: alternates.canonical }),
+    alternates,
+  };
+};
 
 export const revalidate = 60 * 60 * 12;
 

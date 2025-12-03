@@ -10,9 +10,15 @@ import { generateArticleSchema, generateBreadcrumbs } from '@/utils/schemaUtils'
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import { SITE_URL } from '@/config/siteConfig';
 import ScriptLD from '@/components/ScriptLD';
+import { buildAlternates } from '@/utils/alternateLinks';
 
-export const generateMetadata = ({ params }: { params: { lang: string } }): Metadata =>
-  buildPageMetadata(params.lang, 'blogs');
+export const generateMetadata = ({ params }: { params: { lang: string } }): Metadata => {
+  const alternates = buildAlternates('/blogs');
+  return {
+    ...buildPageMetadata(params.lang, 'blogs', { canonicalPath: alternates.canonical }),
+    alternates,
+  };
+};
 
 const blogsHtmlPath = path.join(process.cwd(), 'tmp_hy_blogs.html');
 

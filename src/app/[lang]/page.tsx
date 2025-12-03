@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { buildPageMetadata } from '@/utils/pageMetadata';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import { translations } from '@/i18n/translations';
+import { buildAlternates } from '@/utils/alternateLinks';
 
 // Lazy load sections to reduce initial bundle size
 const HeroSection = dynamic(() => import('@/components/HeroSection'), {
@@ -13,8 +14,13 @@ const ProductShowcaseSection = dynamic(() => import('@/components/ProductShowcas
   ssr: true, // Keep SSR for SEO
 });
 
-export const generateMetadata = ({ params }: { params: { lang: string } }) =>
-  buildPageMetadata(params.lang, 'home');
+export const generateMetadata = ({ params }: { params: { lang: string } }) => {
+  const alternates = buildAlternates();
+  return {
+    ...buildPageMetadata(params.lang, 'home', { canonicalPath: alternates.canonical }),
+    alternates,
+  };
+};
 
 const LangPage = async ({ params }: { params: { lang: string } }) => {
   const currentLang: SupportedLang = resolveLang(params.lang);

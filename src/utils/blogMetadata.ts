@@ -10,6 +10,7 @@ interface BlogMetadataOptions {
   slug: string;
   post: BlogPost;
   translation: BlogTranslation;
+  canonicalPath?: string;
 }
 
 export const buildBlogPostMetadata = ({
@@ -17,11 +18,12 @@ export const buildBlogPostMetadata = ({
   slug,
   post,
   translation,
+  canonicalPath,
 }: BlogMetadataOptions): Metadata => {
   const normalizedLang = normalizeLang(lang);
   const t = translations[normalizedLang] || translations.hy;
   const keywords = [...translation.tags, ...post.tags].join(', ');
-  const canonicalPath = `/${normalizedLang}/blogs/${slug}`;
+  const canonical = canonicalPath ?? `/hy/blogs/${slug}`;
 
   return generateCommonMetadata({
     lang: normalizedLang,
@@ -33,6 +35,6 @@ export const buildBlogPostMetadata = ({
     image: translation.heroImage,
     imageAlt: translation.heroImageAlt,
     type: 'article',
-    canonicalPath,
+    canonicalPath: canonical,
   });
 };

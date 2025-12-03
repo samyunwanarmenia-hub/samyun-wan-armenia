@@ -410,6 +410,8 @@ export const buildPageMetadata = (
   const { title, description, keywords, imageAlt } = config.buildCopy(t, normalizedLang);
   const keywordList = keywords.length ? keywords : [title, t.hero.title];
   const extendedKeywords = Array.from(new Set([...keywordList, ...getSeoKeywords(normalizedLang)]));
+  const canonicalPath =
+    options?.canonicalPath ?? `/hy${config.path ? `/${config.path.replace(/^\/+|\/+$/g, '')}` : ''}`;
 
   return generateMetadata({
     lang: normalizedLang,
@@ -419,7 +421,7 @@ export const buildPageMetadata = (
     keywords: extendedKeywords,
     image: `${SITE_URL}/api/og/${normalizedLang}?title=${encodeURIComponent(title)}`,
     imageAlt: imageAlt ?? title,
-    canonicalPath: options?.canonicalPath,
+    canonicalPath,
     type: options?.type,
     titleOverride: title,
     descriptionOverride: description,

@@ -8,6 +8,7 @@ import { resolveLang, type SupportedLang } from '@/config/locales';
 import { notFound } from 'next/navigation';
 import { SITE_URL } from '@/config/siteConfig';
 import ScriptLD from '@/components/ScriptLD';
+import { buildAlternates } from '@/utils/alternateLinks';
 
 const fetchBlogPost = cache((slug: string) => getBlogPost(slug));
 
@@ -25,13 +26,18 @@ export async function generateMetadata({
 
   const lang: SupportedLang = resolveLang(params.lang);
   const translation = post.translations[lang] || post.translations.hy;
+  const alternates = buildAlternates(`/blogs/${params.slug}`);
 
-  return buildBlogPostMetadata({
-    lang,
-    slug: params.slug,
-    post,
-    translation,
-  });
+  return {
+    ...buildBlogPostMetadata({
+      lang,
+      slug: params.slug,
+      post,
+      translation,
+      canonicalPath: alternates.canonical,
+    }),
+    alternates,
+  };
 }
 
 export function generateStaticParams() {

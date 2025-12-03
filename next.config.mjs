@@ -32,6 +32,12 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'samyunwanarmenia.netlify.app' }],
+        destination: 'https://samyun-wan.life/:path*',
+        permanent: true,
+      },
+      {
         source: '/samyun-wan-armenia.html',
         destination: '/hy',
         permanent: true,

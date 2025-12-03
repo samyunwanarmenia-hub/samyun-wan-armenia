@@ -11,8 +11,8 @@ const LOCALE_CODES = {
   en: 'en-US',
 };
 
-// IMPORTANT FIX: Google requires real x-default pointing to English
-const DEFAULT_LANG = 'en';
+// Default language for x-default hreflang entries
+const DEFAULT_LANG = 'hy';
 
 const ROOT_ENTRY = { changefreq: 'weekly', priority: 0.9 };
 const NOW_ISO = new Date().toISOString();
@@ -29,7 +29,7 @@ const normalizeLastmod = value => {
 
 const SITE_PAGES = [
   { path: '', changefreq: 'weekly', priority: 0.9 },
-  { path: 'about', changefreq: 'monthly', priority: 0.8 },
+  { path: 'about', changefreq: 'monthly', priority: 0.5 },
   { path: 'benefits', changefreq: 'monthly', priority: 0.8 },
   { path: 'products', changefreq: 'weekly', priority: 1.0 },
   { path: 'testimonials', changefreq: 'monthly', priority: 0.7 },
@@ -69,11 +69,9 @@ const buildAlternateRefs = (baseUrl, segments) => {
     hrefIsAbsolute: true,
   }));
 
-  // CORRECT x-default
-  // Should point to LANGUAGE-LESS homepage (or main lang)
   refs.push({
     hreflang: 'x-default',
-    href: sanitizedSegments.length === 0 ? `${baseUrl}/en` : buildLocalizedUrl(baseUrl, DEFAULT_LANG, sanitizedSegments),
+    href: buildLocalizedUrl(baseUrl, DEFAULT_LANG, sanitizedSegments),
     hrefIsAbsolute: true,
   });
 
@@ -112,11 +110,11 @@ const createBlogPostEntries = baseUrl =>
 module.exports = {
   siteUrl: normalizeUrl(process.env.NEXT_PUBLIC_SITE_URL ?? DEFAULT_SITE_URL),
 
-  generateRobotsTxt: false,
+  generateRobotsTxt: true,
   outDir: './public',
   sitemapSize: 50,
 
-  autoLastmod: false,
+  autoLastmod: true,
   changefreq: 'weekly',
   priority: 0.7,
 

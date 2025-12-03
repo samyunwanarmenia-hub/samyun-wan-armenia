@@ -1,10 +1,7 @@
 import { MetadataRoute } from "next";
 import { SITE_URL } from "@/config/siteConfig";
 
-const normalize = (url: string) => (url.endsWith("/") ? url : `${url}/`);
-
 export default function robots(): MetadataRoute.Robots {
-  const base = normalize(SITE_URL);
   const host = new URL(SITE_URL).host;
 
   return {
@@ -18,7 +15,7 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: `${base}sitemap.xml`,
+    sitemap: "https://samyun-wan.life/sitemap.xml",
     host,
   };
 }

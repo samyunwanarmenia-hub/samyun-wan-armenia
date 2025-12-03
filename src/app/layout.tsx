@@ -180,6 +180,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <ScriptLD json={localBusinessStructuredData} />
         <ScriptLD json={websiteStructuredData} />
         <meta name="theme-color" content={THEME_COLOR} />
+        <meta name="robots" content="max-image-preview:large" />
         {allowAnalyticsScripts && (
           <>
             {/* Google tag (gtag.js) */}
@@ -242,7 +243,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         <noscript>
           <img
             src="https://mc.yandex.ru/watch/103962073"
-            alt=""
+            alt="Yandex Metrica tracking pixel"
             style={{ position: "absolute", left: "-9999px" }}
           />
         </noscript>

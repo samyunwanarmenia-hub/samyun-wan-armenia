@@ -5,9 +5,15 @@ import { translations } from '@/i18n/translations';
 import { generateBreadcrumbs, SOCIAL_LINKS } from '@/utils/schemaUtils';
 import { resolveLang, type SupportedLang } from '@/config/locales';
 import ScriptLD from '@/components/ScriptLD';
+import { buildAlternates } from '@/utils/alternateLinks';
 
-export const generateMetadata = ({ params }: { params: { lang: string } }) =>
-  buildPageMetadata(params.lang, 'contact');
+export const generateMetadata = ({ params }: { params: { lang: string } }) => {
+  const alternates = buildAlternates('/contact');
+  return {
+    ...buildPageMetadata(params.lang, 'contact', { canonicalPath: alternates.canonical }),
+    alternates,
+  };
+};
 
 const ContactPage = ({ params }: { params: { lang: string } }) => {
   const lang: SupportedLang = resolveLang(params.lang);

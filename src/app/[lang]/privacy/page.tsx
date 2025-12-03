@@ -1,26 +1,16 @@
 import { LEGAL_COPY, buildPageMetadata } from '@/utils/pageMetadata';
-import { resolveLang, type SupportedLang, SUPPORTED_LANGS } from '@/config/locales';
+import { resolveLang, type SupportedLang } from '@/config/locales';
 import LegalPageLayout from '@/components/LegalPageLayout';
 import { generateBreadcrumbs } from '@/utils/schemaUtils';
 import ScriptLD from '@/components/ScriptLD';
 import { PRIVACY_EFFECTIVE_DATE, PRIVACY_POLICY_VERSION } from '@/config/siteConfig';
+import { buildAlternates } from '@/utils/alternateLinks';
 
 export const generateMetadata = ({ params }: { params: { lang: string } }) => {
-  const baseMetadata = buildPageMetadata(params.lang, 'privacy');
-  const languageAlternates = SUPPORTED_LANGS.reduce<Record<string, string>>((acc, locale) => {
-    acc[locale] = `/${locale}/privacy`;
-    return acc;
-  }, {});
-
+  const alternates = buildAlternates('/privacy');
   return {
-    ...baseMetadata,
-    alternates: {
-      ...(baseMetadata.alternates ?? {}),
-      languages: {
-        ...(baseMetadata.alternates?.languages ?? {}),
-        ...languageAlternates,
-      },
-    },
+    ...buildPageMetadata(params.lang, 'privacy', { canonicalPath: alternates.canonical }),
+    alternates,
   };
 };
 
