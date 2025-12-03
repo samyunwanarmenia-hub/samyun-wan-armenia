@@ -145,26 +145,22 @@ const SwipeableProductCarousel: React.FC<SwipeableProductCarouselProps> = ({ t, 
         </motion.div>
       </AnimatePresence>
 
-      <motion.button
+      <button
         onClick={handlePrev}
-        className="absolute top-1/2 left-3 transform -translate-y-1/2 bg-gray-100 dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-600 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-20" /* Changed text-gray-700 to text-gray-600 for light mode */
+        className="absolute top-1/2 left-3 -translate-y-1/2 transform bg-gray-100 dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-600 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-20"
         aria-label="Previous product"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        type="button"
       >
         <ChevronLeft className="w-6 h-6" />
-      </motion.button>
-      <motion.button
+      </button>
+      <button
         onClick={handleNext}
-        className="absolute top-1/2 right-3 transform -translate-y-1/2 bg-gray-100 dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-600 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-20" /* Changed text-gray-700 to text-gray-600 for light mode */
+        className="absolute top-1/2 right-3 -translate-y-1/2 transform bg-gray-100 dark:bg-gray-700 p-2 rounded-full shadow-md text-gray-600 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors z-20"
         aria-label="Next product"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        transition={{ type: "spring", stiffness: 400, damping: 17 }}
+        type="button"
       >
         <ChevronRight className="w-6 h-6" />
-      </motion.button>
+      </button>
     </div>
   );
 };

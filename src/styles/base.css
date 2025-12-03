@@ -1,40 +1,6 @@
 /* =================== base.css ==================== */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  src: url('/fonts/Inter-Regular.woff2') format('woff2');
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 500;
-  src: url('/fonts/Inter-Medium.woff2') format('woff2');
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 600;
-  src: url('/fonts/Inter-SemiBold.woff2') format('woff2');
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 700;
-  src: url('/fonts/Inter-Bold.woff2') format('woff2');
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Cal Sans';
-  font-style: normal;
-  font-weight: 600;
-  src: url('/fonts/CalSans-SemiBold.woff2') format('woff2');
-  font-display: swap;
-}
+/* Local @font-face removed: Inter already loaded via next/font in app/layout.tsx, Cal Sans unused.
+   This avoids sanitizer errors from problematic WOFF2 files in public/fonts. */
 
 html {
   scroll-behavior: smooth;
@@ -55,6 +21,7 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-family: var(--font-roboto, 'Roboto'), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-weight: 500;
   line-height: 1.7;
   position: relative;

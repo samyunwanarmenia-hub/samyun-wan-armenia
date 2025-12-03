@@ -40,12 +40,11 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
   }, [pathname]);
 
   useEffect(() => {
-    // Ensure the client-side state matches the initial server-rendered language
-    if (initialLang && initialLang !== currentLangState) {
+    // Sync with server-provided lang only when it actually changes (avoid overriding manual switches)
+    if (initialLang) {
       setCurrentLangState(initialLang);
     }
-    // Removed: console.log('LayoutClientProvider - initial Lang:', initialLang, 'currentLangState:', currentLangState);
-  }, [initialLang, currentLangState]);
+  }, [initialLang]);
 
   // Effect to update the HTML lang attribute and body classes
   useEffect(() => {

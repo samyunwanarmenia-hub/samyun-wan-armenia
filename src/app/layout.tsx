@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { cookies, headers } from "next/headers";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import Script from "next/script";
 import "../app/globals.css";
 
@@ -17,9 +17,10 @@ const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID || "";
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-56D2LTZS";
 const THEME_COLOR = "#86b486";
 
-const inter = Inter({
+const roboto = Roboto({
   subsets: ["latin", "cyrillic"],
-  variable: "--font-inter",
+  weight: ["400", "500", "700"],
+  variable: "--font-roboto",
   display: "swap",
 });
 
@@ -113,7 +114,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const htmlLang = LOCALE_CODES[resolvedLang] || resolvedLang;
 
   return (
-    <html lang={htmlLang} className={inter.variable} suppressHydrationWarning>
+    <html lang={htmlLang} className={roboto.variable} suppressHydrationWarning>
       <head>
         {hasTagManagerConsent && (
           <Script id="gtm-init" strategy="afterInteractive">
