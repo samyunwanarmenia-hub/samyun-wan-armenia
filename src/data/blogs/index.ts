@@ -6,6 +6,10 @@ import { marked } from 'marked';
 import blogPostsJson from '@/data/blogs/blogPosts.json';
 import { DEFAULT_LANG, SUPPORTED_LANGS, type SupportedLang } from '@/config/locales';
 
+marked.use({
+  mangle: false,
+  headerIds: false,
+});
 
 
 type BlogSection = {

@@ -24,7 +24,7 @@ const BlogPreviewCard: React.FC<BlogPreviewCardProps> = ({ preview, lang }) => {
       (preview.heroImage.startsWith('http') || preview.heroImage.startsWith('/images') || preview.heroImage.startsWith('/optimized')
         ? preview.heroImage
         : `/${preview.heroImage.replace(/^\/+/, '')}`)) ||
-    '/optimized/og-image.jpg';
+    '/optimized/og-image-1200x630.webp';
   const normalizedAlt = preview.heroImageAlt || preview.title;
 
   return (

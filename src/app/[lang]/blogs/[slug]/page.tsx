@@ -54,7 +54,8 @@ const BlogDetailPage = ({ params }: BlogDetailPageProps) => {
   const lang: SupportedLang = resolveLang(params.lang);
   const translation = post.translations[lang] || post.translations.hy;
   const breadcrumbItems = buildBreadcrumbItems({ lang, segments: ['blogs', params.slug] });
-  const heroImageFallback = translation.heroImage || post.heroImage || `${SITE_URL}/optimized/og-image.jpg`;
+  const heroImageFallback =
+    translation.heroImage || post.heroImage || `${SITE_URL}/optimized/og-image-1200x630.webp`;
   const articleSchema = buildArticleJsonLd({
     lang,
     slug: params.slug,

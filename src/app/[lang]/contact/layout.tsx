@@ -70,7 +70,7 @@ const buildContactSchema = (lang: SupportedLang, t: TranslationKeys) => {
     '@type': 'LocalBusiness',
     name: 'Samyun Wan Armenia',
     url: `${SITE_URL}/${lang}/contact`,
-    image: `${SITE_URL}/optimized/og-image.jpg`,
+    image: `${SITE_URL}/optimized/og-image-1200x630.webp`,
     telephone: phoneNumbers,
     address: {
       '@type': 'PostalAddress',

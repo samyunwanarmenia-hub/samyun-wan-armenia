@@ -18,6 +18,11 @@ const TestimonialsSection = ({ testimonials, currentLang }: TestimonialsSectionP
   
   // Show only base testimonials - user reviews are sent to Telegram only
   const displayedTestimonials = testimonials.slice(0, 6);
+  const reviewCount = testimonials.length;
+  const averageRating =
+    reviewCount === 0
+      ? '0.00'
+      : (testimonials.reduce((sum, testimonial) => sum + (testimonial.rating || 0), 0) / reviewCount).toFixed(2);
 
   const sectionVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -52,6 +57,17 @@ const TestimonialsSection = ({ testimonials, currentLang }: TestimonialsSectionP
             title={t.testimonials.title}
             subtitle={t.testimonials.subtitle}
           />
+
+          <div className="mb-6 flex flex-wrap items-center gap-4 text-gray-800 dark:text-gray-100">
+            <div className="flex items-center gap-2 rounded-full border border-primary-200 bg-white px-4 py-2 shadow-sm dark:border-primary-700 dark:bg-gray-900">
+              <Star className="h-5 w-5 text-yellow-400" />
+              <span className="text-2xl font-semibold">{averageRating}</span>
+              <span className="text-sm text-gray-500 dark:text-gray-400">/ 5</span>
+            </div>
+            <span className="text-sm text-gray-600 dark:text-gray-300">
+              {reviewCount} reviews
+            </span>
+          </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
             {displayedTestimonials.map((testimonial: Testimonial) => (

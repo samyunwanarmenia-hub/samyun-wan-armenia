@@ -26,10 +26,10 @@ const BlogArticleContent = ({
       (translation.heroImage.startsWith('http') || translation.heroImage.startsWith('/images') || translation.heroImage.startsWith('/optimized')
         ? translation.heroImage
         : `/${translation.heroImage.replace(/^\/+/, '')}`)) ||
-    '/optimized/og-image.jpg';
+    '/optimized/og-image-1200x630.webp';
   const heroAlt = translation.heroImageAlt || translation.title;
   const heroWidth = translation.heroImageWidth || 1200;
-  const heroHeight = translation.heroImageHeight || 800;
+  const heroHeight = translation.heroImageHeight || 630;
 
   return (
     <article className="space-y-8 rounded-3xl border border-gray-200 bg-white p-6 shadow-xl dark:border-gray-700 dark:bg-gray-950">

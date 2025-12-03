@@ -74,7 +74,7 @@ const BlogsPage = ({ params }: { params: { lang: string } }) => {
     description: t.article.metaDescription,
     image:
       featured?.heroImage?.startsWith('http') || !featured?.heroImage
-        ? featured?.heroImage ?? `${SITE_URL}/optimized/og-image.jpg`
+        ? featured?.heroImage ?? `${SITE_URL}/optimized/og-image-1200x630.webp`
         : `${SITE_URL}${featured.heroImage}`,
     url: `${SITE_URL}/${lang}/blogs`,
     authorName: 'Samyun Wan Armenia',
