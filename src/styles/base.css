@@ -1,22 +1,59 @@
 /* =================== base.css ==================== */
-/* Fonts come from next/font (Inter + Montserrat) with Armenian-friendly fallbacks. */
+/* Theme tokens use data-theme on <html>. Fonts are loaded via next/font (Inter, Montserrat). */
+
+:root {
+  --background: #f6f0e4;
+  --surface: #fff9ef;
+  --muted-surface: #f0e5d7;
+  --surface-card: #fff9ef;
+  --text-primary: #1c2420;
+  --text-secondary: #55645a;
+  --accent: #3f7f4a;
+  --accent-strong: #2f6a3a;
+  --border-soft: rgba(28, 36, 32, 0.16);
+  --shadow-soft: 0 12px 28px rgba(28, 36, 32, 0.08);
+  --shadow-card: 0 14px 30px rgba(28, 36, 32, 0.1);
+  --glow-mint: rgba(63, 127, 74, 0.12);
+  --glow-gold: rgba(203, 170, 112, 0.14);
+  --brand-primary: var(--accent);
+  --brand-primary-strong: var(--accent-strong);
+  --surface-main: var(--background);
+}
+
+:root[data-theme="light"] {
+  --background: #f6f0e4;
+  --surface: #fff9ef;
+  --muted-surface: #f0e5d7;
+  --surface-card: #fffdf7;
+  --text-primary: #1c2420;
+  --text-secondary: #55645a;
+  --accent: #3f7f4a;
+  --accent-strong: #2f6a3a;
+  --border-soft: rgba(28, 36, 32, 0.16);
+  --shadow-soft: 0 12px 28px rgba(28, 36, 32, 0.08);
+  --shadow-card: 0 14px 30px rgba(28, 36, 32, 0.1);
+  --glow-mint: rgba(63, 127, 74, 0.12);
+  --glow-gold: rgba(203, 170, 112, 0.14);
+}
+
+:root[data-theme="dark"] {
+  --background: #0f1b15;
+  --surface: #15251d;
+  --muted-surface: #1b2d23;
+  --surface-card: #182d23;
+  --text-primary: #e8f3eb;
+  --text-secondary: #b7c7bb;
+  --accent: #74c18a;
+  --accent-strong: #5aa572;
+  --border-soft: rgba(232, 243, 235, 0.16);
+  --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 16px 36px rgba(0, 0, 0, 0.4);
+  --glow-mint: rgba(116, 193, 138, 0.18);
+  --glow-gold: rgba(203, 170, 112, 0.18);
+}
 
 html {
   scroll-behavior: smooth;
-}
-
-:root {
-  --brand-primary: #2f7a46;
-  --brand-primary-strong: #25633a;
-  --brand-olive: #3d704c;
-  --brand-accent: #4c9563;
-  --surface-main: #f7f9f5;
-  --surface-muted: #edf2e8;
-  --text-primary: #0f172a;
-  --text-muted: #4b5563;
-  --border-soft: rgba(15, 23, 42, 0.12);
-  --shadow-soft: 0 12px 28px rgba(15, 23, 42, 0.08);
-  --shadow-card: 0 14px 30px rgba(15, 23, 42, 0.1);
 }
 
 body {
@@ -24,22 +61,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--font-inter, 'Inter'), 'Noto Sans Armenian', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-weight: 400;
+  font-size: 16px;
   line-height: 1.6;
   letter-spacing: -0.01em;
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
-  background: linear-gradient(180deg, #f7f9f5 0%, #f1f5ec 100%);
+  background: var(--background);
   color: var(--text-primary);
 }
 
-body::before,
-body::after {
-  display: none;
-}
-
 ::selection {
-  background-color: var(--brand-primary-strong);
+  background-color: var(--accent-strong);
   color: #fff;
 }
 
@@ -51,53 +84,42 @@ h3 {
   line-height: 1.2;
 }
 
+h1 {
+  font-size: clamp(32px, 5vw, 42px);
+}
+
+h2 {
+  font-size: clamp(28px, 4vw, 32px);
+}
+
+h3 {
+  font-size: clamp(22px, 3vw, 26px);
+}
+
+p {
+  color: var(--text-secondary);
+}
+
 a {
-  color: var(--brand-primary-strong);
+  color: var(--accent-strong);
   text-decoration: none;
+  transition: color 0.3s ease-in-out;
 }
 
 a:hover {
-  color: var(--brand-primary);
+  color: var(--accent);
 }
 
 section {
   scroll-margin-top: 96px;
 }
 
-html.dark {
-  color-scheme: dark;
-  --surface-main: #0e1a14 !important;
-  --surface-muted: #102219 !important;
-  --text-primary: #f1f5f9 !important;
-  --text-muted: #cbd5e1 !important;
-  --border-soft: rgba(226, 232, 240, 0.16) !important;
-  --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.35) !important;
-  --shadow-card: 0 16px 36px rgba(0, 0, 0, 0.4) !important;
-}
-
-html.dark body {
-  background: linear-gradient(180deg, #0e1a14 0%, #101f17 100%);
-  color: var(--text-primary);
-}
-
-html.dark a {
-  color: #8bd09b;
-}
-
-html.dark a:hover {
-  color: #a1e0ae;
-}
-
-html.dark .breadcrumbs,
-html.dark .article,
-html.dark .metric-pill,
-html.dark .footer,
-html.dark .header,
-html.dark .card,
-html.dark .btn,
-html.dark .badge {
-  background-color: var(--surface-muted);
-  color: var(--text-primary);
+.card-surface {
+  background: var(--surface-card);
+  box-shadow: var(--shadow-card);
   border-color: var(--border-soft);
-  box-shadow: var(--shadow-soft);
+}
+
+.text-surface-muted {
+  color: var(--text-secondary);
 }

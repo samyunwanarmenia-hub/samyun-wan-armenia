@@ -122,18 +122,18 @@ type FooterNavListProps = {
 };
 
 const FooterNavList = ({ sections, resolveLabel, getSectionPath }: FooterNavListProps) => (
-  <ul className="space-y-2 text-sm text-slate-300">
+  <ul className="space-y-2 text-sm text-[var(--text-secondary)]">
     {sections.map(section => {
       const label = resolveLabel(section);
       return (
         <li key={section.id}>
           <Link
             href={getSectionPath(section.id)}
-            className="flex items-center justify-between rounded-lg px-3 py-2 transition-colors hover:bg-white/5 hover:text-white"
+            className="flex items-center justify-between rounded-lg px-3 py-2 transition-all duration-300 hover:bg-[color-mix(in_srgb,var(--muted-surface)_60%,transparent)] hover:text-[var(--text-primary)] hover:-translate-y-[1px]"
             aria-label={label}
           >
             <span>{label}</span>
-            <span aria-hidden="true" className="text-xs text-white/60">
+            <span aria-hidden="true" className="text-xs text-[var(--text-secondary)]">
               ↗
             </span>
           </Link>
@@ -155,9 +155,9 @@ const FooterNavCard = ({
   getSectionPath,
   footerContent,
 }: FooterNavCardProps) => (
-  <section className="flex h-full flex-col gap-6 rounded-xl border border-slate-800 bg-slate-900/60 p-6">
+  <section className="flex h-full flex-col gap-6 rounded-xl border border-[var(--border-soft)] bg-[var(--surface)] p-6 shadow-sm">
     <div className="space-y-3">
-      <h3 className="text-lg font-semibold tracking-wide text-white">{title}</h3>
+      <h3 className="text-lg font-semibold tracking-wide text-[var(--text-primary)]">{title}</h3>
       <FooterNavList sections={sections} resolveLabel={resolveLabel} getSectionPath={getSectionPath} />
     </div>
     {footerContent ?? null}
@@ -210,9 +210,9 @@ const Footer = () => {
   ];
 
   const cautionNote = (
-    <div className="flex items-start gap-3 rounded-lg border border-amber-300/30 bg-amber-900/30 px-3 py-3 text-amber-100 shadow-inner">
-      <AlertTriangle className="mt-0.5 h-5 w-5 text-amber-200" />
-      <p className="text-sm font-semibold leading-relaxed">{t.footer.caution}</p>
+    <div className="flex items-start gap-3 rounded-lg border border-[var(--accent)]/30 bg-[color-mix(in_srgb,var(--accent)_14%,transparent)] px-3 py-3 text-[var(--text-primary)] shadow-inner">
+      <AlertTriangle className="mt-0.5 h-5 w-5 text-[var(--accent)]" />
+      <p className="text-sm font-semibold leading-relaxed text-[var(--text-primary)]">{t.footer.caution}</p>
     </div>
   );
 
@@ -242,13 +242,13 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-[#0e1a14] text-slate-100 border-t border-slate-800">
+    <footer className="bg-[var(--background)] text-[var(--text-primary)] border-t border-[var(--border-soft)]">
       <div className="container grid gap-10 py-14 lg:grid-cols-[1.2fr,1fr,1fr]">
-        <section className="flex h-full flex-col gap-6 rounded-xl border border-slate-800 bg-slate-900/60 p-6">
-          <div className="text-sm leading-relaxed text-slate-300" dangerouslySetInnerHTML={{ __html: t.footer.legalAndWarning }} />
+        <section className="flex h-full flex-col gap-6 rounded-xl border border-[var(--border-soft)] bg-[var(--muted-surface)] p-6 shadow-sm">
+          <div className="text-sm leading-relaxed text-[var(--text-secondary)]" dangerouslySetInnerHTML={{ __html: t.footer.legalAndWarning }} />
           <button
             type="button"
-            className="inline-flex items-center justify-center rounded-md bg-[var(--brand-primary)] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[#256a3a]"
+            className="inline-flex items-center justify-center rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-[var(--accent-strong)] hover:-translate-y-[2px]"
             onClick={openAuthenticityModal}
             aria-label={t.footer.howToDistinguishButton}
           >
@@ -261,7 +261,7 @@ const Footer = () => {
                 href={link.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-700 text-white transition hover:border-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-[var(--border-soft)] text-[var(--text-primary)] transition hover:border-[var(--accent)] hover:-translate-y-[2px]"
                 aria-label={link.label}
                 style={{ backgroundColor: 'transparent', color: link.color } as CSSProperties}
               >
@@ -285,11 +285,11 @@ const Footer = () => {
       </div>
 
       <div className="border-t border-slate-800">
-        <div className="container flex flex-col gap-3 py-6 text-xs text-slate-400 sm:flex-row sm:items-center sm:justify-between">
+        <div className="container flex flex-col gap-3 py-6 text-xs text-[var(--text-secondary)] sm:flex-row sm:items-center sm:justify-between">
           <span>© 2025 Samyun Wan Armenia. {t.footer.allRightsReserved}</span>
           <div className="flex flex-wrap gap-3">
             {legalLinks.map(link => (
-              <Link key={link.key} href={link.href} className="hover:text-white" aria-label={link.ariaLabel}>
+              <Link key={link.key} href={link.href} className="hover:text-[var(--accent)]" aria-label={link.ariaLabel}>
                 {getLegalText(link.key)}
               </Link>
             ))}

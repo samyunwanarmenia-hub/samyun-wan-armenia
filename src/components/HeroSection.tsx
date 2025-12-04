@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart, MessageCircle, Award } from 'lucide-react';
+import { ShoppingCart, MessageCircle, Award, Sprout } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { StatItem } from '../types/global';
 import HeroStats from './HeroStats';
@@ -27,16 +27,17 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
   const secondaryLine = titleWords.slice(2).join(' ');
 
   return (
-    <section id="home" className="relative overflow-hidden bg-[var(--surface-main)]">
-      <div className="container grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.1fr,0.9fr]">
+    <section id="home" className="relative overflow-hidden bg-[var(--background)]">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(63,127,74,0.08),transparent_45%),radial-gradient(circle_at_80%_10%,rgba(203,170,112,0.08),transparent_45%)]" />
+      <div className="container relative grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.1fr,0.9fr]">
         <div className="space-y-6">
           <motion.div
-            className="inline-flex items-center rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 ring-1 ring-emerald-100"
+            className="inline-flex items-center rounded-full bg-[var(--muted-surface)] px-4 py-2 text-sm font-semibold text-[var(--accent-strong)] ring-1 ring-[var(--border-soft)]"
             variants={fadeInUpVariants}
             initial="hidden"
             animate="visible"
           >
-            <Award className="mr-2 h-4 w-4" />
+            <Award className="mr-2 h-4 w-4 text-[var(--accent)]" />
             {t.hero.guarantee}
           </motion.div>
 
@@ -47,17 +48,18 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             animate="visible"
             transition={{ delay: 0.08 }}
           >
-            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-slate-900">
+            <h1 className="text-[38px] sm:text-[42px] font-extrabold leading-tight text-[var(--text-primary)]">
               <span className="block">{primaryLine}</span>
-              {secondaryLine ? <span className="block text-[var(--brand-primary)]">{secondaryLine}</span> : null}
+              {secondaryLine ? <span className="block text-[var(--accent)]">{secondaryLine}</span> : null}
             </h1>
-            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-600">
+            <p className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.18em] text-[var(--text-secondary)]">
+              <Sprout className="h-4 w-4 text-[var(--accent)]" aria-hidden />
               {t.hero.tagline}
             </p>
           </motion.div>
 
           <motion.p
-            className="max-w-2xl text-lg text-slate-700"
+            className="max-w-2xl text-[17px] leading-[1.6] text-[var(--text-secondary)]"
             variants={fadeInUpVariants}
             initial="hidden"
             animate="visible"
@@ -104,7 +106,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
             initial="hidden"
             animate="visible"
             transition={{ delay: 0.26 }}
-            className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+            className="rounded-xl border border-[var(--border-soft)] bg-[var(--surface-card)] p-4 shadow-sm"
           >
             <HeroStats t={t} stats={stats} startDelay={0} />
           </motion.div>

@@ -2,14 +2,7 @@
 /* Simplified to keep a calm, high-contrast backdrop without moving layers. */
 
 body {
-  background: linear-gradient(180deg, #f7f9f5 0%, #f1f5ec 100%);
-  color: var(--text-primary);
-  background-size: auto;
-  animation: none;
-}
-
-.dark body {
-  background: linear-gradient(180deg, #0e1a14 0%, #101f17 100%);
+  background: linear-gradient(180deg, var(--background) 0%, var(--muted-surface) 100%);
   color: var(--text-primary);
   background-size: auto;
   animation: none;

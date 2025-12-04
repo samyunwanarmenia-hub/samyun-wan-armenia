@@ -45,7 +45,7 @@ const ThemeToggle: React.FC<ThemeToggleProps> = ({ onClose }) => {
   return (
     <motion.button
       onClick={handleToggle} // Use the new handler
-      className="p-2 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-50 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-primary-600"
+      className="p-2 rounded-full bg-[var(--muted-surface)] text-[var(--text-primary)] hover:bg-[var(--surface)] transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       aria-label={theme === 'light' ? 'Switch to dark mode' : 'Switch to light mode'}

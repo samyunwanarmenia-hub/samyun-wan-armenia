@@ -32,8 +32,8 @@ const Navbar: React.FC<NavbarProps> = () => {
   }, []);
 
   const navSurfaceClass = scrolled
-    ? 'bg-[#f7f9f5]/95 dark:bg-slate-900/95 shadow-sm border-b border-slate-200/80 dark:border-slate-800'
-    : 'bg-[#f7f9f5] dark:bg-slate-900/95 shadow-sm border-b border-slate-200/60 dark:border-slate-800';
+    ? 'bg-[var(--surface)] shadow-sm border-b border-[var(--border-soft)]'
+    : 'bg-[var(--background)] shadow-sm border-b border-[var(--border-soft)]';
 
   const primarySections = navigationSections.slice(0, 6);
   const contactSection = navigationSections.find(section => section.id === 'contact');
@@ -43,7 +43,7 @@ const Navbar: React.FC<NavbarProps> = () => {
     <header className={`sticky inset-x-0 top-0 z-[120] transition-all duration-150 ${navSurfaceClass}`} role="banner">
       <div className="container flex items-center justify-between gap-6 py-3">
         <Link href={getHomePath()} className="flex items-center min-w-0" aria-label={t.hero.title}>
-          <span className="text-lg sm:text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-50">
+          <span className="text-lg sm:text-xl font-semibold tracking-tight text-[var(--text-primary)]">
             {t.hero.title}
           </span>
         </Link>
@@ -53,7 +53,7 @@ const Navbar: React.FC<NavbarProps> = () => {
             <Link
               key={section.id}
               href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
-              className={`text-sm font-semibold text-slate-700 hover:text-[var(--brand-primary)] transition-colors ${getLinkClasses?.(section.id) ?? ''}`}
+              className={`text-sm font-semibold text-[var(--text-secondary)] hover:text-[var(--accent-strong)] transition-all duration-300 ${getLinkClasses?.(section.id) ?? ''}`}
             >
               {t.nav[section.labelKey]}
             </Link>
@@ -64,7 +64,7 @@ const Navbar: React.FC<NavbarProps> = () => {
           {trackOrderSection && (
             <Link
               href={getSectionPath(trackOrderSection.id)}
-              className="hidden md:inline-flex items-center rounded-md border border-slate-300 px-3 py-2 text-sm font-semibold text-slate-800 hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)] dark:border-slate-700 dark:text-slate-100"
+              className="hidden md:inline-flex items-center rounded-md border border-[var(--border-soft)] px-3 py-2 text-sm font-semibold text-[var(--text-primary)] transition-all duration-300 hover:border-[var(--accent)] hover:-translate-y-[2px]"
             >
               {t.nav[trackOrderSection.labelKey]}
             </Link>
@@ -72,7 +72,7 @@ const Navbar: React.FC<NavbarProps> = () => {
           {contactSection && (
             <Link
               href={getSectionPath(contactSection.id)}
-              className="hidden sm:inline-flex items-center rounded-md bg-[var(--brand-primary)] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#256a3a]"
+              className="hidden sm:inline-flex items-center rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-white shadow-sm transition-all duration-300 hover:bg-[var(--accent-strong)] hover:-translate-y-[2px]"
             >
               {t.nav[contactSection.labelKey]}
             </Link>

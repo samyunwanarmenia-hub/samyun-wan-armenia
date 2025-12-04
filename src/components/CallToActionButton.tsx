@@ -90,7 +90,7 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
 
   const variantClasses: Record<NonNullable<CallToActionButtonProps['variant']>, string> = {
     primary:
-      "bg-[var(--brand-primary)] text-white border border-[#1f452b] hover:bg-[#256a3a] hover:shadow-md",
+      "bg-[var(--brand-primary)] text-white border border-[var(--accent-strong)] hover:bg-[var(--accent-strong)] hover:shadow-md",
     secondary:
       "bg-white text-[var(--brand-primary)] border border-[var(--brand-primary)] hover:bg-[var(--surface-muted)] hover:shadow-md",
     outline:

@@ -132,7 +132,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
       <motion.button
         onClick={toggleMenu}
         type="button"
-        className="relative inline-flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-md border border-slate-300 bg-white text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] dark:border-slate-700 dark:bg-slate-800 dark:text-white z-[130]"
+        className="relative inline-flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-md border border-[var(--border-soft)] bg-[var(--surface)] text-[var(--text-primary)] shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)] z-[130]"
         aria-label={isOpen ? t.nav.close : t.nav.open}
         aria-expanded={isOpen}
         aria-controls="mobile-nav-drawer"
@@ -172,7 +172,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
             />
             <motion.div
               id="mobile-nav-drawer"
-              className="fixed top-0 left-0 h-screen w-[90vw] max-w-[420px] sm:max-w-[460px] bg-[#f7f9f5] dark:bg-slate-900 border-r border-slate-200/80 dark:border-slate-800 shadow-2xl z-[120]"
+              className="fixed top-0 left-0 h-screen w-[90vw] max-w-[420px] sm:max-w-[460px] bg-[var(--background)] border-r border-[var(--border-soft)] shadow-2xl z-[120]"
               style={safeAreaMenuStyle}
               variants={menuVariants}
               initial="closed"
@@ -184,7 +184,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
                   <Link
                     href={getHomePath()}
                     onClick={closeMenu}
-                    className="text-base font-semibold leading-snug tracking-tight text-gray-900 dark:text-gray-50 max-w-[220px] whitespace-normal"
+                    className="text-base font-semibold leading-snug tracking-tight text-[var(--text-primary)] max-w-[220px] whitespace-normal"
                   >
                     {t.hero.title}
                   </Link>
@@ -203,7 +203,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
                       <Link
                         href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
                         onClick={closeMenu}
-                        className={`${getLinkClasses(section.id)} block rounded-lg border border-transparent px-3 py-2 text-base font-medium tracking-tight text-slate-800 hover:border-[var(--brand-primary)] hover:bg-white dark:text-slate-100 dark:hover:bg-slate-800`}
+                        className={`${getLinkClasses(section.id)} block rounded-lg border border-transparent px-3 py-2 text-base font-medium tracking-tight text-[var(--text-primary)] hover:border-[var(--accent)] hover:bg-[var(--surface)] transition-all duration-300 dark:hover:bg-[var(--muted-surface)]`}
                       >
                         {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                       </Link>
@@ -211,7 +211,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
                   ))}
                   <motion.div
                     variants={menuItemVariants}
-                    className="flex items-center gap-3 pt-3 border-t border-slate-200/80 dark:border-slate-800 w-full"
+                    className="flex items-center gap-3 pt-3 border-t border-[var(--border-soft)] w-full"
                   >
                     <LanguageSwitcher />
                     <ThemeToggle onClose={closeMenu} />

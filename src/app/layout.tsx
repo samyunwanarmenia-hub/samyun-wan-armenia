@@ -121,7 +121,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const htmlLang = LOCALE_CODES[resolvedLang] || resolvedLang;
 
   return (
-    <html lang={htmlLang} className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
+    <html lang={htmlLang} data-theme="light" className={`${inter.variable} ${montserrat.variable}`} suppressHydrationWarning>
       <head>
         {hasTagManagerConsent && (
           <Script id="gtm-init" strategy="afterInteractive">
