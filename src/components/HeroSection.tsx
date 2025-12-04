@@ -7,7 +7,6 @@ import HeroStats from './HeroStats';
 import CallToActionButton from './CallToActionButton';
 import { productShowcaseData } from '../data/productShowcaseData';
 import { useLayoutContext } from '@/context/LayoutContext';
-import SplitTextAnimation from './SplitTextAnimation';
 import HeroQrCodeBlock from './HeroQrCodeBlock';
 
 interface HeroSectionProps {
@@ -17,117 +16,109 @@ interface HeroSectionProps {
 const HeroSection: React.FC<HeroSectionProps> = ({ stats }) => {
   const { t, openOrderModal } = useLayoutContext();
 
-  // Variants for general fade-in-up animation - optimized with transform
   const fadeInUpVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } } // Faster, smoother easing
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] } },
   };
 
-  const mainProduct = productShowcaseData[0]; // Still need this for the order button
-
-  // Base delay for elements in HeroSection, relative to the end of the intro animation (1.3s + 0.3s fade-out = 1.6s)
-  const introEndDelay = 1.6;
+  const mainProduct = productShowcaseData[0];
+  const titleWords = t.hero.title.split(' ');
+  const primaryLine = titleWords.slice(0, 2).join(' ');
+  const secondaryLine = titleWords.slice(2).join(' ');
 
   return (
-    <section id="home" className="relative min-h-screen flex items-center overflow-hidden py-12">
-      <div className="hero-overlays">
-        <span className="hero-overlay hero-overlay--first" />
-        <span className="hero-overlay hero-overlay--second" />
-        <span className="hero-overlay hero-overlay--third" />
-      </div>
-      <div className="container mx-auto px-4 relative z-10 max-w-7xl">
-        <div className="lg:grid lg:grid-cols-2 lg:gap-8 items-center"> {/* Grid for desktop layout */}
-          {/* Left Column: Main content */}
-          <div className="flex flex-col items-center text-center lg:items-start lg:text-left"> {/* Align left on large screens */}
-            {/* Guarantee Badge */}
-            <motion.div 
-              className="inline-flex items-center bg-primary-100/50 text-primary-600 px-3 py-1.5 rounded-full text-sm font-semibold mb-5 dark:bg-primary-900/50 dark:text-primary-400"
-              variants={fadeInUpVariants}
-              initial="hidden"
-              animate="visible"
-              transition={{ delay: introEndDelay + 0.1 }} // Adjusted delay
-            >
-              <Award className="w-4 h-4 mr-2" />
-              {t.hero.guarantee}
-            </motion.div>
-            
-            {/* Main Title (Samyun Wan Armenia) and Tagline */}
-            <h1 
-              className="text-4xl lg:text-6xl font-extrabold mb-3 leading-tight text-gray-900 dark:text-gray-50 drop-shadow-[0_2px_10px_rgba(255,255,255,0.8)]"
-            >
-              <SplitTextAnimation 
-                text="Samyun Wan Armenia" 
-                delay={0} // No delay for LCP element
-                duration={0.8} // Faster animation
-                className="mb-1.5 lg:justify-start text-gray-900 dark:text-gray-50"
-              />
-              {/* Tagline moved here */}
-              <motion.p 
-                className="block text-xs sm:text-sm lg:text-lg font-bold uppercase tracking-[2px] sm:tracking-[3px] lg:tracking-[5px] text-slogan-shine mt-1.5 mb-4 leading-relaxed relative overflow-hidden whitespace-nowrap"
-                variants={fadeInUpVariants}
-                initial="hidden"
-                animate="visible"
-                transition={{ delay: 0.3 }} // Reduced delay for faster LCP
-              >
-                {t.hero.tagline}
-              </motion.p>
+    <section id="home" className="relative overflow-hidden bg-[var(--surface-main)]">
+      <div className="container grid items-center gap-12 py-16 sm:py-20 lg:grid-cols-[1.1fr,0.9fr]">
+        <div className="space-y-6">
+          <motion.div
+            className="inline-flex items-center rounded-full bg-emerald-50 px-4 py-2 text-sm font-semibold text-emerald-700 ring-1 ring-emerald-100"
+            variants={fadeInUpVariants}
+            initial="hidden"
+            animate="visible"
+          >
+            <Award className="mr-2 h-4 w-4" />
+            {t.hero.guarantee}
+          </motion.div>
+
+          <motion.div
+            className="space-y-3"
+            variants={fadeInUpVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.08 }}
+          >
+            <h1 className="text-4xl sm:text-5xl font-extrabold leading-tight text-slate-900">
+              <span className="block">{primaryLine}</span>
+              {secondaryLine ? <span className="block text-[var(--brand-primary)]">{secondaryLine}</span> : null}
             </h1>
-            
-            {/* Subtitle moved here */}
-            <motion.p 
-              className="block text-2xl lg:text-3xl font-bold mb-5 text-gray-600 dark:text-gradient-primary" // Применение нового класса
-              variants={fadeInUpVariants}
-              initial="hidden"
-              animate="visible"
-              transition={{ delay: 0.2 }} // Reduced delay for faster LCP
+            <p className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-600">
+              {t.hero.tagline}
+            </p>
+          </motion.div>
+
+          <motion.p
+            className="max-w-2xl text-lg text-slate-700"
+            variants={fadeInUpVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.14 }}
+          >
+            {t.hero.subtitle}
+          </motion.p>
+
+          <motion.div
+            className="flex flex-col gap-3 sm:flex-row"
+            variants={fadeInUpVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.2 }}
+          >
+            <CallToActionButton
+              onClick={() => openOrderModal(mainProduct.labelKey)}
+              icon={ShoppingCart}
+              variant="primary"
+              size="md"
+              interactionEffect="burst"
+              gaEvent={{ category: 'Order', action: 'Click_Hero_OrderNow', label: mainProduct.labelKey }}
+              ymEvent={{ category: 'Order', action: 'Click_Hero_OrderNow', label: mainProduct.labelKey }}
+              className="shadow-md"
             >
-              {t.hero.subtitle}
-            </motion.p>
-
-            {/* Buttons */}
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-3 mb-10 justify-center lg:justify-start" 
-              variants={fadeInUpVariants}
-              initial="hidden"
-              animate="visible"
-              transition={{ delay: introEndDelay + 2.0 }} // Увеличена задержка
+              {t.hero.cta}
+            </CallToActionButton>
+            <CallToActionButton
+              href="https://m.me/samyunwanarmenia"
+              target="_blank"
+              rel="noopener noreferrer"
+              icon={MessageCircle}
+              variant="secondary"
+              size="md"
+              gaEvent={{ category: 'Contact', action: 'Click_Hero_Consultation', label: 'Facebook_Messenger' }}
+              ymEvent={{ category: 'Contact', action: 'Click_Hero_Consultation', label: 'Facebook_Messenger' }}
             >
-              <CallToActionButton 
-                onClick={() => openOrderModal(mainProduct.labelKey)}
-                icon={ShoppingCart} 
-                variant="primary" 
-                size="sm"
-                iconClassName="group-hover:animate-bounce"
-                interactionEffect="burst"
-                gaEvent={{ category: 'Order', action: 'Click_Hero_OrderNow', label: mainProduct.labelKey }}
-                ymEvent={{ category: 'Order', action: 'Click_Hero_OrderNow', label: mainProduct.labelKey }}
-                className="animate-pulse-subtle" // Apply the new pulse animation here
-              >
-                {t.hero.cta}
-              </CallToActionButton>
-              <CallToActionButton 
-                href="https://m.me/samyunwanarmenia" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                icon={MessageCircle} 
-                variant="ghost"
-                size="sm"
-                gaEvent={{ category: 'Contact', action: 'Click_Hero_Consultation', label: 'Facebook_Messenger' }}
-                ymEvent={{ category: 'Contact', action: 'Click_Hero_Consultation', label: 'Facebook_Messenger' }}
-              >
-                {t.hero.consultation}
-              </CallToActionButton>
-            </motion.div>
+              {t.hero.consultation}
+            </CallToActionButton>
+          </motion.div>
 
-            {/* HeroStats */}
-            <HeroStats t={t} stats={stats} startDelay={introEndDelay + 2.5} /> {/* Увеличена задержка */}
-          </div>
-
-          {/* Right Column: QR Code Block */}
-          <div className="flex justify-center lg:justify-end items-center mt-10 lg:mt-0"> {/* Align right on large screens */}
-            <HeroQrCodeBlock delay={0.5} /> {/* Reduced delay for faster LCP */}
-          </div>
+          <motion.div
+            variants={fadeInUpVariants}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.26 }}
+            className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm"
+          >
+            <HeroStats t={t} stats={stats} startDelay={0} />
+          </motion.div>
         </div>
+
+        <motion.div
+          className="grid gap-4 sm:gap-6"
+          variants={fadeInUpVariants}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.12 }}
+        >
+          <HeroQrCodeBlock delay={0.1} />
+        </motion.div>
       </div>
     </section>
   );

@@ -10,13 +10,10 @@ import useNavigationUtils from '@/hooks/useNavigationUtils';
 import LanguageSwitcher from './LanguageSwitcher';
 import { MobileNavProps, TranslationKeys } from '@/types/global';
 import { navigationSections } from '@/data/navigationSections';
-import { useTheme } from '@/context/ThemeContext'; // Import useTheme to get current theme
-import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 import { usePathname } from 'next/navigation';
 
 const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
   const { t, currentLang, getLinkClasses } = useLayoutContext();
-  const { theme } = useTheme(); // Get current theme for dynamic icon color
   const [isOpen, setIsOpen] = useState(false);
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);
   const pathname = usePathname();
@@ -24,10 +21,6 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
 
   const toggleMenu = () => setIsOpen(prev => !prev);
   const closeMenu = () => setIsOpen(false);
-
-  const iconColorClass = scrolled
-    ? (theme === 'dark' ? 'bg-gray-200' : 'bg-gray-800')
-    : (theme === 'dark' ? 'bg-gray-200' : 'bg-gray-700');
 
   const safeAreaMenuStyle = {
     paddingTop: 'calc(env(safe-area-inset-top) + 12px)',
@@ -139,7 +132,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
       <motion.button
         onClick={toggleMenu}
         type="button"
-        className="relative w-12 h-12 inline-flex flex-col items-center justify-center gap-1.5 rounded-full border-2 border-primary-500/70 bg-gradient-to-br from-white to-primary-50 dark:from-gray-800 dark:to-primary-900/30 backdrop-blur-lg shadow-[0_12px_34px_rgba(0,0,0,0.18)] focus:outline-none focus:ring-2 focus:ring-primary-500/80 z-[130]"
+        className="relative inline-flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-md border border-slate-300 bg-white text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--brand-primary)] dark:border-slate-700 dark:bg-slate-800 dark:text-white z-[130]"
         aria-label={isOpen ? t.nav.close : t.nav.open}
         aria-expanded={isOpen}
         aria-controls="mobile-nav-drawer"
@@ -148,19 +141,19 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <motion.span
-          className={`block h-0.5 w-6 rounded-full ${iconColorClass}`}
+          className="block h-0.5 w-6 rounded-full bg-current"
           variants={line1Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.3 }}
         />
         <motion.span
-          className={`block h-0.5 w-6 rounded-full ${iconColorClass}`}
+          className="block h-0.5 w-6 rounded-full bg-current"
           variants={line2Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.2 }}
         />
         <motion.span
-          className={`block h-0.5 w-6 rounded-full ${iconColorClass}`}
+          className="block h-0.5 w-6 rounded-full bg-current"
           variants={line3Variants}
           animate={isOpen ? 'open' : 'closed'}
           transition={{ duration: 0.3 }}
@@ -179,7 +172,7 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
             />
             <motion.div
               id="mobile-nav-drawer"
-              className="fixed top-0 left-0 h-screen w-[90vw] max-w-[420px] sm:max-w-[460px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-2xl border-r border-gray-200/70 dark:border-gray-800/70 shadow-2xl z-[120]"
+              className="fixed top-0 left-0 h-screen w-[90vw] max-w-[420px] sm:max-w-[460px] bg-[#f7f9f5] dark:bg-slate-900 border-r border-slate-200/80 dark:border-slate-800 shadow-2xl z-[120]"
               style={safeAreaMenuStyle}
               variants={menuVariants}
               initial="closed"
@@ -204,27 +197,21 @@ const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
                     <X size={24} />
                   </button>
                 </div>
-                <nav className="flex flex-col items-start gap-5 px-6 py-8 overflow-y-auto">
+                <nav className="flex flex-col items-start gap-5 px-6 py-8 overflow-y-auto" aria-label="Mobile">
                   {navigationSections.map(section => (
-                    <InteractiveDiv
-                      key={section.id}
-                      variants={menuItemVariants}
-                      whileHoverScale={1.05}
-                      hoverY={0}
-                      hoverShadow="none"
-                    >
+                    <motion.div key={section.id} variants={menuItemVariants} className="w-full">
                       <Link
                         href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
                         onClick={closeMenu}
-                        className={`${getLinkClasses(section.id)} text-base font-medium tracking-tight text-gray-800 dark:text-gray-200`}
+                        className={`${getLinkClasses(section.id)} block rounded-lg border border-transparent px-3 py-2 text-base font-medium tracking-tight text-slate-800 hover:border-[var(--brand-primary)] hover:bg-white dark:text-slate-100 dark:hover:bg-slate-800`}
                       >
                         {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                       </Link>
-                    </InteractiveDiv>
+                    </motion.div>
                   ))}
                   <motion.div
                     variants={menuItemVariants}
-                    className="flex items-center gap-3 pt-3 border-t border-gray-100/80 dark:border-gray-800/70 w-full"
+                    className="flex items-center gap-3 pt-3 border-t border-slate-200/80 dark:border-slate-800 w-full"
                   >
                     <LanguageSwitcher />
                     <ThemeToggle onClose={closeMenu} />

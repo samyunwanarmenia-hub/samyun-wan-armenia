@@ -78,21 +78,27 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
     setActiveEffect(null);
   };
 
-  const baseClasses = "flex items-center justify-center font-semibold transition-all duration-300 rounded-full relative overflow-hidden";
+  const baseClasses =
+    "inline-flex items-center justify-center font-semibold transition-transform duration-200 rounded-lg relative overflow-hidden shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--brand-primary)]";
   
   const sizeClasses: Record<NonNullable<CallToActionButtonProps['size']>, string> = {
     xs: "px-3 py-1.5 text-xs",
     sm: "px-4 py-2 text-sm",
-    md: "px-5 py-2.5 text-sm",
-    lg: "px-8 py-3 text-lg",
+    md: "px-5 py-2.5 text-base",
+    lg: "px-7 py-3 text-lg",
   };
 
   const variantClasses: Record<NonNullable<CallToActionButtonProps['variant']>, string> = {
-    primary: "bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:shadow-glow-green", // Ensure this uses glow-green
-    secondary: "bg-gray-200 dark:bg-gray-700 text-brandRed-600 dark:text-brandRed-400 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-xl",
-    outline: "border-2 border-brandRed-600 text-brandRed-600 hover:bg-brandRed-600 hover:text-white dark:border-brandRed-400 dark:text-brandRed-400 dark:hover:bg-brandRed-600 dark:hover:text-white",
-    ghost: "border-2 border-primary-600 dark:border-primary-400 text-primary-700 dark:text-primary-400 hover:bg-primary-100 dark:hover:bg-primary-800 hover:text-primary-900 dark:hover:text-primary-200", /* Changed text-primary-200 to text-primary-700 and hover:text-primary-700 to hover:text-primary-900 for light mode */
-    subtle: "bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-50 hover:bg-gray-300 dark:hover:bg-gray-600 shadow-sm border border-gray-300 dark:border-gray-600",
+    primary:
+      "bg-[var(--brand-primary)] text-white border border-[#1f452b] hover:bg-[#256a3a] hover:shadow-md",
+    secondary:
+      "bg-white text-[var(--brand-primary)] border border-[var(--brand-primary)] hover:bg-[var(--surface-muted)] hover:shadow-md",
+    outline:
+      "border border-[var(--brand-primary-strong)] text-[var(--brand-primary-strong)] bg-transparent hover:bg-[var(--brand-primary)] hover:text-white",
+    ghost:
+      "border border-slate-300 text-slate-800 bg-transparent hover:border-[var(--brand-primary)] hover:text-[var(--brand-primary)] dark:border-slate-600 dark:text-slate-100 dark:hover:border-[var(--brand-primary)]",
+    subtle:
+      "bg-[var(--surface-muted)] text-[var(--text-primary)] border border-[var(--border-soft)] hover:bg-white hover:shadow-sm",
   };
 
   const iconSizeClasses: Record<NonNullable<CallToActionButtonProps['size']>, string> = {

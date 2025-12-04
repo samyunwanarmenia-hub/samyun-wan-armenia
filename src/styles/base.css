@@ -1,100 +1,91 @@
 /* =================== base.css ==================== */
-/* Local @font-face removed: Inter already loaded via next/font in app/layout.tsx, Cal Sans unused.
-   This avoids sanitizer errors from problematic WOFF2 files in public/fonts. */
+/* Fonts come from next/font (Inter + Montserrat) with Armenian-friendly fallbacks. */
 
 html {
   scroll-behavior: smooth;
 }
 
 :root {
-  --theme-surface: #eef2f5;
-  --theme-soft: #e4eaef;
-  --theme-text: #111827;
-  --theme-muted: #475569;
-  --theme-border: rgba(15, 23, 42, 0.12);
-  --shadow-soft: 0 14px 38px rgba(0, 0, 0, 0.1);
-  --glow-mint: rgba(134, 180, 134, 0.16);
-  --glow-blue: rgba(116, 155, 200, 0.14);
-  --glow-gold: rgba(250, 204, 21, 0.1);
+  --brand-primary: #2f7a46;
+  --brand-primary-strong: #25633a;
+  --brand-olive: #3d704c;
+  --brand-accent: #4c9563;
+  --surface-main: #f7f9f5;
+  --surface-muted: #edf2e8;
+  --text-primary: #0f172a;
+  --text-muted: #4b5563;
+  --border-soft: rgba(15, 23, 42, 0.12);
+  --shadow-soft: 0 12px 28px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 14px 30px rgba(15, 23, 42, 0.1);
 }
 
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: var(--font-roboto, 'Roboto'), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-weight: 500;
-  line-height: 1.7;
+  font-family: var(--font-inter, 'Inter'), 'Noto Sans Armenian', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.01em;
   position: relative;
+  min-height: 100vh;
   overflow-x: hidden;
-  background:
-    radial-gradient(circle at 12% 18%, var(--glow-mint), transparent 32%),
-    radial-gradient(circle at 88% 10%, var(--glow-blue), transparent 30%),
-    radial-gradient(circle at 20% 78%, var(--glow-gold), transparent 28%),
-    linear-gradient(135deg, #f6f8fb 0%, #e9f1ed 55%, #edf1f7 100%);
-  color: var(--theme-text);
+  background: linear-gradient(180deg, #f7f9f5 0%, #f1f5ec 100%);
+  color: var(--text-primary);
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  inset: -20% -10% auto;
-  height: 60%;
-  z-index: -1;
-  pointer-events: none;
-  background:
-    radial-gradient(40% 60% at 20% 30%, rgba(134, 180, 134, 0.2), transparent 55%),
-    radial-gradient(35% 55% at 75% 25%, rgba(116, 155, 200, 0.14), transparent 60%),
-    radial-gradient(45% 65% at 55% 70%, rgba(250, 204, 21, 0.1), transparent 60%);
-  filter: blur(40px);
-  opacity: 0.7;
-}
-
+body::before,
 body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: -1;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.35), transparent 27%),
-    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.25), transparent 25%),
-    linear-gradient(120deg, rgba(255, 255, 255, 0.08), transparent 30%, rgba(255, 255, 255, 0.06));
-  mix-blend-mode: screen;
-  opacity: 0.65;
-}
-
-html.dark body::before,
-html.dark body::after {
-  opacity: 0.08;
-  filter: blur(0);
+  display: none;
 }
 
 ::selection {
-  background-color: theme('colors.primary.500');
-  color: theme('colors.white');
+  background-color: var(--brand-primary-strong);
+  color: #fff;
 }
 
-/* Dark mode overrides for legacy/static blocks (e.g., blogs HTML) */
+h1,
+h2,
+h3 {
+  font-family: var(--font-montserrat, var(--font-inter, 'Inter')), 'Noto Sans Armenian', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+a {
+  color: var(--brand-primary-strong);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--brand-primary);
+}
+
+section {
+  scroll-margin-top: 96px;
+}
+
 html.dark {
   color-scheme: dark;
-  --theme-surface: #0f172a !important;
-  --theme-soft: #0c1424 !important;
-  --theme-text: #e2e8f0 !important;
-  --theme-muted: #94a3b8 !important;
-  --theme-border: rgba(148, 163, 184, 0.28) !important;
-  --shadow-soft: 0 16px 40px rgba(0, 0, 0, 0.35) !important;
-  --glow-mint: rgba(134, 180, 134, 0.14);
-  --glow-blue: rgba(116, 155, 200, 0.12);
-  --glow-gold: rgba(250, 204, 21, 0.08);
+  --surface-main: #0e1a14 !important;
+  --surface-muted: #102219 !important;
+  --text-primary: #f1f5f9 !important;
+  --text-muted: #cbd5e1 !important;
+  --border-soft: rgba(226, 232, 240, 0.16) !important;
+  --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.35) !important;
+  --shadow-card: 0 16px 36px rgba(0, 0, 0, 0.4) !important;
 }
 
 html.dark body {
-  background:
-    radial-gradient(circle at 12% 18%, rgba(134, 180, 134, 0.08), transparent 32%),
-    radial-gradient(circle at 82% 12%, rgba(116, 155, 200, 0.08), transparent 30%),
-    radial-gradient(circle at 24% 78%, rgba(250, 204, 21, 0.06), transparent 32%),
-    linear-gradient(140deg, #0b1220 0%, #0d1527 45%, #0b111d 100%);
-  color: var(--theme-text);
+  background: linear-gradient(180deg, #0e1a14 0%, #101f17 100%);
+  color: var(--text-primary);
+}
+
+html.dark a {
+  color: #8bd09b;
+}
+
+html.dark a:hover {
+  color: #a1e0ae;
 }
 
 html.dark .breadcrumbs,
@@ -105,33 +96,8 @@ html.dark .header,
 html.dark .card,
 html.dark .btn,
 html.dark .badge {
-  background-color: var(--theme-surface);
-  color: var(--theme-text);
-  border-color: var(--theme-border);
+  background-color: var(--surface-muted);
+  color: var(--text-primary);
+  border-color: var(--border-soft);
   box-shadow: var(--shadow-soft);
-}
-
-html.dark a {
-  color: #9fc49f;
-}
-
-html.dark a:hover {
-  color: #b8d4b8;
-}
-
-html.dark body::before {
-  background:
-    radial-gradient(40% 60% at 20% 30%, rgba(134, 180, 134, 0.12), transparent 55%),
-    radial-gradient(35% 55% at 75% 25%, rgba(116, 155, 200, 0.1), transparent 60%),
-    radial-gradient(45% 65% at 55% 70%, rgba(250, 204, 21, 0.06), transparent 60%);
-  opacity: 0.18;
-  filter: blur(50px);
-}
-
-html.dark body::after {
-  opacity: 0.12;
-  background-image:
-    radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.12), transparent 27%),
-    radial-gradient(circle at 80% 10%, rgba(255, 255, 255, 0.08), transparent 25%),
-    linear-gradient(120deg, rgba(255, 255, 255, 0.05), transparent 32%, rgba(255, 255, 255, 0.04));
 }

@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic';
 import { useLayoutContext } from '@/context/LayoutContext'; // Import useLayoutContext
 import { ContactModalType, ProductShowcaseItem, TranslationKeys } from '@/types/global'; // Import necessary types, including TranslationKeys
 import FloatingActionButton from '@/components/FloatingActionButton'; // Import the new FAB component
-import AnimatedBackground from '@/components/AnimatedBackground';
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -70,12 +69,10 @@ const MainLayout = ({
 
   return (
     <> {/* Use React.Fragment instead of a div */}
-      <AnimatedBackground />
-      
       <DynamicNavbar />
       
       <motion.main 
-        className="flex-grow pt-16 relative z-10"
+        className="flex-grow pt-16 relative"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
