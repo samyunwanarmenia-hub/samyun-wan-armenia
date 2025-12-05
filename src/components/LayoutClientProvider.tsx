@@ -13,12 +13,19 @@ import MainLayout from '@/layouts/MainLayout';
 import { ThemeProvider } from '@/context/ThemeContext';
 import ToastProvider from '@/components/ToastProvider';
 import dynamic from 'next/dynamic';
+import { DEFAULT_LANG, isSupportedLang } from '@/config/locales';
 
 // Dynamically import client-only components with ssr: false
 const DynamicYandexMetrikaTracker = dynamic(() => import('@/components/YandexMetrikaTracker'), { ssr: false });
 const DynamicVisitTrackerWrapper = dynamic(() => import('@/components/VisitTrackerWrapper'), { ssr: false });
 const DynamicGoogleAnalyticsTracker = dynamic(() => import('@/components/GoogleAnalyticsTracker'), { ssr: false });
 const DynamicServiceWorkerRegister = dynamic(() => import('@/components/ServiceWorkerRegister'), { ssr: false });
+
+const getLangFromPathname = (path?: string | null) => {
+  const segments = (path || '').split('/').filter(Boolean);
+  const candidate = segments[0]?.toLowerCase();
+  return isSupportedLang(candidate) ? candidate : null;
+};
 
 interface LayoutClientProviderProps {
   children: React.ReactNode;
@@ -28,8 +35,9 @@ interface LayoutClientProviderProps {
 const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, initialLang }) => {
   const pathname = usePathname();
   const router = useRouter();
+  const pathLang = useMemo(() => getLangFromPathname(pathname), [pathname]);
 
-  const [currentLangState, setCurrentLangState] = useState<string>(initialLang);
+  const [currentLangState, setCurrentLangState] = useState<string>(pathLang || initialLang || DEFAULT_LANG);
   const [loadingLinkModalOpen, setLoadingLinkModalOpen] = useState(false);
   const [loadingLinkClientId, setLoadingLinkClientId] = useState<string | null>(null);
 
@@ -40,11 +48,15 @@ const LayoutClientProvider: React.FC<LayoutClientProviderProps> = ({ children, i
   }, [pathname]);
 
   useEffect(() => {
-    // Sync with server-provided lang only when it actually changes (avoid overriding manual switches)
-    if (initialLang) {
+    if (pathLang && pathLang !== currentLangState) {
+      setCurrentLangState(pathLang);
+      return;
+    }
+
+    if (initialLang && isSupportedLang(initialLang) && !pathLang && initialLang !== currentLangState) {
       setCurrentLangState(initialLang);
     }
-  }, [initialLang]);
+  }, [currentLangState, initialLang, pathLang]);
 
   // Effect to update the HTML lang attribute and body classes
   useEffect(() => {

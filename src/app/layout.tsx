@@ -102,6 +102,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   const headerList = headers();
   const cookieStore = cookies();
   const headerLang = headerList.get("x-current-lang") || undefined;
+  const cookieLang = cookieStore.get("current_lang")?.value;
   const analyticsConsent =
     cookieStore.get("analytics_consent")?.value === "granted" ||
     cookieStore.get("analytics_consent")?.value === "true";
@@ -117,7 +118,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     extractLangFromPath(headerList.get("x-forwarded-uri")) ||
     extractLangFromPath(headerLang);
 
-  const resolvedLang = resolveLang(headerLang || fallbackPathLang || DEFAULT_LANG);
+  const resolvedLang = resolveLang(cookieLang || headerLang || fallbackPathLang || DEFAULT_LANG);
   const htmlLang = LOCALE_CODES[resolvedLang] || resolvedLang;
 
   return (
