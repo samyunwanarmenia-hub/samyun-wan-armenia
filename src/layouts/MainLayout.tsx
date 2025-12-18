@@ -7,6 +7,7 @@ import { useLayoutContext } from '@/context/LayoutContext'; // Import useLayoutC
 import { ContactModalType, ProductShowcaseItem, TranslationKeys } from '@/types/global'; // Import necessary types, including TranslationKeys
 import FloatingActionButton from '@/components/FloatingActionButton'; // Import the new FAB component
 import StarfallBackground from '@/components/StarfallBackground'; // Import starfall background
+import AdBoardingStocking from '@/components/AdBoardingStocking'; // Third-party ad banner (BoardingStocking)
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -86,6 +87,9 @@ const MainLayout = ({
       >
         {children}
       </motion.main>
+
+      {/* Third-party ad banner, placed above the footer to keep main content/SEO clean */}
+      <AdBoardingStocking />
 
       {/* 
         CONSISTENCY NOTE: Footer is rendered consistently across all pages.
