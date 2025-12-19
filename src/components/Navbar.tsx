@@ -81,7 +81,7 @@ const Navbar: React.FC<NavbarProps> = () => {
           <div className="hidden md:flex">
             <ThemeToggle />
           </div>
-          <MobileNav scrolled={scrolled} />
+          <MobileNav />
         </div>
       </div>
     </header>

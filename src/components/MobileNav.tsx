@@ -12,7 +12,7 @@ import { MobileNavProps, TranslationKeys } from '@/types/global';
 import { navigationSections } from '@/data/navigationSections';
 import { usePathname } from 'next/navigation';
 
-const MobileNav: React.FC<MobileNavProps> = ({ scrolled }) => {
+const MobileNav: React.FC<MobileNavProps> = () => {
   const { t, currentLang, getLinkClasses } = useLayoutContext();
   const [isOpen, setIsOpen] = useState(false);
   const { getHomePath, getSectionPath } = useNavigationUtils(currentLang);

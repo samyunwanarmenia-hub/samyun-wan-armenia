@@ -382,7 +382,6 @@ export interface HeroSectionProps {
   stats: StatItem[];
 }
 export interface MobileNavProps {
-  scrolled: boolean; // Updated to reflect the new prop
 }
 
 export interface ReviewFormProps {
