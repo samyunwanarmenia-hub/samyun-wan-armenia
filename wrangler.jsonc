@@ -1,0 +1,35 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "samyun-wan-life",
+  "account_id": "9de6a912443a2cbf7e72218953f0a746",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2026-06-11",
+  "compatibility_flags": [
+    "nodejs_compat",
+    "global_fetch_strictly_public"
+  ],
+  "routes": [
+    { "pattern": "samyun-wan.life/*", "zone_name": "samyun-wan.life" },
+    { "pattern": "www.samyun-wan.life/*", "zone_name": "samyun-wan.life" }
+  ],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "samyun-wan-life"
+    }
+  ],
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://www.samyun-wan.life",
+    "NEXT_PUBLIC_QR_VERIFICATION_URL": "https://qr-wan.netlify.app/",
+    "NEXT_PUBLIC_PRIVACY_VERSION": "1.0.0",
+    "NEXT_PUBLIC_PRIVACY_EFFECTIVE_DATE": "2025-06-24"
+  }
+}
+
