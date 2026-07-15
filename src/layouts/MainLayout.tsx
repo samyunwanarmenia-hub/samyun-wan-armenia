@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic';
 import { useLayoutContext } from '@/context/LayoutContext'; // Import useLayoutContext
 import { ContactModalType, ProductShowcaseItem, TranslationKeys } from '@/types/global'; // Import necessary types, including TranslationKeys
 import FloatingActionButton from '@/components/FloatingActionButton'; // Import the new FAB component
-import StarfallBackground from '@/components/StarfallBackground'; // Import starfall background
 import AdBoardingStocking from '@/components/AdBoardingStocking'; // Third-party ad banner (BoardingStocking)
 
 interface MainLayoutProps {
@@ -31,7 +30,7 @@ interface MainLayoutProps {
 
 // Dynamically import client-only components with ssr: false
 const DynamicNavbar = dynamic(() => import('@/components/Navbar'), { ssr: false });
-const DynamicFooter = dynamic(() => import('@/components/Footer'), { ssr: false });
+const DynamicFooter = dynamic(() => import('@/components/Footer'), { ssr: true });
 // Removed DynamicSvgGradientBackground import
 const DynamicScrollToTopButton = dynamic(() => import('@/components/ScrollToTopButton'), { ssr: false }); // Lazy load ScrollToTopButton
 
@@ -71,7 +70,7 @@ const MainLayout = ({
 
   return (
     <> {/* Use React.Fragment instead of a div */}
-      <StarfallBackground />
+      <div className="premium-ambient" aria-hidden />
       {/* 
         CONSISTENCY NOTE: Navbar is rendered consistently across all pages.
         All pages (except QR verify page) use this MainLayout, ensuring
@@ -80,7 +79,7 @@ const MainLayout = ({
       <DynamicNavbar />
       
       <motion.main 
-        className="flex-grow pt-16 relative z-10"
+        className="relative z-10 flex-grow premium-shell"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}

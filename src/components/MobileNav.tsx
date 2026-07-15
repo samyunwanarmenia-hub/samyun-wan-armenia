@@ -132,12 +132,12 @@ const MobileNav: React.FC<MobileNavProps> = () => {
       <motion.button
         onClick={toggleMenu}
         type="button"
-        className="relative inline-flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-md border border-[var(--border-soft)] bg-[var(--surface)] text-[var(--text-primary)] shadow-sm focus:outline-none focus:ring-2 focus:ring-[var(--accent)] z-[130]"
+        className="relative z-[130] inline-flex h-11 w-11 flex-col items-center justify-center gap-1.5 rounded-lg border border-[var(--border-premium)] bg-[var(--surface-glass)] text-[var(--text-primary)] shadow-sm backdrop-blur-xl focus:outline-none focus:ring-2 focus:ring-[var(--accent)] lg:hidden"
         aria-label={isOpen ? t.nav.close : t.nav.open}
         aria-expanded={isOpen}
         aria-controls="mobile-nav-drawer"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
+        whileHover={{ scale: 1.04 }}
+        whileTap={{ scale: 0.96 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
         <motion.span
@@ -164,7 +164,7 @@ const MobileNav: React.FC<MobileNavProps> = () => {
           <>
             <motion.div
               key="mobile-nav-overlay"
-              className="fixed inset-0 bg-black/30 backdrop-blur-sm z-[115]"
+              className="fixed inset-0 z-[115] bg-black/45 backdrop-blur-md"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -172,7 +172,7 @@ const MobileNav: React.FC<MobileNavProps> = () => {
             />
             <motion.div
               id="mobile-nav-drawer"
-              className="fixed top-0 left-0 h-screen w-[90vw] max-w-[420px] sm:max-w-[460px] bg-[var(--background)] border-r border-[var(--border-soft)] shadow-2xl z-[120]"
+              className="premium-panel fixed left-0 top-0 z-[120] h-screen w-[88vw] max-w-[420px] rounded-none border-y-0 border-l-0 border-r border-[var(--border-premium)] bg-[var(--surface-glass)] shadow-2xl sm:max-w-[460px] lg:hidden"
               style={safeAreaMenuStyle}
               variants={menuVariants}
               initial="closed"
@@ -184,26 +184,26 @@ const MobileNav: React.FC<MobileNavProps> = () => {
                   <Link
                     href={getHomePath()}
                     onClick={closeMenu}
-                    className="text-base font-semibold leading-snug tracking-tight text-[var(--text-primary)] max-w-[220px] whitespace-normal"
+                    className="max-w-[240px] whitespace-normal text-base font-bold leading-snug tracking-tight text-[var(--text-primary)]"
                   >
                     {t.hero.title}
                   </Link>
                   <button
                     onClick={closeMenu}
-                    className="text-gray-600 dark:text-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-500 rounded-full p-1"
+                    className="rounded-lg bg-[var(--muted-surface)] p-2 text-[var(--text-primary)] transition hover:text-red-600 focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
                     aria-label={t.nav.close}
                     type="button"
                   >
                     <X size={24} />
                   </button>
                 </div>
-                <nav className="flex flex-col items-start gap-5 px-6 py-8 overflow-y-auto" aria-label="Mobile">
+                <nav className="flex flex-col items-start gap-2 overflow-y-auto px-6 py-7" aria-label="Mobile">
                   {navigationSections.map(section => (
                     <motion.div key={section.id} variants={menuItemVariants} className="w-full">
                       <Link
                         href={section.id === 'home' ? getHomePath() : getSectionPath(section.id)}
                         onClick={closeMenu}
-                        className={`${getLinkClasses(section.id)} block rounded-lg border border-transparent px-3 py-2 text-base font-medium tracking-tight text-[var(--text-primary)] hover:border-[var(--accent)] hover:bg-[var(--surface)] transition-all duration-300 dark:hover:bg-[var(--muted-surface)]`}
+                        className={`${getLinkClasses(section.id)} block rounded-lg border border-transparent px-4 py-3 text-base font-semibold tracking-tight text-[var(--text-primary)] transition-all duration-300 hover:border-[var(--border-premium)] hover:bg-[var(--accent-soft)]`}
                       >
                         {t.nav[section.labelKey as keyof TranslationKeys['nav']]}
                       </Link>

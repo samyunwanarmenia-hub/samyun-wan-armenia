@@ -1,57 +1,135 @@
 /* =================== base.css ==================== */
-/* Theme tokens use data-theme on <html>. Fonts are loaded via next/font (Inter, Montserrat). */
+/* Design system: Deep Forest Green #15803D + Warm Gold #D97706 */
 
 :root {
-  --background: #f6f0e4;
-  --surface: #fff9ef;
-  --muted-surface: #f0e5d7;
-  --surface-card: #fff9ef;
-  --text-primary: #1c2420;
-  --text-secondary: #55645a;
-  --accent: #3f7f4a;
-  --accent-strong: #2f6a3a;
-  --border-soft: rgba(28, 36, 32, 0.16);
-  --shadow-soft: 0 12px 28px rgba(28, 36, 32, 0.08);
-  --shadow-card: 0 14px 30px rgba(28, 36, 32, 0.1);
-  --glow-mint: rgba(63, 127, 74, 0.12);
-  --glow-gold: rgba(203, 170, 112, 0.14);
-  --brand-primary: var(--accent);
+  /* Backgrounds */
+  --background:       #f0fdf4;
+  --surface:          #ffffff;
+  --muted-surface:    #dcfce7;
+  --surface-card:     rgba(255, 255, 255, 0.97);
+  --surface-elevated: #ffffff;
+  --surface-glass:    rgba(255, 255, 255, 0.90);
+
+  /* Text */
+  --text-primary:   #14532d;
+  --text-secondary: #166534;
+  --text-muted:     #4b7a5a;
+
+  /* Accent — Deep Forest Green */
+  --accent:        #15803d;
+  --accent-strong: #14532d;
+  --accent-soft:   rgba(21, 128, 61, 0.10);
+  --accent-hover:  #16a34a;
+
+  /* CTA — Trust Blue for primary conversion actions */
+  --cta:        #0369a1;
+  --cta-strong: #075985;
+  --cta-soft:   rgba(3, 105, 161, 0.10);
+  --border-cta: rgba(3, 105, 161, 0.28);
+
+  /* Gold — premium */
+  --gold:        #d97706;
+  --gold-strong: #b45309;
+  --gold-soft:   rgba(217, 119, 6, 0.10);
+  --gold-light:  #fef3c7;
+
+  /* Danger */
+  --danger-soft: rgba(196, 54, 45, 0.11);
+
+  /* Borders */
+  --border-soft:    rgba(20, 83, 45, 0.12);
+  --border-premium: rgba(21, 128, 61, 0.28);
+  --border-gold:    rgba(217, 119, 6, 0.30);
+
+  /* Shadows */
+  --shadow-soft:    0 8px 24px rgba(20, 83, 45, 0.08);
+  --shadow-card:    0 12px 36px rgba(20, 83, 45, 0.10);
+  --shadow-premium: 0 18px 50px rgba(20, 83, 45, 0.14);
+  --shadow-gold:    0 12px 36px rgba(180, 83, 9, 0.14);
+
+  /* Glows */
+  --glow-green: rgba(21, 128, 61, 0.10);
+  --glow-gold:  rgba(217, 119, 6, 0.10);
+
+  /* Radii */
+  --radius-card:  0.5rem;
+  --radius-panel: 0.75rem;
+  --radius-pill:  999px;
+
+  /* Brand aliases */
+  --brand-primary:        var(--accent);
   --brand-primary-strong: var(--accent-strong);
-  --surface-main: var(--background);
+  --surface-main:         var(--background);
 }
 
 :root[data-theme="light"] {
-  --background: #f6f0e4;
-  --surface: #fff9ef;
-  --muted-surface: #f0e5d7;
-  --surface-card: #fffdf7;
-  --text-primary: #1c2420;
-  --text-secondary: #55645a;
-  --accent: #3f7f4a;
-  --accent-strong: #2f6a3a;
-  --border-soft: rgba(28, 36, 32, 0.16);
-  --shadow-soft: 0 12px 28px rgba(28, 36, 32, 0.08);
-  --shadow-card: 0 14px 30px rgba(28, 36, 32, 0.1);
-  --glow-mint: rgba(63, 127, 74, 0.12);
-  --glow-gold: rgba(203, 170, 112, 0.14);
+  --background:       #f0fdf4;
+  --surface:          #ffffff;
+  --muted-surface:    #dcfce7;
+  --surface-card:     rgba(255, 255, 255, 0.97);
+  --surface-elevated: #ffffff;
+  --surface-glass:    rgba(255, 255, 255, 0.90);
+  --text-primary:     #14532d;
+  --text-secondary:   #166534;
+  --text-muted:       #4b7a5a;
+  --accent:           #15803d;
+  --accent-strong:    #14532d;
+  --accent-soft:      rgba(21, 128, 61, 0.10);
+  --accent-hover:     #16a34a;
+  --cta:              #0369a1;
+  --cta-strong:       #075985;
+  --cta-soft:         rgba(3, 105, 161, 0.10);
+  --border-cta:       rgba(3, 105, 161, 0.28);
+  --gold:             #d97706;
+  --gold-strong:      #b45309;
+  --gold-soft:        rgba(217, 119, 6, 0.10);
+  --gold-light:       #fef3c7;
+  --border-soft:      rgba(20, 83, 45, 0.12);
+  --border-premium:   rgba(21, 128, 61, 0.28);
+  --border-gold:      rgba(217, 119, 6, 0.30);
+  --shadow-soft:      0 8px 24px rgba(20, 83, 45, 0.08);
+  --shadow-card:      0 12px 36px rgba(20, 83, 45, 0.10);
+  --shadow-premium:   0 18px 50px rgba(20, 83, 45, 0.14);
+  --shadow-gold:      0 12px 36px rgba(180, 83, 9, 0.14);
+  --glow-green:       rgba(21, 128, 61, 0.10);
+  --glow-gold:        rgba(217, 119, 6, 0.10);
 }
 
 :root[data-theme="dark"] {
-  --background: #0f1b15;
-  --surface: #15251d;
-  --muted-surface: #1b2d23;
-  --surface-card: #182d23;
-  --text-primary: #e8f3eb;
-  --text-secondary: #b7c7bb;
-  --accent: #74c18a;
-  --accent-strong: #5aa572;
-  --border-soft: rgba(232, 243, 235, 0.16);
-  --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.35);
-  --shadow-card: 0 16px 36px rgba(0, 0, 0, 0.4);
-  --glow-mint: rgba(116, 193, 138, 0.18);
-  --glow-gold: rgba(203, 170, 112, 0.18);
+  --background:       #052e16;
+  --surface:          #071f0f;
+  --muted-surface:    #0a2d17;
+  --surface-card:     rgba(7, 31, 15, 0.97);
+  --surface-elevated: #0d2818;
+  --surface-glass:    rgba(7, 31, 15, 0.92);
+  --text-primary:     #dcfce7;
+  --text-secondary:   #bbf7d0;
+  --text-muted:       #86efac;
+  --accent:           #4ade80;
+  --accent-strong:    #86efac;
+  --accent-soft:      rgba(74, 222, 128, 0.12);
+  --accent-hover:     #22c55e;
+  --cta:              #38bdf8;
+  --cta-strong:       #7dd3fc;
+  --cta-soft:         rgba(56, 189, 248, 0.14);
+  --border-cta:       rgba(56, 189, 248, 0.26);
+  --gold:             #fbbf24;
+  --gold-strong:      #fcd34d;
+  --gold-soft:        rgba(251, 191, 36, 0.12);
+  --gold-light:       rgba(251, 191, 36, 0.08);
+  --danger-soft:      rgba(248, 113, 113, 0.13);
+  --border-soft:      rgba(220, 252, 231, 0.10);
+  --border-premium:   rgba(74, 222, 128, 0.22);
+  --border-gold:      rgba(251, 191, 36, 0.25);
+  --shadow-soft:      0 12px 32px rgba(0, 0, 0, 0.36);
+  --shadow-card:      0 16px 46px rgba(0, 0, 0, 0.44);
+  --shadow-premium:   0 22px 64px rgba(0, 0, 0, 0.52);
+  --shadow-gold:      0 12px 36px rgba(251, 191, 36, 0.10);
+  --glow-green:       rgba(74, 222, 128, 0.12);
+  --glow-gold:        rgba(251, 191, 36, 0.10);
 }
 
+/* ── Global resets ─────────────────────────────────── */
 html {
   scroll-behavior: smooth;
 }
@@ -59,59 +137,53 @@ html {
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: var(--font-inter, 'Inter'), 'Noto Sans Armenian', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: var(--font-inter, 'Inter'), 'Noto Sans Armenian', system-ui, -apple-system, sans-serif;
   font-weight: 400;
   font-size: 16px;
-  line-height: 1.6;
-  letter-spacing: -0.01em;
+  line-height: 1.65;
+  letter-spacing: 0;
   position: relative;
   min-height: 100vh;
   overflow-x: hidden;
-  background: var(--background);
+  background: linear-gradient(
+    160deg,
+    var(--background) 0%,
+    color-mix(in srgb, var(--background) 88%, var(--muted-surface)) 100%
+  );
   color: var(--text-primary);
 }
 
 ::selection {
-  background-color: var(--accent-strong);
+  background-color: var(--accent);
   color: #fff;
 }
 
-h1,
-h2,
-h3 {
-  font-family: var(--font-montserrat, var(--font-inter, 'Inter')), 'Noto Sans Armenian', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+h1, h2, h3 {
+  font-family: var(--font-inter, 'Inter'), 'Noto Sans Armenian', system-ui, sans-serif;
   color: var(--text-primary);
-  line-height: 1.2;
+  line-height: 1.18;
 }
 
-h1 {
-  font-size: clamp(32px, 5vw, 42px);
-}
+h1 { font-size: clamp(36px, 5vw, 58px); letter-spacing: 0; }
+h2 { font-size: clamp(28px, 4vw, 42px); letter-spacing: 0; }
+h3 { font-size: clamp(20px, 3vw, 26px); letter-spacing: 0; }
 
-h2 {
-  font-size: clamp(28px, 4vw, 32px);
-}
-
-h3 {
-  font-size: clamp(22px, 3vw, 26px);
-}
-
-p {
-  color: var(--text-secondary);
-}
+p { color: var(--text-secondary); }
 
 a {
   color: var(--accent-strong);
   text-decoration: none;
-  transition: color 0.3s ease-in-out;
+  transition: color 0.2s ease;
 }
 
-a:hover {
-  color: var(--accent);
-}
+a:hover { color: var(--accent); }
 
-section {
-  scroll-margin-top: 96px;
+section { scroll-margin-top: 96px; }
+
+:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 70%, white);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 
 .card-surface {
@@ -120,6 +192,4 @@ section {
   border-color: var(--border-soft);
 }
 
-.text-surface-muted {
-  color: var(--text-secondary);
-}
+.text-surface-muted { color: var(--text-secondary); }

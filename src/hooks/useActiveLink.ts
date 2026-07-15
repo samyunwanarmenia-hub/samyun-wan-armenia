@@ -8,7 +8,7 @@ const useActiveLink = () => {
   const pathname = usePathname();
 
   const getLinkClasses = useCallback((sectionId: SectionId) => {
-    const baseClasses = "text-gray-700 dark:text-gray-300 hover:text-primary-600 transition-colors";
+    const baseClasses = "text-[var(--text-secondary)] hover:text-[var(--accent-strong)] transition-colors";
     
     const currentPath = pathname || '/';
     const pathSegments = currentPath.split('/').filter(Boolean);
@@ -26,7 +26,7 @@ const useActiveLink = () => {
       isActive = currentRouteSection === sectionId;
     }
 
-    return `${baseClasses} ${isActive ? 'text-primary-600 font-bold' : ''}`;
+    return `${baseClasses} ${isActive ? 'bg-[var(--accent-soft)] text-[var(--accent-strong)] font-bold' : ''}`;
   }, [pathname]);
 
   return { getLinkClasses };
