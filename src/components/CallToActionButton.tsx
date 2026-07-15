@@ -2,8 +2,6 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import ExplosionEffect from './ExplosionEffect';
-import PixelExplosion from './PixelExplosion';
 import { Icon, AnalyticsEvent } from '../types/global';
 import { trackGAEvent, trackGoogleAdsConversion } from '@/utils/analytics';
 
@@ -47,8 +45,9 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
 
   const handleInteraction = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
     if (interactionEffect && !disabled) {
+      const rect = e.currentTarget.getBoundingClientRect();
       setActiveEffect(interactionEffect);
-      setEffectCoords({ x: e.clientX, y: e.clientY });
+      setEffectCoords({ x: e.clientX - rect.left, y: e.clientY - rect.top });
     }
 
     if (gaEvent) {
@@ -68,10 +67,8 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
     onClick?.(e);
   };
 
-  const handleEffectComplete = () => setActiveEffect(null);
-
   const baseClasses =
-    'inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg text-center font-semibold leading-tight transition-all duration-200 relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--cta)]';
+    'inline-flex min-h-11 max-w-full touch-manipulation cursor-pointer items-center justify-center gap-2 rounded-lg text-center font-semibold leading-tight transition-all duration-200 relative overflow-hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--cta)]';
 
   const sizeClasses: Record<NonNullable<CallToActionButtonProps['size']>, string> = {
     xs: 'px-3 py-1.5 text-xs',
@@ -120,12 +117,32 @@ const CallToActionButton: React.FC<CallToActionButtonProps> = ({
               aria-hidden
             />
           )}
-          <span className="relative z-10">{children}</span>
+          <span className="relative z-10 min-w-0 whitespace-normal break-words">{children}</span>
         </>
       )}
       <AnimatePresence>
-        {activeEffect === 'burst'  && <ExplosionEffect  x={effectCoords.x} y={effectCoords.y} onComplete={handleEffectComplete} />}
-        {activeEffect === 'pixels' && <PixelExplosion   x={effectCoords.x} y={effectCoords.y} onComplete={handleEffectComplete} />}
+        {activeEffect && (
+          <motion.span
+            key={`${activeEffect}-${effectCoords.x}-${effectCoords.y}`}
+            aria-hidden
+            className="pointer-events-none absolute z-0 h-24 w-24 rounded-full"
+            style={{
+              left: effectCoords.x,
+              top: effectCoords.y,
+              translateX: '-50%',
+              translateY: '-50%',
+              background:
+                activeEffect === 'pixels'
+                  ? 'radial-gradient(circle, rgba(161,98,7,0.28), rgba(161,98,7,0) 68%)'
+                  : 'radial-gradient(circle, rgba(255,255,255,0.30), rgba(255,255,255,0) 70%)',
+            }}
+            initial={{ scale: 0.2, opacity: 0.75 }}
+            animate={{ scale: 2.4, opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
+            onAnimationComplete={() => setActiveEffect(null)}
+          />
+        )}
       </AnimatePresence>
     </>
   );

@@ -4,64 +4,61 @@ import { motion } from 'framer-motion';
 import { benefitsItemsData } from '../data/benefitsItems';
 import SectionHeader from './SectionHeader';
 import { useLayoutContext } from '@/context/LayoutContext';
-import InteractiveDiv from './InteractiveDiv'; // Import InteractiveDiv
 
-const BenefitsSection = () => {
+const itemVariants = {
+  hidden:  { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1, y: 0,
+    transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1], delay: i * 0.07 },
+  }),
+};
+
+const BenefitsSection = ({ headingLevel = 'h2' }: { headingLevel?: 'h1' | 'h2' }) => {
   const { t } = useLayoutContext();
 
-  const sectionVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } } // Faster, smoother easing
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.4, ease: [0.16, 1, 0.3, 1] } } // Faster, smoother easing
-  };
-
   return (
-    <motion.section 
-      id="benefits" 
-      className="relative py-12 overflow-hidden"
-      variants={sectionVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.3 }}
+    <motion.section
+      id="benefits"
+      className="premium-section relative py-14 sm:py-20"
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.15 }}
+      transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
     >
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container relative z-10">
         <SectionHeader
           title={t.benefits.title}
           subtitle={t.benefits.subtitle}
+          as={headingLevel}
         />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-6xl">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {benefitsItemsData.map((benefit, index) => (
-            <InteractiveDiv 
+            <motion.div
               key={benefit.key}
-              className="relative overflow-hidden bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 group"
+              custom={index}
               variants={itemVariants}
               initial="hidden"
               whileInView="visible"
-              transition={{ delay: index * 0.1 + 0.2 }}
-              hoverY={-5} // Subtle lift
-              hoverShadow="0 15px 30px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05), var(--tw-shadow-glow-green)" // Enhanced shadow with glow
+              viewport={{ once: true, amount: 0.2 }}
+              className="premium-card premium-card-hover group relative overflow-hidden border-t-4 border-t-[var(--accent)] p-6"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 opacity-10 transform rotate-12 group-hover:rotate-45 transition-transform duration-500">
-                <div className={`w-full h-full bg-gradient-to-br ${benefit.gradient} rounded-full`} />
-              </div>
-              
-              <div className="relative z-10">
-                <motion.div 
-                  className={`w-10 h-10 bg-gradient-to-r ${benefit.gradient} rounded-2xl flex items-center justify-center mr-3 mb-3`}
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+              <div className="relative z-10 space-y-3">
+                <div
+                  className="flex h-11 w-11 items-center justify-center rounded-lg shadow-[0_6px_18px_rgba(21,128,61,0.18)] transition-transform duration-300 group-hover:scale-105"
+                  style={{ background: benefit.gradient }}
                 >
-                  <benefit.icon className="w-5 h-5 text-white" />
-                </motion.div>
-                <h3 className="text-gray-900 dark:text-gray-50 text-xl font-bold mb-2">{t.benefits[benefit.key].title}</h3>
-                <p className="text-gray-700 dark:text-gray-300 text-base leading-relaxed">{t.benefits[benefit.key].desc}</p>
+                  <benefit.icon className="h-5 w-5 text-white" aria-hidden />
+                </div>
+
+                <h3 className="benefits-title text-lg font-black text-[var(--text-primary)] [letter-spacing:0]">
+                  {t.benefits[benefit.key].title}
+                </h3>
+                <p className="text-sm leading-relaxed text-[var(--text-secondary)]">
+                  {t.benefits[benefit.key].desc}
+                </p>
               </div>
-            </InteractiveDiv>
+            </motion.div>
           ))}
         </div>
       </div>
