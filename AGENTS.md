@@ -48,6 +48,13 @@ Follow `.editorconfig`: UTF-8, LF endings, and a final newline. Use TypeScript s
 
 For any visual design, UI polish, layout, responsive, accessibility, color, typography, animation, or component UX task, use the installed Codex skill `ui-ux-pro-max`. It is installed from `https://github.com/nextlevelbuilder/ui-ux-pro-max-skill` and should guide professional design decisions for this site.
 
+Before redesign work, read:
+
+- `docs/redesign-brief.md`
+- `design-system/samyun-wan-armenia/MASTER.md`
+
+The required art direction is premium botanical authority: modern, rich, professional, alive, nature-accented, product-first, and trust-focused. Do not make a generic landing page or a plain pharmacy template.
+
 ## Testing Guidelines
 
 There is no dedicated test runner configured yet. For now, validate changes with `pnpm run lint`, `pnpm run typecheck`, and `pnpm run build`. For image or SEO work, also run `pnpm run optimize-images` or `pnpm run seo-image-audit` as relevant. If adding tests, use clear `*.test.ts` or `*.test.tsx` names and document the runner in `package.json`.
